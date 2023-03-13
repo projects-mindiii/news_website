@@ -1,0 +1,25 @@
+.searchBar {
+    display: flex;
+    margin-top: 15px;
+}
+
+.searchBar .form-control {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.searchBar .form-control:focus {
+    border: none !important;
+}
+
+.searchBar svg {
+    color: #FFFFFF;
+    font-weight: 700;
+    background: #EC4624;
+    padding: 6px;
+    width: 35px;
+    height: 35px;
+    margin-left: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}

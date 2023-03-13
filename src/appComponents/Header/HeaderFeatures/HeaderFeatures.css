@@ -1,0 +1,28 @@
+.headerFeature {
+    display: flex;
+    background: #FFFFFF;
+    opacity: 0.7;
+    margin-top: 15px;
+    padding-right: 25px !important;
+    padding-left: 25px !important;
+    justify-content: right;
+    width: 100%;
+    max-width: 365px;
+}
+
+.headerFeature h5 {
+    font-weight: 500;
+    font-size: 15px;
+    padding-top: 14px;
+    color: #474747;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+}
+
+.headerFeature span {
+    color: #EC4624;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}

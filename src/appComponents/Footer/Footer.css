@@ -1,0 +1,131 @@
+.footer {
+    background: #4C4C4C;
+}
+
+.footerBottom {
+    background: #EF5132 !important;
+    height: 30px;
+}
+
+.footerContent {
+    padding: 20px 100px 50px 100px;
+}
+
+.signAfricaImg {
+    margin-top: 20px;
+}
+
+.signAfricaImg img {
+    width: 100%;
+    max-width: 235px;
+}
+
+.socialIcon {
+    padding: 30px 0px;
+}
+
+.socialIcon img {
+    width: 30px;
+    margin-right: 6px;
+    margin-bottom: 10px;
+}
+
+.signContent {
+    margin: 10px 0px 55px 0px;
+}
+
+.signContent h6 {
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: -0.19px;
+    color: #FFFFFF;
+}
+
+.appStoresImg {
+    display: flex;
+    flex-direction: column;
+}
+
+.appStoresImg img {
+    width: 100%;
+    max-width: 153px;
+    margin: -5px -10px;
+}
+
+.linkHeading {
+    margin-top: 20px;
+}
+
+.linkHeading h6 {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: -0.19px;
+    color: #FFFFFF;
+}
+
+.linkNames {
+    margin-top: 26px;
+}
+
+.linkNames h6 {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: -0.19px;
+    color: #FFFFFF;
+}
+
+.companyImg {
+    margin-top: 30px;
+    display: grid;
+}
+
+.subscribeForm {
+    margin-top: 40px;
+}
+
+.subscribeForm h5 {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.19px;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+
+.subscribeForm .form-label {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 4px;
+    letter-spacing: -0.19px;
+    color: #FFFFFF;
+}
+
+.subscribeForm input:focus {
+    box-shadow: none;
+    border-color: #dee6eb;
+}
+
+.subscribeForm button {
+    background: #EF5132 !important;
+    border: 1px solid #EF5132 !important;
+    border-radius: unset;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 17px;
+    letter-spacing: -0.19px;
+    color: #FFFFFF;
+}
+
+.subscribeForm .errorMsg {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 4px;
+    letter-spacing: -0.19px;
+    color: #EF5132;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 400px) {
+    .footerContent {
+        padding: 20px 76px 50px 76px;
+    }
+}

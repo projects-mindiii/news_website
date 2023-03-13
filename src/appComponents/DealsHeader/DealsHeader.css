@@ -1,0 +1,37 @@
+.navHeader .navbar-nav a.nav {
+    background: #828282 !important;
+    border-radius: 23.52px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+    padding: 10px 17px;
+    margin-right: 9px;
+    margin-top: 15px;
+    text-decoration: none;
+    max-width: 200px;
+}
+
+.navHeader .navbar-nav a.nav.active {
+    background: #EC4624 !important;
+}
+
+.navHeader img.icon {
+    width: 15px;
+    margin-right: 9px;
+    height: 15px;
+    margin-top: 2px;
+}
+
+.navHeader img.icons {
+    width: 18px;
+    height: 18px;
+    margin-top: 0px;
+    margin-right: 8px;
+}
+
+@media only screen and (max-width: 991px) {
+    .navHeader .navbar-expand .navbar-nav {
+        flex-direction: column !important;
+    }
+}
