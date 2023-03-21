@@ -5,37 +5,42 @@ import Google from "../../assets/images/google_logo.png";
 import Facebook from "../../assets/images/facebook_logo.png";
 import Apple from "../../assets/images/apple_logo.png";
 import Linkedin from "../../assets/images/linkdin_logo.png";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    const navigate = useNavigate();
+
     return (
         <div className="main">
             <Container>
                 <div className="signupForm">
                     <div className="topHeading">
-                        <h1>Login</h1>
+                        <h1>LOGIN</h1>
                     </div>
-                    <div className="loginComponents">
-                        <img src={Email} alt="news-logo" />
+
+                    <div className="loginComponents" onClick={() => navigate("/login-form")}>
+                        <img src={Email} alt="email-logo" />
                         <h3>Login With Email</h3>
                     </div>
+
                     <div className="loginComponents">
-                        <img src={Google} alt="news-logo" />
+                        <img src={Google} alt="google-logo" />
                         <h3>Login With Google</h3>
                     </div>
                     <div className="loginComponents">
-                        <img src={Facebook} alt="news-logo" />
+                        <img src={Facebook} alt="facebook-logo" />
                         <h3>Login With Facebook</h3>
                     </div>
                     <div className="loginComponents">
-                        <img src={Apple} alt="news-logo" />
+                        <img src={Apple} alt="apple-logo" />
                         <h3>Login With Apple</h3>
                     </div>
                     <div className="loginComponents">
-                        <img src={Linkedin} alt="news-logo" />
+                        <img src={Linkedin} alt="linkedin-logo" />
                         <h3>Login With Linkedin</h3>
                     </div>
                     <div className="accountType">
-                        <p> Don't have an account ? <span>SignUp</span></p>
+                        <p> Don't have an account ? <span onClick={() => navigate("/signUp")}>SignUp</span></p>
                     </div>
                 </div>
 
@@ -43,4 +48,4 @@ function Login() {
         </div>
     );
 }
-export default Login;
+export default Login;  

@@ -1,0 +1,166 @@
+.signupForm .btn {
+    background-color: #ec4624;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 500;
+    height: 40px;
+}
+
+button.btn:hover {
+    background-color: #ec4624;
+}
+
+button.btn:active {
+    background-color: #ec4624 !important;
+}
+
+.passwordinput {
+    position: relative;
+}
+
+.passwordicon svg {
+    font-size: 18px;
+    position: absolute;
+    bottom: 8px;
+    right: 7px;
+    color: #9c9ca6b3;
+    cursor: pointer;
+}
+
+.forgotCls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.forgotCls h6 {
+    font-size: 15px;
+    font-weight: 400;
+    color: #242424;
+    margin-bottom: 0px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+
+/* radiobutton css custom */
+.customRadio [type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+.customRadio [type="radio"]:checked+label,
+[type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    line-height: 25px;
+    display: inline-block;
+    color: #666;
+    padding-right: 20px;
+}
+
+.customRadio [type="radio"]:checked+label:before,
+[type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ced9e3;
+    border-radius: 100%;
+    background: #fff;
+}
+
+.customRadio [type="radio"]:checked+label:after,
+[type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 17px;
+    height: 17px;
+    background: #EC4624;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.customRadio [type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+.customRadio [type="radio"]:checked+label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.customRadio label {
+    font-weight: 400;
+    font-size: 15px;
+    color: #000000 !important;
+    margin-left: -22px;
+}
+
+/* radio button custom css end */
+
+.errorSet {
+    margin-top: 20px;
+}
+
+.errorShow {
+    color: #D62D2D;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.LoginText {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.LoginText span {
+    opacity: 0.2;
+    background: #FFFFFF;
+    border-radius: 6px;
+}
+
+.LoginText p {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.28px;
+    color: #2B2C43;
+    opacity: 0.6;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.socialLogo {
+    display: flex;
+    justify-content: center;
+}
+
+.socialLogo img {
+    width: 100%;
+    max-width: 76px;
+    min-width: 30px;
+}
+
+@media screen and(min-width: 320px) and (max-width: 452px) {
+    .passwordicon svg {
+        position: absolute;
+        left: 143px;
+    }
+}
