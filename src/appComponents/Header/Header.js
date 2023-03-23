@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
+import { statictext } from "../../utils/CommonStaticText";
 import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
 import "./Header.css";

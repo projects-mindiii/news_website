@@ -14,6 +14,7 @@ import i18n from "../../../i18n";
 
 
 
+//--------Create a Login with email component----------
 function LoginForm() {
     const [shown, setShown] = useState(false);
       //set language
@@ -70,7 +71,7 @@ function LoginForm() {
                                         message:  `${t("INCOMPLETE")}`,
                                     },
                                     pattern: {
-                                        value: /^\S*$/,
+                                        value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
                                         message: `${t("INVALID_PASSWORD")}`,
                                     },
                                     maxLength: {

@@ -4,24 +4,21 @@
 
 .footerBottom {
     background: #EF5132 !important;
-    height: 30px;
+    height: 20px;
 }
 
 .footerContent {
-    padding: 20px 100px 50px 100px;
+    padding: 20px 100px;
 }
 
 .signAfricaImg {
     margin-top: 20px;
+    margin-bottom: 25px;
 }
 
 .signAfricaImg img {
     width: 100%;
     max-width: 235px;
-}
-
-.socialIcon {
-    padding: 30px 0px;
 }
 
 .socialIcon img {
@@ -31,7 +28,7 @@
 }
 
 .signContent {
-    margin: 10px 0px 55px 0px;
+    margin: 10px 0px 20px 0px;
 }
 
 .signContent h6 {

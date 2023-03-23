@@ -94,7 +94,7 @@ function Footer() {
                                         <img src={Image2} alt="sign-Africa" />
                                         <img src={Image3} alt="sign-Africa" />
                                     </div>
-                                    <div className="subscribeForm">
+                                     {/*<div className="subscribeForm">
                                         <h5>{t("SUBSCRIPTION_TEXT")}</h5>
                                         <Form onSubmit={handleSubmit(onsubmit)}>
                                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -131,7 +131,7 @@ function Footer() {
                                                 Subscribe
                                             </Button>
                                         </Form>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </Col>
                         </Row>

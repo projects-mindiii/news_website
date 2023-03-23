@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { statictext } from "../../../utils/CommonStaticText";
 import "./HeaderFeatures.css";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n";
@@ -18,11 +19,11 @@ function HeaderFeatures() {
 
 
             {/* <div className="headerFeature" >
-                    <h5>BOOKMARKS</h5>
+                    <h5>{statictext.BOOKMARKS}</h5>
                 <span>|</span>
-                    <h5>VIEW PROFILE</h5>
+                    <h5>{statictext.VIEW_PROFILE}</h5>
                 <span>|</span>
-                    <h5>LOG OUT</h5>
+                    <h5>{statictext.LOG_OUT}</h5>
             </div> */}
         </>
     );

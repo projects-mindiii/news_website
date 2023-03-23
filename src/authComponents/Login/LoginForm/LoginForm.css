@@ -160,6 +160,7 @@ button.btn:active {
     width: 100%;
     max-width: 76px;
     min-width: 30px;
+    cursor: pointer;
 }
 
 @media screen and(min-width: 320px) and (max-width: 452px) {
