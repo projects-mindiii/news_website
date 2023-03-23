@@ -18,7 +18,7 @@ function Routers() {
             <Routes>
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/login-form" element={<LoginForm />} />
-                <Route exact path="/signUp" element={<SignupForm />} />
+                <Route exact path="/sign-up" element={<SignupForm />} />
             </Routes>
             <Footer />
         </Router>

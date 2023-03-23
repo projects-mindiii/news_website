@@ -9,18 +9,23 @@ import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { statictext } from "../../CommonStaticText";
-// Form for singing up new users.
+import {
+  error_message,
+  statictext,
+  placeholders,
+} from "../../utils/CommonStaticText";
+
+//--------------Form for singing up new users----------
 
 function SignupForm() {
   const navigate = useNavigate();
-  //sets toggle for showing and hiding password
+  //-------sets toggle for showing and hiding password------
   const [shown, setShown] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
-  //sets toggle for subscribe button on/off
+  //-------sets toggle for subscribe button on/off--------------
   const [notification, setNotification] = useState(false);
 
-  // function for form validation using useform
+  //--------function for form validation using useform-----------
   const {
     register,
     handleSubmit,
@@ -42,23 +47,23 @@ function SignupForm() {
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Control
                 type="text"
-                placeholder="Full Name"
+                placeholder={placeholders.NAME}
                 {...register("fullName", {
                   required: {
                     value: true,
-                    message: "Form incomplete, please fill all fields",
+                    message: error_message.INCOMPLETE,
                   },
                   minLength: {
                     value: 2,
-                    message: "Please enter valid name",
+                    message: error_message.NAME_MINLENGTH,
                   },
                   maxLength: {
                     value: 20,
-                    message: "Name must be 20 character or small",
+                    message: error_message.NAME_MAXLENGTH,
                   },
                   pattern: {
                     value: /^(?![\s.]+$)[a-zA-Z\s.]*$/,
-                    message: "Please enter valid name",
+                    message: error_message.INVALID_NAME,
                   },
                 })}
               />
@@ -67,46 +72,45 @@ function SignupForm() {
             <Form.Group className="mb-3">
               <Form.Control
                 type="email"
-                placeholder="Your Email"
+                placeholder={placeholders.EMAIL}
                 {...register("email", {
                   required: {
                     value: true,
-                    message: "Form incomplete, please fill all fields",
+                    message: error_message.INCOMPLETE,
                   },
                   maxLength: {
                     value: 50,
-                    message: "Email must be 50 character or small",
+                    message: error_message.EMAIL_MAXLENGTH,
                   },
                   pattern: {
                     value:
                       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: "invalid email address",
+                    message: error_message.INVALID_EMAIL,
                   },
                 })}
               />
             </Form.Group>
 
-           
             <Form.Group className="mb-3 passwordinput">
               <Form.Control
                 type={shown ? "text" : "password"}
-                placeholder="password"
+                placeholder={placeholders.PASSWORD}
                 {...register("password", {
                   required: {
                     value: true,
-                    message: "Form incomplete, please fill all fields",
+                    message: error_message.INCOMPLETE,
                   },
                   pattern: {
-                    value: "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$",
-                    message: "Invalid password",
+                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                    message: error_message.INVALID_PASSWORD,
                   },
                   maxLength: {
                     value: 15,
-                    message: "please enter max 8-16 character",
+                    message: error_message.PASS_MAXLENGTH,
                   },
                   minLength: {
-                    value: 8,
-                    message: "please enter min 4 character",
+                    value: 6,
+                    message: error_message.PASS_MINLENGTH,
                   },
                 })}
               />
@@ -122,48 +126,46 @@ function SignupForm() {
               </div>
             </Form.Group>
 
-            
             <Form.Group className="mb-3 passwordinput">
-            <Form.Control
-              type={passwordShow ? "text" : "password"}
-              placeholder="confirm password"
-              {...register("confirmPassword", {
-                required: {
-                  value: true,
-                  message: "Form incomplete, please fill all fields",
-                },
-                pattern: {
-                  value: "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$",
-                  message: "Invalid password",
-                },
-                maxLength: {
-                  value: 15,
-                  message: "please enter max 8-16 character",
-                },
-                minLength: {
-                  value: 8,
-                  message: "please enter min 4 character",
-                },
-                validate: (value) =>
-                  value === watch("password") || "Passwords have to match",
-              })}
-            />
-             <div className="passwordicon">
-              {passwordShow ? (
-                <FaEye
-                  className="icon"
-                  onClick={() => setPasswordShow(!passwordShow)}
-                />
-              ) : (
-                <FaEyeSlash
-                  className="icon"
-                  onClick={() => setPasswordShow(!passwordShow)}
-                />
-              )}
-            </div>
+              <Form.Control
+                type={passwordShow ? "text" : "password"}
+                placeholder={placeholders.CONFIRM_PASSWORD}
+                {...register("confirmPassword", {
+                  required: {
+                    value: true,
+                    message: error_message.INCOMPLETE,
+                  },
+                  pattern: {
+                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                    message: error_message.INVALID_PASSWORD,
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: error_message.PASS_MAXLENGTH,
+                  },
+                  minLength: {
+                    value: 8,
+                    message: error_message.PASS_MINLENGTH,
+                  },
+                  validate: (value) =>
+                    value === watch("password") || "Passwords have to match",
+                })}
+              />
+              <div className="passwordicon">
+                {passwordShow ? (
+                  <FaEye
+                    className="icon"
+                    onClick={() => setPasswordShow(!passwordShow)}
+                  />
+                ) : (
+                  <FaEyeSlash
+                    className="icon"
+                    onClick={() => setPasswordShow(!passwordShow)}
+                  />
+                )}
+              </div>
             </Form.Group>
-           
-           
+
             <div className="notification">
               {notification ? (
                 <BsToggleOn
@@ -176,7 +178,7 @@ function SignupForm() {
                   onClick={() => setNotification(!notification)}
                 />
               )}
-              <p>Subscribe to our newsletter</p>
+              <p>{statictext.SUBSCRIPTION_TEXT}</p>
             </div>
 
             <div className="errorSet">
@@ -191,8 +193,10 @@ function SignupForm() {
             </Button>
             <div className="accountType">
               <p>
-                Already have an account ?{" "}
-                <span onClick={() => navigate("/Login")}>Login</span>
+                {statictext.EXISTING_ACCOUNT}
+                <span onClick={() => navigate("/Login")}>
+                  {statictext.LOGIN_IN}
+                </span>
               </p>
             </div>
           </Form>
