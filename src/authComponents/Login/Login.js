@@ -40,7 +40,7 @@ function Login() {
                         <h3>Login With Linkedin</h3>
                     </div>
                     <div className="accountType">
-                        <p> Don't have an account ? <span onClick={() => navigate("/signUp")}>SignUp</span></p>
+                        <p> Don't have an account ? <span onClick={() => navigate("/sign-up")}>SignUp</span></p>
                     </div>
                 </div>
 

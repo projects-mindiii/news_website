@@ -46,15 +46,15 @@ button.btn:active {
 }
 
 
-/* radiobutton css custom */
-.customRadio [type="radio"]:checked,
-[type="radio"]:not(:checked) {
+/* checkbox custom css */
+.customCheck [type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
 }
 
-.customRadio [type="radio"]:checked+label,
-[type="radio"]:not(:checked)+label {
+.customCheck [type="checkbox"]:checked+label,
+[type="checkbox"]:not(:checked)+label {
     position: relative;
     padding-left: 32px;
     cursor: pointer;
@@ -64,8 +64,8 @@ button.btn:active {
     padding-right: 20px;
 }
 
-.customRadio [type="radio"]:checked+label:before,
-[type="radio"]:not(:checked)+label:before {
+.customCheck [type="checkbox"]:checked+label:before,
+[type="checkbox"]:not(:checked)+label:before {
     content: '';
     position: absolute;
     left: 0;
@@ -77,8 +77,8 @@ button.btn:active {
     background: #fff;
 }
 
-.customRadio [type="radio"]:checked+label:after,
-[type="radio"]:not(:checked)+label:after {
+.customCheck [type="checkbox"]:checked+label:after,
+[type="checkbox"]:not(:checked)+label:after {
     content: '';
     width: 17px;
     height: 17px;
@@ -91,26 +91,26 @@ button.btn:active {
     transition: all 0.2s ease;
 }
 
-.customRadio [type="radio"]:not(:checked)+label:after {
+.customCheck [type="checkbox"]:not(:checked)+label:after {
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0);
 }
 
-.customRadio [type="radio"]:checked+label:after {
+.customCheck [type="checkbox"]:checked+label:after {
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
 }
 
-.customRadio label {
+.customCheck label {
     font-weight: 400;
     font-size: 15px;
     color: #000000 !important;
     margin-left: -22px;
 }
 
-/* radio button custom css end */
+/* checkbox custom css end */
 
 .errorSet {
     margin-top: 20px;
@@ -126,13 +126,17 @@ button.btn:active {
 .LoginText {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 40px;
+    margin-bottom: 30px;
 }
 
 .LoginText span {
     opacity: 0.2;
     background: #FFFFFF;
-    border-radius: 6px;
+    border-radius: 2px;
+    width: 85px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #2B2C43;
 }
 
 .LoginText p {
@@ -142,9 +146,9 @@ button.btn:active {
     letter-spacing: 0.28px;
     color: #2B2C43;
     opacity: 0.6;
-    margin-top: 10px;
     margin-right: 10px;
     margin-left: 10px;
+    margin-bottom: 0px;
 }
 
 .socialLogo {

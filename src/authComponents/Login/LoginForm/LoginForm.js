@@ -9,6 +9,8 @@ import Linkedin from "../../../assets/images/linkdin_logo.png";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { error_message } from "../../../utils/ErrorMessage";
+import { placeholders } from "../../../utils/Placeholders";
 
 
 function LoginForm() {
@@ -37,20 +39,19 @@ function LoginForm() {
                         <Form.Group className="mb-3">
                             <Form.Control
                                 type="text"
-                                placeholder="Your Email"
+                                placeholder={placeholders.EMAIL}
                                 {...register("email", {
                                     required: {
                                         value: true,
-                                        message: "Form incomplete, please fill all fields",
+                                        message: error_message.INCOMPLETE,
                                     },
                                     maxLength: {
                                         value: 50,
-                                        message: "Email must be 50 character or small",
+                                        message: error_message.EMAIL_MAXLENGTH,
                                     },
                                     pattern: {
-                                        value:
-                                            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                        message: "Invalid Email Address",
+                                        value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                        message: error_message.INVALID_EMAIL,
                                     },
                                 })}
                             />
@@ -59,16 +60,23 @@ function LoginForm() {
                         <Form.Group className="mb-3 passwordinput">
                             <Form.Control
                                 type={shown ? "text" : "password"}
-                                placeholder="Your Password"
+                                placeholder={placeholders.PASSWORD}
                                 {...register("password", {
                                     required: {
                                         value: true,
-                                        message: "Form incomplete, please fill all fields",
-                                        minLength: 6,
-                                        pattern: {
-                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                                            message: "Invalid Password",
-                                        },
+                                        message: error_message.INCOMPLETE,
+                                    },
+                                    pattern: {
+                                        value: /^\S*$/,
+                                        message: error_message.INVALID_PASSWORD,
+                                    },
+                                    maxLength: {
+                                        value: 15,
+                                        message: error_message.PASS_MAXLENGTH,
+                                    },
+                                    minLength: {
+                                        value: 8,
+                                        message: error_message.PASS_MINLENGTH,
                                     },
                                 })}
                             />
@@ -85,8 +93,8 @@ function LoginForm() {
                         </Form.Group>
 
                         <div className="forgotCls">
-                            <Form.Group className="mb-3 customRadio" controlId="formBasicRadio">
-                                <Form.Check type="radio" label="Remember me" defaultChecked />
+                            <Form.Group className="mb-3 customCheck" controlId="formBasicRadio">
+                                <Form.Check type="checkbox" label="Remember me" defaultChecked />
                             </Form.Group>
 
                             <h6>Forgot password ?</h6>
@@ -104,7 +112,7 @@ function LoginForm() {
                         </Button>
 
                         <div className="LoginText">
-                            <span>__________</span> <p>or login with</p><span>__________</span>
+                            <span></span> <p>or login with</p><span></span>
                         </div>
 
                         <div className="socialLogo">
