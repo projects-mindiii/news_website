@@ -4,21 +4,21 @@ import "../../assets/styles/Common.css";
 import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { BsToggleOn, BsToggleOff } from "react-icons/bs";
+// import { BsToggleOn, BsToggleOff } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import {
-  error_message,
-  statictext,
-  placeholders,
-} from "../../utils/CommonStaticText";
+import { useTranslation } from "react-i18next";
+import { MdToggleOff,MdToggleOn } from "react-icons/md";
+
 
 //--------------Form for singing up new users----------
 
 function SignupForm() {
   const navigate = useNavigate();
+  //set language
+  const { t, i18n } = useTranslation();
   //-------sets toggle for showing and hiding password------
   const [shown, setShown] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -36,34 +36,35 @@ function SignupForm() {
   const onsubmit = (data) => {
     console.log("data", data);
   };
+
   return (
     <div className="main">
       <Container>
         <div className="signupForm">
           <div className="topHeading">
-            <h1>{statictext.CREATEACCOUNT}</h1>
+            <h1>{t("CREATEACCOUNT")}</h1>
           </div>
           <Form onSubmit={handleSubmit(onsubmit)}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Control
                 type="text"
-                placeholder={placeholders.NAME}
+                placeholder={t("NAME")}
                 {...register("fullName", {
                   required: {
                     value: true,
-                    message: error_message.INCOMPLETE,
+                    message: `${t("INCOMPLETE")}`,
                   },
                   minLength: {
                     value: 2,
-                    message: error_message.NAME_MINLENGTH,
+                    message:  `${t("NAME_MINLENGTH")}`,
                   },
                   maxLength: {
                     value: 20,
-                    message: error_message.NAME_MAXLENGTH,
+                    message:  `${t("NAME_MAXLENGTH")}`,
                   },
                   pattern: {
                     value: /^(?![\s.]+$)[a-zA-Z\s.]*$/,
-                    message: error_message.INVALID_NAME,
+                    message: `${t("INVALID_NAME")}`,
                   },
                 })}
               />
@@ -72,20 +73,20 @@ function SignupForm() {
             <Form.Group className="mb-3">
               <Form.Control
                 type="email"
-                placeholder={placeholders.EMAIL}
+                placeholder={t("EMAIL")}
                 {...register("email", {
                   required: {
                     value: true,
-                    message: error_message.INCOMPLETE,
+                    message: `${t("INCOMPLETE")}`,
                   },
                   maxLength: {
                     value: 50,
-                    message: error_message.EMAIL_MAXLENGTH,
+                    message:`${t("EMAIL_MAXLENGTH")}`,
                   },
                   pattern: {
                     value:
                       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: error_message.INVALID_EMAIL,
+                    message: `${t("INVALID_EMAIL")}`,
                   },
                 })}
               />
@@ -94,23 +95,23 @@ function SignupForm() {
             <Form.Group className="mb-3 passwordinput">
               <Form.Control
                 type={shown ? "text" : "password"}
-                placeholder={placeholders.PASSWORD}
+                placeholder={t("PASSWORD")}
                 {...register("password", {
                   required: {
                     value: true,
-                    message: error_message.INCOMPLETE,
+                    message: `${t("INCOMPLETE")}`,
                   },
                   pattern: {
                     value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                    message: error_message.INVALID_PASSWORD,
+                    message: `${t("INVALID_PASSWORD")}`,
                   },
                   maxLength: {
                     value: 15,
-                    message: error_message.PASS_MAXLENGTH,
+                    message:`${t("PASS_MAXLENGTH")}`,
                   },
                   minLength: {
                     value: 6,
-                    message: error_message.PASS_MINLENGTH,
+                    message: `${t("PASS_MINLENGTH")}`,
                   },
                 })}
               />
@@ -129,23 +130,23 @@ function SignupForm() {
             <Form.Group className="mb-3 passwordinput">
               <Form.Control
                 type={passwordShow ? "text" : "password"}
-                placeholder={placeholders.CONFIRM_PASSWORD}
+                placeholder={t("CONFIRM_PASSWORD")}
                 {...register("confirmPassword", {
                   required: {
                     value: true,
-                    message: error_message.INCOMPLETE,
+                    message: `${t("INCOMPLETE")}`,
                   },
                   pattern: {
                     value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                    message: error_message.INVALID_PASSWORD,
+                    message: `${t("INVALID_PASSWORD")}`,
                   },
                   maxLength: {
                     value: 15,
-                    message: error_message.PASS_MAXLENGTH,
+                    message: `${t("PASS_MAXLENGTH")}`,
                   },
                   minLength: {
-                    value: 8,
-                    message: error_message.PASS_MINLENGTH,
+                    value: 6,
+                    message: `${t("PASS_MINLENGTH")}`,
                   },
                   validate: (value) =>
                     value === watch("password") || "Passwords have to match",
@@ -168,17 +169,17 @@ function SignupForm() {
 
             <div className="notification">
               {notification ? (
-                <BsToggleOn
+                <MdToggleOn
                   className="icon"
                   onClick={() => setNotification(!notification)}
                 />
               ) : (
-                <BsToggleOff
+                <MdToggleOff
                   className="icon"
                   onClick={() => setNotification(!notification)}
                 />
               )}
-              <p>{statictext.SUBSCRIPTION_TEXT}</p>
+              <p>{t("SUBSCRIPTION_TEXT")}</p>
             </div>
 
             <div className="errorSet">
@@ -189,13 +190,13 @@ function SignupForm() {
             </div>
 
             <Button className="btn" type="submit">
-              {statictext.CREATEACCOUNT}
+            {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">
               <p>
-                {statictext.EXISTING_ACCOUNT}
+                {t("EXISTING_ACCOUNT")}
                 <span onClick={() => navigate("/Login")}>
-                  {statictext.LOGIN_IN}
+                  {t("LOGIN_IN")}
                 </span>
               </p>
             </div>
