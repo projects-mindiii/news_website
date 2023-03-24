@@ -1,0 +1,17 @@
+ .notification svg {
+  font-size: 35px;
+  color: #ec4624;
+  margin-left: 11px;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.notification p {
+  font-size: 17px;
+  color: #000000;
+  font-weight: 400;
+  margin-top: 5px;
+}

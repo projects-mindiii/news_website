@@ -8,6 +8,7 @@ import Footer from "../appComponents/Footer/Footer";
 import Header from "../appComponents/Header/Header";
 import Login from "../authComponents/Login/Login";
 import LoginForm from "../authComponents/Login/LoginForm/LoginForm";
+import SignupForm from "../authComponents/SignupForm/SignupForm";
 
 //-------Create a component for manage routing--------
 function Routers() {
@@ -17,6 +18,7 @@ function Routers() {
             <Routes>
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/login-form" element={<LoginForm />} />
+                <Route exact path="/sign-up" element={<SignupForm />} />
             </Routes>
             <Footer />
         </Router>

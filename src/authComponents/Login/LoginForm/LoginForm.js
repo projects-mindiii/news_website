@@ -9,8 +9,8 @@ import Linkedin from "../../../assets/images/linkdin_logo.png";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import { error_message } from "../../../utils/ErrorMessage";
-import { placeholders } from "../../../utils/Placeholders";
+import { error_message, placeholders } from "../../../utils/CommonStaticText";
+
 
 
 function LoginForm() {
