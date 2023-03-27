@@ -10,8 +10,10 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { MdToggleOff,MdToggleOn } from "react-icons/md";
-
+import { MdToggleOff, MdToggleOn } from "react-icons/md";
+import i18n from "../../i18n";
+import SublyApi from "../../helpers/Api";
+import { Toast } from "../../utils/Toaster";
 
 //--------------Form for singing up new users----------
 
@@ -33,10 +35,38 @@ function SignupForm() {
     formState: { errors },
   } = useForm();
 
-  const onsubmit = (data) => {
-    console.log("data", data);
-  };
+  // const onsubmit = (data) => {
+  //   console.log("data", data);
+  // };
 
+  const onSubmit = async (formdata) => {
+        let requestData = new FormData();
+        requestData.append("name", formdata.fullName);
+        requestData.append("email", formdata.email);
+        requestData.append("password",formdata.password);
+        requestData.append("confirm_password",formdata.confirmPassword);
+        // requestData.append("otp", otp);
+        // requestData.append("country", country);
+        // requestData.append("initial_lat", );
+        // requestData.append("initial_long", );
+        await SublyApi.varifySignUp(requestData).then((responsejson) => {
+            if (responsejson.status_code === 200) {
+                Toast.fire({
+                    icon: "success",
+                    title: responsejson.message,
+                });
+                console.log("responsejson", responsejson);
+               
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: responsejson.data.message,
+                });
+               
+            }
+        })
+   
+};
   return (
     <div className="main">
       <Container>
@@ -44,7 +74,7 @@ function SignupForm() {
           <div className="topHeading">
             <h1>{t("CREATEACCOUNT")}</h1>
           </div>
-          <Form onSubmit={handleSubmit(onsubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Control
                 type="text"
@@ -56,11 +86,11 @@ function SignupForm() {
                   },
                   minLength: {
                     value: 2,
-                    message:  `${t("NAME_MINLENGTH")}`,
+                    message: `${t("NAME_MINLENGTH")}`,
                   },
                   maxLength: {
                     value: 20,
-                    message:  `${t("NAME_MAXLENGTH")}`,
+                    message: `${t("NAME_MAXLENGTH")}`,
                   },
                   pattern: {
                     value: /^(?![\s.]+$)[a-zA-Z\s.]*$/,
@@ -81,7 +111,7 @@ function SignupForm() {
                   },
                   maxLength: {
                     value: 50,
-                    message:`${t("EMAIL_MAXLENGTH")}`,
+                    message: `${t("EMAIL_MAXLENGTH")}`,
                   },
                   pattern: {
                     value:
@@ -107,7 +137,7 @@ function SignupForm() {
                   },
                   maxLength: {
                     value: 15,
-                    message:`${t("PASS_MAXLENGTH")}`,
+                    message: `${t("PASS_MAXLENGTH")}`,
                   },
                   minLength: {
                     value: 6,
@@ -190,14 +220,12 @@ function SignupForm() {
             </div>
 
             <Button className="btn" type="submit">
-            {t("CREATEACCOUNT")}
+              {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">
               <p>
                 {t("EXISTING_ACCOUNT")}
-                <span onClick={() => navigate("/Login")}>
-                  {t("LOGIN_IN")}
-                </span>
+                <span onClick={() => navigate("/Login")}>{t("LOGIN_IN")}</span>
               </p>
             </div>
           </Form>

@@ -7,7 +7,7 @@ function HeaderFeatures() {
     return (
         <>
             <div className="headerFeature" >
-                <h5 onClick={() => navigate("/profile")}>CREATE PROFILE</h5>
+                <h5 onClick={() => navigate("/sign-up")}>CREATE PROFILE</h5>
                 <span>|</span>
                 <h5 onClick={() => navigate("/login")}>LOG IN</h5>
             </div>
