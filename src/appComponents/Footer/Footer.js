@@ -13,9 +13,13 @@ import AppGallery from "../../assets/images/appGallery.png";
 import Image2 from "../../assets/images/image2.png";
 import Image3 from "../../assets/images/image3.png";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 //--------Create a Footer component----------
 function Footer() {
+    //set language
+  const { t, i18n } = useTranslation();
 
     //-----react useform use for validation-----
     const {
@@ -50,8 +54,7 @@ function Footer() {
                                     <img src={Telegram} alt="telegram" />
                                 </div>
                                 <div className="signContent">
-                                    <h6>Sign Africa provides the latest news, insights and trends in wide format,
-                                        garment & textile print, branding and all visual communications in Southern Africa.</h6>
+                                    <h6>{t("FOOTER_TEXT")}</h6>
                                 </div>
                                 <div className="appStoresImg">
                                     <a
@@ -76,31 +79,31 @@ function Footer() {
                             </Col>
                             <Col lg={4} md={4}>
                                 <div className="linkHeading">
-                                    <h6>QUICK LINKS</h6>
+                                    <h6>{t("QUICK_LINKS")}</h6>
                                     <div className="linkNames">
-                                        <h6>News</h6>
-                                        <h6>Jobs</h6>
-                                        <h6>Advertise</h6>
+                                        <h6>{t("NEWS_LINKS")}</h6>
+                                        <h6>{t("JOB_LINKS")}</h6>
+                                        <h6>{t("ADVERTIES_LINKS")}</h6>
                                     </div>
                                 </div>
                             </Col>
                             <Col lg={4} md={4}>
                                 <div className="linkHeading">
-                                    <h6>OUR MEDIA</h6>
+                                    <h6>{t("OUR MEDIA")}</h6>
                                     <div className="companyImg">
                                         <img src={Image2} alt="sign-Africa" />
                                         <img src={Image3} alt="sign-Africa" />
                                     </div>
                                     <div className="subscribeForm">
-                                        <h5>SUBSCRIBE TO OUT NEWSLETTER</h5>
+                                        <h5>{t("SUBSCRIPTION_TEXT")}</h5>
                                         <Form onSubmit={handleSubmit(onsubmit)}>
                                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                                <Form.Label>Your Name (Optional)</Form.Label>
+                                                <Form.Label>{t("YOUR_NAME")}</Form.Label>
                                                 <Form.Control type="text" />
                                             </Form.Group>
 
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Your Email (Required)</Form.Label>
+                                                <Form.Label>{t("YOUR_EMAIL")}</Form.Label>
                                                 <Form.Control
                                                     type="email"
                                                     {...register("email", {

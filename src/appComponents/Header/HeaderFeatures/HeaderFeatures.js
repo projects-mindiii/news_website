@@ -1,15 +1,19 @@
-import { NavLink } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./HeaderFeatures.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
+
 
 function HeaderFeatures() {
     const navigate = useNavigate();
+     //set language
+  const { t, i18n } = useTranslation();
     return (
         <>
             <div className="headerFeature" >
-                <h5 onClick={() => navigate("/sign-up")}>CREATE PROFILE</h5>
+                <h5 onClick={() => navigate("/sign-up")}>{t("CREATE_PROFILE")}</h5>
                 <span>|</span>
-                <h5 onClick={() => navigate("/login")}>LOG IN</h5>
+                <h5 onClick={() => navigate("/login")}>{t("LOG_IN")}</h5>
             </div>
 
 

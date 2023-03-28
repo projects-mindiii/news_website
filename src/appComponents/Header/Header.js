@@ -5,9 +5,13 @@ import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
 import "./Header.css";
 import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 //-------Create a Header component--------
 function Header() {
+    //set language
+  const { t, i18n } = useTranslation();
     return (
         <section className="header">
             <Container>
@@ -25,7 +29,7 @@ function Header() {
                                             className="nav-link"
                                             to="/deals"
                                         >
-                                            DEALS/HUB
+                                           {t("DEALS")}
                                         </NavLink>
                                     </Nav.Item>
                                     <Nav.Item as="li">
@@ -33,7 +37,7 @@ function Header() {
                                             className="nav-link"
                                             to="/classified"
                                         >
-                                            CLASSIFIEDS
+                                            {t("CLASSIFIEDS")}
                                         </NavLink>
                                     </Nav.Item>
                                     <Nav.Item as="li">
@@ -41,7 +45,7 @@ function Header() {
                                             className="nav-link"
                                             to="/job"
                                         >
-                                            JOBS
+                                           {t("JOBS")}
                                         </NavLink>
                                     </Nav.Item>
                                     <Nav.Item as="li">
@@ -49,7 +53,7 @@ function Header() {
                                             className="nav-link"
                                             to="/post"
                                         >
-                                            POST ADVERT
+                                           {t("POST_ADVERT")}
                                         </NavLink>
                                     </Nav.Item>
                                     <Nav.Item as="li">
@@ -57,7 +61,7 @@ function Header() {
                                             className="nav-link"
                                             to="/ads"
                                         >
-                                            YOUR ADS
+                                            {t("YOUR_ADS")}
                                         </NavLink>
                                     </Nav.Item>
                                 </Nav>

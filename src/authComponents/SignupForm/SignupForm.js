@@ -31,13 +31,11 @@ function SignupForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm();
 
-  // const onsubmit = (data) => {
-  //   console.log("data", data);
-  // };
 
   const onSubmit = async (formdata) => {
         let requestData = new FormData();
@@ -45,12 +43,12 @@ function SignupForm() {
         requestData.append("email", formdata.email);
         requestData.append("password",formdata.password);
         requestData.append("confirm_password",formdata.confirmPassword);
-        // requestData.append("otp", otp);
-        // requestData.append("country", country);
-        // requestData.append("initial_lat", );
-        // requestData.append("initial_long", );
-        await SublyApi.varifySignUp(requestData).then((responsejson) => {
+        await SublyApi.requestOtp(requestData).then((responsejson) => {
             if (responsejson.status_code === 200) {
+              setValue("fullName", "");
+              setValue("email", "");
+              setValue("password", "");
+              setValue("confirmPassword", "");
                 Toast.fire({
                     icon: "success",
                     title: responsejson.message,

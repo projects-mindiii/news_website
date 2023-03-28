@@ -9,12 +9,15 @@ import Linkedin from "../../../assets/images/linkdin_logo.png";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import { error_message, placeholders } from "../../../utils/CommonStaticText";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
 
 
 
 function LoginForm() {
     const [shown, setShown] = useState(false);
+      //set language
+  const { t, i18n } = useTranslation();
 
     //----------function for form validation using useform------------
     const {
@@ -33,25 +36,25 @@ function LoginForm() {
             <Container>
                 <div className="signupForm">
                     <div className="topHeading">
-                        <h1>EMAIL LOGIN</h1>
+                        <h1>{t("EMAIL_LOGIN")}</h1>
                     </div>
                     <Form onSubmit={handleSubmit(onsubmit)}>
                         <Form.Group className="mb-3">
                             <Form.Control
                                 type="text"
-                                placeholder={placeholders.EMAIL}
+                                placeholder={t("EMAIL")}
                                 {...register("email", {
                                     required: {
                                         value: true,
-                                        message: error_message.INCOMPLETE,
+                                        message: `${t("INCOMPLETE")}`,
                                     },
                                     maxLength: {
                                         value: 50,
-                                        message: error_message.EMAIL_MAXLENGTH,
+                                        message: `${t("EMAIL_MAXLENGTH")}`,
                                     },
                                     pattern: {
                                         value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                        message: error_message.INVALID_EMAIL,
+                                        message: `${t("INVALID_EMAIL")}`,
                                     },
                                 })}
                             />
@@ -60,23 +63,23 @@ function LoginForm() {
                         <Form.Group className="mb-3 passwordinput">
                             <Form.Control
                                 type={shown ? "text" : "password"}
-                                placeholder={placeholders.PASSWORD}
+                                placeholder={t("PASSWORD")}
                                 {...register("password", {
                                     required: {
                                         value: true,
-                                        message: error_message.INCOMPLETE,
+                                        message:  `${t("INCOMPLETE")}`,
                                     },
                                     pattern: {
                                         value: /^\S*$/,
-                                        message: error_message.INVALID_PASSWORD,
+                                        message: `${t("INVALID_PASSWORD")}`,
                                     },
                                     maxLength: {
                                         value: 15,
-                                        message: error_message.PASS_MAXLENGTH,
+                                        message:`${t("PASS_MAXLENGTH")}`,
                                     },
                                     minLength: {
                                         value: 8,
-                                        message: error_message.PASS_MINLENGTH,
+                                        message: `${t("PASS_MINLENGTH")}`,
                                     },
                                 })}
                             />
@@ -94,10 +97,10 @@ function LoginForm() {
 
                         <div className="forgotCls">
                             <Form.Group className="mb-3 customCheck" controlId="formBasicRadio">
-                                <Form.Check type="checkbox" label="Remember me" defaultChecked />
+                                <Form.Check type="checkbox" label={t("REMEMBER_ME")}defaultChecked />
                             </Form.Group>
 
-                            <h6>Forgot password ?</h6>
+                            <h6>{t("FORGOT_PASSWORD")}</h6>
                         </div>
 
                         <div className="errorSet">
@@ -112,7 +115,7 @@ function LoginForm() {
                         </Button>
 
                         <div className="LoginText">
-                            <span></span> <p>or login with</p><span></span>
+                            <span></span> <p>{t("LOGIN_WITH")}</p><span></span>
                         </div>
 
                         <div className="socialLogo">

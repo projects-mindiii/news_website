@@ -6,9 +6,15 @@ import Icon2 from "../../assets/images/icon2.png";
 import Icon3 from "../../assets/images/icon3.png";
 import Icon4 from "../../assets/images/icon4.png";
 import Icon5 from "../../assets/images/icon5.png";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
+
 
 //-------Create a Deals Header component--------
 function DealsHeader() {
+     //set language
+ const { t, i18n} = useTranslation();
+
     return (
         <div className="navHeader">
             <Navbar bg="light" variant="light">
@@ -19,7 +25,7 @@ function DealsHeader() {
                             to="/latest-deals"
                         >
                             <img src={Icon1} alt="icon" className="icon" />
-                            LALEST DEALS
+                           {t("LALEST_DEALS")}
                         </NavLink>
                     </Nav.Item>
                     <Nav.Item as="li">
@@ -28,7 +34,7 @@ function DealsHeader() {
                             to="/products"
                         >
                             <img src={Icon2} alt="icon" className="icon" />
-                            PRODUCTS
+                            {t("PRODUCTS")}
                         </NavLink>
                     </Nav.Item>
                     <Nav.Item as="li">
@@ -37,7 +43,7 @@ function DealsHeader() {
                             to="/services"
                         >
                             <img src={Icon3} alt="icon" className="icon" />
-                            SERVICES
+                            {t("SERVICES")}
                         </NavLink>
                     </Nav.Item>
                     <Nav.Item as="li">
@@ -46,7 +52,7 @@ function DealsHeader() {
                             to="/brands"
                         >
                             <img src={Icon4} alt="icon" className="icons" />
-                            BRANDS
+                            {t("BRANDS")}
                         </NavLink>
                     </Nav.Item>
                     <Nav.Item as="li">
@@ -55,7 +61,7 @@ function DealsHeader() {
                             to="/companies"
                         >
                             <img src={Icon5} alt="icon" className="icon" />
-                            COMPANIES
+                            {t("COMPANIES")}
                         </NavLink>
                     </Nav.Item>
 

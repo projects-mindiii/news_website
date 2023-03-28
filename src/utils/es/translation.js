@@ -20,8 +20,14 @@ export const TRANSLATIONS_ES = {
     LOG_OUT: " CERRAR_SESIÓN",
     VIEW_PROFILE: "VER_PERFILE",
     BOOKMARKS: "MARCAPÁGINAS",
+    FOOTER_TEXT:`Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
+    QUICK_LINKS:"ENLACES RÁPIDOS",
+    NEWS_LINKS:"Noticias",
+    JOB_LINKS:"Trabajos",
+    ADVERTIES_LINKS:"Anunciar",
+    OUR_MEDIA:"NUESTROS MEDIOS",
 
-    //----header text------
+    //----Header Text------
 
     DEALS: "OFERTAS/CENTRO",
     CLASSIFIEDS: " CLASIFICADOS",
@@ -56,4 +62,10 @@ export const TRANSLATIONS_ES = {
     EMAIL: "Tu correo electrónico",
     PASSWORD: "Tu contraseña",
     CONFIRM_PASSWORD: "confirmar Contraseña",
+    SEARCH: "Buscar",
+
+     //---------- Form Lable Common Text---------------
+  REMEMBER_ME:"Acuérdate de mí",
+  YOUR_NAME:"Tu nombre (Opcional)",
+  YOUR_EMAIL:"Tu Email (requerido)"
 }

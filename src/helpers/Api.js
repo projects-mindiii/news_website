@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = "";
+const BASE_URL = "http://13.244.196.231:3002/v1/";
 // const REACT_PROXYURL = "https://quiet-retreat-79741.herokuapp.com/";
-const REACT_PROXYURL = "";
+  const REACT_PROXYURL = "";
 
 /** API Class
  * static clase trying together method used to get/send to the API.
@@ -23,22 +23,27 @@ class SublyApi {
     }
   }
 
-  /* ------SIGNUP API ROUTES -----*/
-  /* POST  /signup: {email,password}
-     Signup
+  /******************************************************
+	 * USERS AUTH API ROUTES
+	 *******************************************************/
+
+  /* ------SIGNUP API -----*/
+  /* POST  /request otp: { fullname ,email,password, confirm password}
+     request otp
      
      Authorization required:none
      
-     @param data {Object} {email,password}
+     @param data {Object} {fullname ,email,password, confirm password}
      @returns {object} {token}
      */
-  static async varifySignUp(data) {
+  static async requestOtp(data) {
     const header = {
-      "Device-Id": "777fgh",
-      "Device-Type": "3",
-      "Firebase-Token": "abcdef",
+      "api_key":"5da17efe-b69a-4133-a454-18fdf22065a9",
+      "device_token":"abcd",
+      "device_id": "777fgh",
+      "device_type": "3",
     };
-    let res = await this.request(`/verify-otp`,
+    let res = await this.request(`/request-otp`,
      data, "post", 
      header);
 
