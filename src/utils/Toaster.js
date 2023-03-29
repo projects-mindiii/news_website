@@ -2,9 +2,11 @@ import Swal from "sweetalert2";
 //------Toaster------
 
 export const Toast = Swal.mixin({
+  title: 'Whoops!',
   toast: true,
-  position: "top-end",
+  position: "TOP_CENTER",
   showConfirmButton: false,
+  className: 'toast-message',
   timer: 1800,
   timerProgressBar: true,
   didOpen: (toast) => {
@@ -12,3 +14,11 @@ export const Toast = Swal.mixin({
     toast.addEventListener("mouseleave", Swal.resumeTimer);
   },
 });
+
+
+
+
+  
+
+
+

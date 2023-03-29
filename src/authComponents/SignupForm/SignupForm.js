@@ -36,35 +36,34 @@ function SignupForm() {
     formState: { errors },
   } = useForm();
 
-
   const onSubmit = async (formdata) => {
-        let requestData = new FormData();
-        requestData.append("name", formdata.fullName);
-        requestData.append("email", formdata.email);
-        requestData.append("password",formdata.password);
-        requestData.append("confirm_password",formdata.confirmPassword);
-        await SublyApi.requestOtp(requestData).then((responsejson) => {
-            if (responsejson.status_code === 200) {
-              setValue("fullName", "");
-              setValue("email", "");
-              setValue("password", "");
-              setValue("confirmPassword", "");
-                Toast.fire({
-                    icon: "success",
-                    title: responsejson.message,
-                });
-                console.log("responsejson", responsejson);
-               
-            } else {
-                Toast.fire({
-                    icon: "error",
-                    title: responsejson.data.message,
-                });
-               
-            }
-        })
-   
-};
+    let requestData = new FormData();
+    requestData.append("name", formdata.fullName);
+    requestData.append("email", formdata.email);
+    requestData.append("password", formdata.password);
+    requestData.append("confirm_password", formdata.confirmPassword);
+    await SublyApi.requestOtp(requestData).then((responsejson) => {
+      if (responsejson.status_code === 200) {
+        setValue("fullName", "");
+        setValue("email", "");
+        setValue("password", "");
+        setValue("confirmPassword", "");
+        Toast.fire({
+          icon: "success",
+          className: 'toast-message',
+          title: responsejson.message,
+        });
+        console.log("responsejson", responsejson);
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: responsejson.data.message,
+        });
+      }
+    });
+  };
+
+ 
   return (
     <div className="main">
       <Container>
@@ -99,10 +98,11 @@ function SignupForm() {
             </Form.Group>
 
             <Form.Group className="mb-3">
+              
               <Form.Control
                 type="email"
                 placeholder={t("EMAIL")}
-                {...register("email", {
+                {...register("email", { 
                   required: {
                     value: true,
                     message: `${t("INCOMPLETE")}`,
@@ -217,7 +217,7 @@ function SignupForm() {
               </span>
             </div>
 
-            <Button className="btn" type="submit">
+            <Button className="btn" type="submit"  onClick={() => navigate("/email-varify")}>
               {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">

@@ -7,6 +7,7 @@ import {
 import Footer from "../appComponents/Footer/Footer";
 import Header from "../appComponents/Header/Header";
 import ForgotPassword from "../authComponents/ForgotPassword/ForgotPassword";
+import EmailVarify from "../authComponents/EmailVarification/EmailVarify";
 import Login from "../authComponents/Login/Login";
 import LoginForm from "../authComponents/Login/LoginForm/LoginForm";
 import PasswordSent from "../authComponents/PasswordSent/PasswordSent";
@@ -23,6 +24,7 @@ function Routers() {
                 <Route exact path="/sign-up" element={<SignupForm />} />
                 <Route exact path="/forgot-password" element={<ForgotPassword/>} />
                 <Route exact path="/password-sent" element={<PasswordSent/>} />
+                <Route exact path="/email-varify" element={<EmailVarify/>} />
             </Routes>
             <Footer />
         </Router>

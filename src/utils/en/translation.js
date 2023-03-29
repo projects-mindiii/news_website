@@ -28,6 +28,11 @@ export const TRANSLATIONS_EN = {
   SENT_EMAIL: "example@email.com",
   RESEND: "Resend",
   CHANGE_EMAIL: "Change email address",
+  EMAIL_VERIFICATION: "EMAIL VERIFICATION",
+  VARIFICATION_TEXT: `To verify your email address  
+  please enter the code sent to
+  example@email.com`,
+  VERIFY:"VERIFY",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -36,6 +41,8 @@ export const TRANSLATIONS_EN = {
   JOB_LINKS: "Jobs",
   ADVERTIES_LINKS: "Advertise",
   OUR_MEDIA: "OUR MEDIA",
+
+  
 
   //----Header Text------
   DEALS: "DEALS/HUB",
