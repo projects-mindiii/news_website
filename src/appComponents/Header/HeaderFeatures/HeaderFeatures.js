@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { statictext } from "../../../utils/CommonStaticText";
 import "./HeaderFeatures.css";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n";

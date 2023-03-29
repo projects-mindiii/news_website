@@ -20,18 +20,19 @@ export const TRANSLATIONS_EN = {
   LOG_OUT: " LOG_OUT",
   VIEW_PROFILE: "VIEW_PROFILE",
   BOOKMARKS: "BOOKMARKS",
-  FOOTER_TEXT:`Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
-  QUICK_LINKS:"QUICK LINKS",
-  NEWS_LINKS:"News",
-  JOB_LINKS:"Jobs",
-  ADVERTIES_LINKS:"Advertise",
-  OUR_MEDIA:"OUR MEDIA",
+  RESET_PASSWORD: "RESET YOUR PASSWORD",
+  PASSWORD_TEXT: "A new password will be sent to the entered email address",
+  RESET_PASS: "RESET PASSWORD",
 
-
-  
+  //----Footer Text------
+  FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
+  QUICK_LINKS: "QUICK LINKS",
+  NEWS_LINKS: "News",
+  JOB_LINKS: "Jobs",
+  ADVERTIES_LINKS: "Advertise",
+  OUR_MEDIA: "OUR MEDIA",
 
   //----Header Text------
-
   DEALS: "DEALS/HUB",
   CLASSIFIEDS: " CLASSIFIEDS",
   JOBS: "JOBS",
@@ -66,7 +67,7 @@ export const TRANSLATIONS_EN = {
 
 
   //---------- Form Lable Common Text---------------
-  REMEMBER_ME:"Remember me",
-  YOUR_NAME:"Your Name (Optional)",
-  YOUR_EMAIL:"Your Email (Required)"
+  REMEMBER_ME: "Remember me",
+  YOUR_NAME: "Your Name (Optional)",
+  YOUR_EMAIL: "Your Email (Required)"
 };

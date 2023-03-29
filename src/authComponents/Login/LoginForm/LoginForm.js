@@ -11,14 +11,17 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n";
-
+import { useNavigate } from "react-router-dom";
 
 
 //--------Create a Login with email component----------
 function LoginForm() {
+    const navigate = useNavigate();
     const [shown, setShown] = useState(false);
-      //set language
-  const { t, i18n } = useTranslation();
+
+
+    //set language
+    const { t, i18n } = useTranslation();
 
     //----------function for form validation using useform------------
     const {
@@ -68,18 +71,18 @@ function LoginForm() {
                                 {...register("password", {
                                     required: {
                                         value: true,
-                                        message:  `${t("INCOMPLETE")}`,
+                                        message: `${t("INCOMPLETE")}`,
                                     },
                                     pattern: {
                                         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
                                         message: `${t("INVALID_PASSWORD")}`,
                                     },
                                     maxLength: {
-                                        value: 15,
-                                        message:`${t("PASS_MAXLENGTH")}`,
+                                        value: 8,
+                                        message: `${t("PASS_MAXLENGTH")}`,
                                     },
                                     minLength: {
-                                        value: 8,
+                                        value: 4,
                                         message: `${t("PASS_MINLENGTH")}`,
                                     },
                                 })}
@@ -98,10 +101,10 @@ function LoginForm() {
 
                         <div className="forgotCls">
                             <Form.Group className="mb-3 customCheck" controlId="formBasicRadio">
-                                <Form.Check type="checkbox" label={t("REMEMBER_ME")}defaultChecked />
+                                <Form.Check type="checkbox" label={t("REMEMBER_ME")} defaultChecked />
                             </Form.Group>
 
-                            <h6>{t("FORGOT_PASSWORD")}</h6>
+                            <h6 onClick={() => navigate("/forgot-password")}>{t("FORGOT_PASSWORD")}</h6>
                         </div>
 
                         <div className="errorSet">
@@ -112,7 +115,7 @@ function LoginForm() {
                         </div>
 
                         <Button className="btn" type="submit">
-                            LOGIN
+                            {t("LOGIN")}
                         </Button>
 
                         <div className="LoginText">
