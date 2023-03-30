@@ -4,8 +4,11 @@ import Reset from "../../assets/images/reset_password.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
+//----------create a forgotPassword component------------
 function ForgotPassword() {
+    const navigate = useNavigate();
     //set language
     const { t, i18n } = useTranslation();
 
@@ -18,7 +21,7 @@ function ForgotPassword() {
 
     //-----------function for submit login form-----------
     const onsubmit = (data) => {
-        console.log(data);
+       
     }
 
     return (
@@ -57,7 +60,7 @@ function ForgotPassword() {
                                     errors[Object.keys(errors)[0]].message}{" "}
                             </span>
 
-                            <Button className="btn" type="submit">
+                            <Button className="btn" type="submit"  onClick={() => navigate("/password-sent")}>
                                 {t("RESET_PASS")}
                             </Button>
                         </Form>

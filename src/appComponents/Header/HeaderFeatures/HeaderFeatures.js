@@ -6,8 +6,9 @@ import i18n from "../../../i18n";
 
 function HeaderFeatures() {
     const navigate = useNavigate();
-     //set language
-  const { t, i18n } = useTranslation();
+    //set language
+    const { t, i18n } = useTranslation();
+    
     return (
         <>
             <div className="headerFeature" >

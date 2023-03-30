@@ -23,6 +23,11 @@ export const TRANSLATIONS_EN = {
   RESET_PASSWORD: "RESET YOUR PASSWORD",
   PASSWORD_TEXT: "A new password will be sent to the entered email address",
   RESET_PASS: "RESET PASSWORD",
+  NEW_PASS: "NEW PASSWORD SENT",
+  PASS_SENT: "A new password will be sent too",
+  SENT_EMAIL: "example@email.com",
+  RESEND: "Resend",
+  CHANGE_EMAIL: "Change email address",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,

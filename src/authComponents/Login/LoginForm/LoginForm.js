@@ -32,7 +32,7 @@ function LoginForm() {
 
     //-----------function for submit login form-----------
     const onsubmit = (data) => {
-        console.log(data);
+        
     }
 
     return (

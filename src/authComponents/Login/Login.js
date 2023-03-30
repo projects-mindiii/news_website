@@ -45,7 +45,7 @@ function Login() {
                         <h3>{t("LOGIN_LINKEDIN")}</h3>
                     </div>
                     <div className="accountType">
-                        <p>{t("DONT_ACCOUNT")}<span onClick={() => navigate("/sign-up")}>{t("SIGNUP")}</span></p>
+                        <p>{t("DONT_ACCOUNT")}<span onClick={() => navigate("/sign-up")}> {t("SIGNUP")} </span></p>
                     </div>
                 </div>
 
