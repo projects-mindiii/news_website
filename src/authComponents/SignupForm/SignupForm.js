@@ -11,16 +11,17 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { MdToggleOff, MdToggleOn } from "react-icons/md";
-import i18n from "../../i18n";
+ import i18n from "../../i18n";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
+import {EmailValidation} from "../../utils/CommonInputFields/EmailValidation";
 
 //--------------Form for singing up new users----------
 
 function SignupForm() {
   const navigate = useNavigate();
   //set language
-  const { t, i18n } = useTranslation();
+  const { t, i18n} = useTranslation();
   //-------sets toggle for showing and hiding password------
   const [shown, setShown] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -34,7 +35,10 @@ function SignupForm() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur",
+  defaultValues: {
+    email: "",
+  },});
 
   const onSubmit = async (formdata) => {
     let requestData = new FormData();
@@ -99,7 +103,7 @@ function SignupForm() {
 
             <Form.Group className="mb-3">
               
-              <Form.Control
+              {/* <Form.Control
                 type="email"
                 placeholder={t("EMAIL")}
                 {...register("email", { 
@@ -117,6 +121,12 @@ function SignupForm() {
                     message: `${t("INVALID_EMAIL")}`,
                   },
                 })}
+              /> */}
+
+              <Form.Control
+                type="email"
+                placeholder={t("EMAIL")}
+                {...register("email", EmailValidation)}
               />
             </Form.Group>
 
@@ -217,7 +227,7 @@ function SignupForm() {
               </span>
             </div>
 
-            <Button className="btn" type="submit"  onClick={() => navigate("/email-varify")}>
+            <Button className="btn" type="submit">
               {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">

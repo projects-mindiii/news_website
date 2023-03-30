@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 export const Toast = Swal.mixin({
   title: 'Whoops!',
   toast: true,
-  position: "TOP_CENTER",
+  position: "top-right",
   showConfirmButton: false,
   className: 'toast-message',
   timer: 1800,
