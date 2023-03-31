@@ -44,6 +44,7 @@ function SignupForm() {
     },
   });
 
+
   const onSubmit = async (formdata) => {
     let requestData = new FormData();
     requestData.append("name", formdata.fullName);
@@ -52,6 +53,7 @@ function SignupForm() {
     requestData.append("confirm_password", formdata.confirmPassword);
     await SublyApi.requestOtp(requestData).then((responsejson) => {
       if (responsejson.status_code === 200) {
+
         setValue("fullName", "");
         setValue("email", "");
         setValue("password", "");
@@ -61,7 +63,7 @@ function SignupForm() {
           className: "toast-message",
           title: responsejson.message,
         });
-
+        navigate("/email-varify")
         console.log("responsejson", responsejson);
       } else {
         Toast.fire({
@@ -230,7 +232,7 @@ function SignupForm() {
               </span>
             </div>
 
-            <Button className="btn" type="submit" onClick={() => navigate("/email-varify")}>
+            <Button className="btn" type="submit" >
               {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">
