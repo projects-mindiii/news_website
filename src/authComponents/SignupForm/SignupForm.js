@@ -11,22 +11,24 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { MdToggleOff, MdToggleOn } from "react-icons/md";
- import i18n from "../../i18n";
+import i18n from "../../i18n";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
-import {EmailValidation} from "../../utils/CommonInputFields/EmailValidation";
+import { EmailValidation } from "../../utils/CommonInputFields/EmailValidation";
+
 
 //--------------Form for singing up new users----------
 
 function SignupForm() {
   const navigate = useNavigate();
   //set language
-  const { t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   //-------sets toggle for showing and hiding password------
   const [shown, setShown] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
   //-------sets toggle for subscribe button on/off--------------
   const [notification, setNotification] = useState(false);
+ 
 
   //--------function for form validation using useform-----------
   const {
@@ -35,10 +37,12 @@ function SignupForm() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm({ mode: "onBlur",
-  defaultValues: {
-    email: "",
-  },});
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      email: "",
+    },
+  });
 
   const onSubmit = async (formdata) => {
     let requestData = new FormData();
@@ -54,9 +58,10 @@ function SignupForm() {
         setValue("confirmPassword", "");
         Toast.fire({
           icon: "success",
-          className: 'toast-message',
+          className: "toast-message",
           title: responsejson.message,
         });
+
         console.log("responsejson", responsejson);
       } else {
         Toast.fire({
@@ -67,7 +72,6 @@ function SignupForm() {
     });
   };
 
- 
   return (
     <div className="main">
       <Container>
@@ -102,7 +106,6 @@ function SignupForm() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              
               {/* <Form.Control
                 type="email"
                 placeholder={t("EMAIL")}
@@ -227,7 +230,7 @@ function SignupForm() {
               </span>
             </div>
 
-            <Button className="btn" type="submit">
+            <Button className="btn" type="submit" onClick={() => navigate("/email-varify")}>
               {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">

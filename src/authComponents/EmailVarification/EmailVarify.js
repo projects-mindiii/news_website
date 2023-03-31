@@ -3,26 +3,13 @@ import "./EmailVarify.css";
 import EMAILVARIFICATION from "../../assets/images/emailvarify.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
-import { useForm } from "react-hook-form";
-// import OtpInput from "react-otp-input";
+import OtpInput from "react-otp-input";
 import { useState } from "react";
 
 function EmailVarify() {
-  const [emailOtp, setEmailOtp] = useState("");
+  const [otp, setOtp] = useState("");
   //set language
   const { t, i18n } = useTranslation();
-
-  //----------function for form validation using useform------------
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  //-----------function for submit login form-----------
-  const onsubmit = (data) => {
-    console.log(data);
-  };
 
   // async function SendEmailOtp() {
   //     let requestData = new FormData();
@@ -55,46 +42,28 @@ function EmailVarify() {
           <div className="forgotPassword">
             <img src={EMAILVARIFICATION} alt="reset-password" />
             <h1>{t("EMAIL_VERIFICATION")}</h1>
-            <p>{t("VARIFICATION_TEXT")}</p>
-
-            <Form onSubmit={handleSubmit(onsubmit)}>
-              {/* <div className="otpbox">
-                                            <OtpInput
-                                                className="inputCus"
-                                                value={emailOtp}
-                                                isInputNum={true}
-                                                 onChange={(value) => {
-                                                     setEmailOtp(value);
-                                                }}
-                                                 numInputs={4}
-                                                 isInputSecure={true}
-                                            />
-                                        </div>  */}
-
-              <span className="errorShow">
-                {errors[Object.keys(errors)[0]] &&
-                  errors[Object.keys(errors)[0]].message}{" "}
-              </span>
-
-              <Button className="btn" type="submit">
-                {t("VERIFY")}
-              </Button>
-              <div className="bottomText">
-                <span
-                // onClick={() => { setEmailOtp(""); SendEmailOtp(); }}
-                >
-                  Resend OTP
-                </span>
-              </div>
-
-              <div className="bottomText">
-                <span
-                // onClick={() => { setEmailOtp(""); SendEmailOtp(); }}
-                >
-                  change email address
-                </span>
-              </div>
-            </Form>
+            <div className="passwordSent">
+              <p>{t("VARIFICATION_TEXT")}</p>
+              <span>{t("SENT_EMAIL")}</span>
+            </div>
+            <div className="otpbox">
+              <OtpInput
+                className="inputCus"
+                inputStyle="inputStyle"
+                value={otp}
+                onChange={(value) => {
+                  setOtp(value);
+                }}
+                numInputs={4}
+                isInputSecure={true}
+                renderInput={(props) => <input {...props} />}
+              />
+            </div>
+            <Button className="btn" type="submit">
+              {t("VARIFY")}
+            </Button>
+            <h4>{t("RESEND")}</h4>
+            <h4>{t("CHANGE_EMAIL")}</h4>
           </div>
         </div>
       </Container>

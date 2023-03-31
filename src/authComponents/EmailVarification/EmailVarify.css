@@ -21,16 +21,34 @@
   color: #656565;
 }
 
-@media screen and (max-width: 390px) {
-  .otpbox input {
-    margin: 3px;
-  }
+.passwordSent p {
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  color: #656565;
+  margin-bottom: 0px;
+}
+
+.passwordSent span {
+  font-weight: 600;
+  font-size: 14px;
+  color: #656565;
+}
+
+.forgotPassword h4 {
+  font-weight: 700;
+  font-size: 14px;
+  color: #242424;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
 .otpbox {
   text-align: center;
-  padding: 5px 6px;
-  margin-top: 20px;
+    padding: 5px 6px;
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
 }
 
 .otpbox input::placeholder {
@@ -39,33 +57,33 @@
 }
 
 .inputCus input {
-    width: 32px !important;
-    max-width: 32px;
-    height: 37px;
-    margin: 16px 0px 16px 27px;
-    border-radius: 8px;
-    background-color: #f5f5f5;
-    border: 1px solid #f5f5f5;
-    outline: none;
-  }
-
-@media screen and (min-width: 310px) and (max-width: 338px) {
-  .otpbox {
-    display: flex;
-    justify-content: center;
-  }
+  width: 32px !important;
+  max-width: 32px;
+  height: 37px;
+  margin: 16px 0px 16px 27px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  outline: none;
 }
 
-@media screen and (min-width: 338px) and (max-width: 767px) {
-  .otpbox {
-    display: flex;
-    justify-content: center;
-  }
+.inputStyle {
+  width: 3rem !important;
+  height: 3rem;
+  margin: 0 1rem;
+  font-size: 2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.bottomText {
-  font-size: 15px;
-  font-weight: 600;
-  color: #242424;
-  margin-top: 15px;
+.otpbox input {
+  background-color: #EAEAEA;
+  border: none;
+  border-radius: 6px;
+}
+
+.otpbox input:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
 }

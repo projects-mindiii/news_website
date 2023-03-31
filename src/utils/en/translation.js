@@ -30,9 +30,11 @@ export const TRANSLATIONS_EN = {
   CHANGE_EMAIL: "Change email address",
   EMAIL_VERIFICATION: "EMAIL VERIFICATION",
   VARIFICATION_TEXT: `To verify your email address  
-  please enter the code sent to
-  example@email.com`,
+  please enter the code sent to`,
   VERIFY:"VERIFY",
+  SENT_EMAIL: "example@email.com",
+  RESEND: "Resend",
+  CHANGE_EMAIL: "Change email address",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
