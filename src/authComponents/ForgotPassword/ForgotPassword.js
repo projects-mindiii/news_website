@@ -21,7 +21,7 @@ function ForgotPassword() {
 
     //-----------function for submit login form-----------
     const onsubmit = (data) => {
-       
+
     }
 
     return (
@@ -60,7 +60,7 @@ function ForgotPassword() {
                                     errors[Object.keys(errors)[0]].message}{" "}
                             </span>
 
-                            <Button className="btn" type="submit"  onClick={() => navigate("/password-sent")}>
+                            <Button className="btn" type="submit" onClick={() => navigate("/password-sent")}>
                                 {t("RESET_PASS")}
                             </Button>
                         </Form>

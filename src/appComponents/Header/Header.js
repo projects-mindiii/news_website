@@ -14,7 +14,7 @@ import HeaderData from "./HeaderData";
 function Header() {
     //set language
     const { t, i18n } = useTranslation();
-    
+
     return (
         <section className="header">
             <Container>

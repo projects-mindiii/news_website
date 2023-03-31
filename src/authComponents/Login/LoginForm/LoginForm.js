@@ -12,6 +12,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n";
 import { useNavigate } from "react-router-dom";
+import SublyApi from "../../../helpers/Api";
+import { Toast } from "../../../utils/Toaster";
 
 
 //--------Create a Login with email component----------
@@ -27,13 +29,35 @@ function LoginForm() {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm();
 
     //-----------function for submit login form-----------
-    const onsubmit = (data) => {
-        
-    }
+
+    const onSubmit = async (formdata) => {
+        let requestData = new FormData();
+        requestData.append("email", formdata.email);
+        requestData.append("password", formdata.password);
+        await SublyApi.loginProcess(requestData).then((responsejson) => {
+            if (responsejson.status_code === 200) {
+                setValue("email", "");
+                setValue("password", "");
+                Toast.fire({
+                    icon: "success",
+                    title: responsejson.message,
+                });
+
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: responsejson.data.message,
+                });
+
+            }
+        })
+
+    };
 
     return (
         <div className="main">
@@ -42,7 +66,7 @@ function LoginForm() {
                     <div className="topHeading">
                         <h1>{t("EMAIL_LOGIN")}</h1>
                     </div>
-                    <Form onSubmit={handleSubmit(onsubmit)}>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
                         <Form.Group className="mb-3">
                             <Form.Control
                                 type="text"

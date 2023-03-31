@@ -6,8 +6,8 @@ import i18n from "../../i18n";
 
 //-------Create a Search component--------
 function SearchBar() {
-     //set language
-  const { t, i18n } = useTranslation();
+    //set language
+    const { t, i18n } = useTranslation();
     return (
         <div className="searchBar">
             <Form>

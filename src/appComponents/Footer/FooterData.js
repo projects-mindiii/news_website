@@ -11,52 +11,6 @@ import AppStore from "../../assets/images/appStore.png";
 import GooglePlay from "../../assets/images/googlePlay.png";
 import AppGallery from "../../assets/images/appGallery.png";
 
-// export const footerData = [
-//     {
-//         id: "1",
-//         logo: `${Facebook}`,
-//     },
-//     {
-//         id: "2",
-//         logo: `${Twitter}`,
-//     },
-//     {
-//         id: "3",
-//         logo: `${Linkedin}`,
-//     },
-//     {
-//         id: "4",
-//         logo: `${Instragram}`,
-//     },
-//     {
-//         id: "5",
-//         logo: `${Youtube}`,
-//     },
-//     {
-//         id: "6",
-//         logo: `${Telegram}`,
-//     },
-
-// ];
-
-// export const footerData1 = [
-//     {
-//         id: "1",
-//         socialapp: `${AppStore}`,
-//     },
-//     {
-//         id: "2",
-//         socialapp: `${GooglePlay}`,
-//     },
-//     {
-//         id: "3",
-//         socialapp: `${AppGallery}`,
-//     },
-
-// ];
-
-
-
 export const footerData = {
     sociallogo: [
         {

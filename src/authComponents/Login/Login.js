@@ -12,8 +12,8 @@ import { useTranslation } from "react-i18next";
 //--------Create a Login component----------
 function Login() {
     const navigate = useNavigate();
-     //set language
-  const { t, i18n } = useTranslation();
+    //set language
+    const { t, i18n } = useTranslation();
 
     return (
         <div className="main">

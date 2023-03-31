@@ -16,8 +16,10 @@ function PasswordSent() {
                     <div className="forgotPassword">
                         <img src={Email} alt="reset-password" />
                         <h1>{t("NEW_PASS")}</h1>
-                        <p>{t("PASS_SENT")}</p>
-                        <span>{t("SENT_EMAIL")}</span>
+                        <div className="passwordSent">
+                            <p>{t("PASS_SENT")}</p>
+                            <span>{t("SENT_EMAIL")}</span>
+                        </div>
 
                         <Button className="btn" type="submit">
                             {t("LOGIN")}
@@ -25,7 +27,7 @@ function PasswordSent() {
                         <h4>{t("RESEND")}</h4>
                         <h4>{t("CHANGE_EMAIL")}</h4>
                     </div>
-                </div> 
+                </div>
             </Container>
         </div>
     );

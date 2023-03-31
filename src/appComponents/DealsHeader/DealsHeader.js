@@ -26,43 +26,6 @@ function DealsHeader() {
                             </NavLink>
                         </Nav.Item>
                     ))}
-                    {/* <Nav.Item as="li">
-                        <NavLink
-                            className="nav"
-                            to="/products"
-                        >
-                            <img src={Icon2} alt="icon" className="icon" />
-                            {t("PRODUCTS")}
-                        </NavLink>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <NavLink
-                            className="nav"
-                            to="/services"
-                        >
-                            <img src={Icon3} alt="icon" className="icon" />
-                            {t("SERVICES")}
-                        </NavLink>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <NavLink
-                            className="nav"
-                            to="/brands"
-                        >
-                            <img src={Icon4} alt="icon" className="icons" />
-                            {t("BRANDS")}
-                        </NavLink>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <NavLink
-                            className="nav"
-                            to="/companies"
-                        >
-                            <img src={Icon5} alt="icon" className="icon" />
-                            {t("COMPANIES")}
-                        </NavLink>
-                    </Nav.Item> */}
-
                 </Nav>
             </Navbar>
         </div>

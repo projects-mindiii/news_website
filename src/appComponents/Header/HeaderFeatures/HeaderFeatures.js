@@ -8,7 +8,7 @@ function HeaderFeatures() {
     const navigate = useNavigate();
     //set language
     const { t, i18n } = useTranslation();
-    
+
     return (
         <>
             <div className="headerFeature" >
