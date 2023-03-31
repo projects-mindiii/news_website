@@ -1,38 +1,16 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "./Footer.css";
-import Facebook from "../../assets/images/facebook_ico.png";
-import Twitter from "../../assets/images/twitter_ico.png";
-import Linkedin from "../../assets/images/linkdin_ico.png";
-import Instragram from "../../assets/images/instagram_ico.png";
-import Youtube from "../../assets/images/youtube_ico.png";
-import Telegram from "../../assets/images/send_ico.png";
 import Image1 from "../../assets/images/image1.png";
-import AppStore from "../../assets/images/appStore.png";
-import GooglePlay from "../../assets/images/googlePlay.png";
-import AppGallery from "../../assets/images/appGallery.png";
 import Image2 from "../../assets/images/image2.png";
 import Image3 from "../../assets/images/image3.png";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
+import { footerData } from "./FooterData";
 
 //--------Create a Footer component----------
 function Footer() {
     //set language
-  const { t, i18n } = useTranslation();
-
-    //-----react useform use for validation-----
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-
-
-    //----- function for submit login form-----
-    const onsubmit = (data) => {
-        console.log(data);
-    }
+    const { t, i18n } = useTranslation();
 
     return (
         <>
@@ -46,44 +24,36 @@ function Footer() {
                                 </div>
 
                                 <div className="socialIcon">
-                                    <img src={Facebook} alt="facebook" />
-                                    <img src={Twitter} alt="twitter" />
-                                    <img src={Linkedin} alt="linkedin" />
-                                    <img src={Instragram} alt="instragram" />
-                                    <img src={Youtube} alt="youtube" />
-                                    <img src={Telegram} alt="telegram" />
+                                    {(footerData.sociallogo).map((item, index) => (
+                                        <img src={item.logo} alt="facebook" key={index} />
+                                    ))}
+
                                 </div>
                                 <div className="signContent">
                                     <h6>{t("FOOTER_TEXT")}</h6>
                                 </div>
                                 <div className="appStoresImg">
-                                    <a
-                                        href="#"
-                                        target="_blank"
-                                    >
-                                        <img src={AppStore} alt="appstore" />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        target="_blank"
-                                    >
-                                        <img src={GooglePlay} alt="googlePlay" />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        target="_blank"
-                                    >
-                                        <img src={AppGallery} alt="appGallery" />
-                                    </a>
+                                    {(footerData.socialapp).map((item1, index1) => (
+                                        <a
+                                            href="#"
+                                            target="_blank"
+                                            key={index1}
+                                        >
+                                            <img src={item1.socialapp} alt="appstore" />
+                                        </a>
+                                    ))}
+
                                 </div>
                             </Col>
                             <Col lg={4} md={4}>
                                 <div className="linkHeading">
                                     <h6>{t("QUICK_LINKS")}</h6>
                                     <div className="linkNames">
-                                        <h6>{t("NEWS_LINKS")}</h6>
-                                        <h6>{t("JOB_LINKS")}</h6>
-                                        <h6>{t("ADVERTIES_LINKS")}</h6>
+
+                                        {(footerData.links).map((item2, index2) => (
+                                            <h6 key={index2}> {item2.text}</h6>
+                                        ))}
+
                                     </div>
                                 </div>
                             </Col>
@@ -94,7 +64,7 @@ function Footer() {
                                         <img src={Image2} alt="sign-Africa" />
                                         <img src={Image3} alt="sign-Africa" />
                                     </div>
-                                    <div className="subscribeForm">
+                                    {/*<div className="subscribeForm">
                                         <h5>{t("SUBSCRIPTION_TEXT")}</h5>
                                         <Form onSubmit={handleSubmit(onsubmit)}>
                                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -131,7 +101,7 @@ function Footer() {
                                                 Subscribe
                                             </Button>
                                         </Form>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </Col>
                         </Row>

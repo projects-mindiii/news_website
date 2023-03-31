@@ -6,8 +6,9 @@ import i18n from "../../../i18n";
 
 function HeaderFeatures() {
     const navigate = useNavigate();
-     //set language
-  const { t, i18n } = useTranslation();
+    //set language
+    const { t, i18n } = useTranslation();
+
     return (
         <>
             <div className="headerFeature" >
@@ -18,11 +19,11 @@ function HeaderFeatures() {
 
 
             {/* <div className="headerFeature" >
-                    <h5>BOOKMARKS</h5>
+                    <h5>{statictext.BOOKMARKS}</h5>
                 <span>|</span>
-                    <h5>VIEW PROFILE</h5>
+                    <h5>{statictext.VIEW_PROFILE}</h5>
                 <span>|</span>
-                    <h5>LOG OUT</h5>
+                    <h5>{statictext.LOG_OUT}</h5>
             </div> */}
         </>
     );

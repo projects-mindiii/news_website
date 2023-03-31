@@ -20,15 +20,24 @@ export const TRANSLATIONS_ES = {
     LOG_OUT: " CERRAR_SESIÓN",
     VIEW_PROFILE: "VER_PERFILE",
     BOOKMARKS: "MARCAPÁGINAS",
-    FOOTER_TEXT:`Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
-    QUICK_LINKS:"ENLACES RÁPIDOS",
-    NEWS_LINKS:"Noticias",
-    JOB_LINKS:"Trabajos",
-    ADVERTIES_LINKS:"Anunciar",
-    OUR_MEDIA:"NUESTROS MEDIOS",
+    RESET_PASSWORD: "RESTABLECER SU CONTRASEÑA",
+    PASSWORD_TEXT: "Se enviará una nueva contraseña a la dirección de correo electrónico ingresada",
+    RESET_PASS: "RESTABLECER LA CONTRASEÑA",
+    NEW_PASS: "NUEVA CONTRASEÑA ENVIADA",
+    PASS_SENT: "También se enviará una nueva contraseña.",
+    SENT_EMAIL: "ejemplo@email.com",
+    RESEND: "reenviar",
+    CHANGE_EMAIL: "Cambiar dirección de correo electrónico",
+
+    //----Footer Text------
+    FOOTER_TEXT: `Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
+    QUICK_LINKS: "ENLACES RÁPIDOS",
+    NEWS_LINKS: "Noticias",
+    JOB_LINKS: "Trabajos",
+    ADVERTIES_LINKS: "Anunciar",
+    OUR_MEDIA: "NUESTROS MEDIOS",
 
     //----Header Text------
-
     DEALS: "OFERTAS/CENTRO",
     CLASSIFIEDS: " CLASIFICADOS",
     JOBS: "TRABAJOS",
@@ -42,8 +51,7 @@ export const TRANSLATIONS_ES = {
 
 
 
-//---------------Error Messages Common Text----------
-
+    //---------------Error Messages Common Text----------
     INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
     INVALID_EMAIL: "Dirección de correo electrónico no válida",
     EMAIL_MAXLENGTH: "El correo electrónico debe tener 50 caracteres o menos",
@@ -56,16 +64,15 @@ export const TRANSLATIONS_ES = {
 
 
 
-//---------- Placeholder Common Text---------------
-
+    //---------- Placeholder Common Text---------------
     NAME: "Nombre completo",
     EMAIL: "Tu correo electrónico",
     PASSWORD: "Tu contraseña",
     CONFIRM_PASSWORD: "confirmar Contraseña",
     SEARCH: "Buscar",
 
-     //---------- Form Lable Common Text---------------
-  REMEMBER_ME:"Acuérdate de mí",
-  YOUR_NAME:"Tu nombre (Opcional)",
-  YOUR_EMAIL:"Tu Email (requerido)"
+    //---------- Form Lable Common Text---------------
+    REMEMBER_ME: "Acuérdate de mí",
+    YOUR_NAME: "Tu nombre (Opcional)",
+    YOUR_EMAIL: "Tu Email (requerido)"
 }

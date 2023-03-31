@@ -9,10 +9,11 @@ import { useNavigate } from "react-router-dom";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 
+//--------Create a Login component----------
 function Login() {
     const navigate = useNavigate();
-     //set language
-  const { t, i18n } = useTranslation();
+    //set language
+    const { t, i18n } = useTranslation();
 
     return (
         <div className="main">
@@ -44,7 +45,7 @@ function Login() {
                         <h3>{t("LOGIN_LINKEDIN")}</h3>
                     </div>
                     <div className="accountType">
-                        <p>{t("DONT_ACCOUNT")}<span onClick={() => navigate("/sign-up")}>{t("SIGNUP")}</span></p>
+                        <p>{t("DONT_ACCOUNT")}<span onClick={() => navigate("/sign-up")}> {t("SIGNUP")} </span></p>
                     </div>
                 </div>
 
