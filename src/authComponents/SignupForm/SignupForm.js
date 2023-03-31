@@ -14,6 +14,8 @@ import { MdToggleOff, MdToggleOn } from "react-icons/md";
 import i18n from "../../i18n";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
+import { EmailValidation } from "../../utils/CommonInputFields/EmailValidation";
+
 
 //--------------Form for singing up new users----------
 
@@ -26,6 +28,7 @@ function SignupForm() {
   const [passwordShow, setPasswordShow] = useState(false);
   //-------sets toggle for subscribe button on/off--------------
   const [notification, setNotification] = useState(false);
+ 
 
   //--------function for form validation using useform-----------
   const {
@@ -34,37 +37,43 @@ function SignupForm() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      email: "",
+    },
+  });
 
 
   const onSubmit = async (formdata) => {
-        let requestData = new FormData();
-        requestData.append("name", formdata.fullName);
-        requestData.append("email", formdata.email);
-        requestData.append("password",formdata.password);
-        requestData.append("confirm_password",formdata.confirmPassword);
-        await SublyApi.requestOtp(requestData).then((responsejson) => {
-            if (responsejson.status_code === 200) {
-              setValue("fullName", "");
-              setValue("email", "");
-              setValue("password", "");
-              setValue("confirmPassword", "");
-                Toast.fire({
-                    icon: "success",
-                    title: responsejson.message,
-                });
-                console.log("responsejson", responsejson);
-               
-            } else {
-                Toast.fire({
-                    icon: "error",
-                    title: responsejson.data.message,
-                });
-               
-            }
-        })
-   
-};
+    let requestData = new FormData();
+    requestData.append("name", formdata.fullName);
+    requestData.append("email", formdata.email);
+    requestData.append("password", formdata.password);
+    requestData.append("confirm_password", formdata.confirmPassword);
+    await SublyApi.requestOtp(requestData).then((responsejson) => {
+      if (responsejson.status_code === 200) {
+
+        setValue("fullName", "");
+        setValue("email", "");
+        setValue("password", "");
+        setValue("confirmPassword", "");
+        Toast.fire({
+          icon: "success",
+          className: "toast-message",
+          title: responsejson.message,
+        });
+        navigate("/email-varify")
+        console.log("responsejson", responsejson);
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: responsejson.data.message,
+        });
+      }
+    });
+  };
+
   return (
     <div className="main">
       <Container>
@@ -99,10 +108,10 @@ function SignupForm() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Control
+              {/* <Form.Control
                 type="email"
                 placeholder={t("EMAIL")}
-                {...register("email", {
+                {...register("email", { 
                   required: {
                     value: true,
                     message: `${t("INCOMPLETE")}`,
@@ -117,6 +126,12 @@ function SignupForm() {
                     message: `${t("INVALID_EMAIL")}`,
                   },
                 })}
+              /> */}
+
+              <Form.Control
+                type="email"
+                placeholder={t("EMAIL")}
+                {...register("email", EmailValidation)}
               />
             </Form.Group>
 
@@ -217,7 +232,7 @@ function SignupForm() {
               </span>
             </div>
 
-            <Button className="btn" type="submit">
+            <Button className="btn" type="submit" >
               {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">

@@ -28,6 +28,13 @@ export const TRANSLATIONS_ES = {
     SENT_EMAIL: "ejemplo@email.com",
     RESEND: "reenviar",
     CHANGE_EMAIL: "Cambiar dirección de correo electrónico",
+    EMAIL_VERIFICATION: `Para verificar su dirección de correo electrónico
+    por favor ingrese el código enviado a
+    ejemplo@email.com`,
+    VERIFY:"VERIFICAR",
+    SENT_EMAIL: "ejemplo@email.com",
+    RESEND: "reenviar",
+    CHANGE_EMAIL: "Cambiar dirección de correo electrónico",
 
     //----Footer Text------
     FOOTER_TEXT: `Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,

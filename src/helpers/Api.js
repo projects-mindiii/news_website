@@ -74,6 +74,30 @@ class SublyApi {
   }
 
 
+
+  /* POST  /request otp: { fullname ,email,password, confirm password}
+     request otp
+     
+     Authorization required:none
+     
+     @param data {Object} {fullname ,email,password, confirm password}
+     @returns {object} {token}
+     */
+     static async varifyOtp(data) {
+      const header = {
+        "api_key":"5da17efe-b69a-4133-a454-18fdf22065a9",
+        "device_token":"abcd",
+        "device_id": "777fgh",
+        "device_type": "3",
+      };
+      let res = await this.request(`/verify-otp`,
+       data, "post", 
+       header);
+  
+      return res;
+    }
+
+ 
 }
 
 SublyApi.token =
