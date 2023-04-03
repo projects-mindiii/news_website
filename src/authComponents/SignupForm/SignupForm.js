@@ -4,17 +4,17 @@ import "../../assets/styles/Common.css";
 import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-// import { BsToggleOn, BsToggleOff } from "react-icons/bs";
+import { BsToggleOn, BsToggleOff } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { MdToggleOff, MdToggleOn } from "react-icons/md";
-import i18n from "../../i18n";
+// import { MdToggleOff, MdToggleOn } from "react-icons/md";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import { EmailValidation } from "../../utils/CommonInputFields/EmailValidation";
+
 
 
 //--------------Form for singing up new users----------
@@ -22,13 +22,13 @@ import { EmailValidation } from "../../utils/CommonInputFields/EmailValidation";
 function SignupForm() {
   const navigate = useNavigate();
   //set language
-  const { t, i18n } = useTranslation();
+  const {t} = useTranslation();
   //-------sets toggle for showing and hiding password------
   const [shown, setShown] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
   //-------sets toggle for subscribe button on/off--------------
   const [notification, setNotification] = useState(false);
- 
+
 
   //--------function for form validation using useform-----------
   const {
@@ -53,17 +53,15 @@ function SignupForm() {
     requestData.append("confirm_password", formdata.confirmPassword);
     await SublyApi.requestOtp(requestData).then((responsejson) => {
       if (responsejson.status_code === 200) {
-
         setValue("fullName", "");
         setValue("email", "");
         setValue("password", "");
         setValue("confirmPassword", "");
         Toast.fire({
           icon: "success",
-          className: "toast-message",
           title: responsejson.message,
         });
-        navigate("/email-varify")
+        navigate("/email-varify",{state:{name:formdata.fullName, email:formdata.email, password:formdata.password, confirm_password:formdata.confirmPassword, otp:formdata.otp, country:formdata.country, initial_lat:formdata.initial_lat, initial_long:formdata.initial_long}})
         console.log("responsejson", responsejson);
       } else {
         Toast.fire({
@@ -212,12 +210,12 @@ function SignupForm() {
 
             <div className="notification">
               {notification ? (
-                <MdToggleOn
+                <BsToggleOn
                   className="icon"
                   onClick={() => setNotification(!notification)}
                 />
               ) : (
-                <MdToggleOff
+                <BsToggleOff
                   className="icon"
                   onClick={() => setNotification(!notification)}
                 />
@@ -233,7 +231,7 @@ function SignupForm() {
             </div>
 
             <Button className="btn" type="submit" >
-              {t("CREATEACCOUNT")}
+            {t("CREATEACCOUNT")}
             </Button>
             <div className="accountType">
               <p>

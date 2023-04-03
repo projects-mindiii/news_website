@@ -12,6 +12,12 @@ class SublyApi {
   //token which interact with the API will be stored here.
   static token;
   static async request(endpoint, data = {}, method = "get", header) {
+    header = {
+      "api-key": "5da17efe-b69a-4133-a454-18fdf22065a9",
+      "device-token": "abcd",
+      "device-id": "777fgh",
+      "device-type": "3",
+    };
     const url = `${REACT_PROXYURL}${BASE_URL}${endpoint}`;
     const headers = header || { Authorization: `Bearer ${SublyApi.token}` };
     const params = method === "get" ? data : {};
@@ -37,20 +43,14 @@ class SublyApi {
      @returns {object} {token}
      */
   static async requestOtp(data) {
-    const header = {
-      "api_key": "5da17efe-b69a-4133-a454-18fdf22065a9",
-      "device_token": "abcd",
-      "device_id": "777fgh",
-      "device_type": "3",
-    };
     let res = await this.request(`/request-otp`,
       data, "post",
-      header);
+      );
 
     return res;
   }
 
-  /* ------SIGNUP API -----*/
+  
   /* POST  /login api : { email, password }
     login api
      
@@ -60,15 +60,9 @@ class SublyApi {
      @returns {object} {token}
      */
   static async loginProcess(data) {
-    const header = {
-      "api-key": "5da17efe-b69a-4133-a454-18fdf22065a9",
-      "device-token": "abcd",
-      "device-id": "777fgh",
-      "device-type": "3",
-    };
     let res = await this.request(`/login`,
       data, "post",
-      header);
+      );
 
     return res;
   }
@@ -84,15 +78,9 @@ class SublyApi {
      @returns {object} {token}
      */
      static async varifyOtp(data) {
-      const header = {
-        "api_key":"5da17efe-b69a-4133-a454-18fdf22065a9",
-        "device_token":"abcd",
-        "device_id": "777fgh",
-        "device_type": "3",
-      };
       let res = await this.request(`/verify-otp`,
        data, "post", 
-       header);
+       );
   
       return res;
     }
