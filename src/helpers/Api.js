@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://13.244.196.231:3002/v1/";
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 // const REACT_PROXYURL = "https://quiet-retreat-79741.herokuapp.com/";
 const REACT_PROXYURL = "";
 
@@ -13,7 +14,7 @@ class SublyApi {
   static token;
   static async request(endpoint, data = {}, method = "get", header) {
     header = {
-      "api-key": "5da17efe-b69a-4133-a454-18fdf22065a9",
+      "api-key": process.env.REACT_APP_API_KEY_PAIR,
       "device-token": "abcd",
       "device-id": "777fgh",
       "device-type": "3",
@@ -36,9 +37,7 @@ class SublyApi {
   /* ------SIGNUP API -----*/
   /* POST  /request otp: { fullname ,email,password, confirm password}
      request otp
-     
      Authorization required:none
-     
      @param data {Object} {fullname ,email,password, confirm password}
      @returns {object} {token}
      */
@@ -46,16 +45,13 @@ class SublyApi {
     let res = await this.request(`/request-otp`,
       data, "post",
       );
-
     return res;
   }
 
   
   /* POST  /login api : { email, password }
     login api
-     
      Authorization required:none
-     
      @param data {Object} { email, password }
      @returns {object} {token}
      */
@@ -63,7 +59,6 @@ class SublyApi {
     let res = await this.request(`/login`,
       data, "post",
       );
-
     return res;
   }
 
@@ -71,9 +66,7 @@ class SublyApi {
 
   /* POST  /request otp: { fullname ,email,password, confirm password}
      request otp
-     
      Authorization required:none
-     
      @param data {Object} {fullname ,email,password, confirm password}
      @returns {object} {token}
      */
