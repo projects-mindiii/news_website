@@ -1,5 +1,6 @@
 /** @format */
 
+
 import { t } from "i18next";
 import Icon1 from "../../assets/images/icon1.png";
 import Icon2 from "../../assets/images/icon2.png";

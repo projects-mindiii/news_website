@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import CustomBtn from "../../formComponent/Button/Button";
 
 //----------create a forgotPassword component------------
 function ForgotPassword() {
@@ -60,9 +61,11 @@ function ForgotPassword() {
                                     errors[Object.keys(errors)[0]].message}{" "}
                             </span>
 
-                            <Button className="btn" type="submit" onClick={() => navigate("/password-sent")}>
+                            {/* <Button className="btn" type="submit" onClick={() => navigate("/password-sent")}>
                                 {t("RESET_PASS")}
-                            </Button>
+                            </Button> */}
+                            <CustomBtn type="submit" onClick={() => navigate("/password-sent")}>{t("RESET_PASS")}</CustomBtn>
+
                         </Form>
                     </div>
                 </div>
