@@ -4,7 +4,7 @@ import EMAILVARIFICATION from "../../assets/images/emailvarify.png";
 import { useTranslation } from "react-i18next";
 import OtpInput from "react-otp-input";
 import { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 
@@ -16,8 +16,7 @@ function EmailVarify() {
   //set language
   const { t } = useTranslation();
   const detail = location.state;
-  console.log("detailssssss",detail);
-
+  console.log("details",detail);
 
 
 
@@ -61,6 +60,7 @@ function EmailVarify() {
           icon: "success",
           title: responsejson.message,
         });
+
        
         console.log("responsejson", responsejson);
       } else {
@@ -86,7 +86,6 @@ function EmailVarify() {
             <div className="otpbox">
               <OtpInput 
                 className="inputCus"
-                inputType="number"
                 inputMode="numeric"
                   pattern="[0-9]*"
                 inputStyle="inputStyle"
@@ -124,7 +123,11 @@ function EmailVarify() {
              
               ></span>
             </h4>
-            <h4 onClick={() => navigate("/sign-up")}>
+            <h4 onClick={() => navigate("/sign-up",{state:{name:detail.name,
+           email:detail.email,
+            password:detail.password,
+             confirm_password:detail.confirm_password,
+              }})}>
             {t("CHANGE_EMAIL")}</h4>
           </div>
         </div>

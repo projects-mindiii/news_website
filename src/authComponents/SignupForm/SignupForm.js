@@ -4,13 +4,11 @@ import "../../assets/styles/Common.css";
 import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { BsToggleOn, BsToggleOff } from "react-icons/bs";
-import { FiToggleLeft } from "react-icons/fi";
-import { RiToggleLine,RiToggleFill } from "react-icons/ri";
+// import { BsToggleOn, BsToggleOff } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
@@ -20,14 +18,19 @@ import { EmailValidation } from "../../utils/CommonInputFields/EmailValidation";
 
 //--------------Form for singing up new users----------
 function SignupForm() {
+  const location = useLocation();
   const navigate = useNavigate();
   //set language
   const {t} = useTranslation();
+  const signupDetails = location.state;
+
+  console.log("signupDetails", signupDetails)
+
   //-------sets toggle for showing and hiding password------
   const [shown, setShown] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
   //-------sets toggle for subscribe button on/off--------------
-  const [notification, setNotification] = useState(false);
+  // const [notification, setNotification] = useState(false);
 
 
   //--------function for form validation using useform-----------
@@ -109,6 +112,7 @@ function SignupForm() {
                     message: `${t("INVALID_NAME")}`,
                   },
                 })}
+                disabled={true}
               />
             </Form.Group>
 
@@ -136,6 +140,7 @@ function SignupForm() {
               <Form.Control
                 placeholder={t("EMAIL")}
                 {...register("email", EmailValidation)}
+                disabled={true}
               />
             </Form.Group>
 
@@ -161,6 +166,8 @@ function SignupForm() {
                     message: `${t("PASS_MINLENGTH")}`,
                   },
                 })}
+                disabled={true}
+                
               />
               <div className="passwordicon">
                 {shown ? (
@@ -187,6 +194,7 @@ function SignupForm() {
                   validate: (value) =>
                     value === watch("password") || "Passwords have to match",
                 })}
+                disabled={true}
               />
               <div className="passwordicon">
                 {passwordShow ? (
@@ -203,20 +211,20 @@ function SignupForm() {
               </div>
             </Form.Group>
 
-            <div className="notification">
+            {/* <div className="notification">
               {notification ? (
-                <RiToggleFill
+                <BsToggleOn
                   className="icon"
                   onClick={() => setNotification(!notification)}
                 />
               ) : (
-                <RiToggleLine
+                <BsToggleOff
                   className="icon"
                   onClick={() => setNotification(!notification)}
                 />
               )}
               <p>{t("SUBSCRIPTION_TEXT")}</p>
-            </div>
+            </div> */}
 
             <div className="errorSet">
               <span className="errorShow">
