@@ -25,7 +25,6 @@ export const TRANSLATIONS_EN = {
   RESET_PASS: "RESET PASSWORD",
   NEW_PASS: "NEW PASSWORD SENT",
   PASS_SENT: "A new password will be sent too",
-  SENT_EMAIL: "example@email.com",
   RESEND: "Resend",
   CHANGE_EMAIL: "Change email address",
   EMAIL_VERIFICATION: "EMAIL VERIFICATION",

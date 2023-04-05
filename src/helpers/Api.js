@@ -78,7 +78,23 @@ class SublyApi {
       return res;
     }
 
- 
+    /* POST  /forgot password api : { email }
+    forgot password api
+     
+     Authorization required:none
+     
+     @param data {Object} { email }
+     @returns {object} {token}
+     */
+  static async forgotPassword(data) {
+    
+    let res = await this.request(`/forgote`,
+      data, "post",
+);
+
+    return res;
+  }
+
 }
 
 SublyApi.token =
