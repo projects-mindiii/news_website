@@ -1,4 +1,4 @@
-import { Button, Container } from "react-bootstrap";
+import { Button ,Container } from "react-bootstrap";
 import "./PasswordSent.css";
 import Email from "../../assets/images/email_verification.png";
 import { useTranslation } from "react-i18next";

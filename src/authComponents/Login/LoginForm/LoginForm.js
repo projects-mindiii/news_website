@@ -122,7 +122,6 @@ function LoginForm() {
                                     />
                                 )}
                             </div>
-
                         </Form.Group>
 
                         <div className="forgotCls">
