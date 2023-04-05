@@ -16,7 +16,7 @@ function EmailVarify() {
   //set language
   const { t } = useTranslation();
   const detail = location.state;
-  console.log("details",detail);
+ 
 
 
 

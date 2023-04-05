@@ -72,7 +72,7 @@ function SignupForm() {
           icon: "success",
           title: responsejson.message,
         });
-        console.log("responsejson", responsejson);
+       
       } else {
         Toast.fire({
           icon: "error",
@@ -112,7 +112,7 @@ function SignupForm() {
                     message: `${t("INVALID_NAME")}`,
                   },
                 })}
-                disabled={true}
+               
               />
             </Form.Group>
 
@@ -140,7 +140,7 @@ function SignupForm() {
               <Form.Control
                 placeholder={t("EMAIL")}
                 {...register("email", EmailValidation)}
-                disabled={true}
+               
               />
             </Form.Group>
 
@@ -166,7 +166,7 @@ function SignupForm() {
                     message: `${t("PASS_MINLENGTH")}`,
                   },
                 })}
-                disabled={true}
+               
                 
               />
               <div className="passwordicon">
@@ -194,7 +194,7 @@ function SignupForm() {
                   validate: (value) =>
                     value === watch("password") || "Passwords have to match",
                 })}
-                disabled={true}
+               
               />
               <div className="passwordicon">
                 {passwordShow ? (
