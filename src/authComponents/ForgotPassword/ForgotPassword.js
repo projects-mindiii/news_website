@@ -1,11 +1,11 @@
-import { Container, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import "./ForgotPassword.css";
 import Reset from "../../assets/images/reset_password.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import CustomBtn from "../../formComponent/Button/Button";
+// import CustomBtn from "../../formComponent/Button/Button";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 
@@ -88,10 +88,10 @@ function ForgotPassword() {
                                     errors[Object.keys(errors)[0]].message}{" "}
                             </span>
 
-                            {/* <Button className="btn" type="submit" onClick={() => navigate("/password-sent")}>
+                            <Button className="btn" type="submit">
                                 {t("RESET_PASS")}
-                            </Button> */}
-                            <CustomBtn type="submit">{t("RESET_PASS")}</CustomBtn>
+                            </Button>
+                            {/* <CustomBtn type="submit">{t("RESET_PASS")}</CustomBtn> */}
 
                         </Form>
                     </div>

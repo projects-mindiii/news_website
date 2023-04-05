@@ -21,7 +21,9 @@ function Routers() {
         <Router basename={"/"}>
             <Header />
             <Routes>
+                <Route exact path="/" element={<LatestDeals />} />
                 <Route exact path="/login" element={<Login />} />
+
                 <Route exact path="/login-form" element={<LoginForm />} />
                 <Route exact path="/sign-up" element={<SignupForm />} />
                 <Route exact path="/forgot-password" element={<ForgotPassword />} />

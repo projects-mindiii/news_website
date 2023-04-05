@@ -14,7 +14,7 @@ import i18n from "../../../i18n";
 import { useNavigate } from "react-router-dom";
 import SublyApi from "../../../helpers/Api";
 import { Toast } from "../../../utils/Toaster";
-import CustomBtn from "../../../formComponent/Button/Button";
+// import CustomBtn from "../../../formComponent/Button/Button";
 
 
 //--------Create a Login with email component----------
@@ -140,10 +140,10 @@ function LoginForm() {
                             </span>
                         </div>
 
-                        {/* <Button className="btn" type="submit">
+                        <Button className="btn" type="submit">
                             {t("LOGIN")}
-                        </Button> */}
-                        <CustomBtn>{t("LOGIN")}</CustomBtn>
+                        </Button>
+                        {/* <CustomBtn>{t("LOGIN")}</CustomBtn> */}
 
                         <div className="LoginText">
                             <span></span> <p>{t("LOGIN_WITH")}</p><span></span>

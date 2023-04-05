@@ -1,9 +1,9 @@
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import "./PasswordSent.css";
 import Email from "../../assets/images/email_verification.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
-import CustomBtn from "../../formComponent/Button/Button";
+// import CustomBtn from "../../formComponent/Button/Button";
 import { useNavigate, useLocation } from "react-router-dom";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
@@ -54,10 +54,10 @@ function PasswordSent() {
                             <span>{detail.email}</span>
                         </div>
 
-                        {/* <Button className="btn" type="submit">
+                        <Button className="btn" type="submit">
                             {t("LOGIN")}
-                        </Button> */}
-                        <CustomBtn>{t("LOGIN")}</CustomBtn>
+                        </Button>
+                        {/* <CustomBtn>{t("LOGIN")}</CustomBtn> */}
 
                         <h4 onClick={() => { forgotData(); }}>
                             {t("RESEND")}
