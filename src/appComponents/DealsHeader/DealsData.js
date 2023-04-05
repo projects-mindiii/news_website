@@ -1,5 +1,6 @@
 /** @format */
 
+
 import { t } from "i18next";
 import Icon1 from "../../assets/images/icon1.png";
 import Icon2 from "../../assets/images/icon2.png";
@@ -17,25 +18,29 @@ export const dealsData = [
     {
         id: "2",
         text: `${t("PRODUCTS")}`,
-        link: `/products`,
+        // link: `/products`,
+        link: `javascript:;`,
         icon: `${Icon2}`,
     },
     {
         id: "3",
         text: `${t("SERVICES")}`,
-        link: `/services`,
+        link: `javascript:;`,
+        // link: `/services`,
         icon: `${Icon3}`,
     },
     {
         id: "4",
         text: `${t("BRANDS")} `,
-        link: `/brands`,
+        // link: `/brands`,
+        link: `javascript:;`,
         icon: `${Icon4}`,
     },
     {
         id: "5",
         text: `${t("COMPANIES")} `,
-        link: `/companies`,
+        // link: `/companies`,
+        link: `javascript:;`,
         icon: `${Icon5}`,
     },
 ];

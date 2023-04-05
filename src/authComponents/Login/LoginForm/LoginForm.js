@@ -14,6 +14,7 @@ import i18n from "../../../i18n";
 import { useNavigate } from "react-router-dom";
 import SublyApi from "../../../helpers/Api";
 import { Toast } from "../../../utils/Toaster";
+// import CustomBtn from "../../../formComponent/Button/Button";
 
 
 //--------Create a Login with email component----------
@@ -101,14 +102,14 @@ function LoginForm() {
                                         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
                                         message: `${t("INVALID_PASSWORD")}`,
                                     },
-                                    maxLength: {
-                                        value: 8,
-                                        message: `${t("PASS_MAXLENGTH")}`,
-                                    },
-                                    minLength: {
-                                        value: 4,
-                                        message: `${t("PASS_MINLENGTH")}`,
-                                    },
+                                    // maxLength: {
+                                    //     value: 8,
+                                    //     message: `${t("PASS_MAXLENGTH")}`,
+                                    // },
+                                    // minLength: {
+                                    //     value: 4,
+                                    //     message: `${t("PASS_MINLENGTH")}`,
+                                    // },
                                 })}
                             />
                             <div className="passwordicon">
@@ -141,6 +142,7 @@ function LoginForm() {
                         <Button className="btn" type="submit">
                             {t("LOGIN")}
                         </Button>
+                        {/* <CustomBtn>{t("LOGIN")}</CustomBtn> */}
 
                         <div className="LoginText">
                             <span></span> <p>{t("LOGIN_WITH")}</p><span></span>

@@ -5,6 +5,10 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+// import CustomBtn from "../../formComponent/Button/Button";
+import SublyApi from "../../helpers/Api";
+import { Toast } from "../../utils/Toaster";
+
 
 //----------create a forgotPassword component------------
 function ForgotPassword() {
@@ -16,13 +20,37 @@ function ForgotPassword() {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm();
 
-    //-----------function for submit login form-----------
-    const onsubmit = (data) => {
+    //-----------function for forgot password api call-----------
+    const onSubmit = async (formdata) => {
+        let requestData = new FormData();
+        requestData.append("email", formdata.email);
+        await SublyApi.forgotPassword(requestData).then((responsejson) => {
+            if (responsejson.status_code === 200) {
+                setValue("email", "");
+                Toast.fire({
+                    icon: "success",
+                    title: responsejson.message,
+                });
+                navigate("/password-sent", {
+                    state:
+                    {
+                        email: formdata.email,
+                    }
+                })
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: responsejson.data.message,
+                });
 
-    }
+            }
+        })
+
+    };
 
     return (
         <div className="main">
@@ -33,7 +61,7 @@ function ForgotPassword() {
                         <h1>{t("RESET_PASSWORD")}</h1>
                         <p>{t("PASSWORD_TEXT")}</p>
 
-                        <Form onSubmit={handleSubmit(onsubmit)}>
+                        <Form onSubmit={handleSubmit(onSubmit)}>
                             <Form.Group className="mb-3">
                                 <Form.Control
                                     type="text"
@@ -60,9 +88,11 @@ function ForgotPassword() {
                                     errors[Object.keys(errors)[0]].message}{" "}
                             </span>
 
-                            <Button className="btn" type="submit" onClick={() => navigate("/password-sent")}>
+                            <Button className="btn" type="submit">
                                 {t("RESET_PASS")}
                             </Button>
+                            {/* <CustomBtn type="submit">{t("RESET_PASS")}</CustomBtn> */}
+
                         </Form>
                     </div>
                 </div>

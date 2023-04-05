@@ -6,27 +6,33 @@ export const headerData = [
     {
         id: "1",
         text: `${t("DEALS")}`,
-        link: `/deals`,
+        link: `javascript:;`,
+        // link: `/deals`,
+
     },
     {
         id: "2",
         text: `${t("CLASSIFIEDS")}`,
-        link: `/classified`,
+        link: `javascript:;`,
+        // link: `/classified`,
     },
     {
         id: "3",
         text: `${t("JOBS")}`,
-        link: `/job`,
+        link: `javascript:;`,
+        // link: `/job`,
     },
     {
         id: "4",
         text: `${t("POST_ADVERT")} `,
-        link: `/post`,
+        link: `javascript:;`,
+        // link: `/post`,
     },
     {
         id: "5",
         text: `${t("YOUR_ADS")} `,
-        link: `/ads`,
+        link: `javascript:;`,
+        // link: `/ads`,
     },
 ];
 
