@@ -1,7 +1,7 @@
  .notification svg {
-  font-size: 50px;
-  color: #ec4624;
-  margin-left: 11px;
+  font-size: 41px;
+    color: #ec4624;
+    margin-left: 15px;
 }
 
 .notification {
@@ -13,7 +13,7 @@
   font-size: 17px;
   color: #000000;
   font-weight: 400;
-  margin-top: 13px;
+  margin-top: 8px;
 }
 
 @media screen and (max-width: 477px) {

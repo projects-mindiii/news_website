@@ -32,9 +32,7 @@ export const TRANSLATIONS_ES = {
     por favor ingrese el código enviado a
     ejemplo@email.com`,
     VERIFY:"VERIFICAR",
-    SENT_EMAIL: "ejemplo@email.com",
-    RESEND: "reenviar",
-    CHANGE_EMAIL: "Cambiar dirección de correo electrónico",
+   
 
     //----Footer Text------
     FOOTER_TEXT: `Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
@@ -62,7 +60,7 @@ export const TRANSLATIONS_ES = {
     INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
     INVALID_EMAIL: "Dirección de correo electrónico no válida",
     EMAIL_MAXLENGTH: "El correo electrónico debe tener 50 caracteres o menos",
-    INVALID_PASSWORD: "Contraseña invalida",
+    INVALID_PASSWORD: "La contraseña debe tener 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial mínimo 4 caracteres.",
     PASS_MAXLENGTH: "La contraseña debe tener 15 caracteres o menos",
     PASS_MINLENGTH: "la contraseña debe tener 8 caracteres o más",
     INVALID_NAME: "Por favor, introduzca un nombre válido",

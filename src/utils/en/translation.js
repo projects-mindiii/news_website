@@ -32,9 +32,7 @@ export const TRANSLATIONS_EN = {
   VARIFICATION_TEXT: `To verify your email address  
   please enter the code sent to`,
   VERIFY:"VERIFY",
-  SENT_EMAIL: "example@email.com",
-  RESEND: "Resend",
-  CHANGE_EMAIL: "Change email address",
+ 
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -64,7 +62,7 @@ export const TRANSLATIONS_EN = {
   INCOMPLETE: "Form incomplete, please fill all fields",
   INVALID_EMAIL: "Invalid Email Address",
   EMAIL_MAXLENGTH: "Email must be 50 character or small",
-  INVALID_PASSWORD: "Use minimum 4, maximum 8 characters only. Password must contain at least one uppercase, lowercase, number, and a special character.",
+  INVALID_PASSWORD: "Password should have 1 upper case, 1 lower case, 1 number, 1 special character min 4 char.",
   PASS_MAXLENGTH: "Password must be 8 character or small",
   PASS_MINLENGTH: "password must be 4 character or long",
   INVALID_NAME: "Please enter valid name",
