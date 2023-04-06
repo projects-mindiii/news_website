@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./SignupForm.css";
 import "../../assets/styles/Common.css";
 import { Container } from "react-bootstrap";
@@ -23,6 +23,7 @@ function SignupForm() {
   //set language
   const {t} = useTranslation();
   const signupDetails = location.state;
+  const isChangeEmail = useRef(true);
 
   console.log("signupDetails", signupDetails)
 
@@ -81,6 +82,21 @@ function SignupForm() {
       }
     });
   };
+  useEffect(()=>{
+    if(signupDetails && signupDetails.isChangeEmail== true){
+      setValue("fullName",signupDetails.name)
+      setValue("email",signupDetails.email)
+       setValue("password",signupDetails.password)
+       setValue("confirmPassword",signupDetails.confirm_password)
+    } 
+
+  //   if (isChangeEmail.current) {
+  //     setValue("email",signupDetails.email)
+  //     isChangeEmail.current.focus();
+   
+  // }
+  
+  },[])
 
   return (
     <div className="main">
@@ -112,7 +128,7 @@ function SignupForm() {
                     message: `${t("INVALID_NAME")}`,
                   },
                 })}
-               
+                disabled={signupDetails && signupDetails.isChangeEmail==true?true:false}
               />
             </Form.Group>
 
@@ -140,7 +156,10 @@ function SignupForm() {
               <Form.Control
                 placeholder={t("EMAIL")}
                 {...register("email", EmailValidation)}
-               
+                
+                //  ref={isChangeEmail} 
+                disabled={signupDetails && signupDetails.isChangeEmail==true?true:false}
+                
               />
             </Form.Group>
 
@@ -166,7 +185,8 @@ function SignupForm() {
                     message: `${t("PASS_MINLENGTH")}`,
                   },
                 })}
-               
+                disabled={signupDetails && signupDetails.isChangeEmail==true?true:false}
+                
                 
               />
               <div className="passwordicon">
@@ -194,7 +214,8 @@ function SignupForm() {
                   validate: (value) =>
                     value === watch("password") || "Passwords have to match",
                 })}
-               
+                disabled={signupDetails && signupDetails.isChangeEmail==true?true:false}
+                
               />
               <div className="passwordicon">
                 {passwordShow ? (
