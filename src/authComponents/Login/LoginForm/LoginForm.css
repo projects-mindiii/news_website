@@ -169,3 +169,9 @@ button.btn:active {
         left: 143px;
     }
 }
+
+@media screen and (max-width: 381px) and (min-width: 374px) {
+    .forgotCls h6 {
+        font-size: 14px !important;
+    }
+}
