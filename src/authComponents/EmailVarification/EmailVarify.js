@@ -127,6 +127,7 @@ function EmailVarify() {
            email:detail.email,
             password:detail.password,
              confirm_password:detail.confirm_password,
+             isChangeEmail:true
               }})}>
             {t("CHANGE_EMAIL")}</h4>
           </div>
