@@ -15,6 +15,7 @@ import SignupForm from "../authComponents/SignupForm/SignupForm";
 import LatestDeals from "../appComponents/LatestDeals/LatestDeals";
 
 
+
 //-------Create a component for manage routing--------
 function Routers() {
     return (
@@ -23,13 +24,13 @@ function Routers() {
             <Routes>
                 <Route exact path="/" element={<LatestDeals />} />
                 <Route exact path="/login" element={<Login />} />
-
                 <Route exact path="/login-form" element={<LoginForm />} />
                 <Route exact path="/sign-up" element={<SignupForm />} />
                 <Route exact path="/forgot-password" element={<ForgotPassword />} />
                 <Route exact path="/password-sent" element={<PasswordSent />} />
                 <Route exact path="/email-varify" element={<EmailVarify />} />
                 <Route exact path="/latest-deals" element={<LatestDeals />} />
+                
             </Routes>
             <Footer />
         </Router>
