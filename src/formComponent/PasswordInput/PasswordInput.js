@@ -8,6 +8,7 @@ import { useState } from "react";
 function PasswordInput({ register }) {
     //set language
     const { t } = useTranslation();
+    //-------state for showing and hiding password------
     const [shown, setShown] = useState(false);
 
     return (

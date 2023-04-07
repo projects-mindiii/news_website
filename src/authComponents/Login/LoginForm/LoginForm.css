@@ -1,4 +1,4 @@
-.signupForm .btn {
+/* .signupForm .btn {
     background-color: #ec4624;
     border: none;
     border-radius: 4px;
@@ -16,7 +16,7 @@ button.btn:hover {
 
 button.btn:active {
     background-color: #ec4624 !important;
-}
+} */
 
 .passwordinput {
     position: relative;

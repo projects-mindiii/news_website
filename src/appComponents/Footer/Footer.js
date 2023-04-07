@@ -25,7 +25,12 @@ function Footer() {
 
                                 <div className="socialIcon">
                                     {(footerData.sociallogo).map((item, index) => (
-                                        <img src={item.logo} alt="facebook" key={index} />
+                                        <a
+                                            href={item.link}
+                                            key={index}
+                                        >
+                                            <img src={item.logo} alt="social-logo" />
+                                        </a>
                                     ))}
 
                                 </div>
@@ -39,7 +44,7 @@ function Footer() {
                                             target="_blank"
                                             key={index1}
                                         >
-                                            <img src={item1.socialapp} alt="appstore" />
+                                            <img src={item1.socialapp} alt="apps" />
                                         </a>
                                     ))}
 
@@ -61,8 +66,8 @@ function Footer() {
                                 <div className="linkHeading">
                                     <h6>{t("OUR MEDIA")}</h6>
                                     <div className="companyImg">
-                                        <img src={Image2} alt="sign-Africa" />
-                                        <img src={Image3} alt="sign-Africa" />
+                                        <img src={Image2} alt="africa-print" />
+                                        <img src={Image3} alt="modern-marketing" />
                                     </div>
                                     {/*<div className="subscribeForm">
                                         <h5>{t("SUBSCRIPTION_TEXT")}</h5>

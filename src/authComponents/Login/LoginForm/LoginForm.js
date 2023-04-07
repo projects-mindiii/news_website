@@ -14,14 +14,18 @@ import { Toast } from "../../../utils/Toaster";
 import EmailInput from "../../../formComponent/EmailInput/EmailInput";
 import PasswordInput from "../../../formComponent/PasswordInput/PasswordInput";
 import CustomBtn from "../../../formComponent/Button/Button";
+import { useState } from "react";
+import ErrorResponse from "../../../utils/AlertBox/ErrorResponse";
 
 
 //--------Create a Login with email component----------
 function LoginForm() {
     const navigate = useNavigate();
-
     //set language
     const { t, i18n } = useTranslation();
+    //-----state for show alert box for error response------
+    const [showError, setShowError] = useState(null);
+
 
     //----------function for form validation using useform------------
     const {
@@ -47,11 +51,7 @@ function LoginForm() {
                 });
 
             } else {
-                Toast.fire({
-                    icon: "error",
-                    title: responsejson.data.message,
-                });
-
+                setShowError(responsejson.data.message)
             }
         })
 
@@ -61,6 +61,8 @@ function LoginForm() {
         <div className="main">
             <Container>
                 <div className="signupForm">
+                    {showError ?
+                        <ErrorResponse message={showError} setShowError={setShowError} /> : ""}
                     <div className="topHeading">
                         <h1>{t("EMAIL_LOGIN")}</h1>
                     </div>

@@ -7,6 +7,8 @@ import CustomBtn from "../../formComponent/Button/Button";
 import { useNavigate, useLocation } from "react-router-dom";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
+import { useState } from "react";
+import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
 
 //----------create a password sent component------------
 function PasswordSent() {
@@ -16,6 +18,8 @@ function PasswordSent() {
 
     //set language
     const { t, i18n } = useTranslation();
+    //-----state for show alert box for error response------
+    const [showError, setShowError] = useState(null);
 
     //-----------function for forgot password (resen api) api call-----------
     async function forgotData() {
@@ -34,11 +38,7 @@ function PasswordSent() {
                     }
                 })
             } else {
-                Toast.fire({
-                    icon: "error",
-                    title: responsejson.data.message,
-                });
-
+                setShowError(responsejson.data.message)
             }
         })
     }
@@ -47,6 +47,8 @@ function PasswordSent() {
         <div className="main">
             <Container>
                 <div className="signupForm">
+                    {showError ?
+                        <ErrorResponse message={showError} setShowError={setShowError} /> : ""}
                     <div className="forgotPassword">
                         <img src={Email} alt="reset-password" />
                         <h1>{t("NEW_PASS")}</h1>
