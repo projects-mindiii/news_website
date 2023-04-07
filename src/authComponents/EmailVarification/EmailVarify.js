@@ -56,8 +56,6 @@ function EmailVarify() {
           icon: "success",
           title: responsejson.message,
         });
-
-       
       } else {
         Toast.fire({
           icon: "error",
