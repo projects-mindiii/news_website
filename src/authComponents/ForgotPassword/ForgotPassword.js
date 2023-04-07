@@ -1,13 +1,14 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import "./ForgotPassword.css";
 import Reset from "../../assets/images/reset_password.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-// import CustomBtn from "../../formComponent/Button/Button";
+import CustomBtn from "../../formComponent/Button/Button";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
+import EmailInput from "../../formComponent/EmailInput/EmailInput";
 
 
 //----------create a forgotPassword component------------
@@ -62,36 +63,18 @@ function ForgotPassword() {
                         <p>{t("PASSWORD_TEXT")}</p>
 
                         <Form onSubmit={handleSubmit(onSubmit)}>
-                            <Form.Group className="mb-3">
-                                <Form.Control
-                                    type="text"
-                                    placeholder={t("EMAIL")}
-                                    {...register("email", {
-                                        required: {
-                                            value: true,
-                                            message: `${t("INVALID_EMAIL")}`,
-                                        },
-                                        maxLength: {
-                                            value: 50,
-                                            message: `${t("EMAIL_MAXLENGTH")}`,
-                                        },
-                                        pattern: {
-                                            value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                            message: `${t("INVALID_EMAIL")}`,
-                                        },
-                                    })}
-                                />
-                            </Form.Group>
+
+                            <EmailInput register={register} />
 
                             <span className="errorShow">
                                 {errors[Object.keys(errors)[0]] &&
                                     errors[Object.keys(errors)[0]].message}{" "}
                             </span>
 
-                            <Button className="btn" type="submit">
+                            {/* <Button className="btn" type="submit">
                                 {t("RESET_PASS")}
-                            </Button>
-                            {/* <CustomBtn type="submit">{t("RESET_PASS")}</CustomBtn> */}
+                            </Button> */}
+                            <CustomBtn>{t("RESET_PASS")}</CustomBtn>
 
                         </Form>
                     </div>
