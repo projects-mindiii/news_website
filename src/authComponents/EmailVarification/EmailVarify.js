@@ -4,10 +4,10 @@ import EMAILVARIFICATION from "../../assets/images/emailvarify.png";
 import { useTranslation } from "react-i18next";
 import OtpInput from "react-otp-input";
 import { useState } from "react";
-import { useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
-
+import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
 
 function EmailVarify() {
   const location = useLocation();
@@ -16,9 +16,9 @@ function EmailVarify() {
   //set language
   const { t } = useTranslation();
   const detail = location.state;
- 
 
-
+  //-----state for show alert box for error response------
+  const [showError, setShowError] = useState(null);
 
   async function SendEmailOtp() {
     let requestData = new FormData();
@@ -27,28 +27,24 @@ function EmailVarify() {
     requestData.append("password", detail.password);
     requestData.append("confirm_password", detail.confirm_password);
     requestData.append("otp", emailOtp);
-    // requestData.append("country", detail.country);
-    // requestData.append("initial_lat", detail.initial_lat);
-    // requestData.append("initial_long", detail.initial_long);
+    
 
     await SublyApi.varifyOtp(requestData).then((responsejson) => {
       if (responsejson.status === "success") {
         setEmailOtp(responsejson.data.otp);
+        setEmailOtp("");
         Toast.fire({
           icon: "success",
           title: responsejson.message,
         });
-        navigate("/login-form")
+        navigate("/login-form");
       } else {
-        Toast.fire({
-          icon: "error",
-          title: responsejson.data.message,
-        });
+        setShowError(responsejson.data.message);
       }
     });
   }
 
-  async function VarifyOtp(){
+  async function VarifyOtp() {
     let requestData = new FormData();
     requestData.append("name", detail.fullName);
     requestData.append("email", detail.email);
@@ -60,9 +56,6 @@ function EmailVarify() {
           icon: "success",
           title: responsejson.message,
         });
-
-       
-        console.log("responsejson", responsejson);
       } else {
         Toast.fire({
           icon: "error",
@@ -70,13 +63,18 @@ function EmailVarify() {
         });
       }
     });
-  };
+  }
 
   return (
     <div className="main">
       <Container>
         <div className="signupForm">
           <div className="forgotPassword">
+            {showError ? (
+              <ErrorResponse message={showError} setShowError={setShowError} />
+            ) : (
+              ""
+            )}
             <img src={EMAILVARIFICATION} alt="reset-password" />
             <h1>{t("EMAIL_VERIFICATION")}</h1>
             <div className="passwordSent">
@@ -84,21 +82,22 @@ function EmailVarify() {
               <span>{detail.email}</span>
             </div>
             <div className="otpbox">
-              <OtpInput 
+              <OtpInput
                 className="inputCus"
-                inputMode="numeric"
-                  pattern="[0-9]*"
                 inputStyle="inputStyle"
                 isInputNum={true}
-                copyNumbersOnly={true}
                 value={emailOtp}
                 onChange={(value) => {
-                  setEmailOtp(value);
+                  let numbers = /^[0-9]+$/;
+                  if (value.match(numbers) || value == "") {
+                    setEmailOtp(value);
+                  } else {
+                    return false;
+                  }
                 }}
                 numInputs={4}
-                 isInputSecure={true}
+                isInputSecure={true}
                 renderInput={(props) => <input {...props} />}
-                
               />
             </div>
             <Button
@@ -117,18 +116,29 @@ function EmailVarify() {
             >
               {t("VARIFY")}
             </Button>
-            <h4  onClick={() => {VarifyOtp();}}>
+            <h4
+              onClick={() => {
+                VarifyOtp();
+              }}
+            >
               {t("RESEND")}
-              <span
-             
-              ></span>
+              <span></span>
             </h4>
-            <h4 onClick={() => navigate("/sign-up",{state:{name:detail.name,
-           email:detail.email,
-            password:detail.password,
-             confirm_password:detail.confirm_password,
-              }})}>
-            {t("CHANGE_EMAIL")}</h4>
+            <h4
+              onClick={() =>
+                navigate("/sign-up", {
+                  state: {
+                    name: detail.name,
+                    email: detail.email,
+                    password: detail.password,
+                    confirm_password: detail.confirm_password,
+                    isChangeEmail: true,
+                  },
+                })
+              }
+            >
+              {t("CHANGE_EMAIL")}
+            </h4>
           </div>
         </div>
       </Container>
