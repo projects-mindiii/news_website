@@ -3,7 +3,6 @@ import Alert from "react-bootstrap/Alert";
 import "./ResponseAlert.css";
 
 function ErrorResponse(props) {
-  console.log("propsprops", props )
   const [show, setShow] = useState(true);
 
   if (show) {
