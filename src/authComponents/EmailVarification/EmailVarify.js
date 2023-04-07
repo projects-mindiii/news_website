@@ -27,13 +27,12 @@ function EmailVarify() {
     requestData.append("password", detail.password);
     requestData.append("confirm_password", detail.confirm_password);
     requestData.append("otp", emailOtp);
-    // requestData.append("country", detail.country);
-    // requestData.append("initial_lat", detail.initial_lat);
-    // requestData.append("initial_long", detail.initial_long);
+    
 
     await SublyApi.varifyOtp(requestData).then((responsejson) => {
       if (responsejson.status === "success") {
         setEmailOtp(responsejson.data.otp);
+        setEmailOtp("");
         Toast.fire({
           icon: "success",
           title: responsejson.message,
@@ -58,7 +57,7 @@ function EmailVarify() {
           title: responsejson.message,
         });
 
-        console.log("responsejson", responsejson);
+       
       } else {
         Toast.fire({
           icon: "error",
