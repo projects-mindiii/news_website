@@ -13,6 +13,7 @@ import LoginForm from "../authComponents/Login/LoginForm/LoginForm";
 import PasswordSent from "../authComponents/PasswordSent/PasswordSent";
 import SignupForm from "../authComponents/SignupForm/SignupForm";
 import LatestDeals from "../appComponents/LatestDeals/LatestDeals";
+import Profile from "../appComponents/Profile/Profile";
 
 
 
@@ -30,6 +31,7 @@ function Routers() {
                 <Route exact path="/password-sent" element={<PasswordSent />} />
                 <Route exact path="/email-varify" element={<EmailVarify />} />
                 <Route exact path="/latest-deals" element={<LatestDeals />} />
+                <Route exact path="/products" element={<Profile />} />
                 
             </Routes>
             <Footer />

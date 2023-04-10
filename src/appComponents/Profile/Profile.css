@@ -1,0 +1,104 @@
+.profileLeftPart h3 {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #474747;
+}
+
+.profileLeftPart p {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 14px;
+    padding: 30px;
+}
+
+.profileRightPart {
+    margin-top: 33px;
+}
+
+.profileRightPart h4 {
+    background: #000000;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px;
+}
+
+.profileRightPart h3 {
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    color: #000000;
+    margin-top: 20px;
+}
+
+.profileRightPart p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+}
+
+/* form control css */
+.profileRightPart .form-control {
+    border: none;
+    height: 40px;
+    background: #FFFFFF;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+    border-radius: 7.26px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.profileRightPart .form-control:focus {
+    background-color: #FFFFFF;
+    outline: none !important;
+    border: none !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+}
+
+.profileRightPart .form-select {
+    border: none;
+    height: 40px;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+    border-radius: 7.26px;
+    font-weight: 500;
+    font-size: 14px;
+    background-size: 19px 19px !important;
+    color: #727272 !important;
+}
+
+.profileRightPart .form-select:focus {
+    background-color: #FFFFFF;
+    outline: none !important;
+    border: none !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+}
+
+/* profile image css */
+.profileImg{
+    display: flex;
+    justify-content: center;
+}
+.profileImg img{
+    width: 100%;
+    max-width: 120px;
+}
+.profileIcon{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+.profileIcon svg{
+    font-size: 33px;
+    cursor: pointer;
+}
