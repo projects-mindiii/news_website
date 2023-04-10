@@ -8,5 +8,104 @@
 }
 .latestDeals img{
     width: 100%;
-    max-width: 485px;
+    /* max-width: 485px; */
+}
+
+.latestDeals h3 {
+    font-size: 25.2px;
+    font-weight: 600;
+    color: black;
+    line-height: 36px;
+    margin-bottom: 0px;
+    padding: 12px 0px;
+}
+
+.latestDeals p {
+    color: #000000;
+    font-style: normal;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 25px;
+    margin-bottom: 0px;
+}
+
+.dealSubText {
+    margin-bottom: 16px !important;
+}
+
+.detailsValue {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 14px !important;
+}
+
+.latestDeals button{
+    display: block;
+    width: 100%;
+    height: 46px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins';
+}
+
+.detailsValue img {
+    width: 42px;
+    margin-right: 20px;
+}
+
+.dealText {
+    margin-bottom: 5px;
+}
+
+.dealText p {
+    font-size: 18px;
+    line-height: 14px !important;
+}
+
+.dealText span {
+    font-size: 11px;
+    color: #828282;
+}
+
+.dealPrice {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.dealPrice h4{
+    font-weight: 400;
+    font-size: 33.6px;
+    line-height: 50px;
+    margin-bottom: 0px !important;
+    margin-right: 5px;
+}
+
+.dealPrice span{
+    font-weight: 300;
+    font-size: 12px;
+    color: #000000;
+}
+
+.whatsApp {
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #85D51D 0%, #6AAE1B 98.67%);
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 19.2px;
+    line-height: 29px;
+}
+
+.viewProfile {
+    font-weight: 600;
+    font-size: 19.2px;
+    line-height: 29px;
+    color: #FFFFFF;
+    background: #000000;
+}
+
+button.whatsApp svg {
+    margin-right: 6px;
 }

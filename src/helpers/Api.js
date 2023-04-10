@@ -88,6 +88,8 @@ class SublyApi {
 
   /* POST  /check social login : {facebook}
     check social login
+  /* GET  /deal list api : { email }
+   deal list api
      
      Authorization required:none
      
@@ -107,6 +109,19 @@ class SublyApi {
      */
   static async socialSignup(data) {
     let res = await this.request(`/social-signup`, data, "post");
+  }
+
+  /* GET  /deal list api : { email }
+   deal list api
+     
+     Authorization required:none
+     
+     @param data {Object} { email }
+     @returns {object} {token}
+     */
+  static async getDealList() {
+    let res = await this.request(`/deal-list`, undefined, "get");
+
     return res;
   }
 }
