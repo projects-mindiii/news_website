@@ -16,8 +16,8 @@ export const dealsData = [
     {
         id: "2",
         text: `${t("PRODUCTS")}`,
-        // link: `/products`,
-        link: `javascript:;`,
+        link: `/products`,
+        // link: `javascript:;`,
         icon: `${Icon2}`,
     },
     {
