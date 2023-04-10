@@ -7,7 +7,6 @@ import Facebook from "../../../assets/images/facebook_logo.png";
 import Apple from "../../../assets/images/apple_logo.png";
 import Linkedin from "../../../assets/images/linkdin_logo.png";
 import { useTranslation } from "react-i18next";
-import i18n from "../../../i18n";
 import { useNavigate } from "react-router-dom";
 import SublyApi from "../../../helpers/Api";
 import { Toast } from "../../../utils/Toaster";
