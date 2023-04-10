@@ -119,14 +119,15 @@ class SublyApi {
      @param data {Object} { email }
      @returns {object} {token}
      */
-  static async getDealList() {
-    let res = await this.request(`/deal-list`, undefined, "get");
+  static async getDealList(authToken) {
+    let header = { "access-token": ` ${ authToken }`};
+    let res = await this.request(`/deal-list`, undefined, "get", header);
 
     return res;
   }
 }
 
-SublyApi.token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJEZXZpY2VJRCI6Ijc3N2ZnaCIsInVzZXJUeXBlIjoiMSIsImlhdCI6MTY0ODYyNDMzMCwiZXhwIjoxNjUxMjE2MzMwfQ.5ATTyFrpkG6_kGOJ9QnMQGBbB5sKz7KwfaPKOflhkgE";
+// SublyApi.token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJEZXZpY2VJRCI6Ijc3N2ZnaCIsInVzZXJUeXBlIjoiMSIsImlhdCI6MTY0ODYyNDMzMCwiZXhwIjoxNjUxMjE2MzMwfQ.5ATTyFrpkG6_kGOJ9QnMQGBbB5sKz7KwfaPKOflhkgE";
 
 export default SublyApi;

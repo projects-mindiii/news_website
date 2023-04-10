@@ -5,8 +5,25 @@ import "../../assets/styles/Common.css";
 import Deals from "../../assets/images/Bitmap.png";
 import { detailsDeal } from "./DealDetails";
 import DigitalPrint from "../DealSubModule/DealSubModules";
+import { useEffect, useState } from "react";
+import SublyApi from "../../helpers/Api";
 
 function LatestDeals() {
+  const [dealList, setDealList] = useState(null);
+  const token = localStorage.getItem("token");
+
+  // =====Here i am calling api for getting deal list =====
+  useEffect(() => {
+    async function getDealList() {
+     await SublyApi.getDealList(token).then((response) => {
+        if (response.status_code == 200) {
+          setDealList(response.data);
+        }
+      });
+    }
+    getDealList();
+  }, []);
+
   return (
     <div className="dealContainer">
       <Container>
@@ -16,7 +33,8 @@ function LatestDeals() {
               <Nav variant="pills" className="flex-column addTabs">
                 <Nav.Item>
                   <Nav.Link eventKey="first">
-                    Digital Print Media(8)
+                    Digital Print Media (
+                    {dealList && dealList.company_deal_count_list.length})
                     <MdKeyboardArrowRight />
                   </Nav.Link>
                 </Nav.Item>
@@ -37,7 +55,11 @@ function LatestDeals() {
             <Col sm={6}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <DigitalPrint />
+                  <DigitalPrint
+                    dealsArray={
+                      dealList ? dealList.company_deal_count_list : ""
+                    }
+                  />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <div className="latestDeals">
