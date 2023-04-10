@@ -12,15 +12,19 @@ const REACT_PROXYURL = "";
 class SublyApi {
   //token which interact with the API will be stored here.
   static token;
+
+  //required common header for each api calling.
+  static commonHeaders = {
+    "api-key": process.env.REACT_APP_API_KEY_PAIR,
+    "device-token": "abcd",
+    "device-id": "777fgh",
+    "device-type": "3",
+  };
+
   static async request(endpoint, data = {}, method = "get", header) {
-    header = {
-      "api-key": process.env.REACT_APP_API_KEY_PAIR,
-      "device-token": "abcd",
-      "device-id": "777fgh",
-      "device-type": "3",
-    };
     const url = `${REACT_PROXYURL}${BASE_URL}${endpoint}`;
-    const headers = header || { Authorization: `Bearer ${SublyApi.token}` };
+    const headers = {...SublyApi.commonHeaders,...header};
+
     const params = method === "get" ? data : {};
     try {
       const result = await axios({ url, method, data, params, headers });
