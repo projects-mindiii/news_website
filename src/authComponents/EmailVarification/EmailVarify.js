@@ -1,4 +1,4 @@
-import { Button, Container } from "react-bootstrap";
+import {Container } from "react-bootstrap";
 import "./EmailVarify.css";
 import EMAILVARIFICATION from "../../assets/images/emailvarify.png";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
+import CustomBtn from "../../formComponent/Button/Button";
 
 function EmailVarify() {
   const location = useLocation();
@@ -17,7 +18,7 @@ function EmailVarify() {
   const { t } = useTranslation();
   const detail = location.state;
 
-  //-----state for show alert box for error response------
+  //----- set state for show alert box for error response------
   const [showError, setShowError] = useState(null);
 
   async function SendEmailOtp() {
@@ -100,7 +101,7 @@ function EmailVarify() {
                 renderInput={(props) => <input {...props} />}
               />
             </div>
-            <Button
+            <CustomBtn
               className="btn"
               type="submit"
               onClick={() => {
@@ -115,14 +116,14 @@ function EmailVarify() {
               }}
             >
               {t("VARIFY")}
-            </Button>
+            </CustomBtn>
             <h4
               onClick={() => {
                 VarifyOtp();
               }}
             >
               {t("RESEND")}
-              <span></span>
+             
             </h4>
             <h4
               onClick={() =>

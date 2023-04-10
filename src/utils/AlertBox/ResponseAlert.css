@@ -19,14 +19,30 @@
     line-height: 20px;
     text-align: center;
     color: #EC4624;
+    margin-left: 25px;
 }
 
 .alertBox p {
     font-weight: 500 !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
     line-height: 22px !important;
     text-align: center !important;
     color: #000000 !important;
-    margin-left: 20px !important;
+    margin-left: 30px !important;
+
 }
 
+
+.alertBox .btn-close {
+  color: #000000 !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  padding: 6px 5px !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  opacity: unset;
+  cursor: pointer;
+
+  
+}
