@@ -9,6 +9,9 @@ import CustomBtn from "../../formComponent/Button/Button";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import EmailInput from "../../formComponent/EmailInput/EmailInput";
+import { useState } from "react";
+import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
+
 
 
 //----------create a forgotPassword component------------
@@ -16,6 +19,8 @@ function ForgotPassword() {
     const navigate = useNavigate();
     //set language
     const { t, i18n } = useTranslation();
+    //-----state for show alert box for error response------
+    const [showError, setShowError] = useState(null);
 
     //----------function for form validation using useform------------
     const {
@@ -43,11 +48,7 @@ function ForgotPassword() {
                     }
                 })
             } else {
-                Toast.fire({
-                    icon: "error",
-                    title: responsejson.data.message,
-                });
-
+                setShowError(responsejson.data.message)
             }
         })
 
@@ -57,6 +58,8 @@ function ForgotPassword() {
         <div className="main">
             <Container>
                 <div className="signupForm">
+                    {showError ?
+                        <ErrorResponse message={showError} setShowError={setShowError} /> : ""}
                     <div className="forgotPassword">
                         <img src={Reset} alt="reset-password" />
                         <h1>{t("RESET_PASSWORD")}</h1>

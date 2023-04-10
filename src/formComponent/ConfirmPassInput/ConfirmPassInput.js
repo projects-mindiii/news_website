@@ -3,16 +3,15 @@ import { Form } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 
 //--------Create a confirm password input field component----------
-function ConfirmPassInput({ register }) {
+function ConfirmPassInput({ register, watch }) {
 
     //set language
     const { t } = useTranslation();
+    //-------state for showing and hiding password------
     const [passwordShow, setPasswordShow] = useState(false);
-    
-    const { watch } = useForm();
+
 
     return (
         <>

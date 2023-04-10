@@ -16,26 +16,32 @@ export const footerData = {
         {
             id: "1",
             logo: `${Facebook}`,
+            link: process.env.REACT_APP_FACEBOOK_KEY,
         },
         {
             id: "2",
             logo: `${Twitter}`,
+            link: process.env.REACT_APP_TWITTER_KEY,
         },
         {
             id: "3",
             logo: `${Linkedin}`,
+            link: process.env.REACT_APP_LINKEDIN_KEY,
         },
         {
             id: "4",
             logo: `${Instragram}`,
+            link: process.env.REACT_APP_INSTRAGRAM_KEY,
         },
         {
             id: "5",
             logo: `${Youtube}`,
+            link: process.env.REACT_APP_YOUTUBE_KEY,
         },
         {
             id: "6",
             logo: `${Telegram}`,
+            link: process.env.REACT_APP_TELEGRAM_KEY,
         },
     ],
     socialapp: [

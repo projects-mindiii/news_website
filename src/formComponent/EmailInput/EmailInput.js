@@ -26,6 +26,7 @@ function EmailInput({ register }) {
                             message: `${t("INVALID_EMAIL")}`,
                         },
                     })}
+                    autoFocus={true}
                 />
             </Form.Group>
         </>
