@@ -4,7 +4,6 @@ import Image1 from "../../assets/images/image1.png";
 import Image2 from "../../assets/images/image2.png";
 import Image3 from "../../assets/images/image3.png";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
 import { footerData } from "./FooterData";
 
 //--------Create a Footer component----------

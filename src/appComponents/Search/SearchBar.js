@@ -2,7 +2,6 @@ import { Form } from "react-bootstrap";
 import "./SearchBar.css";
 import { FiSearch } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
 
 //-------Create a Search component--------
 function SearchBar() {

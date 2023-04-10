@@ -1,15 +1,11 @@
 import { Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./DealsHeader.css";
-import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
 import dealsData from "./DealsData";
-
 
 //-------Create a Deals Header component--------
 function DealsHeader() {
     //set language
-    const { t, i18n } = useTranslation();
 
     return (
         <div className="navHeader">

@@ -5,16 +5,12 @@ import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
 import "./Header.css";
 import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
-import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
 import HeaderData from "./HeaderData";
 
 
 //-------Create a Header component--------
 function Header() {
     //set language
-    const { t, i18n } = useTranslation();
-
     return (
         <section className="header">
             <Container>
