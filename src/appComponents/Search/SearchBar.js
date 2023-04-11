@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 //-------Create a Search component--------
 function SearchBar() {
     //set language
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <div className="searchBar">
             <Form>
