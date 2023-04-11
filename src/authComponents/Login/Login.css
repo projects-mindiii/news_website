@@ -60,3 +60,12 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+
+/* social signup facebook css */
+
+.loginComponents button.my-facebook-button-class.metro {
+    border: none;
+    font-size: 18px;
+    background-color: #F6F6F6;
+}
