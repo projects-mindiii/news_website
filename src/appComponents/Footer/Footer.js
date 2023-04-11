@@ -9,7 +9,7 @@ import { footerData } from "./FooterData";
 //--------Create a Footer component----------
 function Footer() {
     //set language
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <>

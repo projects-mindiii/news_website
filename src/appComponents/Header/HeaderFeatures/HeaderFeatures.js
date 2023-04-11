@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 function HeaderFeatures() {
     const navigate = useNavigate();
     //set language
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <>
