@@ -2,7 +2,7 @@ import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
 function EmailInput({ register,className }) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
    
     return (
         <>

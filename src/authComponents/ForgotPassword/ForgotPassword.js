@@ -17,7 +17,7 @@ import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
 function ForgotPassword() {
     const navigate = useNavigate();
     //set language
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     //-----state for show alert box for error response------
     const [showError, setShowError] = useState(null);
 
