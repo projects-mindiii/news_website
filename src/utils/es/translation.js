@@ -33,7 +33,6 @@ export const TRANSLATIONS_ES = {
     ejemplo@email.com`,
     VERIFY:"VERIFICAR",
    
-
     //----Footer Text------
     FOOTER_TEXT: `Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
     QUICK_LINKS: "ENLACES RÁPIDOS",
@@ -55,7 +54,6 @@ export const TRANSLATIONS_ES = {
     COMPANIES: "COMPAÑÍAS",
 
 
-
     //---------------Error Messages Common Text----------
     INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
     INVALID_EMAIL: "Dirección de correo electrónico no válida",
@@ -66,7 +64,6 @@ export const TRANSLATIONS_ES = {
     INVALID_NAME: "Por favor, introduzca un nombre válido",
     NAME_MAXLENGTH: "El nombre debe tener 20 caracteres o menos",
     NAME_MINLENGTH: "Por favor ingrese al menos 3 caracteres",
-
 
 
     //---------- Placeholder Common Text---------------
