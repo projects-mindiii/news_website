@@ -61,7 +61,7 @@
 
 .dealText p {
     font-size: 18px;
-    line-height: 14px !important;
+    line-height: 14px;
 }
 
 .dealText span {
@@ -108,4 +108,14 @@
 
 button.whatsApp svg {
     margin-right: 6px;
+}
+
+.dealContainer {
+    padding-bottom: 15px;
+}
+
+.websiteUrl p {
+    line-break: anywhere;
+    line-height: 20px;
+    font-size: 16px;
 }

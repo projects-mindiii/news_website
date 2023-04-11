@@ -1,37 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../LatestDeals/LatestDeals.css";
 import Deals from "../../assets/images/Bitmap.png";
 import { detailsDeal } from "../LatestDeals/DealDetails";
 import { Icon } from "@iconify/react";
+import message from "../../assets/images/Deal_icon/message.png";
+import contact from "../../assets/images/Deal_icon/contact_ico.png";
+import globe from "../../assets/images/Deal_icon/globe_ico.png";
+import mail from "../../assets/images/Deal_icon/mail_ico.png";
+import watch from "../../assets/images/Deal_icon/watch.png";
+import promotional from "../../assets/images/Deal_icon/promotional.png";
 
 function DigitalPrint(props) {
-//   console.log("propsprops", props.dealsArray);
+  const [filteredList, setFilteredList] = useState(null);
+
+  // =====here i am filtering the deal list which one need to show====
+  useEffect(() => {
+    function filterDeal() {
+      const getFilterData = props.dealList.filter(
+        (value, index) => value.id == props.eventKeyValue
+      );
+      getFilterData.length > 0 && setFilteredList(getFilterData[0].dealList);
+      console.log("getFilterData", getFilterData);
+    }
+    filterDeal();
+  }, [props]);
   return (
     <section>
-      {props.dealsArray
-        ? props.dealsArray.map((item, index) => (
-            <div className="latestDeals">
-              <img src={item.company_logo} alt="deals" />
-              <h3>DRYtech Spacial</h3>
-              <p className="dealSubText">
-                When adding redeem code then pop up comes their test should be
-                written as "Added redeem code amount
-              </p>
+      {filteredList
+        ? filteredList.map((item, index) => (
+            <div className="latestDeals" key={index}>
+              <img src={item.gallery[0].img_url} alt="deals" />
+              <h3>{item.name}</h3>
+              <p className="dealSubText">{item.description}</p>
               <div className="dealDetails">
-                {detailsDeal
-                  ? detailsDeal.map((item, index) => (
-                      <div className="detailsValue">
-                        <img src={item.imgValue} alt="img" />
-                        <div className="dealText">
-                          <span>{item.subText}</span>
-                          <p>{item.commonText}</p>
-                        </div>
-                      </div>
-                    ))
-                  : ""}
+                <div className="detailsValue">
+                  <img src={message} alt="img" />
+                  <div className="dealText">
+                    <span>CONTACT PERSON</span>
+                    <p>{item.contact_name}</p>
+                  </div>
+                </div>
+                <div className="detailsValue">
+                  <img src={contact} alt="img" />
+                  <div className="dealText">
+                    <span>CONTACT PERSON</span>
+                    <p>
+                      +{item.contact_dial_code} {item.contact_number}
+                    </p>
+                  </div>
+                </div>
+                <div className="detailsValue">
+                  <img src={globe} alt="img" />
+                  <div className="dealText websiteUrl">
+                    <span>WEBSITE</span>
+                    <p>{item.contact_web_url}</p>
+                  </div>
+                </div>
+                <div className="detailsValue">
+                  <img src={mail} alt="img" />
+                  <div className="dealText">
+                    <span>EMAIL</span>
+                    <p>{item.contact_email}</p>
+                  </div>
+                </div>
+                <div className="detailsValue">
+                  <img src={watch} alt="img" />
+                  <div className="dealText">
+                    <span>EXPIRY</span>
+                    <p>{item.deal_expire_date}</p>
+                  </div>
+                </div>
+                {item.promo_code && (
+                  <div className="detailsValue">
+                    <img src={promotional} alt="img" />
+                    <div className="dealText">
+                      <span>PROMOTIONAL CODE</span>
+                      <p>{item.promo_code}</p>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="dealPrice">
-                <h4>ZAR 349.55</h4> <span>VAT NICL</span>
+                <h4>{item.currency_code} {item.price}</h4> <span>{item.currency_symbol}</span>
               </div>
               <button className="whatsApp">
                 <Icon

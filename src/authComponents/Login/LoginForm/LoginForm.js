@@ -57,7 +57,7 @@ function LoginForm() {
                 });
                 navigate("/");
                 localStorage.setItem("token", responsejson.data.token)
-
+                navigate("/latest-deals")
             } else {
                 setShowError(response.data.message)
             }

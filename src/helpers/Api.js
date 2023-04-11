@@ -37,6 +37,18 @@ class SublyApi {
    * USERS AUTH API ROUTES
    *******************************************************/
 
+  /* ------guest login API -----*/
+  /* GET  /request otp: { fullname ,email,password, confirm password}
+     request otp
+     Authorization required:none
+     @param data {Object} {fullname ,email,password, confirm password}
+     @returns {object} {token}
+     */
+  static async guestUserLogin() {
+    let res = await this.request(`/guest-user-login`, undefined, "get");
+    return res;
+  }
+
   /* ------SIGNUP API -----*/
   /* POST  /request otp: { fullname ,email,password, confirm password}
      request otp
@@ -120,7 +132,7 @@ class SublyApi {
      @returns {object} {token}
      */
   static async getDealList(authToken) {
-    let header = { "access-token": ` ${ authToken }`};
+    let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/deal-list`, undefined, "get", header);
 
     return res;
