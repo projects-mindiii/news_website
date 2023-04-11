@@ -84,21 +84,173 @@
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
 }
 
+/* form control for email css */
+.emailSet {
+    position: relative;
+}
+
+.emailSet .form-control {
+    padding-left: 63px;
+}
+
+.emailSet svg {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    height: 40px;
+    color: white;
+    width: 50px;
+    margin-bottom: -11px;
+    padding: 9px;
+}
+
 /* profile image css */
-.profileImg{
+.profileImg {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-.profileImg img{
+
+.profileImageSet {
     width: 100%;
     max-width: 120px;
+    border-radius: 100%;
+    border: 1px solid #e7e4e4;
 }
-.profileIcon{
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 30px;
+
+.profileImageSet img {
+    width: 100%;
+    max-width: 120px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 1px solid #e7e4e4;
 }
-.profileIcon svg{
+
+.profileIcon svg {
     font-size: 33px;
     cursor: pointer;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.profileIcon .addCls {
+    font-size: 14.52px;
+    text-align: center;
+    color: #40475F;
+}
+
+/* change password css */
+.hidePassword {
+    border: none;
+    height: 40px;
+    background: #FFFFFF;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+    border-radius: 7.26px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+}
+
+.changePassword .changeIcon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.changePassword .changeIcon h6 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 0px;
+    margin-left: 4px;
+}
+
+.changePassword .changeIcon svg {
+    color: #000000;
+    font-size: 30px;
+}
+
+/* button css */
+.buttonAdd {
+    border: none;
+    color: #ffffff;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 500;
+    height: 40px;
+    background: #000000;
+    border-radius: 10px;
+}
+
+.buttonAdd:hover {
+    background: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* delete account css */
+.deleteIcon {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.deleteIcon h6 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 0px;
+    margin-left: 4px;
+}
+
+.deleteIcon svg {
+    color: #000000;
+    font-size: 23px;
+}
+
+
+/* phone input css */
+.phoneInputSet {
+    position: relative;
+}
+
+.phoneInputSet svg {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 20px;
+}
+
+.phoneInputSet .form-control {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px;
+    margin-left: 0;
+    background: #FFFFFF;
+    border: none !important;
+    border-radius: 5px;
+    line-height: 25px;
+    height: 40px !important;
+    width: 100% !important;
+    outline: none;
+}
+
+.react-tel-input .flag-dropdown {
+    background-color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 3px 0 0 3px;
+}
+
+.react-tel-input .selected-flag .flag {
+    display: none !important;
 }

@@ -1,15 +1,29 @@
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "./Profile.css";
 import { AiOutlineMail } from "react-icons/ai";
 import { useState } from "react";
 import ProfileImg from "../../assets/images/profile.png"
 import { MdAddCircleOutline } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { useForm } from "react-hook-form";
+import { BsTrash3 } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css';
+import { MdPhonelinkRing } from "react-icons/md";
 
 //--------Create a Profile component----------
 function Profile() {
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
+    //----- state for manage show/hide change password inputs fields-----
+    const [show, setShow] = useState(false);
+   
+
+    //set language
+    const { t } = useTranslation();
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -19,6 +33,16 @@ function Profile() {
         }
     }
 
+    //----------function for form validation using useform------------
+    const {
+        handleSubmit,
+    } = useForm();
+
+    //-----------function for save profile details-----------
+    const onSubmit = () => {
+
+    };
+
     return (
         <div className="main">
             <Container>
@@ -26,19 +50,18 @@ function Profile() {
                     <Row>
                         <Col sm={6}>
                             <div className="profileLeftPart">
-                                <h3>YOUR PROFILE</h3>
-                                <p><strong>PLEASE NOTE - </strong>
-                                    A profile is required to post and manage classified adverts.
-                                    You can create or edit yout profile here.
+                                <h3>{t("YOUR_PROFILE")}</h3>
+                                <p><strong>{t("NOTE")}</strong>
+                                    {t("PROFILE_DETAILS")}
                                 </p>
                             </div>
                         </Col>
                         <Col sm={6}>
                             <div className="profileRightPart">
-                                <h4>YOUR PROFILE</h4>
-                                <h3>Your Profile Details</h3>
-                                <p>Tell us a little about you, used for classifieds</p>
-                                <Form>
+                                <h4>{t("YOUR_PROFILE")}</h4>
+                                <Form onSubmit={handleSubmit(onSubmit)}>
+                                    <h3>{t("PROFILE")}</h3>
+                                    <p>{t("PROFILE_PARA")}</p>
                                     <Form.Group className="mb-3" controlId="formBasicName">
                                         <Form.Control
                                             type="text"
@@ -58,26 +81,33 @@ function Profile() {
                                         />
                                     </Form.Group>
 
-                                    <Form.Group className="mb-3">
-
+                                    <Form.Group className="mb-3 emailSet">
                                         <Form.Control
                                             type="text"
                                             placeholder="EMAIL"
                                         />
-                                        {/* <AiOutlineMail/> */}
-
+                                        <AiOutlineMail />
                                     </Form.Group>
+                                    <div className="phoneInputSet">
+                                        <PhoneInput
+                                            country={"us"}
+                                            countryCodeEditable={false}
+                                        />
+                                        <MdPhonelinkRing />
 
-                                    <h3>Your Location</h3>
-                                    <p>Not public, used for your classified adverts</p>
+                                    </div>
+                                    <h3>{t("LOCATION")}</h3>
+                                    <p>{t("LOCATION_PARA")}</p>
                                     <Form.Group className="mb-3">
                                         <Form.Select id="disabledSelect">
-                                            <option >South Africa</option>
+                                            <option className="selectionCls">South Africa</option>
+                                            <option className="selection">South Africa</option>
+                                            <option className="selection">South Africa</option>
                                         </Form.Select>
                                     </Form.Group>
                                     <Form.Group className="mb-3">
                                         <Form.Select>
-                                            <option >Select Provience</option>
+                                            <option >Select Province</option>
                                         </Form.Select>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicName">
@@ -86,39 +116,83 @@ function Profile() {
                                             placeholder="Input City/Town"
                                         />
                                     </Form.Group>
-                                    <h3>Your Profile Photo</h3>
-                                    <p>Add in profile photo for company logo</p>
+
+                                    <h3>{t("PROFILE_PHOTO")}</h3>
+                                    <p>{t("ADD_PHOTO")}</p>
                                     <div className="profileImg ">
                                         <div className="profileIcon">
                                             <label for="uploadImage">
                                                 <MdAddCircleOutline />
                                             </label>
-                                            <h6>ADD</h6>
+                                            <h6 className="addCls">{t("ADD")}</h6>
                                         </div>
-
-
-                                        <img src={profilePreview} />
-                                        <input
-                                            id="uploadImage"
-                                            type="file"
-                                            style={{
-                                                display: "none",
-                                            }}
-                                            accept="image/*"
-                                            onChange={onImageChange}
-                                        />
+                                        <div className="profileImageSet">
+                                            <img src={profilePreview} />
+                                            <input
+                                                id="uploadImage"
+                                                type="file"
+                                                style={{
+                                                    display: "none",
+                                                }}
+                                                accept="image/*"
+                                                onChange={onImageChange}
+                                            />
+                                        </div>
                                         <div className="profileIcon">
                                             <MdOutlineCancel />
-                                            <h6>CLEAR</h6>
+                                            <h6 className="addCls">{t("CLEAR")}</h6>
                                         </div>
                                     </div>
+
+                                    <h3>{t("YOUR_PASSWORD")}</h3>
+                                    <p>{t("PASSWORD_PARA")}</p>
+                                    <div className="hidePassword">
+                                        *****H12
+                                    </div>
+                                    <div className="changePassword">
+                                        {show ? (
+                                            <div className="changeIcon" onClick={() => setShow(!show)}>
+                                                <h6>{t("CHANGE_PASSWORD")}</h6>
+                                                < MdKeyboardArrowUp />
+                                            </div>
+
+                                        ) : (
+                                            <div className="changeIcon" onClick={() => setShow(!show)}>
+                                                <h6>{t("CHANGE_PASSWORD")}</h6>
+                                                <MdKeyboardArrowDown />
+                                            </div>
+                                        )}
+                                        {show == true ? (
+                                            <div>
+                                                <Form.Group className="mb-3">
+                                                    <Form.Control
+                                                        type="password"
+                                                        placeholder="Set New Password"
+                                                    />
+                                                </Form.Group>
+                                                <Form.Group className="mb-3">
+                                                    <Form.Control
+                                                        type="password"
+                                                        placeholder="Repeat Password"
+                                                    />
+                                                </Form.Group>
+                                            </div>
+                                        ) : ""}
+                                    </div>
+                                    <Button className="buttonAdd" type="submit">{t("SAVE")}</Button>
                                 </Form>
+
+                                <div className="deleteIcon">
+                                    <BsTrash3 />
+                                    <h6>{t("DELETE_ACCOUNT")}</h6>
+                                </div>
+
                             </div>
                         </Col>
                     </Row>
-                </div>
-            </Container>
-        </div>
+                </div >
+            </Container >
+        </div >
     );
 }
 export default Profile;

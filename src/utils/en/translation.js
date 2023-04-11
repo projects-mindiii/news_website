@@ -30,8 +30,7 @@ export const TRANSLATIONS_EN = {
   EMAIL_VERIFICATION: "EMAIL VERIFICATION",
   VARIFICATION_TEXT: `To verify your email address  
   please enter the code sent to`,
-  VERIFY:"VERIFY",
- 
+  VERIFY: "VERIFY",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -40,8 +39,6 @@ export const TRANSLATIONS_EN = {
   JOB_LINKS: "Jobs",
   ADVERTIES_LINKS: "Advertise",
   OUR_MEDIA: "OUR MEDIA",
-
-  
 
   //----Header Text------
   DEALS: "DEALS/HUB",
@@ -55,6 +52,24 @@ export const TRANSLATIONS_EN = {
   BRANDS: "BRANDS",
   COMPANIES: "COMPANIES",
 
+  //----Profile Text------
+  YOUR_PROFILE: "YOUR PROFILE",
+  PROFILE: "Your Profile Details",
+  PROFILE_PARA: "Tell us a little about you, used for classifieds",
+  PROFILE_DETAILS: "A profile is required to post and manage classified adverts. You can create or edit yout profile here.",
+  LOCATION: "Your Location",
+  LOCATION_PARA: "Not public, used for your classified adverts",
+  PROFILE_PHOTO: "Your Profile Photo",
+  ADD_PHOTO: "Add in profile photo for company logo",
+  ADD: "ADD",
+  CLEAR: "CLEAR",
+  YOUR_PASSWORD: "Your Password",
+  PASSWORD_PARA: "Manage your password here",
+  CHANGE_PASSWORD: "CHANGE PASSWORD",
+  DELETE_ACCOUNT: "DELETE ACCOUNT",
+  SAVE: "SAVE",
+  NOTE: "PLEASE NOTE -",
+
 
   //---------------Error Messages Common Text----------
 
@@ -67,6 +82,7 @@ export const TRANSLATIONS_EN = {
   INVALID_NAME: "Please enter valid name",
   NAME_MAXLENGTH: "Name must be 20 character or small",
   NAME_MINLENGTH: "Please enter atleast 3 character",
+
 
   //---------- Placeholder Common Text---------------
 
