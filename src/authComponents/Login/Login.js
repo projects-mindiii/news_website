@@ -11,45 +11,53 @@ import React from "react";
 import FacebookLogin from "react-facebook-login";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
+import { STATUS_CODES } from "../../utils/StatusCode";
 
 //--------Create a Login component----------
 function Login() {
   const navigate = useNavigate();
   //set language
-  const { t, i18n } = useTranslation();
-
-  
+  const { t } = useTranslation();
 
   const responseFacebook = async (response) => {
-    console.log("response", response);
     let userData = response;
     if (userData) {
-      // Toast.dismiss();
       let requestData = new FormData();
       requestData.append("name", userData.name);
       requestData.append("social_type", 2);
       requestData.append("social_key", userData.id);
       requestData.append("email", userData.email);
       requestData.append("profile_url", "");
-      await SublyApi.checkSocialLogin(requestData).then((responsejson) => {
-        console.log("response", responsejson);
-        if (responsejson.status_code === 200) {
-          Toast.fire({
-            icon: "success",
-            title: responsejson.message,
-          });
-        } else if (responsejson.status === 400 || responsejson.status === 500) {
-          Toast.error(responsejson.data.error.message, {
-            autoClose: 1500,
-          });
+      await SublyApi.checkSocialLogin(requestData).then(
+        async (responsejson) => {
+          if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+            Toast.fire({
+              icon: "success",
+              title: responsejson.message,
+            });
+            navigate("/latest-deals");
+          } else if (
+            responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND &&
+            responsejson.data.message == STATUS_CODES.SOCIAL_USER_NOT_FOUND
+          ) {
+            await SublyApi.socialSignup(requestData).then((responsejson) => {
+              if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+                Toast.fire({
+                  icon: "success",
+                  title: responsejson.message,
+                });
+              }
+            });
+          } else {
+            Toast.fire({
+              icon: "Error",
+              title: responsejson.message,
+            });
+          }
         }
-      });
+      );
     }
   };
-
-  //   const componentClicked = (data)=>{
-  //     console.log(data)
-  //   }
 
   return (
     <div className="main">
