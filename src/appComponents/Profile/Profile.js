@@ -14,16 +14,18 @@ import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css';
 import { MdPhonelinkRing } from "react-icons/md";
 
+
 //--------Create a Profile component----------
 function Profile() {
+    //set language
+    const { t } = useTranslation();
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
     //----- state for manage show/hide change password inputs fields-----
     const [show, setShow] = useState(false);
-   
-
-    //set language
-    const { t } = useTranslation();
+    const [phoneNo, setPhoneNo] = useState("");
+    const [dialCode, setDialCode] = useState("27");
+    const [countryCode, setCountryCode] = useState("za");
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -62,19 +64,19 @@ function Profile() {
                                 <Form onSubmit={handleSubmit(onSubmit)}>
                                     <h3>{t("PROFILE")}</h3>
                                     <p>{t("PROFILE_PARA")}</p>
-                                    <Form.Group className="mb-3" controlId="formBasicName">
+                                    <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
                                             placeholder="Full Name"
                                         />
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicName">
+                                    <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
                                             placeholder="Company Name (Optional)"
                                         />
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicName">
+                                    <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
                                             placeholder="Position/Occupation (Optional)"
@@ -88,21 +90,39 @@ function Profile() {
                                         />
                                         <AiOutlineMail />
                                     </Form.Group>
-                                    <div className="phoneInputSet">
-                                        <PhoneInput
-                                            country={"us"}
-                                            countryCodeEditable={false}
-                                        />
-                                        <MdPhonelinkRing />
 
+                                    {/* phone input */}
+                                    <div className="phoneInputSet">
+                                        <MdPhonelinkRing />
+                                        <p>{countryCode.toUpperCase()} + {dialCode.toString()}</p>
+                                        {/* <MdKeyboardArrowDown className="downArrow" /> */}
+                                        <PhoneInput
+                                            country={"za"}
+                                            value={dialCode.toString() +
+                                                phoneNo.toString()}
+                                            onChange={(value, country) => {
+                                                let dialCode = country.dialCode;
+                                                let phone = value.slice(
+                                                    dialCode.length,
+                                                    value.length
+                                                );
+                                                setCountryCode(country.countryCode)
+                                                setDialCode(dialCode);
+                                                setPhoneNo(phone);
+
+                                            }}
+                                            countryCodeEditable={false}
+                                            copyNumbersOnly={true}
+                                        />
                                     </div>
+
                                     <h3>{t("LOCATION")}</h3>
                                     <p>{t("LOCATION_PARA")}</p>
                                     <Form.Group className="mb-3">
-                                        <Form.Select id="disabledSelect">
-                                            <option className="selectionCls">South Africa</option>
-                                            <option className="selection">South Africa</option>
-                                            <option className="selection">South Africa</option>
+                                        <Form.Select id="disabledSelect" className="customSelect">
+                                            <option className="customOption">South Africa</option>
+                                            <option>South Africa</option>
+                                            <option>South Africa</option>
                                         </Form.Select>
                                     </Form.Group>
                                     <Form.Group className="mb-3">
@@ -110,7 +130,8 @@ function Profile() {
                                             <option >Select Province</option>
                                         </Form.Select>
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicName">
+
+                                    <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
                                             placeholder="Input City/Town"
