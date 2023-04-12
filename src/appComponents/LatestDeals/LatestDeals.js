@@ -4,8 +4,9 @@ import "./LatestDeals.css";
 import "../../assets/styles/Common.css";
 import Deals from "../../assets/images/Bitmap.png";
 import DigitalPrint from "../DealSubModule/DealSubModules";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import SublyApi from "../../helpers/Api";
+import CompanyProfile from "../DealSubModule/CompanyProfile";
 
 function LatestDeals() {
   const [dealList, setDealList] = useState([]);
@@ -13,7 +14,7 @@ function LatestDeals() {
   const token = localStorage.getItem("token");
 
   // =====Here i am calling api for getting deal list =====
-  useEffect(() => {
+  useLayoutEffect(() => {
     async function getDealList() {
       await SublyApi.getDealList(token).then((response) => {
         if (response.status_code == 200) {
@@ -21,6 +22,7 @@ function LatestDeals() {
             ...response.data.product_deal_count_list,
             ...response.data.service_deal_count_list,
           ]);
+          setEventKeyValue(dealList ? dealList[0] && dealList[0].id : "");
         } else {
           Toast.fire({
             icon: "error",
@@ -37,12 +39,13 @@ function LatestDeals() {
   return (
     <div className="dealContainer">
       <Container>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+        <Tab.Container id="left-tabs-example" defaultActiveKey={eventKeyValue}>
           <Row>
-            <Col sm={6}>
+            <Col lg={6} sm={12}>
               <Nav
                 variant="pills"
                 className="flex-column addTabs"
+                // defaultActiveKey={eventKeyValue}
                 onSelect={(value) => {
                   setEventKeyValue(value);
                 }}
@@ -57,30 +60,16 @@ function LatestDeals() {
                       ))
                     : ""}
                 </Nav.Item>
-                {/* <Nav.Item>
-                  <Nav.Link eventKey="second">
-                    Display Hardware(8)
-                    <MdKeyboardArrowRight />
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="third">
-                    Large Format Printer(8)
-                    <MdKeyboardArrowRight />
-                  </Nav.Link>
-                </Nav.Item> */}
               </Nav>
             </Col>
-            <Col sm={6}>
+            <Col lg={6} sm={12}>
               <Tab.Content>
-                <Tab.Pane eventKey={eventKeyValue}>
+                <Tab.Pane eventKey={eventKeyValue ? eventKeyValue : ""}>
                   <DigitalPrint
                     eventKeyValue={eventKeyValue}
                     dealList={dealList}
-                    // dealsArray={
-                    //   dealList ? dealList.product_deal_count_list[0] : ""
-                    // }
                   />
+                  {/* <CompanyProfile/> */}
                 </Tab.Pane>
               </Tab.Content>
             </Col>

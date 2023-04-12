@@ -62,6 +62,7 @@
 .dealText p {
     font-size: 18px;
     line-height: 14px;
+    font-family: 'Poppins';
 }
 
 .dealText span {
@@ -87,6 +88,7 @@
     font-weight: 300;
     font-size: 12px;
     color: #000000;
+    font-family: 'Poppins';
 }
 
 .whatsApp {
@@ -118,4 +120,10 @@ button.whatsApp svg {
     line-break: anywhere;
     line-height: 20px;
     font-size: 16px;
+}
+
+@media screen and (max-width: 400px) {
+    .latestDeals {
+        padding: 15px;
+    }
 }

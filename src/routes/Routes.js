@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "../appComponents/Footer/Footer";
 import Header from "../appComponents/Header/Header";
 import ForgotPassword from "../authComponents/ForgotPassword/ForgotPassword";

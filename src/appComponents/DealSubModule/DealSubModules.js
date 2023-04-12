@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../LatestDeals/LatestDeals.css";
-import Deals from "../../assets/images/Bitmap.png";
-import { detailsDeal } from "../LatestDeals/DealDetails";
 import { Icon } from "@iconify/react";
 import message from "../../assets/images/Deal_icon/message.png";
 import contact from "../../assets/images/Deal_icon/contact_ico.png";
@@ -40,36 +38,44 @@ function DigitalPrint(props) {
                     <p>{item.contact_name}</p>
                   </div>
                 </div>
-                <div className="detailsValue">
-                  <img src={contact} alt="img" />
-                  <div className="dealText">
-                    <span>CONTACT PERSON</span>
-                    <p>
-                      +{item.contact_dial_code} {item.contact_number}
-                    </p>
+                {item.contact_number && (
+                  <div className="detailsValue">
+                    <img src={contact} alt="img" />
+                    <div className="dealText">
+                      <span>CONTACT PERSON</span>
+                      <p>
+                        +{item.contact_dial_code} {item.contact_number}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="detailsValue">
-                  <img src={globe} alt="img" />
-                  <div className="dealText websiteUrl">
-                    <span>WEBSITE</span>
-                    <p>{item.contact_web_url}</p>
+                )}
+                {item.contact_web_url && (
+                  <div className="detailsValue">
+                    <img src={globe} alt="img" />
+                    <div className="dealText websiteUrl">
+                      <span>WEBSITE</span>
+                      <p>{item.contact_web_url}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="detailsValue">
-                  <img src={mail} alt="img" />
-                  <div className="dealText">
-                    <span>EMAIL</span>
-                    <p>{item.contact_email}</p>
+                )}
+                {item.contact_email && (
+                  <div className="detailsValue">
+                    <img src={mail} alt="img" />
+                    <div className="dealText websiteUrl">
+                      <span>EMAIL</span>
+                      <p>{item.contact_email}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="detailsValue">
-                  <img src={watch} alt="img" />
-                  <div className="dealText">
-                    <span>EXPIRY</span>
-                    <p>{item.deal_expire_date}</p>
+                )}
+                {item.deal_expire_date && (
+                  <div className="detailsValue">
+                    <img src={watch} alt="img" />
+                    <div className="dealText">
+                      <span>EXPIRY</span>
+                      <p>{item.deal_expire_date}</p>
+                    </div>
                   </div>
-                </div>
+                )}
                 {item.promo_code && (
                   <div className="detailsValue">
                     <img src={promotional} alt="img" />
@@ -81,7 +87,10 @@ function DigitalPrint(props) {
                 )}
               </div>
               <div className="dealPrice">
-                <h4>{item.currency_code} {item.price}</h4> <span>{item.currency_symbol}</span>
+                <h4>
+                  {item.currency_code} {item.price}
+                </h4>{" "}
+                <span>{item.tax_lable}</span>
               </div>
               <button className="whatsApp">
                 <Icon
