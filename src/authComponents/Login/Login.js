@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import FacebookLogin from "react-facebook-login";
+import { useGoogleLogin } from "@react-oauth/google";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
@@ -19,7 +20,14 @@ function Login() {
   //set language
   const { t } = useTranslation();
 
+  // Social Login with google
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => console.log(tokenResponse),
+  });
+
+  // Social Login with facebook.
   const responseFacebook = async (response) => {
+    console.log("response");
     let userData = response;
     if (userData) {
       let requestData = new FormData();
@@ -74,10 +82,13 @@ function Login() {
             <img src={Email} alt="email-logo" />
             <h3>{t("LOGIN_EMAIL")}</h3>
           </div>
-          <div className="loginComponents">
+
+          <div className="loginComponents"
+           onClick={() => login()}>
             <img src={Google} alt="google-logo" />
             <h3>{t("LOGIN_GOOGLE")}</h3>
           </div>
+
           <div className="loginComponents">
             <img src={Facebook} alt="facebook-logo" />
             <FacebookLogin
@@ -86,10 +97,12 @@ function Login() {
               fields="name,email,picture"
               callback={responseFacebook}
               cssClass="my-facebook-button-class"
+              onFailure={(value) => console.log(value)}
             />
 
             {/* <h3>{t("LOGIN_FACEBOOK")}</h3> */}
           </div>
+
           <div className="loginComponents">
             <img src={Apple} alt="apple-logo" />
             <h3>{t("LOGIN_APPLE")}</h3>
