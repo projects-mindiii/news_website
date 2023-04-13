@@ -71,7 +71,6 @@ export const TRANSLATIONS_ES = {
     SAVE: "AHORRAR",
     NOTE: "TENGA EN CUENTA -",
 
-
     //---------------Error Messages Common Text----------
     INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
     INVALID_EMAIL: "Dirección de correo electrónico no válida",
@@ -84,7 +83,6 @@ export const TRANSLATIONS_ES = {
     NAME_MINLENGTH: "Por favor ingrese al menos 3 caracteres",
     ENTER_NAME: "por favor ingrese el nombre completo",
     ENTER_EMAIL: "por favor ingrese la dirección de correo electrónico",
-
 
     //---------- Placeholder Common Text---------------
     NAME: "Nombre completo",
