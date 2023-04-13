@@ -1,7 +1,7 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "./Profile.css";
 import { AiOutlineMail } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileImg from "../../assets/images/profile.png"
 import { MdAddCircleOutline } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
@@ -13,19 +13,28 @@ import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css';
 import { MdPhonelinkRing } from "react-icons/md";
+import { BsWhatsapp } from "react-icons/bs";
+import SublyApi from "../../helpers/Api";
 
 
 //--------Create a Profile component----------
 function Profile() {
     //set language
     const { t } = useTranslation();
+    const [phoneNo, setPhoneNo] = useState("");
+    const [dialCode, setDialCode] = useState("27");
+    const [countryCode, setCountryCode] = useState("za");
+    const [watsappNo, setWatsappNo] = useState("");
+    const [dialCodeWatsapp, setDialCodeWatsapp] = useState("27");
+    const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
     //----- state for manage show/hide change password inputs fields-----
     const [show, setShow] = useState(false);
-    const [phoneNo, setPhoneNo] = useState("");
-    const [dialCode, setDialCode] = useState("27");
-    const [countryCode, setCountryCode] = useState("za");
+    const [userDetails, setUserDetails] = useState("");
+
+    const token = localStorage.getItem("token");
+
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -37,10 +46,24 @@ function Profile() {
 
     //----------function for form validation using useform------------
     const {
+        register,
         handleSubmit,
+        setValue,
+        formState: { errors },
     } = useForm();
 
-    //-----------function for save profile details-----------
+    //-------function for profile Api-------
+    useEffect(() => {
+        async function getUserDetails() {
+            const details = await SublyApi.userProfile(token); //profile api call
+            setUserDetails(details.data);
+
+        }
+        getUserDetails();
+    }, []);
+
+
+    //-----------function for update profile details-----------
     const onSubmit = () => {
 
     };
@@ -64,38 +87,65 @@ function Profile() {
                                 <Form onSubmit={handleSubmit(onSubmit)}>
                                     <h3>{t("PROFILE")}</h3>
                                     <p>{t("PROFILE_PARA")}</p>
-                                    <Form.Group className="mb-3">
+                                    <Form.Group className="mb-3" controlId="formBasicName">
                                         <Form.Control
                                             type="text"
-                                            placeholder="Full Name"
+                                            placeholder={t("NAME")}
+                                            {...register("fullName", {
+                                                required: {
+                                                    value: true,
+                                                    message: `${t("ENTER_NAME")}`,
+                                                },
+                                            })}
                                         />
                                     </Form.Group>
+                                    {errors.fullName && (
+                                        <span className="errorDisplay">
+                                            {errors.fullName.message}
+                                        </span>
+                                    )}
+
                                     <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
-                                            placeholder="Company Name (Optional)"
+                                            placeholder={t("COMPANY_NAME")}
                                         />
                                     </Form.Group>
+
                                     <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
-                                            placeholder="Position/Occupation (Optional)"
+                                            placeholder={t("POSITION")}
                                         />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3 emailSet">
                                         <Form.Control
                                             type="text"
-                                            placeholder="EMAIL"
+                                            placeholder={t("EMAIL")}
+                                            {...register("email", {
+                                                required: {
+                                                    value: true,
+                                                    message: `${t("ENTER_EMAIL")}`,
+                                                },
+                                                pattern: {
+                                                    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                                    message: `${t("INVALID_EMAIL")}`,
+                                                },
+                                            })}
                                         />
                                         <AiOutlineMail />
                                     </Form.Group>
+                                    {errors.email && (
+                                        <span className="errorDisplay">
+                                            {errors.email.message}
+                                        </span>
+                                    )}
 
-                                    {/* phone input */}
+                                    {/* phone number input */}
                                     <div className="phoneInputSet">
                                         <MdPhonelinkRing />
                                         <p>{countryCode.toUpperCase()} + {dialCode.toString()}</p>
-                                        {/* <MdKeyboardArrowDown className="downArrow" /> */}
                                         <PhoneInput
                                             country={"za"}
                                             value={dialCode.toString() +
@@ -116,15 +166,38 @@ function Profile() {
                                         />
                                     </div>
 
+                                    {/* watsapp number input */}
+                                    <div className="phoneInputSet watsappInput">
+                                        <BsWhatsapp />
+                                        <p>{countryCodeWatsapp.toUpperCase()} + {dialCodeWatsapp.toString()}</p>
+                                        <PhoneInput
+                                            country={"za"}
+                                            value={dialCodeWatsapp.toString() +
+                                                watsappNo.toString()}
+                                            onChange={(value, country) => {
+                                                let dialCode = country.dialCode;
+                                                let phone = value.slice(
+                                                    dialCode.length,
+                                                    value.length
+                                                );
+                                                setCountryCodeWatsapp(country.countryCode)
+                                                setDialCodeWatsapp(dialCode);
+                                                setWatsappNo(phone);
+
+                                            }}
+                                            countryCodeEditable={false}
+                                            copyNumbersOnly={true}
+                                        />
+                                    </div>
+
                                     <h3>{t("LOCATION")}</h3>
                                     <p>{t("LOCATION_PARA")}</p>
                                     <Form.Group className="mb-3">
                                         <Form.Select id="disabledSelect" className="customSelect">
                                             <option className="customOption">South Africa</option>
-                                            <option>South Africa</option>
-                                            <option>South Africa</option>
                                         </Form.Select>
                                     </Form.Group>
+
                                     <Form.Group className="mb-3">
                                         <Form.Select>
                                             <option >Select Province</option>

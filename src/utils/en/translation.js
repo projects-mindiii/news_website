@@ -72,7 +72,6 @@ export const TRANSLATIONS_EN = {
 
 
   //---------------Error Messages Common Text----------
-
   INCOMPLETE: "Form incomplete, please fill all fields",
   INVALID_EMAIL: "Invalid Email Address",
   EMAIL_MAXLENGTH: "Email must be 50 character or small",
@@ -82,15 +81,18 @@ export const TRANSLATIONS_EN = {
   INVALID_NAME: "Please enter valid name",
   NAME_MAXLENGTH: "Name must be 20 character or small",
   NAME_MINLENGTH: "Please enter atleast 3 character",
+  ENTER_NAME: "please enter full name",
+  ENTER_EMAIL: "please enter Email address",
 
 
   //---------- Placeholder Common Text---------------
-
   NAME: "Full Name",
   EMAIL: "Your Email",
   PASSWORD: "Your Password",
   CONFIRM_PASSWORD: "Confirm Password",
   SEARCH: "Search",
+  COMPANY_NAME: "Company Name (Optional)",
+  POSITION: "Position/Occupation (Optional)",
 
 
   //---------- Form Lable Common Text---------------

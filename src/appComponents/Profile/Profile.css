@@ -1,3 +1,12 @@
+.errorDisplay {
+    color: #D62D2D;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    margin-top: -11px;
+    margin-bottom: 10px;
+}
+
 .profileLeftPart h3 {
     font-weight: 700;
     font-size: 25px;
@@ -315,15 +324,21 @@
     color: #FFFFFF !important;
 }
 
-/* .flag-dropdown:before{
-    content: "";
-    border-top: 6px solid;
-    border-right: 6px solid transparent;
-    border-bottom: 0;
-    border-left: 6px solid transparent;
-    position: absolute;
-    left: 89px;
-    top: 18px;
-    z-index: 999;
-    color: #FFFFFF !important;
-} */
+/* watsapp input css */
+.watsappInput {
+    margin-top: 16px;
+}
+
+.watsappInput .react-tel-input .selected-flag {
+    background: #29af29 !important;
+}
+
+.watsappInput .react-tel-input .selected-flag:hover,
+.watsappInput .react-tel-input .selected-flag:focus {
+    background: #29af29 !important;
+}
+
+
+.watsappInput .react-tel-input .selected-flag {
+    background: #29af29 !important;
+}
