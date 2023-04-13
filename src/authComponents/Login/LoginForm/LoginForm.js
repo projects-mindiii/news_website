@@ -8,7 +8,6 @@ import Apple from "../../../assets/images/apple_logo.png";
 import Linkedin from "../../../assets/images/linkdin_logo.png";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import SublyApi from "../../../helpers/Api";
 import { Toast } from "../../../utils/Toaster";
 import EmailInput from "../../../formComponent/EmailInput/EmailInput";
 import PasswordInput from "../../../formComponent/PasswordInput/PasswordInput";
@@ -16,10 +15,17 @@ import CustomBtn from "../../../formComponent/Button/Button";
 import { useState } from "react";
 import ErrorResponse from "../../../utils/AlertBox/ErrorResponse";
 
+import { userLogin } from "../../../store/slices/UserSlice";
+import { useDispatch,useSelector } from 'react-redux';
 
 //--------Create a Login with email component----------
 function LoginForm() {
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const  {currentUser,isLoading}  = useSelector((state) => state.user);
+
     //set language
     const { t, i18n } = useTranslation();
     //-----state for show alert box for error response------
@@ -40,17 +46,19 @@ function LoginForm() {
         let requestData = new FormData();
         requestData.append("email", formdata.email);
         requestData.append("password", formdata.password);
-        await SublyApi.loginProcess(requestData).then((responsejson) => {
-            if (responsejson.status_code === 200) {
+        dispatch(userLogin(requestData)).then((responsejson) => {
+            const response = responsejson.payload;
+            console.log('onSubmit response',response)
+            if (response.status_code === 200) {
                 setValue("email", "");
                 setValue("password", "");
                 Toast.fire({
                     icon: "success",
-                    title: responsejson.message,
+                    title: response.message,
                 });
-
+                navigate("/");
             } else {
-                setShowError(responsejson.data.message)
+                setShowError(response.message)
             }
         })
 
