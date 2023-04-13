@@ -81,8 +81,8 @@ function Login() {
           <div className="loginComponents">
             <img src={Facebook} alt="facebook-logo" />
             <FacebookLogin
-              appId="598360515537196"
-              autoLoad={true}
+              appId="668522841263824"
+              autoLoad={false}
               fields="name,email,picture"
               callback={responseFacebook}
               cssClass="my-facebook-button-class"
