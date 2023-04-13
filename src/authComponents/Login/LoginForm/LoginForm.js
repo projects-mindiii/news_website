@@ -48,7 +48,6 @@ function LoginForm() {
         requestData.append("password", formdata.password);
         dispatch(userLogin(requestData)).then((responsejson) => {
             const response = responsejson.payload;
-            console.log('onSubmit response',response)
             if (response.status_code === 200) {
                 setValue("email", "");
                 setValue("password", "");
@@ -58,7 +57,7 @@ function LoginForm() {
                 });
                 navigate("/");
             } else {
-                setShowError(response.message)
+                setShowError(response.data.message)
             }
         })
 

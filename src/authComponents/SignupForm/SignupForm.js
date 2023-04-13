@@ -15,6 +15,7 @@ import PasswordInput from "../../formComponent/PasswordInput/PasswordInput";
 import NameInput from "../../formComponent/NameInput.js/NameInput";
 import CustomBtn from "../../formComponent/Button/Button";
 import ConfirmPassInput from "../../formComponent/ConfirmPassInput/ConfirmPassInput";
+import { STATUS_CODES } from "../../utils/StatusCode";
 
 
 //--------------Form for singing up new users----------
@@ -46,7 +47,7 @@ function SignupForm() {
     requestData.append("password", formdata.password);
     requestData.append("confirm_password", formdata.confirmPassword);
     await SublyApi.requestOtp(requestData).then((responsejson) => {
-      if (responsejson.status_code === 200) {
+      if (responsejson.status_code === STATUS_CODES.SUCCESS) {
         navigate("/email-varify", {
           state: {
             name: formdata.fullName,

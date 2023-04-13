@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 // const REACT_PROXYURL = "https://quiet-retreat-79741.herokuapp.com/";
 const REACT_PROXYURL = "";
@@ -23,7 +22,7 @@ class SublyApi {
 
   static async request(endpoint, data = {}, method = "get", header) {
     const url = `${REACT_PROXYURL}${BASE_URL}${endpoint}`;
-    const headers = {...SublyApi.commonHeaders,...header};
+    const headers = { ...SublyApi.commonHeaders, ...header };
 
     const params = method === "get" ? data : {};
     try {
@@ -46,13 +45,10 @@ class SublyApi {
      @returns {object} {token}
      */
   static async requestOtp(data) {
-    let res = await this.request(`/request-otp`,
-      data, "post",
-      );
+    let res = await this.request(`/request-otp`, data, "post");
     return res;
   }
 
-  
   /* POST  /login api : { email, password }
     login api
      Authorization required:none
@@ -60,13 +56,9 @@ class SublyApi {
      @returns {object} {token}
      */
   static async loginProcess(data) {
-    let res = await this.request(`/login`,
-      data, "post",
-      );
+    let res = await this.request(`/login`, data, "post");
     return res;
   }
-
-
 
   /* POST  /request otp: { fullname ,email,password, confirm password}
      request otp
@@ -74,15 +66,13 @@ class SublyApi {
      @param data {Object} {fullname ,email,password, confirm password}
      @returns {object} {token}
      */
-     static async varifyOtp(data) {
-      let res = await this.request(`/verify-otp`,
-       data, "post", 
-       );
-  
-      return res;
-    }
+  static async varifyOtp(data) {
+    let res = await this.request(`/verify-otp`, data, "post");
 
-    /* POST  /forgot password api : { email }
+    return res;
+  }
+
+  /* POST  /forgot password api : { email }
     forgot password api
      
      Authorization required:none
@@ -91,14 +81,34 @@ class SublyApi {
      @returns {object} {token}
      */
   static async forgotPassword(data) {
-    
-    let res = await this.request(`/forgote`,
-      data, "post",
-);
+    let res = await this.request(`/forgote`, data, "post");
 
     return res;
   }
 
+  /* POST  /check social login : {facebook}
+    check social login
+     
+     Authorization required:none
+     
+     @param data {Object} { email }
+     @returns {object} {token}
+     */
+  static async checkSocialLogin(data) {
+    let res = await this.request(`/is-account-exist`, data, "post");
+    return res;
+  }
+
+  /* POST  /Social Signup : {facebook}
+    Social Signup
+     Authorization required:none
+     @param data {Object} { email }
+     @returns {object} {token}
+     */
+  static async socialSignup(data) {
+    let res = await this.request(`/social-signup`, data, "post");
+    return res;
+  }
 }
 
 SublyApi.token =

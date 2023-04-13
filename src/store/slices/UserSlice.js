@@ -16,7 +16,6 @@ export const userLogin = createAsyncThunk(
 	async (data, { rejectWithValue }) => {
 		try {
 			const response = await SublyApi.loginProcess(data);
-      console.log('userLogin responseresponse',response)
 			return response;
 		} catch (error) {
 			return rejectWithValue(error);
@@ -41,8 +40,7 @@ export const userSlice = createSlice({
     builder.addCase(userLogin.fulfilled, (state, action) => {
       console.log('fulfilled action',action)
         const response = action.payload;
-      console.log('response response',response)
-
+        // console.log('response response',response)
         if(response.status_code==200){
           state.currentUser = response.data;
           state.userToken = response.data.token;
@@ -55,7 +53,7 @@ export const userSlice = createSlice({
         state.isLoading = false
     })
     builder.addCase(userLogin.rejected, (state, action) => {
-        console.log('rejected action',action)
+        // console.log('rejected action',action)
         state.isLoading = false
         state.error = action.error.message
     })

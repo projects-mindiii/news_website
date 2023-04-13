@@ -9,6 +9,7 @@ import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
 import CustomBtn from "../../formComponent/Button/Button";
+import { STATUS_CODES } from "../../utils/StatusCode";
 
 function EmailVarify() {
   const location = useLocation();
@@ -28,8 +29,6 @@ function EmailVarify() {
     requestData.append("password", detail.password);
     requestData.append("confirm_password", detail.confirm_password);
     requestData.append("otp", emailOtp);
-    
-
     await SublyApi.varifyOtp(requestData).then((responsejson) => {
       if (responsejson.status === "success") {
         setEmailOtp(responsejson.data.otp);
@@ -52,7 +51,7 @@ function EmailVarify() {
     requestData.append("password", detail.password);
     requestData.append("confirm_password", detail.confirm_password);
     await SublyApi.requestOtp(requestData).then((responsejson) => {
-      if (responsejson.status_code === 200) {
+      if (responsejson.status_code === STATUS_CODES.SUCCESS) {
         Toast.fire({
           icon: "success",
           title: responsejson.message,
