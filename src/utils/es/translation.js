@@ -17,8 +17,8 @@ export const TRANSLATIONS_ES = {
     LOGIN_WITH: "o inicia sesión con",
     CREATE_PROFILE: "CREAR PERFIL",
     LOG_IN: "ACCESO",
-    LOG_OUT: " CERRAR_SESIÓN",
-    VIEW_PROFILE: "VER_PERFILE",
+    LOG_OUT: " CERRAR SESIÓN",
+    VIEW_PROFILE: "VER PERFILE",
     BOOKMARKS: "MARCAPÁGINAS",
     RESET_PASSWORD: "RESTABLECER SU CONTRASEÑA",
     PASSWORD_TEXT: "Se enviará una nueva contraseña a la dirección de correo electrónico ingresada",
@@ -31,8 +31,7 @@ export const TRANSLATIONS_ES = {
     EMAIL_VERIFICATION: `Para verificar su dirección de correo electrónico
     por favor ingrese el código enviado a
     ejemplo@email.com`,
-    VERIFY:"VERIFICAR",
-   
+    VERIFY: "VERIFICAR",
 
     //----Footer Text------
     FOOTER_TEXT: `Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
@@ -54,7 +53,23 @@ export const TRANSLATIONS_ES = {
     BRANDS: "MARCAS",
     COMPANIES: "COMPAÑÍAS",
 
-
+    //----Profile Text------
+    YOUR_PROFILE: "TU PERFIL",
+    PROFILE: "Detalles de su perfil",
+    PROFILE_PARA: "Cuéntanos un poco sobre ti, usado para anuncios clasificados",
+    PROFILE_DETAILS: "Se requiere un perfil para publicar y administrar anuncios clasificados. Puede crear o editar su perfil aquí.",
+    LOCATION: "Tu ubicación",
+    LOCATION_PARA: "No público, utilizado para sus anuncios clasificados",
+    PROFILE_PHOTO: "Tu foto de perfil",
+    ADD_PHOTO: "Agregue una foto de perfil para el logotipo de la empresa",
+    ADD: "AGREGAR",
+    CLEAR: "CLARA",
+    YOUR_PASSWORD: "Tu contraseña",
+    PASSWORD_PARA: "Gestiona tu contraseña aquí",
+    CHANGE_PASSWORD: "CAMBIAR LA CONTRASEÑA",
+    DELETE_ACCOUNT: "BORRAR CUENTA",
+    SAVE: "AHORRAR",
+    NOTE: "TENGA EN CUENTA -",
 
     //---------------Error Messages Common Text----------
     INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
@@ -66,8 +81,8 @@ export const TRANSLATIONS_ES = {
     INVALID_NAME: "Por favor, introduzca un nombre válido",
     NAME_MAXLENGTH: "El nombre debe tener 20 caracteres o menos",
     NAME_MINLENGTH: "Por favor ingrese al menos 3 caracteres",
-
-
+    ENTER_NAME: "por favor ingrese el nombre completo",
+    ENTER_EMAIL: "por favor ingrese la dirección de correo electrónico",
 
     //---------- Placeholder Common Text---------------
     NAME: "Nombre completo",
@@ -75,7 +90,10 @@ export const TRANSLATIONS_ES = {
     PASSWORD: "Tu contraseña",
     CONFIRM_PASSWORD: "confirmar Contraseña",
     SEARCH: "Buscar",
+    COMPANY_NAME: "Nombre de la compañía (opcional)",
+    POSITION: "Puesto/Ocupación (Opcional)",
 
+    
     //---------- Form Lable Common Text---------------
     REMEMBER_ME: "Acuérdate de mí",
     YOUR_NAME: "Tu nombre (Opcional)",

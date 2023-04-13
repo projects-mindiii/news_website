@@ -17,8 +17,8 @@ export const TRANSLATIONS_EN = {
   LOGIN_WITH: "or login with",
   CREATE_PROFILE: "CREATE PROFILE",
   LOG_IN: "LOG IN",
-  LOG_OUT: " LOG_OUT",
-  VIEW_PROFILE: "VIEW_PROFILE",
+  LOG_OUT: " LOG OUT",
+  VIEW_PROFILE: "VIEW PROFILE",
   BOOKMARKS: "BOOKMARKS",
   RESET_PASSWORD: "RESET YOUR PASSWORD",
   PASSWORD_TEXT: "A new password will be sent to the entered email address",
@@ -30,8 +30,7 @@ export const TRANSLATIONS_EN = {
   EMAIL_VERIFICATION: "EMAIL VERIFICATION",
   VARIFICATION_TEXT: `To verify your email address  
   please enter the code sent to`,
-  VERIFY:"VERIFY",
- 
+  VERIFY: "VERIFY",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -40,8 +39,6 @@ export const TRANSLATIONS_EN = {
   JOB_LINKS: "Jobs",
   ADVERTIES_LINKS: "Advertise",
   OUR_MEDIA: "OUR MEDIA",
-
-  
 
   //----Header Text------
   DEALS: "DEALS/HUB",
@@ -55,9 +52,26 @@ export const TRANSLATIONS_EN = {
   BRANDS: "BRANDS",
   COMPANIES: "COMPANIES",
 
+  //----Profile Text------
+  YOUR_PROFILE: "YOUR PROFILE",
+  PROFILE: "Your Profile Details",
+  PROFILE_PARA: "Tell us a little about you, used for classifieds",
+  PROFILE_DETAILS: "A profile is required to post and manage classified adverts. You can create or edit yout profile here.",
+  LOCATION: "Your Location",
+  LOCATION_PARA: "Not public, used for your classified adverts",
+  PROFILE_PHOTO: "Your Profile Photo",
+  ADD_PHOTO: "Add in profile photo for company logo",
+  ADD: "ADD",
+  CLEAR: "CLEAR",
+  YOUR_PASSWORD: "Your Password",
+  PASSWORD_PARA: "Manage your password here",
+  CHANGE_PASSWORD: "CHANGE PASSWORD",
+  DELETE_ACCOUNT: "DELETE ACCOUNT",
+  SAVE: "SAVE",
+  NOTE: "PLEASE NOTE -",
+
 
   //---------------Error Messages Common Text----------
-
   INCOMPLETE: "Form incomplete, please fill all fields",
   INVALID_EMAIL: "Invalid Email Address",
   EMAIL_MAXLENGTH: "Email must be 50 character or small",
@@ -67,14 +81,18 @@ export const TRANSLATIONS_EN = {
   INVALID_NAME: "Please enter valid name",
   NAME_MAXLENGTH: "Name must be 20 character or small",
   NAME_MINLENGTH: "Please enter atleast 3 character",
+  ENTER_NAME: "please enter full name",
+  ENTER_EMAIL: "please enter Email address",
+
 
   //---------- Placeholder Common Text---------------
-
   NAME: "Full Name",
   EMAIL: "Your Email",
   PASSWORD: "Your Password",
   CONFIRM_PASSWORD: "Confirm Password",
   SEARCH: "Search",
+  COMPANY_NAME: "Company Name (Optional)",
+  POSITION: "Position/Occupation (Optional)",
 
 
   //---------- Form Lable Common Text---------------

@@ -1,0 +1,344 @@
+.errorDisplay {
+    color: #D62D2D;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    margin-top: -11px;
+    margin-bottom: 10px;
+}
+
+.profileLeftPart h3 {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #474747;
+}
+
+.profileLeftPart p {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 14px;
+    padding: 30px;
+}
+
+.profileRightPart {
+    margin-top: 33px;
+}
+
+.profileRightPart h4 {
+    background: #000000;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px;
+}
+
+.profileRightPart h3 {
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    color: #000000;
+    margin-top: 20px;
+}
+
+.profileRightPart p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+}
+
+/* form control css */
+.profileRightPart .form-control {
+    border: none;
+    height: 40px;
+    background: #FFFFFF;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+    border-radius: 7.26px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.profileRightPart .form-control:focus {
+    background-color: #FFFFFF;
+    outline: none !important;
+    border: none !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+}
+
+.profileRightPart .form-select {
+    border: none;
+    height: 40px;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+    border-radius: 7.26px;
+    font-weight: 500;
+    font-size: 14px;
+    background-size: 19px 19px !important;
+    color: #727272 !important;
+}
+
+.profileRightPart .form-select:focus {
+    background-color: #FFFFFF;
+    outline: none !important;
+    border: none !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+}
+
+/* form control for email css */
+.emailSet {
+    position: relative;
+}
+
+.emailSet .form-control {
+    padding-left: 63px;
+}
+
+.emailSet svg {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    height: 40px;
+    color: white;
+    width: 50px;
+    margin-bottom: -11px;
+    padding: 9px;
+}
+
+/* profile image css */
+.profileImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileImageSet {
+    width: 100%;
+    max-width: 120px;
+    border-radius: 100%;
+    border: 1px solid #e7e4e4;
+}
+
+.profileImageSet img {
+    width: 100%;
+    max-width: 120px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 1px solid #e7e4e4;
+}
+
+.profileIcon svg {
+    font-size: 33px;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.profileIcon .addCls {
+    font-size: 14.52px;
+    text-align: center;
+    color: #40475F;
+}
+
+/* change password css */
+.hidePassword {
+    border: none;
+    height: 40px;
+    background: #FFFFFF;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+    border-radius: 7.26px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+}
+
+.changePassword .changeIcon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.changePassword .changeIcon h6 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 0px;
+    margin-left: 4px;
+}
+
+.changePassword .changeIcon svg {
+    color: #000000;
+    font-size: 30px;
+}
+
+/* button css */
+.buttonAdd {
+    border: none;
+    color: #ffffff;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 500;
+    height: 40px;
+    background: #000000;
+    border-radius: 10px;
+}
+
+.buttonAdd:hover {
+    background: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* delete account css */
+.deleteIcon {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.deleteIcon h6 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 0px;
+    margin-left: 4px;
+}
+
+.deleteIcon svg {
+    color: #000000;
+    font-size: 23px;
+}
+
+
+/* phone input css */
+.phoneInputSet {
+    position: relative;
+}
+
+.phoneInputSet svg {
+    position: absolute;
+    bottom: 10px;
+    left: 4px;
+    font-size: 20px;
+    z-index: 999;
+    color: #FFFFFF;
+}
+
+.phoneInputSet p {
+    position: absolute;
+    bottom: -5px;
+    left: 29px;
+    font-size: 12px;
+    z-index: 999;
+    color: #FFFFFF;
+}
+
+.phoneInputSet .downArrow {
+    position: absolute;
+    bottom: 6px;
+    left: 82px;
+    font-size: 28px;
+    z-index: 999;
+    color: #FFFFFF;
+}
+
+.phoneInputSet .form-control {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px;
+    margin-left: 0;
+    background: #FFFFFF;
+    border: none !important;
+    border-radius: 5px;
+    line-height: 25px;
+    height: 40px !important;
+    width: 100% !important;
+    outline: none;
+    /* padding-left: 48px !important; */
+    padding-left: 120px !important;
+}
+
+.phoneInputSet .react-tel-input .flag-dropdown {
+    border: none !important;
+    border-radius: 3px 0 0 3px;
+    background: #000000 !important;
+    width: 110px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
+.phoneInputSet .react-tel-input .selected-flag .flag {
+    display: none !important;
+    z-index: 0;
+}
+
+
+.phoneInputSet .react-tel-input .selected-flag:hover,
+.phoneInputSet .react-tel-input .selected-flag:focus {
+    background: #000000 !important;
+}
+
+.phoneInputSet .react-tel-input .selected-flag {
+    outline: none;
+    position: relative;
+    width: 110px !important;
+    height: 100%;
+    padding: 0 0 0 8px;
+    border-radius: 3px 0 0 3px;
+    background: #000000 !important;
+}
+
+.phoneInputSet .react-tel-input .selected-flag {
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
+.phoneInputSet:before {
+    content: "";
+    border-top: 6px solid;
+    border-right: 6px solid transparent;
+    border-bottom: 0;
+    border-left: 6px solid transparent;
+    position: absolute;
+    left: 89px;
+    top: 18px;
+    z-index: 999;
+    color: #FFFFFF !important;
+}
+
+/* watsapp input css */
+.watsappInput {
+    margin-top: 16px;
+}
+
+.watsappInput .react-tel-input .selected-flag {
+    background: #29af29 !important;
+}
+
+.watsappInput .react-tel-input .selected-flag:hover,
+.watsappInput .react-tel-input .selected-flag:focus {
+    background: #29af29 !important;
+}
+
+
+.watsappInput .react-tel-input .selected-flag {
+    background: #29af29 !important;
+}

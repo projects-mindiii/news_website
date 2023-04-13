@@ -18,11 +18,11 @@ function HeaderFeatures() {
 
 
             {/* <div className="headerFeature" >
-                    <h5>{statictext.BOOKMARKS}</h5>
+                <h5>{t("BOOKMARKS")}</h5>
                 <span>|</span>
-                    <h5>{statictext.VIEW_PROFILE}</h5>
+                <h5>{t("VIEW_PROFILE")}</h5>
                 <span>|</span>
-                    <h5>{statictext.LOG_OUT}</h5>
+                <h5>{t("LOG_OUT")}</h5>
             </div> */}
         </>
     );
