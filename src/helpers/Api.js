@@ -113,7 +113,7 @@ class SublyApi {
     return res;
   }
 
-  /* POST  /Social Signup : {facebook}
+  /* POST  /social signup : {facebook}
     Social Signup
      Authorization required:none
      @param data {Object} { email }
@@ -152,6 +152,20 @@ class SublyApi {
 
     return res;
   }
+
+ /* GET  /verify google login: 
+      Returns user detail
+       Authorization required: none
+       @returns {object} {}
+       */
+       static async verifyGoogleLogin(data) {
+        // let header = { "access-token": ` ${authToken}` };
+        let res = await this.request(`/v2/verify-google-login?access_token=${data}`,
+        undefined, undefined
+        );
+    
+        return res;
+      }
 
 }
 
