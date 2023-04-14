@@ -13,7 +13,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
-import { useEffect } from "react";
+
 
 //--------Create a Login component----------
 function Login() {
@@ -25,17 +25,11 @@ function Login() {
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => getUserDetail(tokenResponse),
   });
-
     async function getUserDetail(value) {
       await SublyApi.verifyGoogleLogin(value.access_token).then((response)=>{
-        console.log(response)
-      if (response.status === STATUS_CODES.SUCCESS) {
-        Toast.fire({
-          icon: "success",
-          title: "Google Verification done successfully",
-        });
-        
-      } else if (response.status === 400) {
+      if (response.status_code === STATUS_CODES.SUCCESS) {
+        responseGoogle(response.data)
+      } else if (response.status_code === 400) {
         Toast.fire({
           icon: "error",
           title: response.data.message,
@@ -46,12 +40,49 @@ function Login() {
     }
 
     // Social Login with Google
-
+ const responseGoogle = async (response)=>{
+    let userData = response;
+    if (userData) {
+      let requestData = new FormData();
+      requestData.append("name", userData.name);
+      requestData.append("social_type", 1);
+      requestData.append("social_key", userData.sub);
+      requestData.append("email", userData.email);
+      requestData.append("profile_url", userData.picture);
+      await SublyApi.checkSocialLogin(requestData).then(
+        async (responsejson) => {
+          if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+            Toast.fire({
+              icon: "success",
+              title: responsejson.message,
+            });
+            navigate("/deals/latest-deals");
+          } else if (
+            responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND
+          ) {
+            await SublyApi.socialSignup(requestData).then((responsejson) => {
+              if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+                Toast.fire({
+                  icon: "success",
+                  title: responsejson.message,
+                });
+                navigate("/deals/latest-deals");
+              }
+            });
+          } else {
+            Toast.fire({
+              icon: "Error",
+              title: responsejson.message,
+            });
+          }
+        }
+      );
+    }
+ }
   
 
   // Social Login with facebook.
   const responseFacebook = async (response) => {
-    console.log("response");
     let userData = response;
     if (userData) {
       let requestData = new FormData();
@@ -67,7 +98,7 @@ function Login() {
               icon: "success",
               title: responsejson.message,
             });
-            navigate("/latest-deals");
+            navigate("/deals/latest-deals");
           } else if (
             responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND
           ) {
@@ -77,6 +108,7 @@ function Login() {
                   icon: "success",
                   title: responsejson.message,
                 });
+                navigate("/deals/latest-deals");
               }
             });
           } else {
