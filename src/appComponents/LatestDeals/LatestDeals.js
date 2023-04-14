@@ -4,7 +4,6 @@ import "./LatestDeals.css";
 import "../../assets/styles/Common.css";
 import DigitalPrint from "../DealSubModule/DealSubModules";
 import { useEffect, useLayoutEffect, useState } from "react";
-import SublyApi from "../../helpers/Api";
 import CompanyProfile from "../DealSubModule/CompanyProfile";
 import { useDispatch, useSelector } from "react-redux";
 

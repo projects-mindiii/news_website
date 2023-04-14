@@ -83,7 +83,7 @@ function CompanyProfile() {
             <div class="card-header" id="headingOne">
               <h2 class="mb-0">
                 <button
-                  class="btn-link btn-block text-left"
+                  class="btn-link btn-block text-left collapsed"
                   type="button"
                   data-toggle="collapse"
                   data-target="#collapseOne"
@@ -101,6 +101,7 @@ function CompanyProfile() {
                     icon="material-symbols:keyboard-arrow-down"
                     width="45"
                     height="45"
+                    className="showIcon"
                   />
                 </button>
               </h2>
