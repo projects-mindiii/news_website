@@ -14,6 +14,7 @@ import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
 
+
 //--------Create a Login component----------
 function Login() {
   const navigate = useNavigate();
@@ -22,12 +23,66 @@ function Login() {
 
   // Social Login with google
   const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
+    onSuccess: (tokenResponse) => getUserDetail(tokenResponse),
   });
+    async function getUserDetail(value) {
+      await SublyApi.verifyGoogleLogin(value.access_token).then((response)=>{
+      if (response.status_code === STATUS_CODES.SUCCESS) {
+        responseGoogle(response.data)
+      } else if (response.status_code === 400) {
+        Toast.fire({
+          icon: "error",
+          title: response.data.message,
+        });
+      }
+    })
+
+    }
+
+    // Social Login with Google
+ const responseGoogle = async (response)=>{
+    let userData = response;
+    if (userData) {
+      let requestData = new FormData();
+      requestData.append("name", userData.name);
+      requestData.append("social_type", 1);
+      requestData.append("social_key", userData.sub);
+      requestData.append("email", userData.email);
+      requestData.append("profile_url", userData.picture);
+      await SublyApi.checkSocialLogin(requestData).then(
+        async (responsejson) => {
+          if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+            Toast.fire({
+              icon: "success",
+              title: responsejson.message,
+            });
+            navigate("/deals/latest-deals");
+          } else if (
+            responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND
+          ) {
+            await SublyApi.socialSignup(requestData).then((responsejson) => {
+              if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+                Toast.fire({
+                  icon: "success",
+                  title: responsejson.message,
+                });
+                navigate("/deals/latest-deals");
+              }
+            });
+          } else {
+            Toast.fire({
+              icon: "Error",
+              title: responsejson.message,
+            });
+          }
+        }
+      );
+    }
+ }
+  
 
   // Social Login with facebook.
   const responseFacebook = async (response) => {
-    console.log("response");
     let userData = response;
     if (userData) {
       let requestData = new FormData();
@@ -43,10 +98,9 @@ function Login() {
               icon: "success",
               title: responsejson.message,
             });
-            navigate("/latest-deals");
+            navigate("/deals/latest-deals");
           } else if (
-            responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND &&
-            responsejson.data.message == STATUS_CODES.SOCIAL_USER_NOT_FOUND
+            responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND
           ) {
             await SublyApi.socialSignup(requestData).then((responsejson) => {
               if (responsejson.status_code === STATUS_CODES.SUCCESS) {
@@ -54,6 +108,7 @@ function Login() {
                   icon: "success",
                   title: responsejson.message,
                 });
+                navigate("/deals/latest-deals");
               }
             });
           } else {
@@ -83,8 +138,7 @@ function Login() {
             <h3>{t("LOGIN_EMAIL")}</h3>
           </div>
 
-          <div className="loginComponents"
-           onClick={() => login()}>
+          <div className="loginComponents" onClick={() => login()}>
             <img src={Google} alt="google-logo" />
             <h3>{t("LOGIN_GOOGLE")}</h3>
           </div>
@@ -92,11 +146,12 @@ function Login() {
           <div className="loginComponents">
             <img src={Facebook} alt="facebook-logo" />
             <FacebookLogin
-              appId="668522841263824"
+              appId={process.env.REACT_APP_FACEBOOK_APP_ID}
               autoLoad={false}
               fields="name,email,picture"
               callback={responseFacebook}
               cssClass="my-facebook-button-class"
+              textButton={<h3>{t("LOGIN_FACEBOOK")}</h3>}
               onFailure={(value) => console.log(value)}
             />
 

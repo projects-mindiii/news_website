@@ -45,7 +45,7 @@ class SublyApi {
      @returns {object} {token}
      */
   static async guestUserLogin() {
-    let res = await this.request(`/guest-user-login`, undefined, "get");
+    let res = await this.request(`/v1/guest-user-login`, undefined, "get");
     return res;
   }
 
@@ -57,7 +57,7 @@ class SublyApi {
      @returns {object} {token}
      */
   static async requestOtp(data) {
-    let res = await this.request(`/request-otp`, data, "post");
+    let res = await this.request(`/v1/request-otp`, data, "post");
     return res;
   }
 
@@ -68,7 +68,7 @@ class SublyApi {
      @returns {object} {token}
      */
   static async loginProcess(data) {
-    let res = await this.request(`/login`, data, "post");
+    let res = await this.request(`/v1/login`, data, "post");
     return res;
   }
 
@@ -79,7 +79,7 @@ class SublyApi {
      @returns {object} {token}
      */
   static async varifyOtp(data) {
-    let res = await this.request(`/verify-otp`, data, "post");
+    let res = await this.request(`/v1/verify-otp`, data, "post");
 
     return res;
   }
@@ -93,7 +93,7 @@ class SublyApi {
      @returns {object} {token}
      */
   static async forgotPassword(data) {
-    let res = await this.request(`/forgote`, data, "post");
+    let res = await this.request(`/v1/forgote`, data, "post");
 
     return res;
   }
@@ -109,31 +109,29 @@ class SublyApi {
      @returns {object} {token}
      */
   static async checkSocialLogin(data) {
-    let res = await this.request(`/is-account-exist`, data, "post");
+    let res = await this.request(`/v1/is-account-exist`, data, "post");
     return res;
   }
 
-  /* POST  /Social Signup : {facebook}
+  /* POST  /social signup : {facebook}
     Social Signup
      Authorization required:none
      @param data {Object} { email }
      @returns {object} {token}
      */
   static async socialSignup(data) {
-    let res = await this.request(`/social-signup`, data, "post");
+    let res = await this.request(`/v1/social-signup`, data, "post");
   }
 
   /* GET  /deal list api : { email }
    deal list api
-     
      Authorization required:none
-     
      @param data {Object} { email }
      @returns {object} {token}
      */
   static async getDealList(authToken) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/deal-list`, undefined, "get", header);
+    let res = await this.request(`/v1/deal-list`, undefined, "get", header);
 
     return res;
   }
@@ -152,6 +150,19 @@ class SublyApi {
 
     return res;
   }
+
+ /* GET  /verify google login: 
+      Returns user detail
+       Authorization required: none
+       @returns {object} {}
+       */
+       static async verifyGoogleLogin(data) {
+        let res = await this.request(`/v2/verify-google-login?access_token=${data}`,
+        undefined, undefined
+        );
+    
+        return res;
+      }
 
 }
 
