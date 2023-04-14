@@ -127,7 +127,7 @@ function SignupForm() {
             <div className="accountType">
               <p>
                 {t("EXISTING_ACCOUNT")}
-                <span onClick={() => navigate("/Login")}>{t("LOGIN_IN")}</span>
+                <span onClick={() => navigate("/login")}>{t("LOGIN_IN")}</span>
               </p>
             </div>
           </Form>
