@@ -14,9 +14,9 @@
     max-width: 430px;
 }
 
-.navItem {
+ .navItem {
     display: flex;
-}
+} 
 
 .headerSection .navbar {
     display: unset !important;
@@ -30,7 +30,7 @@
     background: #FFFFFF !important;
     margin-right: 12px;
     margin-top: 15px;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 16px;
     letter-spacing: -0.2px;
     color: #000000;

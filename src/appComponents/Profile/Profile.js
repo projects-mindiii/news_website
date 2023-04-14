@@ -1,4 +1,4 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Toast } from "react-bootstrap";
 import "./Profile.css";
 import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
@@ -15,6 +15,8 @@ import 'react-phone-input-2/lib/style.css';
 import { MdPhonelinkRing } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import SublyApi from "../../helpers/Api";
+import { useSelector } from "react-redux";
+import { userLogout } from "../../store/slices/UserSlice";
 
 
 //--------Create a Profile component----------
@@ -33,8 +35,7 @@ function Profile() {
     const [show, setShow] = useState(false);
     const [userDetails, setUserDetails] = useState("");
 
-    const token = localStorage.getItem("token");
-
+    const  {userToken}  = useSelector((state) => state.user);
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -55,8 +56,10 @@ function Profile() {
     //-------function for profile Api-------
     useEffect(() => {
         async function getUserDetails() {
-            const details = await SublyApi.userProfile(token); //profile api call
+            const details = await SublyApi.userProfile(userToken); //profile api call
             setUserDetails(details.data);
+
+            console.log("data", details);
 
         }
         getUserDetails();
@@ -200,7 +203,7 @@ function Profile() {
 
                                     <Form.Group className="mb-3">
                                         <Form.Select>
-                                            <option >Select Province</option>
+                                            <option>Select Province</option>
                                         </Form.Select>
                                     </Form.Group>
 
