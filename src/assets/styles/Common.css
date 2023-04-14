@@ -25,6 +25,14 @@
     right: 5px;
 }
 
-.collapsed .hideIcon {
+.collapsed .showIcon {
     display: none;
+}
+
+.hideIcon {
+    display: none;
+}
+
+.collapsed .hideIcon {
+    display: block;
 }
