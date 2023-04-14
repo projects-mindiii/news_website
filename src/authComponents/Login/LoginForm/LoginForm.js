@@ -56,6 +56,7 @@ function LoginForm() {
                     title: response.message,
                 });
                 navigate("/");
+                localStorage.setItem("token", responsejson.data.token)
             } else {
                 setShowError(response.data.message)
             }

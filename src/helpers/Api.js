@@ -37,6 +37,18 @@ class SublyApi {
    * USERS AUTH API ROUTES
    *******************************************************/
 
+  /* ------guest login API -----*/
+  /* GET  /request otp: { fullname ,email,password, confirm password}
+     request otp
+     Authorization required:none
+     @param data {Object} {fullname ,email,password, confirm password}
+     @returns {object} {token}
+     */
+  static async guestUserLogin() {
+    let res = await this.request(`/guest-user-login`, undefined, "get");
+    return res;
+  }
+
   /* ------SIGNUP API -----*/
   /* POST  /request otp: { fullname ,email,password, confirm password}
      request otp
@@ -88,6 +100,8 @@ class SublyApi {
 
   /* POST  /check social login : {facebook}
     check social login
+  /* GET  /deal list api : { email }
+   deal list api
      
      Authorization required:none
      
@@ -107,11 +121,25 @@ class SublyApi {
      */
   static async socialSignup(data) {
     let res = await this.request(`/social-signup`, data, "post");
+  }
+
+  /* GET  /deal list api : { email }
+   deal list api
+     
+     Authorization required:none
+     
+     @param data {Object} { email }
+     @returns {object} {token}
+     */
+  static async getDealList(authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/deal-list`, undefined, "get", header);
+
     return res;
   }
 }
 
-SublyApi.token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJEZXZpY2VJRCI6Ijc3N2ZnaCIsInVzZXJUeXBlIjoiMSIsImlhdCI6MTY0ODYyNDMzMCwiZXhwIjoxNjUxMjE2MzMwfQ.5ATTyFrpkG6_kGOJ9QnMQGBbB5sKz7KwfaPKOflhkgE";
+// SublyApi.token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJEZXZpY2VJRCI6Ijc3N2ZnaCIsInVzZXJUeXBlIjoiMSIsImlhdCI6MTY0ODYyNDMzMCwiZXhwIjoxNjUxMjE2MzMwfQ.5ATTyFrpkG6_kGOJ9QnMQGBbB5sKz7KwfaPKOflhkgE";
 
 export default SublyApi;

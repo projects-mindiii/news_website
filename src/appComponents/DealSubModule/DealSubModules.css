@@ -1,0 +1,117 @@
+.companyDetails h3{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+
+.companyDetails h5{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20.8px;
+    line-height: 29px;
+    margin-bottom: 0px;
+    margin-top: 25px;
+}
+
+.companyDetails li{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.8px;
+    line-height: 29px;
+    list-style: none;
+}
+
+.companyDetails li::before{
+    content:"";
+    margin-right: 0.5rem;
+    width: 13px;
+    height: 13px;
+    border: 4px solid #fa6400;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    vertical-align: middle;
+}
+
+.brandType {
+    display: flex;
+    align-items: center;
+}
+
+.brandType p {
+    background: #828282 !important;
+    border-radius: 23.52px;
+    color: #FFFFFF;
+    padding: 5px 15px;
+    margin-right: 9px;
+    margin-top: 15px;
+    text-decoration: none;
+    max-width: 200px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18.2px;
+    line-height: 27px;
+    text-align: center;
+}
+
+.playBox {
+    text-align: center;
+    background: red;
+    width: 100%;
+    height: 276.43px;   
+    margin: 25px 0px;
+}
+
+.playBox img {
+    width: 100px;
+    margin-top: 88px;
+}
+
+.mapAccordion {
+    margin-top: 21px;
+}
+
+.mapAccordion .card {
+    border: none;
+}
+
+
+.btn-link:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+.btn-link:focus {
+    color: #000000;
+    text-decoration: none;
+}
+
+.mapAccordion h2 button {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 29px;
+    color: #000000;
+    border: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mapAccordion .card-body {
+    padding: 0px;
+}
+
+.mapAccordion .card-body .mapBox {
+    margin-top: 0px !important;
+}
+
+.accordion>.card>.card-header {
+    background-color: #F1F1F1 !important;
+}

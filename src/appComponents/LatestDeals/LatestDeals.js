@@ -1,57 +1,59 @@
-import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
+import { Col, Container, Nav, Row, Tab, Toast } from "react-bootstrap";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import "./LatestDeals.css";
 import "../../assets/styles/Common.css";
-import Deals from "../../assets/images/Bitmap.png";
+import DigitalPrint from "../DealSubModule/DealSubModules";
+import { useEffect, useLayoutEffect, useState } from "react";
+import SublyApi from "../../helpers/Api";
+import CompanyProfile from "../DealSubModule/CompanyProfile";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function LatestDeals() {
-    return (
-        <div className="addTabs">
-            <Container>
-                <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
-                    <Row>
-                        <Col sm={6}>
-                            <Nav variant="pills" className="flex-column">
-                                <Nav.Item>
-                                    <Nav.Link eventKey="first">Digital Print Media(8)
-                                        <MdKeyboardArrowRight />
-                                    </Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="second">Display Hardware(8)
-                                        <MdKeyboardArrowRight />
-                                    </Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="third">Large Format Printer(8)
-                                        <MdKeyboardArrowRight />
-                                    </Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                        </Col>
-                        <Col sm={6}>
-                            <Tab.Content>
-                                <Tab.Pane eventKey="first">
-                                    <div className="latestDeals">
-                                        <img src={Deals} alt="deals" />
-                                    </div>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    <div className="latestDeals">
-                                        <img src={Deals} alt="deals" />
-                                    </div>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="third">
-                                    <div className="latestDeals">
-                                        <img src={Deals} alt="deals" />
-                                    </div>
-                                </Tab.Pane>
-                            </Tab.Content>
-                        </Col>
-                    </Row>
-                </Tab.Container>
-            </Container>
-        </div>
-    );
+  const [eventKeyValue, setEventKeyValue] = useState(null);
+  const { latestDeals, isLoading } = useSelector((state) => state.deal);
+
+  return (
+    <div className="dealContainer">
+      <Container>
+        <Tab.Container id="left-tabs-example" defaultActiveKey={eventKeyValue}>
+          <Row>
+            <Col lg={6} sm={12}>
+              <Nav
+                variant="pills"
+                className="flex-column addTabs stickyClass"
+                // defaultActiveKey={eventKeyValue}
+                onSelect={(value) => {
+                  setEventKeyValue(value);
+                }}
+              >
+                <Nav.Item>
+                  {latestDeals.length > 0
+                    ? latestDeals.map((item, index) => (
+                        <Nav.Link eventKey={item.id}>
+                          {item.name} ({item.deal_count})
+                          <MdKeyboardArrowRight />
+                        </Nav.Link>
+                      ))
+                    : ""}
+                </Nav.Item>
+              </Nav>
+            </Col>
+            <Col lg={6} sm={12}>
+              <Tab.Content>
+                <Tab.Pane eventKey={eventKeyValue ? eventKeyValue : ""}>
+                  <DigitalPrint
+                    eventKeyValue={eventKeyValue}
+                    dealList={latestDeals}
+                  />
+                  {/* <CompanyProfile/> */}
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
+      </Container>
+    </div>
+  );
 }
 export default LatestDeals;
