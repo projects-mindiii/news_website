@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Footer from "../appComponents/Footer/Footer";
 import Header from "../appComponents/Header/Header";
 import ForgotPassword from "../authComponents/ForgotPassword/ForgotPassword";
@@ -19,15 +19,15 @@ function Routers() {
         <Router basename={"/"}>
             <Header />
             <Routes>
-                <Route exact path="/" element={<LatestDeals />} />
+                <Route exact path="/" element={<Navigate to="/deals/latest-deals" />} />
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/login-form" element={<LoginForm />} />
                 <Route exact path="/sign-up" element={<SignupForm />} />
                 <Route exact path="/forgot-password" element={<ForgotPassword />} />
                 <Route exact path="/password-sent" element={<PasswordSent />} />
                 <Route exact path="/email-varify" element={<EmailVarify />} />
-                <Route exact path="/latest-deals" element={<LatestDeals />} />
-                <Route exact path="/products" element={<Profile />} />
+                <Route exact path="/deals/latest-deals" element={<LatestDeals />} />
+                <Route exact path="/deals/products" element={<Profile />} />
                 
             </Routes>
             <Footer />

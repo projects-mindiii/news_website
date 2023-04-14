@@ -79,32 +79,43 @@ function CompanyProfile() {
           <MapLocation />
         </div>
         <div class="accordion mapAccordion" id="accordionExample">
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <h2 class="mb-0">
-              <button
-                class="btn btn-link btn-block text-left"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                BEDFORDVIEW BRANCH
-              </button>
-            </h2>
-          </div>
-
-          <div
-            id="collapseOne"
-            class="collapse show"
-            aria-labelledby="headingOne"
-            data-parent="#accordionExample"
-          >
-            <div class="card-body">
-            <MapLocation />
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button
+                  class="btn-link btn-block text-left"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  BEDFORDVIEW BRANCH
+                  <Icon
+                    icon="material-symbols:keyboard-arrow-up"
+                    width="45"
+                    height="45"
+                    className="hideIcon"
+                  />
+                  <Icon
+                    icon="material-symbols:keyboard-arrow-down"
+                    width="45"
+                    height="45"
+                  />
+                </button>
+              </h2>
             </div>
-          </div>
+
+            <div
+              id="collapseOne"
+              class="collapse"
+              aria-labelledby="headingOne"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body">
+                <MapLocation />
+              </div>
+            </div>
           </div>
         </div>
       </div>

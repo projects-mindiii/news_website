@@ -4,12 +4,21 @@ import "./DealsHeader.css";
 import dealsData from "./DealsData";
 import { useEffect, useState } from "react";
 import SublyApi from "../../helpers/Api";
+import { useDispatch, useSelector } from "react-redux";
+import { getDealList } from "../../store/slices/DealSlice";
+
 
 //-------Create a Deals Header component--------
 function DealsHeader() {
-    const [navBar, setNavBar] = useState(null)
-    console.log("navBar", navBar)
+  const dispatch = useDispatch();
+  const [navBar, setNavBar] = useState(null);
+  const token = localStorage.getItem("token");
+
   //set language
+
+  useEffect(() => {
+    dispatch(getDealList(token));
+  }, []);
 
   // ======Calling Api for guest user login======
   useEffect(() => {
@@ -31,10 +40,16 @@ function DealsHeader() {
   return (
     <div className="navHeader">
       <Navbar bg="light" variant="light">
-        <Nav className="me-auto" as="ul" >
+        <Nav className="me-auto" as="ul">
           {dealsData.map((item, index) => (
             <Nav.Item as="li" key={index}>
-              <NavLink className="nav" to={item.link} onClick={()=>{setNavBar(item.id)}}>
+              <NavLink
+                className="nav"
+                to={item.link}
+                onClick={() => {
+                  setNavBar(item.id);
+                }}
+              >
                 <img src={item.icon} alt="icon" className="icon" />
                 {item.text}
               </NavLink>

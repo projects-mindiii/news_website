@@ -24,3 +24,7 @@
     position: absolute;
     right: 5px;
 }
+
+.collapsed .hideIcon {
+    display: none;
+}

@@ -38,10 +38,10 @@ function Header() {
             <div className="navItem">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto" as="ul">
+                <Nav className="" as="ul">
                   {HeaderData.map((item, index) => (
                     <Nav.Item as="li" key={index}>
-                      <NavLink className="nav-link" to={item.link}>
+                      <NavLink className={`nav-link`} to={item.link}>
                         {item.text}
                       </NavLink>
                     </Nav.Item>

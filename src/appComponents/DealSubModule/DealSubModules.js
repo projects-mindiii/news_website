@@ -18,7 +18,6 @@ function DigitalPrint(props) {
         (value, index) => value.id == props.eventKeyValue
       );
       getFilterData.length > 0 && setFilteredList(getFilterData[0].dealList);
-      console.log("getFilterData", getFilterData);
     }
     filterDeal();
   }, [props]);

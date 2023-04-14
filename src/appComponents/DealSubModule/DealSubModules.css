@@ -87,6 +87,11 @@
     text-decoration: none;
 }
 
+.btn-link:focus {
+    color: #000000;
+    text-decoration: none;
+}
+
 .mapAccordion h2 button {
     font-weight: 600;
     font-size: 20px;
@@ -94,6 +99,9 @@
     color: #000000;
     border: none;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .mapAccordion .card-body {

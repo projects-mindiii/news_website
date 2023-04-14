@@ -10,13 +10,13 @@ export const dealsData = [
     {
         id: "1",
         text: `${t("LALEST_DEALS")}`,
-        link: `/latest-deals`,
+        link: `/deals/latest-deals`,
         icon: `${Icon1}`,
     },
     {
         id: "2",
         text: `${t("PRODUCTS")}`,
-        link: `/products`,
+        link: `/deals/products`,
         // link: `javascript:;`,
         icon: `${Icon2}`,
     },
