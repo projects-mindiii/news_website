@@ -10,11 +10,14 @@ import PasswordSent from "../authComponents/PasswordSent/PasswordSent";
 import SignupForm from "../authComponents/SignupForm/SignupForm";
 import LatestDeals from "../appComponents/LatestDeals/LatestDeals";
 import Profile from "../appComponents/Profile/Profile";
+import { useSelector } from "react-redux";
 
 
 
 //-------Create a component for manage routing--------
 function Routers() {
+    const { currentUser } = useSelector((state) => state.user);
+
     return (
         <Router basename={"/"}>
             <Header />
@@ -27,7 +30,8 @@ function Routers() {
                 <Route exact path="/password-sent" element={<PasswordSent />} />
                 <Route exact path="/email-varify" element={<EmailVarify />} />
                 <Route exact path="/deals/latest-deals" element={<LatestDeals />} />
-                <Route exact path="/deals/products" element={<Profile />} />
+                {/* <Route exact path="/deals/products" element={<Profile />} /> */}
+                <Route exact path="/view-profile" element={Object.keys(currentUser).length!==0?(<Profile />):(<Navigate to="/login" />)} />
                 
             </Routes>
             <Footer />

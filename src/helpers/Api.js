@@ -137,6 +137,22 @@ class SublyApi {
 
     return res;
   }
+
+  /* GET  /Get user details: 
+      Returns user detail
+  
+       Authorization required: Token
+       @returns {object} {token}
+       */
+  static async userProfile(authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/user-detail`,
+      undefined, undefined, header
+    );
+
+    return res;
+  }
+
 }
 
 // SublyApi.token =
