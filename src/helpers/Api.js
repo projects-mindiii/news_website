@@ -121,6 +121,7 @@ class SublyApi {
      */
   static async socialSignup(data) {
     let res = await this.request(`/v1/social-signup`, data, "post");
+    return res;
   }
 
   /* GET  /deal list api : { email }
