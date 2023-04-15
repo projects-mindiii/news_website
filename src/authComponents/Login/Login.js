@@ -13,11 +13,14 @@ import { useGoogleLogin } from "@react-oauth/google";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
+import { isSocialLogin,socialSignup } from "../../store/slices/UserSlice";
+import { useDispatch } from 'react-redux';
 
 
 //--------Create a Login component----------
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   //set language
   const { t } = useTranslation();
 
@@ -49,25 +52,43 @@ function Login() {
       requestData.append("social_key", userData.sub);
       requestData.append("email", userData.email);
       requestData.append("profile_url", userData.picture);
-      await SublyApi.checkSocialLogin(requestData).then(
+      await dispatch(isSocialLogin(requestData)).then(
         async (responsejson) => {
-          if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-            Toast.fire({
-              icon: "success",
-              title: responsejson.message,
-            });
-            navigate("/deals/latest-deals");
+          const response = responsejson.payload;
+          if (response.status_code === STATUS_CODES.SUCCESS) {
+                if (response.status_code === STATUS_CODES.SUCCESS) {
+                    Toast.fire({
+                        icon: "success",
+                        title: response.message,
+                    });
+                    navigate("/deals/latest-deals");
+                    localStorage.setItem("token", response.data.token)
+                } else {
+                  Toast.fire({
+                    icon: "error",
+                    title: response.data.message,
+                  });
+                }
           } else if (
-            responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND
+            response.data.status_code == STATUS_CODES.PAGE_NOT_FOUND
           ) {
-            await SublyApi.socialSignup(requestData).then((responsejson) => {
-              if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-                Toast.fire({
-                  icon: "success",
-                  title: responsejson.message,
-                });
-                navigate("/deals/latest-deals");
-              }
+            await dispatch(socialSignup(requestData)).then((signresponsejson) => {
+                console.log('api socialSignup responsejson',signresponsejson)
+                const response = signresponsejson.payload;
+                if (response.status_code === STATUS_CODES.SUCCESS) {
+                    Toast.fire({
+                        icon: "success",
+                        title: response.message,
+                    });
+                    navigate("/deals/latest-deals");
+                    localStorage.setItem("token", signresponsejson.data.token)
+                } else {
+
+                    Toast.fire({
+                      icon: "error",
+                      title: response.data.message,
+                    });
+                }
             });
           } else {
             Toast.fire({
