@@ -145,7 +145,7 @@ class SublyApi {
        */
   static async userProfile(authToken) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/user-detail`,
+    let res = await this.request(`/v1/user-detail`,
       undefined, undefined, header
     );
 
