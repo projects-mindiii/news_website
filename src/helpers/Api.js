@@ -165,6 +165,16 @@ class SublyApi {
         return res;
       }
 
+      static async getClassiFiedMeta(token) {
+        let header = { "access-token": ` ${token}` };
+    
+        let res = await this.request(`/get-meta-list`,
+          "", "get",header
+    );
+    
+        return res;
+      }
+
 }
 
 // SublyApi.token =
