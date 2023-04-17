@@ -165,15 +165,31 @@ class SublyApi {
     return res;
   }
 
-      static async getClassiFiedMeta(token) {
-        let header = { "access-token": ` ${token}` };
-    
-        let res = await this.request(`/get-meta-list`,
-          "", "get",header
+  static async getClassiFiedMeta(token) {
+    let header = { "access-token": ` ${token}` };
+
+    let res = await this.request(`/get-meta-list`,
+      "", "get", header
     );
-    
-        return res;
-      }
+
+    return res;
+  }
+
+
+
+  /* POST  /Update User Profile: 
+      Update profile
+  
+       Authorization required: Token
+       @returns {object} {token}
+       */
+  static async updateProfile(data, authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v1/update-profile`,
+      data, "post", header
+    );
+    return res;
+  }
 
 }
 

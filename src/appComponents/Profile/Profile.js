@@ -17,6 +17,9 @@ import { BsWhatsapp } from "react-icons/bs";
 import SublyApi from "../../helpers/Api";
 import { useSelector } from "react-redux";
 import { userLogout } from "../../store/slices/UserSlice";
+import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
+import CustomBtn from "../../formComponent/Button/Button";
+import Select from "react-select";
 
 
 //--------Create a Profile component----------
@@ -31,11 +34,22 @@ function Profile() {
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
+    //----- set state for show alert box for error response------
+    const [showError, setShowError] = useState(null);
     //----- state for manage show/hide change password inputs fields-----
     const [show, setShow] = useState(false);
     const [userDetails, setUserDetails] = useState("");
-
     const { userToken } = useSelector((state) => state.user);
+
+    const locationOption = [
+        { value: "204", label: "South Africa", id: "204" },
+        { value: "0", label: "Outside South Africa", id: "0" },
+    ];
+
+    const countryOption = [
+        { value: "country", label: "Set Country", id: "0" },
+
+    ];
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -50,6 +64,7 @@ function Profile() {
         register,
         handleSubmit,
         setValue,
+        watch,
         formState: { errors },
     } = useForm();
 
@@ -70,16 +85,43 @@ function Profile() {
             setCountryCodeWatsapp(details.data[0].whatsapp_country_code);
             setDialCodeWatsapp(details.data[0].whatsapp_dail_code);
             setProfilePreview(details.data[0].img_url);
-            console.log("data", details);
 
+
+
+            console.log("data", details);
         }
         getUserDetails();
     }, []);
 
+    function locationHandler() {
 
-    //-----------function for update profile details-----------
-    const onSubmit = () => {
+    }
 
+    //-----------function for update profile api-----------
+    const onSubmit = async (formdata) => {
+        // let requestData = new FormData();
+        // requestData.append("name", formdata.fullName);
+        // requestData.append("email", formdata.email);
+        // requestData.append("company_name", formdata.companyName);
+        // requestData.append("occupation", formdata.occupation);
+        // requestData.append("city", formdata.city);
+        // requestData.append("dial_code", dialCode);
+        // requestData.append("country_code", countryCode);
+        // requestData.append("contact", phoneNo);
+        // requestData.append("whatsapp_dail_code", dialCodeWatsapp);
+        // requestData.append("whatsapp_country_code", countryCodeWatsapp);
+        // requestData.append("whatapp_contact_number", watsappNo);
+
+        // await SublyApi.updateProfile(requestData).then((responsejson) => {
+        //     if (responsejson.status_code === 200) {
+        //         Toast.fire({
+        //             icon: "success",
+        //             title: responsejson.message,
+        //         });
+        //     } else {
+        //         setShowError(responsejson.data.message);
+        //     }
+        // });
     };
 
     return (
@@ -96,6 +138,11 @@ function Profile() {
                             </div>
                         </Col>
                         <Col sm={6}>
+                            {showError ? (
+                                <ErrorResponse message={showError} setShowError={setShowError} />
+                            ) : (
+                                ""
+                            )}
                             <div className="profileRightPart">
                                 <h4>{t("YOUR_PROFILE")}</h4>
                                 <Form onSubmit={handleSubmit(onSubmit)}>
@@ -124,7 +171,7 @@ function Profile() {
                                             type="text"
                                             placeholder={t("COMPANY_NAME")}
                                             {...register("companyName"
-                                               
+
                                             )}
                                         />
                                     </Form.Group>
@@ -134,7 +181,7 @@ function Profile() {
                                             type="text"
                                             placeholder={t("POSITION")}
                                             {...register("occupation"
-                                               
+
                                             )}
                                         />
                                     </Form.Group>
@@ -212,24 +259,81 @@ function Profile() {
 
                                     <h3>{t("LOCATION")}</h3>
                                     <p>{t("LOCATION_PARA")}</p>
-                                    <Form.Group className="mb-3">
-                                        <Form.Select id="disabledSelect" className="customSelect">
-                                            <option className="customOption">South Africa</option>
-                                        </Form.Select>
-                                    </Form.Group>
+                                    <div className="selectOption">
+                                        <Form.Group className="mb-3">
+                                            <Select
+                                                id="status"
+                                                options={locationOption ? locationOption : {}}
+                                                onChange={(value) => locationHandler(value)}
+                                                placeholder="South Africa"
+                                                // maxMenuHeight={220}
+                                                // menuPlacement="auto"
+                                                defaultValue={locationOption[0]}
+                                                styles={{
+                                                    placeholder: () => ({
+                                                        fontSize: "15px",
+                                                        color: "#cacaca",
+                                                        position: "absolute",
+                                                        top: "8px",
+                                                        left: "15px",
+                                                    }),
+                                                }}
+                                                theme={(theme) => ({
+                                                    ...theme,
+                                                    colors: {
+                                                        ...theme.colors,
+                                                        borderRadius: 0,
+                                                        primary25: "#f2f2f2",
+                                                        primary: "#000000;",
+                                                        primary50: "#f2f2f2",
+                                                    },
+                                                })}
+                                            />
+                                        </Form.Group>
+                                    </div>
 
-                                    <Form.Group className="mb-3">
-                                        <Form.Select>
-                                            <option>Select Province</option>
-                                        </Form.Select>
-                                    </Form.Group>
+                                    <div className="selectOption">
+
+                                        <Form.Group className="mb-3" >
+                                            < Select
+                                                id="status"
+                                                options={countryOption ? countryOption : {}}
+                                                // onChange={(value) => countryHandler(value)}
+                                                placeholder="South Africa"
+                                                maxMenuHeight={220}
+                                                menuPlacement="auto"
+                                                defaultValue={countryOption[0]}
+                                                styles={{
+                                                    placeholder: () => ({
+                                                        fontSize: "15px",
+                                                        color: "#cacaca",
+                                                        position: "absolute",
+                                                        top: "8px",
+                                                        left: "15px",
+                                                    }),
+                                                }}
+                                                theme={(theme) => ({
+                                                    ...theme,
+                                                    colors: {
+                                                        ...theme.colors,
+                                                        borderRadius: 0,
+                                                        primary25: "#f2f2f2",
+                                                        primary: "#000000;",
+                                                        primary50: "#f2f2f2",
+                                                    },
+                                                })}
+                                            />
+
+                                        </Form.Group>
+                                    </div>
+
 
                                     <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
                                             placeholder="Input City/Town"
                                             {...register("city"
-                                               
+
                                             )}
                                         />
                                     </Form.Group>
@@ -285,18 +389,45 @@ function Profile() {
                                                     <Form.Control
                                                         type="password"
                                                         placeholder="Set New Password"
+                                                        {...register("password", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Password`,
+                                                            },
+                                                            pattern: {
+                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                message: `${t("INVALID_PASSWORD")}`,
+                                                            },
+                                                        })}
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3">
                                                     <Form.Control
                                                         type="password"
                                                         placeholder="Repeat Password"
+                                                        {...register("repeatPassword", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Repeat Password`,
+                                                            },
+
+                                                            validate: (value) =>
+                                                                value === watch("password") || "Passwords have to match",
+                                                        })}
                                                     />
                                                 </Form.Group>
+                                                <div className="errorSet">
+                                                    <span className="errorShow">
+                                                        {errors[Object.keys(errors)[0]] &&
+                                                            errors[Object.keys(errors)[0]].message}{" "}
+                                                    </span>
+                                                </div>
                                             </div>
                                         ) : ""}
                                     </div>
-                                    <Button className="buttonAdd" type="submit">{t("SAVE")}</Button>
+                                    <div className="buttonAdd">
+                                        <CustomBtn>{t("SAVE")}</CustomBtn>
+                                    </div>
                                 </Form>
 
                                 <div className="deleteIcon">

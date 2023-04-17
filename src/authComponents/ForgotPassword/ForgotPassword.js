@@ -73,9 +73,6 @@ function ForgotPassword() {
                                     errors[Object.keys(errors)[0]].message}{" "}
                             </span>
 
-                            {/* <Button className="btn" type="submit">
-                                {t("RESET_PASS")}
-                            </Button> */}
                             <CustomBtn>{t("RESET_PASS")}</CustomBtn>
 
                         </Form>
