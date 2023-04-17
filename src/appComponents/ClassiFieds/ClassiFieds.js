@@ -14,10 +14,14 @@ import SublyApi from "../../helpers/Api";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
+import { useSelector } from "react-redux";
 //-------Create a Deals Header component--------
 function ClassiFieds() {
-    const token = localStorage.getItem("tokens");
-   
+    const { userToken, currentUser, isLoading } = useSelector((state) => state.user);   
+    useEffect(() => {
+        SublyApi.getClassiFiedMeta(userToken).then((responsejson) => {
+        });
+    }, []);
     //set language
     const imagearray = [{ image: newsadd1 }, { image: newsadd2 }, { image: newsadd1 }, { image: newsadd2 }]
     return (
