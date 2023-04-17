@@ -12,30 +12,31 @@ import { getDealList } from "../../store/slices/DealSlice";
 function DealsHeader() {
   const dispatch = useDispatch();
   const [navBar, setNavBar] = useState(null);
+  const { userToken, currentUser, isLoading } = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
 
   //set language
 
   useEffect(() => {
-    dispatch(getDealList(token));
+    dispatch(getDealList(userToken ? userToken : token));
   }, []);
 
-  // ======Calling Api for guest user login======
-  useEffect(() => {
-    async function GuestLogin() {
-      await SublyApi.guestUserLogin().then((responseJson) => {
-        if (responseJson.status_code === 200) {
-          localStorage.setItem("token", responseJson.data.token);
-        } else {
-          Toast.fire({
-            icon: "error",
-            title: responseJson.data.message,
-          });
-        }
-      });
-    }
-    GuestLogin();
-  }, [navBar]);
+  // // ======Calling Api for guest user login======
+  // useEffect(() => {
+  //   async function GuestLogin() {
+  //     await SublyApi.guestUserLogin().then((responseJson) => {
+  //       if (responseJson.status_code === 200) {
+  //         localStorage.setItem("token", responseJson.data.token);
+  //       } else {
+  //         Toast.fire({
+  //           icon: "error",
+  //           title: responseJson.data.message,
+  //         });
+  //       }
+  //     });
+  //   }
+  //   GuestLogin();
+  // }, [navBar]);
 
   return (
     <div className="navHeader">
