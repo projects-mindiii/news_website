@@ -17,6 +17,8 @@ import ErrorResponse from "../../../utils/AlertBox/ErrorResponse";
 
 import { userLogin } from "../../../store/slices/UserSlice";
 import { useDispatch,useSelector } from 'react-redux';
+import GoogleLogin from "../../CommonSocial/GoogleLogin";
+import FacebookSocialLogin from "../../CommonSocial/FacebookSocialLogin";
 
 //--------Create a Login with email component----------
 function LoginForm() {
@@ -103,9 +105,14 @@ function LoginForm() {
                             <span></span> <p>{t("LOGIN_WITH")}</p><span></span>
                         </div>
 
-                        <div className="socialLogo">
-                            <img src={Google} alt="google-logo" />
-                            <img src={Facebook} alt="facebook-logo" />
+                        <div className="socialLogo loginformcomponent">
+                           <GoogleLogin/>
+                           <span>
+
+                           <FacebookSocialLogin facebookText="" />
+
+                           </span>
+                           {/* <img src={Facebook} alt="apple-logo" /> */}
                             <img src={Apple} alt="apple-logo" />
                             <img src={Linkedin} alt="linkedin-logo" />
                         </div>
