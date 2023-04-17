@@ -1,0 +1,451 @@
+.classiFieds_forSaleBox {
+    padding: 15px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.03);
+}
+
+.classiFieds_forSaleBox .classiFieds_forSale_about {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.classiFields_mobileMargingRemove {
+    margin-bottom: 0px !important;
+}
+.classiFieds_forSale_about>div {
+    margin-right: 10px;
+}
+
+.classiFieds_forSale_about .classiFieds_forSale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.classiFieds_forSale_about .classiFieds_forSale img {
+    width: 180px;
+    height: 135px;
+    font-weight: 600;
+}
+
+.classiFieds_forSale_about .classiFields_heading .text {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    color: #000000;
+    margin-bottom: 5px;
+}
+.classiFieds_forSale_about .classiFields_heading {
+    margin-top: 10px;
+
+}
+
+.classiFieds_forSale_about .classiFieds_time_action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%);
+    border-radius: 14px;
+    line-height: 20px;
+    border: none !important;
+    color: white;
+    font-weight: 600;
+    height: 27.89px;
+    width: 97.63px;
+    font-size: 13px;
+}
+
+.classiFieds_forSaleBox .classiFields_contactPerson {
+    background: #E8E8E8;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.0311407);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.classiFieds_forSaleBox .heading {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 22px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.classiFields_contactPerson .classiFields_PersonAboutShow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.classiFields_contactPerson .classiFields_PersonAboutShow>div {
+    margin-right: 15px;
+}
+
+.classiFields_PersonAboutShow p {
+    margin-bottom: 0px;
+}
+
+.classiFields_PersonAboutShow img {
+    height: 30px;
+    width: 30px;
+}
+
+.classiFieds_forSaledropdown button {
+    background: #EC4624;
+    box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+    width: 100%;
+    height: 50px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 14px;
+    color: #FFFFFF;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none
+}
+
+.classiFieds_wanteddropdown button {
+    background: #DFDFDF;
+    box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 14px;
+    color: black;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+}
+
+.classiFieds_forSale p {
+    color: white;
+}
+
+.classiFieds_time span {
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+    color: #000000;
+}
+
+.classiFieds_time span img {
+    height: 18.57px;
+    width: 18.57px;
+    vertical-align: sub;
+}
+
+.classiFieds_RupeesText p {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.2px;
+    color: #E91F63;
+    margin-bottom: 0px;
+}
+
+.classiFieds_RupeesText p small {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.0916667px;
+    color: #000000;
+
+}
+
+.classiFieds_countryName span {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 36px;
+    letter-spacing: -0.48px;
+    color: #E91F63;
+}
+
+.classiFieds_countryName img {
+    width: 14px;
+    height: 17.62px;
+}
+
+.classiFieds_aboutText p {
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: -0.3px;
+}
+
+.classiFields_emailHeadingText p:first-child {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    color: #6D6D6D;
+}
+
+.classiFields_emailHeadingText p:nth-child(2) {
+    font-size: 16.5px;
+    font-weight: 400px;
+    line-height: 25px;
+    letter-spacing: -0.515625px;
+    color: #000000;
+}
+
+.classiFields_iconBackGround {
+    width: 30px;
+    height: 30px;
+    background: #E5E5E5;
+    mix-blend-mode: multiply;
+    border-radius: 6px;
+}
+
+.classiFields_whatAppIcon {
+    width: 100%;
+    background: linear-gradient(180deg, #85D51D 0%, #6AAE1B 98.67%);
+    border-radius: 6px;
+    height: 38px;
+    border: none;
+    margin-top: 15px;
+}
+
+.classiFields_whatAppIcon img {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+
+}
+
+.classiFieds_bookmarkicon img {
+    width: 14px;
+    height: 20px;
+}
+
+.classiFields_shareMedia {
+    height: 66px;
+    background: #EBEBEB;
+    border-radius: 6px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.classiFields_shareicons img {
+    width: 48px;
+    height: 48px;
+}
+
+.classiFields_shareIcon p {
+    margin-bottom: -10px;
+}
+
+.classiFields_shareicons span>span {
+    margin-right: 5px;
+}
+.classiFields_shareIcon img{
+    width: 4px;
+    height: 4px;
+    margin: 5px;
+ }
+ .classiFields_advertise {
+    width: 339px;
+    height: 277px;
+    margin-bottom: 15px;
+
+}
+.classiFields_advertise img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+.classiFields_whatAppIcon span{
+    color: #FFFFFF;
+    font-weight: 600;
+    
+}
+@media only screen and (max-width: 480px) {
+    .classiFieds_forSale_about .classiFieds_forSale img {
+        width: 116.83px;
+        height: 87.62px;
+        font-weight: 600;
+    }
+    .classiFieds_forSaleBox .classiFieds_forSale_about {
+
+        align-items: flex-start;
+    }
+    .classiFieds_forSale_about .classiFields_heading .text {
+        font-weight: 500;
+        font-size: 16.0467px;
+        line-height: 17px;
+        margin-bottom: 0px;
+    }
+    .classiFieds_forSale_about .classiFields_heading {
+        margin-top: 5px;
+    
+    }
+
+    .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+        font-weight: 600;
+        font-size: 8.4378px;
+        line-height: 13px;
+        height: 18px;
+        width: 56px;
+    }
+
+    .classiFieds_time span {
+        font-weight: 400;
+        font-size: 7.78876px;
+        line-height: 12px;
+        letter-spacing: -0.194719px;
+        color: #000000;
+    }
+
+    .classiFieds_bookmarkicon img {
+        width: 11.2px;
+        height: 16px;
+    }
+
+    .classiFieds_RupeesText p {
+        font-weight: 500;
+        font-size: 19.8272px;
+        line-height: 30px;
+        letter-spacing: -0.129813px;
+        color: #E91F63;
+    }
+
+    .classiFieds_RupeesText p small {
+        font-weight: 400;
+        font-size: 9.91359px;
+        line-height: 15px;
+        letter-spacing: -0.0594973px;
+        color: #000000;
+    }
+
+    .classiFieds_countryName span {
+        font-weight: 600;
+        font-size: 9.02628px;
+        line-height: 23px;
+        letter-spacing: -0.31155px;
+        color: #E91F63;
+    }
+
+    .classiFieds_aboutText p {
+        font-weight: 400;
+        font-size: 14.0409px;
+        line-height: 15px;
+        letter-spacing: -0.194719px;
+        color: #000000;
+    }
+
+    .classiFieds_forSaleBox .classiFields_contactPerson {
+        height: 198.27px;
+        background: #E8E8E8;
+        box-shadow: 0px 6.69137px 6.69137px rgba(0, 0, 0, 0.0311407);
+        border-radius: 4.01483px;
+    }
+
+    .classiFieds_forSaleBox .heading {
+        font-weight: 600;
+        font-size: 15.8617px;
+        line-height: 14px;
+        color: #000000;
+    }
+
+    .classiFields_PersonAboutShow img {
+        width: 24.45px;
+        height: 24.77px;
+    }
+
+    .classiFields_emailHeadingText p:first-child {
+        font-weight: 500;
+        font-size: 8.74189px;
+        line-height: 13px;
+        color: #000000;
+    }
+
+    .classiFields_emailHeadingText p:nth-child(2) {
+        font-weight: 400;
+        font-size: 14.2056px;
+        line-height: 21px;
+        letter-spacing: -0.422967px;
+        color: #000000;
+    }
+
+    .classiFields_whatAppIcon {
+        margin-top: 15px;
+        height: 43.62px;
+    }
+
+    .classiFields_whatAppIcon img {
+        width: 27.76px;
+        height: 27.76px;
+    }
+
+    .classiFields_shareMedia {
+        height: 44.17px;
+    }
+
+    .classiFields_shareicons img {
+        width: 32.12px;
+        height: 32.12px;
+    }
+
+    .classiFields_shareIcon p {
+        font-weight: 500;
+        font-size: 9.36972px;
+        line-height: 14px;
+        color: #000000;
+    }
+
+    .classiFieds_forSaledropdown button {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 9px;
+    }
+
+    .classiFieds_wanteddropdown button {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 9px;
+    }
+
+    .classiFieds_time span img {
+        vertical-align: sub !important;
+        Width:
+            12.05px;
+        Height:
+            12.05px
+    }
+    .classiFields_shareIcon img{
+       width: 2.68px;
+       height: 2.68px;
+       margin: 3px;
+    }
+}
+
+@media only screen and (max-width: 349px) {
+    .classiFieds_time span {
+        padding-left: 3px;
+    }
+
+}
+
+@media only screen and (max-width: 377px) {
+    .classiFields_advertise {
+        width: 300px;
+        height: 277px;
+    }
+}
+

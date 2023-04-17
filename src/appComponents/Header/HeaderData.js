@@ -15,7 +15,7 @@ export const headerData = [
     {
         id: "2",
         text: `${t("CLASSIFIEDS")}`,
-         link: `javascript:;`,
+         link: `/classi-fieds`,
         // link: `/classified`,
         activeClass:""
     },
