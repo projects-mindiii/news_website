@@ -38,7 +38,7 @@ function Header() {
             <div className="navItem">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="" as="ul">
+                <Nav className="ulValue" as="ul">
                   {HeaderData.map((item, index) => (
                     <Nav.Item as="li" key={index}>
                       <NavLink className={`nav-link`} to={item.link}>

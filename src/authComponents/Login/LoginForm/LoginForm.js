@@ -55,7 +55,7 @@ function LoginForm() {
                     icon: "success",
                     title: response.message,
                 });
-                navigate("/");
+                navigate("/view-profile");
                 localStorage.setItem("token", responsejson.data.token)
             } else {
                 setShowError(response.data.message)

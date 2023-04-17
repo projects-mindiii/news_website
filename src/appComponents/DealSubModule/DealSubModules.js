@@ -7,8 +7,10 @@ import globe from "../../assets/images/Deal_icon/globe_ico.png";
 import mail from "../../assets/images/Deal_icon/mail_ico.png";
 import watch from "../../assets/images/Deal_icon/watch.png";
 import promotional from "../../assets/images/Deal_icon/promotional.png";
+import { useNavigate } from "react-router-dom";
 
 function DigitalPrint(props) {
+  const navigate = useNavigate();
   const [filteredList, setFilteredList] = useState(null);
 
   // =====here i am filtering the deal list which one need to show====
@@ -100,7 +102,7 @@ function DigitalPrint(props) {
                 />
                 WhatsApp Me
               </button>
-              <button className="viewProfile">View Company Profile</button>
+                <button className="viewProfile" onClick={()=>{navigate("/deals/latest-deals/company-profile")}}>View Company Profile</button>
             </div>
           ))
         : ""}

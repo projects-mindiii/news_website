@@ -11,6 +11,7 @@ import SignupForm from "../authComponents/SignupForm/SignupForm";
 import LatestDeals from "../appComponents/LatestDeals/LatestDeals";
 import Profile from "../appComponents/Profile/Profile";
 import { useSelector } from "react-redux";
+import ViewCompanyProfile from "../appComponents/ViewCompanyProfile/ViewCompanyProfile";
 
 
 
@@ -22,7 +23,7 @@ function Routers() {
         <Router basename={"/"}>
             <Header />
             <Routes>
-                <Route exact path="/" element={<Navigate to="/deals/latest-deals" />} />
+                <Route exact path="/" element={<Navigate to="/login" />} />
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/login-form" element={<LoginForm />} />
                 <Route exact path="/sign-up" element={<SignupForm />} />
@@ -32,6 +33,7 @@ function Routers() {
                 <Route exact path="/deals/latest-deals" element={<LatestDeals />} />
                 {/* <Route exact path="/deals/products" element={<Profile />} /> */}
                 <Route exact path="/view-profile" element={Object.keys(currentUser).length!==0?(<Profile />):(<Navigate to="/login" />)} />
+                <Route exact path="/deals/latest-deals/company-profile" element={<ViewCompanyProfile/>} />
                 
             </Routes>
             <Footer />
