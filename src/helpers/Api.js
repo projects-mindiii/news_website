@@ -176,9 +176,25 @@ class SublyApi {
         let res = await this.request(`/v2/get-meta-list`,
           "", "get",header
     );
-    
-        return res;
-      }
+
+    return res;
+  }
+
+
+
+  /* POST  /Update User Profile: 
+      Update profile
+  
+       Authorization required: Token
+       @returns {object} {token}
+       */
+  static async updateProfile(data, authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v1/update-profile`,
+      data, "post", header
+    );
+    return res;
+  }
 
 }
 

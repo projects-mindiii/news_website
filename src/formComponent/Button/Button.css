@@ -22,3 +22,8 @@
 .btn:active {
     background-color: #ec4624 !important;
 }
+
+.btn:focus {
+    outline: 0;
+    box-shadow: none !important;
+}

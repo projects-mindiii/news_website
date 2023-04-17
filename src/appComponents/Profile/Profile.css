@@ -185,7 +185,7 @@
 }
 
 /* button css */
-.buttonAdd {
+.buttonAdd .btn {
     border: none;
     color: #ffffff;
     width: 100%;
@@ -197,13 +197,18 @@
     border-radius: 10px;
 }
 
-.buttonAdd:hover {
+.buttonAdd .btn:hover {
     background: #000000 !important;
     color: #FFFFFF !important;
 }
 
-.buttonAdd:active {
+.buttonAdd .btn:active {
     background: #000000 !important;
+}
+
+.buttonAdd .btn :focus {
+    outline: 0;
+    box-shadow: none !important;
 }
 
 /* delete account css */
@@ -346,3 +351,14 @@
 .watsappInput .react-tel-input .selected-flag {
     background: #29af29 !important;
 }
+
+/* css for select input */
+/* .selectOption .css-13cymwt-control {
+    border: none !important;
+    height: 40px !important;
+    background: #FFFFFF !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+    border-radius: 7.26px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+} */
