@@ -15,8 +15,8 @@ class SublyApi {
   //required common header for each api calling.
   static commonHeaders = {
     "api-key": process.env.REACT_APP_API_KEY_PAIR,
-    "device-token": "abcd",
-    "device-id": "777fgh",
+    "device-token": "abcde",
+    "device-id": "777fghi",
     "device-type": "3",
   };
 
@@ -168,8 +168,18 @@ class SublyApi {
       static async getClassiFiedMeta(token) {
         let header = { "access-token": ` ${token}` };
     
-        let res = await this.request(`/get-meta-list`,
+        let res = await this.request(`/v1/get-meta-list`,
           "", "get",header
+    );
+    
+        return res;
+      }
+
+      static async getClassifiedList(requestData,token) {
+        let header = { "access-token": ` ${token}` };
+    
+        let res = await this.request(`/v2/classified-list`,
+        requestData, "get",header
     );
     
         return res;
