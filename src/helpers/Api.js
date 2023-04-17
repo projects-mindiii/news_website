@@ -152,18 +152,18 @@ class SublyApi {
     return res;
   }
 
- /* GET  /verify google login: 
-      Returns user detail
-       Authorization required: none
-       @returns {object} {}
-       */
-       static async verifyGoogleLogin(data) {
-        let res = await this.request(`/v2/verify-google-login?access_token=${data}`,
-        undefined, undefined
-        );
-    
-        return res;
-      }
+  /* GET  /verify google login: 
+       Returns user detail
+        Authorization required: none
+        @returns {object} {}
+        */
+  static async verifyGoogleLogin(data) {
+    let res = await this.request(`/v2/verify-google-login?access_token=${data}`,
+      undefined, undefined
+    );
+
+    return res;
+  }
 
       static async getClassiFiedMeta(token) {
         let header = { "access-token": ` ${token}` };
