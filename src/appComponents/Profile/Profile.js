@@ -35,7 +35,7 @@ function Profile() {
     const [show, setShow] = useState(false);
     const [userDetails, setUserDetails] = useState("");
 
-    const  {userToken}  = useSelector((state) => state.user);
+    const { userToken } = useSelector((state) => state.user);
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -58,7 +58,18 @@ function Profile() {
         async function getUserDetails() {
             const details = await SublyApi.userProfile(userToken); //profile api call
             setUserDetails(details.data);
-
+            setValue("fullName", details.data[0].name);
+            setValue("email", details.data[0].email);
+            setValue("companyName", details.data[0].company_name);
+            setValue("occupation", details.data[0].occupation);
+            setValue("city", details.data[0].city);
+            setDialCode(details.data[0].dial_code);
+            setCountryCode(details.data[0].country_code);
+            setPhoneNo(details.data[0].contact);
+            setWatsappNo(details.data[0].whatapp_contact_number);
+            setCountryCodeWatsapp(details.data[0].whatsapp_country_code);
+            setDialCodeWatsapp(details.data[0].whatsapp_dail_code);
+            setProfilePreview(details.data[0].img_url);
             console.log("data", details);
 
         }
@@ -112,6 +123,9 @@ function Profile() {
                                         <Form.Control
                                             type="text"
                                             placeholder={t("COMPANY_NAME")}
+                                            {...register("companyName"
+                                               
+                                            )}
                                         />
                                     </Form.Group>
 
@@ -119,6 +133,9 @@ function Profile() {
                                         <Form.Control
                                             type="text"
                                             placeholder={t("POSITION")}
+                                            {...register("occupation"
+                                               
+                                            )}
                                         />
                                     </Form.Group>
 
@@ -211,6 +228,9 @@ function Profile() {
                                         <Form.Control
                                             type="text"
                                             placeholder="Input City/Town"
+                                            {...register("city"
+                                               
+                                            )}
                                         />
                                     </Form.Group>
 
