@@ -20,6 +20,7 @@ function ClassiFieds() {
     const { userToken, currentUser, isLoading } = useSelector((state) => state.user);   
     useEffect(() => {
         SublyApi.getClassiFiedMeta(userToken).then((responsejson) => {
+            console.log('responsejson',responsejson)
         });
     }, []);
     //set language

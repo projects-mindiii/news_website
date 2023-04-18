@@ -3,7 +3,9 @@ import SublyApi from '../../helpers/Api'
 import { STATUS_CODES } from "../../utils/StatusCode";
 
 const initialState = {
+  guestUser: {},
   currentUser: {},
+  sessionExpire: "",
   isLoading: false,
   userToken:null,
   success:false,
@@ -24,7 +26,18 @@ export const userLogin = createAsyncThunk(
 	}
 );
 
-
+// Thunk for guest user
+export const guestUserLogin = createAsyncThunk(
+	"user/guestUserLogin",
+	async (data, { rejectWithValue }) => {
+		try {
+			const response = await SublyApi.guestUserLogin();
+			return response;
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	}
+);
 
 // Thunk for social login
 export const isSocialLogin = createAsyncThunk(
@@ -54,7 +67,6 @@ export const socialSignup = createAsyncThunk(
 
 // manage user login session 
 const userSessionLogin = (state,response) => {
-		
     if(response.status_code === STATUS_CODES.SUCCESS){
       state.currentUser = response.data;
       state.userToken = response.data.token;
@@ -67,16 +79,41 @@ const userSessionLogin = (state,response) => {
     state.isLoading = false
 };
 
+// manage user session expire
+const isUserSessionExpire = (state,response) => {
+  if(response.status_code === STATUS_CODES.SESSION_EXPIRE){
+    state.sessionExpire = response.data.message;
+    state.currentUser = {};
+    state.guestUser = {};
+    state.userToken = null;
+  }
+};
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     userLogout: (state, action) => {
       state.currentUser = {};
+      state.guestUser = {};
       state.userToken = null;
     }
   },
   extraReducers: (builder) => {
+    // guest user login
+    builder.addCase(guestUserLogin.fulfilled, (state, action) => {
+      const response = action.payload;
+      if(response.status_code === STATUS_CODES.SUCCESS){
+        state.guestUser = response.data;
+        state.userToken = response.data.token;
+        state.success = true;
+      }else{
+        state.guestUser = {};
+        state.userToken = null;
+        state.success = false;
+      }
+    })
+
     // user login
     builder.addCase(userLogin.pending, (state) => {
         state.isLoading = true

@@ -9,9 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 function LatestDeals() {
-  const [eventKeyValue, setEventKeyValue] = useState(null);
   const { latestDeals, isLoading } = useSelector((state) => state.deal);
 
+  const [eventKeyValue, setEventKeyValue] = useState((latestDeals && latestDeals.length >0)?latestDeals[0].id:null);
+console.log('latestDeals',latestDeals)
   return (
     <div className="dealContainer">
       <Container>
@@ -21,7 +22,6 @@ function LatestDeals() {
               <Nav
                 variant="pills"
                 className="flex-column addTabs stickyClass"
-                // defaultActiveKey={eventKeyValue}
                 onSelect={(value) => {
                   setEventKeyValue(value);
                 }}

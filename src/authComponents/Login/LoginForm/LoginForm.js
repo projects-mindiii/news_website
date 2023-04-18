@@ -26,7 +26,7 @@ function LoginForm() {
 
     const dispatch = useDispatch();
 
-    const  {currentUser,isLoading}  = useSelector((state) => state.user);
+    const  {guestUser,currentUser,isLoading}  = useSelector((state) => state.user);
 
     //set language
     const { t, i18n } = useTranslation();
@@ -58,7 +58,6 @@ function LoginForm() {
                     title: response.message,
                 });
                 navigate("/view-profile");
-                localStorage.setItem("token", responsejson.data.token)
             } else {
                 setShowError(response.data.message)
             }
