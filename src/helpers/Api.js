@@ -158,16 +158,16 @@ class SublyApi {
     return res;
   }
 
-/* POST  /verify google login: {}
-     Returns user detail
-     Authorization required:none
-     @param data {Object} {fullname ,email,password, confirm password}
-     @returns {object} {token}
-     */
-     static async verifyGoogleLogin(data) {
-      let res = await this.request(`/v2/verify-google-login`, data, "post");
-      return res;
-    }
+  /* POST  /verify google login: {}
+       Returns user detail
+       Authorization required:none
+       @param data {Object} {fullname ,email,password, confirm password}
+       @returns {object} {token}
+       */
+  static async verifyGoogleLogin(data) {
+    let res = await this.request(`/v2/verify-google-login`, data, "post");
+    return res;
+  }
 
 
       static async getClassiFiedMeta(token) {
@@ -190,7 +190,7 @@ class SublyApi {
        */
   static async updateProfile(data, authToken) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v1/update-profile`,
+    let res = await this.request(`/v2/update-profile`,
       data, "post", header
     );
     return res;

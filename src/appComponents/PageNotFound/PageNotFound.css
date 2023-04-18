@@ -1,0 +1,29 @@
+.notFoundWrapper {
+    background: #dee5f170;
+    height: 100vh;
+}
+
+.notFound {
+    text-align: center;
+    color: #ec4624;
+    font-size: 30px;
+}
+
+.findError {
+    text-align: center;
+    padding-top: 12%;
+    color: #000000;
+    font-size: 60px;
+}
+
+.notFoundWrapper p {
+    text-align: center;
+    color: #2c2a68;
+}
+
+.notFoundWrapper .mainFooter {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

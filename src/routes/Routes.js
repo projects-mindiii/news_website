@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import ViewCompanyProfile from "../appComponents/ViewCompanyProfile/ViewCompanyProfile";
 
 import ClassiFieds from "../appComponents/ClassiFieds/ClassiFieds";
+import PageNotFound from "../appComponents/PageNotFound/PageNotFound";
 
 
 //-------Create a component for manage routing--------
@@ -33,12 +34,16 @@ function Routers() {
                 <Route exact path="/email-varify" element={<EmailVarify />} />
                 <Route exact path="/deals/latest-deals" element={<LatestDeals />} />
                 {/* <Route exact path="/deals/products" element={<Profile />} /> */}
-                <Route exact path="/view-profile" element={Object.keys(currentUser).length!==0?(<Profile />):(<Navigate to="/login" />)} />
-                <Route exact path="/deals/latest-deals/company-profile" element={<ViewCompanyProfile/>} />
-                <Route exact path="/classi-fieds" element={<ClassiFieds/>} />
+                <Route exact path="/view-profile" element={Object.keys(currentUser).length !== 0 ? (<Profile />) : (<Navigate to="/login" />)} />
+                <Route exact path="/deals/latest-deals/company-profile" element={<ViewCompanyProfile />} />
+                <Route exact path="/classi-fieds" element={<ClassiFieds />} />
+
+                <Route path="*" element={<PageNotFound />} />
+
             </Routes>
             <Footer />
         </Router>
+
 
     )
 }

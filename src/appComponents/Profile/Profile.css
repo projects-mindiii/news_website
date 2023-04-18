@@ -353,7 +353,7 @@
 }
 
 /* css for select input */
-/* .selectOption .css-13cymwt-control {
+.selectOption .css-13cymwt-control {
     border: none !important;
     height: 40px !important;
     background: #FFFFFF !important;
@@ -361,4 +361,32 @@
     border-radius: 7.26px !important;
     font-weight: 500 !important;
     font-size: 14px !important;
-} */
+}
+
+.css-13cymwt-control:hover {
+    border-color: unset !important;
+}
+
+.css-1xz3in2-control {
+    border: none !important;
+    height: 40px !important;
+    background: #FFFFFF !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+    border-radius: 7.26px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+.css-1xz3in2-control:hover {
+    border-color: unset !important;
+}
+
+.css-1u9des2-indicatorSeparator {
+    display: none !important;
+}
+
+.css-tj5bde-Svg {
+    fill: #000000 !important;
+    width: 28px !important;
+    height: 28px !important;
+}

@@ -7,8 +7,8 @@
     padding-left: 25px !important;
     justify-content: right;
     width: 100%;
-    max-width: 365px;
-}
+    max-width:fit-content;
+    height: 39px !important;}
 
 .headerFeature h5 {
     font-weight: 400;
