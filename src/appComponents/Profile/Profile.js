@@ -40,16 +40,28 @@ function Profile() {
     const [show, setShow] = useState(false);
     const [userDetails, setUserDetails] = useState("");
     const { userToken } = useSelector((state) => state.user);
+    const [metaData, setMetaData] = useState("");
+    // const [countryOption, setCountryOption] = useState([
+    //     {
+    //         label: "Set Country",
+    //         value: "0",
+    //         id: "0",
+    //     },
+    // ]);
+    const [countrySelected, setCountrySelected] = useState("");
 
     const locationOption = [
         { value: "204", label: "South Africa", id: "204" },
         { value: "0", label: "Outside South Africa", id: "0" },
     ];
-
-    const countryOption = [
-        { value: "country", label: "Set Country", id: "0" },
-
-    ];
+    const [provinceOption, setProvinceOption] = useState([
+        {
+            label: "Province",
+            value: "0",
+            id: "0",
+        },
+    ]);
+    const [countryOption, setCountryOption] = useState({});
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -67,6 +79,22 @@ function Profile() {
         watch,
         formState: { errors },
     } = useForm();
+
+    //-------function for get country list Api-------
+    useEffect(() => {
+        async function getMetaDetails() {
+            const details = await SublyApi.getClassiFiedMeta(userToken); //profile api call
+            setMetaData(details.data);
+            setCountryOption(details.data.countries);
+            setProvinceOption(details.data.provinces);
+
+            console.log("metadetail", details);
+            console.log("province", provinceOption);
+            console.log("countryOption", countryOption);
+        }
+        getMetaDetails();
+    }, []);
+
 
     //-------function for profile Api-------
     useEffect(() => {
@@ -86,16 +114,10 @@ function Profile() {
             setDialCodeWatsapp(details.data[0].whatsapp_dail_code);
             setProfilePreview(details.data[0].img_url);
 
-
-
             console.log("data", details);
         }
         getUserDetails();
     }, []);
-
-    function locationHandler() {
-
-    }
 
     //-----------function for update profile api-----------
     const onSubmit = async (formdata) => {
@@ -264,7 +286,7 @@ function Profile() {
                                             <Select
                                                 id="status"
                                                 options={locationOption ? locationOption : {}}
-                                                onChange={(value) => locationHandler(value)}
+                                                // onChange={(value) => locationHandler(value)}
                                                 placeholder="South Africa"
                                                 // maxMenuHeight={220}
                                                 // menuPlacement="auto"
@@ -295,7 +317,7 @@ function Profile() {
                                     <div className="selectOption">
 
                                         <Form.Group className="mb-3" >
-                                            < Select
+                                            <Select
                                                 id="status"
                                                 options={countryOption ? countryOption : {}}
                                                 // onChange={(value) => countryHandler(value)}
