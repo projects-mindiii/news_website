@@ -1,42 +1,33 @@
-import { Nav, Navbar, Toast } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./DealsHeader.css";
 import dealsData from "./DealsData";
 import { useEffect, useState } from "react";
-import SublyApi from "../../helpers/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { getDealList } from "../../store/slices/DealSlice";
+import { Toast } from "../../utils/Toaster";
+import { STATUS_CODES } from "../../utils/StatusCode";
 
 
 //-------Create a Deals Header component--------
 function DealsHeader() {
   const dispatch = useDispatch();
   const [navBar, setNavBar] = useState(null);
-  const { userToken, currentUser, isLoading } = useSelector((state) => state.user);
-  const token = localStorage.getItem("token");
+  const { userToken,isLoading } = useSelector((state) => state.user);
 
   //set language
 
   useEffect(() => {
-    dispatch(getDealList(userToken ? userToken : token));
+    dispatch(getDealList(userToken)).then((responsejson) => {
+        const response = responsejson.payload;
+        if (response.status_code !== STATUS_CODES.SUCCESS) {
+            Toast.fire({
+                icon: "error",
+                title: response.data.message,
+            });
+        } 
+    });
   }, []);
-
-  // // ======Calling Api for guest user login======
-  // useEffect(() => {
-  //   async function GuestLogin() {
-  //     await SublyApi.guestUserLogin().then((responseJson) => {
-  //       if (responseJson.status_code === 200) {
-  //         localStorage.setItem("token", responseJson.data.token);
-  //       } else {
-  //         Toast.fire({
-  //           icon: "error",
-  //           title: responseJson.data.message,
-  //         });
-  //       }
-  //     });
-  //   }
-  //   GuestLogin();
-  // }, [navBar]);
 
   return (
     <div className="navHeader">

@@ -7,25 +7,31 @@ import "./Header.css";
 import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
 import { useEffect } from "react";
-import SublyApi from "../../helpers/Api";
+import { useDispatch,useSelector } from 'react-redux';
+import { guestUserLogin } from "../../store/slices/UserSlice";
 
 //-------Create a Header component--------
 function Header() {
+  const dispatch = useDispatch();
+
+  const  {guestUser,currentUser,isLoading}  = useSelector((state) => state.user);
+
   // ======Calling Api for guest user login======
   useEffect(() => {
     async function GuestLogin() {
-      await SublyApi.guestUserLogin().then((responseJson) => {
-        if (responseJson.status_code === 200) {
-          localStorage.setItem("token", responseJson.data.token);
-        } else {
-          Toast.fire({
-            icon: "error",
-            title: responseJson.data.message,
-          });
+      await dispatch(guestUserLogin()).then((responseJson) => {
+        const response = responseJson.payload;
+        if (response.status_code === 200) {
+            Toast.fire({
+              icon: "error",
+              title: response.data.message,
+            });
         }
       });
     }
-    GuestLogin();
+    if(Object.keys(currentUser).length===0 && Object.keys(guestUser).length===0){
+      GuestLogin();
+    }
   }, []);
   return (
     <section className="header">

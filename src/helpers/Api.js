@@ -4,6 +4,12 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 // const REACT_PROXYURL = "https://quiet-retreat-79741.herokuapp.com/";
 const REACT_PROXYURL = "";
 
+// for making unique id for every browser
+if(!localStorage.getItem("news_device_id")){
+  const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
+  localStorage.setItem("news_device_id", uint32.toString(16));
+}
+
 /** API Class
  * static clase trying together method used to get/send to the API.
  * There shouldn't be any frontend-specific stuff here, and there  shouldn't be any API-aware stuff else hre in the frontend...
@@ -15,8 +21,8 @@ class SublyApi {
   //required common header for each api calling.
   static commonHeaders = {
     "api-key": process.env.REACT_APP_API_KEY_PAIR,
-    "device-token": "abcd",
-    "device-id": "777fgh",
+    "device-token":localStorage.getItem("news_device_id"),
+    "device-id": localStorage.getItem("news_device_id"),
     "device-type": "3",
   };
 
@@ -167,7 +173,7 @@ class SublyApi {
       static async getClassiFiedMeta(token) {
         let header = { "access-token": ` ${token}` };
     
-        let res = await this.request(`/get-meta-list`,
+        let res = await this.request(`/v2/get-meta-list`,
           "", "get",header
     );
     

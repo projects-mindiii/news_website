@@ -33,9 +33,7 @@ export const dealSlice = createSlice({
         state.isLoading = true
     })
     builder.addCase(getDealList.fulfilled, (state, action) => {
-      // console.log('getDealList fulfilled action',action)
         const response = action.payload;
-        // console.log('response response',response)
         if(response.status_code==200){
           state.allDeals = response.data;
           state.latestDeals = [...response.data.product_deal_count_list,...response.data.service_deal_count_list];
@@ -46,7 +44,6 @@ export const dealSlice = createSlice({
         state.isLoading = false
     })
     builder.addCase(getDealList.rejected, (state, action) => {
-        // console.log('getDealList rejected action',action)
         state.isLoading = false
     })
   },
