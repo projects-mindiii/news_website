@@ -16,7 +16,6 @@ import { MdPhonelinkRing } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import SublyApi from "../../helpers/Api";
 import { useSelector } from "react-redux";
-import { userLogout } from "../../store/slices/UserSlice";
 import CustomBtn from "../../formComponent/Button/Button";
 import Select from "react-select";
 import { Toast } from "../../utils/Toaster";
@@ -87,11 +86,6 @@ function Profile() {
                 setMetaData(details.data);
                 setCountryOption(details.data.countries);
                 setProvinceOption(details.data.provinces);
-                console.log("metadetail", details);
-                // Toast.fire({
-                //     icon: "success",
-                //     title: details.message,
-                // });
             }
             else {
                 Toast.fire({
@@ -102,11 +96,6 @@ function Profile() {
         }
         getMetaDetails();
     }, []);
-
-    // const handleChange = (selected) => {
-    //     setCountrySelected(selected);
-    //     console.log(`Option selected:`, selected);
-    // };
 
     //-------function for profile Api-------
     useEffect(() => {
@@ -130,12 +119,6 @@ function Profile() {
                 // setProvinceOption(details.data[0].provinces)
                 setCountrySelected(details.data[0].country_id)
                 setProvinceSelected(details.data[0].provinces)
-
-                console.log("data", details);
-                // Toast.fire({
-                //     icon: "success",
-                //     title: details.message,
-                // });
             } else {
                 Toast.fire({
                     icon: "error",
@@ -160,13 +143,8 @@ function Profile() {
         requestData.append("whatsapp_dail_code", dialCodeWatsapp);
         requestData.append("whatsapp_country_code", countryCodeWatsapp);
         requestData.append("whatapp_contact_number", watsappNo);
-        await SublyApi.updateProfile(requestData).then((responsejson) => {
+        await SublyApi.updateProfile(requestData,userToken).then((responsejson) => {
             if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-                setValue("fullName", "");
-                setValue("email", "");
-                setValue("companyName", "");
-                setValue("occupation", "");
-                setValue("city", "");
                 Toast.fire({
                     icon: "success",
                     title: responsejson.message,
