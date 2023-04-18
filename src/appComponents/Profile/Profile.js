@@ -1,4 +1,4 @@
-import { Button, Col, Container, Form, Row, Toast } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import "./Profile.css";
 import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
@@ -16,7 +16,10 @@ import { MdPhonelinkRing } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import SublyApi from "../../helpers/Api";
 import { useSelector } from "react-redux";
-import { userLogout } from "../../store/slices/UserSlice";
+import CustomBtn from "../../formComponent/Button/Button";
+import Select from "react-select";
+import { Toast } from "../../utils/Toaster";
+import { STATUS_CODES } from "../../utils/StatusCode";
 
 
 //--------Create a Profile component----------
@@ -31,11 +34,34 @@ function Profile() {
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
+    //----- set state for show alert box for error response------
+    const [showError, setShowError] = useState(null);
     //----- state for manage show/hide change password inputs fields-----
     const [show, setShow] = useState(false);
     const [userDetails, setUserDetails] = useState("");
-
-    const  {userToken}  = useSelector((state) => state.user);
+    const { userToken } = useSelector((state) => state.user);
+    const [metaData, setMetaData] = useState("");
+    const locationOption = [
+        { value: "204", label: "South Africa", id: "204" },
+        { value: "0", label: "Outside South Africa", id: "0" },
+    ];
+    const [locationSelected, setLocationSelected] = useState(204);
+    const [countryOption, setCountryOption] = useState([
+        {
+            label: "Set Country",
+            value: "0",
+            id: "0",
+        },
+    ]);
+    const [countrySelected, setCountrySelected] = useState("");
+    const [provinceOption, setProvinceOption] = useState([
+        {
+            label: "Province",
+            value: "0",
+            id: "0",
+        },
+    ]);
+    const [provinceSelected, setProvinceSelected] = useState("");
 
     //----- function for Upload update profile image-----
     function onImageChange(e) {
@@ -50,25 +76,88 @@ function Profile() {
         register,
         handleSubmit,
         setValue,
+        watch,
         formState: { errors },
     } = useForm();
+
+    //-------function for get country list Api-------
+    useEffect(() => {
+        async function getMetaDetails() {
+            const details = await SublyApi.getClassiFiedMeta(userToken); //profile api call
+            if (details.status_code === STATUS_CODES.SUCCESS) {
+                setMetaData(details.data);
+                setCountryOption(details.data.countries);
+                setProvinceOption(details.data.provinces);
+            }
+            else {
+                Toast.fire({
+                    icon: "error",
+                    title: details.data.message,
+                });
+            }
+        }
+        getMetaDetails();
+    }, []);
 
     //-------function for profile Api-------
     useEffect(() => {
         async function getUserDetails() {
             const details = await SublyApi.userProfile(userToken); //profile api call
-            setUserDetails(details.data);
-
-            console.log("data", details);
-
+            if (details.status_code === STATUS_CODES.SUCCESS) {
+                setUserDetails(details.data);
+                setValue("fullName", details.data[0].name);
+                setValue("email", details.data[0].email);
+                setValue("companyName", details.data[0].company_name);
+                setValue("occupation", details.data[0].occupation);
+                setValue("city", details.data[0].city);
+                setDialCode(details.data[0].dial_code);
+                setCountryCode(details.data[0].country_code);
+                setPhoneNo(details.data[0].contact);
+                setWatsappNo(details.data[0].whatapp_contact_number);
+                setCountryCodeWatsapp(details.data[0].whatsapp_country_code);
+                setDialCodeWatsapp(details.data[0].whatsapp_dail_code);
+                setProfilePreview(details.data[0].img_url);
+                // setCountryOption(details.data[0].country_id)
+                // setProvinceOption(details.data[0].provinces)
+                setCountrySelected(details.data[0].country_id)
+                setProvinceSelected(details.data[0].provinces)
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: details.data.message,
+                });
+            }
         }
         getUserDetails();
     }, []);
 
-
-    //-----------function for update profile details-----------
-    const onSubmit = () => {
-
+    //-----------function for update profile api-----------
+    const onSubmit = async (formdata) => {
+        let requestData = new FormData();
+        requestData.append("name", formdata.fullName);
+        requestData.append("email", formdata.email);
+        requestData.append("company_name", formdata.companyName);
+        requestData.append("occupation", formdata.occupation);
+        requestData.append("city", formdata.city);
+        requestData.append("dial_code", dialCode);
+        requestData.append("country_code", countryCode);
+        requestData.append("contact", phoneNo);
+        requestData.append("whatsapp_dail_code", dialCodeWatsapp);
+        requestData.append("whatsapp_country_code", countryCodeWatsapp);
+        requestData.append("whatapp_contact_number", watsappNo);
+        await SublyApi.updateProfile(requestData,userToken).then((responsejson) => {
+            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+                Toast.fire({
+                    icon: "success",
+                    title: responsejson.message,
+                });
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: responsejson.data.message,
+                });
+            }
+        });
     };
 
     return (
@@ -112,6 +201,12 @@ function Profile() {
                                         <Form.Control
                                             type="text"
                                             placeholder={t("COMPANY_NAME")}
+                                            {...register("companyName"
+
+                                            )}
+                                            {...register("companyName"
+
+                                            )}
                                         />
                                     </Form.Group>
 
@@ -119,6 +214,12 @@ function Profile() {
                                         <Form.Control
                                             type="text"
                                             placeholder={t("POSITION")}
+                                            {...register("occupation"
+
+                                            )}
+                                            {...register("occupation"
+
+                                            )}
                                         />
                                     </Form.Group>
 
@@ -195,22 +296,117 @@ function Profile() {
 
                                     <h3>{t("LOCATION")}</h3>
                                     <p>{t("LOCATION_PARA")}</p>
-                                    <Form.Group className="mb-3">
-                                        <Form.Select id="disabledSelect" className="customSelect">
-                                            <option className="customOption">South Africa</option>
-                                        </Form.Select>
-                                    </Form.Group>
+                                    <div className="selectOption">
+                                        <Form.Group className="mb-3">
+                                            <Select
+                                                id="status"
+                                                options={locationOption ? locationOption : {}}
+                                                onChange={(value) => setLocationSelected(value.id)}
+                                                placeholder="South Africa"
+                                                // maxMenuHeight={220}
+                                                // menuPlacement="auto"
+                                                defaultValue={locationOption[0]}
+                                                styles={{
+                                                    placeholder: () => ({
+                                                        fontSize: "15px",
+                                                        color: "#cacaca",
+                                                        position: "absolute",
+                                                        top: "8px",
+                                                        left: "15px",
+                                                    }),
+                                                }}
+                                                theme={(theme) => ({
+                                                    ...theme,
+                                                    colors: {
+                                                        ...theme.colors,
+                                                        borderRadius: 0,
+                                                        primary25: "#f2f2f2",
+                                                        primary: "#000000;",
+                                                        primary50: "#f2f2f2",
+                                                    },
+                                                })}
+                                            />
+                                        </Form.Group>
+                                    </div>
 
-                                    <Form.Group className="mb-3">
-                                        <Form.Select>
-                                            <option>Select Province</option>
-                                        </Form.Select>
-                                    </Form.Group>
+                                    <div className={`${locationSelected == 204 ? "selectOption hideIcon" : "selectOption"}`}>
+                                        <Form.Group className="mb-3" >
+                                            <Select
+                                                id="status"
+                                                options={countryOption ? countryOption : {}}
+                                                // onChange={(e) => handleChange(e)}
+                                                onChange={(value) => setCountrySelected(value)}
+                                                placeholder="South Africa"
+                                                maxMenuHeight={220}
+                                                menuPlacement="auto"
+                                                defaultValue={countryOption[0]}
+                                                styles={{
+                                                    placeholder: () => ({
+                                                        fontSize: "15px",
+                                                        color: "#cacaca",
+                                                        position: "absolute",
+                                                        top: "8px",
+                                                        left: "15px",
+                                                    }),
+                                                }}
+                                                theme={(theme) => ({
+                                                    ...theme,
+                                                    colors: {
+                                                        ...theme.colors,
+                                                        borderRadius: 0,
+                                                        primary25: "#f2f2f2",
+                                                        primary: "#000000;",
+                                                        primary50: "#f2f2f2",
+                                                    },
+                                                })}
+                                            />
+                                        </Form.Group>
+                                    </div>
+
+                                    <div className={`${locationSelected == 0 ? "selectOption hideIcon" : "selectOption"}`}>
+                                        <Form.Group className="mb-3" >
+                                            <Select
+                                                id="status"
+                                                options={provinceOption ? provinceOption : {}}
+                                                onChange={(value) => setProvinceSelected(value)}
+                                                placeholder="South Africa"
+                                                maxMenuHeight={220}
+                                                menuPlacement="auto"
+                                                defaultValue={provinceOption[0]}
+                                                styles={{
+                                                    placeholder: () => ({
+                                                        fontSize: "15px",
+                                                        color: "#cacaca",
+                                                        position: "absolute",
+                                                        top: "8px",
+                                                        left: "15px",
+                                                    }),
+                                                }}
+                                                theme={(theme) => ({
+                                                    ...theme,
+                                                    colors: {
+                                                        ...theme.colors,
+                                                        borderRadius: 0,
+                                                        primary25: "#f2f2f2",
+                                                        primary: "#000000;",
+                                                        primary50: "#f2f2f2",
+                                                    },
+                                                })}
+                                            />
+
+                                        </Form.Group>
+                                    </div>
 
                                     <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
                                             placeholder="Input City/Town"
+                                            {...register("city"
+
+                                            )}
+                                            {...register("city"
+
+                                            )}
                                         />
                                     </Form.Group>
 
@@ -265,18 +461,70 @@ function Profile() {
                                                     <Form.Control
                                                         type="password"
                                                         placeholder="Set New Password"
+                                                        {...register("password", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Password`,
+                                                            },
+                                                            pattern: {
+                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                message: `${t("INVALID_PASSWORD")}`,
+                                                            },
+                                                        })}
+                                                        {...register("password", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Password`,
+                                                            },
+                                                            pattern: {
+                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                message: `${t("INVALID_PASSWORD")}`,
+                                                            },
+                                                        })}
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3">
                                                     <Form.Control
                                                         type="password"
                                                         placeholder="Repeat Password"
+                                                        {...register("repeatPassword", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Repeat Password`,
+                                                            },
+
+                                                            validate: (value) =>
+                                                                value === watch("password") || "Passwords have to match",
+                                                        })}
+                                                        {...register("repeatPassword", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Repeat Password`,
+                                                            },
+
+                                                            validate: (value) =>
+                                                                value === watch("password") || "Passwords have to match",
+                                                        })}
                                                     />
                                                 </Form.Group>
+                                                <div className="errorSet">
+                                                    <span className="errorShow">
+                                                        {errors[Object.keys(errors)[0]] &&
+                                                            errors[Object.keys(errors)[0]].message}{" "}
+                                                    </span>
+                                                </div>
+                                                <div className="errorSet">
+                                                    <span className="errorShow">
+                                                        {errors[Object.keys(errors)[0]] &&
+                                                            errors[Object.keys(errors)[0]].message}{" "}
+                                                    </span>
+                                                </div>
                                             </div>
                                         ) : ""}
                                     </div>
-                                    <Button className="buttonAdd" type="submit">{t("SAVE")}</Button>
+                                    <div className="buttonAdd">
+                                        <CustomBtn>{t("SAVE")}</CustomBtn>
+                                    </div>
                                 </Form>
 
                                 <div className="deleteIcon">

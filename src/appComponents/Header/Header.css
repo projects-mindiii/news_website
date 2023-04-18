@@ -14,9 +14,9 @@
     max-width: 430px;
 }
 
- .navItem {
+.navItem {
     display: flex;
-} 
+}
 
 .headerSection .navbar {
     display: unset !important;
@@ -47,13 +47,36 @@
 
 .ulValue {
     gap: 15px;
+    flex-wrap: wrap;
+}
+
+.ulValue a {
+    margin-top: 0px !important;
+}
+
+.headerFeature {
+    margin-top: 0px !important;
+}
+
+.headerLinks {
+    flex-wrap: wrap !important;
+    gap: 15px;
 }
 
 @media only screen and (max-width: 991px) {
     .navItem {
         display: block;
     }
+
+    .headerFeature {
+        margin-top: 15px !important;
+    }
+
+    .ulValue {
+        margin-top: 15px !important;
+    }
 }
+
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .navItem .navbar-nav .nav-link {

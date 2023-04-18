@@ -41,7 +41,7 @@ function Header() {
             <img src={Logo} alt="news-logo" />
           </div>
           <Navbar expand="lg">
-            <div className="navItem">
+            <div className="navItem headerLinks">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ulValue" as="ul">

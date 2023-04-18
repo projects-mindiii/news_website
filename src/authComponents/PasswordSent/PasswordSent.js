@@ -56,9 +56,6 @@ function PasswordSent() {
                             <span>{detail.email}</span>
                         </div>
 
-                        {/* <Button className="btn" type="submit" onClick={() => navigate("/login-form")}>
-                            {t("LOGIN")}
-                        </Button> */}
                         <CustomBtn onClick={() => navigate("/login-form")}>{t("LOGIN")}</CustomBtn>
 
                         <h4 onClick={() => { forgotData(); }}>
