@@ -34,6 +34,8 @@ function Profile() {
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
+    //----- set state for show alert box for error response------
+    const [showError, setShowError] = useState(null);
     //----- state for manage show/hide change password inputs fields-----
     const [show, setShow] = useState(false);
     const [userDetails, setUserDetails] = useState("");
@@ -202,6 +204,9 @@ function Profile() {
                                             {...register("companyName"
 
                                             )}
+                                            {...register("companyName"
+
+                                            )}
                                         />
                                     </Form.Group>
 
@@ -209,6 +214,9 @@ function Profile() {
                                         <Form.Control
                                             type="text"
                                             placeholder={t("POSITION")}
+                                            {...register("occupation"
+
+                                            )}
                                             {...register("occupation"
 
                                             )}
@@ -396,6 +404,9 @@ function Profile() {
                                             {...register("city"
 
                                             )}
+                                            {...register("city"
+
+                                            )}
                                         />
                                     </Form.Group>
 
@@ -460,6 +471,16 @@ function Profile() {
                                                                 message: `${t("INVALID_PASSWORD")}`,
                                                             },
                                                         })}
+                                                        {...register("password", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Password`,
+                                                            },
+                                                            pattern: {
+                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                message: `${t("INVALID_PASSWORD")}`,
+                                                            },
+                                                        })}
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3">
@@ -475,8 +496,23 @@ function Profile() {
                                                             validate: (value) =>
                                                                 value === watch("password") || "Passwords have to match",
                                                         })}
+                                                        {...register("repeatPassword", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `Please Enter Repeat Password`,
+                                                            },
+
+                                                            validate: (value) =>
+                                                                value === watch("password") || "Passwords have to match",
+                                                        })}
                                                     />
                                                 </Form.Group>
+                                                <div className="errorSet">
+                                                    <span className="errorShow">
+                                                        {errors[Object.keys(errors)[0]] &&
+                                                            errors[Object.keys(errors)[0]].message}{" "}
+                                                    </span>
+                                                </div>
                                                 <div className="errorSet">
                                                     <span className="errorShow">
                                                         {errors[Object.keys(errors)[0]] &&
