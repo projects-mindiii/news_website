@@ -84,10 +84,30 @@ function Profile() {
     useEffect(() => {
         async function getMetaDetails() {
             const details = await SublyApi.getClassiFiedMeta(userToken); //profile api call
+
+            
             if (details.status_code === STATUS_CODES.SUCCESS) {
+                let countryOptions = [];
+                await details.data.countries.map((item) => {
+                    countryOptions.push({
+                    label: item.name,
+                    value: item.id,
+                    id: item.id,
+                  });
+                }); //getting selection option in array as country list
+                await setCountryOption(countryOptions);
+
+                let provinceOptions = [];
+                await details.data.provinces.map((item) => {
+                    provinceOptions.push({
+                    label: item.name,
+                    value: item.id,
+                    id: item.id,
+                  });
+                }); //getting selection option in array as province list
+                await setProvinceOption(provinceOptions);
+
                 setMetaData(details.data);
-                setCountryOption(details.data.countries);
-                setProvinceOption(details.data.provinces);
             }
             else {
                 Toast.fire({
@@ -103,24 +123,26 @@ function Profile() {
     useEffect(() => {
         async function getUserDetails() {
             const details = await SublyApi.userProfile(userToken); //profile api call
+            console.log('detailsdetails',details)
+           
             if (details.status_code === STATUS_CODES.SUCCESS) {
-                setUserDetails(details.data);
+                // setUserDetails(details.data);
                 setValue("fullName", details.data[0].name);
                 setValue("email", details.data[0].email);
                 setValue("companyName", details.data[0].company_name);
                 setValue("occupation", details.data[0].occupation);
                 setValue("city", details.data[0].city);
-                setDialCode(details.data[0].dial_code);
-                setCountryCode(details.data[0].country_code);
-                setPhoneNo(details.data[0].contact);
-                setWatsappNo(details.data[0].whatapp_contact_number);
-                setCountryCodeWatsapp(details.data[0].whatsapp_country_code);
-                setDialCodeWatsapp(details.data[0].whatsapp_dail_code);
-                setProfilePreview(details.data[0].img_url);
-                // setCountryOption(details.data[0].country_id)
-                // setProvinceOption(details.data[0].provinces)
-                setCountrySelected(details.data[0].country_id)
-                setProvinceSelected(details.data[0].provinces)
+                setDialCode((details.data[0].dial_code)?details.data[0].dial_code:"");
+                setCountryCode((details.data[0].country_code)?details.data[0].country_code:"");
+                setPhoneNo((details.data[0].contact)?details.data[0].contact:"");
+                setWatsappNo((details.data[0].whatapp_contact_number)?details.data[0].whatapp_contact_number:"");
+                setCountryCodeWatsapp((details.data[0].whatsapp_country_code)?details.data[0].whatsapp_country_code:"");
+                setDialCodeWatsapp((details.data[0].whatsapp_dail_code)?details.data[0].whatsapp_dail_code:"");
+                setProfilePreview((details.data[0].img_url)?details.data[0].img_url:"");
+                // setCountryOption((details.data[0].country_id)?details.data[0].country_id:"")
+                // setProvinceOption((details.data[0].provinces)?details.data[0].provinces:"")
+                // setCountrySelected((details.data[0].country_id)?details.data[0].country_id:"")
+                // setProvinceSelected((details.data[0].provinces)?details.data[0].provinces:"")
             } else {
                 Toast.fire({
                     icon: "error",
@@ -339,7 +361,7 @@ function Profile() {
                                                 placeholder="South Africa"
                                                 maxMenuHeight={220}
                                                 menuPlacement="auto"
-                                                defaultValue={countryOption[0]}
+                                                defaultValue={countrySelected}
                                                 styles={{
                                                     placeholder: () => ({
                                                         fontSize: "15px",

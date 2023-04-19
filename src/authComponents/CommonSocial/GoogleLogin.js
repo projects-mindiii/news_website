@@ -11,7 +11,6 @@ import { isSocialLogin, socialSignup } from "../../store/slices/UserSlice";
 import { SOCIAL_TYPE } from "../../utils/Constants";
 
 function GoogleLogin(props) {
-  console.log(props);
   const navigate = useNavigate();
   //set language
   const { t } = useTranslation();
