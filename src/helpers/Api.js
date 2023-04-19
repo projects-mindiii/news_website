@@ -170,13 +170,15 @@ class SublyApi {
   }
 
 
+  /* GET  /Get classified metalist: 
+       Authorization required: Token
+       @returns {object} {token}
+       */
       static async getClassiFiedMeta(token) {
         let header = { "access-token": ` ${token}` };
-    
         let res = await this.request(`/v2/get-meta-list`,
           "", "get",header
     );
-
     return res;
   }
 

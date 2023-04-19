@@ -9,6 +9,7 @@ import HeaderData from "./HeaderData";
 import { useEffect } from "react";
 import { useDispatch,useSelector } from 'react-redux';
 import { guestUserLogin } from "../../store/slices/UserSlice";
+import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
 
 //-------Create a Header component--------
 function Header() {
@@ -62,6 +63,7 @@ function Header() {
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
             <DealsHeader />
+            <ClassifiedCountry/>
             <SearchBar />
           </div>
         </div>
