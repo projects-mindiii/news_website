@@ -157,14 +157,13 @@
     margin-bottom: 0px;
 }
 
-.classiFieds_RupeesText p small {
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 16px;
-    letter-spacing: -0.0916667px;
-    color: #000000;
+.classiFieds_RupeesText span {
+        color: #000000;
+        font-size: 12px;
+        font-weight: 400;
+        margin: 5px;
+    }
 
-}
 
 .classiFieds_countryName span {
     font-weight: 600;
@@ -274,6 +273,14 @@
     color: #FFFFFF;
     font-weight: 600;
     
+}
+.classiFieds_forSaledropdown{
+    margin-bottom: 15px;
+}
+@media only screen and (max-width: 991px) {
+    .advertisment{
+        margin-top: 10px;
+    }
 }
 @media only screen and (max-width: 480px) {
     .classiFieds_forSale_about .classiFieds_forSale img {
@@ -433,6 +440,7 @@
        height: 2.68px;
        margin: 3px;
     }
+    
 }
 
 @media only screen and (max-width: 349px) {
@@ -447,5 +455,27 @@
         width: 300px;
         height: 277px;
     }
+}
+.advertisment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.classiFieds_map_serchbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.classiFieds_country_select{
+    border: 1px solid red;
+    max-height: 200px;
+    overflow-y: scroll;
+    z-index: 99999999999 !important;
+    position: absolute;
+    background:#ec4624 ;
+}
+.classiFieds_country_select >div{
+    border: 1px solid #ec4624;
+    color: white;
 }
 
