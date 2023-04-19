@@ -20,6 +20,7 @@ function Header() {
   // ======Calling Api for guest user login======
   useEffect(() => {
     async function GuestLogin() {
+      alert('GuestLogin')
       await dispatch(guestUserLogin()).then((responseJson) => {
         const response = responseJson.payload;
         if (response.status_code === 200) {
