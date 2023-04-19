@@ -15,15 +15,17 @@ import 'react-phone-input-2/lib/style.css';
 import { MdPhonelinkRing } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import SublyApi from "../../helpers/Api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CustomBtn from "../../formComponent/Button/Button";
 import Select from "react-select";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
+import { updateProfile, userDetails } from "../../store/slices/UserSlice";
 
 
 //--------Create a Profile component----------
 function Profile() {
+    const dispatch = useDispatch();
     //set language
     const { t } = useTranslation();
     const [phoneNo, setPhoneNo] = useState("");
@@ -34,18 +36,15 @@ function Profile() {
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
-    //----- set state for show alert box for error response------
-    const [showError, setShowError] = useState(null);
     //----- state for manage show/hide change password inputs fields-----
     const [show, setShow] = useState(false);
-    const [userDetails, setUserDetails] = useState("");
     const { userToken } = useSelector((state) => state.user);
     const [metaData, setMetaData] = useState("");
     const locationOption = [
-        { value: "204", label: "South Africa", id: "204" },
-        { value: "0", label: "Outside South Africa", id: "0" },
+        { value: 1, label: "South Africa", id: 1 },
+        { value: 2, label: "Outside South Africa", id: 2 },
     ];
-    const [locationSelected, setLocationSelected] = useState(204);
+    const [locationSelected, setLocationSelected] = useState(1);
     const [countryOption, setCountryOption] = useState([
         {
             label: "Set Country",
@@ -63,12 +62,19 @@ function Profile() {
     ]);
     const [provinceSelected, setProvinceSelected] = useState("");
 
+
     //----- function for Upload update profile image-----
     function onImageChange(e) {
         if (e.target.files.length !== 0) {
             setProfilePreview(URL.createObjectURL(e.target.files[0]));
             setProfileImage(e.target.files[0]);
         }
+    }
+
+    //----- function for remove profile image-----
+    function onImageRemove() {
+        setProfilePreview(ProfileImg);
+        setProfileImage("");
     }
 
     //----------function for form validation using useform------------
@@ -83,27 +89,26 @@ function Profile() {
     //-------function for get country list Api-------
     useEffect(() => {
         async function getMetaDetails() {
-            const details = await SublyApi.getClassiFiedMeta(userToken); //profile api call
+            const details = await SublyApi.getClassiFiedMeta(userToken); //get country and province list
 
-            
             if (details.status_code === STATUS_CODES.SUCCESS) {
                 let countryOptions = [];
                 await details.data.countries.map((item) => {
                     countryOptions.push({
-                    label: item.name,
-                    value: item.id,
-                    id: item.id,
-                  });
+                        label: item.name,
+                        value: item.id,
+                        id: item.id,
+                    });
                 }); //getting selection option in array as country list
                 await setCountryOption(countryOptions);
 
                 let provinceOptions = [];
                 await details.data.provinces.map((item) => {
                     provinceOptions.push({
-                    label: item.name,
-                    value: item.id,
-                    id: item.id,
-                  });
+                        label: item.name,
+                        value: item.id,
+                        id: item.id,
+                    });
                 }); //getting selection option in array as province list
                 await setProvinceOption(provinceOptions);
 
@@ -121,36 +126,41 @@ function Profile() {
 
     //-------function for profile Api-------
     useEffect(() => {
-        async function getUserDetails() {
-            const details = await SublyApi.userProfile(userToken); //profile api call
-            console.log('detailsdetails',details)
-           
-            if (details.status_code === STATUS_CODES.SUCCESS) {
-                // setUserDetails(details.data);
-                setValue("fullName", details.data[0].name);
-                setValue("email", details.data[0].email);
-                setValue("companyName", details.data[0].company_name);
-                setValue("occupation", details.data[0].occupation);
-                setValue("city", details.data[0].city);
-                setDialCode((details.data[0].dial_code)?details.data[0].dial_code:"");
-                setCountryCode((details.data[0].country_code)?details.data[0].country_code:"");
-                setPhoneNo((details.data[0].contact)?details.data[0].contact:"");
-                setWatsappNo((details.data[0].whatapp_contact_number)?details.data[0].whatapp_contact_number:"");
-                setCountryCodeWatsapp((details.data[0].whatsapp_country_code)?details.data[0].whatsapp_country_code:"");
-                setDialCodeWatsapp((details.data[0].whatsapp_dail_code)?details.data[0].whatsapp_dail_code:"");
-                setProfilePreview((details.data[0].img_url)?details.data[0].img_url:"");
-                // setCountryOption((details.data[0].country_id)?details.data[0].country_id:"")
-                // setProvinceOption((details.data[0].provinces)?details.data[0].provinces:"")
-                // setCountrySelected((details.data[0].country_id)?details.data[0].country_id:"")
-                // setProvinceSelected((details.data[0].provinces)?details.data[0].provinces:"")
+        dispatch(userDetails(userToken)).then((responsejson) => {
+            const response = responsejson.payload;
+            if (response.status_code === STATUS_CODES.SUCCESS) {
+                setValue("fullName", (response.data[0].name) ? response.data[0].name : "");
+                setValue("email", (response.data[0].email) ? response.data[0].email : "");
+                setValue("companyName", (response.data[0].company_name) ? response.data[0].company_name : "");
+                setValue("occupation", (response.data[0].occupation) ? response.data[0].occupation : "");
+                setValue("city", (response.data[0].city) ? response.data[0].city : "");
+                setDialCode((response.data[0].dial_code) ? response.data[0].dial_code : dialCode);
+                setCountryCode((response.data[0].country_code) ? response.data[0].country_code : countryCode);
+                setPhoneNo((response.data[0].contact) ? response.data[0].contact : "");
+                setWatsappNo((response.data[0].whatapp_contact_number) ? response.data[0].whatapp_contact_number : "");
+                setCountryCodeWatsapp((response.data[0].whatsapp_country_code) ? response.data[0].whatsapp_country_code : countryCodeWatsapp);
+                setDialCodeWatsapp((response.data[0].whatsapp_dail_code) ? response.data[0].whatsapp_dail_code : dialCodeWatsapp);
+                setProfilePreview((response.data[0].img_url) ? response.data[0].img_url : "");
+
+                const newOption = locationOption.find(item => item.id === response.data[0].is_default_country);
+                console.log('newOption', newOption)
+
+                setLocationSelected({ value: 2, label: "Outside South Africa", id: 2 });
+
+
+
+
+                // setCountryOption((response.data[0].country_id) ? response.data[0].country_id : "")
+                // setProvinceOption((response.data[0].provinces) ? response.data[0].provinces : "")
+                // setCountrySelected((response.data[0].country_id) ? response.data[0].country_id : "")
+                // setProvinceSelected((response.data[0].provinces) ? response.data[0].provinces : "")
             } else {
                 Toast.fire({
                     icon: "error",
-                    title: details.data.message,
+                    title: response.data.message,
                 });
             }
-        }
-        getUserDetails();
+        })
     }, []);
 
     //-----------function for update profile api-----------
@@ -167,16 +177,30 @@ function Profile() {
         requestData.append("whatsapp_dail_code", dialCodeWatsapp);
         requestData.append("whatsapp_country_code", countryCodeWatsapp);
         requestData.append("whatapp_contact_number", watsappNo);
-        await SublyApi.updateProfile(requestData,userToken).then((responsejson) => {
-            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+        requestData.append("country_id", countryOption);
+        requestData.append("provinces", provinceOption);
+        console.log('locationSelected', locationSelected)
+        console.log('locationSelected value', locationSelected.value)
+
+        requestData.append("is_default_country", locationSelected.value);
+
+
+        requestData.append("current_password", formdata.setPassword);
+        requestData.append("new_passsword", formdata.repeatPassword);
+
+
+        const data = { 'requestData': requestData, "userToken": userToken };
+        dispatch(updateProfile(data)).then((responsejson) => {
+            const response = responsejson.payload;
+            if (response.status_code === STATUS_CODES.SUCCESS) {
                 Toast.fire({
                     icon: "success",
-                    title: responsejson.message,
+                    title: response.message,
                 });
             } else {
                 Toast.fire({
                     icon: "error",
-                    title: responsejson.data.message,
+                    title: response.data.message,
                 });
             }
         });
@@ -226,9 +250,6 @@ function Profile() {
                                             {...register("companyName"
 
                                             )}
-                                            {...register("companyName"
-
-                                            )}
                                         />
                                     </Form.Group>
 
@@ -236,9 +257,6 @@ function Profile() {
                                         <Form.Control
                                             type="text"
                                             placeholder={t("POSITION")}
-                                            {...register("occupation"
-
-                                            )}
                                             {...register("occupation"
 
                                             )}
@@ -321,13 +339,14 @@ function Profile() {
                                     <div className="selectOption">
                                         <Form.Group className="mb-3">
                                             <Select
-                                                id="status"
-                                                options={locationOption ? locationOption : {}}
-                                                onChange={(value) => setLocationSelected(value.id)}
-                                                placeholder="South Africa"
+                                                id="location" name="location"
+                                                options={locationOption}
+                                                onChange={setLocationSelected}
+                                                // onChange={(value) => setLocationSelected(value.id)}
+                                                // placeholder="South Africa"
                                                 // maxMenuHeight={220}
                                                 // menuPlacement="auto"
-                                                defaultValue={locationOption[0]}
+                                                defaultValue={locationSelected}
                                                 styles={{
                                                     placeholder: () => ({
                                                         fontSize: "15px",
@@ -351,17 +370,16 @@ function Profile() {
                                         </Form.Group>
                                     </div>
 
-                                    <div className={`${locationSelected == 204 ? "selectOption hideIcon" : "selectOption"}`}>
+                                    <div className={`${locationSelected.value == 1 ? "selectOption hideIcon" : "selectOption"}`}>
                                         <Form.Group className="mb-3" >
                                             <Select
-                                                id="status"
+                                                id="country"
                                                 options={countryOption ? countryOption : {}}
-                                                // onChange={(e) => handleChange(e)}
                                                 onChange={(value) => setCountrySelected(value)}
-                                                placeholder="South Africa"
+                                                placeholder="Country Set"
                                                 maxMenuHeight={220}
                                                 menuPlacement="auto"
-                                                defaultValue={countrySelected}
+                                                defaultValue={countryOption[0]}
                                                 styles={{
                                                     placeholder: () => ({
                                                         fontSize: "15px",
@@ -385,13 +403,13 @@ function Profile() {
                                         </Form.Group>
                                     </div>
 
-                                    <div className={`${locationSelected == 0 ? "selectOption hideIcon" : "selectOption"}`}>
+                                    <div className={`${locationSelected.value == 0 ? "selectOption hideIcon" : "selectOption"}`}>
                                         <Form.Group className="mb-3" >
                                             <Select
-                                                id="status"
+                                                id="province"
                                                 options={provinceOption ? provinceOption : {}}
                                                 onChange={(value) => setProvinceSelected(value)}
-                                                placeholder="South Africa"
+                                                placeholder="Province"
                                                 maxMenuHeight={220}
                                                 menuPlacement="auto"
                                                 defaultValue={provinceOption[0]}
@@ -426,9 +444,6 @@ function Profile() {
                                             {...register("city"
 
                                             )}
-                                            {...register("city"
-
-                                            )}
                                         />
                                     </Form.Group>
 
@@ -454,7 +469,7 @@ function Profile() {
                                             />
                                         </div>
                                         <div className="profileIcon">
-                                            <MdOutlineCancel />
+                                            <MdOutlineCancel onClick={(e) => onImageRemove(e)} />
                                             <h6 className="addCls">{t("CLEAR")}</h6>
                                         </div>
                                     </div>
@@ -483,17 +498,7 @@ function Profile() {
                                                     <Form.Control
                                                         type="password"
                                                         placeholder="Set New Password"
-                                                        {...register("password", {
-                                                            required: {
-                                                                value: true,
-                                                                message: `Please Enter Password`,
-                                                            },
-                                                            pattern: {
-                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                                                                message: `${t("INVALID_PASSWORD")}`,
-                                                            },
-                                                        })}
-                                                        {...register("password", {
+                                                        {...register("setPassword", {
                                                             required: {
                                                                 value: true,
                                                                 message: `Please Enter Password`,
@@ -512,29 +517,14 @@ function Profile() {
                                                         {...register("repeatPassword", {
                                                             required: {
                                                                 value: true,
-                                                                message: `Please Enter Repeat Password`,
+                                                                message: `Please Enter Password`,
                                                             },
 
                                                             validate: (value) =>
-                                                                value === watch("password") || "Passwords have to match",
-                                                        })}
-                                                        {...register("repeatPassword", {
-                                                            required: {
-                                                                value: true,
-                                                                message: `Please Enter Repeat Password`,
-                                                            },
-
-                                                            validate: (value) =>
-                                                                value === watch("password") || "Passwords have to match",
+                                                                value === watch("setPassword") || "Passwords have to match",
                                                         })}
                                                     />
                                                 </Form.Group>
-                                                <div className="errorSet">
-                                                    <span className="errorShow">
-                                                        {errors[Object.keys(errors)[0]] &&
-                                                            errors[Object.keys(errors)[0]].message}{" "}
-                                                    </span>
-                                                </div>
                                                 <div className="errorSet">
                                                     <span className="errorShow">
                                                         {errors[Object.keys(errors)[0]] &&
@@ -553,7 +543,6 @@ function Profile() {
                                     <BsTrash3 />
                                     <h6>{t("DELETE_ACCOUNT")}</h6>
                                 </div>
-
                             </div>
                         </Col>
                     </Row>

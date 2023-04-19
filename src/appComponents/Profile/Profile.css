@@ -123,16 +123,16 @@
 }
 
 .profileImageSet {
-    width: 100%;
-    max-width: 120px;
-    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     border: 1px solid #e7e4e4;
 }
 
 .profileImageSet img {
-    width: 100%;
-    max-width: 120px;
-    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     object-fit: cover;
     border: 1px solid #e7e4e4;
 }
@@ -276,22 +276,20 @@
     margin-left: 0;
     background: #FFFFFF;
     border: none !important;
-    border-radius: 5px;
+    border-radius: 7.26px;
     line-height: 25px;
     height: 40px !important;
     width: 100% !important;
     outline: none;
-    /* padding-left: 48px !important; */
     padding-left: 120px !important;
 }
 
 .phoneInputSet .react-tel-input .flag-dropdown {
     border: none !important;
-    border-radius: 3px 0 0 3px;
     background: #000000 !important;
     width: 110px !important;
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
+    border-top-left-radius: 7.26px !important;
+    border-bottom-left-radius: 7.26px !important;
 }
 
 .phoneInputSet .react-tel-input .selected-flag .flag {
@@ -311,13 +309,12 @@
     width: 110px !important;
     height: 100%;
     padding: 0 0 0 8px;
-    border-radius: 3px 0 0 3px;
     background: #000000 !important;
 }
 
 .phoneInputSet .react-tel-input .selected-flag {
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
+    border-top-left-radius: 7.26px !important;
+    border-bottom-left-radius: 7.26px !important;
 }
 
 .phoneInputSet:before {
@@ -391,3 +388,10 @@
     height: 28px !important;
 }
 
+/* .css-1prs2ur-Placeholder {
+    font-size: 15px;
+    color: #000000 !important;
+    position: absolute;
+     top: 0px !important;
+    left: 10px;
+} */

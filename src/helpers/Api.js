@@ -7,7 +7,13 @@ const REACT_PROXYURL = "";
 // for making unique id for every browser
 if(!localStorage.getItem("news_device_id")){
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
-  localStorage.setItem("news_device_id", uint32.toString(16));
+  localStorage.setItem("news_device_id", uint32.toString(32));
+}
+
+// for making unique token for every browser
+if(!localStorage.getItem("news_device_token")){
+  const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
+  localStorage.setItem("news_device_token", uint32.toString(32));
 }
 
 /** API Class
@@ -21,7 +27,7 @@ class SublyApi {
   //required common header for each api calling.
   static commonHeaders = {
     "api-key": process.env.REACT_APP_API_KEY_PAIR,
-    "device-token":localStorage.getItem("news_device_id"),
+    "device-token":localStorage.getItem("news_device_token"),
     "device-id": localStorage.getItem("news_device_id"),
     "device-type": "3",
   };
