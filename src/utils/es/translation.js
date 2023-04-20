@@ -93,9 +93,11 @@ export const TRANSLATIONS_ES = {
     COMPANY_NAME: "Nombre de la compañía (opcional)",
     POSITION: "Puesto/Ocupación (Opcional)",
 
-    
     //---------- Form Lable Common Text---------------
     REMEMBER_ME: "Acuérdate de mí",
     YOUR_NAME: "Tu nombre (Opcional)",
-    YOUR_EMAIL: "Tu Email (requerido)"
+    YOUR_EMAIL: "Tu Email (requerido)",
+
+     //---------- Status Error Text---------------
+     SESSION_EXPIRE: "Your Session Expired!",
 }

@@ -55,7 +55,7 @@ function GoogleLogin(props) {
           });
           navigate("/deals/latest-deals");
           localStorage.setItem("token", response.data.token);
-        } else if (response.data.status_code == STATUS_CODES.PAGE_NOT_FOUND) {
+        } else if (response.data.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
             console.log("api socialSignup responsejson", signresponsejson);
             const response = signresponsejson.payload;

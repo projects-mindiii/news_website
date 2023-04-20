@@ -107,8 +107,8 @@ const userSessionLogin = (state, response) => {
 };
 
 // manage user session expire
-const isUserSessionExpire = (state, response) => {
-  if (response.status_code === STATUS_CODES.SESSION_EXPIRE) {
+export const isUserSessionExpire = (state, response) => {
+  if (response.status_code === STATUS_CODES.INVALID_TOKEN) {
     state.sessionExpire = response.data.message;
     state.currentUser = {};
     state.guestUser = {};
@@ -179,6 +179,33 @@ export const userSlice = createSlice({
       state.isLoading = false
       state.error = action.error.message
     })
+
+     // check get user detail
+     builder.addCase(userDetails.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(userDetails.fulfilled, (state, action) => {
+      const response = action.payload;
+      isUserSessionExpire(state, response);
+    })
+    builder.addCase(userDetails.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
+    })
+
+    // check update profile 
+    builder.addCase(updateProfile.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      const response = action.payload;
+      isUserSessionExpire(state, response);
+    })
+    builder.addCase(updateProfile.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
+    })
+
 
   },
 })

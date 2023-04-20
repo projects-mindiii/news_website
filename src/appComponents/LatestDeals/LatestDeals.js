@@ -1,18 +1,15 @@
-import { Col, Container, Nav, Row, Tab, Toast } from "react-bootstrap";
+import { Col, Container, Nav, Row, Tab} from "react-bootstrap";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import "./LatestDeals.css";
 import "../../assets/styles/Common.css";
 import DigitalPrint from "../DealSubModule/DealSubModules";
-import { useEffect, useLayoutEffect, useState } from "react";
-import CompanyProfile from "../DealSubModule/CompanyProfile";
-import { useDispatch, useSelector } from "react-redux";
-
+import {useState} from "react";
+import {useSelector} from "react-redux";
 
 function LatestDeals() {
   const { latestDeals, isLoading } = useSelector((state) => state.deal);
-
   const [eventKeyValue, setEventKeyValue] = useState((latestDeals && latestDeals.length >0)?latestDeals[0].id:null);
-console.log('latestDeals',latestDeals)
+
   return (
     <div className="dealContainer">
       <Container>
@@ -29,7 +26,7 @@ console.log('latestDeals',latestDeals)
                 <Nav.Item>
                   {latestDeals.length > 0
                     ? latestDeals.map((item, index) => (
-                        <Nav.Link eventKey={item.id}>
+                        <Nav.Link  key={item.id} eventKey={item.id}>
                           {item.name} ({item.deal_count})
                           <MdKeyboardArrowRight />
                         </Nav.Link>
@@ -45,7 +42,6 @@ console.log('latestDeals',latestDeals)
                     eventKeyValue={eventKeyValue}
                     dealList={latestDeals}
                   />
-                  {/* <CompanyProfile/> */}
                 </Tab.Pane>
               </Tab.Content>
             </Col>
