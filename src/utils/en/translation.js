@@ -69,6 +69,10 @@ export const TRANSLATIONS_EN = {
   DELETE_ACCOUNT: "DELETE ACCOUNT",
   SAVE: "SAVE",
   NOTE: "PLEASE NOTE -",
+  ALERT: "Alert",
+  WANT_DELETE: "Are you sure ? You want to delete your account.",
+  CANCEL: "CANCEL",
+  DELETE: "DELETE",
 
 
   //---------------Error Messages Common Text----------
@@ -83,6 +87,10 @@ export const TRANSLATIONS_EN = {
   NAME_MINLENGTH: "Please enter atleast 3 character",
   ENTER_NAME: "please enter full name",
   ENTER_EMAIL: "please enter Email address",
+  NEW_PASSWORD: "Please Enter New Password",
+  REPEAT_PASS: "Please Enter Repeat Password",
+  NOT_MATCH: "Repeat password does not match",
+  MATCH_PASS: "Passwords have to match",
 
 
   //---------- Placeholder Common Text---------------
@@ -93,6 +101,9 @@ export const TRANSLATIONS_EN = {
   SEARCH: "Search",
   COMPANY_NAME: "Company Name (Optional)",
   POSITION: "Position/Occupation (Optional)",
+  CITY: "Input City/Town",
+  SET_PASSWORD: "Set New Password",
+  REPEAT_PASSWORD: "Repeat Password",
 
 
   //---------- Form Lable Common Text---------------
