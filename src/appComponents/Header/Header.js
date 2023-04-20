@@ -64,7 +64,7 @@ function Header() {
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
             <DealsHeader />
-            {/* <ClassifiedCountry/> */}
+            <ClassifiedCountry/>
             <SearchBar />
           </div>
         </div>
