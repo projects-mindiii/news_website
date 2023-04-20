@@ -70,6 +70,10 @@ export const TRANSLATIONS_ES = {
     DELETE_ACCOUNT: "BORRAR CUENTA",
     SAVE: "AHORRAR",
     NOTE: "TENGA EN CUENTA -",
+    ALERT: "Alerta",
+    WANT_DELETE: "Está seguro ? Quiere eliminar su cuenta.",
+    CANCEL: "CANCELAR",
+    DELETE: "BORRAR",
 
     //---------------Error Messages Common Text----------
     INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
@@ -83,6 +87,10 @@ export const TRANSLATIONS_ES = {
     NAME_MINLENGTH: "Por favor ingrese al menos 3 caracteres",
     ENTER_NAME: "por favor ingrese el nombre completo",
     ENTER_EMAIL: "por favor ingrese la dirección de correo electrónico",
+    NEW_PASSWORD: "Ingrese una nueva contraseña",
+    REPEAT_PASS: "Ingrese la contraseña repetida",
+    NOT_MATCH: "Repetir contraseña no coincide",
+    MATCH_PASS: "Las contraseñas tienen que coincidir",
 
     //---------- Placeholder Common Text---------------
     NAME: "Nombre completo",
@@ -92,8 +100,11 @@ export const TRANSLATIONS_ES = {
     SEARCH: "Buscar",
     COMPANY_NAME: "Nombre de la compañía (opcional)",
     POSITION: "Puesto/Ocupación (Opcional)",
+    CITY: "Ciudad/pueblo de entrada",
+    SET_PASSWORD: "Establecer nueva contraseña",
+    REPEAT_PASSWORD: "Repita la contraseña",
 
-    
+
     //---------- Form Lable Common Text---------------
     REMEMBER_ME: "Acuérdate de mí",
     YOUR_NAME: "Tu nombre (Opcional)",

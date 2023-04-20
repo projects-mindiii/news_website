@@ -388,10 +388,20 @@
     height: 28px !important;
 }
 
-/* .css-1prs2ur-Placeholder {
-    font-size: 15px;
-    color: #000000 !important;
-    position: absolute;
-     top: 0px !important;
-    left: 10px;
-} */
+/* css for delete popup modal */
+.deletePopup .modal-footer {
+    border-top: none !important;
+}
+
+.deletePopup .modal-header {
+    border-bottom: none !important;
+}
+
+.deletePopup .modal-body {
+    padding: 0px !important;
+    padding-left: 15px !important;
+}
+
+.buttonAdd1 .btn {
+    background-color: #000000 !important;
+}
