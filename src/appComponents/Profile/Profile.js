@@ -101,7 +101,6 @@ function Profile() {
     useEffect(() => {
         async function getMetaDetails() {
             const details = await SublyApi.getClassiFiedMeta(userToken); //get country and province list
-
             if (details.status_code === STATUS_CODES.SUCCESS) {
                 let countryOptions = [];
                 await details.data.countries.map((item) => {
@@ -151,12 +150,9 @@ function Profile() {
                 setWatsappNo((response.data[0].whatapp_contact_number) ? response.data[0].whatapp_contact_number : "");
                 setCountryCodeWatsapp((response.data[0].whatsapp_country_code) ? response.data[0].whatsapp_country_code : countryCodeWatsapp);
                 setDialCodeWatsapp((response.data[0].whatsapp_dail_code) ? response.data[0].whatsapp_dail_code : dialCodeWatsapp);
-                setProfilePreview((response.data[0].img_url) ? response.data[0].img_url : "");
+                setProfilePreview((response.data[0].img_url) ? response.data[0].img_url : profilePreview);
                 setIsPassword((response.data[0].password) ? response.data[0].password : "");
-
                 const newOption = locationOption.find(item => item.id === response.data[0].is_default_country);
-               
-
                 setLocationSelected({ value: 2, label: "Outside South Africa", id: 2 });
 
                 // setCountryOption((response.data[0].country_id) ? response.data[0].country_id : "")
@@ -188,18 +184,11 @@ function Profile() {
         requestData.append("whatapp_contact_number", watsappNo);
         requestData.append("country_id", countryOption);
         requestData.append("provinces", provinceOption);
-        console.log('locationSelected', locationSelected)
-        console.log('locationSelected value', locationSelected.value)
-
         requestData.append("is_default_country", locationSelected.value);
-
-
         requestData.append("image", profileImage);
         requestData.append("is_password_change", changePassword);
-        requestData.append("current_password", formdata.setPassword);
-        requestData.append("new_passsword", formdata.repeatPassword);
-
-
+        requestData.append("current_password", formdata.currentPassword);
+        requestData.append("new_passsword", formdata.setPassword);
         const data = { 'requestData': requestData, "userToken": userToken };
         dispatch(updateProfile(data)).then((responsejson) => {
             const response = responsejson.payload;
@@ -521,7 +510,7 @@ function Profile() {
                                                     <Form.Control
                                                         type="password"
                                                         placeholder="Current Password"
-                                                        {...register("password", {
+                                                        {...register("currentPassword", {
                                                             required: {
                                                                 value: true,
                                                                 message: "Please Enter password"
@@ -569,8 +558,8 @@ function Profile() {
                                                                 message: `${t("REPEAT_PASS")}`,
                                                             },
 
-                                                            // validate: (value) =>
-                                                            //     value === watch("setPassword") || `${t("NOT_MATCH")}`,
+                                                            validate: (value) =>
+                                                                value === watch("setPassword") || `${t("NOT_MATCH")}`,
                                                         })}
                                                     />
                                                 </Form.Group>

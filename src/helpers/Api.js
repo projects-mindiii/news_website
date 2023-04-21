@@ -9,14 +9,14 @@ if (!localStorage.getItem("news_device_id")) {
 if (!localStorage.getItem("news_device_id")) {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
   localStorage.setItem("news_device_id", uint32.toString(32));
-}
+}}
 
 // for making unique token for every browser
 if (!localStorage.getItem("news_device_token")) {
 if (!localStorage.getItem("news_device_token")) {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
   localStorage.setItem("news_device_token", uint32.toString(32));
-}
+}}
 
 /** API Class
  * static clase trying together method used to get/send to the API.
