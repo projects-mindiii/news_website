@@ -16,18 +16,11 @@
     background: #EC4624 !important;
 }
 
-.navHeader img.icon {
-    width: 15px;
+ .navHeader img.icon {
+   
     margin-right: 9px;
-    height: 15px;
-    margin-top: 2px;
-}
-
-.navHeader img.icons {
-    width: 18px;
-    height: 18px;
-    margin-top: 0px;
-    margin-right: 8px;
+   
+   
 }
 
 @media only screen and (max-width: 991px) {

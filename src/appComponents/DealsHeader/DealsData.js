@@ -1,10 +1,10 @@
 /** @format */
 import { t } from "i18next";
-import Icon1 from "../../assets/images/icon1.png";
-import Icon2 from "../../assets/images/icon2.png";
-import Icon3 from "../../assets/images/icon3.png";
-import Icon4 from "../../assets/images/icon4.png";
-import Icon5 from "../../assets/images/icon5.png";
+import Icon1 from "../../assets/images/icon1.svg";
+import Icon2 from "../../assets/images/icon2.svg";
+import Icon3 from "../../assets/images/icon3.svg";
+import Icon4 from "../../assets/images/icon4.svg";
+import Icon5 from "../../assets/images/icon5.svg";
 
 export const dealsData = [
     {

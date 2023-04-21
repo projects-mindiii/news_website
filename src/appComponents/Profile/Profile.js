@@ -1,4 +1,4 @@
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Form, Modal, Row } from "react-bootstrap";
 import "./Profile.css";
 import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
@@ -21,11 +21,13 @@ import Select from "react-select";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { updateProfile, userDetails } from "../../store/slices/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 
 //--------Create a Profile component----------
 function Profile() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     //set language
     const { t } = useTranslation();
     const [phoneNo, setPhoneNo] = useState("");
@@ -36,8 +38,6 @@ function Profile() {
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
-    //----- state for manage show/hide change password inputs fields-----
-    const [show, setShow] = useState(false);
     const { userToken } = useSelector((state) => state.user);
     const [metaData, setMetaData] = useState("");
     const locationOption = [
@@ -61,6 +61,17 @@ function Profile() {
         },
     ]);
     const [provinceSelected, setProvinceSelected] = useState("");
+
+    const [changePassword, setChangePassword] = useState(0);
+    const [isPassword, setIsPassword] = useState("");
+
+    //----- state for manage show/hide modal-----
+    const [showPopup, setShowPopup] = useState(false);
+
+    //----- for close modal-----
+    const handleClose = () => setShowPopup(false);
+    //----- for show modal-----
+    const handleShow = () => setShowPopup(true);
 
 
     //----- function for Upload update profile image-----
@@ -86,11 +97,20 @@ function Profile() {
         formState: { errors },
     } = useForm();
 
+    //----------function for last 3 digit of password showing in string------------
+    function showMaskedPassword() {
+        if (isPassword.length >= 3) {
+            const maskedPassword = '*'.repeat(isPassword.length - 3) + isPassword.slice(-3);
+            return maskedPassword;
+        } else {
+            return isPassword;
+        }
+    }
+
     //-------function for get country list Api-------
     useEffect(() => {
         async function getMetaDetails() {
             const details = await SublyApi.getClassiFiedMeta(userToken); //get country and province list
-
             if (details.status_code === STATUS_CODES.SUCCESS) {
                 let countryOptions = [];
                 await details.data.countries.map((item) => {
@@ -124,7 +144,7 @@ function Profile() {
         getMetaDetails();
     }, []);
 
-    //-------function for profile Api-------
+    //-------function for get profile Api-------
     useEffect(() => {
         dispatch(userDetails(userToken)).then((responsejson) => {
             const response = responsejson.payload;
@@ -140,15 +160,10 @@ function Profile() {
                 setWatsappNo((response.data[0].whatapp_contact_number) ? response.data[0].whatapp_contact_number : "");
                 setCountryCodeWatsapp((response.data[0].whatsapp_country_code) ? response.data[0].whatsapp_country_code : countryCodeWatsapp);
                 setDialCodeWatsapp((response.data[0].whatsapp_dail_code) ? response.data[0].whatsapp_dail_code : dialCodeWatsapp);
-                setProfilePreview((response.data[0].img_url) ? response.data[0].img_url : "");
-
+                setProfilePreview((response.data[0].img_url) ? response.data[0].img_url : profilePreview);
+                setIsPassword((response.data[0].password) ? response.data[0].password : "");
                 const newOption = locationOption.find(item => item.id === response.data[0].is_default_country);
-                console.log('newOption', newOption)
-
                 setLocationSelected({ value: 2, label: "Outside South Africa", id: 2 });
-
-
-
 
                 // setCountryOption((response.data[0].country_id) ? response.data[0].country_id : "")
                 // setProvinceOption((response.data[0].provinces) ? response.data[0].provinces : "")
@@ -179,16 +194,11 @@ function Profile() {
         requestData.append("whatapp_contact_number", watsappNo);
         requestData.append("country_id", countryOption);
         requestData.append("provinces", provinceOption);
-        console.log('locationSelected', locationSelected)
-        console.log('locationSelected value', locationSelected.value)
-
         requestData.append("is_default_country", locationSelected.value);
-
-
-        requestData.append("current_password", formdata.setPassword);
-        requestData.append("new_passsword", formdata.repeatPassword);
-
-
+        requestData.append("image", profileImage);
+        requestData.append("is_password_change", changePassword);
+        requestData.append("current_password", formdata.currentPassword);
+        requestData.append("new_passsword", formdata.setPassword);
         const data = { 'requestData': requestData, "userToken": userToken };
         dispatch(updateProfile(data)).then((responsejson) => {
             const response = responsejson.payload;
@@ -205,6 +215,23 @@ function Profile() {
             }
         });
     };
+
+    //------ function for delete user API -------
+    async function deleteUser() {
+        const response = await SublyApi.deleteUserProfile(userToken);
+        if (response.status_code === STATUS_CODES.SUCCESS) {
+            Toast.fire({
+                icon: "success",
+                title: response.message,
+            });
+            navigate("/login-form");
+        } else {
+            Toast.fire({
+                icon: "error",
+                title: response.data.message,
+            });
+        }
+    }
 
     return (
         <div className="main">
@@ -440,7 +467,7 @@ function Profile() {
                                     <Form.Group className="mb-3">
                                         <Form.Control
                                             type="text"
-                                            placeholder="Input City/Town"
+                                            placeholder={t("CITY")}
                                             {...register("city"
 
                                             )}
@@ -460,6 +487,7 @@ function Profile() {
                                             <img src={profilePreview} />
                                             <input
                                                 id="uploadImage"
+                                                name="image"
                                                 type="file"
                                                 style={{
                                                     display: "none",
@@ -477,31 +505,25 @@ function Profile() {
                                     <h3>{t("YOUR_PASSWORD")}</h3>
                                     <p>{t("PASSWORD_PARA")}</p>
                                     <div className="hidePassword">
-                                        *****H12
+                                        {isPassword}
                                     </div>
-                                    <div className="changePassword">
-                                        {show ? (
-                                            <div className="changeIcon" onClick={() => setShow(!show)}>
-                                                <h6>{t("CHANGE_PASSWORD")}</h6>
-                                                < MdKeyboardArrowUp />
-                                            </div>
 
-                                        ) : (
-                                            <div className="changeIcon" onClick={() => setShow(!show)}>
-                                                <h6>{t("CHANGE_PASSWORD")}</h6>
-                                                <MdKeyboardArrowDown />
-                                            </div>
-                                        )}
-                                        {show == true ? (
+                                    <div className="changePassword">
+                                        <div className="changeIcon">
+                                            <h6>{t("CHANGE_PASSWORD")}</h6>
+                                            {changePassword == 0 ? <MdKeyboardArrowDown onClick={() => setChangePassword(1)} /> : <MdKeyboardArrowUp onClick={() => setChangePassword(0)} />}
+                                        </div>
+
+                                        {changePassword == 1 &&
                                             <div>
                                                 <Form.Group className="mb-3">
                                                     <Form.Control
                                                         type="password"
-                                                        placeholder="Set New Password"
-                                                        {...register("setPassword", {
+                                                        placeholder="Current Password"
+                                                        {...register("currentPassword", {
                                                             required: {
                                                                 value: true,
-                                                                message: `Please Enter Password`,
+                                                                message: "Please Enter password"
                                                             },
                                                             pattern: {
                                                                 value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
@@ -510,36 +532,63 @@ function Profile() {
                                                         })}
                                                     />
                                                 </Form.Group>
+                                                {errors.password && (
+                                                    <span className="errorDisplay">
+                                                        {errors.password.message}
+                                                    </span>
+                                                )}
                                                 <Form.Group className="mb-3">
                                                     <Form.Control
                                                         type="password"
-                                                        placeholder="Repeat Password"
-                                                        {...register("repeatPassword", {
+                                                        placeholder={t("SET_PASSWORD")}
+                                                        {...register("setPassword", {
                                                             required: {
                                                                 value: true,
-                                                                message: `Please Enter Password`,
+                                                                message: `${t("NEW_PASSWORD")}`,
                                                             },
-
-                                                            validate: (value) =>
-                                                                value === watch("setPassword") || "Passwords have to match",
+                                                            pattern: {
+                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                message: `${t("INVALID_PASSWORD")}`,
+                                                            },
                                                         })}
                                                     />
                                                 </Form.Group>
-                                                <div className="errorSet">
-                                                    <span className="errorShow">
-                                                        {errors[Object.keys(errors)[0]] &&
-                                                            errors[Object.keys(errors)[0]].message}{" "}
+                                                {errors.setPassword && (
+                                                    <span className="errorDisplay">
+                                                        {errors.setPassword.message}
                                                     </span>
-                                                </div>
+                                                )}
+                                                <Form.Group className="mb-3">
+                                                    <Form.Control
+                                                        type="password"
+                                                        placeholder={t("REPEAT_PASSWORD")}
+                                                        {...register("repeatPassword", {
+                                                            required: {
+                                                                value: true,
+                                                                message: `${t("REPEAT_PASS")}`,
+                                                            },
+
+                                                            validate: (value) =>
+                                                                value === watch("setPassword") || `${t("NOT_MATCH")}`,
+                                                        })}
+                                                    />
+                                                </Form.Group>
+                                                {errors.repeatPassword && (
+                                                    <span className="errorDisplay">
+                                                        {errors.repeatPassword.message}
+                                                    </span>
+                                                )}
                                             </div>
-                                        ) : ""}
+                                        }
+
                                     </div>
+
                                     <div className="buttonAdd">
                                         <CustomBtn>{t("SAVE")}</CustomBtn>
                                     </div>
                                 </Form>
 
-                                <div className="deleteIcon">
+                                <div className="deleteIcon" onClick={handleShow}>
                                     <BsTrash3 />
                                     <h6>{t("DELETE_ACCOUNT")}</h6>
                                 </div>
@@ -548,7 +597,28 @@ function Profile() {
                     </Row>
                 </div >
             </Container >
+
+            <Modal
+                show={showPopup}
+                onHide={handleClose}
+                className="deletePopup"
+                keyboard={false}
+                backdrop="static">
+                <Modal.Header>
+                    <Modal.Title>{t("ALERT")}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{t("WANT_DELETE")}</Modal.Body>
+                <Modal.Footer>
+                    <div className="buttonAdd1">
+                        <CustomBtn type="button" onClick={handleClose}>{t("CANCEL")}</CustomBtn>
+                    </div>
+                    <div>
+                        <CustomBtn onClick={() => { deleteUser(); handleClose() }}>{t("DELETE")}</CustomBtn>
+                    </div>
+                </Modal.Footer>
+            </Modal>
         </div >
+
     );
 }
 export default Profile;

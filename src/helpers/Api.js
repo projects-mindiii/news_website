@@ -184,7 +184,9 @@ class SublyApi {
        */
   static async getClassiFiedMeta(token) {
     let header = { "access-token": ` ${token}` };
-    let res = await this.request(`/v2/get-meta-list`, "", "get", header);
+    let res = await this.request(`/v2/get-meta-list`,
+      "", "get", header
+    );
     return res;
   }
 
@@ -200,6 +202,52 @@ class SublyApi {
     let res = await this.request(`/v2/update-profile`, data, "post", header);
     return res;
   }
+
+  /* GET  /delete user: 
+    user account delete
+ 
+     Authorization required: Token
+     @returns {object} {token}
+     */
+  static async deleteUserProfile(authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/delete-user`,
+      undefined, undefined, header
+    );
+
+    return res;
+  }
+
+  /* GET  /delete user: 
+    user account delete
+ 
+     Authorization required: Token
+     @returns {object} {token}
+     */
+  static async deleteUserProfile(authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/delete-user`,
+      undefined, undefined, header
+    );
+
+    return res;
+  }
+
+  /* GET  /delete user: 
+    user account delete
+ 
+     Authorization required: Token
+     @returns {object} {token}
+     */
+  static async deleteUserProfile(authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/delete-user`,
+      undefined, undefined, header
+    );
+
+    return res;
+  }
+
 }
 
 // SublyApi.token =

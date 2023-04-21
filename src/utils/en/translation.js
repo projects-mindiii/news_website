@@ -13,7 +13,7 @@ export const TRANSLATIONS_EN = {
   LOGIN_LINKEDIN: "Login With Linkedin",
   DONT_ACCOUNT: "Don't have an account ?",
   EMAIL_LOGIN: "EMAIL LOGIN",
-  FORGOT_PASSWORD: "Forgot password ?",
+  FORGOT_PASSWORD: "Forgot password?",
   LOGIN_WITH: "or login with",
   CREATE_PROFILE: "CREATE PROFILE",
   LOG_IN: "LOG IN",
@@ -21,10 +21,10 @@ export const TRANSLATIONS_EN = {
   VIEW_PROFILE: "VIEW PROFILE",
   BOOKMARKS: "BOOKMARKS",
   RESET_PASSWORD: "RESET YOUR PASSWORD",
-  PASSWORD_TEXT: "A new password will be sent to the entered email address",
+  PASSWORD_TEXT: "A new password will be sent to the entered email address.",
   RESET_PASS: "RESET PASSWORD",
   NEW_PASS: "NEW PASSWORD SENT",
-  PASS_SENT: "A new password will be sent too",
+  PASS_SENT: "A new password will be sent to",
   RESEND: "Resend",
   CHANGE_EMAIL: "Change email address",
   EMAIL_VERIFICATION: "EMAIL VERIFICATION",
@@ -64,11 +64,15 @@ export const TRANSLATIONS_EN = {
   ADD: "ADD",
   CLEAR: "CLEAR",
   YOUR_PASSWORD: "Your Password",
-  PASSWORD_PARA: "Manage your password here",
+  PASSWORD_PARA: "Manage your password here.",
   CHANGE_PASSWORD: "CHANGE PASSWORD",
   DELETE_ACCOUNT: "DELETE ACCOUNT",
   SAVE: "SAVE",
   NOTE: "PLEASE NOTE -",
+  ALERT: "Alert",
+  WANT_DELETE: "Are you sure ? You want to delete your account.",
+  CANCEL: "CANCEL",
+  DELETE: "DELETE",
 
 
   //---------------Error Messages Common Text----------
@@ -83,6 +87,10 @@ export const TRANSLATIONS_EN = {
   NAME_MINLENGTH: "Please enter atleast 3 character",
   ENTER_NAME: "please enter full name",
   ENTER_EMAIL: "please enter Email address",
+  NEW_PASSWORD: "Please Enter New Password",
+  REPEAT_PASS: "Please Enter Repeat Password",
+  NOT_MATCH: "Repeat password does not match",
+  MATCH_PASS: "Passwords have to match",
 
 
   //---------- Placeholder Common Text---------------
@@ -93,6 +101,9 @@ export const TRANSLATIONS_EN = {
   SEARCH: "Search",
   COMPANY_NAME: "Company Name (Optional)",
   POSITION: "Position/Occupation (Optional)",
+  CITY: "Input City/Town",
+  SET_PASSWORD: "Set New Password",
+  REPEAT_PASSWORD: "Repeat Password",
 
 
   //---------- Form Lable Common Text---------------
