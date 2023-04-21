@@ -97,6 +97,16 @@ function Profile() {
         formState: { errors },
     } = useForm();
 
+    //----------function for last 3 digit of password showing in string------------
+    function showMaskedPassword() {
+        if (isPassword.length >= 3) {
+            const maskedPassword = '*'.repeat(isPassword.length - 3) + isPassword.slice(-3);
+            return maskedPassword;
+        } else {
+            return isPassword;
+        }
+    }
+
     //-------function for get country list Api-------
     useEffect(() => {
         async function getMetaDetails() {

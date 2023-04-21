@@ -25,19 +25,23 @@ function DealsHeader() {
   useEffect(() => {
     dispatch(getDealList(userToken)).then(async(responsejson) => {
         const response = responsejson.payload;
-        if (response.status === STATUS_CODES.INVALID_TOKEN) {
-          Toast.fire({
-              icon: "error",
-              title: t("SESSION_EXPIRE"),
-          });
-          await dispatch(userLogout());
-          await dispatch(guestUserLogin());
-          navigate("/login");
-        }else{
-          Toast.fire({
-              icon: "error",
-              title: response.data.message,
-          });
+        if (response.status_code !== STATUS_CODES.SUCCESS) {
+
+            if (response.status === STATUS_CODES.INVALID_TOKEN) {
+              Toast.fire({
+                  icon: "error",
+                  title: t("SESSION_EXPIRE"),
+              });
+              await dispatch(userLogout());
+              await dispatch(guestUserLogin());
+              navigate("/login");
+            }else{
+              Toast.fire({
+                  icon: "error",
+                  title: response.data.message,
+              });
+            }
+            
         }
     });
   }, []);
