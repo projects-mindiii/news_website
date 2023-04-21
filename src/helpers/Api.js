@@ -5,13 +5,13 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const REACT_PROXYURL = "";
 
 // for making unique id for every browser
-if(!localStorage.getItem("news_device_id")){
+if (!localStorage.getItem("news_device_id")) {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
   localStorage.setItem("news_device_id", uint32.toString(32));
 }
 
 // for making unique token for every browser
-if(!localStorage.getItem("news_device_token")){
+if (!localStorage.getItem("news_device_token")) {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
   localStorage.setItem("news_device_token", uint32.toString(32));
 }
@@ -27,7 +27,7 @@ class SublyApi {
   //required common header for each api calling.
   static commonHeaders = {
     "api-key": process.env.REACT_APP_API_KEY_PAIR,
-    "device-token":localStorage.getItem("news_device_token"),
+    "device-token": localStorage.getItem("news_device_token"),
     "device-id": localStorage.getItem("news_device_id"),
     "device-type": "3",
   };
@@ -157,8 +157,11 @@ class SublyApi {
        */
   static async userProfile(authToken) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/user-detail`,
-      undefined, undefined, header
+    let res = await this.request(
+      `/v2/user-detail`,
+      undefined,
+      undefined,
+      header
     );
 
     return res;
@@ -175,33 +178,30 @@ class SublyApi {
     return res;
   }
 
-
   /* GET  /Get classified metalist: 
        Authorization required: Token
        @returns {object} {token}
        */
-      static async getClassiFiedMeta(token) {
-        let header = { "access-token": ` ${token}` };
-        let res = await this.request(`/v2/get-meta-list`,
-          "", "get",header
-    );
+  static async getClassiFiedMeta(token) {
+    let header = { "access-token": ` ${token}` };
+    let res = await this.request(`/v2/get-meta-list`, "", "get", header);
     return res;
   }
-
-
 
   /* GET  /Get Webclassified list: 
        Authorization required: Token
        @returns {object} {token}
        */
-       static async getWebClassiFied(token) {
-        let header = { "access-token": ` ${token}` };
-        let res = await this.request(`/v2/web-classified-list`,
-          "", "get",header
+  static async getWebClassiFied(data, token, limit, offset, type) {
+    let header = { "access-token": ` ${token}` };
+    let res = await this.request(
+      `/v2/web-classified-list?limit=${limit}&offset=${offset}&type=${type}`,
+      data,
+      "get",
+      header
     );
     return res;
   }
-
 
   /* POST  /Update User Profile: 
       Update profile
@@ -211,12 +211,9 @@ class SublyApi {
        */
   static async updateProfile(data, authToken) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/update-profile`,
-      data, "post", header
-    );
+    let res = await this.request(`/v2/update-profile`, data, "post", header);
     return res;
   }
-
 }
 
 // SublyApi.token =

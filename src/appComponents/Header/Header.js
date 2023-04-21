@@ -1,5 +1,5 @@
 import { Container, Nav, Navbar, Toast } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
 import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
@@ -7,31 +7,30 @@ import "./Header.css";
 import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
 import { useEffect } from "react";
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { guestUserLogin } from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
 
 //-------Create a Header component--------
 function Header() {
   const dispatch = useDispatch();
+  const location = useLocation();
 
-  const  {guestUser,currentUser,isLoading}  = useSelector((state) => state.user);
+  const { guestUser, currentUser, isLoading } = useSelector(
+    (state) => state.user
+  );
 
   // ======Calling Api for guest user login======
   useEffect(() => {
     async function GuestLogin() {
-      alert('GuestLogin')
       await dispatch(guestUserLogin()).then((responseJson) => {
         const response = responseJson.payload;
-        if (response.status_code === 200) {
-            Toast.fire({
-              icon: "error",
-              title: response.data.message,
-            });
-        }
       });
     }
-    if(Object.keys(currentUser).length===0 && Object.keys(guestUser).length===0){
+    if (
+      Object.keys(currentUser).length === 0 &&
+      Object.keys(guestUser).length === 0
+    ) {
       GuestLogin();
     }
   }, []);
@@ -63,8 +62,8 @@ function Header() {
 
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
-            <DealsHeader />
-            <ClassifiedCountry/>
+            {location.pathname == "/deals/latest-deals" ? <DealsHeader /> : ""}
+            {location.pathname == "/classifieds" ? <ClassifiedCountry /> : ""}
             <SearchBar />
           </div>
         </div>

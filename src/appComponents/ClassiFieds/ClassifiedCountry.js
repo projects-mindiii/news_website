@@ -17,36 +17,38 @@ function ClassifiedCountry() {
   );
 
   //function for get classiFieds metalist
-  useEffect(() => {
-    async function getClassifiedLists() {
-      let requestData = new FormData();
-      requestData.append("limit", "");
-      requestData.append("offset", "");
-      requestData.append("type", 6);
-      requestData.append("search_by", 1);
-      requestData.append("province", 931);
-      requestData.append("country", 15);
-      requestData.append("city", "Free State");
-      await SublyApi.getClassiFiedMeta(userToken).then((responsejson) => {
-        if (responsejson.status_code == 500) {
-        } else if (responsejson.status_code == 400) {
-        } else {
-          if (responsejson.status_code == 200) {
-            setCategoryType(responsejson.data.category_type);
-            setCountryName(responsejson.data.provinces);
-          }
-        }
-      });
-      // SublyApi.getClassifiedList(requestData, userToken).then((responsejson) => {
-      // });
-    }
-    getClassifiedLists();
-  }, []);
+  // useEffect(() => {
+  //   async function getClassifiedLists() {
+  //     let requestData = new FormData();
+  //     requestData.append("limit", "");
+  //     requestData.append("offset", "");
+  //     requestData.append("type", 6);
+  //     requestData.append("search_by", 1);
+  //     requestData.append("province", 931);
+  //     requestData.append("country", 15);
+  //     requestData.append("city", "Free State");
+  //     await SublyApi.getClassiFiedMeta(userToken).then((responsejson) => {
+  //       if (responsejson.status_code == 500) {
+  //       } else if (responsejson.status_code == 400) {
+  //       } else {
+  //         if (responsejson.status_code == 200) {
+  //           setCategoryType(responsejson.data.category_type);
+  //           setCountryName(responsejson.data.provinces);
+  //         }
+  //       }
+  //     });
+  //     // SublyApi.getClassifiedList(requestData, userToken).then((responsejson) => {
+  //     // });
+  //   }
+  //   getClassifiedLists();
+  // }, []);
 
+
+ 
   return (
     <div className="classiFieds_map_serchbar">
       <div className="countryIcon">
-        <span
+        {/* <span
           onClick={() =>
             setcountriesSelect(countriesSelect == true ? false : true)
           }
@@ -54,12 +56,16 @@ function ClassifiedCountry() {
           <img src={mapicon} alt={mapicon} width="25px" height="25px" />
           {"All South Africa "}
 
-          {/* <span>
+          <span>
             {selectCountry
               ? selectCountry
               : CountryName && CountryName.length > 0 && CountryName[0].name}
-          </span> */}
-        </span>
+          </span>
+        </span> */}
+        <span className="imgIcon"> <img src={mapicon} alt={mapicon} width="25px" height="25px" /><span className="countryText">All South Africa -<span className="resultText">0 Results</span> </span></span>
+        
+
+
 
         <div className="classiFieds_country_select">
           {CountryName &&

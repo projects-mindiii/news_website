@@ -35,7 +35,7 @@ function FacebookSocialLogin(props) {
           });
           navigate("/deals/latest-deals");
         } else if (
-          responsejson.data.status_code == STATUS_CODES.PAGE_NOT_FOUND
+          responsejson.data.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND
         ) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
             console.log("api socialSignup responsejson", signresponsejson);

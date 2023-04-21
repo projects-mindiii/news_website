@@ -467,7 +467,6 @@
     align-items: center;
 }
 .classiFieds_country_select{
-    border: 1px solid red;
     max-height: 200px;
     overflow-y: scroll;
     z-index: 99999999999 !important;
