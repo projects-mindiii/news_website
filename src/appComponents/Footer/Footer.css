@@ -33,10 +33,11 @@
 }
 
 .signContent h6 {
-    font-size: 13px;
+    font-size: 10px;
     line-height: 22px;
     letter-spacing: -0.19px;
     color: #FFFFFF;
+    font-weight: 500px;
 }
 
 .appStoresImg {
@@ -67,7 +68,7 @@
 
 .linkNames h6 {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 9px;
     letter-spacing: -0.19px;
     color: #FFFFFF;
 }

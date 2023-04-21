@@ -9,15 +9,15 @@
 
 .profileLeftPart h3 {
     font-weight: 700;
-    font-size: 25px;
+    font-size: 30px;
     line-height: 25px;
     text-align: center;
     color: #474747;
 }
 
 .profileLeftPart p {
-    font-weight: 500;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 19px;
     line-height: 30px;
     text-align: center;
     color: #FFFFFF;
@@ -34,7 +34,7 @@
     background: #000000;
     border-radius: 10px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 22px;
     line-height: 25px;
     color: #FFFFFF;
     text-align: center;
@@ -43,7 +43,7 @@
 
 .profileRightPart h3 {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 22px;
     text-align: center;
     color: #000000;
     margin-top: 20px;
@@ -51,7 +51,7 @@
 
 .profileRightPart p {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 17px;
     text-align: center;
     color: #000000;
@@ -65,7 +65,7 @@
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
     border-radius: 7.26px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16.94px;
 }
 
 .profileRightPart .form-control:focus {
@@ -106,8 +106,8 @@
     position: absolute;
     bottom: 11px;
     background: #000000;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
     height: 40px;
     color: white;
     width: 50px;
@@ -189,9 +189,10 @@
     border: none;
     color: #ffffff;
     width: 100%;
-    font-size: 16px;
+    font-size: 22px;
     margin-top: 10px;
-    font-weight: 500;
+    line-height: 10px;
+    font-weight: 700;
     height: 40px;
     background: #000000;
     border-radius: 10px;
@@ -221,8 +222,8 @@
 
 .deleteIcon h6 {
     font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 26px;
     color: #000000;
     margin-bottom: 0px;
     margin-left: 4px;
@@ -268,7 +269,7 @@
 
 .phoneInputSet .form-control {
     position: relative;
-    font-size: 14px;
+    /* font-size: 14px; */
     letter-spacing: .01rem;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
@@ -282,6 +283,8 @@
     width: 100% !important;
     outline: none;
     padding-left: 120px !important;
+    font-weight: 500;
+    font-size: 16.94px !important;
 }
 
 .phoneInputSet .react-tel-input .flag-dropdown {
@@ -357,7 +360,7 @@
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
     font-weight: 500 !important;
-    font-size: 14px !important;
+    font-size: 16.94px !important;
 }
 
 .css-13cymwt-control:hover {
@@ -371,7 +374,7 @@
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
     font-weight: 500 !important;
-    font-size: 14px !important;
+    font-size: 16.94px !important;
 }
 
 .css-1xz3in2-control:hover {

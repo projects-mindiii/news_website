@@ -97,16 +97,6 @@ function Profile() {
         formState: { errors },
     } = useForm();
 
-    //----------function for last 3 digit of password showing in string------------
-    function showMaskedPassword() {
-        if (isPassword.length >= 3) {
-            const maskedPassword = '*'.repeat(isPassword.length - 3) + isPassword.slice(-3);
-            return maskedPassword;
-        } else {
-            return isPassword;
-        }
-    }
-
     //-------function for get country list Api-------
     useEffect(() => {
         async function getMetaDetails() {
@@ -165,7 +155,7 @@ function Profile() {
                 setIsPassword((response.data[0].password) ? response.data[0].password : "");
 
                 const newOption = locationOption.find(item => item.id === response.data[0].is_default_country);
-                console.log('newOption', newOption)
+               
 
                 setLocationSelected({ value: 2, label: "Outside South Africa", id: 2 });
 
@@ -203,12 +193,11 @@ function Profile() {
 
         requestData.append("is_default_country", locationSelected.value);
 
+
+        requestData.append("image", profileImage);
         requestData.append("is_password_change", changePassword);
         requestData.append("current_password", formdata.setPassword);
         requestData.append("new_passsword", formdata.repeatPassword);
-        console.log("changePassword", changePassword);
-        console.log("form data", formdata);
-        console.log("requestData", requestData)
 
 
         const data = { 'requestData': requestData, "userToken": userToken };
@@ -231,7 +220,6 @@ function Profile() {
     //------ function for delete user API -------
     async function deleteUser() {
         const response = await SublyApi.deleteUserProfile(userToken);
-        console.log("deleteresponse", response)
         if (response.status_code === STATUS_CODES.SUCCESS) {
             Toast.fire({
                 icon: "success",
@@ -500,6 +488,7 @@ function Profile() {
                                             <img src={profilePreview} />
                                             <input
                                                 id="uploadImage"
+                                                name="image"
                                                 type="file"
                                                 style={{
                                                     display: "none",
@@ -517,7 +506,7 @@ function Profile() {
                                     <h3>{t("YOUR_PASSWORD")}</h3>
                                     <p>{t("PASSWORD_PARA")}</p>
                                     <div className="hidePassword">
-                                        {showMaskedPassword()}
+                                        {isPassword}
                                     </div>
 
                                     <div className="changePassword">
@@ -528,6 +517,27 @@ function Profile() {
 
                                         {changePassword == 1 &&
                                             <div>
+                                                <Form.Group className="mb-3">
+                                                    <Form.Control
+                                                        type="password"
+                                                        placeholder="Current Password"
+                                                        {...register("password", {
+                                                            required: {
+                                                                value: true,
+                                                                message: "Please Enter password"
+                                                            },
+                                                            pattern: {
+                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                message: `${t("INVALID_PASSWORD")}`,
+                                                            },
+                                                        })}
+                                                    />
+                                                </Form.Group>
+                                                {errors.password && (
+                                                    <span className="errorDisplay">
+                                                        {errors.password.message}
+                                                    </span>
+                                                )}
                                                 <Form.Group className="mb-3">
                                                     <Form.Control
                                                         type="password"
@@ -573,7 +583,6 @@ function Profile() {
                                         }
 
                                     </div>
-
 
                                     <div className="buttonAdd">
                                         <CustomBtn>{t("SAVE")}</CustomBtn>
