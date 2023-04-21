@@ -16,7 +16,27 @@ function ClassiFieds() {
   const [CatergoryType, setCategoryType] = useState("");
   const [CountryName, setCountryName] = useState("");
   const [shown, setShown] = useState(false);
+  const [forSaleTotalCount, setForSaleTotalCount] = useState("");
+  const [forSaleList, setForSaleList]= useState("");
+  
+  // function for classified webList
+  const classifiedValue ={limit: 10, offset: 0, type: 4}
+  useEffect(() => {
+    async function getWebClassifiedLists() {
+      const details = await SublyApi.getWebClassiFiedList(
+        userToken,
+        classifiedValue
+      );
+      console.log("details", details)
+      if (details.status_code == 200) {
+        setForSaleTotalCount(details.data.total_count);
+        setForSaleList(details.data.list)
+      }
+    }
+    getWebClassifiedLists();
+  }, []);
 
+  // function for classified metaList
   useEffect(() => {
     async function getClassifiedLists() {
       let requestData = new FormData();
@@ -37,8 +57,7 @@ function ClassiFieds() {
           }
         }
       });
-      // SublyApi.getClassifiedList(requestData, userToken).then((responsejson) => {
-      // });
+      
     }
     getClassifiedLists();
   }, []);
@@ -61,7 +80,7 @@ function ClassiFieds() {
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                      <Nav.Link eventKey="first">FOR SALE (4)</Nav.Link>
+                      <Nav.Link eventKey="first">FOR SALE ({forSaleTotalCount})</Nav.Link>
                       {shown ? (
                         <MdKeyboardArrowDown
                           onClick={() => setShown(!shown)}
@@ -105,7 +124,7 @@ function ClassiFieds() {
               </div>
             </Col>
 
-            <ClassifiedCategoryList />
+            <ClassifiedCategoryList forSaleListData={forSaleList}/>
 
             {/* <Col xs={12} sm={12} md={12} lg={5}>
               <div className="advertisment">
