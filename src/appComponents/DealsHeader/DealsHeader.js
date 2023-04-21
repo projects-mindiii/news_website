@@ -1,31 +1,44 @@
 import { Nav, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import "./DealsHeader.css";
 import dealsData from "./DealsData";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDealList } from "../../store/slices/DealSlice";
+import { userLogout } from "../../store/slices/UserSlice";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
+import { useTranslation } from "react-i18next";
+import { guestUserLogin } from "../../store/slices/UserSlice";
 
 
 //-------Create a Deals Header component--------
 function DealsHeader() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [navBar, setNavBar] = useState(null);
   const { userToken,isLoading } = useSelector((state) => state.user);
 
   //set language
 
   useEffect(() => {
-    dispatch(getDealList(userToken)).then((responsejson) => {
+    dispatch(getDealList(userToken)).then(async(responsejson) => {
         const response = responsejson.payload;
-        if (response.status_code !== STATUS_CODES.SUCCESS) {
-            Toast.fire({
-                icon: "error",
-                title: response.data.message,
-            });
-        } 
+        if (response.status === STATUS_CODES.INVALID_TOKEN) {
+          Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+          });
+          await dispatch(userLogout());
+          await dispatch(guestUserLogin());
+          navigate("/login");
+        }else{
+          Toast.fire({
+              icon: "error",
+              title: response.data.message,
+          });
+        }
     });
   }, []);
 

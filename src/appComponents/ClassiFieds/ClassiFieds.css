@@ -467,7 +467,6 @@
     align-items: center;
 }
 .classiFieds_country_select{
-    border: 1px solid red;
     max-height: 200px;
     overflow-y: scroll;
     z-index: 99999999999 !important;
@@ -478,4 +477,19 @@
     border: 1px solid #ec4624;
     color: white;
 }
+
+
+.categoryButton .nav-item {
+    position: relative;
+}
+
+.categoryButton svg {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+}
+
 

@@ -98,5 +98,8 @@ export const TRANSLATIONS_EN = {
   //---------- Form Lable Common Text---------------
   REMEMBER_ME: "Remember me",
   YOUR_NAME: "Your Name (Optional)",
-  YOUR_EMAIL: "Your Email (Required)"
+  YOUR_EMAIL: "Your Email (Required)",
+
+   //---------- Status Error Text---------------
+   SESSION_EXPIRE: "Your Session Expired!",
 };

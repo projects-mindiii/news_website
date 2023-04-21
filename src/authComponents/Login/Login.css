@@ -12,7 +12,7 @@
 }
 
 .topHeading h1 {
-    font-size: 22px;
+    font-size: 20px;
     color: #000000;
     text-align: center;
     font-weight: 500;
@@ -49,10 +49,11 @@
 .accountType p {
     color: #242424;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     margin-top: 10px;
 }
+
 
 .accountType span {
     color: #000;
