@@ -190,6 +190,17 @@ class SublyApi {
     return res;
   }
 
+   /* GET  /Get WebClassified list: 
+       Authorization required: Token
+       @returns {object} {token}
+       */
+       static async getWebClassiFiedList(token, data) {
+        console.log("data" ,data)
+        let header = { "access-token": ` ${token}` };
+        let res = await this.request(`/v2/web-classified-list?limit=${data.limit}&offset=${data.offset}&type=${data.type}`, undefined, "get", header);
+        return res;
+      }
+
 
   /* POST  /Update User Profile: 
       Update profile
