@@ -42,9 +42,9 @@ function Profile() {
     const [metaData, setMetaData] = useState("");
     const locationOption = [
         { value: 1, label: "South Africa", id: 1 },
-        { value: 2, label: "Outside South Africa", id: 2 },
+        { value: 0, label: "Outside South Africa", id: 0 },
     ];
-    const [locationSelected, setLocationSelected] = useState(1);
+    const [locationSelected, setLocationSelected] = useState({ value: 1, label: "South Africa", id: 1 });
     const [countryOption, setCountryOption] = useState([
         {
             label: "Set Country",
@@ -52,7 +52,11 @@ function Profile() {
             id: "0",
         },
     ]);
-    const [countrySelected, setCountrySelected] = useState("");
+    const [countrySelected, setCountrySelected] = useState({
+        label: "Set Country",
+        value: "0",
+        id: "0",
+    });
     const [provinceOption, setProvinceOption] = useState([
         {
             label: "Province",
@@ -60,7 +64,11 @@ function Profile() {
             id: "0",
         },
     ]);
-    const [provinceSelected, setProvinceSelected] = useState("");
+    const [provinceSelected, setProvinceSelected] = useState({
+        label: "Province",
+        value: "0",
+        id: "0",
+    },);
 
     const [changePassword, setChangePassword] = useState(0);
     const [isPassword, setIsPassword] = useState("");
@@ -96,16 +104,6 @@ function Profile() {
         watch,
         formState: { errors },
     } = useForm();
-
-    //----------function for last 3 digit of password showing in string------------
-    function showMaskedPassword() {
-        if (isPassword.length >= 3) {
-            const maskedPassword = '*'.repeat(isPassword.length - 3) + isPassword.slice(-3);
-            return maskedPassword;
-        } else {
-            return isPassword;
-        }
-    }
 
     //-------function for get country list Api-------
     useEffect(() => {
@@ -148,6 +146,7 @@ function Profile() {
     useEffect(() => {
         dispatch(userDetails(userToken)).then((responsejson) => {
             const response = responsejson.payload;
+            console.log("response",response);
             if (response.status_code === STATUS_CODES.SUCCESS) {
                 setValue("fullName", (response.data[0].name) ? response.data[0].name : "");
                 setValue("email", (response.data[0].email) ? response.data[0].email : "");
@@ -163,8 +162,16 @@ function Profile() {
                 setProfilePreview((response.data[0].img_url) ? response.data[0].img_url : profilePreview);
                 setIsPassword((response.data[0].password) ? response.data[0].password : "");
                 const newOption = locationOption.find(item => item.id === response.data[0].is_default_country);
-                setLocationSelected({ value: 2, label: "Outside South Africa", id: 2 });
+                setLocationSelected(newOption);
+                // setLocationSelected({ value: 0, label: "Outside South Africa", id: 0 });
+                const countryOption = countryOption.find(item1 => item1.id === response.data[0].country_id);
+                setCountrySelected(countryOption);
+                console.log("countryOptions", countryOption)
 
+                const provinceOption = provinceOption.find(item2 => item2.id === response.data[0].provinces);
+                setProvinceSelected(provinceOption);
+                console.log("provinceOptions", provinceOption);
+                // console.log("newOption", newOption);
                 // setCountryOption((response.data[0].country_id) ? response.data[0].country_id : "")
                 // setProvinceOption((response.data[0].provinces) ? response.data[0].provinces : "")
                 // setCountrySelected((response.data[0].country_id) ? response.data[0].country_id : "")
@@ -192,14 +199,16 @@ function Profile() {
         requestData.append("whatsapp_dail_code", dialCodeWatsapp);
         requestData.append("whatsapp_country_code", countryCodeWatsapp);
         requestData.append("whatapp_contact_number", watsappNo);
-        requestData.append("country_id", countryOption);
-        requestData.append("provinces", provinceOption);
+        requestData.append("country_id", countrySelected.value);
+        requestData.append("provinces", provinceSelected.value);
         requestData.append("is_default_country", locationSelected.value);
         requestData.append("image", profileImage);
         requestData.append("is_password_change", changePassword);
         requestData.append("current_password", formdata.currentPassword);
         requestData.append("new_passsword", formdata.setPassword);
         const data = { 'requestData': requestData, "userToken": userToken };
+        console.log("countrySelected",countrySelected.value)
+        console.log("provinceSelected",provinceSelected.value)
         dispatch(updateProfile(data)).then((responsejson) => {
             const response = responsejson.payload;
             if (response.status_code === STATUS_CODES.SUCCESS) {
@@ -369,11 +378,7 @@ function Profile() {
                                                 id="location" name="location"
                                                 options={locationOption}
                                                 onChange={setLocationSelected}
-                                                // onChange={(value) => setLocationSelected(value.id)}
-                                                // placeholder="South Africa"
-                                                // maxMenuHeight={220}
-                                                // menuPlacement="auto"
-                                                defaultValue={locationSelected}
+                                                value={locationSelected}
                                                 styles={{
                                                     placeholder: () => ({
                                                         fontSize: "15px",
@@ -401,12 +406,10 @@ function Profile() {
                                         <Form.Group className="mb-3" >
                                             <Select
                                                 id="country"
-                                                options={countryOption ? countryOption : {}}
-                                                onChange={(value) => setCountrySelected(value)}
-                                                placeholder="Country Set"
-                                                maxMenuHeight={220}
-                                                menuPlacement="auto"
-                                                defaultValue={countryOption[0]}
+                                                options={countryOption}
+                                                onChange={setCountrySelected}
+                                                // placeholder="Country Set"
+                                                value={countrySelected}
                                                 styles={{
                                                     placeholder: () => ({
                                                         fontSize: "15px",
@@ -434,12 +437,10 @@ function Profile() {
                                         <Form.Group className="mb-3" >
                                             <Select
                                                 id="province"
-                                                options={provinceOption ? provinceOption : {}}
-                                                onChange={(value) => setProvinceSelected(value)}
-                                                placeholder="Province"
-                                                maxMenuHeight={220}
-                                                menuPlacement="auto"
-                                                defaultValue={provinceOption[0]}
+                                                options={provinceOption}
+                                                onChange={setProvinceSelected}
+                                                // placeholder="Province"
+                                                value={provinceSelected}
                                                 styles={{
                                                     placeholder: () => ({
                                                         fontSize: "15px",
@@ -460,7 +461,6 @@ function Profile() {
                                                     },
                                                 })}
                                             />
-
                                         </Form.Group>
                                     </div>
 
@@ -519,11 +519,11 @@ function Profile() {
                                                 <Form.Group className="mb-3">
                                                     <Form.Control
                                                         type="password"
-                                                        placeholder="Current Password"
+                                                        placeholder={t("CURRENT_PASSWORD")}
                                                         {...register("currentPassword", {
                                                             required: {
                                                                 value: true,
-                                                                message: "Please Enter password"
+                                                                message: `${t("CURRENT_PASS")}`,
                                                             },
                                                             pattern: {
                                                                 value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
@@ -532,9 +532,9 @@ function Profile() {
                                                         })}
                                                     />
                                                 </Form.Group>
-                                                {errors.password && (
+                                                {errors.currentPassword && (
                                                     <span className="errorDisplay">
-                                                        {errors.password.message}
+                                                        {errors.currentPassword.message}
                                                     </span>
                                                 )}
                                                 <Form.Group className="mb-3">

@@ -91,6 +91,7 @@ export const TRANSLATIONS_ES = {
     REPEAT_PASS: "Ingrese la contraseña repetida",
     NOT_MATCH: "Repetir contraseña no coincide",
     MATCH_PASS: "Las contraseñas tienen que coincidir",
+    CURRENT_PASS: "Por favor, introduzca la contraseña actual",
 
     //---------- Placeholder Common Text---------------
     NAME: "Nombre completo",
@@ -103,6 +104,7 @@ export const TRANSLATIONS_ES = {
     CITY: "Ciudad/pueblo de entrada",
     SET_PASSWORD: "Establecer nueva contraseña",
     REPEAT_PASSWORD: "Repita la contraseña",
+    CURRENT_PASSWORD: "Contraseña actual",
 
 
     //---------- Form Lable Common Text---------------
@@ -110,6 +112,6 @@ export const TRANSLATIONS_ES = {
     YOUR_NAME: "Tu nombre (Opcional)",
     YOUR_EMAIL: "Tu Email (requerido)",
 
-     //---------- Status Error Text---------------
-     SESSION_EXPIRE: "Your Session Expired!",
+    //---------- Status Error Text---------------
+    SESSION_EXPIRE: "Your Session Expired!",
 }
