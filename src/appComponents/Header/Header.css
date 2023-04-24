@@ -93,3 +93,10 @@
         display: block !important;
     }
 }
+
+/* banner img css for classified  */
+
+.bannerImg {
+    text-align: center;
+    margin: 30px 0px;
+}

@@ -2,6 +2,7 @@
     padding: 15px;
     background-color: #FFFFFF;
     box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.03);
+    margin-bottom: 25px;
 }
 
 .classiFieds_forSaleBox .classiFieds_forSale_about {
@@ -140,6 +141,7 @@
     line-height: 18px;
     letter-spacing: -0.3px;
     color: #000000;
+    margin: 4px;
 }
 
 .classiFieds_time span img {
@@ -228,6 +230,7 @@
 .classiFieds_bookmarkicon img {
     width: 14px;
     height: 20px;
+    margin-left: 10px;
 }
 
 .classiFields_shareMedia {
@@ -490,6 +493,11 @@
     color: #fff;
     font-size: 25px;
     font-weight: 600;
+}
+
+.classiFields_iconBackGround svg {
+    font-size: 22px;
+    margin-left: 4px;
 }
 
 

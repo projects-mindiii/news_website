@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar, Toast } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
+import Banner from "../../assets/images/classifiedheader.png"
 import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
 import "./Header.css";
@@ -41,6 +42,10 @@ function Header() {
           <div className="logoImg">
             <img src={Logo} alt="news-logo" />
           </div>
+          {location.pathname == "/classifieds" ? 
+          <div className="bannerImg">
+            <img src={Banner} alt="news-logo" />
+          </div>: ""}
           <Navbar expand="lg">
             <div className="navItem headerLinks">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -55,7 +60,6 @@ function Header() {
                   ))}
                 </Nav>
               </Navbar.Collapse>
-
               <HeaderFeatures />
             </div>
           </Navbar>
