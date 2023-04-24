@@ -12,17 +12,18 @@ import watchicon from "../../assets/images/watch_ico.png";
 
 
 function ClassifiedCategoryList(props) {
-  console.log("props", props.forSaleListData)
+  console.log("ClassifiedCategoryList", props.forSaleListData)
   return (
     <div className="main">
-    {props.forSaleListData.map((item,index)=>{
+    {props.forSaleListData && props.forSaleListData.map((item,index)=>{
       return(
         <Row>
        <Col xs={12} sm={12} md={12} lg={6}>
          <div className="classiFieds_forSaleBox" key={index}>
            <div className="classiFieds_forSale_about">
              <div className="classiFieds_forSale">
-               <img src={forsale} alt={forsale} />
+              
+               <img src={item.img_url} alt={item.img_url} />
              </div>
              <div className="classiFields_heading">
                <p className="text">
@@ -37,7 +38,7 @@ function ClassifiedCategoryList(props) {
                      <span>
                        <img src={watchicon} alt={watchicon} />{" "}
                      </span>{" "}
-                   {item.created_at}
+                   {item.created_date}
                    </span>
                  </div>
                  <div className="classiFieds_bookmarkicon">
@@ -48,7 +49,7 @@ function ClassifiedCategoryList(props) {
            </div>
            <div className="classiFieds_RupeesText ">
              <p>
-               {item.amount}<span>PER WEEK</span>
+               R{item.amount}<span>PER WEEK</span>
              </p>
            </div>
            <div className="classiFieds_countryName ">
@@ -62,7 +63,7 @@ function ClassifiedCategoryList(props) {
               {item.description}
              </p>
            </div>
-           <ContactPerson />
+           <ContactPerson forSaleListData={props.forSaleListData} index={index}/>
            <WhatsApp />
            <SocialMedaiShare />
          </div>
