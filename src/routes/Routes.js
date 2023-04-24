@@ -16,6 +16,7 @@ import ClassiFieds from "../appComponents/ClassiFieds/ClassiFieds";
 import PageNotFound from "../appComponents/PageNotFound/PageNotFound";
 import JobTypes from "../appComponents/ClassiFieds/JobTypes";
 
+import YourAdd from "../appComponents/YourAdd/YourAdd";
 
 
 //-------Create a component for manage routing--------
@@ -41,6 +42,7 @@ function Routers() {
                 <Route exact path="/job-types" element={<JobTypes/>} />
                 
 
+                <Route exact path="/Your-add" element={<YourAdd />} />
                 <Route path="*" element={<PageNotFound />} />
 
             </Routes>

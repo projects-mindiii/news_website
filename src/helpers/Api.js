@@ -258,6 +258,34 @@ class SublyApi {
 
     return res;
   }
+/* GET  /delete user: 
+    get classified list
+ 
+     Authorization required: Token
+     @returns {object} {token}
+     */
+  static async getClassifiedList(requestdata,authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/web-classified-list?limit=200&offset=0&type=${requestdata.type}&search_by=0`,
+    undefined, undefined, header
+    );
+
+    return res;
+  }
+/* GET  /delete user: 
+    add classified list
+ 
+     Authorization required: Token
+     @returns {object} {token}
+     */
+  static async addClassifiedList(requestdata,authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2//add-classified`,
+    requestdata, "post", header
+    );
+
+    return res;
+  }
 
 
 }

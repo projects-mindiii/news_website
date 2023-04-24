@@ -34,7 +34,7 @@ export const headerData = [
     {
         id: "5",
         text: `${t("YOUR_ADS")} `,
-        link: `javascript:;`,
+        link: `/Your-add`,
         activeClass:""
        
     },
