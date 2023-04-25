@@ -233,20 +233,21 @@ class SublyApi {
     return res;
   }
 
-  /* GET  /delete user: 
-    user account delete
+  /* GET  /company details: 
+   get company details
  
-     Authorization required: Token
-     @returns {object} {token}
-     */
-  static async deleteUserProfile(authToken) {
+    Authorization required: Token
+    @returns {object} {token}
+    */
+  static async companyDetails(authToken, data) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/delete-user`,
-      undefined, undefined, header
+    let res = await this.request(`/v2/company-detail?id=${data.id}&refrence_id=${data.refrence_id}&refrence_type=${data.refrence_type}`,
+      "", undefined, header
     );
 
     return res;
   }
+
 
 }
 

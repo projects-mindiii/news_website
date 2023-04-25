@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import companyImg from "../../assets/images/reoland.png";
 import playBtn from "../../assets/images/play_btn.png";
 import "./DealSubModules.css";
@@ -9,33 +9,74 @@ import { Icon } from "@iconify/react";
 import socialShare from "../CommonModule/CommonSocialShare";
 import "../CommonModule/CommonModule.css";
 import MapLocation from "../CommonModule/MapLocation";
+import SublyApi from "../../helpers/Api";
+import { useSelector } from "react-redux";
 
 function CompanyProfile() {
+  const [companyDetails, setcompanyDetails] = useState("");
+  const [productList, setProductList] = useState("");
+  const [serviceList, setServiceList] = useState("");
+  const [brandList, setBrandList] = useState("");
+  const { userToken } = useSelector((state) => state.user);
+
+  // --------function for get company details----------
+  const companyValue = { id: 22, refrence_id: 0, refrence_type: 3 }
+  useEffect(() => {
+    async function getCompanyDetails() {
+      const details = await SublyApi.companyDetails(
+        userToken,
+        companyValue
+      );
+      console.log("details", details)
+      if (details.status_code == 200) {
+        setcompanyDetails(details.data.company_detail);
+        setProductList(details.data.product_list);
+        setServiceList(details.data.service_list);
+        setBrandList(details.data.brand_list);
+      }
+    }
+    getCompanyDetails();
+  }, []);
+
   return (
     <section>
       <div className="latestDeals companyDetails">
-        <img src={companyImg} alt="company_img" />
-        <h3>AGFA Graphics</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          pharetra posuere libero at luctus. In hac habitasse platea dictumst.
-          Quisque venenatis posuere neque, sit amet pharetra elit lacinia vitae.
-          Donec aliquet nisi ac elit egestaas vulputate. Ut vulputate, diam vel
-          scelerisqs vulputate. Ut vulputate, diam vel scelerisque bibendum,
-          libero nisi pharetra nunc, et facilisis dui risus nec est.
-        </p>
-        <h5>PRODUCTS</h5>
-        <li>Large format printers</li>
-        <li>Digital printer link</li>
-        <h5>SERVICE</h5>
-        <li>Large format printers</li>
-        <li>Digital printer link</li>
-        <li>Digital printer link</li>
+        <div className="companyLogo">
+          <img src={companyDetails.company_logo} alt="company_img" />
+        </div>
+        <h3>{companyDetails.name}</h3>
+        <p>{companyDetails.description}</p>
+
+        {productList.length > 0 && (
+          <>
+            <h5>PRODUCTS</h5>
+            {productList.length > 0 && productList.map((item, index) => (
+              <li key={index}>{item.name}</li>
+            ))}
+          </>
+        )}
+
+        {serviceList.length > 0 && (
+          <>
+            <h5>SERVICE</h5>
+            {serviceList.length > 0 && serviceList.map((item1, index1) => (
+              <li key={index1}>{item1.name}</li>
+            ))}
+          </>
+        )}
+
         <div className="brandPrasent">
-          <h3>BRANDS REPRESENTED</h3>
-          <div className="brandType">
-            <p>ROLAND</p> <p>APPLE</p> <p>MUSTEK</p>
-          </div>
+          {brandList.length > 0 && (
+            <>
+              <h3>BRANDS REPRESENTED</h3>
+              <div className="brandType">
+                {brandList.length > 0 && brandList.map((item2, index2) => (
+                  <p key={index2}>{item2.name}</p>
+                ))}
+              </div>
+            </>
+          )}
+
           <div className="playBox">
             <img src={playBtn} alt="playBtn" />
           </div>
@@ -43,21 +84,21 @@ function CompanyProfile() {
             <img src={mail} alt="img" />
             <div className="dealText">
               <span>EMAIL</span>
-              <p>Abhishek@gmail.com</p>
+              <p>{companyDetails.email}</p>
             </div>
           </div>
           <div className="detailsValue">
             <img src={contact} alt="img" />
             <div className="dealText">
               <span>CONTACT PERSON</span>
-              <p>+123456789</p>
+              <p>{companyDetails.dial_code}{companyDetails.contact}</p>
             </div>
           </div>
           <div className="detailsValue">
             <img src={globe} alt="img" />
             <div className="dealText websiteUrl">
               <span>WEBSITE</span>
-              <p>WWW.mindiii.com</p>
+              <p>{companyDetails.webside_url}</p>
             </div>
           </div>
           <button className="whatsApp">
@@ -72,8 +113,10 @@ function CompanyProfile() {
         </div>
         <div className="socialShare">
           {socialShare.map((item, index) => (
-            <img src={item.icon_share} />
+            
+            <a href={companyDetails.facebook_link}><img src={item.icon_share} /></a>
           ))}
+
         </div>
         <div className="mapClass">
           <MapLocation />

@@ -41,6 +41,7 @@
 .brandType {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .brandType p {
@@ -49,11 +50,8 @@
     color: #FFFFFF;
     padding: 5px 15px;
     margin-right: 9px;
-    margin-top: 15px;
+    margin-top: 10px;
     text-decoration: none;
-    max-width: 200px;
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 600;
     font-size: 18.2px;
     line-height: 27px;

@@ -8,7 +8,7 @@ import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { guestUserLogin } from "../../store/slices/UserSlice";
+import { guestUserLogin, getMetaListApi } from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
 
 //-------Create a Header component--------
@@ -16,22 +16,30 @@ function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { guestUser, currentUser, isLoading } = useSelector(
+  const { guestUser, currentUser, isLoading, userToken } = useSelector(
     (state) => state.user
   );
 
+  function GetMetaList(userToken) {
+    dispatch(getMetaListApi(userToken));
+  }
+
+  function GuestLogin() {
+    dispatch(guestUserLogin()).then((responseJson) => {
+      const response = responseJson.payload;
+      GetMetaList(response.data.token);
+    });
+  }
+
   // ======Calling Api for guest user login======
   useEffect(() => {
-    async function GuestLogin() {
-      await dispatch(guestUserLogin()).then((responseJson) => {
-        const response = responseJson.payload;
-      });
-    }
     if (
       Object.keys(currentUser).length === 0 &&
       Object.keys(guestUser).length === 0
     ) {
       GuestLogin();
+    } else {
+      GetMetaList(userToken);
     }
   }, []);
   return (

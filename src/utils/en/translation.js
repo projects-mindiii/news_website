@@ -91,6 +91,7 @@ export const TRANSLATIONS_EN = {
   REPEAT_PASS: "Please Enter Repeat Password",
   NOT_MATCH: "Repeat password does not match",
   MATCH_PASS: "Passwords have to match",
+  CURRENT_PASS: "Please Enter current password",
 
 
   //---------- Placeholder Common Text---------------
@@ -104,6 +105,9 @@ export const TRANSLATIONS_EN = {
   CITY: "Input City/Town",
   SET_PASSWORD: "Set New Password",
   REPEAT_PASSWORD: "Repeat Password",
+  CURRENT_PASSWORD: "Current Password",
+  SELECT_PROVINCE: "Select Province",
+  COUNTRY_SET: "Country Set",
 
 
   //---------- Form Lable Common Text---------------
@@ -111,6 +115,6 @@ export const TRANSLATIONS_EN = {
   YOUR_NAME: "Your Name (Optional)",
   YOUR_EMAIL: "Your Email (Required)",
 
-   //---------- Status Error Text---------------
-   SESSION_EXPIRE: "Your Session Expired!",
+  //---------- Status Error Text---------------
+  SESSION_EXPIRE: "Your Session Expired!",
 };

@@ -14,11 +14,11 @@ import PasswordInput from "../../../formComponent/PasswordInput/PasswordInput";
 import CustomBtn from "../../../formComponent/Button/Button";
 import { useState } from "react";
 import ErrorResponse from "../../../utils/AlertBox/ErrorResponse";
-
 import { userLogin } from "../../../store/slices/UserSlice";
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import GoogleLogin from "../../CommonSocial/GoogleLogin";
 import FacebookSocialLogin from "../../CommonSocial/FacebookSocialLogin";
+import Loader from "../../../utils/Loader/Loader";
 
 //--------Create a Login with email component----------
 function LoginForm() {
@@ -26,7 +26,7 @@ function LoginForm() {
 
     const dispatch = useDispatch();
 
-    const  {guestUser,currentUser,isLoading}  = useSelector((state) => state.user);
+    const { guestUser, currentUser, isLoading } = useSelector((state) => state.user);
 
     //set language
     const { t, i18n } = useTranslation();
@@ -41,7 +41,7 @@ function LoginForm() {
         setValue,
         formState: { errors },
     } = useForm();
-
+    console.log("isLoading", isLoading)
 
     //-----------function for submit login form-----------
     const onSubmit = async (formdata) => {
@@ -62,12 +62,14 @@ function LoginForm() {
                 setShowError(response.data.message)
             }
         })
-
     };
 
     return (
         <div className="main">
             <Container>
+                {isLoading === true ? (
+                    <Loader />
+                ) : ""}
                 <div className="signupForm">
                     {showError ?
                         <ErrorResponse message={showError} setShowError={setShowError} /> : ""}
@@ -95,9 +97,6 @@ function LoginForm() {
                             </span>
                         </div>
 
-                        {/* <Button className="btn" type="submit">
-                            {t("LOGIN")}
-                        </Button> */}
                         <CustomBtn>{t("LOGIN")}</CustomBtn>
 
                         <div className="LoginText">
@@ -105,13 +104,13 @@ function LoginForm() {
                         </div>
 
                         <div className="socialLogo loginformcomponent">
-                           <GoogleLogin/>
-                           <span>
+                            <GoogleLogin />
+                            <span>
 
-                           <FacebookSocialLogin facebookText="" />
+                                <FacebookSocialLogin facebookText="" />
 
-                           </span>
-                           {/* <img src={Facebook} alt="apple-logo" /> */}
+                            </span>
+
                             <img src={Apple} alt="apple-logo" />
                             <img src={Linkedin} alt="linkedin-logo" />
                         </div>
