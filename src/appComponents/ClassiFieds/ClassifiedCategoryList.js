@@ -13,7 +13,7 @@ function ClassifiedCategoryList(props) {
   // console.log("ClassifiedCategoryList", props.forSaleListData);
   return (
     <div className="main">
-      {props.forSaleListData &&
+      {props.forSaleListData.length &&
         props.forSaleListData.map((item, index) => {
           return (
             <Row>
