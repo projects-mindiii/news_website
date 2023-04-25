@@ -3,6 +3,7 @@ import SublyApi from '../../helpers/Api'
 import { STATUS_CODES } from "../../utils/StatusCode";
 
 const initialState = {
+  allMetaList: {},
   guestUser: {},
   currentUser: {},
   sessionExpire: "",
@@ -12,6 +13,19 @@ const initialState = {
   message: false,
   error: null,
 }
+
+// Thunk for get meta list
+export const getMetaListApi = createAsyncThunk(
+  "user/getMetaListApi",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await SublyApi.getClassiFiedMeta(data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 // Thunk for user login
 export const userLogin = createAsyncThunk(
@@ -114,6 +128,7 @@ export const isUserSessionExpire = (state, response) => {
     state.guestUser = {};
     state.userToken = null;
   }
+  state.isLoading = false
 };
 
 export const userSlice = createSlice({
@@ -122,6 +137,7 @@ export const userSlice = createSlice({
   reducers: {
     userLogout: (state, action) => {
       state.currentUser = {};
+      state.isLoading=false;
       state.guestUser = {};
       state.userToken = null;
     }
@@ -180,8 +196,8 @@ export const userSlice = createSlice({
       state.error = action.error.message
     })
 
-     // check get user detail
-     builder.addCase(userDetails.pending, (state) => {
+    // check get user detail
+    builder.addCase(userDetails.pending, (state) => {
       state.isLoading = true
     })
     builder.addCase(userDetails.fulfilled, (state, action) => {
@@ -206,6 +222,25 @@ export const userSlice = createSlice({
       state.error = action.error.message
     })
 
+    // check get meta list
+    builder.addCase(getMetaListApi.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(getMetaListApi.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.status_code === STATUS_CODES.SUCCESS) {
+        state.allMetaList = response.data;
+        state.success = true;
+      } else {
+        state.allMetaList = {};
+        state.success = false;
+      }
+      state.isLoading = false
+    })
+    builder.addCase(getMetaListApi.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
+    })
 
   },
 })

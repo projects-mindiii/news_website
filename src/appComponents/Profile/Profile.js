@@ -1,6 +1,5 @@
 import { Col, Container, Form, Modal, Row } from "react-bootstrap";
 import "./Profile.css";
-import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import ProfileImg from "../../assets/images/profile.png"
 import { MdAddCircleOutline } from "react-icons/md";
@@ -10,10 +9,7 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { BsTrash3 } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
-import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css';
-import { MdPhonelinkRing } from "react-icons/md";
-import { BsWhatsapp } from "react-icons/bs";
 import SublyApi from "../../helpers/Api";
 import { useDispatch, useSelector } from "react-redux";
 import CustomBtn from "../../formComponent/Button/Button";
@@ -22,10 +18,15 @@ import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { updateProfile, userDetails } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
+import ProfileEmail from "../../formComponent/ProfileCommonInput/ProfileEmail";
+import ContactInput from "../../formComponent/ProfileCommonInput/ContactInput";
+import WatsappInput from "../../formComponent/ProfileCommonInput/WatsappInput";
+import Loader from "../../utils/Loader/Loader";
 
 
 //--------Create a Profile component----------
 function Profile() {
+    const { userToken, allMetaList, isLoading } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     //set language
@@ -38,8 +39,6 @@ function Profile() {
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [profilePreview, setProfilePreview] = useState(ProfileImg);
     const [profileImage, setProfileImage] = useState("");
-    const { userToken } = useSelector((state) => state.user);
-    const [metaData, setMetaData] = useState("");
     const locationOption = [
         { value: 1, label: "South Africa", id: 1 },
         { value: 0, label: "Outside South Africa", id: 0 },
@@ -59,13 +58,13 @@ function Profile() {
     });
     const [provinceOption, setProvinceOption] = useState([
         {
-            label: "Province",
+            label: "Select Province",
             value: "0",
             id: "0",
         },
     ]);
     const [provinceSelected, setProvinceSelected] = useState({
-        label: "Province",
+        label: "Select Province",
         value: "0",
         id: "0",
     },);
@@ -105,13 +104,13 @@ function Profile() {
         formState: { errors },
     } = useForm();
 
-    //-------function for get country list Api-------
+    //-------function for get profile Api-------
     useEffect(() => {
+        let countryOptions = [];
+        let provinceOptions = [];
         async function getMetaDetails() {
-            const details = await SublyApi.getClassiFiedMeta(userToken); //get country and province list
-            if (details.status_code === STATUS_CODES.SUCCESS) {
-                let countryOptions = [];
-                await details.data.countries.map((item) => {
+            if (Object.keys(allMetaList).length > 0) {
+                await allMetaList.countries.map((item) => {
                     countryOptions.push({
                         label: item.name,
                         value: item.id,
@@ -120,33 +119,21 @@ function Profile() {
                 }); //getting selection option in array as country list
                 await setCountryOption(countryOptions);
 
-                let provinceOptions = [];
-                await details.data.provinces.map((item) => {
+                await allMetaList.provinces.map((item) => {
                     provinceOptions.push({
                         label: item.name,
                         value: item.id,
                         id: item.id,
                     });
                 }); //getting selection option in array as province list
-                await setProvinceOption(provinceOptions);
 
-                setMetaData(details.data);
-            }
-            else {
-                Toast.fire({
-                    icon: "error",
-                    title: details.data.message,
-                });
+                await setProvinceOption(provinceOptions);
             }
         }
         getMetaDetails();
-    }, []);
 
-    //-------function for get profile Api-------
-    useEffect(() => {
         dispatch(userDetails(userToken)).then((responsejson) => {
             const response = responsejson.payload;
-            console.log("response",response);
             if (response.status_code === STATUS_CODES.SUCCESS) {
                 setValue("fullName", (response.data[0].name) ? response.data[0].name : "");
                 setValue("email", (response.data[0].email) ? response.data[0].email : "");
@@ -161,21 +148,12 @@ function Profile() {
                 setDialCodeWatsapp((response.data[0].whatsapp_dail_code) ? response.data[0].whatsapp_dail_code : dialCodeWatsapp);
                 setProfilePreview((response.data[0].img_url) ? response.data[0].img_url : profilePreview);
                 setIsPassword((response.data[0].password) ? response.data[0].password : "");
-                const newOption = locationOption.find(item => item.id === response.data[0].is_default_country);
-                setLocationSelected(newOption);
-                // setLocationSelected({ value: 0, label: "Outside South Africa", id: 0 });
-                const countryOption = countryOption.find(item1 => item1.id === response.data[0].country_id);
-                setCountrySelected(countryOption);
-                console.log("countryOptions", countryOption)
-
-                const provinceOption = provinceOption.find(item2 => item2.id === response.data[0].provinces);
-                setProvinceSelected(provinceOption);
-                console.log("provinceOptions", provinceOption);
-                // console.log("newOption", newOption);
-                // setCountryOption((response.data[0].country_id) ? response.data[0].country_id : "")
-                // setProvinceOption((response.data[0].provinces) ? response.data[0].provinces : "")
-                // setCountrySelected((response.data[0].country_id) ? response.data[0].country_id : "")
-                // setProvinceSelected((response.data[0].provinces) ? response.data[0].provinces : "")
+                const newLocationOption = locationOption.find(item => item.id === response.data[0].is_default_country);
+                setLocationSelected(newLocationOption);
+                const newCountryOption = countryOptions.find(item => item.id === response.data[0].country_id);
+                setCountrySelected(newCountryOption);
+                const newProvinceOption = provinceOptions.find(item => item.id === response.data[0].provinces);
+                setProvinceSelected(newProvinceOption);
             } else {
                 Toast.fire({
                     icon: "error",
@@ -207,8 +185,6 @@ function Profile() {
         requestData.append("current_password", formdata.currentPassword);
         requestData.append("new_passsword", formdata.setPassword);
         const data = { 'requestData': requestData, "userToken": userToken };
-        console.log("countrySelected",countrySelected.value)
-        console.log("provinceSelected",provinceSelected.value)
         dispatch(updateProfile(data)).then((responsejson) => {
             const response = responsejson.payload;
             if (response.status_code === STATUS_CODES.SUCCESS) {
@@ -243,382 +219,330 @@ function Profile() {
     }
 
     return (
-        <div className="main">
-            <Container>
-                <div className="profile">
-                    <Row>
-                        <Col sm={6}>
-                            <div className="profileLeftPart">
-                                <h3>{t("YOUR_PROFILE")}</h3>
-                                <p><strong>{t("NOTE")}</strong>
-                                    {t("PROFILE_DETAILS")}
-                                </p>
-                            </div>
-                        </Col>
-                        <Col sm={6}>
-                            <div className="profileRightPart">
-                                <h4>{t("YOUR_PROFILE")}</h4>
-                                <Form onSubmit={handleSubmit(onSubmit)}>
-                                    <h3>{t("PROFILE")}</h3>
-                                    <p>{t("PROFILE_PARA")}</p>
-                                    <Form.Group className="mb-3" controlId="formBasicName">
-                                        <Form.Control
-                                            type="text"
-                                            placeholder={t("NAME")}
-                                            {...register("fullName", {
-                                                required: {
-                                                    value: true,
-                                                    message: `${t("ENTER_NAME")}`,
-                                                },
-                                            })}
-                                        />
-                                    </Form.Group>
-                                    {errors.fullName && (
-                                        <span className="errorDisplay">
-                                            {errors.fullName.message}
-                                        </span>
-                                    )}
-
-                                    <Form.Group className="mb-3">
-                                        <Form.Control
-                                            type="text"
-                                            placeholder={t("COMPANY_NAME")}
-                                            {...register("companyName"
-
-                                            )}
-                                        />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3">
-                                        <Form.Control
-                                            type="text"
-                                            placeholder={t("POSITION")}
-                                            {...register("occupation"
-
-                                            )}
-                                        />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3 emailSet">
-                                        <Form.Control
-                                            type="text"
-                                            placeholder={t("EMAIL")}
-                                            {...register("email", {
-                                                required: {
-                                                    value: true,
-                                                    message: `${t("ENTER_EMAIL")}`,
-                                                },
-                                                pattern: {
-                                                    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                                    message: `${t("INVALID_EMAIL")}`,
-                                                },
-                                            })}
-                                        />
-                                        <AiOutlineMail />
-                                    </Form.Group>
-                                    {errors.email && (
-                                        <span className="errorDisplay">
-                                            {errors.email.message}
-                                        </span>
-                                    )}
-
-                                    {/* phone number input */}
-                                    <div className="phoneInputSet">
-                                        <MdPhonelinkRing />
-                                        <p>{countryCode.toUpperCase()} + {dialCode.toString()}</p>
-                                        <PhoneInput
-                                            country={"za"}
-                                            value={dialCode.toString() +
-                                                phoneNo.toString()}
-                                            onChange={(value, country) => {
-                                                let dialCode = country.dialCode;
-                                                let phone = value.slice(
-                                                    dialCode.length,
-                                                    value.length
-                                                );
-                                                setCountryCode(country.countryCode)
-                                                setDialCode(dialCode);
-                                                setPhoneNo(phone);
-
-                                            }}
-                                            countryCodeEditable={false}
-                                            copyNumbersOnly={true}
-                                        />
-                                    </div>
-
-                                    {/* watsapp number input */}
-                                    <div className="phoneInputSet watsappInput">
-                                        <BsWhatsapp />
-                                        <p>{countryCodeWatsapp.toUpperCase()} + {dialCodeWatsapp.toString()}</p>
-                                        <PhoneInput
-                                            country={"za"}
-                                            value={dialCodeWatsapp.toString() +
-                                                watsappNo.toString()}
-                                            onChange={(value, country) => {
-                                                let dialCode = country.dialCode;
-                                                let phone = value.slice(
-                                                    dialCode.length,
-                                                    value.length
-                                                );
-                                                setCountryCodeWatsapp(country.countryCode)
-                                                setDialCodeWatsapp(dialCode);
-                                                setWatsappNo(phone);
-
-                                            }}
-                                            countryCodeEditable={false}
-                                            copyNumbersOnly={true}
-                                        />
-                                    </div>
-
-                                    <h3>{t("LOCATION")}</h3>
-                                    <p>{t("LOCATION_PARA")}</p>
-                                    <div className="selectOption">
-                                        <Form.Group className="mb-3">
-                                            <Select
-                                                id="location" name="location"
-                                                options={locationOption}
-                                                onChange={setLocationSelected}
-                                                value={locationSelected}
-                                                styles={{
-                                                    placeholder: () => ({
-                                                        fontSize: "15px",
-                                                        color: "#cacaca",
-                                                        position: "absolute",
-                                                        top: "8px",
-                                                        left: "15px",
-                                                    }),
-                                                }}
-                                                theme={(theme) => ({
-                                                    ...theme,
-                                                    colors: {
-                                                        ...theme.colors,
-                                                        borderRadius: 0,
-                                                        primary25: "#f2f2f2",
-                                                        primary: "#000000;",
-                                                        primary50: "#f2f2f2",
-                                                    },
-                                                })}
-                                            />
-                                        </Form.Group>
-                                    </div>
-
-                                    <div className={`${locationSelected.value == 1 ? "selectOption hideIcon" : "selectOption"}`}>
-                                        <Form.Group className="mb-3" >
-                                            <Select
-                                                id="country"
-                                                options={countryOption}
-                                                onChange={setCountrySelected}
-                                                // placeholder="Country Set"
-                                                value={countrySelected}
-                                                styles={{
-                                                    placeholder: () => ({
-                                                        fontSize: "15px",
-                                                        color: "#cacaca",
-                                                        position: "absolute",
-                                                        top: "8px",
-                                                        left: "15px",
-                                                    }),
-                                                }}
-                                                theme={(theme) => ({
-                                                    ...theme,
-                                                    colors: {
-                                                        ...theme.colors,
-                                                        borderRadius: 0,
-                                                        primary25: "#f2f2f2",
-                                                        primary: "#000000;",
-                                                        primary50: "#f2f2f2",
-                                                    },
-                                                })}
-                                            />
-                                        </Form.Group>
-                                    </div>
-
-                                    <div className={`${locationSelected.value == 0 ? "selectOption hideIcon" : "selectOption"}`}>
-                                        <Form.Group className="mb-3" >
-                                            <Select
-                                                id="province"
-                                                options={provinceOption}
-                                                onChange={setProvinceSelected}
-                                                // placeholder="Province"
-                                                value={provinceSelected}
-                                                styles={{
-                                                    placeholder: () => ({
-                                                        fontSize: "15px",
-                                                        color: "#cacaca",
-                                                        position: "absolute",
-                                                        top: "8px",
-                                                        left: "15px",
-                                                    }),
-                                                }}
-                                                theme={(theme) => ({
-                                                    ...theme,
-                                                    colors: {
-                                                        ...theme.colors,
-                                                        borderRadius: 0,
-                                                        primary25: "#f2f2f2",
-                                                        primary: "#000000;",
-                                                        primary50: "#f2f2f2",
-                                                    },
-                                                })}
-                                            />
-                                        </Form.Group>
-                                    </div>
-
-                                    <Form.Group className="mb-3">
-                                        <Form.Control
-                                            type="text"
-                                            placeholder={t("CITY")}
-                                            {...register("city"
-
-                                            )}
-                                        />
-                                    </Form.Group>
-
-                                    <h3>{t("PROFILE_PHOTO")}</h3>
-                                    <p>{t("ADD_PHOTO")}</p>
-                                    <div className="profileImg ">
-                                        <div className="profileIcon">
-                                            <label for="uploadImage">
-                                                <MdAddCircleOutline />
-                                            </label>
-                                            <h6 className="addCls">{t("ADD")}</h6>
-                                        </div>
-                                        <div className="profileImageSet">
-                                            <img src={profilePreview} />
-                                            <input
-                                                id="uploadImage"
-                                                name="image"
-                                                type="file"
-                                                style={{
-                                                    display: "none",
-                                                }}
-                                                accept="image/*"
-                                                onChange={onImageChange}
-                                            />
-                                        </div>
-                                        <div className="profileIcon">
-                                            <MdOutlineCancel onClick={(e) => onImageRemove(e)} />
-                                            <h6 className="addCls">{t("CLEAR")}</h6>
-                                        </div>
-                                    </div>
-
-                                    <h3>{t("YOUR_PASSWORD")}</h3>
-                                    <p>{t("PASSWORD_PARA")}</p>
-                                    <div className="hidePassword">
-                                        {isPassword}
-                                    </div>
-
-                                    <div className="changePassword">
-                                        <div className="changeIcon">
-                                            <h6>{t("CHANGE_PASSWORD")}</h6>
-                                            {changePassword == 0 ? <MdKeyboardArrowDown onClick={() => setChangePassword(1)} /> : <MdKeyboardArrowUp onClick={() => setChangePassword(0)} />}
-                                        </div>
-
-                                        {changePassword == 1 &&
-                                            <div>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Control
-                                                        type="password"
-                                                        placeholder={t("CURRENT_PASSWORD")}
-                                                        {...register("currentPassword", {
-                                                            required: {
-                                                                value: true,
-                                                                message: `${t("CURRENT_PASS")}`,
-                                                            },
-                                                            pattern: {
-                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                                                                message: `${t("INVALID_PASSWORD")}`,
-                                                            },
-                                                        })}
-                                                    />
-                                                </Form.Group>
-                                                {errors.currentPassword && (
-                                                    <span className="errorDisplay">
-                                                        {errors.currentPassword.message}
-                                                    </span>
-                                                )}
-                                                <Form.Group className="mb-3">
-                                                    <Form.Control
-                                                        type="password"
-                                                        placeholder={t("SET_PASSWORD")}
-                                                        {...register("setPassword", {
-                                                            required: {
-                                                                value: true,
-                                                                message: `${t("NEW_PASSWORD")}`,
-                                                            },
-                                                            pattern: {
-                                                                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                                                                message: `${t("INVALID_PASSWORD")}`,
-                                                            },
-                                                        })}
-                                                    />
-                                                </Form.Group>
-                                                {errors.setPassword && (
-                                                    <span className="errorDisplay">
-                                                        {errors.setPassword.message}
-                                                    </span>
-                                                )}
-                                                <Form.Group className="mb-3">
-                                                    <Form.Control
-                                                        type="password"
-                                                        placeholder={t("REPEAT_PASSWORD")}
-                                                        {...register("repeatPassword", {
-                                                            required: {
-                                                                value: true,
-                                                                message: `${t("REPEAT_PASS")}`,
-                                                            },
-
-                                                            validate: (value) =>
-                                                                value === watch("setPassword") || `${t("NOT_MATCH")}`,
-                                                        })}
-                                                    />
-                                                </Form.Group>
-                                                {errors.repeatPassword && (
-                                                    <span className="errorDisplay">
-                                                        {errors.repeatPassword.message}
-                                                    </span>
-                                                )}
-                                            </div>
-                                        }
-
-                                    </div>
-
-                                    <div className="buttonAdd">
-                                        <CustomBtn>{t("SAVE")}</CustomBtn>
-                                    </div>
-                                </Form>
-
-                                <div className="deleteIcon" onClick={handleShow}>
-                                    <BsTrash3 />
-                                    <h6>{t("DELETE_ACCOUNT")}</h6>
+        <>
+            {isLoading === true ? (
+                <Loader />
+            ) : ""}
+            <div className="main">
+                <Container>
+                    <div className="profile">
+                        <Row>
+                            <Col sm={6}>
+                                <div className="profileLeftPart">
+                                    <h3>{t("YOUR_PROFILE")}</h3>
+                                    <p><strong>{t("NOTE")}</strong>
+                                        {t("PROFILE_DETAILS")}
+                                    </p>
                                 </div>
-                            </div>
-                        </Col>
-                    </Row>
-                </div >
-            </Container >
+                            </Col>
+                            <Col sm={6}>
+                                <div className="profileRightPart">
+                                    <h4>{t("YOUR_PROFILE")}</h4>
+                                    <Form onSubmit={handleSubmit(onSubmit)}>
+                                        <h3>{t("PROFILE")}</h3>
+                                        <p>{t("PROFILE_PARA")}</p>
+                                        <Form.Group className="mb-3" controlId="formBasicName">
+                                            <Form.Control
+                                                type="text"
+                                                placeholder={t("NAME")}
+                                                {...register("fullName", {
+                                                    required: {
+                                                        value: true,
+                                                        message: `${t("ENTER_NAME")}`,
+                                                    },
+                                                })}
+                                            />
+                                        </Form.Group>
+                                        {errors.fullName && (
+                                            <span className="errorDisplay">
+                                                {errors.fullName.message}
+                                            </span>
+                                        )}
 
-            <Modal
-                show={showPopup}
-                onHide={handleClose}
-                className="deletePopup"
-                keyboard={false}
-                backdrop="static">
-                <Modal.Header>
-                    <Modal.Title>{t("ALERT")}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{t("WANT_DELETE")}</Modal.Body>
-                <Modal.Footer>
-                    <div className="buttonAdd1">
-                        <CustomBtn type="button" onClick={handleClose}>{t("CANCEL")}</CustomBtn>
-                    </div>
-                    <div>
-                        <CustomBtn onClick={() => { deleteUser(); handleClose() }}>{t("DELETE")}</CustomBtn>
-                    </div>
-                </Modal.Footer>
-            </Modal>
-        </div >
+                                        <Form.Group className="mb-3">
+                                            <Form.Control
+                                                type="text"
+                                                placeholder={t("COMPANY_NAME")}
+                                                {...register("companyName"
 
+                                                )}
+                                            />
+                                        </Form.Group>
+
+                                        <Form.Group className="mb-3">
+                                            <Form.Control
+                                                type="text"
+                                                placeholder={t("POSITION")}
+                                                {...register("occupation"
+
+                                                )}
+                                            />
+                                        </Form.Group>
+
+                                        <ProfileEmail register={register} />
+                                        {errors.email && (
+                                            <span className="errorDisplay">
+                                                {errors.email.message}
+                                            </span>
+                                        )}
+
+                                        {/* phone number input */}
+                                        <ContactInput phone={phoneNo} dialCode={dialCode} country={countryCode} phone1={setPhoneNo}
+                                            dialCode1={setDialCode} country1={setCountryCode} />
+
+                                        {/* watsapp number input */}
+                                        <WatsappInput watsappNo={watsappNo} dialCodeWatsapp={dialCodeWatsapp} countryCodeWatsapp={countryCodeWatsapp}
+                                            setWatsappNo={setWatsappNo} setDialCodeWatsapp={setDialCodeWatsapp} setCountryCodeWatsapp={setCountryCodeWatsapp} />
+
+                                        <h3>{t("LOCATION")}</h3>
+                                        <p>{t("LOCATION_PARA")}</p>
+                                        <div className="selectOption">
+                                            <Form.Group className="mb-3">
+                                                <Select
+                                                    id="location" name="location"
+                                                    options={locationOption}
+                                                    onChange={setLocationSelected}
+                                                    value={locationSelected}
+                                                    styles={{
+                                                        placeholder: () => ({
+                                                            fontSize: "15px",
+                                                            color: "#cacaca",
+                                                            position: "absolute",
+                                                            top: "8px",
+                                                            left: "15px",
+                                                        }),
+                                                    }}
+                                                    theme={(theme) => ({
+                                                        ...theme,
+                                                        colors: {
+                                                            ...theme.colors,
+                                                            borderRadius: 0,
+                                                            primary25: "#f2f2f2",
+                                                            primary: "#000000;",
+                                                            primary50: "#f2f2f2",
+                                                        },
+                                                    })}
+                                                />
+                                            </Form.Group>
+                                        </div>
+
+                                        <div className={`${locationSelected.value == 1 ? "selectOption hideIcon" : "selectOption"}`}>
+                                            <Form.Group className="mb-3" >
+                                                <Select
+                                                    id="country"
+                                                    options={countryOption}
+                                                    onChange={setCountrySelected}
+                                                    placeholder={t("COUNTRY_SET")}
+                                                    value={countrySelected}
+                                                    styles={{
+                                                        placeholder: () => ({
+                                                            fontSize: "15px",
+                                                            color: "#cacaca",
+                                                            position: "absolute",
+                                                            top: "8px",
+                                                            left: "15px",
+                                                        }),
+                                                    }}
+                                                    theme={(theme) => ({
+                                                        ...theme,
+                                                        colors: {
+                                                            ...theme.colors,
+                                                            borderRadius: 0,
+                                                            primary25: "#f2f2f2",
+                                                            primary: "#000000;",
+                                                            primary50: "#f2f2f2",
+                                                        },
+                                                    })}
+                                                />
+                                            </Form.Group>
+                                        </div>
+
+                                        <div className={`${locationSelected.value == 0 ? "selectOption hideIcon" : "selectOption"}`}>
+                                            <Form.Group className="mb-3" >
+                                                <Select
+                                                    id="province"
+                                                    options={provinceOption}
+                                                    onChange={setProvinceSelected}
+                                                    placeholder={t("SELECT_PROVINCE")}
+                                                    value={provinceSelected}
+                                                    styles={{
+                                                        placeholder: () => ({
+                                                            fontSize: "15px",
+                                                            color: "#cacaca",
+                                                            position: "absolute",
+                                                            top: "8px",
+                                                            left: "15px",
+                                                        }),
+                                                    }}
+                                                    theme={(theme) => ({
+                                                        ...theme,
+                                                        colors: {
+                                                            ...theme.colors,
+                                                            borderRadius: 0,
+                                                            primary25: "#f2f2f2",
+                                                            primary: "#000000;",
+                                                            primary50: "#f2f2f2",
+                                                        },
+                                                    })}
+                                                />
+                                            </Form.Group>
+                                        </div>
+
+                                        <Form.Group className="mb-3">
+                                            <Form.Control
+                                                type="text"
+                                                placeholder={t("CITY")}
+                                                {...register("city"
+
+                                                )}
+                                            />
+                                        </Form.Group>
+
+                                        <h3>{t("PROFILE_PHOTO")}</h3>
+                                        <p>{t("ADD_PHOTO")}</p>
+                                        <div className="profileImg ">
+                                            <div className="profileIcon">
+                                                <label for="uploadImage">
+                                                    <MdAddCircleOutline />
+                                                </label>
+                                                <h6 className="addCls">{t("ADD")}</h6>
+                                            </div>
+                                            <div className="profileImageSet">
+                                                <img src={profilePreview} />
+                                                <input
+                                                    id="uploadImage"
+                                                    name="image"
+                                                    type="file"
+                                                    style={{
+                                                        display: "none",
+                                                    }}
+                                                    accept="image/*"
+                                                    onChange={onImageChange}
+                                                />
+                                            </div>
+                                            <div className="profileIcon">
+                                                <MdOutlineCancel onClick={(e) => onImageRemove(e)} />
+                                                <h6 className="addCls">{t("CLEAR")}</h6>
+                                            </div>
+                                        </div>
+
+                                        <h3>{t("YOUR_PASSWORD")}</h3>
+                                        <p>{t("PASSWORD_PARA")}</p>
+                                        <div className="hidePassword">
+                                            {isPassword}
+                                        </div>
+
+                                        <div className="changePassword">
+                                            <div className="changeIcon">
+                                                <h6>{t("CHANGE_PASSWORD")}</h6>
+                                                {changePassword == 0 ? <MdKeyboardArrowDown onClick={() => setChangePassword(1)} /> : <MdKeyboardArrowUp onClick={() => setChangePassword(0)} />}
+                                            </div>
+
+                                            {changePassword == 1 &&
+                                                <div>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Control
+                                                            type="password"
+                                                            placeholder={t("CURRENT_PASSWORD")}
+                                                            {...register("currentPassword", {
+                                                                required: {
+                                                                    value: true,
+                                                                    message: `${t("CURRENT_PASS")}`,
+                                                                },
+                                                                pattern: {
+                                                                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                    message: `${t("INVALID_PASSWORD")}`,
+                                                                },
+                                                            })}
+                                                        />
+                                                    </Form.Group>
+                                                    {errors.currentPassword && (
+                                                        <span className="errorDisplay">
+                                                            {errors.currentPassword.message}
+                                                        </span>
+                                                    )}
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Control
+                                                            type="password"
+                                                            placeholder={t("SET_PASSWORD")}
+                                                            {...register("setPassword", {
+                                                                required: {
+                                                                    value: true,
+                                                                    message: `${t("NEW_PASSWORD")}`,
+                                                                },
+                                                                pattern: {
+                                                                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                                                    message: `${t("INVALID_PASSWORD")}`,
+                                                                },
+                                                            })}
+                                                        />
+                                                    </Form.Group>
+                                                    {errors.setPassword && (
+                                                        <span className="errorDisplay">
+                                                            {errors.setPassword.message}
+                                                        </span>
+                                                    )}
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Control
+                                                            type="password"
+                                                            placeholder={t("REPEAT_PASSWORD")}
+                                                            {...register("repeatPassword", {
+                                                                required: {
+                                                                    value: true,
+                                                                    message: `${t("REPEAT_PASS")}`,
+                                                                },
+
+                                                                validate: (value) =>
+                                                                    value === watch("setPassword") || `${t("NOT_MATCH")}`,
+                                                            })}
+                                                        />
+                                                    </Form.Group>
+                                                    {errors.repeatPassword && (
+                                                        <span className="errorDisplay">
+                                                            {errors.repeatPassword.message}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            }
+
+                                        </div>
+
+                                        <div className="buttonAdd">
+                                            <CustomBtn>{t("SAVE")}</CustomBtn>
+                                        </div>
+                                    </Form>
+
+                                    <div className="deleteIcon" onClick={handleShow}>
+                                        <BsTrash3 />
+                                        <h6>{t("DELETE_ACCOUNT")}</h6>
+                                    </div>
+                                </div>
+                            </Col>
+                        </Row>
+                    </div >
+                </Container >
+
+                <Modal
+                    show={showPopup}
+                    onHide={handleClose}
+                    className="deletePopup"
+                    keyboard={false}
+                    backdrop="static">
+                    <Modal.Header>
+                        <Modal.Title>{t("ALERT")}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{t("WANT_DELETE")}</Modal.Body>
+                    <Modal.Footer>
+                        <div className="buttonAdd1">
+                            <CustomBtn type="button" onClick={handleClose}>{t("CANCEL")}</CustomBtn>
+                        </div>
+                        <div>
+                            <CustomBtn onClick={() => { deleteUser(); handleClose() }}>{t("DELETE")}</CustomBtn>
+                        </div>
+                    </Modal.Footer>
+                </Modal>
+            </div >
+        </>
     );
 }
 export default Profile;

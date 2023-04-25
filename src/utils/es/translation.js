@@ -105,6 +105,8 @@ export const TRANSLATIONS_ES = {
     SET_PASSWORD: "Establecer nueva contraseña",
     REPEAT_PASSWORD: "Repita la contraseña",
     CURRENT_PASSWORD: "Contraseña actual",
+    SELECT_PROVINCE: "Seleccione Provincia",
+    COUNTRY_SET: "Conjunto de países",
 
 
     //---------- Form Lable Common Text---------------
