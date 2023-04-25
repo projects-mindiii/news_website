@@ -1,56 +1,49 @@
 import "./ClassiFieds.css";
 import { Row, Nav, Container, Col, Tab } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import SublyApi from "../../helpers/Api";
 import { useSelector } from "react-redux";
 import ClassifiedCategoryList from "./ClassifiedCategoryList";
+import { STATUS_CODES } from "../../utils/StatusCode";
+import { getWantedListApi,forSaleListApi } from "../../store/slices/ClassifiedSlice";
+import { useDispatch} from "react-redux";
 
 //-------Create a Deals Header component--------
 function ClassiFieds() {
-  const { userToken, currentUser, isLoading } = useSelector(
-    (state) => state.user
+  const dispatch = useDispatch();
+  const {forSaleTotalCount, forSaleWebList,wantedTotalCount,wantedWebList} = useSelector(
+    (state) => state.classified
   );
-  const [CatergoryType, setCategoryType] = useState("");
-  const [CountryName, setCountryName] = useState("");
-  const [shown, setShown] = useState(false);
 
+  const { userToken } = useSelector((state) => state.user);
+  
+  const [shown, setShown] = useState(false);
+  const [showDefaultList, setShowDefaultList] = useState(1);
+
+
+  // function for classified webList
+  
   useEffect(() => {
-    async function getClassifiedLists() {
-      let requestData = new FormData();
-      requestData.append("limit", "");
-      requestData.append("offset", "");
-      requestData.append("type", 4);
-      requestData.append("search_by", 1);
-      requestData.append("province", 931);
-      requestData.append("country", 15);
-      requestData.append("city", "Free State");
-      await SublyApi.getClassiFiedMeta(userToken).then((responsejson) => {
-        if (responsejson.status_code == 500) {
-        } else if (responsejson.status_code == 400) {
-        } else {
-          if (responsejson.status_code == 200) {
-            setCategoryType(responsejson.data.category_type);
-            setCountryName(responsejson.data.provinces);
-          }
-        }
+    async function getWebClassifiedLists() {
+      const forSaleQuery = { limit: 10, offset: 0, type: 4 };
+
+      const data = { "userToken":userToken, "whereQuery":forSaleQuery}
+      dispatch(forSaleListApi(data)).then((responsejson)=>{
+        console.log('responsejson',responsejson.payload)
       });
-      // SublyApi.getClassifiedList(requestData, userToken).then((responsejson) => {
-      // });
+
+      const wantedQuery = { limit: 10, offset: 0, type: 2 };
+
+      const wantedData = { "userToken":userToken, "whereQuery":wantedQuery}
+      dispatch(getWantedListApi(wantedData)).then((responsejson)=>{
+        console.log("response", responsejson)
+      });
     }
-    getClassifiedLists();
+    getWebClassifiedLists();
   }, []);
-  console.log(CatergoryType);
-  console.log(CountryName);
-  //Adverties image
-  // const imagearray = [
-  //   { image: newsadd1 },
-  //   { image: newsadd2 },
-  //   { image: newsadd1 },
-  //   { image: newsadd2 },
-  // ];
+
   return (
     <div className="main">
       <React.Fragment>
@@ -61,7 +54,9 @@ function ClassiFieds() {
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                      <Nav.Link eventKey="first">FOR SALE (4)</Nav.Link>
+                      <Nav.Link eventKey="first">
+                        FOR SALE ({forSaleTotalCount})
+                      </Nav.Link>
                       {shown ? (
                         <MdKeyboardArrowDown
                           onClick={() => setShown(!shown)}
@@ -76,12 +71,12 @@ function ClassiFieds() {
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
-                          color="white"
+                          color="black"
                         />
                       )}
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="second">WANTED (2)</Nav.Link>
+                      <Nav.Link eventKey="second">WANTED ({wantedTotalCount})</Nav.Link>
                       {shown ? (
                         <MdKeyboardArrowDown
                           onClick={() => setShown(!shown)}
@@ -96,7 +91,7 @@ function ClassiFieds() {
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
-                          color="white"
+                          color="black"
                         />
                       )}
                     </Nav.Item>
@@ -104,18 +99,7 @@ function ClassiFieds() {
                 </Tab.Container>
               </div>
             </Col>
-
-            <ClassifiedCategoryList />
-
-            {/* <Col xs={12} sm={12} md={12} lg={5}>
-              <div className="advertisment">
-                {imagearray.map((item, index) => (
-                  <div className="classiFields_advertise">
-                    <img src={item.image} alt={item.image} />
-                  </div>
-                ))}
-              </div>
-            </Col> */}
+            <ClassifiedCategoryList forSaleListData={(showDefaultList==1)?forSaleWebList:wantedWebList}/>
           </Row>
         </Container>
       </React.Fragment>

@@ -2,11 +2,12 @@
     padding: 15px;
     background-color: #FFFFFF;
     box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.03);
+    margin-bottom: 25px;
 }
 
 .classiFieds_forSaleBox .classiFieds_forSale_about {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: flex-start;
 }
 .classiFields_mobileMargingRemove {
@@ -27,6 +28,8 @@
     width: 180px;
     height: 135px;
     font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
 }
 
 .classiFieds_forSale_about .classiFields_heading .text {
@@ -48,7 +51,7 @@
 }
 
 .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
-    background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%);
+    /* background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%); */
     border-radius: 14px;
     line-height: 20px;
     border: none !important;
@@ -140,6 +143,7 @@
     line-height: 18px;
     letter-spacing: -0.3px;
     color: #000000;
+    margin: 4px;
 }
 
 .classiFieds_time span img {
@@ -155,6 +159,7 @@
     letter-spacing: -0.2px;
     color: #E91F63;
     margin-bottom: 0px;
+    margin-top: 10px;
 }
 
 .classiFieds_RupeesText span {
@@ -171,11 +176,21 @@
     line-height: 36px;
     letter-spacing: -0.48px;
     color: #E91F63;
+    /* position: relative;
+    left: 14px;
+    right: 0px;
+    top: 0px; */
 }
 
 .classiFieds_countryName img {
     width: 14px;
     height: 17.62px;
+    /* height: 20.4px;
+    width: 16.8px;
+    position: absolute;
+    color: #000000;
+    right: 38px;
+    top: -2px; */
 }
 
 .classiFieds_aboutText p {
@@ -228,6 +243,7 @@
 .classiFieds_bookmarkicon img {
     width: 14px;
     height: 20px;
+    margin-left: 10px;
 }
 
 .classiFields_shareMedia {
@@ -322,6 +338,10 @@
     .classiFieds_bookmarkicon img {
         width: 11.2px;
         height: 16px;
+    }
+
+    .classiFieds_RupeesText {
+        margin-top: 6px;
     }
 
     .classiFieds_RupeesText p {
@@ -491,5 +511,12 @@
     font-size: 25px;
     font-weight: 600;
 }
+
+.classiFields_iconBackGround svg {
+    font-size: 22px;
+    margin-left: 4px;
+}
+
+
 
 
