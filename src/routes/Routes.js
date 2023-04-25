@@ -17,6 +17,7 @@ import PageNotFound from "../appComponents/PageNotFound/PageNotFound";
 import JobTypes from "../appComponents/ClassiFieds/JobTypes";
 
 import YourAdd from "../appComponents/YourAdd/YourAdd";
+import PostAdvert from "../appComponents/PostAdvert/PostAdvert";
 
 
 //-------Create a component for manage routing--------
@@ -43,6 +44,8 @@ function Routers() {
                 
 
                 <Route exact path="/Your-add" element={<YourAdd />} />
+                <Route exact path="/Post-advert" element={<PostAdvert />} />
+
                 <Route path="*" element={<PageNotFound />} />
 
             </Routes>

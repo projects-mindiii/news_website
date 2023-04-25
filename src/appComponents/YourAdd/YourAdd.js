@@ -117,16 +117,26 @@ function YourAdd() {
                             </div>
                         </Col>
                         <Col xs={12} sm={12} md={12} lg={6}>
-                            {yourAds ? yourAds.map((item,index)=>(
-                            <div className="yourAdd_DataShow">
-                                <CommonDataShow yourdata={item}/>
-                                <WhatsappshareContact yourdata={item}/>
-                                <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
-                                
-                               {item.approval_status == 0 &&
-                                <button className="not_live">NOT LIVE - Pending Approvals</button>}
-                            </div> 
-                            ) ): <h5 className="youAdd_NotShow">--- approval_status ---</h5>}
+                        {yourAds && yourAds.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5> }
+
+                            {yourAds && yourAds.map((item, index) => (
+                                item.approval_status == 1 &&
+                                    <div className="yourAdd_DataShow">
+                                        <CommonDataShow yourdata={item} />
+                                        <WhatsappshareContact yourdata={item} />
+                                        <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
+                                    </div>
+                            )) }
+                      {yourAds && yourAds.some(item => item.approval_status == 0) == true && <h5 className="youAdd_PendingApproval">---- PENDING APPROVAL ----</h5> }
+                       {yourAds && yourAds.map((item, index) => (
+                                item.approval_status == 0 &&
+                                    <div className="yourAdd_DataShow">
+                                        <CommonDataShow yourdata={item} />
+                                        <WhatsappshareContact yourdata={item} />
+                                        <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
+                                        <button className="not_live">NOT LIVE - Pending Approvals</button>
+                                    </div>
+                            )) }
                         </Col>
                     </Row>
                 </Container>

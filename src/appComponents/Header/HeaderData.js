@@ -27,7 +27,7 @@ export const headerData = [
     {
         id: "4",
         text: `${t("POST_ADVERT")} `,
-        link: `javascript:;`,
+        link: `/Post-advert`,
         activeClass:""
         
     },
