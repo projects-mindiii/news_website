@@ -1,37 +1,45 @@
 import "./ClassiFieds.css";
 import { Row, Nav, Container, Col, Tab } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import SublyApi from "../../helpers/Api";
 import { useSelector } from "react-redux";
 import ClassifiedCategoryList from "./ClassifiedCategoryList";
+import { STATUS_CODES } from "../../utils/StatusCode";
+import { getWebList } from "../../store/slices/ClassifiedSlice";
+import { useDispatch} from "react-redux";
 
 //-------Create a Deals Header component--------
 function ClassiFieds() {
-  const { userToken, currentUser, isLoading } = useSelector(
-    (state) => state.user
+  const dispatch = useDispatch();
+  const {classifiedTotalCount, classifiedWebList} = useSelector(
+    (state) => state.classified
   );
+  const { userToken } = useSelector((state) => state.user);
   const [CatergoryType, setCategoryType] = useState("");
   const [CountryName, setCountryName] = useState("");
   const [shown, setShown] = useState(false);
   const [forSaleTotalCount, setForSaleTotalCount] = useState("");
-  const [forSaleList, setForSaleList]= useState("");
-  
+  const [forSaleList, setForSaleList] = useState("");
+console.log("classifiedWebList",classifiedWebList)
+console.log("classifiedWebList",classifiedWebList)
+
   // function for classified webList
-  const classifiedValue ={limit: 10, offset: 0, type: 4}
+  const classifiedValue = { limit: 10, offset: 0, type: 4 };
+  
   useEffect(() => {
     async function getWebClassifiedLists() {
-      const details = await SublyApi.getWebClassiFiedList(
-        userToken,
-        classifiedValue
-      );
-      console.log("details", details)
-      if (details.status_code == 200) {
-        setForSaleTotalCount(details.data.total_count);
-        setForSaleList(details.data.list)
-      }
+      const data = { "userToken":userToken, "classifiedValue":classifiedValue}
+      dispatch(getWebList(data)).then((responsejson)=>{
+        
+      });
+      // const details = details.payload;
+      //  console.log("abcd");
+      // if (details.status_code == STATUS_CODES.SUCCESS) {
+      //   setForSaleTotalCount(details.data.total_count);
+      //   setForSaleList(details.data.list);
+      // }
     }
     getWebClassifiedLists();
   }, []);
@@ -48,21 +56,20 @@ function ClassiFieds() {
       requestData.append("country", 15);
       requestData.append("city", "Free State");
       await SublyApi.getClassiFiedMeta(userToken).then((responsejson) => {
-        if (responsejson.status_code == 500) {
-        } else if (responsejson.status_code == 400) {
+        if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
+        } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
         } else {
-          if (responsejson.status_code == 200) {
+          if (responsejson.status_code == STATUS_CODES.SUCCESS) {
             setCategoryType(responsejson.data.category_type);
             setCountryName(responsejson.data.provinces);
           }
         }
       });
-      
     }
     getClassifiedLists();
   }, []);
-  console.log(CatergoryType);
-  console.log(CountryName);
+  // console.log(CatergoryType);
+  // console.log(CountryName);
   //Adverties image
   // const imagearray = [
   //   { image: newsadd1 },
@@ -80,7 +87,9 @@ function ClassiFieds() {
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                      <Nav.Link eventKey="first">FOR SALE ({forSaleTotalCount})</Nav.Link>
+                      <Nav.Link eventKey="first">
+                        FOR SALE ({classifiedTotalCount})
+                      </Nav.Link>
                       {shown ? (
                         <MdKeyboardArrowDown
                           onClick={() => setShown(!shown)}
@@ -95,7 +104,7 @@ function ClassiFieds() {
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
-                          color="white"
+                          color="black"
                         />
                       )}
                     </Nav.Item>
@@ -115,7 +124,7 @@ function ClassiFieds() {
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
-                          color="white"
+                          color="black"
                         />
                       )}
                     </Nav.Item>
@@ -124,7 +133,7 @@ function ClassiFieds() {
               </div>
             </Col>
 
-            <ClassifiedCategoryList forSaleListData={forSaleList}/>
+            <ClassifiedCategoryList forSaleListData={classifiedWebList} />
 
             {/* <Col xs={12} sm={12} md={12} lg={5}>
               <div className="advertisment">

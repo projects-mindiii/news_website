@@ -7,7 +7,7 @@ function ContactPerson(props) {
   console.log("props", props);
   return (
       <React.Fragment>
-        <div className="classiFields_contactPerson">
+        <div className="classiFields_contactPersondetail">
           <p className="heading">Contact Person</p>
           {props.forSaleListData[props.index].contact_company && (
             <div className="classiFields_PersonAboutShow">

@@ -1,17 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userSlice from './slices/UserSlice'
 import dealSlice from './slices/DealSlice'
-
 import { persistStore, persistReducer } from "redux-persist"; 
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from 'redux-thunk';
 import { combineReducers } from "redux";
+import classifiedSlice from './slices/ClassifiedSlice';
 
 //redux method which combines reducer
 const rootReducer = combineReducers({
   user: userSlice,
   deal: dealSlice,
+  classified: classifiedSlice,
 
 });
 

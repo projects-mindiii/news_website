@@ -2,18 +2,22 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import SublyApi from '../../helpers/Api'
 
 const initialState = {
-  ClassifiedMetaList: {},
+  classifiedTotalCount: {},
+  classifiedWebList: {},
   isLoading: false,
 }
 
 // Thunk for getWeb list
 export const getWebList = createAsyncThunk(
-	"deals/getWebList",
+	"classified/getWebList",
 	async (data, { rejectWithValue }) => {
+    console.log("data", data)
 		try {
-			const response = await SublyApi.getWebClassiFiedList(data);
-			return response;
+			const details = await SublyApi.getWebClassiFiedList(data.userToken, data.classifiedValue);
+      console.log("detail", details)
+			return details;
 		} catch (error) {
+      console.log("error", error)
 			return rejectWithValue(error);
 		}
 	}
@@ -31,12 +35,15 @@ export const classifiedSlice = createSlice({
         state.isLoading = true
     })
     builder.addCase(getWebList.fulfilled, (state, action) => {
-        const response = action.payload;
-        if(response.status_code==200){
-          state.categoryType = response.data;
+        const details = action.payload;
+        console.log("detail", details)
+        if(details.status_code==200){
+          state.classifiedTotalCount = details.data.total_count;
+          state.classifiedWebList = details.data.list;
+         
          
         }else{
-          state.categoryType = {};
+          state.classifiedTotalCount = {};
          
         }
         state.isLoading = false
