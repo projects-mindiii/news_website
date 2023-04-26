@@ -1,17 +1,21 @@
-import { Col, Container, Nav, Row, Tab} from "react-bootstrap";
+import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import "./LatestDeals.css";
-import "../../assets/styles/Common.css";
-import DigitalPrint from "../DealSubModule/DealSubModules";
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import "../../../assets/styles/Common.css";
+import LatestDealList from "../LatestDealList/LatestDealList";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import Loader from "../../../utils/Loader/Loader";
 
 function LatestDeals() {
   const { latestDeals, isLoading } = useSelector((state) => state.deal);
-  const [eventKeyValue, setEventKeyValue] = useState((latestDeals && latestDeals.length >0)?latestDeals[0].id:null);
+  const [eventKeyValue, setEventKeyValue] = useState((latestDeals && latestDeals.length > 0) ? latestDeals[0].id : null);
 
   return (
     <div className="dealContainer">
+      {isLoading === true ? (
+        <Loader />
+      ) : ""}
       <Container>
         <Tab.Container id="left-tabs-example" defaultActiveKey={eventKeyValue}>
           <Row>
@@ -26,11 +30,11 @@ function LatestDeals() {
                 <Nav.Item>
                   {latestDeals.length > 0
                     ? latestDeals.map((item, index) => (
-                        <Nav.Link  key={item.id} eventKey={item.id}>
-                          {item.name} ({item.deal_count})
-                          <MdKeyboardArrowRight />
-                        </Nav.Link>
-                      ))
+                      <Nav.Link key={item.id} eventKey={item.id}>
+                        {item.name} ({item.deal_count})
+                        <MdKeyboardArrowRight />
+                      </Nav.Link>
+                    ))
                     : ""}
                 </Nav.Item>
               </Nav>
@@ -38,7 +42,7 @@ function LatestDeals() {
             <Col lg={6} sm={12}>
               <Tab.Content>
                 <Tab.Pane eventKey={eventKeyValue ? eventKeyValue : ""}>
-                  <DigitalPrint
+                  <LatestDealList
                     eventKeyValue={eventKeyValue}
                     dealList={latestDeals}
                   />

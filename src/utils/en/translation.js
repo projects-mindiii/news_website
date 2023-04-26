@@ -87,6 +87,18 @@ export const TRANSLATIONS_EN = {
   CANCEL: "CANCEL",
   DELETE: "DELETE",
 
+  //----Deals Text------
+  CONTACT_PERSON: "CONTACT PERSON",
+  CONTACT_NUMBER: "CONTACT NUMBER",
+  WEBSITE: "WEBSITE",
+  EXPIRY: "EXPIRY",
+  EMAIL_TEXT: "EMAIL",
+  PROMOTION_CODE: "PROMOTIONAL CODE",
+  WHATSAPP_ME: "WhatsApp Me",
+  COMPANY_PROFILE: "View Company Profile",
+  BRAND_REPRESENT: "BRANDS REPRESENTED",
+  BEDFORD_BRANCH: "BEDFORDVIEW BRANCH",
+
 
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Form incomplete, please fill all fields",

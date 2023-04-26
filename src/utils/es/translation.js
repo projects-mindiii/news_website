@@ -75,6 +75,18 @@ export const TRANSLATIONS_ES = {
     CANCEL: "CANCELAR",
     DELETE: "BORRAR",
 
+    //----Deals Text------
+    CONTACT_PERSON: "PERSONA DE CONTACTO",
+    CONTACT_NUMBER: "NÚMERO DE CONTACTO",
+    WEBSITE: "SITIO WEB",
+    EXPIRY: "EXPIRACIÓN",
+    EMAIL_TEXT: "CORREO ELECTRÓNICO",
+    PROMOTION_CODE: "CODIGO PROMOCIONAL",
+    WHATSAPP_ME: "Mándame un mensaje por Whatsapp",
+    COMPANY_PROFILE: "Ver perfil de la empresa",
+    BRAND_REPRESENT: "MARCAS REPRESENTADAS",
+    BEDFORD_BRANCH: "SUCURSAL BEDFORDVIEW",
+
     //---------------Error Messages Common Text----------
     INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
     INVALID_EMAIL: "Dirección de correo electrónico no válida",
