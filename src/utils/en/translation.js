@@ -32,6 +32,19 @@ export const TRANSLATIONS_EN = {
   please enter the code sent to`,
   VERIFY: "VERIFY",
 
+  //---------- Classified Common Text---------------
+  FOR_SALE: "FOR SALE",
+  WANTED: "WANTED",
+  JOB_OFFERS:"JOB OFFERS",
+  JOB_SEEKER:"JOB SEEKAR",
+  PER_WEEK:"PER WEEK",
+  CONTACT_PERSON:"Contact Person",
+  COMPANY:"COMPANY",
+  CONTACT_PERSON_EMAIL:"EMAIL",
+  CONTACT_NUMBER:"CONTACT NUMBER",
+  WHATSAPP:"WhatsApp",
+  SHARE:"SHARE",
+
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
   QUICK_LINKS: "QUICK LINKS",
@@ -117,4 +130,8 @@ export const TRANSLATIONS_EN = {
 
   //---------- Status Error Text---------------
   SESSION_EXPIRE: "Your Session Expired!",
+
+    
+
+
 };

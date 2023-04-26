@@ -6,7 +6,6 @@ export const headerData = [
     {
         id: "1",
         text: `${t("DEALS")}`,
-        // link: `javascript:;`,
         link: `/deals/latest-deals`,
         activeClass: `active`,
 
@@ -16,29 +15,28 @@ export const headerData = [
         id: "2",
         text: `${t("CLASSIFIEDS")}`,
          link: `/classifieds`,
-        // link: `/classified`,
         activeClass:""
     },
     {
         id: "3",
         text: `${t("JOBS")}`,
-        link: `javascript:;`,
+        link: `/job-types`,
         activeClass:""
-        // link: `/job`,
+       
     },
     {
         id: "4",
         text: `${t("POST_ADVERT")} `,
         link: `javascript:;`,
         activeClass:""
-        // link: `/post`,
+        
     },
     {
         id: "5",
         text: `${t("YOUR_ADS")} `,
         link: `javascript:;`,
         activeClass:""
-        // link: `/ads`,
+       
     },
 ];
 

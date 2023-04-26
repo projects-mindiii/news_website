@@ -6,17 +6,17 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
 import ClassifiedCategoryList from "./ClassifiedCategoryList";
 import {
-  getWantedListApi,
-  forSaleListApi,
+  getJobOfferListApi,
+  getJobSeekerListApi
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 //-------Create a Deals Header component--------
-function ClassiFieds() {
+function JobTypes() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { forSaleTotalCount, forSaleWebList, wantedTotalCount, wantedWebList } =
+  const {jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
     useSelector((state) => state.classified);
   const { userToken } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
@@ -25,15 +25,15 @@ function ClassiFieds() {
 
   useEffect(() => {
     async function getWebClassifiedLists() {
-      const forSaleQuery = { limit: 10, offset: 0, type: 4 };
-      const data = { userToken: userToken, whereQuery: forSaleQuery };
-      dispatch(forSaleListApi(data)).then((responsejson) => {
-        console.log("responsejson", responsejson.payload);
+      const jobOfferQuery = { limit: 10, offset: 0, type: 6 };
+      const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
+      dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
+        console.log("response", responsejson);
       });
 
-      const wantedQuery = { limit: 10, offset: 0, type: 5 };
-      const wantedData = { userToken: userToken, whereQuery: wantedQuery };
-      dispatch(getWantedListApi(wantedData)).then((responsejson) => {
+      const jobSeekerQuery = { limit: 10, offset: 0, type: 7 };
+      const jobSeekerData = { userToken: userToken, whereQuery: jobSeekerQuery };
+      dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
         console.log("response", responsejson);
       });
     }
@@ -51,7 +51,7 @@ console.log("showDefaultList",showDefaultList)
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
                       <Nav.Link eventKey={1}>
-                        {t("FOR_SALE")}({forSaleTotalCount})
+                        {t("JOB_OFFERS")}({jobOfferTotalCount})
                       </Nav.Link>
                       {showDefaultList == 1 ? (
                         <MdKeyboardArrowDown
@@ -71,7 +71,7 @@ console.log("showDefaultList",showDefaultList)
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link eventKey={2} >
-                      {t("WANTED")} ({wantedTotalCount})
+                      {t("JOB_SEEKER")} ({jobSeekerTotalCount})
                       </Nav.Link>
                       {showDefaultList == 2 ? (
                         <MdKeyboardArrowDown
@@ -96,7 +96,7 @@ console.log("showDefaultList",showDefaultList)
             </Col>
               <ClassifiedCategoryList
               forSaleListData={
-                showDefaultList == 1 ? forSaleWebList : wantedWebList
+                showDefaultList == 1 ? jobOfferWebList : jobSeekerWebList
               }
             />
           </Row>
@@ -105,4 +105,4 @@ console.log("showDefaultList",showDefaultList)
     </div>
   );
 }
-export default ClassiFieds;
+export default JobTypes;

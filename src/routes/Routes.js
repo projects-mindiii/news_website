@@ -15,6 +15,7 @@ import ViewCompanyProfile from "../appComponents/ViewCompanyProfile/ViewCompanyP
 
 import ClassiFieds from "../appComponents/ClassiFieds/ClassiFieds";
 import PageNotFound from "../appComponents/PageNotFound/PageNotFound";
+import JobTypes from "../appComponents/ClassiFieds/JobTypes";
 
 
 //-------Create a component for manage routing--------
@@ -37,6 +38,8 @@ function Routers() {
                 <Route exact path="/view-profile" element={Object.keys(currentUser).length !== 0 ? (<Profile />) : (<Navigate to="/login" />)} />
                 <Route exact path="/deals/latest-deals/company-profile" element={<ViewCompanyProfile />} />
                 <Route exact path="/classifieds" element={<ClassiFieds />} />
+                <Route exact path="/job-types" element={<JobTypes/>} />
+                
 
                 <Route path="*" element={<PageNotFound />} />
 
