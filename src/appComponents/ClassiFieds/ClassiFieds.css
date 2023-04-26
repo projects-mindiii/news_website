@@ -9,11 +9,11 @@
     display: flex;
     /* justify-content: space-between; */
     align-items: flex-start;
-}
+} 
 .classiFields_mobileMargingRemove {
     margin-bottom: 0px !important;
 }
-.classiFieds_forSale_about>div {
+ .classiFieds_forSale_about>div {
     margin-right: 10px;
 }
 
@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
     font-weight: 600;
-}
+} 
 
 .classiFieds_forSale_about .classiFieds_forSale img {
     width: 180px;
@@ -30,7 +30,7 @@
     font-weight: 600;
     border-radius: 5px;
     box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
-}
+} 
 
 .classiFieds_forSale_about .classiFields_heading .text {
     font-weight: 500;
@@ -41,6 +41,8 @@
 }
 .classiFieds_forSale_about .classiFields_heading {
     margin-top: 10px;
+    margin-left: 10px;
+    width: 100%;
 
 }
 
@@ -317,9 +319,9 @@
     .classiFieds_forSale_about .classiFields_heading {
         margin-top: 5px;
     
-    }
+    } 
 
-    .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+     .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
         font-weight: 600;
         font-size: 8.4378px;
         line-height: 13px;
@@ -377,7 +379,7 @@
     }
 
     .classiFieds_forSaleBox .classiFields_contactPerson {
-        height: 198.27px;
+        /* height: 198.27px; */
         background: #E8E8E8;
         box-shadow: 0px 6.69137px 6.69137px rgba(0, 0, 0, 0.0311407);
         border-radius: 4.01483px;

@@ -115,5 +115,12 @@ export const TRANSLATIONS_ES = {
     YOUR_EMAIL: "Tu Email (requerido)",
 
     //---------- Status Error Text---------------
-    SESSION_EXPIRE: "Your Session Expired!",
+    SESSION_EXPIRE: "¡Su sesión expiró!",
+
+     //---------- Classified Common Text---------------
+     FOR_SALE: "EN VENTA",
+     WANTED: "BUSCADO",
+     JOB_OFFERS:"OFERTAS DE TRABAJO",
+     JOB_SEEKER:"DEMANDANTE DE EMPLEO",
+     PER_WEEK:"POR SEMANA"
 }

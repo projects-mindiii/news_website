@@ -50,7 +50,7 @@ function Header() {
           <div className="logoImg">
             <img src={Logo} alt="news-logo" />
           </div>
-          {location.pathname == "/classifieds" ? 
+          {location.pathname == "/classifieds" || location.pathname == "/job-types"? 
           <div className="bannerImg">
             <img src={Banner} alt="news-logo" />
           </div>: ""}
@@ -75,7 +75,7 @@ function Header() {
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
             {location.pathname == "/deals/latest-deals" ? <DealsHeader /> : ""}
-            {location.pathname == "/classifieds" ? <ClassifiedCountry /> : ""}
+            {location.pathname == "/classifieds" || location.pathname == "/job-types"? <ClassifiedCountry /> : ""}
             <SearchBar />
           </div>
         </div>

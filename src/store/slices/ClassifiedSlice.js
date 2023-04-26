@@ -5,8 +5,12 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 const initialState = {
   forSaleTotalCount: 0,
   forSaleWebList: {},
-  wantedWebList: {},
   wantedTotalCount: 0,
+  wantedWebList: {},
+  jobOfferTotalCount: 0,
+  jobOfferWebList: {},
+  jobSeekerTotalCount: 0,
+  jobSeekerWebList: {},
   isLoading: false,
 }
 
@@ -38,6 +42,32 @@ export const getWantedListApi = createAsyncThunk(
 	}
 );
 
+export const getJobOfferListApi = createAsyncThunk(
+	"jobtypes/getJobOfferListApi",
+	async (data, { rejectWithValue }) => {
+		try {
+			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
+			return response;
+		} catch (error) {
+      console.log("error", error)
+			return rejectWithValue(error);
+		}
+	}
+)
+
+
+export const getJobSeekerListApi = createAsyncThunk(
+	"jobtypes/getJobSeekerListApi",
+	async (data, { rejectWithValue }) => {
+		try {
+			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
+			return response;
+		} catch (error) {
+      console.log("error", error)
+			return rejectWithValue(error);
+		}
+	}
+)
 export const classifiedSlice = createSlice({
   name: 'classified',
   initialState,
@@ -50,11 +80,12 @@ export const classifiedSlice = createSlice({
     })
     builder.addCase(forSaleListApi.fulfilled, (state, action) => {
         const response = action.payload;
-        if(response.status_code==200){
+        if(response.status_code==STATUS_CODES.SUCCESS){
           state.forSaleTotalCount = response.data.total_count;
           state.forSaleWebList = response.data.list;
         }else{
-          state.forSaleTotalCount = {};
+          state.forSaleTotalCount = 0;
+          state.forSaleWebList = {};
         }
         state.isLoading = false
     })
@@ -81,6 +112,50 @@ export const classifiedSlice = createSlice({
       state.isLoading = false
     })
     builder.addCase(getWantedListApi.rejected, (state, action) => {
+        state.isLoading = false
+    })
+
+     // JobOffer list api
+     builder.addCase(getJobOfferListApi.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(getJobOfferListApi.fulfilled, (state, action) => {
+      const response = action.payload;
+
+      if (response.status_code === STATUS_CODES.SUCCESS) {
+        state.jobOfferTotalCount = response.data.total_count;
+        state.jobOfferWebList = response.data.list;
+        state.success = true;
+      } else {
+        state.jobOfferTotalCount = 0;
+        state.jobOfferWebList = {};
+        state.success = false;
+      }
+      state.isLoading = false
+    })
+    builder.addCase(getJobOfferListApi.rejected, (state, action) => {
+        state.isLoading = false
+    })
+
+     // JobSeeker list api
+     builder.addCase(getJobSeekerListApi.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(getJobSeekerListApi.fulfilled, (state, action) => {
+      const response = action.payload;
+
+      if (response.status_code === STATUS_CODES.SUCCESS) {
+        state.jobSeekerTotalCount = response.data.total_count;
+        state.jobSeekerWebList = response.data.list;
+        state.success = true;
+      } else {
+        state.jobSeekerTotalCount = 0;
+        state.jobSeekerWebList = {};
+        state.success = false;
+      }
+      state.isLoading = false
+    })
+    builder.addCase(getJobSeekerListApi.rejected, (state, action) => {
         state.isLoading = false
     })
   },

@@ -1,24 +1,24 @@
 import mapicon from "../../assets/images/map_ico.png";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import "../ClassiFieds/ClassiFieds.css";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
 import bookmarkicon from "../../assets/images/bookmark_ico.png";
-import forsale from "../../assets/images/for_sale_img.png";
 import watchicon from "../../assets/images/watch_ico.png";
+import { useTranslation } from "react-i18next";
 
-function ClassifiedCategoryList(props) {
-  // console.log("ClassifiedCategoryList", props.forSaleListData);
+function ClassifiedCategoryList({ forSaleListData }) {
+  const { t } = useTranslation();
   return (
     <div className="main">
-      {props.forSaleListData.length &&
-        props.forSaleListData.map((item, index) => {
+      {forSaleListData.length > 0 &&
+        forSaleListData.map((item, index) => {
           return (
-            <Row>
+            <Row key={index}>
               <Col xs={12} sm={12} md={12} lg={6}>
-                <div className="classiFieds_forSaleBox" key={index}>
+                <div className="classiFieds_forSaleBox">
                   <div className="classiFieds_forSale_about">
                     <div className="classiFieds_forSale">
                       <img src={item.img_url} alt={item.img_url} />
@@ -47,13 +47,14 @@ function ClassifiedCategoryList(props) {
                         <div className="classiFieds_bookmarkicon">
                           <img src={bookmarkicon} alt={bookmarkicon} />
                         </div>
+                       
                       </div>
                     </div>
                   </div>
                   <div className="classiFieds_RupeesText">
                     <p>
                       R{item.amount}
-                      <span>PER WEEK</span>
+                      <span>{t("PER_WEEK")}</span>
                     </p>
                   </div>
                   <div className="classiFieds_countryName ">
@@ -67,14 +68,15 @@ function ClassifiedCategoryList(props) {
                   </div>
                   <div className="classiFields_contactPerson">
                   <ContactPerson
-                    forSaleListData={props.forSaleListData}
+                    forSaleListData={forSaleListData}
                     index={index}
                   />
                   <WhatsApp />
                   </div>
-                 
+
                   <SocialMedaiShare />
                 </div>
+               
               </Col>
             </Row>
           );
