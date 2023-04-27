@@ -6,8 +6,6 @@
 
 
 .companyDetails h5 {
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 600;
     font-size: 20.8px;
     line-height: 29px;
@@ -16,8 +14,6 @@
 }
 
 .companyDetails li {
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 400;
     font-size: 19.8px;
     line-height: 29px;
@@ -116,7 +112,6 @@
     background: #FFFFFF;
     border-radius: 7.89238px;
     margin-top: 10px;
-    height: 100px;
 }
 
 .companyDetails .watsappCls img {
@@ -127,4 +122,10 @@
     font-weight: 500 !important;
     font-size: 19.2px !important;
     line-height: 21px !important;
+}
+
+.advertBox img {
+    width: 100%;
+    border-radius: 7.89238px;
+    object-fit: cover;
 }

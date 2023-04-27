@@ -20,21 +20,22 @@ function DealList({ dealList, fromDeal }) {
 
     return (
         <section>
-            {dealList
-                ? dealList.map((item, index) => (
+            {dealList ?
+                dealList.map((item, index) => (
                     <div className="latestDeals" key={index}>
-                         
                         <img src={item.gallery[0].img_url} alt="deals" />
                         <h3>{item.name}</h3>
                         <p className="dealSubText">{item.description}</p>
                         <div className="dealDetails">
-                            <div className="detailsValue">
-                                <img src={message} alt="img" />
-                                <div className="dealText">
-                                    <span>{t("CONTACT_PERSON")}</span>
-                                    <p>{item.contact_name}</p>
+                            {item.contact_name && (
+                                <div className="detailsValue">
+                                    <img src={message} alt="img" />
+                                    <div className="dealText">
+                                        <span>{t("CONTACT_PERSON")}</span>
+                                        <p>{item.contact_name}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             {item.contact_number && (
                                 <div className="detailsValue">
                                     <img src={contact} alt="img" />
