@@ -11,6 +11,7 @@ import {
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import Loader from "../../utils/Loader/Loader";
 
 //-------Create a Deals Header component--------
 function JobTypes() {
@@ -18,7 +19,7 @@ function JobTypes() {
   const dispatch = useDispatch();
   const {jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
     useSelector((state) => state.classified);
-  const { userToken } = useSelector((state) => state.user);
+  const { userToken,isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
 
   // function for classified webList
@@ -42,6 +43,9 @@ function JobTypes() {
 console.log("showDefaultList",showDefaultList)
   return (
     <div className="main">
+       {isLoading === true ? (
+                <Loader/>
+            ) : ""}
       <React.Fragment>
         <Container>
           <Row>
@@ -94,11 +98,23 @@ console.log("showDefaultList",showDefaultList)
               </div>
               
             </Col>
-              <ClassifiedCategoryList
+
+            {showDefaultList == 1 ? (
+              jobOfferWebList.length > 0 ? (
+                <ClassifiedCategoryList forSaleListData={jobOfferWebList}  classifiedDataType={6} />
+              ) : (
+                <p className="nodataDisplay">--- {t("N0CLASSIFIED_DISPLAY")}  --- </p>
+              )
+            ) : jobSeekerWebList.length ? (
+              <ClassifiedCategoryList forSaleListData={jobSeekerWebList}  classifiedDataType={7} />
+            ) : (
+              <p className="nodataDisplay">--- {t("N0CLASSIFIED_DISPLAY")}  --- </p>
+            )}
+              {/* <ClassifiedCategoryList
               forSaleListData={
                 showDefaultList == 1 ? jobOfferWebList : jobSeekerWebList
               }
-            />
+            /> */}
           </Row>
         </Container>
       </React.Fragment>

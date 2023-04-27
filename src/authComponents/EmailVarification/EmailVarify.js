@@ -10,8 +10,11 @@ import { Toast } from "../../utils/Toaster";
 import ErrorResponse from "../../utils/AlertBox/ErrorResponse";
 import CustomBtn from "../../formComponent/Button/Button";
 import { STATUS_CODES } from "../../utils/StatusCode";
+import { useSelector } from "react-redux";
+import Loader from "../../utils/Loader/Loader";
 
 function EmailVarify() {
+  const { userToken ,isLoading} = useSelector((state) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
   const [emailOtp, setEmailOtp] = useState("");
@@ -67,6 +70,9 @@ function EmailVarify() {
 
   return (
     <div className="main">
+       {isLoading === true ? (
+                <Loader />
+            ) : ""}
       <Container>
         <div className="signupForm">
           <div className="forgotPassword">

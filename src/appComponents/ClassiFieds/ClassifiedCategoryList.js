@@ -9,7 +9,8 @@ import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
 import { useTranslation } from "react-i18next";
 
-function ClassifiedCategoryList({ forSaleListData }) {
+function ClassifiedCategoryList({ forSaleListData, classifiedDataType }) {
+  console.log("classifiedDataType",classifiedDataType)
   const { t } = useTranslation();
   return (
     <div className="main">
@@ -47,36 +48,50 @@ function ClassifiedCategoryList({ forSaleListData }) {
                         <div className="classiFieds_bookmarkicon">
                           <img src={bookmarkicon} alt={bookmarkicon} />
                         </div>
-                       
                       </div>
                     </div>
                   </div>
-                  <div className="classiFieds_RupeesText">
-                    <p>
-                      R{item.amount}
-                      <span>{t("PER_WEEK")}</span>
-                    </p>
-                  </div>
+                 
+                   {classifiedDataType == 6 || classifiedDataType==7?(
+                    <div className="jobType">
+                    <p>{(item.job_type_name)?item.job_type_name+`-`:"" }{item.job_location_type_name}</p>
+                   </div>
+
+                  ): ""}
+                 
+
+                  {classifiedDataType == 4 ||  classifiedDataType == 6? (
+                    <div className="classiFieds_RupeesText">
+                      <p>
+                        {item.currency_code} {item.amount}
+                        {/* <span>{item.earning_name}</span> */}
+                      </p>
+                      <span>{(classifiedDataType == 6)?item.earning_name:item.currency_name} {(item.is_negotiable)?"(Negotiable)":""}</span>
+                    </div>
+                  ): ""}
+
                   <div className="classiFieds_countryName ">
                     <span>
                       <img src={mapicon} alt={mapicon} />{" "}
-                      <span>{item.city}</span>
+                      <span>
+                        {" "}
+                        {item.country_name}, {item.province_name}, {item.city}
+                      </span>
                     </span>
                   </div>
                   <div className="classiFieds_aboutText">
                     <p>{item.description}</p>
                   </div>
                   <div className="classiFields_contactPerson">
-                  <ContactPerson
-                    forSaleListData={forSaleListData}
-                    index={index}
-                  />
-                  <WhatsApp />
+                    <ContactPerson
+                      forSaleListData={forSaleListData}
+                      index={index}
+                    />
+                    {item.whatapp_contact_number.length > 0 && <WhatsApp />}
                   </div>
 
                   <SocialMedaiShare />
                 </div>
-               
               </Col>
             </Row>
           );

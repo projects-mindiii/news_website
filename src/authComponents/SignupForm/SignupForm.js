@@ -16,10 +16,14 @@ import NameInput from "../../formComponent/NameInput.js/NameInput";
 import CustomBtn from "../../formComponent/Button/Button";
 import ConfirmPassInput from "../../formComponent/ConfirmPassInput/ConfirmPassInput";
 import { STATUS_CODES } from "../../utils/StatusCode";
+import Loader from "../../utils/Loader/Loader";
+import { useSelector } from "react-redux";
+
 
 
 //--------------Form for singing up new users----------
 function SignupForm() {
+  const { userToken ,isLoading} = useSelector((state) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
   //set language
@@ -84,6 +88,9 @@ function SignupForm() {
 
   return (
     <div className="main">
+      {isLoading === true ? (
+                <Loader />
+            ) : ""}
       <Container>
         <div className="signupForm">
           <div className="topHeading">
