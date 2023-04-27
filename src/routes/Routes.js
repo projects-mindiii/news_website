@@ -43,8 +43,8 @@ function Routers() {
                 <Route exact path="/job-types" element={<JobTypes/>} />
                 
 
-                <Route exact path="/Your-add" element={<YourAdd />} />
                 <Route exact path="/Post-advert" element={<PostAdvert />} />
+                <Route exact path="/your-add" element={<YourAdd />} />
 
                 <Route path="*" element={<PageNotFound />} />
 

@@ -64,7 +64,7 @@
 }
 
 .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
-    /* background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%); */
+     background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%); 
     border-radius: 14px;
     line-height: 20px;
     border: none !important;
@@ -153,6 +153,10 @@
     color: white;
 }
 
+.classiFieds_time{
+    display: flex;
+    align-items: center;
+}
 .classiFieds_time span {
     font-weight: 400;
     font-size: 12px;

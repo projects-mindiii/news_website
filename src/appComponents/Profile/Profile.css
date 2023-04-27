@@ -109,7 +109,7 @@
     background: #000000;
     border-top-left-radius: 7.26px;
     border-bottom-left-radius: 7.26px;
-    height: 40px;
+    height: 62px;
     color: white;
     width: 50px;
     margin-bottom: -11px;
@@ -243,7 +243,7 @@
 
 .phoneInputSet svg {
     position: absolute;
-    bottom: 10px;
+    bottom: 22px;
     left: 4px;
     font-size: 20px;
     z-index: 999;
@@ -329,7 +329,7 @@
     border-left: 6px solid transparent;
     position: absolute;
     left: 89px;
-    top: 18px;
+    top: 28px;
     z-index: 999;
     color: #FFFFFF !important;
 }
@@ -364,11 +364,11 @@
     font-size: 16.94px !important;
 }
 
-.css-13cymwt-control:hover {
+.selectOption .css-13cymwt-control:hover {
     border-color: unset !important;
 }
 
-.css-1xz3in2-control {
+.selectOption .css-1xz3in2-control {
     border: none !important;
     height: 40px !important;
     background: #FFFFFF !important;
@@ -378,15 +378,15 @@
     font-size: 16.94px !important;
 }
 
-.css-1xz3in2-control:hover {
+.selectOption .css-1xz3in2-control:hover {
     border-color: unset !important;
 }
 
-.css-1u9des2-indicatorSeparator {
+.selectOption .css-1u9des2-indicatorSeparator {
     display: none !important;
 }
 
-.css-tj5bde-Svg {
+.selectOption .css-tj5bde-Svg {
     fill: #000000 !important;
     width: 28px !important;
     height: 28px !important;

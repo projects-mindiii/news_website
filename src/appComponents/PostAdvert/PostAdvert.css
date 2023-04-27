@@ -1,14 +1,47 @@
-.post_Add_CategoryButton button {
+.yourAdd {
+    margin-top: 18px;
+}
+
+.post_Add_CategoryButton h5 {
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    color: #373A3C !important;
+}
+
+.post_Add_CategoryButton .headings {
     background: #DEDEDE;
     border-radius: 10px;
     height: 51px;
-    color: black;
+    color: #231F20;
     width: 100%;
     border: none;
     font-weight: 600;
     font-size: 22px;
     line-height: 25px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-label {
+    color: #343434 !important;
+}
+
+.post_Add_HeadingGap {
+    margin-bottom: 20px;
+}
+
+.post_Add_CategoryButton:first-child {
+    margin-top: 70px;
+}
+
+.post_Add_CategoryButton .post_AddForm .selectNew .form-check {
+    display: flex !important;
+    align-items: center;
+    justify-content: center !important;
+    padding-left: 0px !important;
 }
 
 .post_Add_CategoryButton .post_AddForm .form-check {
@@ -16,34 +49,54 @@
     align-items: center;
 }
 
-.post_Add_CategoryButton .post_AddForm .post_Add_category  .form-check-input {
+.post_Add_CategoryType>div {
+    width: 50%;
+}
+
+.post_Add_CategoryType {
+    margin-bottom: 28px !important;
+    margin-top: 26px !important;
+    gap: 9px 0px;
+    width: 267px;
+    margin: auto;
+
+}
+
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input {
     height: 26px !important;
     width: 26px !important;
     position: relative !important;
 }
-.negotiable .negotiables  .form-check-input {
+
+.negotiable .negotiables .form-check-input {
     height: 26px !important;
     width: 26px !important;
     position: relative !important;
 }
-.negotiable .negotiables  .form-check-input[type="checkbox"]:checked::after {
+
+.negotiable .negotiables .form-check-input[type="checkbox"]:checked::after {
     content: '';
     width: 20px !important;
     height: 20px !important;
     background: #EC4624 !important;
     position: absolute !important;
 }
-.negotiable .negotiables  .form-check-input::before {
-    left: 10px;
-  top: 0px;
-  width: 7px;
-  height: 15px;
-  border: solid rgb(7, 6, 6);
-  border-width: 0 4px 4px 0;
-  transform: rotate(45deg);
-  position:absolute;
+
+.negotiable .negotiables .form-check-input[type="checkbox"]:checked::before {
+    content: "";
+    left: 8px;
+    top: 2px;
+    z-index: 99 !important;
+    width: 7px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    position: absolute;
 }
-.negotiable .negotiables  .form-check-input:checked {
+
+.negotiable .negotiables .form-check-input:checked {
     background-color: white !important;
     border-color: white !important;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.107654);
@@ -57,7 +110,7 @@
     margin-left: 10px;
 }
 
-.post_Add_CategoryButton .post_AddForm .post_Add_category  .form-check-input[type=radio]:checked::after {
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input[type=radio]:checked::after {
     content: '';
     width: 20px !important;
     height: 20px !important;
@@ -66,7 +119,7 @@
     border-radius: 50% !important;
 }
 
-.post_Add_CategoryButton .post_AddForm .post_Add_category  .form-check-input:checked {
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input:checked {
     background-color: white !important;
     border-color: white !important;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.107654);
@@ -75,15 +128,9 @@
     align-items: center;
 }
 
-.post_AddForm {
-    padding-top: 15px;
-}
-
 .post_AddForm>div:first-child {
     display: flex;
     flex-wrap: wrap;
-    margin-right: 50px;
-    margin-left: 50px;
 }
 
 
@@ -113,7 +160,37 @@
     color: #FFFFFF;
 }
 
+.post_AddForm .amount div {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+    height: 62px;
+    width: 50px;
+    margin-bottom: -11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+}
+
+.post_AddForm .amount div img {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+}
+
 .post_AddForm .heading {
+    background-color: #F6F6F6;
+    height: 40px;
+}
+
+.post_AddForm .heading::placeholder {
+    color: #999999 !important;
     height: 42px !important;
 }
 
@@ -123,31 +200,228 @@
     height: 62px !important;
 }
 
-.post_AddForm .css-13cymwt-control{
-    background-color: black !important;
-}
-.post_AddForm .css-t3ipsp-control{
-    background-color: black !important;
+.amounts::placeholder {
+    color: #999999 !important;
 }
 
-.post_AddForm .css-tj5bde-Svg{
-    fill:white !important;
+.post_AddForm #location .css-13cymwt-control {
+    color: white !important;
+    height: 62px !important;
+    background-color: black !important;
+    border-radius: 10px;
 }
 
-.post_AddForm .post_Add_Discription{
+.post_AddForm #location .css-t3ipsp-control {
+    color: white !important;
+    min-height: 62px !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+
+.post_AddForm #earningoption .css-13cymwt-control {
+    color: white !important;
+    height: 62px !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #earningoption .css-t3ipsp-control {
+    color: white !important;
+    min-height: 62px !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm .css-t3ipsp-control {
+    height: 62px !important;
+}
+
+.post_AddForm .css-1xz3in2-control {
+    height: 62px !important;
+}
+
+
+
+.post_AddForm #countries .css-13cymwt-control {
+    color: black !important;
+    height: 62px;
+    border-radius: 10px;
+}
+
+.post_AddForm #countries .css-t3ipsp-control {
+    color: black !important;
+    height: 62px;
+    border-radius: 10px;
+}
+
+.post_AddForm #countries .css-tj5bde-Svg {
+    fill: black !important;
+}
+
+.post_AddForm #province .css-13cymwt-control {
+    color: black !important;
+    height: 62px;
+    border-radius: 10px;
+}
+
+.post_AddForm #province .css-t3ipsp-control {
+    color: black !important;
+    height: 62px !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #province .css-tj5bde-Svg {
+    fill: black !important;
+}
+
+.post_AddForm #cities .css-13cymwt-control {
+    color: black !important;
+    height: 62px !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #cities .css-t3ipsp-control {
+    color: black !important;
+    height: 62px !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #cities .css-tj5bde-Svg {
+    fill: black !important;
+}
+
+
+
+
+
+.post_AddForm .post_Add_Discription {
     height: 176px;
 }
-.post_AddForm .post_Add_Locationtype{
-display: flex;
+
+.post_AddForm .post_Add_Discription::placeholder {
+    color: #999999;
+}
+
+.post_AddForm .post_Add_Locationtype {
+    margin-top: -15px;
+    display: flex;
+    margin-bottom: 16px;
 }
 
 .post_AddForm .post_Add_Locationtype>div {
     width: 50%;
 }
 
-.post_Add{
-    margin-bottom: 15px;
-}
-.css-lnmdiq5-menu{
+
+.css-lnmdiq5-menu {
     color: black !important;
+}
+
+.post_Add_PriceGap {
+    margin-top: 19px;
+    margin-bottom: 19px;
+}
+
+.post_Add_DivPriceGap {
+    margin-bottom: 10px;
+}
+
+.post_Add_Remumeration {
+    margin-bottom: 13px;
+}
+
+.post_Add_EaringOption {
+    margin-top: 13px;
+}
+
+.post_Add_JobType {
+    margin-top: -4px;
+    margin-bottom: 12px;
+}
+
+.post_Add_JobType .headings {
+    margin-bottom: 12px;
+}
+
+.post_Add_Locations {
+    margin-top: 13px;
+    margin-bottom: 13px;
+}
+
+.whatsapp_Input {
+    height: 62px;
+}
+
+.contact_Input {
+    height: 62px;
+}
+
+.profile_Email {
+    height: 62px;
+}
+
+.post_Add_DivPriceGap {}
+
+.post_Add_AddPhoto button {
+    height: 51px;
+    background: #F76203;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+    border: none;
+    min-width: 311px;
+}
+
+.post_Add_AddPhoto {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.post_Add_Save button {
+    height: 62px;
+    background: #000000;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+    border: none;
+    width: 100%;
+}
+
+.post_Add_Save {
+    display: flex;
+    justify-content: center;
+    margin-top: 33px;
+}
+
+.post_Add_DeleteAdever button {
+    height: 62px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    border: none;
+    width: 100%;
+}
+.post_Add_DeleteAdever button svg{
+    margin-right: 20px;
+    height: 31px;
+    width: 28px;
+}
+
+.post_Add_DeleteAdever {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+    align-items: center;
 }

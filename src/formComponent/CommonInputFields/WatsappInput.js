@@ -8,24 +8,25 @@ function WatsappInput(props) {
 
         <div className="phoneInputSet watsappInput">
             <BsWhatsapp />
-            <p>{props.countryCodeWatsapp.toUpperCase()} + {props.dialCodeWatsapp.toString()}</p>
+            {/* <p>{props.countryCodeWatsapp.toUpperCase()} + {props.dialCodeWatsapp.toString()}</p> */}
             <PhoneInput
-                country={"za"}
-                value={props.dialCodeWatsapp.toString() +
-                    props.watsappNo.toString()}
-                onChange={(value, country) => {
-                    let dialCode = country.dialCode;
-                    let phone = value.slice(
-                        dialCode.length,
-                        value.length
-                    );
-                    props.setCountryCodeWatsapp(country.countryCode)
-                    props.setDialCodeWatsapp(dialCode);
-                    props.setWatsappNo(phone);
+             
+                // country={"za"}
+                // value={props.dialCodeWatsapp.toString() +
+                //     props.watsappNo.toString()}
+                // onChange={(value, country) => {
+                //     let dialCode = country.dialCode;
+                //     let phone = value.slice(
+                //         dialCode.length,
+                //         value.length
+                //     );
+                //     props.setCountryCodeWatsapp(country.countryCode)
+                //     props.setDialCodeWatsapp(dialCode);
+                //     props.setWatsappNo(phone);
 
-                }}
-                countryCodeEditable={false}
-                copyNumbersOnly={true}
+                // }}
+                // countryCodeEditable={false}
+                // copyNumbersOnly={true}
             />
         </div>
 

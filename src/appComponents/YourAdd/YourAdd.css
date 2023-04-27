@@ -5,20 +5,35 @@
     line-height: 25px;
     text-align: center;
     color: #474747;
+    padding-bottom: 10px;
 }
 
 .yourAdd_Note {
     background: #000000;
     border-radius: 14px;
+    padding: 28px;
+    min-height: 143px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 .yourAdd_Note p {
-    padding: 20px;
     font-weight: 700;
     font-size: 19px;
     line-height: 30px;
     text-align: center;
     color: #FFFFFF;
+    margin-bottom: 0px;
+}
+.yourAdd_Note p small{
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 30px;
+    text-align: center;
+    color: #e5dada;
+    margin-bottom: 0px;
 }
 
 .yourAdd_DataShow {
@@ -54,11 +69,16 @@
     color: #FFFFFF;
     min-height: 46px;
 }
-.youAdd_NotShow{
+
+.youAdd_NotShow {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 70px;
 }
-.youAdd_PendingApproval{
+.post_Add_Discription{
+    min-height: 114.9px !important;
+    background-color: #F6F6F6 !important;
+}
+.youAdd_PendingApproval {
     text-align: center;
     margin-top: 0.5rem;
 }
