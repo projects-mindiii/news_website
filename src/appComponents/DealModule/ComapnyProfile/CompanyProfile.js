@@ -12,8 +12,6 @@ import linkedin from "../../../assets/images/socialMedia_icon/linkedin_black_ico
 import youtube from "../../../assets/images/socialMedia_icon/youtube_play_ico.png";
 import twitter from "../../../assets/images/socialMedia_icon/twitter_ico.png";
 import { useTranslation } from "react-i18next";
-import WhatsApp from "../../../CommonComponent/Whatappshare";
-import Loader from "../../../utils/Loader/Loader";
 
 
 function CompanyProfile({ companyDetailData }) {
@@ -23,10 +21,7 @@ function CompanyProfile({ companyDetailData }) {
   return (
     <section>
       {companyDetailData ?
-
-
         <div className="latestDeals companyDetails">
-        
           <div className="companyLogo">
             <img src={companyDetailData.company_detail.company_logo} alt="company_img" />
           </div>
@@ -66,27 +61,40 @@ function CompanyProfile({ companyDetailData }) {
             <div className="playBox">
               <img src={playBtn} alt="playBtn" />
             </div>
-            <div className="detailsValue">
-              <img src={mail} alt="img" />
-              <div className="dealText">
-                <span>{t("EMAIL_TEXT")}</span>
-                <p>{companyDetailData.company_detail.email}</p>
-              </div>
+
+            <div className="dealDetails">
+              {companyDetailData.company_detail.email && (
+                <div className="detailsValue">
+                  <img src={mail} alt="img" />
+                  <div className="dealText">
+                    <span>{t("EMAIL_TEXT")}</span>
+                    <p>{companyDetailData.company_detail.email}</p>
+                  </div>
+                </div>
+              )}
+
+              {companyDetailData.company_detail.contact && (
+                <div className="detailsValue">
+                  <img src={contact} alt="img" />
+                  <div className="dealText">
+                    <span>{t("CONTACT_PERSON")}</span>
+                    <p>{companyDetailData.company_detail.dial_code}{companyDetailData.company_detail.contact}</p>
+                  </div>
+                </div>
+              )}
+
+              {companyDetailData.company_detail.webside_url && (
+                <div className="detailsValue">
+                  <img src={globe} alt="img" />
+                  <div className="dealText websiteUrl">
+                    <span>{t("WEBSITE")}</span>
+                    <p>{companyDetailData.company_detail.webside_url}</p>
+                  </div>
+                </div>
+              )}
+
             </div>
-            <div className="detailsValue">
-              <img src={contact} alt="img" />
-              <div className="dealText">
-                <span>{t("CONTACT_PERSON")}</span>
-                <p>{companyDetailData.company_detail.dial_code}{companyDetailData.company_detail.contact}</p>
-              </div>
-            </div>
-            <div className="detailsValue">
-              <img src={globe} alt="img" />
-              <div className="dealText websiteUrl">
-                <span>{t("WEBSITE")}</span>
-                <p>{companyDetailData.company_detail.webside_url}</p>
-              </div>
-            </div>
+            {companyDetailData.company_detail.whatapp_contact_number && (
             <button className="whatsApp">
               <Icon
                 icon="mdi:whatsapp"
@@ -96,22 +104,30 @@ function CompanyProfile({ companyDetailData }) {
               />
               {t("WHATSAPP_ME")}
             </button>
+            )}
+
             {/* <div className="watsappCls">
             <WhatsApp/>
             </div> */}
           </div>
           <div className="socialShare">
-            {/* {socialShare.map((item, index) => (
-
-            <a href={companyDetails.facebook_link}><img src={item.icon_share} /></a>
-          ))} */}
-
-            <a href={companyDetailData.company_detail.facebook_link}><img src={facebook} /></a>
-            <a href={companyDetailData.company_detail.twitter_link}><img src={twitter} /></a>
-            <a href={companyDetailData.company_detail.instagrame_link}><img src={insta} /></a>
-            <a href={companyDetailData.company_detail.linkedin_link}><img src={linkedin} /></a>
-            <a href={companyDetailData.company_detail.youtube_link}><img src={youtube} /></a>
+            {companyDetailData.company_detail.facebook_link && (
+              <a href={companyDetailData.company_detail.facebook_link}><img src={facebook} /></a>
+            )}
+            {companyDetailData.company_detail.twitter_link && (
+              <a href={companyDetailData.company_detail.twitter_link}><img src={twitter} /></a>
+            )}
+            {companyDetailData.company_detail.instagrame_link && (
+              <a href={companyDetailData.company_detail.instagrame_link}><img src={insta} /></a>
+            )}
+            {companyDetailData.company_detail.linkedin_link && (
+              <a href={companyDetailData.company_detail.linkedin_link}><img src={linkedin} /></a>
+            )}
+            {companyDetailData.company_detail.youtube_link && (
+              <a href={companyDetailData.company_detail.youtube_link}><img src={youtube} /></a>
+            )}
           </div>
+
           <div className="mapClass">
             <MapLocation />
           </div>
@@ -151,7 +167,7 @@ function CompanyProfile({ companyDetailData }) {
                 data-parent="#accordionExample"
               >
                 <div class="card-body">
-                  <MapLocation />
+                  <MapLocation address={companyDetailData.company_detail.address}/>
                 </div>
               </div>
             </div>

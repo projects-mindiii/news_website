@@ -1,7 +1,8 @@
 import React from "react";
 import mapIcon from "../../assets/images/socialMedia_icon/map_ico.png";
 
-function MapLocation() {
+function MapLocation(address) {
+  console.log("address",address)
   return (
     <section>
       <div className="mapBox"></div>

@@ -9,7 +9,6 @@
 
 .latestDeals img {
     width: 100%;
-    /* max-width: 485px; */
 }
 
 .latestDeals h3 {
@@ -23,8 +22,6 @@
 
 .latestDeals p {
     color: #000000;
-    font-style: normal;
-    font-family: 'Nunito', sans-serif;
     font-weight: 400;
     font-size: 19px;
     line-height: 25px;
@@ -48,7 +45,6 @@
     height: 46px;
     border: none;
     border-radius: 5px;
-    font-family: 'Poppins';
 }
 
 .detailsValue img {
@@ -63,7 +59,7 @@
 .dealText p {
     font-size: 18px;
     line-height: 14px;
-    font-family: 'Poppins';
+    line-break: anywhere;
 }
 
 .dealText span {
@@ -89,7 +85,6 @@
     font-weight: 300;
     font-size: 12px;
     color: #000000;
-    font-family: 'Poppins';
 }
 
 .whatsApp {
@@ -141,4 +136,15 @@ button.whatsApp svg {
     box-shadow: 4px 4px 10px rgb(0 0 0 / 20%);
     border-radius: 7.8px;
     margin-bottom: 15px;
+}
+
+.dealContainer h4 {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: -0.315px;
+    color: #000000;
+    margin-top: 30px;
+    margin-bottom: 100px;
 }

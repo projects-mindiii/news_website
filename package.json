@@ -24,6 +24,7 @@
     "react-localization": "^1.0.19",
     "react-otp-input": "^3.0.0",
     "react-phone-input-2": "^2.15.1",
+    "react-player": "^2.12.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",

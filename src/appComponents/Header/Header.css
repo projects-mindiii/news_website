@@ -103,3 +103,15 @@
 .bannerImg img {
     width: 100%;
 }
+
+ /* back arrow button css  */
+.backarrowButton svg{
+    background: #232323;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: 22px;
+    cursor: pointer;
+    margin-right: 10px;
+}
