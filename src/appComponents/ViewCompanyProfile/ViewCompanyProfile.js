@@ -22,7 +22,7 @@ function ViewCompanyProfile() {
         userToken,
         companyValue
       );
-     
+
       if (details.status_code == STATUS_CODES.SUCCESS) {
         setcompanyDetails(details.data);
       }
@@ -30,7 +30,6 @@ function ViewCompanyProfile() {
     getCompanyDetails();
   }, []);
  
-  
 
   return (
 
@@ -45,15 +44,22 @@ function ViewCompanyProfile() {
               <CompanyProfile companyDetailData={companyDetails} />
             </Col>
             <Col lg={6} sm={12}>
-              <div className="advertBox">
+              {companyDetails ?
+                <>
+                  {companyDetails.company_detail.banner_img && (
+                    < div className="advertBox">
+                      <img src={companyDetails.company_detail.banner_img} />
+                    </div>
+                  )}
+                </>
+                : ""}
 
-              </div>
               <DealList fromDeal={false} dealList={companyDetails.deal_list} />
             </Col>
           </Row>
         </Container>
       </div>
-    </section>
+    </section >
   );
 }
 

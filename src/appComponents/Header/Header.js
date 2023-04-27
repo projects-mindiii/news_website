@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, Toast } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
 import Banner from "../../assets/images/classifiedheader.png"
@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guestUserLogin, getMetaListApi } from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
+import Loader from "../../utils/Loader/Loader";
 
 //-------Create a Header component--------
 function Header() {
@@ -43,17 +44,21 @@ function Header() {
       GetMetaList(userToken);
     }
   }, []);
+  
   return (
     <section className="header">
+      {isLoading === true ? (
+        <Loader />
+      ) : ""}
       <Container>
         <div className="headerSection">
           <div className="logoImg">
             <img src={Logo} alt="news-logo" />
           </div>
-          {location.pathname == "/classifieds" || location.pathname == "/job-types"? 
-          <div className="bannerImg">
-            <img src={Banner} alt="news-logo" />
-          </div>: ""}
+          {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
+            <div className="bannerImg">
+              <img src={Banner} alt="news-logo" />
+            </div> : ""}
           <Navbar expand="lg">
             <div className="navItem headerLinks">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -74,8 +79,8 @@ function Header() {
 
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
-            {location.pathname == "/deals/latest-deals" ? <DealsHeader /> : ""}
-            {location.pathname == "/classifieds" || location.pathname == "/job-types"? <ClassifiedCountry /> : ""}
+            {location.pathname == "/deals/latest-deals" || (location.pathname.match("/deals/latest-deals/company-profile/"))  ? <DealsHeader /> : ""}
+            {location.pathname == "/classifieds" || location.pathname == "/job-types" ? <ClassifiedCountry /> : ""}
             <SearchBar />
           </div>
         </div>
