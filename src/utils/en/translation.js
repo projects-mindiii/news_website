@@ -36,7 +36,7 @@ export const TRANSLATIONS_EN = {
   FOR_SALE: "FOR SALE",
   WANTED: "WANTED",
   JOB_OFFERS:"JOB OFFERS",
-  JOB_SEEKER:"JOB SEEKAR",
+  JOB_SEEKER:"JOB SEEKER",
   PER_WEEK:"PER WEEK",
   CONTACT_PERSON:"Contact Person",
   COMPANY:"COMPANY",
@@ -44,6 +44,7 @@ export const TRANSLATIONS_EN = {
   CONTACT_NUMBER:"CONTACT NUMBER",
   WHATSAPP:"WhatsApp",
   SHARE:"SHARE",
+  N0CLASSIFIED_DISPLAY:"NO CLASSIFIEDS TO DISPLAY",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,

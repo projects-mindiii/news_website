@@ -4,7 +4,8 @@ import { WhatsappShareButton } from "react-share";
 import { useTranslation } from "react-i18next";
 
 //-------Create a Deals Header component--------
-function WhatsApp() {
+function WhatsApp(props) {
+  console.log("props", props.forSaleListData)
   const { t } = useTranslation();
   return (
     <React.Fragment>

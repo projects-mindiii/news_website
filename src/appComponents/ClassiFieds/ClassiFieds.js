@@ -11,14 +11,16 @@ import {
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import Loader from "../../utils/Loader/Loader";
 
 //-------Create a Deals Header component--------
 function ClassiFieds() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
   const { forSaleTotalCount, forSaleWebList, wantedTotalCount, wantedWebList } =
     useSelector((state) => state.classified);
-  const { userToken } = useSelector((state) => state.user);
+  const { userToken, isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
 
   // function for classified webList
@@ -28,26 +30,31 @@ function ClassiFieds() {
       const forSaleQuery = { limit: 10, offset: 0, type: 4 };
       const data = { userToken: userToken, whereQuery: forSaleQuery };
       dispatch(forSaleListApi(data)).then((responsejson) => {
-        console.log("responsejson", responsejson.payload);
+       
       });
 
       const wantedQuery = { limit: 10, offset: 0, type: 5 };
       const wantedData = { userToken: userToken, whereQuery: wantedQuery };
       dispatch(getWantedListApi(wantedData)).then((responsejson) => {
-        console.log("response", responsejson);
+       
       });
     }
     getWebClassifiedLists();
   }, []);
-console.log("showDefaultList",showDefaultList)
+  // console.log("showDefaultList", showDefaultList);
   return (
     <div className="main">
+      {isLoading === true ? <Loader /> : ""}
       <React.Fragment>
         <Container>
           <Row>
             <Col xs={12} sm={12} md={12} lg={6}>
               <div className="categoryButton">
-                <Tab.Container id="left-tabs-example" defaultActiveKey={1} onSelect={(value)=>setShowDefaultList(value)}>
+                <Tab.Container
+                  id="left-tabs-example"
+                  defaultActiveKey={1}
+                  onSelect={(value) => setShowDefaultList(value)}
+                >
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
                       <Nav.Link eventKey={1}>
@@ -70,8 +77,8 @@ console.log("showDefaultList",showDefaultList)
                       )}
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey={2} >
-                      {t("WANTED")} ({wantedTotalCount})
+                      <Nav.Link eventKey={2}>
+                        {t("WANTED")} ({wantedTotalCount})
                       </Nav.Link>
                       {showDefaultList == 2 ? (
                         <MdKeyboardArrowDown
@@ -92,13 +99,18 @@ console.log("showDefaultList",showDefaultList)
                   </Nav>
                 </Tab.Container>
               </div>
-              
             </Col>
-              <ClassifiedCategoryList
-              forSaleListData={
-                showDefaultList == 1 ? forSaleWebList : wantedWebList
-              }
-            />
+            {showDefaultList == 1 ? (
+              forSaleWebList.length > 0 ? (
+                <ClassifiedCategoryList forSaleListData={forSaleWebList}  classifiedDataType={4}  />
+              ) : (
+                <p className="nodataDisplay">--- {t("N0CLASSIFIED_DISPLAY")}  --- </p>
+              )
+            ) : wantedWebList.length ? (
+              <ClassifiedCategoryList forSaleListData={wantedWebList}  classifiedDataType={5} />
+            ) : (
+              <p className="nodataDisplay">--- {t("N0CLASSIFIED_DISPLAY")}  --- </p>
+            )}
           </Row>
         </Container>
       </React.Fragment>
