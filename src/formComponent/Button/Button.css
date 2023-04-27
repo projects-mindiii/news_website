@@ -27,11 +27,3 @@
     outline: 0;
     box-shadow: none !important;
 }
-.watsappInput .react-tel-input .form-control{
-
-    height: 62px !important;
-}
-.phoneInputSet .react-tel-input .form-control{
-    
-    height: 62px !important;
-}

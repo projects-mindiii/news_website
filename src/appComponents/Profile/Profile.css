@@ -109,7 +109,7 @@
     background: #000000;
     border-top-left-radius: 7.26px;
     border-bottom-left-radius: 7.26px;
-    height: 62px;
+    height: 40px;
     color: white;
     width: 50px;
     margin-bottom: -11px;
@@ -243,7 +243,7 @@
 
 .phoneInputSet svg {
     position: absolute;
-    bottom: 22px;
+    bottom: 10px;
     left: 4px;
     font-size: 20px;
     z-index: 999;
@@ -329,7 +329,7 @@
     border-left: 6px solid transparent;
     position: absolute;
     left: 89px;
-    top: 28px;
+    top: 18px;
     z-index: 999;
     color: #FFFFFF !important;
 }

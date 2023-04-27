@@ -28,11 +28,6 @@
 .post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-label {
     color: #343434 !important;
 }
-
-.post_Add_HeadingGap {
-    margin-bottom: 20px;
-}
-
 .post_Add_CategoryButton:first-child {
     margin-top: 70px;
 }
@@ -138,55 +133,8 @@
     width: 50%;
 }
 
-.post_AddForm .amount {
-    position: relative;
-}
-
-.post_AddForm .amount p {
-    position: absolute;
-    bottom: 11px;
-    background: #000000;
-    border-top-left-radius: 7.26px;
-    border-bottom-left-radius: 7.26px;
-    height: 62px;
-    width: 50px;
-    margin-bottom: -11px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 25px;
-    color: #FFFFFF;
-}
-
-.post_AddForm .amount div {
-    position: absolute;
-    bottom: 11px;
-    background: #000000;
-    border-top-left-radius: 7.26px;
-    border-bottom-left-radius: 7.26px;
-    height: 62px;
-    width: 50px;
-    margin-bottom: -11px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 25px;
-    color: #FFFFFF;
-}
-
-.post_AddForm .amount div img {
-    position: absolute;
-    height: 20px;
-    width: 20px;
-}
-
 .post_AddForm .heading {
     background-color: #F6F6F6;
-    height: 40px;
 }
 
 .post_AddForm .heading::placeholder {
@@ -194,64 +142,37 @@
     height: 42px !important;
 }
 
-.post_AddForm .amount .amounts {
-    padding-left: 58px;
-    position: relative;
-    height: 62px !important;
-}
-
-.amounts::placeholder {
-    color: #999999 !important;
-}
 
 .post_AddForm #location .css-13cymwt-control {
     color: white !important;
-    height: 62px !important;
     background-color: black !important;
     border-radius: 10px;
 }
 
 .post_AddForm #location .css-t3ipsp-control {
     color: white !important;
-    min-height: 62px !important;
     background-color: black !important;
     border-radius: 10px;
 }
 
-
 .post_AddForm #earningoption .css-13cymwt-control {
     color: white !important;
-    height: 62px !important;
     background-color: black !important;
     border-radius: 10px;
 }
 
 .post_AddForm #earningoption .css-t3ipsp-control {
     color: white !important;
-    min-height: 62px !important;
     background-color: black !important;
     border-radius: 10px;
 }
-
-.post_AddForm .css-t3ipsp-control {
-    height: 62px !important;
-}
-
-.post_AddForm .css-1xz3in2-control {
-    height: 62px !important;
-}
-
-
-
 .post_AddForm #countries .css-13cymwt-control {
     color: black !important;
-    height: 62px;
     border-radius: 10px;
 }
 
 .post_AddForm #countries .css-t3ipsp-control {
     color: black !important;
-    height: 62px;
     border-radius: 10px;
 }
 
@@ -261,13 +182,11 @@
 
 .post_AddForm #province .css-13cymwt-control {
     color: black !important;
-    height: 62px;
     border-radius: 10px;
 }
 
 .post_AddForm #province .css-t3ipsp-control {
     color: black !important;
-    height: 62px !important;
     border-radius: 10px;
 }
 
@@ -277,22 +196,17 @@
 
 .post_AddForm #cities .css-13cymwt-control {
     color: black !important;
-    height: 62px !important;
     border-radius: 10px;
 }
 
 .post_AddForm #cities .css-t3ipsp-control {
     color: black !important;
-    height: 62px !important;
     border-radius: 10px;
 }
 
 .post_AddForm #cities .css-tj5bde-Svg {
     fill: black !important;
 }
-
-
-
 
 
 .post_AddForm .post_Add_Discription {
@@ -304,65 +218,24 @@
 }
 
 .post_AddForm .post_Add_Locationtype {
-    margin-top: -15px;
     display: flex;
-    margin-bottom: 16px;
 }
 
 .post_AddForm .post_Add_Locationtype>div {
     width: 50%;
 }
 
+.post_AddForm .post_Add_EmploymentEnquiry{
+    display: flex;
+}
+
+.post_AddForm .post_Add_EmploymentEnquiry>div {
+    width: 50%;
+}
 
 .css-lnmdiq5-menu {
     color: black !important;
 }
-
-.post_Add_PriceGap {
-    margin-top: 19px;
-    margin-bottom: 19px;
-}
-
-.post_Add_DivPriceGap {
-    margin-bottom: 10px;
-}
-
-.post_Add_Remumeration {
-    margin-bottom: 13px;
-}
-
-.post_Add_EaringOption {
-    margin-top: 13px;
-}
-
-.post_Add_JobType {
-    margin-top: -4px;
-    margin-bottom: 12px;
-}
-
-.post_Add_JobType .headings {
-    margin-bottom: 12px;
-}
-
-.post_Add_Locations {
-    margin-top: 13px;
-    margin-bottom: 13px;
-}
-
-.whatsapp_Input {
-    height: 62px;
-}
-
-.contact_Input {
-    height: 62px;
-}
-
-.profile_Email {
-    height: 62px;
-}
-
-.post_Add_DivPriceGap {}
-
 .post_Add_AddPhoto button {
     height: 51px;
     background: #F76203;
@@ -383,23 +256,8 @@
     margin-top: 22px;
 }
 
-.post_Add_Save button {
-    height: 62px;
-    background: #000000;
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 25px;
-    color: #FFFFFF;
-    border-radius: 10px;
-    text-align: center;
-    border: none;
-    width: 100%;
-}
-
 .post_Add_Save {
-    display: flex;
-    justify-content: center;
-    margin-top: 33px;
+    margin-top: 23px;
 }
 
 .post_Add_DeleteAdever button {
@@ -413,7 +271,8 @@
     border: none;
     width: 100%;
 }
-.post_Add_DeleteAdever button svg{
+
+.post_Add_DeleteAdever button svg {
     margin-right: 20px;
     height: 31px;
     width: 28px;
@@ -425,3 +284,135 @@
     margin-top: 22px;
     align-items: center;
 }
+
+.post_AddForm .companyName {
+    position: relative;
+}
+
+.post_AddForm .companyName .companyName_Control {
+    padding-left: 58px;
+    position: relative;
+}
+
+.post_AddForm .companyName div {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+    width: 50px;
+    margin-bottom: -11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    top: 0px;
+}
+
+.post_AddForm .companyName div img {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+}
+
+.post_Add_CompanyName {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.post_AddForm .names {
+    position: relative;
+}
+
+.post_AddForm .names .names_Control {
+    padding-left: 58px;
+    position: relative;
+}
+
+.post_AddForm .names div {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+    width: 50px;
+    margin-bottom: -11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    top: 0px;
+}
+
+.post_AddForm .names div img {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+}
+
+.post_Add_Name {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.post_AddForm .companyName {
+    position: relative;
+}
+
+.post_AddForm .amount {
+    position: relative;
+}
+
+.post_AddForm .amount_Control {
+    padding-left: 58px;
+}
+
+.post_AddForm .amount div {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+    width: 50px;
+    margin-bottom: -11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    top: 0px;
+}
+
+.post_AddForm .amount div p {
+    position: absolute;
+   top:5px
+}
+
+  .css-1u9des2-indicatorSeparator{
+    width: 0px !important;
+ }
+ .post_Add_Locationtype {
+    margin-top: 16px;
+    margin-bottom: 31px;
+ }
+ .post_Add_EmploymentEnquiry{
+    margin-top: 13px;
+    margin-bottom: 29px;
+ }
+ .css-13cymwt-control .css-1xc3v61-indicatorContainer{
+    color: white !important;
+ }
+ .names_Control::placeholder{
+    color: #999999 !important;
+ }
+ .companyName_Control::placeholder{
+    color: #999999 !important;
+ }

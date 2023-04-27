@@ -5,15 +5,31 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SublyApi from "../../helpers/Api";
 import Form from 'react-bootstrap/Form';
-import ProfileEmail from "../../formComponent/ProfileCommonInput/ProfileEmail";
-import ContactInput from "../../formComponent/ProfileCommonInput/ContactInput";
-import WatsappInput from "../../formComponent/ProfileCommonInput/WatsappInput";
+import CommonEmailField from "../../formComponent/CommonInputFields/CommonEmailField";
+import { useForm } from "react-hook-form";
+
 import nameicon from "../../assets/images/Deal_icon/support_ico.png";
 import staricon from "../../assets/images/Deal_icon/star_ico.png";
 import { BsTrash3 } from "react-icons/bs";
+import WatsappInput from "../../formComponent/CommonInputFields/WatsappInput";
+import ContactInput from "../../formComponent/CommonInputFields/ContactInput";
+import CustomBtn from "../../formComponent/Button/Button";
 
 //-------Create a Deals Header component--------
 function PostAdvert() {
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState: { errors },
+    } = useForm();
+    const [watsappNo, setWatsappNo] = useState("");
+    const [dialCodeWatsapp, setDialCodeWatsapp] = useState("27");
+    const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
+    const [phoneNo, setPhoneNo] = useState("");
+    const [dialCode, setDialCode] = useState("27");
+    const [countryCode, setCountryCode] = useState("za");
     const { userToken, currentUser, allMetaList, isLoading } = useSelector(
         (state) => state.user
     );
@@ -126,25 +142,29 @@ function PostAdvert() {
                                                 </div>
                                             )) : ""}
                                         </div>
-                                        <div>
-                                            <div className="headings post_Add_HeadingGap" >AD DETAILS</div>
+                                        <div className="mb-3">
+                                            <div className="headings mb-3" >AD DETAILS</div>
+                                            <div>
                                             <h5>Advert Heading</h5>
-                                            <Form.Group className="mb-3">
+                                            <Form.Group >
                                                 <Form.Control
                                                     className="heading"
                                                     type="text"
                                                     placeholder="Enter Heading"
                                                 />
                                             </Form.Group>
+                                            </div>
+                                            <div className="mt-3">
                                             <h5>Advert Description</h5>
-                                            <Form.Group className="mb-3">
+                                            <Form.Group >
                                                 <Form.Control as="textarea" className="post_Add_Discription" placeholder="Enter description" />
                                             </Form.Group>
+                                            </div>
                                         </div>
                                         {userCategory == 6 &&
                                             <div className="post_Add_JobType">
-                                                <div className="headings">JOB TYPE</div>
-                                                <div>
+                                                <div className="headings mb-3">JOB TYPE</div>
+                                                <div className=" mb-3">
                                                     <Form.Group >
                                                         <Select
                                                             options={jobtype ? jobtype : {}}
@@ -152,7 +172,6 @@ function PostAdvert() {
                                                             id="location" name="location"
                                                             styles={{
                                                                 placeholder: () => ({
-                                                                    fontSize: "22px",
                                                                     color: "white",
                                                                     position: "absolute",
                                                                     display: "flex",
@@ -174,7 +193,7 @@ function PostAdvert() {
                                                     </Form.Group></div></div>}
                                         {(userCategory == 7 || userCategory == 6) &&
                                             <div>
-                                                <div className="headings post_Add_HeadingGap ">ON SITE, HYBRID OR REMOTE?</div>
+                                                <div className="headings ">ON SITE, HYBRID OR REMOTE?</div>
                                                 <div className="post_Add_Locationtype selectNew">
                                                     {locationType ? locationType.map((type, index) => (
                                                         <div key={index} >
@@ -191,9 +210,9 @@ function PostAdvert() {
                                                 </div>
                                             </div>}
                                         {(userCategory == 6) &&
-                                            <div>
-                                                <div className="headings post_Add_HeadingGap">EMPLOYMENT EQUITY</div>
-                                                <div className="post_Add_Locationtype selectNew">
+                                            <div >
+                                                <div className="headings ">EMPLOYMENT EQUITY</div>
+                                                <div className="post_Add_EmploymentEnquiry  selectNew">
                                                     {employmentEquity ? employmentEquity.map((type, index) => (
                                                         <div key={index} >
                                                             <Form.Check
@@ -208,31 +227,28 @@ function PostAdvert() {
                                                     )) : ""}
                                                 </div>
                                             </div>}
+                                        {(userCategory == 4) ? <div className="headings mb-3">PRICE</div> : <div className="headings mb-3">RENUMERATION</div>}
                                         {(userCategory == 4 || userCategory == 6) &&
-                                            <div className="post_Add_DivPriceGap">
-                                                {(userCategory == 4) ? <div className="headings post_Add_PriceGap">PRICE</div> : <div className="headings  post_Add_Remumeration">RENUMERATION</div>}
-
+                                            <div className="post_Add_Amount mb-3">
                                                 <Form.Group className="amount">
                                                     <Form.Control
-                                                        className="amounts"
+                                                        className="amount_Control"
                                                         type="text"
                                                         placeholder="Amount (optional)"
                                                     />
-                                                    <p>R</p>
+                                                    <div><p>R</p></div>
                                                 </Form.Group></div>}
                                         {(userCategory == 4 || userCategory == 6) &&
-                                            <div >
-                                                <Form.Group className="mb-3 ">
+                                            <div className="mb-3">
+                                                <Form.Group >
                                                     <Select
                                                         options={earingOption ? earingOption : {}}
                                                         placeholder="SELECT EARNING OPTION"
                                                         id="earningoption" name="earningoption"
                                                         styles={{
                                                             placeholder: () => ({
-                                                                fontSize: "22px",
                                                                 color: "white",
                                                                 position: "absolute",
-
                                                                 left: "15px",
                                                             }),
                                                         }}
@@ -251,7 +267,7 @@ function PostAdvert() {
                                             </div>}
                                         {(userCategory == 4 || userCategory == 6) &&
                                             ['checkbox'].map((type) => (
-                                                <div className="negotiable post_Add_EaringOption">
+                                                <div className="negotiable mb-3">
                                                     <Form.Check
 
                                                         className="negotiables"
@@ -260,16 +276,15 @@ function PostAdvert() {
                                                         label={"Negotiable"}
                                                     />
                                                 </div>))}
-                                        <div className="headings post_Add_Locations ">LOCATION</div>
-                                        <div >
-                                            <Form.Group className="mb-3 ">
+                                        <div className="headings mb-3">LOCATION</div>
+                                        <div className="mb-3">
+                                            <Form.Group>
                                                 <Select
                                                     options={country ? country : {}}
                                                     placeholder="South Africa"
                                                     id="countries" name="countries"
                                                     styles={{
                                                         placeholder: () => ({
-                                                            fontSize: "22px",
                                                             color: "#231F20",
                                                             position: "absolute",
 
@@ -288,15 +303,14 @@ function PostAdvert() {
                                                     })} />
                                             </Form.Group>
                                         </div>
-                                        <div >
-                                            <Form.Group className="mb-3 ">
+                                        <div className="mb-3">
+                                            <Form.Group >
                                                 <Select
                                                     options={provinces ? provinces : {}}
                                                     placeholder="Selected Province"
                                                     id="province" name="province"
                                                     styles={{
                                                         placeholder: () => ({
-                                                            fontSize: "22px",
                                                             color: "#231F20",
                                                             position: "absolute",
 
@@ -316,15 +330,14 @@ function PostAdvert() {
                                                 />
                                             </Form.Group>
                                         </div>
-                                        <div >
-                                            <Form.Group className="mb-3 ">
+                                        <div className="mb-3">
+                                            <Form.Group >
                                                 <Select
                                                     options={earingOption ? earingOption : {}}
                                                     placeholder="Input City/Town"
                                                     id="cities" name="cities"
                                                     styles={{
                                                         placeholder: () => ({
-                                                            fontSize: "22px",
                                                             color: "#231F20",
                                                             position: "absolute",
                                                             left: "15px",
@@ -343,13 +356,12 @@ function PostAdvert() {
                                                 />
                                             </Form.Group>
                                         </div>
-                                        <div className="headings post_Add_Locations ">CONTACT DETAILS</div>
+                                        <div className="headings ">CONTACT DETAILS</div>
                                         {(userCategory == 4 || userCategory == 6) &&
-                                            <div className="post_Add_DivPriceGap">
-
-                                                <Form.Group className="amount">
+                                            <div className="post_Add_Name">
+                                                <Form.Group className="names">
                                                     <Form.Control
-                                                        className="amounts"
+                                                        className="names_Control"
                                                         type="text"
                                                         placeholder="Your Full Name"
                                                     />
@@ -357,27 +369,30 @@ function PostAdvert() {
 
                                                 </Form.Group>
                                             </div>}
-                                        <div className="post_Add_DivPriceGap">
-                                            <Form.Group className="amount">
+                                        <div className="post_Add_CompanyName">
+                                            <Form.Group className="companyName">
                                                 <Form.Control
-                                                    className="amounts"
+                                                    className="companyName_Control"
                                                     type="text"
                                                     placeholder="Company Name (optional)"
-                                                />                                                <div><img src={staricon} alt={staricon} /></div>
-
+                                                />
+                                                <div><img src={staricon} alt={staricon} /></div>
                                             </Form.Group>
                                         </div>
-                                        <ProfileEmail />
-                                        <ContactInput />
-                                        <WatsappInput />
+                                        <CommonEmailField register={register} />
+                                        <ContactInput phone={phoneNo} dialCode={dialCode} country={countryCode} phone1={setPhoneNo}
+                                            dialCode1={setDialCode} country1={setCountryCode} />
+                                        <WatsappInput watsappNo={watsappNo} dialCodeWatsapp={dialCodeWatsapp} countryCodeWatsapp={countryCodeWatsapp}
+                                            setWatsappNo={setWatsappNo} setDialCodeWatsapp={setDialCodeWatsapp} setCountryCodeWatsapp={setCountryCodeWatsapp} />
                                         <div className="post_Add_AddPhoto">
                                             <button >ADD PHOTOS</button>
                                         </div>
-                                        <div className="post_Add_Save">
-                                            <button >SAVE</button>
+                                    
+                                        <div className="buttonAdd post_Add_Save">
+                                            <CustomBtn>SAVE</CustomBtn>
                                         </div>
                                         <div className="post_Add_DeleteAdever">
-                                            <button ><BsTrash3/>DELETE ADVERT</button>
+                                            <button ><BsTrash3 />DELETE ADVERT</button>
                                         </div>
                                     </Form>
                                 </div>
