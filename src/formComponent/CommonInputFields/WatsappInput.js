@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BsWhatsapp } from "react-icons/bs";
 import PhoneInput from "react-phone-input-2";
 

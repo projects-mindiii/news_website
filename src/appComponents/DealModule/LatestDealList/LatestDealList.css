@@ -1,13 +1,11 @@
-.companyDetails h3{
-    font-family: 'Poppins';
-    font-style: normal;
+.companyDetails h3 {
     font-weight: 600;
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 20.8px;
+    padding-bottom: 0px;
 }
 
 
-.companyDetails h5{
+.companyDetails h5 {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
@@ -17,7 +15,7 @@
     margin-top: 25px;
 }
 
-.companyDetails li{
+.companyDetails li {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -26,8 +24,8 @@
     list-style: none;
 }
 
-.companyDetails li::before{
-    content:"";
+.companyDetails li::before {
+    content: "";
     margin-right: 0.5rem;
     width: 13px;
     height: 13px;
@@ -62,7 +60,7 @@
     text-align: center;
     background: red;
     width: 100%;
-    height: 276.43px;   
+    height: 276.43px;
     margin: 25px 0px;
 }
 
@@ -112,4 +110,21 @@
 
 .accordion>.card>.card-header {
     background-color: #F1F1F1 !important;
+}
+
+.advertBox {
+    background: #FFFFFF;
+    border-radius: 7.89238px;
+    margin-top: 10px;
+    height: 100px;
+}
+
+.companyDetails .watsappCls img {
+    width: unset !important;
+}
+
+.companyDetails .watsappCls span {
+    font-weight: 500 !important;
+    font-size: 19.2px !important;
+    line-height: 21px !important;
 }

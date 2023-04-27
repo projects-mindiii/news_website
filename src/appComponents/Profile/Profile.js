@@ -18,9 +18,9 @@ import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { updateProfile, userDetails } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
-import ProfileEmail from "../../formComponent/ProfileCommonInput/ProfileEmail";
-import ContactInput from "../../formComponent/ProfileCommonInput/ContactInput";
-import WatsappInput from "../../formComponent/ProfileCommonInput/WatsappInput";
+import WatsappInput from "../../formComponent/CommonInputFields/WatsappInput";
+import ContactInput from "../../formComponent/CommonInputFields/ContactInput";
+import CommonEmailField from "../../formComponent/CommonInputFields/CommonEmailField";
 import Loader from "../../utils/Loader/Loader";
 
 
@@ -278,8 +278,8 @@ function Profile() {
                                                 )}
                                             />
                                         </Form.Group>
+                                        <CommonEmailField register={register} />
 
-                                        <ProfileEmail register={register} />
                                         {errors.email && (
                                             <span className="errorDisplay">
                                                 {errors.email.message}

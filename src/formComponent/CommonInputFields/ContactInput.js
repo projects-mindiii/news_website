@@ -1,13 +1,8 @@
-import { useState } from "react";
 import { MdPhonelinkRing } from "react-icons/md";
 import PhoneInput from "react-phone-input-2";
 
 //--------Create a email input field for profile component----------
 function ContactInput(props) {
-   console.log("props",props)
-    const [phoneNo, setPhoneNo] = useState("");
-    const [dialCode, setDialCode] = useState("27");
-    const [countryCode, setCountryCode] = useState("za");
 
     return (
 

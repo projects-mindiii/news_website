@@ -13,7 +13,8 @@ export const getDealList = createAsyncThunk(
 	async (data, { rejectWithValue }) => {
 		try {
 			const response = await SublyApi.getDealList(data);
-            // console.log('getDealList called',response)
+            console.log('getDealList called',response)
+
 			return response;
 		} catch (error) {
 			return rejectWithValue(error);

@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { AiOutlineMail } from "react-icons/ai";
 
 //--------Create a email input field for profile component----------
-function ProfileEmail({ register }) {
+function CommonEmailField({ register }) {
     //set language
     const { t } = useTranslation();
 
@@ -29,4 +29,4 @@ function ProfileEmail({ register }) {
         </>
     );
 }
-export default ProfileEmail;
+export default CommonEmailField;
