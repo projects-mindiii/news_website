@@ -27,14 +27,14 @@ export const headerData = [
     {
         id: "4",
         text: `${t("POST_ADVERT")} `,
-        link: `javascript:;`,
+        link: `/post-advert`,
         activeClass:""
         
     },
     {
         id: "5",
         text: `${t("YOUR_ADS")} `,
-        link: `javascript:;`,
+        link: `/your-add`,
         activeClass:""
        
     },

@@ -12,6 +12,7 @@ function CommonEmailField({ register }) {
             <Form.Group className="mb-3 emailSet">
                 <Form.Control
                     type="text"
+                    className="profile_Email"
                     placeholder={t("EMAIL")}
                     {...register("email", {
                         required: {

@@ -16,6 +16,8 @@ import ClassiFieds from "../appComponents/ClassiFieds/ClassiFieds";
 import PageNotFound from "../appComponents/PageNotFound/PageNotFound";
 import JobTypes from "../appComponents/ClassiFieds/JobTypes";
 
+import YourAdd from "../appComponents/YourAdd/YourAdd";
+import PostAdvert from "../appComponents/PostAdvert/PostAdvert";
 
 
 //-------Create a component for manage routing--------
@@ -40,6 +42,9 @@ function Routers() {
                 <Route exact path="/classifieds" element={<ClassiFieds />} />
                 <Route exact path="/job-types" element={<JobTypes/>} />
                 
+
+                <Route exact path="/Post-advert" element={<PostAdvert />} />
+                <Route exact path="/your-add" element={<YourAdd />} />
 
                 <Route path="*" element={<PageNotFound />} />
 

@@ -10,6 +10,7 @@ function WatsappInput(props) {
             <BsWhatsapp />
             <p>{props.countryCodeWatsapp.toUpperCase()} + {props.dialCodeWatsapp.toString()}</p>
             <PhoneInput
+             
                 country={"za"}
                 value={props.dialCodeWatsapp.toString() +
                     props.watsappNo.toString()}

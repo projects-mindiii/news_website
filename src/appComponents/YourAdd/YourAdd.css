@@ -1,0 +1,84 @@
+.yourAdd p {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 25px;
+    text-align: center;
+    color: #474747;
+    padding-bottom: 10px;
+}
+
+.yourAdd_Note {
+    background: #000000;
+    border-radius: 14px;
+    padding: 28px;
+    min-height: 143px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.yourAdd_Note p {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-bottom: 0px;
+}
+.yourAdd_Note p small{
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 30px;
+    text-align: center;
+    color: #e5dada;
+    margin-bottom: 0px;
+}
+
+.yourAdd_DataShow {
+    background-color: white;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.yourAdd_DataShow .edit_DeleteButton {
+    margin-top: 15px;
+    background: #000000;
+    border-radius: 7.2px;
+    border: none;
+    width: 100%;
+    font-weight: 600;
+    font-size: 19.2px;
+    line-height: 29px;
+    letter-spacing: -0.654545px;
+    color: #FFFFFF;
+    min-height: 46px;
+}
+
+.yourAdd_DataShow .not_live {
+    margin-top: 15px;
+    background: linear-gradient(180deg, #EB235F 0%, #CD0F48 98.67%);
+    border-radius: 6px;
+    width: 100%;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #FFFFFF;
+    min-height: 46px;
+}
+
+.youAdd_NotShow {
+    text-align: center;
+    margin-top: 70px;
+}
+.post_Add_Discription{
+    min-height: 114.9px !important;
+    background-color: #F6F6F6 !important;
+}
+.youAdd_PendingApproval {
+    text-align: center;
+    margin-top: 0.5rem;
+}

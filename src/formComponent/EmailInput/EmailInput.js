@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Form } from "react-bootstrap";
 
 //--------Create a email input field component----------
-function EmailInput({ register }) {
+function EmailInput({register}) {
     //set language
     const { t } = useTranslation();
 

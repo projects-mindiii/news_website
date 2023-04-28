@@ -1,0 +1,482 @@
+.yourAdd {
+    margin-top: 18px;
+}
+
+.post_Add_CategoryButton h5 {
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    color: #373A3C !important;
+}
+
+.post_Add_CategoryButton .headings {
+    background: #DEDEDE;
+    border-radius: 10px;
+    height: 51px;
+    color: #231F20;
+    width: 100%;
+    border: none;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-label {
+    color: #343434 !important;
+}
+
+.post_Add_CategoryButton:first-child {
+    margin-top: 70px;
+}
+
+.post_Add_CategoryButton .post_AddForm .selectNew .form-check {
+    display: flex !important;
+    align-items: center;
+    justify-content: center !important;
+    padding-left: 0px !important;
+}
+
+.post_Add_CategoryButton .post_AddForm .form-check {
+    display: flex !important;
+    align-items: center;
+}
+
+.post_Add_CategoryType>div {
+    width: 50%;
+}
+
+.post_Add_CategoryType {
+    margin-bottom: 28px !important;
+    margin-top: 26px !important;
+    gap: 9px 0px;
+    width: 267px;
+    margin: auto;
+
+}
+
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input {
+    height: 26px !important;
+    width: 26px !important;
+    position: relative !important;
+}
+
+.negotiable .negotiables .form-check-input {
+    height: 26px !important;
+    width: 26px !important;
+    position: relative !important;
+}
+
+.negotiable .negotiables .form-check-input[type="checkbox"]:checked::after {
+    content: '';
+    width: 20px !important;
+    height: 20px !important;
+    background: #EC4624 !important;
+    position: absolute !important;
+}
+
+.negotiable .negotiables .form-check-input[type="checkbox"]:checked::before {
+    content: "";
+    left: 8px;
+    top: 2px;
+    z-index: 99 !important;
+    width: 7px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.negotiable .negotiables .form-check-input:checked {
+    background-color: white !important;
+    border-color: white !important;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.107654);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.post_Add_CategoryButton .post_AddForm .form-check .form-check-label {
+    margin-left: 10px;
+}
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input[type=radio]:checked::after {
+    content: '';
+    width: 20px !important;
+    height: 20px !important;
+    background: #EC4624 !important;
+    position: absolute !important;
+    border-radius: 50% !important;
+}
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input:checked {
+    background-color: white !important;
+    border-color: white !important;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.107654);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post_AddForm>div:first-child {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.post_AddForm>div:first-child>div {
+    width: 50%;
+}
+
+.post_AddForm .heading {
+    background-color: #F6F6F6;
+}
+
+.post_AddForm .heading::placeholder {
+    color: #999999 !important;
+    height: 42px !important;
+}
+
+
+.post_AddForm #location .css-13cymwt-control {
+    color: white !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #location .css-t3ipsp-control {
+    color: white !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #location .css-1dimb5e-singleValue {
+    color: white !important;
+}
+
+.post_AddForm #earningoption .css-13cymwt-control {
+    color: white !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #earningoption .css-t3ipsp-control {
+    color: white !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #earningoption .css-1dimb5e-singleValue {
+    color: white !important;
+}
+
+
+.post_AddForm #countries .css-13cymwt-control {
+    color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #countries .css-t3ipsp-control {
+    color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #countries .css-tj5bde-Svg {
+    fill: black !important;
+}
+
+.post_AddForm #province .css-13cymwt-control {
+    color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #province .css-t3ipsp-control {
+    color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #province .css-tj5bde-Svg {
+    fill: black !important;
+}
+
+.post_AddForm #cities .css-13cymwt-control {
+    color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #cities .css-t3ipsp-control {
+    color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #cities .css-tj5bde-Svg {
+    fill: black !important;
+}
+
+
+.post_AddForm .post_Add_Discription {
+    height: 176px;
+}
+
+.post_AddForm .post_Add_Discription::placeholder {
+    color: #999999;
+}
+
+.post_AddForm .post_Add_Locationtype {
+    display: flex;
+}
+
+.post_AddForm .post_Add_Locationtype>div {
+    width: 50%;
+}
+
+.post_AddForm .post_Add_EmploymentEnquiry {
+    display: flex;
+}
+
+.post_AddForm .post_Add_EmploymentEnquiry>div {
+    width: 50%;
+}
+
+.css-lnmdiq5-menu {
+    color: black !important;
+}
+
+.post_Add_AddPhoto button {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    max-width: 311px;
+}
+
+.post_Add_AddPhoto {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.post_Add_Save button {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    background-color: #000000;
+}
+
+.post_Add_Save {
+    margin-top: 23px;
+}
+
+.post_Add_DeleteAdever button {
+    height: 62px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    border: none;
+    width: 100%;
+}
+
+.post_Add_DeleteAdever button svg {
+    margin-right: 20px;
+    height: 31px;
+    width: 28px;
+}
+
+.post_Add_DeleteAdever {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+    align-items: center;
+}
+
+.post_AddForm .companyName {
+    position: relative;
+}
+
+.post_AddForm .companyName .companyName_Control {
+    padding-left: 58px;
+    position: relative;
+}
+
+.post_AddForm .companyName div {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+    width: 50px;
+    margin-bottom: -11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    top: 0px;
+}
+
+.post_AddForm .companyName div img {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+}
+
+.post_Add_CompanyName {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.post_AddForm .names {
+    position: relative;
+}
+
+.post_AddForm .names .names_Control {
+    padding-left: 58px;
+    position: relative;
+}
+
+.post_AddForm .names div {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+    width: 50px;
+    margin-bottom: -11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    top: 0px;
+}
+
+.post_AddForm .names div img {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+}
+
+.post_Add_Name {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.post_AddForm .companyName {
+    position: relative;
+}
+
+.post_AddForm .amount {
+    position: relative;
+}
+
+/* .post_AddForm .amount_Control {
+    padding-left: 58px;
+} */
+
+.post_AddForm .amount div {
+    position: absolute;
+    bottom: 11px;
+    background: #000000;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+    width: 50px;
+    margin-bottom: -11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    color: #FFFFFF;
+    top: 0px;
+}
+
+.post_AddForm .amount div p {
+    position: absolute;
+    top: 5px
+}
+
+.css-1u9des2-indicatorSeparator {
+    width: 0px !important;
+}
+
+.post_Add_Locationtype {
+    margin-top: 16px;
+    margin-bottom: 31px;
+}
+
+.post_Add_EmploymentEnquiry {
+    margin-top: 13px;
+    margin-bottom: 29px;
+}
+
+.css-13cymwt-control .css-1xc3v61-indicatorContainer {
+    color: white !important;
+}
+
+.names_Control::placeholder {
+    color: #999999 !important;
+}
+
+.companyName_Control::placeholder {
+    color: #999999 !important;
+}
+
+.post_Add_Error {
+    height: 51px;
+    background: #A8ECDC;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    text-align: center;
+    color: #231F20;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.post_Add_priceDiv .btn{
+width: 9% !important;
+   margin-top: 0px;
+   font-weight: 400;
+    font-size: 22px !important;
+    line-height: 25px;
+    color: #FFFFFF;
+background-color: black;
+}
+.post_Add_priceDiv{
+    width: 100% !important;
+}
+
+.post_Add_priceDiv .dropdown-toggle::after{
+    display: none !important;
+}
+.post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
+width: 91% !important;
+}
+.post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
+width: 91% !important;
+}
+.css-a0izu-control{
+    background-color: black !important;
+    color: white !important;
+}
