@@ -5,14 +5,21 @@ import Image2 from "../../assets/images/image2.png";
 import Image3 from "../../assets/images/image3.png";
 import { useTranslation } from "react-i18next";
 import { footerData } from "./FooterData";
+import { useLocation } from "react-router-dom";
 
 //--------Create a Footer component----------
 function Footer() {
     //set language
     const { t } = useTranslation();
+    const location = useLocation();
 
     return (
         <>
+       {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
+            <div className="bannerImg">
+              <iframe src="https://www.signafrica.com?_dnid=84025&t=1682676851"></iframe></div>
+           : ""}
+
             <section className="footer">
                 <Container>
                     <div className="footerContent">
