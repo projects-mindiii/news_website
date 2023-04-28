@@ -26,7 +26,7 @@ function Routers() {
         <Router basename={"/"}>
             <Header />
             <Routes>
-                <Route exact path="/" element={<Navigate to="/login" />} />
+                <Route exact path="/" element={<Navigate to="/deals/latest-deals"/>} />
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/login-form" element={<LoginForm />} />
                 <Route exact path="/sign-up" element={<SignupForm />} />

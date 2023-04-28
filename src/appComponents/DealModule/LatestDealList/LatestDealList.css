@@ -53,16 +53,9 @@
 }
 
 .playBox {
-    text-align: center;
-    background: red;
-    width: 100%;
-    height: 276.43px;
-    margin: 25px 0px;
-}
-
-.playBox img {
-    width: 100px;
-    margin-top: 88px;
+    width: 100% !important;
+    height: 276.43px !important;
+    margin: 20px 0px;
 }
 
 .mapAccordion {
@@ -128,4 +121,21 @@
     width: 100%;
     border-radius: 7.89238px;
     object-fit: cover;
+}
+
+.latestDeals .watsappCls {
+    margin-bottom: 10px;
+}
+
+.latestDeals .watsappCls img {
+    width: unset !important;
+}
+
+.latestDeals .watsappCls span {
+    font-weight: 500 !important;
+    font-size: 19.2px !important;
+    line-height: 21px !important;
+}
+.dealDetailsList{
+    margin-top: 20px;
 }

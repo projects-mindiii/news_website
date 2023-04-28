@@ -8,6 +8,7 @@ import promotional from "../../../assets/images/Deal_icon/promotional.png";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import WhatsApp from "../../../CommonComponent/Whatappshare";
 
 
 function DealList({ dealList, fromDeal }) {
@@ -84,21 +85,19 @@ function DealList({ dealList, fromDeal }) {
                                 </div>
                             )}
                         </div>
+
                         <div className="dealPrice">
                             <h4>
-                                {item.currency_code} {item.price}
+                                {item.currency_code} {new Intl.NumberFormat().format(item.price)}
                             </h4>{" "}
                             <span>{item.tax_lable}</span>
                         </div>
-                        <button className="whatsApp">
-                            <Icon
-                                icon="mdi:whatsapp"
-                                color="white"
-                                width="31.2"
-                                height="31.2"
-                            />
-                            {t("WHATSAPP_ME")}
-                        </button>
+                        {item.contact_whatsapp_contact_number && (
+                            <div className="watsappCls">
+                                <WhatsApp watsApp={false} />
+                            </div>
+                        )}
+
                         {fromDeal == true ? (<button className="viewProfile" onClick={() => { navigate(`/deals/latest-deals/company-profile/${item.company_id}`) }}>{t("COMPANY_PROFILE")}</button>) : ""}
 
                     </div>

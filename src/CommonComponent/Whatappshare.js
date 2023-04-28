@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 
 //-------Create a Deals Header component--------
 function WhatsApp(props) {
-  console.log("props", props.forSaleListData)
   const { t } = useTranslation();
+
   return (
     <React.Fragment>
       <button className="classiFields_whatAppIcon">
@@ -14,7 +14,7 @@ function WhatsApp(props) {
           <span>
             <span>
               <img src={whatsappicon} alt={whatsappicon} />
-              <span>{t("WHATSAPP")}</span>
+              {props.watsApp === true ? (<span>{t("WHATSAPP")}</span>) : <span>{t("WHATSAPP_ME")}</span>}
             </span>
           </span>
         </WhatsappShareButton>
@@ -23,3 +23,4 @@ function WhatsApp(props) {
   );
 }
 export default WhatsApp;
+

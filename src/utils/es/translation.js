@@ -100,7 +100,8 @@ export const TRANSLATIONS_ES = {
   WHATSAPP_ME: "Mándame un mensaje por Whatsapp",
   COMPANY_PROFILE: "Ver perfil de la empresa",
   BRAND_REPRESENT: "MARCAS REPRESENTADAS",
-  BEDFORD_BRANCH: "SUCURSAL BEDFORDVIEW",
+  ADDRESS: "DIRECCIÓN",
+
 
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",

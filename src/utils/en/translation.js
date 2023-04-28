@@ -35,16 +35,16 @@ export const TRANSLATIONS_EN = {
   //---------- Classified Common Text---------------
   FOR_SALE: "FOR SALE",
   WANTED: "WANTED",
-  JOB_OFFERS:"JOB OFFERS",
-  JOB_SEEKER:"JOB SEEKER",
-  PER_WEEK:"PER WEEK",
-  CONTACT_PERSON:"Contact Person",
-  COMPANY:"COMPANY",
-  CONTACT_PERSON_EMAIL:"EMAIL",
-  CONTACT_NUMBER:"CONTACT NUMBER",
-  WHATSAPP:"WhatsApp",
-  SHARE:"SHARE",
-  N0CLASSIFIED_DISPLAY:"NO CLASSIFIEDS TO DISPLAY",
+  JOB_OFFERS: "JOB OFFERS",
+  JOB_SEEKER: "JOB SEEKER",
+  PER_WEEK: "PER WEEK",
+  CONTACT_PERSON: "Contact Person",
+  COMPANY: "COMPANY",
+  CONTACT_PERSON_EMAIL: "EMAIL",
+  CONTACT_NUMBER: "CONTACT NUMBER",
+  WHATSAPP: "WhatsApp",
+  SHARE: "SHARE",
+  N0CLASSIFIED_DISPLAY: "NO CLASSIFIEDS TO DISPLAY",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -98,7 +98,7 @@ export const TRANSLATIONS_EN = {
   WHATSAPP_ME: "WhatsApp Me",
   COMPANY_PROFILE: "View Company Profile",
   BRAND_REPRESENT: "BRANDS REPRESENTED",
-  BEDFORD_BRANCH: "BEDFORDVIEW BRANCH",
+  ADDRESS: "ADDRESS",
 
 
   //---------------Error Messages Common Text----------
@@ -144,7 +144,7 @@ export const TRANSLATIONS_EN = {
   //---------- Status Error Text---------------
   SESSION_EXPIRE: "Your Session Expired!",
 
-    
+
 
 
 };

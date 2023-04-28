@@ -1,9 +1,7 @@
-import playBtn from "../../../assets/images/play_btn.png";
 import "../LatestDealList/LatestDealList.css";
 import contact from "../../../assets/images/Deal_icon/contact_ico.png";
 import globe from "../../../assets/images/Deal_icon/globe_ico.png";
 import mail from "../../../assets/images/Deal_icon/mail_ico.png";
-import { Icon } from "@iconify/react";
 import "../../CommonModule/CommonModule.css";
 import MapLocation from "../../CommonModule/MapLocation";
 import insta from "../../../assets/images/socialMedia_icon/insta_black_ico.png";
@@ -12,6 +10,9 @@ import linkedin from "../../../assets/images/socialMedia_icon/linkedin_black_ico
 import youtube from "../../../assets/images/socialMedia_icon/youtube_play_ico.png";
 import twitter from "../../../assets/images/socialMedia_icon/twitter_ico.png";
 import { useTranslation } from "react-i18next";
+import WhatsApp from "../../../CommonComponent/Whatappshare";
+import ReactPlayer from 'react-player';
+import AddressFields from "../../CommonModule/AddressFields";
 
 
 function CompanyProfile({ companyDetailData }) {
@@ -58,11 +59,22 @@ function CompanyProfile({ companyDetailData }) {
               </>
             )}
 
-            <div className="playBox">
-              <img src={playBtn} alt="playBtn" />
-            </div>
+            {companyDetailData.vedio_list.length > 0 && (
+              <>
+                <div className="brandType">
+                  {companyDetailData.vedio_list.length > 0 && companyDetailData.vedio_list.map((item, index) => (
+                    <ReactPlayer
+                      className="playBox"
+                      url={item.image}
+                      playing={true}
+                      controls={true}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
 
-            <div className="dealDetails">
+            <div className="dealDetailsList">
               {companyDetailData.company_detail.email && (
                 <div className="detailsValue">
                   <img src={mail} alt="img" />
@@ -94,21 +106,12 @@ function CompanyProfile({ companyDetailData }) {
               )}
 
             </div>
-            {companyDetailData.company_detail.whatapp_contact_number && (
-            <button className="whatsApp">
-              <Icon
-                icon="mdi:whatsapp"
-                color="white"
-                width="31.2"
-                height="31.2"
-              />
-              {t("WHATSAPP_ME")}
-            </button>
-            )}
 
-            {/* <div className="watsappCls">
-            <WhatsApp/>
-            </div> */}
+            {companyDetailData.company_detail.whatapp_contact_number && (
+              <div className="watsappCls">
+                <WhatsApp watsApp={false} />
+              </div>)}
+
           </div>
           <div className="socialShare">
             {companyDetailData.company_detail.facebook_link && (
@@ -129,49 +132,11 @@ function CompanyProfile({ companyDetailData }) {
           </div>
 
           <div className="mapClass">
-            <MapLocation />
+            <MapLocation address={companyDetailData.company_detail.address} />
           </div>
-          <div class="accordion mapAccordion" id="accordionExample">
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                  <button
-                    class="btn-link btn-block text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                  >
-                    {t("BEDFORD_BRANCH")}
-                    <Icon
-                      icon="material-symbols:keyboard-arrow-up"
-                      width="45"
-                      height="45"
-                      className="hideIcon"
-                    />
-                    <Icon
-                      icon="material-symbols:keyboard-arrow-down"
-                      width="45"
-                      height="45"
-                      className="showIcon"
-                    />
-                  </button>
-                </h2>
-              </div>
 
-              <div
-                id="collapseOne"
-                class="collapse"
-                aria-labelledby="headingOne"
-                data-parent="#accordionExample"
-              >
-                <div class="card-body">
-                  <MapLocation address={companyDetailData.company_detail.address}/>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AddressFields addressSet={companyDetailData.branch_list} />
+
         </div>
         : ""}
     </section>
