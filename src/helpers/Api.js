@@ -280,7 +280,7 @@ class SublyApi {
      */
   static async addClassifiedList(requestdata,authToken) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2//add-classified`,
+    let res = await this.request(`/v2/add-classified`,
     requestdata, "post", header
     );
 
