@@ -8,24 +8,24 @@ function ContactInput(props) {
 
         <div className="phoneInputSet">
             <MdPhonelinkRing />
-            {/* <p>{props.country.toUpperCase()} + {props.dialCode.toString()}</p> */}
+            <p>{props.country.toUpperCase()} + {props.dialCode.toString()}</p>
             <PhoneInput
-                // country={"za"}
-                // value={props.dialCode.toString() +
-                //     props.phone.toString()}
-                // onChange={(value, country) => {
-                //     let dialCode = country.dialCode;
-                //     let phone = value.slice(
-                //         dialCode.length,
-                //         value.length
-                //     );
-                //     props.country1(country.countryCode)
-                //     props.dialCode1(dialCode);
-                //     props.phone1(phone);
+                country={"za"}
+                value={props.dialCode.toString() +
+                    props.phone.toString()}
+                onChange={(value, country) => {
+                    let dialCode = country.dialCode;
+                    let phone = value.slice(
+                        dialCode.length,
+                        value.length
+                    );
+                    props.country1(country.countryCode)
+                    props.dialCode1(dialCode);
+                    props.phone1(phone);
 
-                // }}
-                // countryCodeEditable={false}
-                // copyNumbersOnly={true}
+                }}
+                countryCodeEditable={false}
+                copyNumbersOnly={true}
             />
         </div>
 

@@ -385,11 +385,11 @@ function PostAdvert() {
                                         <WatsappInput watsappNo={watsappNo} dialCodeWatsapp={dialCodeWatsapp} countryCodeWatsapp={countryCodeWatsapp}
                                             setWatsappNo={setWatsappNo} setDialCodeWatsapp={setDialCodeWatsapp} setCountryCodeWatsapp={setCountryCodeWatsapp} />
                                         <div className="post_Add_AddPhoto">
-                                            <button >ADD PHOTOS</button>
+                                            <CustomBtn children={"ADD PHOTOS"} type={"button"} onClick={""} buttonStyle={"#F76203"}></CustomBtn>
                                         </div>
                                     
-                                        <div className="buttonAdd post_Add_Save">
-                                            <CustomBtn>SAVE</CustomBtn>
+                                        <div className="post_Add_Save">
+                                            <CustomBtn children={"SAVE"} type={"button"} onClick={""} buttonStyle={"btn--danger--solid"}></CustomBtn>
                                         </div>
                                         <div className="post_Add_DeleteAdever">
                                             <button ><BsTrash3 />DELETE ADVERT</button>

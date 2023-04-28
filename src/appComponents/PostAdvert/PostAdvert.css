@@ -237,23 +237,26 @@
     color: black !important;
 }
 .post_Add_AddPhoto button {
-    height: 51px;
-    background: #F76203;
     font-weight: 600;
     font-size: 22px;
     line-height: 25px;
-    text-align: center;
     color: #FFFFFF;
     border-radius: 10px;
-    text-align: center;
-    border: none;
-    min-width: 311px;
+    max-width: 311px;
 }
 
 .post_Add_AddPhoto {
     display: flex;
     justify-content: center;
     margin-top: 22px;
+}
+.post_Add_Save button {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25px;    
+    color: #FFFFFF;
+    border-radius: 10px;
+    background-color: #000000;
 }
 
 .post_Add_Save {
