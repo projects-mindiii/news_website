@@ -1,16 +1,21 @@
 import React from "react";
 import mapIcon from "../../assets/images/socialMedia_icon/map_ico.png";
+import { useTranslation } from "react-i18next";
 
 function MapLocation(address) {
-  console.log("address",address)
+  //set language
+  const { t } = useTranslation();
+
   return (
     <section>
-      <div className="mapBox"></div>
+      <div className="mapBox">
+
+      </div>
       <div className="mapDetails">
         <img src={mapIcon} alt="mapIcon" />
         <div className="mapAddress">
-          <h5>ADDRESS</h5>
-          <p>104/c mitra bandhu nagar indore</p>
+          <h5>{t("ADDRESS")}</h5>
+          <p>{address.address}</p>
         </div>
       </div>
     </section>
