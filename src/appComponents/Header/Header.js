@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
-import Banner from "../../assets/images/classifiedheader.png"
+import Banner from "../../assets/images/classifiedheader.png";
 import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
 import "./Header.css";
@@ -44,21 +44,38 @@ function Header() {
       GetMetaList(userToken);
     }
   }, []);
-  
+
   return (
     <section className="header">
-      {isLoading === true ? (
-        <Loader />
-      ) : ""}
+      {isLoading === true ? <Loader /> : ""}
       <Container>
         <div className="headerSection">
           <div className="logoImg">
             <img src={Logo} alt="news-logo" />
           </div>
-          {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
+          {/* {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
             <div className="bannerImg">
               <img src={Banner} alt="news-logo" />
-            </div> : ""}
+            </div> : ""} */}
+
+          {location.pathname == "/classifieds" ||
+          location.pathname == "/job-types" ? (
+            <div className="bannerImg">
+              <iframe
+                src="https://www.signafrica.com?_dnid=84025&t=1682676851"
+                style={{
+                  width: "100%",
+                  height: "95%",
+                  margin: "0px",
+                  border: "none",
+                  scrollBehavior: "none",
+                }}
+              ></iframe>
+            </div>
+          ) : (
+            ""
+          )}
+
           <Navbar expand="lg">
             <div className="navItem headerLinks">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -79,8 +96,18 @@ function Header() {
 
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
-            {location.pathname == "/deals/latest-deals" || (location.pathname.match("/deals/latest-deals/company-profile/"))  ? <DealsHeader /> : ""}
-            {location.pathname == "/classifieds" || location.pathname == "/job-types" ? <ClassifiedCountry /> : ""}
+            {location.pathname == "/deals/latest-deals" ||
+            location.pathname.match("/deals/latest-deals/company-profile/") ? (
+              <DealsHeader />
+            ) : (
+              ""
+            )}
+            {location.pathname == "/classifieds" ||
+            location.pathname == "/job-types" ? (
+              <ClassifiedCountry />
+            ) : (
+              ""
+            )}
             <SearchBar />
           </div>
         </div>

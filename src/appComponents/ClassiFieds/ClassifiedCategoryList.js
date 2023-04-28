@@ -9,9 +9,11 @@ import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
 import { useTranslation } from "react-i18next";
 
+
 function ClassifiedCategoryList({ forSaleListData, classifiedDataType }) {
   console.log("classifiedDataType",classifiedDataType)
   const { t } = useTranslation();
+  
   return (
     <div className="main">
       {forSaleListData.length > 0 &&
@@ -63,8 +65,7 @@ function ClassifiedCategoryList({ forSaleListData, classifiedDataType }) {
                   {classifiedDataType == 4 ||  classifiedDataType == 6? (
                     <div className="classiFieds_RupeesText">
                       <p>
-                        {item.currency_code} {item.amount}
-                        {/* <span>{item.earning_name}</span> */}
+                        {item.currency_code} {new Intl.NumberFormat().format(item.amount)}
                       </p>
                       <span>{(classifiedDataType == 6)?item.earning_name:item.currency_name} {(item.is_negotiable)?"(Negotiable)":""}</span>
                     </div>
@@ -87,12 +88,13 @@ function ClassifiedCategoryList({ forSaleListData, classifiedDataType }) {
                       forSaleListData={forSaleListData}
                       index={index}
                     />
-                    {item.whatapp_contact_number.length > 0 && <WhatsApp />}
+                    {item.whatapp_contact_number.length > 0 && <WhatsApp watsApp={true}/> }
                   </div>
 
                   <SocialMedaiShare />
                 </div>
               </Col>
+             
             </Row>
           );
         })}
