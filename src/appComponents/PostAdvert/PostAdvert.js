@@ -132,7 +132,7 @@ function PostAdvert() {
         }
         getClassifiedLists();
     }, []);
-    
+
     async function onSubmit(data) {    
         let requestData = new FormData();
         requestData.append('heading', data.heading);
@@ -610,9 +610,9 @@ function PostAdvert() {
                                                 <CustomBtn  >SAVE</CustomBtn>
                                             </div>
                                         </div>
-                                        <div className="post_Add_DeleteAdever">
+                                        {/* <div className="post_Add_DeleteAdever">
                                             <button ><BsTrash3 />DELETE ADVERT</button>
-                                        </div>
+                                        </div> */}
                                     </Form>
                                 </div>
 
