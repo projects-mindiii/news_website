@@ -45,3 +45,53 @@ span.resultText {
 .topSection {
     padding: 18px;
 }
+
+.css-13cymwt-control {
+    border: none !important;
+}
+
+.css-1xc3v61-indicatorContainer {
+    display: none !important;
+}
+
+.css-tj5bde-Svg {
+    display: inline-block;
+    /* fill: currentColor; */
+    line-height: 1;
+    stroke: currentColor;
+    stroke-width: 0;
+}
+
+.css-tj5bde-Svg {
+    /* display: inline-block; */
+    /* fill: currentColor; */
+    /* line-height: 1; */
+    /* stroke: currentColor; */
+    /* stroke-width: 0; */
+    display: none;
+}
+
+.css-13cymwt-control:hover {
+    /* border-color: hsl(0, 0%, 70%); */
+}
+
+.css-1fdsijx-ValueContainer:focus{
+    border: none !important;
+    outline: none !important;
+
+}
+
+.css-1fdsijx-ValueContainer:focus{
+    display: none!important;
+    outline: none;
+}
+
+.countryText div#location {
+    width: 100%;
+    max-width: 307px;
+    border: none !important;
+    outline: none !important;
+    position: absolute;
+    bottom: 35px;
+    left: 96px;
+}
