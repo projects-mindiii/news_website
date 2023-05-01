@@ -28,4 +28,77 @@ span.resultText {
 .countryIcon{
     padding: 5px;
     margin-top: 5px;
+<<<<<<< HEAD
 }
+=======
+}
+
+/* searchbar css */
+
+.ClassifiedsearchBar {
+    display: flex;
+    margin-top: 15px;
+}
+
+.ClassifiedsearchBar .form-control {
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 14px;
+    font-weight: 400;
+    background: #FAFAFA;
+    border-radius: 4px;
+    height: 40px;
+}
+
+.ClassifiedsearchBar .form-control:focus {
+    border: none !important;
+}
+
+.ClassifiedsearchBar svg {
+    color: #FFFFFF;
+    font-weight: 700;
+    background: #dc9586bd;
+    padding: 6px;
+    width: 34px;
+    height: 36px;
+    border-radius: 50%;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> working on classified filter design
