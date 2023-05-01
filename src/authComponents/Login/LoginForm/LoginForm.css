@@ -65,14 +65,14 @@ button.btn:active {
 
 
 /* checkbox custom css */
-.customCheck[type="checkbox"]:checked,
-.customCheck[type="checkbox"]:not(:checked) {
+.customCheck [type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
 }
 
-.customCheck[type="checkbox"]:checked+label,
-.customCheck[type="checkbox"]:not(:checked)+label {
+.customCheck [type="checkbox"]:checked+label,
+[type="checkbox"]:not(:checked)+label {
     position: relative;
     padding-left: 32px;
     cursor: pointer;
@@ -82,8 +82,8 @@ button.btn:active {
     padding-right: 20px;
 }
 
-.customCheck[type="checkbox"]:checked+label:before,
-.customCheck[type="checkbox"]:not(:checked)+label:before {
+.customCheck [type="checkbox"]:checked+label:before,
+[type="checkbox"]:not(:checked)+label:before {
     content: '';
     position: absolute;
     left: 0;
@@ -95,8 +95,8 @@ button.btn:active {
     background: #fff;
 }
 
-.customCheck[type="checkbox"]:checked+label:after,
-.customCheck[type="checkbox"]:not(:checked)+label:after {
+.customCheck [type="checkbox"]:checked+label:after,
+[type="checkbox"]:not(:checked)+label:after {
     content: '';
     width: 17px;
     height: 17px;
@@ -109,13 +109,13 @@ button.btn:active {
     transition: all 0.2s ease;
 }
 
-.customCheck[type="checkbox"]:not(:checked)+label:after {
+.customCheck [type="checkbox"]:not(:checked)+label:after {
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0);
 }
 
-.customCheck[type="checkbox"]:checked+label:after {
+.customCheck [type="checkbox"]:checked+label:after {
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
