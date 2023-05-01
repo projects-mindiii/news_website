@@ -1,4 +1,5 @@
 .classiFieds_forSaleBox {
+    padding: 15px;
     background-color: #FFFFFF;
     box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.03);
     margin-bottom: 25px;
@@ -6,19 +7,10 @@
 
 .classiFieds_forSaleBox .classiFieds_forSale_about {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: flex-start;
     margin-bottom: 6px;
 } 
-
-.classiFieds_forSaleBox .classiFieds_forSale_about>div:first-child{
-    justify-content: flex-start;
-}
-.classiFieds_forSaleBox .classiFieds_forSale_about>div:nth-child(2){
-    margin-left: 5px;
-    width: 100%;
-}
-
 .classiFields_mobileMargingRemove {
     margin-bottom: 0px !important;
 }
@@ -57,14 +49,12 @@
 
 .classiFieds_forSale_about .classiFieds_time_action {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-}
-.classiFieds_forSale_about .classiFieds_time_action>div:nth-child(2) {
-   padding-left: 15px;
 }
 
 .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
-     background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%); 
+    /* background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%); */
     border-radius: 14px;
     line-height: 20px;
     border: none !important;
@@ -75,7 +65,7 @@
     font-size: 13px;
 }
 
- .classiFields_contactPerson {
+.classiFieds_forSaleBox .classiFields_contactPerson {
     background: #E8E8E8;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.0311407);
     border-radius: 6px;
@@ -153,11 +143,8 @@
     color: white;
 }
 
-.classiFieds_time{
-    display: flex;
-    align-items: center;
-}
 .classiFieds_time span {
+    padding-left: 10px;
     font-weight: 400;
     font-size: 12px;
     line-height: 18px;
@@ -328,7 +315,6 @@
     }
 }
 @media only screen and (max-width: 480px) {
-    
     .classiFieds_forSale_about .classiFieds_forSale img {
         width: 116.83px;
         height: 87.62px;
@@ -353,9 +339,8 @@
         font-weight: 600;
         font-size: 8.4378px;
         line-height: 13px;
-        min-height: 18px;
+        height: 18px;
         width: 56px;
-        height: 100%;
     }
 
     .classiFieds_time span {
@@ -542,5 +527,29 @@
     font-size: 25px;
     font-weight: 600;
 }
+
+.classiFields_iconBackGround svg {
+    font-size: 22px;
+    margin-left: 11px;
+    margin-top: 10px;
+}
+
+.nodataDisplay {
+    margin-top: 16px;
+    display: flex;
+    padding: 9px 148px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.jobType p {
+    margin-top: 10px;
+    color: #E91F63;
+    font-size: 20px;
+    font-weight: 500;
+}
+
 
 
