@@ -17,7 +17,7 @@ function Footer() {
         <>
        {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
             <div className="bannerImg">
-              <iframe src="https://www.signafrica.com?_dnid=84025&t=1682676851"></iframe></div>
+              <iframe src={process.env.REACT_APP_CLASSIFIED_FOOTER_IFRAME_URL}></iframe></div>
            : ""}
 
             <section className="footer">
