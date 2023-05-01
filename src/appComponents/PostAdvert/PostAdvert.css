@@ -70,6 +70,9 @@
     width: 26px !important;
     position: relative !important;
 }
+.negotiable .negotiables [type="checkbox"]:checked, [type="checkbox"]:not(:checked){
+    left: 0px !important;
+}
 
 .negotiable .negotiables .form-check-input[type="checkbox"]:checked::after {
     content: '';
@@ -77,6 +80,9 @@
     height: 20px !important;
     background: #EC4624 !important;
     position: absolute !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .negotiable .negotiables .form-check-input[type="checkbox"]:checked::before {

@@ -30,7 +30,7 @@ function PostAdvert() {
         watch,
         formState: { errors },
     } = useForm();
-    console.log(getValues(), errors)
+    const formDataValues = getValues();
     const [watsappNo, setWatsappNo] = useState("");
     const [dialCodeWatsapp, setDialCodeWatsapp] = useState("27");
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
@@ -38,44 +38,15 @@ function PostAdvert() {
     const [dialCode, setDialCode] = useState("27");
     const [countryCode, setCountryCode] = useState("za");
     const [categoryType, setCategoryType] = useState("")
-    const [userCategory, setUserCategory] = useState(4)
     const [locationType, setLocationType] = useState("");
-    const [selectLocation, setSelectLocation] = useState();
-    const [negotiables, setNegotiables] = useState(true);
     const [employmentEquity, setEmploymentEquity] = useState([{ id: 1, name: "none" }, { id: 2, name: "EE/ AA Required" }])
-    const [employment, setEmployment] = useState();
     const [earingOption, setEaringOption] = useState();
-    const [cityOption, setcityOption] = useState();
-    const [cityValue, setCityValue] = useState();
     const [currencies, setCurrencies] = useState();
     const [currencyvalue, setcurrencyvalue] = useState();
-    const [earningValue, setEarningValue] = useState();
-    const [jobtype, setJobType] = useState();
-    const [jobValue, setJobValue] = useState();
+    const [jobTypeOption, setJobTypeOption] = useState();
     const [country, setCountry] = useState({ value: 1, label: "South Africa", id: 1 },
         { value: 0, label: "Outside South Africa", id: 0 },);
-    const [countryvalue, setCountryValue] = useState();
     const [provinces, setProvinces] = useState();
-    const [provincesvalue, setProvinceValue] = useState();
-    function negotiableWork() {
-        document.getElementById("negotiables").checked == true ? setNegotiables(1) : setNegotiables(0)
-    }
-    const customStyles = {
-        option: (defaultStyles, state) => ({
-            ...defaultStyles,
-            color: state.isSelected ? "#212529" : "#fff",
-            backgroundColor: state.isSelected ? "#a0a0a0" : "#212529",
-        }),
-
-        control: (defaultStyles) => ({
-            ...defaultStyles,
-            backgroundColor: "#212529",
-            padding: "10px",
-            border: "none",
-            boxShadow: "none",
-        }),
-        singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
-    };
 
     useEffect(() => {
         async function getClassifiedLists() {
@@ -123,7 +94,7 @@ function PostAdvert() {
                 setCategoryType(allMetaList.category_type);
                 setLocationType(allMetaList.job_location_type);
                 await setEaringOption(earningOption);
-                await setJobType(jobType);
+                await setJobTypeOption(jobType);
                 await setCountry(countyryOption);
                 await setProvinces(provinceOption)
                 await setCurrencies(currencyoption)
@@ -134,25 +105,65 @@ function PostAdvert() {
         }
         getClassifiedLists();
     }, []);
-
     async function onSubmit(data) {
-        console.log(data)
+        //         "classified_type:interger
+        // classified_type is required
+        //         heading: string
+        // heading is required
+        //         description: string 
+        // description is required
+        //         is_default_country: interger
+        // is_default_country is required(0: other, 1:default(south africa)
+        //         country_id: interger
+        // country_id is required  when contry not south africa)
+        //         province: integer
+        // province is required  when country is south africa
+        //         city: interger
+        // city is required
+        //         price: decimal
+        // price is required  when classified type is for sale
+        //         currency_id: integer
+        // currency id is required  when classfied type is for sale
+        //         is_negotiable: integer
+        // is negotiable is required when classified is for sale and job offer
+        //         earning_options: integer
+        // earning option is required
+        //         job_type: integer
+        // job type is required when classified type is job offer
+        //         job_location_type: integer
+        // job location is required when classified type is job offer and job seeker
+        //         emp_equity: integer
+        // emp equity is required when classified type is job offer
+        //         contact_name: string
+        // contact name is required
+        //         email: string
+        // email is required
+        //         contact_company: string
+        // company is optional
+        //         dial_code: integer
+        //         country_code: string
+        //         contact_number: integer
+        //         whatsapp_dail_code: integer
+        //         whatsapp_country_code: string
+        //         whatapp_contact_number: integer
+        //         classifiedGallery:file object
+        // optional"
         let requestData = new FormData();
         requestData.append('heading', data.heading);
         requestData.append('description', data.description);
-        requestData.append('is_default_country', countryvalue.id == 204
-            ? 1 : 0);
+        requestData.append('is_default_country', 
+            );
         requestData.append(
-            'country_id', countryvalue.value
+            'country_id', 
         );
         requestData.append(
-            'classified_type', userCategory
+            'classified_type', formDataValues && formDataValues.categorytype
         );
         requestData.append(
-            'emp_equity', employment
+            'emp_equity', 
         );
         requestData.append(
-            'province', provincesvalue.id
+            'province', 
         );
         requestData.append(
             'city', data.city
@@ -161,20 +172,20 @@ function PostAdvert() {
             'currency_id', currencyvalue.id
         );
         requestData.append(
-            'is_negotiable', negotiables
+            'is_negotiable', 
         );
         requestData.append(
-            "job_location_type", countryvalue.id
+            "job_location_type", 
         );
         requestData.append(
             'price', data.amount
         );
 
         requestData.append(
-            "earning_options", earningValue.value
+            "earning_options", 
         )
         requestData.append(
-            'job_type', jobValue.value ? jobValue.value : ""
+            'job_type', 
         );
         requestData.append(
             "contact_name", data.fullName
@@ -215,6 +226,7 @@ function PostAdvert() {
             }
         });
     }
+   
     return (
         <div className="main">
             <React.Fragment >
@@ -239,16 +251,26 @@ function PostAdvert() {
                                             {categoryType ? categoryType.map((type, index) => (
                                                 <div key={index}>
                                                     <Form.Check
+                                                        {...register("categorytype", {
+                                                            required: {
+                                                                value: true,
+                                                                message: "Select a Category",
+                                                            }
+                                                        })}
                                                         className="post_Add_category"
-                                                        checked={type.id == userCategory}
-                                                        onChange={() => setUserCategory(type.id)}
                                                         type="radio"
-                                                        id={type.name}
                                                         label={type.name}
+                                                        value={type.id}
+                                                        
                                                     />
                                                 </div>
                                             )) : ""}
                                         </div>
+                                        {errors.categorytype && (
+                                            <div className="post_Add_Error">
+                                                {errors.categorytype.message}
+                                            </div>
+                                        )}
                                         <div className="mb-3">
                                             <div className="headings mb-3" >AD DETAILS</div>
                                             <div>
@@ -257,6 +279,7 @@ function PostAdvert() {
                                                     <Form.Control
                                                         className="heading"
                                                         type="text"
+                                                        
                                                         placeholder="Enter Heading"
                                                         {...register("heading", {
                                                             required: {
@@ -291,23 +314,25 @@ function PostAdvert() {
                                             )}
 
                                         </div>
-                                        {userCategory == 6 &&
+                                        {formDataValues && formDataValues.categorytype == 6 &&
                                             <div className="post_Add_JobType">
                                                 <div className="headings mb-3">JOB TYPE</div>
                                                 <div className=" mb-3">
                                                     <Form.Group >
                                                         <Controller
-                                                            defaultValue={1}
-                                                            name="jobtype"
                                                             control={control}
-                                                            render={({ onChange, value, name, ref }) => (
+                                                            name="jobType"
+                                                            render={({
+                                                                field: { onChange, value, name, ref },
+                                                                fieldState: { invalid, isTouched, isDirty, error },
+                                                                formState,
+                                                            }) => (
                                                                 <Select
-                                                                    inputRef={ref}
-                                                                    options={jobtype ? jobtype : {}}
-                                                                    value={jobtype.find(c => c.value === value)}
-                                                                    onChange={setJobValue}
-                                                                    placeholder="SELECT JOB TYPE"
                                                                     id="jobtype"
+                                                                    placeholder="SELECT JOB TYPE"
+                                                                    // value={{ value: 0, label: "Select Job Type", id: 0}}
+                                                                    options={jobTypeOption}
+                                                                    onChange={onChange} // send value to hook form
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "white",
@@ -331,97 +356,112 @@ function PostAdvert() {
                                                             rules={{ required: true }}
                                                         />
                                                     </Form.Group></div></div>}
-                                        {!jobValue && errors.jobtype && (
+                                        {errors.jobType && (
                                             <div className="post_Add_Error">
                                                 Select job Type
                                             </div>
                                         )}
-                                        {(userCategory == 7 || userCategory == 6) &&
+                                        {(formDataValues && formDataValues.categorytype == 7) || (formDataValues && formDataValues.categorytype == 6) &&
                                             <div>
                                                 <div className="headings ">ON SITE, HYBRID OR REMOTE?</div>
                                                 <div className="post_Add_Locationtype selectNew">
                                                     {locationType ? locationType.map((type, index) => (
-                                                        <div key={index} >
+                                                        <div >
                                                             <Form.Check
-                                                                {...register("selectlocationtype")}
+                                                                {...register("selectlocationtype", {
+                                                                    required: {
+                                                                        value: true,
+                                                                    }
+                                                                })}
                                                                 className="post_Add_category"
-                                                                checked={type.id == selectLocation}
-                                                                onChange={() => setSelectLocation(type.id)}
+                                                                // onChange={(e) => e.target.id}
                                                                 type="radio"
-                                                                id={type.name}
+                                                                // id={type.id}
                                                                 label={type.name}
+                                                                value={type.id}
                                                             />
                                                         </div>
                                                     )) : ""}
                                                 </div>
                                             </div>
                                         }
-                                        {(userCategory == 7 || userCategory == 6) && errors.selectlocationtype && (
+                                        {(formDataValues && formDataValues.categorytype == 7 || formDataValues && formDataValues.categorytype == 6) && errors.selectlocationtype && (
                                             <div className="post_Add_Error">
                                                 Select Option
                                             </div>
                                         )}
-                                        {(userCategory == 6) &&
+                                        {(formDataValues && formDataValues.categorytype == 6) &&
                                             <div >
                                                 <div className="headings ">EMPLOYMENT EQUITY</div>
                                                 <div className="post_Add_EmploymentEnquiry  selectNew">
                                                     {employmentEquity ? employmentEquity.map((type, index) => (
-                                                        <div key={index} >
+                                                        <div  >
                                                             <Form.Check
-                                                                {...register("employmentenquiry")}
+                                                                {...register("employmentenquiry", {
+                                                                    required: {
+                                                                        value: true,
+                                                                    }
+                                                                })}
                                                                 className="post_Add_category"
-                                                                checked={type.id == employment}
-                                                                onChange={() => setEmployment(type.id)}
                                                                 type="radio"
-                                                                id={type.name}
                                                                 label={type.name}
+                                                                value={type.id}
+
                                                             />
                                                         </div>
+
                                                     )) : ""}
                                                 </div>
                                             </div>}
-                                        {userCategory == 6 && errors.employmentenquiry && (
+                                        {formDataValues && formDataValues.categorytype == 6 && errors.employmentenquiry && (
                                             <div className="post_Add_Error">
                                                 Select Option
                                             </div>)}
-                                        {(userCategory == 4) ? <div className="headings mb-3">PRICE</div> : <div className="headings mb-3">RENUMERATION</div>}
-                                        <div className="post_Add_priceDiv">
-                                            <InputGroup className="mb-3">
-                                                <DropdownButton
-                                                    variant="outline-secondary"
-                                                    title={currencyvalue && currencyvalue.symbol ? currencyvalue.symbol : currencies && currencies.length > 0 && currencies[0].symbol}
-                                                    id="input-group-dropdown-1"
-                                                >{currencies && currencies.map((item, index) => (
-                                                    <Dropdown.Item onClick={() => setcurrencyvalue(item)}>{item.name}</Dropdown.Item>))}
-                                                </DropdownButton>
-                                                <Form.Group className="amount">
-                                                    <Form.Control
-                                                        className="amount_Control"
-                                                        type="text"
-                                                        placeholder="Amount (optional)"
-                                                        {...register("amount", userCategory == 4 && {
-                                                            required: {
-                                                                value: true,
-                                                                message: "Please enter amount",
-                                                            },
-                                                        })}
-                                                    />
-                                                </Form.Group>
-                                            </InputGroup>
-                                        </div>
-                                        {(userCategory == 4 || userCategory == 6) &&
+                                        {formDataValues && formDataValues.categorytype == 4 ? <div className="headings mb-3">PRICE</div> : formDataValues && formDataValues.categorytype == 6 && <div className="headings mb-3">RENUMERATION</div>}
+                                        {(formDataValues && formDataValues.categorytype == 4 || formDataValues && formDataValues.categorytype == 6) &&
+                                            <div className="post_Add_priceDiv">
+                                                <InputGroup className="mb-3">
+                                                    <DropdownButton
+                                                        variant="outline-secondary"
+                                                        title={currencyvalue && currencyvalue.symbol ? currencyvalue.symbol : currencies && currencies.length > 0 && currencies[0].symbol}
+                                                        id="input-group-dropdown-1"
+                                                    >{currencies && currencies.map((item, index) => (
+                                                        <Dropdown.Item onClick={() => setcurrencyvalue(item)}>{item.name}</Dropdown.Item>))}
+                                                    </DropdownButton>
+                                                    <Form.Group className="amount">
+                                                        <Form.Control
+                                                            className="amount_Control"
+                                                            type="text"
+                                                            placeholder="Amount (optional)"
+                                                            {...register("amountvalue", formDataValues && formDataValues.categorytype == 4 && {
+                                                                required: {
+                                                                    value: true,
+                                                                    message: "Please enter amount",
+                                                                },
+                                                            })}
+                                                        />
+                                                    </Form.Group>
+                                                </InputGroup>
+                                            </div>}
+                                        {(formDataValues && formDataValues.categorytype == 4 || formDataValues && formDataValues.categorytype == 6) && errors.amountvalue && <div className="post_Add_Error">Please Fill Amount</div>}
+
+
+                                        {(formDataValues && formDataValues.categorytype == 4 || formDataValues && formDataValues.categorytype == 6) &&
                                             <div className="mb-3">
                                                 <Form.Group >
                                                     <Controller
-                                                        name="earningoption"
                                                         control={control}
-                                                        render={({ onChange, value, ref }) => (
+                                                        name="earningoption"
+                                                        render={({
+                                                            field: { onChange, value, name, ref },
+                                                            fieldState: { invalid, isTouched, isDirty, error },
+                                                            formState,
+                                                        }) => (
                                                             <Select
-                                                                options={earingOption ? earingOption : {}}
-                                                                onChange={setEarningValue}
+                                                                options={earingOption}
+                                                                onChange={onChange}
                                                                 placeholder="SELECT EARNING OPTION"
                                                                 id="earningoption" name="earningoption"
-                                                                value={earningValue}
                                                                 styles={{
                                                                     placeholder: () => ({
                                                                         color: "white",
@@ -445,35 +485,38 @@ function PostAdvert() {
                                                     />
                                                 </Form.Group>
                                             </div>}
-                                        {(userCategory == 4 || userCategory == 6) && errors.earningoption && !earningValue && <div className="post_Add_Error">Select Earning Option</div>}
-                                        {(userCategory == 4 || userCategory == 6) &&
+                                        {(formDataValues && formDataValues.categorytype == 4 || formDataValues && formDataValues.categorytype == 6) && errors.earningoption && <div className="post_Add_Error">Select Earning Option</div>}
+                                        {(formDataValues && formDataValues.categorytype == 4 || formDataValues && formDataValues.categorytype == 6) &&
 
                                             <div className="negotiable mb-3">
                                                 <Form.Check
-                                                    {...register("negotiables")}
-                                                    id="negotiables"
-                                                    onChange={negotiableWork}
+                                                    {...register("negotiabl")}
                                                     className="negotiables"
                                                     type="checkbox"
                                                     label={"Negotiable"}
-                                                    checked={negotiables == 1}
                                                 />
                                             </div>}
-                                        {(userCategory == 4 || userCategory == 6) && negotiables == 0 && (
+                                        {(formDataValues && formDataValues.categorytype == 4 || formDataValues && formDataValues.categorytype == 6) && errors.negotiabl == 0 && (
                                             <div className="post_Add_Error">
                                                 Please checkbox Click
                                             </div>)}
                                         <div className="headings mb-3">LOCATION</div>
                                         <div className="mb-3">
                                             <Form.Group>
+
                                                 <Controller
+
                                                     name="countries"
                                                     control={control}
-                                                    render={({ onChange, value, ref }) => (
+                                                    render={({
+                                                        field: { onChange, value, name, ref },
+                                                        fieldState: { invalid, isTouched, isDirty, error },
+                                                        formState,
+                                                    }) => (
                                                         <Select
                                                             options={country ? country : {}}
-                                                            onChange={setCountryValue}
-                                                            value={countryvalue}
+                                                            onChange={onChange}
+                                                            // value={countryvalue}
                                                             placeholder="South Africa"
                                                             id="countries" name="countries"
                                                             styles={{
@@ -495,22 +538,24 @@ function PostAdvert() {
                                                                 },
                                                             })} />
                                                     )}
-                                                    rules={{ required: true }}
                                                 />
                                             </Form.Group>
                                         </div>
                                         <div className="mb-3">
                                             <Form.Group >
                                                 <Controller
-                                                    name="provinces"
                                                     control={control}
-                                                    render={({ onChange, value, ref }) => (
+                                                    name="provinces"
+                                                    render={({
+                                                        field: { onChange, value, name, ref },
+                                                        fieldState: { invalid, isTouched, isDirty, error },
+                                                        formState,
+                                                    }) => (
                                                         <Select
-                                                            options={provinces ? provinces : {}}
-                                                            onChange={setProvinceValue}
-                                                            value={provincesvalue}
+                                                            options={provinces}
+                                                            onChange={onChange}
                                                             placeholder="Selected Province"
-                                                            id="province" name="province"
+                                                            id="province"
                                                             styles={{
                                                                 placeholder: () => ({
                                                                     color: "#231F20",
@@ -530,12 +575,13 @@ function PostAdvert() {
                                                                 },
                                                             })}
                                                         />
-                                                    )}
-                                                    rules={{ required: true }}
+                                                    )}                                   
+                                                
+                                                rules={{ required: formDataValues && formDataValues.countries && formDataValues.countries.id == 204 ? true : false }}
                                                 />
                                             </Form.Group>
                                         </div>
-                                        {errors.provinces && <div>Select Earning Option</div>}
+                                        {errors.provinces && <div className="post_Add_Error">Select Province</div>}
 
                                         <Form.Group className="mb-3">
                                             <Form.Control
@@ -557,7 +603,7 @@ function PostAdvert() {
                                         )}
 
                                         <div className="headings ">CONTACT DETAILS</div>
-                                        {(userCategory == 4 || userCategory == 6) &&
+                                        {(formDataValues && formDataValues.categorytype == 4 || formDataValues && formDataValues.categorytype == 6) &&
                                             <div className="post_Add_Name">
                                                 <Form.Group className="names">
                                                     <Form.Control
@@ -567,7 +613,7 @@ function PostAdvert() {
                                                         {...register("fullName", {
                                                             required: {
                                                                 value: true,
-                                                                message: "ENTER_NAME",
+                                                                message: "Input Your Full Name",
                                                             },
                                                         })}
                                                     />
