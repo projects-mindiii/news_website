@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import SublyApi from "../../helpers/Api";
 import Form from 'react-bootstrap/Form';
 import CommonEmailField from "../../formComponent/CommonInputFields/CommonEmailField";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import nameicon from "../../assets/images/Deal_icon/support_ico.png";
 import staricon from "../../assets/images/Deal_icon/star_ico.png";
 import { BsTrash3 } from "react-icons/bs";
@@ -25,10 +25,12 @@ function PostAdvert() {
         register,
         handleSubmit,
         setValue,
+        getValues,
+        control,
         watch,
         formState: { errors },
     } = useForm();
-    const [trigger, setTrigger] = useState(false)
+    console.log(getValues(), errors)
     const [watsappNo, setWatsappNo] = useState("");
     const [dialCodeWatsapp, setDialCodeWatsapp] = useState("27");
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
@@ -74,7 +76,7 @@ function PostAdvert() {
         }),
         singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
     };
-    
+
     useEffect(() => {
         async function getClassifiedLists() {
             let earningOption = [];
@@ -133,7 +135,8 @@ function PostAdvert() {
         getClassifiedLists();
     }, []);
 
-    async function onSubmit(data) {    
+    async function onSubmit(data) {
+        console.log(data)
         let requestData = new FormData();
         requestData.append('heading', data.heading);
         requestData.append('description', data.description);
@@ -155,7 +158,7 @@ function PostAdvert() {
             'city', data.city
         );
         requestData.append(
-            'currency_id',currencyvalue.id
+            'currency_id', currencyvalue.id
         );
         requestData.append(
             'is_negotiable', negotiables
@@ -200,7 +203,7 @@ function PostAdvert() {
             "whatsapp_dail_code", dialCodeWatsapp
         );
         requestData.append(
-            "classifiedGallery",""
+            "classifiedGallery", ""
         );
         await SublyApi.addClassifiedList(requestData, userToken).then((responsejson) => {
             if (responsejson.status_code == 500) {
@@ -269,8 +272,6 @@ function PostAdvert() {
                                                     {errors.heading.message}
                                                 </div>
                                             )}
-
-
                                             <div className="mt-3">
                                                 <h5>Advert Description</h5>
                                                 <Form.Group >
@@ -285,7 +286,7 @@ function PostAdvert() {
                                             </div>
                                             {errors.description && (
                                                 <div className="post_Add_Error">
-                                                    {errors.heading.message}
+                                                    {errors.description.message}
                                                 </div>
                                             )}
 
@@ -295,33 +296,42 @@ function PostAdvert() {
                                                 <div className="headings mb-3">JOB TYPE</div>
                                                 <div className=" mb-3">
                                                     <Form.Group >
-                                                        <Select
-                                                            options={jobtype ? jobtype : {}}
-                                                            onChange={setJobValue}
-                                                            value={jobValue}
-                                                            placeholder="SELECT JOB TYPE"
-                                                            id="location" name="location"
-                                                            styles={{
-                                                                placeholder: () => ({
-                                                                    color: "white",
-                                                                    position: "absolute",
-                                                                    display: "flex",
-                                                                    left: "15px",
-                                                                }),
-                                                            }}
-                                                            theme={(theme) => ({
-                                                                ...theme,
-                                                                colors: {
-                                                                    ...theme.colors,
-                                                                    borderRadius: 0,
-                                                                    primary25: "#f2f2f2",
-                                                                    primary: "black",
-                                                                    primary50: "#f2f2f2",
-                                                                },
-                                                            })}
+                                                        <Controller
+                                                            defaultValue={1}
+                                                            name="jobtype"
+                                                            control={control}
+                                                            render={({ onChange, value, name, ref }) => (
+                                                                <Select
+                                                                    inputRef={ref}
+                                                                    options={jobtype ? jobtype : {}}
+                                                                    value={jobtype.find(c => c.value === value)}
+                                                                    onChange={setJobValue}
+                                                                    placeholder="SELECT JOB TYPE"
+                                                                    id="jobtype"
+                                                                    styles={{
+                                                                        placeholder: () => ({
+                                                                            color: "white",
+                                                                            position: "absolute",
+                                                                            display: "flex",
+                                                                            left: "15px",
+                                                                        }),
+                                                                    }}
+                                                                    theme={(theme) => ({
+                                                                        ...theme,
+                                                                        colors: {
+                                                                            ...theme.colors,
+                                                                            borderRadius: 0,
+                                                                            primary25: "#f2f2f2",
+                                                                            primary: "black",
+                                                                            primary50: "#f2f2f2",
+                                                                        },
+                                                                    })}
+                                                                />
+                                                            )}
+                                                            rules={{ required: true }}
                                                         />
                                                     </Form.Group></div></div>}
-                                        {trigger == true && userCategory == 6 && !jobValue && (
+                                        {!jobValue && errors.jobtype && (
                                             <div className="post_Add_Error">
                                                 Select job Type
                                             </div>
@@ -333,6 +343,7 @@ function PostAdvert() {
                                                     {locationType ? locationType.map((type, index) => (
                                                         <div key={index} >
                                                             <Form.Check
+                                                                {...register("selectlocationtype")}
                                                                 className="post_Add_category"
                                                                 checked={type.id == selectLocation}
                                                                 onChange={() => setSelectLocation(type.id)}
@@ -345,7 +356,7 @@ function PostAdvert() {
                                                 </div>
                                             </div>
                                         }
-                                        {(userCategory == 7 || userCategory == 6) && !selectLocation && (
+                                        {(userCategory == 7 || userCategory == 6) && errors.selectlocationtype && (
                                             <div className="post_Add_Error">
                                                 Select Option
                                             </div>
@@ -357,6 +368,7 @@ function PostAdvert() {
                                                     {employmentEquity ? employmentEquity.map((type, index) => (
                                                         <div key={index} >
                                                             <Form.Check
+                                                                {...register("employmentenquiry")}
                                                                 className="post_Add_category"
                                                                 checked={type.id == employment}
                                                                 onChange={() => setEmployment(type.id)}
@@ -368,31 +380,11 @@ function PostAdvert() {
                                                     )) : ""}
                                                 </div>
                                             </div>}
-                                        {userCategory == 6 && !selectLocation && (
+                                        {userCategory == 6 && errors.employmentenquiry && (
                                             <div className="post_Add_Error">
                                                 Select Option
                                             </div>)}
                                         {(userCategory == 4) ? <div className="headings mb-3">PRICE</div> : <div className="headings mb-3">RENUMERATION</div>}
-                                        {/* {(userCategory == 4 || userCategory == 6) &&
-                                            <div className="post_Add_Amount mb-3">
-                                                <Form.Group className="amount">
-                                                    <Form.Control
-                                                        className="amount_Control"
-                                                        type="text"
-                                                        placeholder="Amount (optional)"
-                                                        {...register("amount", userCategory == 4 && {
-                                                            required: {
-                                                                value: true,
-                                                                message: "Please enter amount",
-                                                            },
-                                                        })}
-                                                    />
-                                                </Form.Group></div>} */}
-
-                                        {/* {(userCategory == 4) && errors.amount && (
-                                            <div className="post_Add_Error">
-                                                {errors.amount.message}
-                                            </div>)} */}
                                         <div className="post_Add_priceDiv">
                                             <InputGroup className="mb-3">
                                                 <DropdownButton
@@ -417,46 +409,48 @@ function PostAdvert() {
                                                 </Form.Group>
                                             </InputGroup>
                                         </div>
-
-
-
                                         {(userCategory == 4 || userCategory == 6) &&
                                             <div className="mb-3">
                                                 <Form.Group >
-                                                    <Select
-                                                        options={earingOption ? earingOption : {}}
-                                                        onChange={setEarningValue}
-                                                        value={earningValue}
-                                                        placeholder="SELECT EARNING OPTION"
-                                                        id="earningoption" name="earningoption"
-                                                        styles={{
-                                                            placeholder: () => ({
-                                                                color: "white",
-                                                                position: "absolute",
-                                                                left: "15px",
-                                                            }),
-                                                        }}
-                                                        theme={(theme) => ({
-                                                            ...theme,
-                                                            colors: {
-                                                                ...theme.colors,
-                                                                borderRadius: 0,
-                                                                primary25: "#f2f2f2",
-                                                                primary: "black",
-                                                                primary50: "#f2f2f2",
-                                                            },
-                                                        })}
+                                                    <Controller
+                                                        name="earningoption"
+                                                        control={control}
+                                                        render={({ onChange, value, ref }) => (
+                                                            <Select
+                                                                options={earingOption ? earingOption : {}}
+                                                                onChange={setEarningValue}
+                                                                placeholder="SELECT EARNING OPTION"
+                                                                id="earningoption" name="earningoption"
+                                                                value={earningValue}
+                                                                styles={{
+                                                                    placeholder: () => ({
+                                                                        color: "white",
+                                                                        position: "absolute",
+                                                                        left: "15px",
+                                                                    }),
+                                                                }}
+                                                                theme={(theme) => ({
+                                                                    ...theme,
+                                                                    colors: {
+                                                                        ...theme.colors,
+                                                                        borderRadius: 0,
+                                                                        primary25: "#f2f2f2",
+                                                                        primary: "black",
+                                                                        primary50: "#f2f2f2",
+                                                                    },
+                                                                })}
+                                                            />
+                                                        )}
+                                                        rules={{ required: true }}
                                                     />
                                                 </Form.Group>
                                             </div>}
-                                        {(userCategory == 4 || userCategory == 6) && !earningValue && (
-                                            <div className="post_Add_Error">
-                                                Select Earning Option
-                                            </div>)}
+                                        {(userCategory == 4 || userCategory == 6) && errors.earningoption && !earningValue && <div className="post_Add_Error">Select Earning Option</div>}
                                         {(userCategory == 4 || userCategory == 6) &&
 
                                             <div className="negotiable mb-3">
                                                 <Form.Check
+                                                    {...register("negotiables")}
                                                     id="negotiables"
                                                     onChange={negotiableWork}
                                                     className="negotiables"
@@ -472,61 +466,77 @@ function PostAdvert() {
                                         <div className="headings mb-3">LOCATION</div>
                                         <div className="mb-3">
                                             <Form.Group>
-                                                <Select
-                                                    options={country ? country : {}}
-                                                    onChange={setCountryValue}
-                                                    value={countryvalue}
-                                                    placeholder="South Africa"
-                                                    id="countries" name="countries"
-                                                    styles={{
-                                                        placeholder: () => ({
-                                                            color: "#231F20",
-                                                            position: "absolute",
+                                                <Controller
+                                                    name="countries"
+                                                    control={control}
+                                                    render={({ onChange, value, ref }) => (
+                                                        <Select
+                                                            options={country ? country : {}}
+                                                            onChange={setCountryValue}
+                                                            value={countryvalue}
+                                                            placeholder="South Africa"
+                                                            id="countries" name="countries"
+                                                            styles={{
+                                                                placeholder: () => ({
+                                                                    color: "#231F20",
+                                                                    position: "absolute",
 
-                                                            left: "15px",
-                                                        }),
-                                                    }}
-                                                    theme={(theme) => ({
-                                                        ...theme,
-                                                        colors: {
-                                                            ...theme.colors,
-                                                            borderRadius: 0,
-                                                            primary25: "#f2f2f2",
-                                                            primary: "#000000;",
-                                                            primary50: "#f2f2f2",
-                                                        },
-                                                    })} />
+                                                                    left: "15px",
+                                                                }),
+                                                            }}
+                                                            theme={(theme) => ({
+                                                                ...theme,
+                                                                colors: {
+                                                                    ...theme.colors,
+                                                                    borderRadius: 0,
+                                                                    primary25: "#f2f2f2",
+                                                                    primary: "#000000;",
+                                                                    primary50: "#f2f2f2",
+                                                                },
+                                                            })} />
+                                                    )}
+                                                    rules={{ required: true }}
+                                                />
                                             </Form.Group>
                                         </div>
                                         <div className="mb-3">
                                             <Form.Group >
-                                                <Select
-                                                    options={provinces ? provinces : {}}
-                                                    onChange={setProvinceValue}
-                                                    value={provincesvalue}
-                                                    placeholder="Selected Province"
-                                                    id="province" name="province"
-                                                    styles={{
-                                                        placeholder: () => ({
-                                                            color: "#231F20",
-                                                            position: "absolute",
+                                                <Controller
+                                                    name="provinces"
+                                                    control={control}
+                                                    render={({ onChange, value, ref }) => (
+                                                        <Select
+                                                            options={provinces ? provinces : {}}
+                                                            onChange={setProvinceValue}
+                                                            value={provincesvalue}
+                                                            placeholder="Selected Province"
+                                                            id="province" name="province"
+                                                            styles={{
+                                                                placeholder: () => ({
+                                                                    color: "#231F20",
+                                                                    position: "absolute",
 
-                                                            left: "15px",
-                                                        }),
-                                                    }}
-                                                    theme={(theme) => ({
-                                                        ...theme,
-                                                        colors: {
-                                                            ...theme.colors,
-                                                            borderRadius: 0,
-                                                            primary25: "#f2f2f2",
-                                                            primary: "#000000;",
-                                                            primary50: "#f2f2f2",
-                                                        },
-                                                    })}
+                                                                    left: "15px",
+                                                                }),
+                                                            }}
+                                                            theme={(theme) => ({
+                                                                ...theme,
+                                                                colors: {
+                                                                    ...theme.colors,
+                                                                    borderRadius: 0,
+                                                                    primary25: "#f2f2f2",
+                                                                    primary: "#000000;",
+                                                                    primary50: "#f2f2f2",
+                                                                },
+                                                            })}
+                                                        />
+                                                    )}
+                                                    rules={{ required: true }}
                                                 />
                                             </Form.Group>
                                         </div>
+                                        {errors.provinces && <div>Select Earning Option</div>}
+
                                         <Form.Group className="mb-3">
                                             <Form.Control
                                                 type="text"
@@ -562,7 +572,6 @@ function PostAdvert() {
                                                         })}
                                                     />
                                                     <div><img src={nameicon} alt={nameicon} /></div>
-
                                                 </Form.Group>
                                             </div>}
                                         {errors.fullName && (

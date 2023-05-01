@@ -160,6 +160,22 @@
     color: white !important;
 }
 
+.post_AddForm #jobtype .css-13cymwt-control {
+    color: white !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #jobtype .css-t3ipsp-control {
+    color: white !important;
+    background-color: black !important;
+    border-radius: 10px;
+}
+
+.post_AddForm #jobtype .css-1dimb5e-singleValue {
+    color: white !important;
+}
+
 .post_AddForm #earningoption .css-13cymwt-control {
     color: white !important;
     background-color: black !important;
