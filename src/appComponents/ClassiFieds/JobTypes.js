@@ -100,7 +100,16 @@ console.log("showDefaultList",showDefaultList)
             </Col>
             <Col xs={12} sm={12} md={12} lg={5}>
               <div className="advertisment">
-              <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168"></iframe>
+              <iframe src={process.env.REACT_APP_CLASSIFIED_SIDER_IFRAME_URL}
+              style={{
+                  width: "100%",
+                  height: "95%",
+                  margin: "0px",
+                  border: "none",
+                  scrollBehavior: "none",
+                  allowfullscreen:"true"
+                }}>
+              </iframe>
               </div>
             </Col>
 

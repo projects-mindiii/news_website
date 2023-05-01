@@ -1,0 +1,100 @@
+.countryIcon .css-13cymwt-control {
+    border: none !important;
+    height: 40px !important;
+    background: #FFFFFF !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+    border-radius: 7.26px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+span.countryText {
+    margin: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #4B4B4B;
+    font-family: 'Nunito';
+}
+
+span.resultText {
+    color: #EC4624;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Nunito';
+    margin: 5px;
+    font-family: 'Nunito' sans-serif !important;
+}
+
+.countryIcon{
+    padding: 5px;
+    margin-top: 5px;
+}
+
+/* searchbar css */
+
+.ClassifiedsearchBar {
+    display: flex;
+    margin-top: 15px;
+}
+
+.ClassifiedsearchBar .form-control {
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 14px;
+    font-weight: 400;
+    background: #FAFAFA;
+    border-radius: 4px;
+    height: 40px;
+}
+
+.ClassifiedsearchBar .form-control:focus {
+    border: none !important;
+}
+
+.ClassifiedsearchBar svg {
+    color: #FFFFFF;
+    font-weight: 700;
+    background: #dc9586bd;
+    padding: 6px;
+    width: 34px;
+    height: 36px;
+    border-radius: 50%;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

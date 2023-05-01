@@ -45,6 +45,7 @@ export const TRANSLATIONS_EN = {
   WHATSAPP: "WhatsApp",
   SHARE: "SHARE",
   N0CLASSIFIED_DISPLAY: "NO CLASSIFIEDS TO DISPLAY",
+  SEARCH_TEXT:"Search Location",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
