@@ -62,13 +62,14 @@ function Header() {
             location.pathname == "/job-types" ? (
             <div className="bannerImg">
               <iframe
-                src="https://www.signafrica.com?_dnid=84025&t=1682676851"
+                src={process.env.REACT_APP_CLASSIFIED_HEADER_IFRAME_URL}
                 style={{
                   width: "100%",
                   height: "95%",
                   margin: "0px",
                   border: "none",
                   scrollBehavior: "none",
+                  allowfullscreen:"true"
                 }}
               ></iframe>
             </div>
