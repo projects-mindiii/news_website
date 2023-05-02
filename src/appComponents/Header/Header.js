@@ -7,7 +7,7 @@ import SearchBar from "../Search/SearchBar";
 import "./Header.css";
 import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guestUserLogin, getMetaListApi } from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
@@ -17,6 +17,7 @@ import Loader from "../../utils/Loader/Loader";
 function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
+  
 
   const { guestUser, currentUser, isLoading, userToken } = useSelector(
     (state) => state.user
@@ -53,11 +54,6 @@ function Header() {
           <div className="logoImg">
             <img src={Logo} alt="news-logo" />
           </div>
-          {/* {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
-            <div className="bannerImg">
-              <img src={Banner} alt="news-logo" />
-            </div> : ""} */}
-
           {location.pathname == "/classifieds" ||
             location.pathname == "/job-types" ? (
             <div className="bannerImg">

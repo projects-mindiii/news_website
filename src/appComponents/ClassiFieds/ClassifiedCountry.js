@@ -8,6 +8,7 @@ import Select from "react-select";
 import { Form } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
 import styles from './ClassifiedCountry.module.css';
+import ClassifiedFilter from "./ClassifiedFilter";
 
 
 function ClassifiedCountry() {
@@ -28,28 +29,22 @@ function ClassifiedCountry() {
     { value: 1, label: "All South Africa", id: 1 },
     { value: 0, label: "Outside South Africa", id: 0 },
   ];
-  //----- state for manage show/hide modal-----
-  const [showPopup, setShowPopup] = useState(false);
-
-  //----- for close modal-----
-  const handleClose = () => setShowPopup(false);
-  //----- for show modal-----
-  const handleShow = () => setShowPopup(true);
-
+  const [isOpen, setIsOpen] = useState(false);
  
 
   return (
     <div className={styles.classiFieds_map_serchbar}>
-      <div className={styles.countryIcon} onClick={() => setShowPopup(true)}>
+      <div className={styles.countryIcon} onClick={() => setIsOpen(true)}>
         <span className={styles.imgIcon}>
           {" "}
           <img src={mapicon} alt={mapicon} width="25px" height="25px" />
           <span className={styles.countryText}>
             All South Africa -<span className={styles.resultText}>0 Results</span>{" "}
+            {isOpen && <ClassifiedFilter/>}
           </span>
         </span>
       </div>
-      <Modal
+      {/* <Modal
           show={showPopup}
           onHide={handleClose}
           keyboard={false}
@@ -66,7 +61,7 @@ function ClassifiedCountry() {
             <RxCross2 />
         </div>
           <Select
-          className="countryIcon"
+          className={styles.countryIcon}
             id="location"
             name="location"
             options={locationOption}
@@ -99,9 +94,10 @@ function ClassifiedCountry() {
               </CustomBtn>
             </div>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
     </div>
   );
   
 }
 export default ClassifiedCountry;
+

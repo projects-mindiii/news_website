@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
 
 //-------Create a Deals Header component--------
-function ClassiFieds() {
+function ClassiFieds(LocationData) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
