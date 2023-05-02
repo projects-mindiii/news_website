@@ -16,6 +16,7 @@
     font-size: 15px;
     font-weight: 400;
 }
+
 /* .signupForm .btn {
     background-color: #ec4624;
     border: none;
@@ -72,7 +73,7 @@ button.btn:active {
 }
 
 .customCheck [type="checkbox"]:checked+label,
-[type="checkbox"]:not(:checked)+label {
+.customCheck [type="checkbox"]:not(:checked)+label {
     position: relative;
     padding-left: 32px;
     cursor: pointer;
@@ -83,7 +84,7 @@ button.btn:active {
 }
 
 .customCheck [type="checkbox"]:checked+label:before,
-[type="checkbox"]:not(:checked)+label:before {
+.customCheck [type="checkbox"]:not(:checked)+label:before {
     content: '';
     position: absolute;
     left: 0;
@@ -96,7 +97,7 @@ button.btn:active {
 }
 
 .customCheck [type="checkbox"]:checked+label:after,
-[type="checkbox"]:not(:checked)+label:after {
+.customCheck [type="checkbox"]:not(:checked)+label:after {
     content: '';
     width: 17px;
     height: 17px;

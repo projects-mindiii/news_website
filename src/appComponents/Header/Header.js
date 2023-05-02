@@ -59,7 +59,7 @@ function Header() {
             </div> : ""} */}
 
           {location.pathname == "/classifieds" ||
-          location.pathname == "/job-types" ? (
+            location.pathname == "/job-types" ? (
             <div className="bannerImg">
               <iframe
                 src="https://www.signafrica.com?_dnid=84025&t=1682676851"
@@ -97,13 +97,15 @@ function Header() {
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
             {location.pathname == "/deals/latest-deals" ||
-            location.pathname.match("/deals/latest-deals/company-profile/") ? (
+              location.pathname.match("/deals/latest-deals/company-profile/") || location.pathname == "/deals/products"
+              || location.pathname == "/deals/services" || location.pathname == "/deals/brands" ||
+              location.pathname == "/deals/companies" ? (
               <DealsHeader />
             ) : (
               ""
             )}
             {location.pathname == "/classifieds" ||
-            location.pathname == "/job-types" ? (
+              location.pathname == "/job-types" ? (
               <ClassifiedCountry />
             ) : (
               ""

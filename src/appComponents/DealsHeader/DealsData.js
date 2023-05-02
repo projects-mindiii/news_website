@@ -16,29 +16,25 @@ export const dealsData = [
     {
         id: "2",
         text: `${t("PRODUCTS")}`,
-        // link: `/deals/products`,
-        link: `javascript:;`,
+        link: `/deals/products`,
         icon: `${Icon2}`,
     },
     {
         id: "3",
         text: `${t("SERVICES")}`,
-        link: `javascript:;`,
-        // link: `/services`,
+        link: `/deals/services`,
         icon: `${Icon3}`,
     },
     {
         id: "4",
         text: `${t("BRANDS")} `,
-        // link: `/brands`,
-        link: `javascript:;`,
+        link: `/deals/brands`,
         icon: `${Icon4}`,
     },
     {
         id: "5",
         text: `${t("COMPANIES")} `,
-        // link: `/companies`,
-        link: `javascript:;`,
+        link: `/deals/companies`,
         icon: `${Icon5}`,
     },
 ];

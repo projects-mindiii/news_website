@@ -17,7 +17,7 @@ function LatestDeals() {
         <Loader />
       ) : ""}
       <Container>
-        {latestDeals ?
+        {latestDeals.length>0 ?
           <Tab.Container id="left-tabs-example" defaultActiveKey={eventKeyValue}>
             <Row>
               <Col lg={6} sm={12}>

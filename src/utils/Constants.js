@@ -4,3 +4,9 @@ export const SOCIAL_TYPE = {
   APPLE: "3",
   LINKEDIN: "4",
 };
+
+export const REFERENCE_TYPE = {
+  PRODUCTS: "1",
+  SERVICES: "2",
+  BRANDS: "3",
+};
