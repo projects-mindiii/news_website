@@ -190,16 +190,16 @@ class SublyApi {
     return res;
   }
 
-   /* GET  /Get WebClassified list: 
-       Authorization required: Token
-       @returns {object} {token}
-       */
-       static async getWebClassiFiedList(token, data) {
-        console.log("data" ,data)
-        let header = { "access-token": ` ${token}` };
-        let res = await this.request(`/v2/web-classified-list?limit=${data.limit}&offset=${data.offset}&type=${data.type}`, undefined, "get", header);
-        return res;
-      }
+  /* GET  /Get WebClassified list: 
+      Authorization required: Token
+      @returns {object} {token}
+      */
+  static async getWebClassiFiedList(token, data) {
+    console.log("data", data)
+    let header = { "access-token": ` ${token}` };
+    let res = await this.request(`/v2/web-classified-list?limit=${data.limit}&offset=${data.offset}&type=${data.type}`, undefined, "get", header);
+    return res;
+  }
 
 
   /* POST  /Update User Profile: 
@@ -211,21 +211,6 @@ class SublyApi {
   static async updateProfile(data, authToken) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/update-profile`, data, "post", header);
-    return res;
-  }
-
-  /* GET  /delete user: 
-    user account delete
- 
-     Authorization required: Token
-     @returns {object} {token}
-     */
-  static async deleteUserProfile(authToken) {
-    let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/delete-user`,
-      undefined, undefined, header
-    );
-
     return res;
   }
 
@@ -258,35 +243,51 @@ class SublyApi {
 
     return res;
   }
-/* GET  /delete user: 
-    get classified list
- 
-     Authorization required: Token
-     @returns {object} {token}
-     */
-  static async getClassifiedList(requestdata,authToken) {
+
+  /* GET  /classified list: 
+      get classified list
+   
+       Authorization required: Token
+       @returns {object} {token}
+       */
+  static async getClassifiedList(requestdata, authToken) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/web-classified-list?limit=200&offset=0&type=${requestdata.type}&search_by=0`,
-    undefined, undefined, header
+      undefined, undefined, header
     );
 
     return res;
   }
-/* GET  /delete user: 
-    add classified list
- 
-     Authorization required: Token
-     @returns {object} {token}
-     */
-  static async addClassifiedList(requestdata,authToken) {
+
+  /* GET  /add classified list: 
+      add classified list
+   
+       Authorization required: Token
+       @returns {object} {token}
+       */
+  static async addClassifiedList(requestdata, authToken) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/add-classified`,
-    requestdata, "post", header
+      requestdata, "post", header
     );
 
     return res;
   }
 
+  /* GET  /get company list: 
+  get company lists
+ 
+   Authorization required: Token
+   @returns {object} {token}
+   */
+  static async getCompanyList(authToken, data) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/deal-company-list?limit=${data.limit}&offset=${data.offset}&refrence_id=${data.refrence_id}&refrence_type=${data.refrence_type}`,
+      "", undefined, header
+    );
+
+    return res;
+  }
 
 }
 

@@ -1,25 +1,18 @@
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
-import styles from '../Products.module.css';
-import ProductList from "../ProductList/ProductList";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import styles from './CompanyData.module.css';
 import { MdKeyboardArrowRight } from "react-icons/md";
-import Loader from "../../../utils/Loader/Loader";
+import { useState } from "react";
+import CompanyData from "./CompanyData";
 
-// -----------function for display products------------
-function Products() {
-    const { allDeals, isLoading } = useSelector((state) => state.deal);
-    const [eventKeyValue, setEventKeyValue] = useState((allDeals.product_company_count_list && allDeals.product_company_count_list.length > 0) ? allDeals.product_company_count_list[0].id : null);
-
-    console.log("allDeals", allDeals.product_company_count_list);
+// -----------function for display companies of products,services and brands------------
+function CompanyList({ companyList, refrenceType }) {
+    console.log("companyList",companyList)
+    const [eventKeyValue, setEventKeyValue] = useState((companyList && companyList.length > 0) ? companyList[0].id : null);
 
     return (
         <>
             <div className={styles.productModule}>
-                {isLoading === true ? (
-                    <Loader />
-                ) : ""}
-                {allDeals.product_company_count_list.length > 0 ?
+                {companyList.length > 0 ?
                     <Container>
                         <Tab.Container id="left-tabs-example" defaultActiveKey={eventKeyValue}>
                             <Row>
@@ -30,21 +23,25 @@ function Products() {
                                             setEventKeyValue(value);
                                         }}>
                                         <Nav.Item>
-                                            {allDeals.product_company_count_list.length > 0
-                                                ? allDeals.product_company_count_list.map((item, index) => (
+                                            {companyList.length > 0
+                                                ? companyList.map((item, index) => (
                                                     <Nav.Link key={item.id} eventKey={item.id}>
-                                                        {item.name} ({item.company_count})
+                                                        {item.name} {(item.company_count!=='company_order')?'('+item.company_count+')':""} 
                                                         <MdKeyboardArrowRight />
                                                     </Nav.Link>
                                                 ))
                                                 : ""}
                                         </Nav.Item>
+                                      
                                     </Nav>
                                 </Col>
                                 <Col lg={6} sm={12}>
                                     <Tab.Content>
-                                        <Tab.Pane eventKey="first">
-                                            <ProductList />
+                                        <Tab.Pane eventKey={eventKeyValue ? eventKeyValue : ""}>
+                                            <CompanyData
+                                                referenceId={eventKeyValue}
+                                                refrenceType={refrenceType}
+                                            />
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Col>
@@ -58,4 +55,4 @@ function Products() {
         </>
     );
 }
-export default Products;
+export default CompanyList;

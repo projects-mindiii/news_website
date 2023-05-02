@@ -32,8 +32,16 @@
     align-items: center;
 }
 
-.productslist img {
+.productImg {
+    background: #FFFFFF;
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
+    border-radius: 5.75997px;
     width: 100%;
+    max-width: 150px;
+}
+
+.productImg img {
+    /* width: 100%; */
     max-width: 150px;
 }
 
@@ -63,7 +71,7 @@
     color: #000000;
 }
 
-.productModule h4{
+.productModule h4 {
     font-weight: 400;
     font-size: 20px;
     line-height: 36px;

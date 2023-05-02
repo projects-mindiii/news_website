@@ -97,7 +97,9 @@ function Header() {
           {/* -------DealsHeaderSection-------- */}
           <div className="dealHeader">
             {location.pathname == "/deals/latest-deals" ||
-              location.pathname.match("/deals/latest-deals/company-profile/") || location.pathname == "/deals/products" ? (
+              location.pathname.match("/deals/latest-deals/company-profile/") || location.pathname == "/deals/products"
+              || location.pathname == "/deals/services" || location.pathname == "/deals/brands" ||
+              location.pathname == "/deals/companies" ? (
               <DealsHeader />
             ) : (
               ""

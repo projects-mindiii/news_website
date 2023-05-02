@@ -15,10 +15,12 @@ import ViewCompanyProfile from "../appComponents/ViewCompanyProfile/ViewCompanyP
 import ClassiFieds from "../appComponents/ClassiFieds/ClassiFieds";
 import PageNotFound from "../appComponents/PageNotFound/PageNotFound";
 import JobTypes from "../appComponents/ClassiFieds/JobTypes";
-
 import YourAdd from "../appComponents/YourAdd/YourAdd";
 import PostAdvert from "../appComponents/PostAdvert/PostAdvert";
-import Products from "../appComponents/ProductsModule/Products/Products";
+import Products from "../appComponents/DealTypesModule/Products/Products";
+import Services from "../appComponents/DealTypesModule/Services/Services";
+import Brands from "../appComponents/DealTypesModule/Brands/Brands";
+import Companies from "../appComponents/DealTypesModule/Companies/Companies";
 
 
 
@@ -38,16 +40,17 @@ function Routers() {
                 <Route exact path="/password-sent" element={<PasswordSent />} />
                 <Route exact path="/email-varify" element={<EmailVarify />} />
                 <Route exact path="/deals/latest-deals" element={<LatestDeals />} />
-                {/* <Route exact path="/deals/products" element={<Profile />} /> */}
                 <Route exact path="/view-profile" element={Object.keys(currentUser).length !== 0 ? (<Profile />) : (<Navigate to="/login" />)} />
                 <Route exact path="/deals/latest-deals/company-profile/:id" element={<ViewCompanyProfile />} />
                 <Route exact path="/classifieds" element={<ClassiFieds />} />
                 <Route exact path="/job-types" element={<JobTypes />} />
-
-
                 <Route exact path="/Post-advert" element={<PostAdvert />} />
                 <Route exact path="/your-add" element={<YourAdd />} />
                 <Route exact path="/deals/products" element={<Products />} />
+                <Route exact path="/deals/services" element={<Services />} />
+                <Route exact path="/deals/brands" element={<Brands />} />
+                <Route exact path="/deals/companies" element={<Companies />} />
+
 
                 <Route path="*" element={<PageNotFound />} />
 
