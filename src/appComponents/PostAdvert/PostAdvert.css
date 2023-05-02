@@ -480,10 +480,11 @@
 width: 9% !important;
    margin-top: 0px;
    font-weight: 400;
-    font-size: 22px !important;
     line-height: 25px;
     color: #FFFFFF;
 background-color: black;
+display: flex;
+justify-content: space-around;
 }
 .post_Add_priceDiv{
     width: 100% !important;

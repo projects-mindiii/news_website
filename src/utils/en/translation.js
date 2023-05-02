@@ -144,6 +144,40 @@ export const TRANSLATIONS_EN = {
   //---------- Status Error Text---------------
   SESSION_EXPIRE: "Your Session Expired!",
 
+  //------------- Post Adever-------------
+  POST_CLASSIFIED_AD:`POST CLASSIFIED AD`,
+  ALL_ADVERT_REMOVE_60:`All adverts are subject to approval. Adverts will be removed after 60 days. Delete or Edit your advert anytime`,
+CATEGORY:`CATEGORY`,
+SELECT_CATEGORY:`Select a Category`,
+ADD_DETAIL:`AD DETAILS`,
+ADVERT_HEADING:`Advert Heading`,
+ADD_ADEVERT_TITLE:`Add an Adver Title`,
+ADVERT_DESCRIPTION:`Advert Description`,
+INCLUDE_DESCRIPTION:`Include a Description`,
+JOB_TYPE:`JOB TYPE`,
+SELECT_JOB_TYPE:`Select job Type`,
+ON_HYBRID_REMOTE:`ON SITE, HYBRID OR REMOTE?`,
+SELECT_OPTION:`Select Option`,
+EMPLOYMENT_EQUITY:`EMPLOYMENT EQUITY`,
+PRICE:`PRICE`,
+RENUMERATION:`RENUMERATION`,
+PLEACE_ENTER_AMOUNT:`Please enter amount`,
+PLEASE_FILL_AMOUNT:`Please Fill Amount`,
+SELECT_EARNING_OPTION:`Select Earning Option`,
+PLEACT_CLICK:`Please checkbox Click`,
+LOCATION:`LOCATION`,
+INPUT_CITY_TOWN:`Input City/Town`,
+CONTACT_DETAILS:`CONTACT DETAILS`,
+INPUT_FULL_NAME:`Input Your Full Name`,
+ENTER_COMANY_NAME:`Enter Company Name`,
+ADD_PHOTO:`ADD PHOTOS`,
+POST_HEADING_MIN_ERROR:`Heading should have minimum length 3 characters.`,
+POST_Description_MIN_ERROR:`Description should have minimum length 3 characters.`,
+SELECT_COUNTRY:`SELECT COUNTRY`
+
+
+
+
 
 
 
