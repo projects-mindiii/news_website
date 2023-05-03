@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import message from "../../../assets/images/Deal_icon/message.png";
 import contact from "../../../assets/images/Deal_icon/contact_ico.png";
 import globe from "../../../assets/images/Deal_icon/globe_ico.png";
@@ -9,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import WhatsApp from "../../../CommonComponent/Whatappshare";
+import Loader from "../../../utils/Loader/Loader";
 
 
 function DealList({ dealList, fromDeal }) {
@@ -102,7 +102,7 @@ function DealList({ dealList, fromDeal }) {
 
                     </div>
                 ))
-                : ""}
+                : <Loader />}
         </section>
     );
 }

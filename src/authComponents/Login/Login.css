@@ -73,6 +73,8 @@
     color: #000000;
     margin-bottom: 0px;
     cursor: pointer;
+    padding: 0px !important;
+    text-align: left;
 }
 
 .loginformcomponent button.my-facebook-button-class.metro {

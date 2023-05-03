@@ -101,6 +101,12 @@ export const TRANSLATIONS_ES = {
   COMPANY_PROFILE: "Ver perfil de la empresa",
   BRAND_REPRESENT: "MARCAS REPRESENTADAS",
   ADDRESS: "DIRECCIÓN",
+  RECENT: "Recientemente actualizado",
+  ALPHABETICAL: "Alfabética",
+  NO_PRODUCT: "--- NO HAY PRODUCTOS PARA MOSTRAR ---",
+  NO_SERVICE: "--- NO HAY SERVICIOS PARA MOSTRAR ---",
+  NO_BRAND: "--- NO HAY MARCAS PARA MOSTRAR ---",
+  NO_DEAL: "--- NO HAY OFERTAS PARA MOSTRAR ---",
 
 
   //---------------Error Messages Common Text----------

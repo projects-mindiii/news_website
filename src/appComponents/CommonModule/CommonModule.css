@@ -17,10 +17,10 @@
 }
 
 .mapDetails {
-    height: 94px;
     background-color: #F1F1F1;
     display: flex;
     align-items: center;
+    padding: 12px 15px;
 }
 
 .mapDetails h5 {
@@ -39,7 +39,7 @@
 
 .mapDetails img {
     width: 36px;
-    margin: 0px 30px 0px 36px;
+    margin: 0px 20px 0px 18px;
 }
 
 .mapLocationSet {
