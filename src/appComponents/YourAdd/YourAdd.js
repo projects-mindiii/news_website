@@ -6,29 +6,52 @@ import WhatsappshareContact from "../../CommonComponent/WhatsappshareContact";
 import { useSelector } from "react-redux";
 import SublyApi from "../../helpers/Api";
 import { STATUS_CODES } from "../../utils/StatusCode";
+import ClassifiedCategoryList from "../ClassiFieds/ClassifiedCategoryList";
+import { yourAdvertListApi} from "../../store/slices/ClassifiedSlice";
+import { useDispatch } from "react-redux";
+
 //-------Create a Deals Header component--------
 function YourAdd() {
+  const dispatch = useDispatch();
+
     const { userToken, currentUser, isLoading } = useSelector(
         (state) => state.user
     );
+    const { yourAdvertWebList, yourAdvertTotalCount} = useSelector((state) => state.classified);
+
     const [yourAds, setYourAds] = useState();
+    // useEffect(() => {
+    //     async function getClassifiedLists() {
+    //         var requestDatas = { "limit": "", "offset": "", "type": 1, "search_by": 0, "province": "", "country": "", "city": "" };
+    //         await SublyApi.getClassifiedList(requestDatas, userToken).then((responsejson) => {
+    //             console.log(responsejson)
+    //             if (responsejson.status_code == 500) {
+    //             } else if (responsejson.status_code == 400) {
+    //             } else {
+    //                 console.log(responsejson)
+    //                 if (responsejson.status_code == 200) {
+    //                     setYourAds(responsejson.data.list)
+    //                 }
+    //             }
+    //         });
+    //     }
+    //     getClassifiedLists();
+    // }, []);
+
     useEffect(() => {
-        async function getClassifiedLists() {
-            var requestDatas = { "limit": "", "offset": "", "type": 1, "search_by": 0, "province": "", "country": "", "city": "" };
-            await SublyApi.getClassifiedList(requestDatas, userToken).then((responsejson) => {
-                console.log(responsejson)
-                if (responsejson.status_code == 500) {
-                } else if (responsejson.status_code == 400) {
-                } else {
-                    console.log(responsejson)
-                    if (responsejson.status_code == 200) {
-                        setYourAds(responsejson.data.list)
-                    }
-                }
-            });
+        async function getWebClassifiedLists() {
+          const yourAdvertQuery = { limit: 10, offset: 0, type: 1 };
+          const data = { userToken: userToken, whereQuery: yourAdvertQuery };
+          dispatch(yourAdvertListApi(data)).then((responsejson) => {
+           
+          });      
         }
-        getClassifiedLists();
-    }, []);
+        getWebClassifiedLists();
+      }, []);
+
+      console.log('yourAds',yourAds)
+      console.log('yourAdvertWebList',yourAdvertWebList)
+
 
     return (
         <div className="main">
@@ -45,8 +68,9 @@ function YourAdd() {
                                 </div>
                             </div>
                         </Col>
-                        <Col xs={12} sm={12} md={12} lg={6}>
-                            {yourAds && yourAds.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5>}
+                        {/* <Col xs={12} sm={12} md={12} lg={6}> */}
+                            <ClassifiedCategoryList forSaleListData={yourAdvertWebList}  classifiedDataType={4}  />
+                            {/* {yourAds && yourAds.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5>}
 
                             {yourAds && yourAds.map((item, index) => (
                                 item.approval_status == 1 &&
@@ -65,8 +89,8 @@ function YourAdd() {
                                     <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
                                     <button className="not_live">NOT LIVE - Pending Approvals</button>
                                 </div>
-                            ))}
-                        </Col>
+                            ))} */}
+                        {/* </Col> */}
                     </Row>
                 </Container>
             </React.Fragment>

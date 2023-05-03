@@ -3,6 +3,8 @@ import SublyApi from '../../helpers/Api'
 import { STATUS_CODES } from "../../utils/StatusCode";
 
 const initialState = {
+  yourAdvertTotalCount: 0,
+  yourAdvertList: {},
   forSaleTotalCount: 0,
   forSaleWebList: {},
   wantedTotalCount: 0,
@@ -14,7 +16,22 @@ const initialState = {
   isLoading: false,
 }
 
-// Thunk for getWeb list
+// Thunk for your advert list
+export const yourAdvertListApi = createAsyncThunk(
+	"classified/yourAdvertListApi",
+	async (data, { rejectWithValue }) => {
+    console.log("data", data)
+		try {
+			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
+			return response;
+		} catch (error) {
+      console.log("error", error)
+			return rejectWithValue(error);
+		}
+	}
+);
+
+// Thunk for for sale classfied list
 export const forSaleListApi = createAsyncThunk(
 	"classified/forSaleListApi",
 	async (data, { rejectWithValue }) => {
@@ -74,7 +91,7 @@ export const classifiedSlice = createSlice({
   reducers: {
   },
   extraReducers: (builder) => {
-   //web list
+    //web list
     builder.addCase(forSaleListApi.pending, (state) => {
         state.isLoading = true
     })
@@ -90,6 +107,25 @@ export const classifiedSlice = createSlice({
         state.isLoading = false
     })
     builder.addCase(forSaleListApi.rejected, (state, action) => {
+        state.isLoading = false
+    })
+
+    //your advert list
+    builder.addCase(yourAdvertListApi.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(yourAdvertListApi.fulfilled, (state, action) => {
+        const response = action.payload;
+        if(response.status_code==STATUS_CODES.SUCCESS){
+          state.yourAdvertTotalCount = response.data.total_count;
+          state.yourAdvertWebList = response.data.list;
+        }else{
+          state.yourAdvertTotalCount = 0;
+          state.yourAdvertWebList = {};
+        }
+        state.isLoading = false
+    })
+    builder.addCase(yourAdvertListApi.rejected, (state, action) => {
         state.isLoading = false
     })
 
