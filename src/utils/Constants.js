@@ -10,3 +10,10 @@ export const REFERENCE_TYPE = {
   SERVICES: "2",
   BRANDS: "3",
 };
+
+export const CLASSIFIED_CATEGORY_TYPE = {
+  FORSALE: "4",
+  WANTED : "5",
+  JOBOFFER:"6",
+  JOBSEEKER:"7",
+}
