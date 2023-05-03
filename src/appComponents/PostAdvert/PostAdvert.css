@@ -35,7 +35,7 @@
 
 .post_Add_CategoryButton .post_AddForm .selectNew .form-check {
     display: flex !important;
-    align-items: center;
+    align-items: end !important;
     justify-content: center !important;
     padding-left: 0px !important;
 }
@@ -270,13 +270,19 @@
     color: black !important;
 }
 
-.post_Add_AddPhoto button {
+.post_Add_AddPhoto div {
     font-weight: 600;
     font-size: 22px;
     line-height: 25px;
     color: #FFFFFF;
     border-radius: 10px;
-    max-width: 311px;
+    min-width: 311px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    background-color: #EC4624;
 }
 
 .post_Add_AddPhoto {
@@ -479,6 +485,7 @@
 .post_Add_priceDiv .btn{
 width: 9% !important;
    margin-top: 0px;
+   height: 37px;
    font-weight: 400;
     line-height: 25px;
     color: #FFFFFF;
@@ -502,4 +509,44 @@ width: 91% !important;
 .css-a0izu-control{
     background-color: black !important;
     color: white !important;
+}
+.post_Add_Heading_Flex{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+}
+.post_Add_Heading_Flex p{
+   color: #F05132;
+    margin-bottom:0px !important ;
+}
+
+.Post_Add_ImageSet {
+    width: 120px;
+    height: 120px;
+position: relative;
+    border: 1px solid #e7e4e4;
+}
+
+.Post_Add_ImageSet img {
+
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid #e7e4e4;
+}
+.Post_Add_ImageSet svg {
+    top:5px;
+    right: 5px;
+    position: absolute;
+}
+.post_Add_ImagePreview{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.post_Add_ImagePreview > div{
+margin-right: 10px;
+margin-top: 10px;
 }
