@@ -23,7 +23,6 @@ import Brands from "../appComponents/DealTypesModule/Brands/Brands";
 import Companies from "../appComponents/DealTypesModule/Companies/Companies";
 
 
-
 //-------Create a component for manage routing--------
 function Routers() {
     const { currentUser } = useSelector((state) => state.user);

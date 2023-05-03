@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 
 function ViewCompanyProfile() {
   const [companyDetails, setcompanyDetails] = useState("");
-  const { userToken, isLoading } = useSelector((state) => state.user);
+  const { userToken } = useSelector((state) => state.user);
   const { id } = useParams();
 
   // --------function for get company details----------
@@ -29,14 +29,11 @@ function ViewCompanyProfile() {
     }
     getCompanyDetails();
   }, []);
- 
+
 
   return (
 
     <section>
-      {isLoading === true ? (
-        <Loader />
-      ) : ""}
       <div className="dealContainer">
         <Container>
           <Row>
@@ -52,7 +49,7 @@ function ViewCompanyProfile() {
                     </div>
                   )}
                 </>
-                : ""}
+                : <Loader />}
 
               <DealList fromDeal={false} dealList={companyDetails.deal_list} />
             </Col>

@@ -5,7 +5,7 @@ export const TRANSLATIONS_EN = {
   EXISTING_ACCOUNT: "Already have an account ?",
   LOGIN: "LOGIN",
   LOGIN_IN: "Login",
-  SIGNUP: "SignUp",
+  SIGNUP: "Sign Up",
   LOGIN_EMAIL: "Login with Email",
   LOGIN_GOOGLE: "Login with Google",
   LOGIN_FACEBOOK: "Login with Facebook",
@@ -99,6 +99,12 @@ export const TRANSLATIONS_EN = {
   COMPANY_PROFILE: "View Company Profile",
   BRAND_REPRESENT: "BRANDS REPRESENTED",
   ADDRESS: "ADDRESS",
+  RECENT: "Recently Updated",
+  ALPHABETICAL: "Alphabetical",
+  NO_PRODUCT: "--- NO PRODUCTS TO DISPLAY ---",
+  NO_SERVICE: "--- NO SERVICES TO DISPLAY ---",
+  NO_BRAND: "--- NO BRANDS TO DISPLAY ---",
+  NO_DEAL: "--- NO DEALS TO DISPLAY ---",
 
 
   //---------------Error Messages Common Text----------

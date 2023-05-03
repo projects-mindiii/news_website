@@ -7,43 +7,49 @@ import Loader from '../../utils/Loader/Loader';
 import { Toast } from "../../utils/Toaster";
 import { useNavigate } from 'react-router-dom';
 
-//  -------function for display company list of products ,services and brands------
-function CompanyData(props) {
+//  -------function for display product list------
+function CompanyOrderType(props) {
     const navigate = useNavigate();
     const [companyList, setcompanyList] = useState("");
+    const [loader, setLoader] = useState(false);
     const { userToken } = useSelector((state) => state.user);
 
     // --------function for get company details----------
-    const companyValue = { refrence_id: props.referenceId, refrence_type: props.refrenceType }
+    const companyValue = { company_order: props.companyList }
     useEffect(() => {
         async function companyList() {
-            const details = await SublyApi.getCompanyList(
+            setLoader(true);
+            const details = await SublyApi.getDealList(
                 userToken,
                 companyValue
             );
+
             if (details.status_code == STATUS_CODES.SUCCESS) {
-                setcompanyList(details.data);
+                setcompanyList(details.data.company_deal_count_list);
+                setLoader(false);
             }
             else {
                 Toast.fire({
                     icon: "error",
                     title: details.data.message,
                 });
+                setLoader(false);
             }
         }
-        companyList();
+        companyList("companyList", companyList);
     }, [props]);
 
     return (
         <>
+            {loader ? (
+                <div className="loader">
+                    <Loader />
+                </div>
+            ) : null}
             {companyList ?
                 <div>
-                    <div className={styles.products}>
-                        <h2>{companyList.detail.name} - <span>{companyList.total_count} Results</span></h2>
-                    </div>
-
-                    {companyList.list.length > 0
-                        ? companyList.list.map((item, index) => (
+                    {companyList.length > 0
+                        ? companyList.map((item, index) => (
                             <div className={styles.productslist} key={index}
                                 onClick={() => { navigate(`/deals/latest-deals/company-profile/${item.id}`) }}>
                                 <div className={styles.productImg}>
@@ -58,8 +64,8 @@ function CompanyData(props) {
                         ))
                         : ""}
                 </div>
-                : <Loader />}
+                : ""}
         </>
     );
 }
-export default CompanyData;
+export default CompanyOrderType;

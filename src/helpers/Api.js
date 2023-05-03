@@ -142,9 +142,9 @@ class SublyApi {
      @param data {Object} { email }
      @returns {object} {token}
      */
-  static async getDealList(authToken) {
+  static async getDealList(authToken,data) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/deal-list`, undefined, "get", header);
+    let res = await this.request(`/v2/deal-list?company_order=${data.company_order}`, undefined, "get", header);
 
     return res;
   }

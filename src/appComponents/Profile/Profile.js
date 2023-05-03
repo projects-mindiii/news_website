@@ -166,24 +166,24 @@ function Profile() {
     //-----------function for update profile api-----------
     const onSubmit = async (formdata) => {
         let requestData = new FormData();
-        requestData.append("name", formdata.fullName);
-        requestData.append("email", formdata.email);
-        requestData.append("company_name", formdata.companyName);
-        requestData.append("occupation", formdata.occupation);
-        requestData.append("city", formdata.city);
+        requestData.append("name", (formdata)?formdata.fullName:"");
+        requestData.append("email", (formdata)?formdata.email:"");
+        requestData.append("company_name", (formdata)?formdata.companyName:"");
+        requestData.append("occupation", (formdata)?formdata.occupation:"");
+        requestData.append("city", (formdata)?formdata.city:"");
         requestData.append("dial_code", dialCode);
         requestData.append("country_code", countryCode);
         requestData.append("contact", phoneNo);
         requestData.append("whatsapp_dail_code", dialCodeWatsapp);
         requestData.append("whatsapp_country_code", countryCodeWatsapp);
         requestData.append("whatapp_contact_number", watsappNo);
-        requestData.append("country_id", countrySelected.value);
-        requestData.append("provinces", provinceSelected.value);
-        requestData.append("is_default_country", locationSelected.value);
+        requestData.append("country_id", (countrySelected)?countrySelected.value:"");
+        requestData.append("provinces", (provinceSelected)?provinceSelected.value:"");
+        requestData.append("is_default_country", (locationSelected)?locationSelected.value:"");
         requestData.append("image", profileImage);
         requestData.append("is_password_change", changePassword);
-        requestData.append("current_password", formdata.currentPassword);
-        requestData.append("new_passsword", formdata.setPassword);
+        requestData.append("current_password", (formdata)?formdata.currentPassword:"");
+        requestData.append("new_passsword", (formdata)?formdata.setPassword:"");
         const data = { 'requestData': requestData, "userToken": userToken };
         dispatch(updateProfile(data)).then((responsejson) => {
             const response = responsejson.payload;
@@ -200,6 +200,7 @@ function Profile() {
             }
         });
     };
+   
 
     //------ function for delete user API -------
     async function deleteUser() {
