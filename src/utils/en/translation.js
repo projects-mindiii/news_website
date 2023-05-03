@@ -175,5 +175,20 @@ ADD_PHOTOS:`ADD PHOTOS`,
 POST_HEADING_MIN_ERROR:`Heading should have minimum length 3 characters.`,
 POST_Description_MIN_ERROR:`Description should have minimum length 3 characters.`,
 SELECT_COUNTRY:`SELECT COUNTRY`,
-PLEASE_SEL_CURR:`PLEASE SELECT CURRENCY`
+PLEASE_SEL_CURR:`PLEASE SELECT CURRENCY`,
+
+//---------Login Alert Box---------
+LOGIN_REQUIRED: "LOGIN REQUIRED",
+LOGIN_SUB_TEXT:"You need to create a profile in order to post an item. Login now if you have a profile or create one.",
+CREATE_PROFILE: "Create FREE Profile",
+OR: "OR",
+LOGIN_TO_PROFILE: "Login to your Profile",
+
+//-------Book mraks module--------
+BOOK_MARK_HEADING: "BOOKMARKED",
+BOOK_MARK_SUBHEAD: "PLEASE NOTE",
+BOOK_MARK_DETAILTEXT: "All bookmarked items are subject to expiration.",
+YOURS_BOOK_MARKS: "YOUR BOOKMARKS"
+
+
 };

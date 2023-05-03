@@ -36,3 +36,8 @@
 .collapsed .hideIcon {
     display: block;
 }
+
+.alertBody .modal-dialog {
+    max-width: 342px !important;
+    height: 302px;
+}

@@ -1,0 +1,68 @@
+.loginAlertBox { 
+    text-align: center;
+}
+
+.modal-dialog {
+    max-width: 342px !important;
+    height: 302px;
+}
+
+.alertSubBody {
+    padding: 9px !important;
+}
+
+.loginAlertBox h5 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    color: #000000;
+    mix-blend-mode: normal;
+    margin-bottom: 0px;
+}
+
+.loginAlertBox p {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 0px;
+    padding: 20px 0px;
+}
+
+.loginAlertBox button {
+    margin-top: 0px;
+    border-radius: 6px;
+}
+
+.orText {
+   padding: 15px 0px;
+   font-weight: 700;
+   font-size: 16px;
+   margin-bottom: 0px;
+   color: #000000;
+}
+
+.createProfileBtn button {
+    background: #000000 !important;
+}
+
+.createProfileBtn button :hover {
+    background-color: #000000 !important;
+}
+
+.createProfileBtn button :active  {
+    background: #000000 !important;
+}
+
+.loginToProfile button {
+    background: #ec4624 !important;
+}
+
+.loginToProfile button:hover {
+    background: #ec4624 !important;
+}
+
+.loginToProfile button:active  {
+    background: #ec4624 !important;
+}

@@ -175,5 +175,19 @@ export const TRANSLATIONS_ES = {
  POST_HEADING_MIN_ERROR:`Heading should have minimum length 3 characters.`,
  POST_Description_MIN_ERROR:`Description should have minimum length 3 characters.`,
  SELECT_COUNTRY:`SELECT COUNTRY`,
- PLEASE_SEL_CURR:`PLEASE SELECT CURRENCY`
+ PLEASE_SEL_CURR:`PLEASE SELECT CURRENCY`,
+
+  //---------Login Alert Box---------
+  LOGIN_REQUIRED: "NECESARIO INICIAR SESIÓN",
+  LOGIN_SUB_TEXT:"Necesitas crear un perfil para publicar un artículo. Inicie sesión ahora si tiene un perfil o cree uno.",
+  CREATE_PROFILE: "Crear perfil GRATIS",
+  OR: "OR",
+  LOGIN_TO_PROFILE: "Inicie sesión en su perfil",
+
+  //-------Book mraks module--------
+  BOOK_MARK_HEADING: "MARCADO",
+  BOOK_MARK_SUBHEAD: "TENGA EN CUENTA",
+  BOOK_MARK_DETAILTEXT: "Todos los artículos marcados están sujetos a vencimiento.",
+  YOURS_BOOK_MARKS: "SUS MARCADORES"
+
 };
