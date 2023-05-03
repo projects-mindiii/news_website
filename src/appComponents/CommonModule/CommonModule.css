@@ -68,6 +68,24 @@
     line-height: 17px;
 }
 
+.noteBoxClass p {
+    font-size: 19px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 14px;
+    padding: 30px;
+}
+
+.noteBoxClass h3 {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 25px;
+    text-align: center;
+    color: #474747;
+}
+
 /* =====Responsive====== */
 
 @media screen and (max-width: 445px) {

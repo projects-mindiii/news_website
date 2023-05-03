@@ -21,7 +21,8 @@ import Products from "../appComponents/DealTypesModule/Products/Products";
 import Services from "../appComponents/DealTypesModule/Services/Services";
 import Brands from "../appComponents/DealTypesModule/Brands/Brands";
 import Companies from "../appComponents/DealTypesModule/Companies/Companies";
-
+import LoginAlertModel from "../authComponents/LoginAlertModel/LoginAlertModel";
+import BookMarks from "../appComponents/BookMarks/BookMarks";
 
 
 //-------Create a component for manage routing--------
@@ -43,17 +44,15 @@ function Routers() {
                 <Route exact path="/view-profile" element={Object.keys(currentUser).length !== 0 ? (<Profile />) : (<Navigate to="/login" />)} />
                 <Route exact path="/deals/latest-deals/company-profile/:id" element={<ViewCompanyProfile />} />
                 <Route exact path="/classifieds" element={<ClassiFieds />} />
-                <Route exact path="/job-types" element={<JobTypes />} />
-                <Route exact path="/Post-advert" element={<PostAdvert />} />
-                <Route exact path="/your-add" element={<YourAdd />} />
                 <Route exact path="/deals/products" element={<Products />} />
                 <Route exact path="/deals/services" element={<Services />} />
                 <Route exact path="/deals/brands" element={<Brands />} />
                 <Route exact path="/deals/companies" element={<Companies />} />
-
-
+                <Route exact path="/job-types" element={<JobTypes/>} />
+                <Route exact path="/Post-advert" element={Object.keys(currentUser).length !== 0 ? (<PostAdvert />) : (<LoginAlertModel modalValue={true}/>)} />
+                <Route exact path="/your-add" element={Object.keys(currentUser).length !== 0 ? (<YourAdd />) : (<LoginAlertModel modalValue={true}/>)} />
+                <Route path="/book-marks" element={<BookMarks />} />
                 <Route path="*" element={<PageNotFound />} />
-
             </Routes>
             <Footer />
         </Router>

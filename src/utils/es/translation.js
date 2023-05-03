@@ -144,4 +144,18 @@ export const TRANSLATIONS_ES = {
 
   //---------- Status Error Text---------------
   SESSION_EXPIRE: "¡Su sesión expiró!",
+
+  //---------Login Alert Box---------
+  LOGIN_REQUIRED: "NECESARIO INICIAR SESIÓN",
+  LOGIN_SUB_TEXT:"Necesitas crear un perfil para publicar un artículo. Inicie sesión ahora si tiene un perfil o cree uno.",
+  CREATE_PROFILE: "Crear perfil GRATIS",
+  OR: "OR",
+  LOGIN_TO_PROFILE: "Inicie sesión en su perfil",
+
+    //-------Book mraks module--------
+    BOOK_MARK_HEADING: "MARCADO",
+    BOOK_MARK_SUBHEAD: "TENGA EN CUENTA",
+    BOOK_MARK_DETAILTEXT: "Todos los artículos marcados están sujetos a vencimiento.",
+    YOURS_BOOK_MARKS: "SUS MARCADORES"
+
 };

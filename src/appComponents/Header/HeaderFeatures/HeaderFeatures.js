@@ -24,7 +24,7 @@ function HeaderFeatures() {
         <>
             {Object.keys(currentUser).length!==0?
                 (<div className="headerFeature headerAfterProfile" >
-                    <h5>{t("BOOKMARKS")}</h5>
+                    <h5 onClick={() => navigate("/book-marks")}>{t("BOOKMARKS")}</h5>
                     <span>|</span>
                     <h5 onClick={() => navigate("/view-profile")}>{t("VIEW_PROFILE")}</h5>
                     <span>|</span>

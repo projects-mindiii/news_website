@@ -100,13 +100,7 @@ function ClassiFieds() {
                   </Nav>
                 </Tab.Container>
               </div>
-            </Col>
-            {/* <Col xs={12} sm={12} md={12} lg={6}>
-              <div className="advertisment">
-              <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168"></iframe>
-              </div>
-            </Col> */}
-            {showDefaultList == 1 ? (
+              {showDefaultList == 1 ? (
               forSaleWebList.length > 0 ? (
                 <ClassifiedCategoryList forSaleListData={forSaleWebList}  classifiedDataType={4}  />
               ) : (
@@ -118,6 +112,13 @@ function ClassiFieds() {
               <p className="nodataDisplay">--- {t("N0CLASSIFIED_DISPLAY")}  --- </p>
             )}
 
+            </Col>
+            {/* <Col xs={12} sm={12} md={12} lg={6}>
+              <div className="advertisment">
+              <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168"></iframe>
+              </div>
+            </Col> */}
+            
            
           </Row>
         </Container>

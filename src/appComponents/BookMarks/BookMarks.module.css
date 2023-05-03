@@ -1,0 +1,14 @@
+.bookmarkHeading {
+    margin-top: 33px;
+}
+
+.bookmarkHeading h3 {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 14px;
+    padding: 20px;
+}
