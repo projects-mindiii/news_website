@@ -8,6 +8,7 @@ import ContactPerson from "../../CommonComponent/ContactPerson";
 import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
 import { useTranslation } from "react-i18next";
+import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 
 
 function ClassifiedCategoryList({ forSaleListData}) {
@@ -50,7 +51,7 @@ function ClassifiedCategoryList({ forSaleListData}) {
                     </div>
                   </div>
                  
-                   {item.category_type_id == 6 || item.category_type_id==7?(
+                   {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER || item.category_type_id==CLASSIFIED_CATEGORY_TYPE.JOBSEEKER?(
                     <div className="jobType">
                     <p>{(item.job_type_name)?item.job_type_name+`-`:"" }{item.job_location_type_name}</p>
                    </div>
@@ -58,7 +59,7 @@ function ClassifiedCategoryList({ forSaleListData}) {
                   ): ""}
                  
 
-                  {item.category_type_id == 4 ||  item.category_type_id == 6? (
+                  {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||  item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER? (
                     <div className="classiFieds_RupeesText">
                       <p>
                         {item.currency_code} {new Intl.NumberFormat().format(item.amount)}
