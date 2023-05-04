@@ -10,17 +10,15 @@ import watchicon from "../../assets/images/watch_ico.png";
 import { useTranslation } from "react-i18next";
 
 
-function ClassifiedCategoryList({ forSaleListData, classifiedDataType }) {
-  console.log("classifiedDataType",classifiedDataType)
+function ClassifiedCategoryList({ forSaleListData}) {
   const { t } = useTranslation();
-  
   return (
     <div className="main">
-      {forSaleListData.length > 0 &&
-        forSaleListData.map((item, index) => {
+      {(forSaleListData) && forSaleListData.length > 0 &&
+        forSaleListData.map((item, index) => { 
           return (
             <Row key={index}>
-              <Col xs={12} sm={12} md={12} lg={6}>
+              <Col xs={12} sm={12} md={12} lg={12}>
                 <div className="classiFieds_forSaleBox">
                   <div className="classiFieds_forSale_about">
                     <div className="classiFieds_forSale">
@@ -54,7 +52,7 @@ function ClassifiedCategoryList({ forSaleListData, classifiedDataType }) {
                     </div>
                   </div>
                  
-                   {classifiedDataType == 6 || classifiedDataType==7?(
+                   {item.category_type_id == 6 || item.category_type_id==7?(
                     <div className="jobType">
                     <p>{(item.job_type_name)?item.job_type_name+`-`:"" }{item.job_location_type_name}</p>
                    </div>
@@ -62,12 +60,12 @@ function ClassifiedCategoryList({ forSaleListData, classifiedDataType }) {
                   ): ""}
                  
 
-                  {classifiedDataType == 4 ||  classifiedDataType == 6? (
+                  {item.category_type_id == 4 ||  item.category_type_id == 6? (
                     <div className="classiFieds_RupeesText">
                       <p>
                         {item.currency_code} {new Intl.NumberFormat().format(item.amount)}
                       </p>
-                      <span>{(classifiedDataType == 6)?item.earning_name:item.currency_name} {(item.is_negotiable)?"(Negotiable)":""}</span>
+                      <span>{(item.category_type_id == 6)?item.earning_name:item.currency_name} {(item.is_negotiable)?"(Negotiable)":""}</span>
                     </div>
                   ): ""}
 
