@@ -68,7 +68,7 @@ function YourAdd() {
                                 </div>
                             </div>
                         </Col>
-                        {/* <Col xs={12} sm={12} md={12} lg={6}> */}
+                        <Col xs={12} sm={12} md={12} lg={6}>
                             <ClassifiedCategoryList forSaleListData={yourAdvertWebList}  classifiedDataType={4}  />
                             {/* {yourAds && yourAds.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5>}
 
@@ -90,7 +90,7 @@ function YourAdd() {
                                     <button className="not_live">NOT LIVE - Pending Approvals</button>
                                 </div>
                             ))} */}
-                        {/* </Col> */}
+                        </Col>
                     </Row>
                 </Container>
             </React.Fragment>
