@@ -14,7 +14,7 @@ function ClassifiedCategoryList({ forSaleListData}) {
   const { t } = useTranslation();
   return (
     <div className="main">
-      {forSaleListData.length > 0 &&
+      {(forSaleListData) && forSaleListData.length > 0 &&
         forSaleListData.map((item, index) => { 
           return (
             <Row key={index}>

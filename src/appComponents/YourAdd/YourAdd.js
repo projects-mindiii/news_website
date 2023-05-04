@@ -43,7 +43,7 @@ function YourAdd() {
           const yourAdvertQuery = { limit: 10, offset: 0, type: 1 };
           const data = { userToken: userToken, whereQuery: yourAdvertQuery };
           dispatch(yourAdvertListApi(data)).then((responsejson) => {
-           
+           console.log('responsejsonresponsejson',responsejson)
           });      
         }
         getWebClassifiedLists();

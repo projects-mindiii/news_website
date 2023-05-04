@@ -4,7 +4,7 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 
 const initialState = {
   yourAdvertTotalCount: 0,
-  yourAdvertList: {},
+  yourAdvertWebList: [],
   forSaleTotalCount: 0,
   forSaleWebList: {},
   wantedTotalCount: 0,
@@ -121,7 +121,7 @@ export const classifiedSlice = createSlice({
           state.yourAdvertWebList = response.data.list;
         }else{
           state.yourAdvertTotalCount = 0;
-          state.yourAdvertWebList = {};
+          state.yourAdvertWebList = [];
         }
         state.isLoading = false
     })
