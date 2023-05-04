@@ -10,7 +10,8 @@ import CustomBtn from "../../formComponent/Button/Button";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import { forSaleListApi, getJobOfferListApi, getJobSeekerListApi, getWantedListApi } from "../../store/slices/ClassifiedSlice";
 
-function ClassifiedFilter() {
+function ClassifiedFilter({setIsOpen}) {
+  const { classifiedType } = useSelector((state) => state.classified);
   const { userToken, allMetaList, isLoading } = useSelector(
     (state) => state.user
   );
@@ -19,6 +20,7 @@ function ClassifiedFilter() {
   const {
     register,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -44,37 +46,63 @@ function ClassifiedFilter() {
   const [provinceOption, setProvinceOption] = useState([]);
   
 
+  function searchApiCall(provinceValue){
 
-  function handleChange(e) {
-    // console.log("event", event);
-    setProvinceSelected(e);
-    // function for classified webList
-    async function getWebClassifiedLists() {
-      const forSaleQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.FORSALE, search_by: 2, province: 1, country:2, city:"indore"};
-      const data = { userToken: userToken, whereQuery: forSaleQuery };
-      dispatch(forSaleListApi(data)).then((responsejson) => {});
-
-      const wantedQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.WANTED, search_by: 2, province: 1, country:2, city:"indore" };
-      const wantedData = { userToken: userToken, whereQuery: wantedQuery };
-      dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
-      
-
-      const jobOfferQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER, search_by: 2, province: 1, country:2, city:"indore" };
-      const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
-      dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
-        console.log("response", responsejson);
-      });
-
-      const jobSeekerQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKER , search_by: 2, province: 1, country:2, city:"indore" };
-      const jobSeekerData = { userToken: userToken, whereQuery: jobSeekerQuery };
-      dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
-        console.log("response", responsejson);
-      });
+    let search_by = 0;
+    let province = 0;
+    let country = 0;
+    
+    if(provinceValue=='all'){
+      search_by=0;
+      province = "";
+      country = "";
+    }else if(provinceValue==0){
+      search_by=2;
+      province = "";
+      country = countrySelected.value
+    }else{
+      search_by=1;
+      country = "";
+      province = provinceValue;
     }
-    getWebClassifiedLists();
+    const classfiedQuery = { limit: 10, offset: 0, type: classifiedType, search_by: search_by, province: province, country:country, city:getValues("city")};
+  
+    getWebClassifiedLists(classfiedQuery);
   }
 
-  console.log("provinceSelected",provinceSelected)
+  function handleClick() {
+      searchApiCall(provinceSelected.value);
+  }
+
+  function handleChange(data) {
+    
+    setProvinceSelected(data);
+    searchApiCall(data.value);
+  }
+  
+  async function getWebClassifiedLists(classfiedQuery) {
+    const data = { userToken: userToken, whereQuery: classfiedQuery };
+   
+
+
+    if(classifiedType==CLASSIFIED_CATEGORY_TYPE.FORSALE){
+      
+      dispatch(forSaleListApi(data)).then((responsejson) => {console.log('responsejson',responsejson)});
+    }
+
+    if(classifiedType==CLASSIFIED_CATEGORY_TYPE.WANTED){
+      dispatch(getWantedListApi(data)).then((responsejson) => {});
+    }
+
+    if(classifiedType==CLASSIFIED_CATEGORY_TYPE.JOBOFFER){
+      dispatch(getJobOfferListApi(data)).then((responsejson) => {});
+    }
+
+    if(classifiedType==CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS){
+      dispatch(getJobSeekerListApi(data)).then((responsejson) => {});
+    }
+  }
+  
 
   useEffect(() => {
     let countryOption = [];
@@ -102,7 +130,7 @@ function ClassifiedFilter() {
         provinceOption.push({ value: 0, label: "Out of South Africa", id: 0 });
 
         await setProvinceOption(provinceOption);
-      }
+      } 
     }
     getMetaDetails();
   }, []);
@@ -115,7 +143,7 @@ function ClassifiedFilter() {
             <Form.Control type="search" placeholder={t("SEARCH_TEXT")} />
           </Form.Group>
         </Form>
-        <RxCross2 />
+        <RxCross2 onClick={()=>setIsOpen(false)}/>
       </div>
       <div className={styles.inputBox}>
         <Form.Group className="mb-3">
@@ -198,7 +226,7 @@ function ClassifiedFilter() {
         )}
 
         <div className="buttonAdd">
-          <CustomBtn onClick={() => handleChange(provinceSelected)}>Done</CustomBtn>
+          <CustomBtn onClick={() => handleClick()}>Done</CustomBtn>
         </div>
       </div>
     </div>

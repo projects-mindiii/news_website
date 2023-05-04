@@ -13,6 +13,7 @@ const initialState = {
   jobOfferWebList: [],
   jobSeekerTotalCount: 0,
   jobSeekerWebList: [],
+  classifiedType: 4,
   isLoading: false,
 }
 
@@ -20,12 +21,10 @@ const initialState = {
 export const yourAdvertListApi = createAsyncThunk(
 	"classified/yourAdvertListApi",
 	async (data, { rejectWithValue }) => {
-    console.log("data", data)
 		try {
 			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
 			return response;
 		} catch (error) {
-      console.log("error", error)
 			return rejectWithValue(error);
 		}
 	}
@@ -80,7 +79,6 @@ export const getJobSeekerListApi = createAsyncThunk(
 			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
 			return response;
 		} catch (error) {
-      console.log("error", error)
 			return rejectWithValue(error);
 		}
 	}
@@ -89,6 +87,9 @@ export const classifiedSlice = createSlice({
   name: 'classified',
   initialState,
   reducers: {
+    setClassfiedType: (state, action) => {
+      state.classifiedType = action.payload;
+    }
   },
   extraReducers: (builder) => {
     //web list
@@ -196,4 +197,5 @@ export const classifiedSlice = createSlice({
     })
   },
 })
+export const { setClassfiedType } = classifiedSlice.actions;
 export default classifiedSlice.reducer
