@@ -7,12 +7,14 @@ import { useTranslation } from "react-i18next";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import CustomBtn from "../../formComponent/Button/Button";
+import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+import { forSaleListApi, getJobOfferListApi, getJobSeekerListApi, getWantedListApi } from "../../store/slices/ClassifiedSlice";
 
 function ClassifiedFilter() {
-  const [countryCode, setCountryCode] = useState("za");
   const { userToken, allMetaList, isLoading } = useSelector(
     (state) => state.user
   );
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const {
     register,
@@ -40,38 +42,66 @@ function ClassifiedFilter() {
     id: "all",
   });
   const [provinceOption, setProvinceOption] = useState([]);
+  
 
-  function handleChange(event) {
-    console.log("event", event);
-    setProvinceSelected(event);
+
+  function handleChange(e) {
+    // console.log("event", event);
+    setProvinceSelected(e);
+    // function for classified webList
+    async function getWebClassifiedLists() {
+      const forSaleQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.FORSALE, search_by: 2, province: 1, country:2, city:"indore"};
+      const data = { userToken: userToken, whereQuery: forSaleQuery };
+      dispatch(forSaleListApi(data)).then((responsejson) => {});
+
+      const wantedQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.WANTED, search_by: 2, province: 1, country:2, city:"indore" };
+      const wantedData = { userToken: userToken, whereQuery: wantedQuery };
+      dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
+      
+
+      const jobOfferQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER, search_by: 2, province: 1, country:2, city:"indore" };
+      const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
+      dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
+        console.log("response", responsejson);
+      });
+
+      const jobSeekerQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKER , search_by: 2, province: 1, country:2, city:"indore" };
+      const jobSeekerData = { userToken: userToken, whereQuery: jobSeekerQuery };
+      dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
+        console.log("response", responsejson);
+      });
+    }
+    getWebClassifiedLists();
   }
 
+  console.log("provinceSelected",provinceSelected)
+
   useEffect(() => {
-    let countryOptions = [];
-    let provinceOptions = [
+    let countryOption = [];
+    let provinceOption = [
       { value: "all", label: "All South Africa", id: "all" },
     ];
     async function getMetaDetails() {
       if (Object.keys(allMetaList).length > 0) {
         await allMetaList.countries.map((item) => {
-          countryOptions.push({
+          countryOption.push({
             label: item.name,
             value: item.id,
             id: item.id,
           });
         });
-        await setCountryOption(countryOptions);
+        await setCountryOption(countryOption);
 
         await allMetaList.provinces.map((item) => {
-          provinceOptions.push({
+          provinceOption.push({
             label: item.name,
             value: item.id,
             id: item.id,
           });
         }); //getting selection option in array as province list
-        provinceOptions.push({ value: 0, label: "Out of South Africa", id: 0 });
+        provinceOption.push({ value: 0, label: "Out of South Africa", id: 0 });
 
-        await setProvinceOption(provinceOptions);
+        await setProvinceOption(provinceOption);
       }
     }
     getMetaDetails();
@@ -92,11 +122,11 @@ function ClassifiedFilter() {
           <Select
             id="province"
             options={provinceOption}
-            onChange={(event) => {
-              handleChange(event);
+            onChange={(e) => {
+              handleChange(e);
             }}
             placeholder={t("SELECT_PROVINCE")}
-            value={provinceSelected}
+            value={provinceSelected && provinceSelected}
             styles={{
               placeholder: () => ({
                 fontSize: "15px",
@@ -168,7 +198,7 @@ function ClassifiedFilter() {
         )}
 
         <div className="buttonAdd">
-          <CustomBtn onClick={() => handleChange()}>Done</CustomBtn>
+          <CustomBtn onClick={() => handleChange(provinceSelected)}>Done</CustomBtn>
         </div>
       </div>
     </div>

@@ -12,9 +12,10 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
+import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
-function ClassiFieds(LocationData) {
+function ClassiFieds() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -27,17 +28,21 @@ function ClassiFieds(LocationData) {
 
   useEffect(() => {
     async function getWebClassifiedLists() {
-      const forSaleQuery = { limit: 10, offset: 0, type: 4 };
+      const forSaleQuery = {
+        limit: 10,
+        offset: 0,
+        type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+      };
       const data = { userToken: userToken, whereQuery: forSaleQuery };
-      dispatch(forSaleListApi(data)).then((responsejson) => {
-       
-      });
+      dispatch(forSaleListApi(data)).then((responsejson) => {});
 
-      const wantedQuery = { limit: 10, offset: 0, type: 5 };
+      const wantedQuery = {
+        limit: 10,
+        offset: 0,
+        type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+      };
       const wantedData = { userToken: userToken, whereQuery: wantedQuery };
-      dispatch(getWantedListApi(wantedData)).then((responsejson) => {
-       
-      });
+      dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
     }
     getWebClassifiedLists();
   }, []);

@@ -197,7 +197,7 @@ class SublyApi {
   static async getWebClassiFiedList(token, data) {
     console.log("data", data)
     let header = { "access-token": ` ${token}` };
-    let res = await this.request(`/v2/web-classified-list?limit=${data.limit}&offset=${data.offset}&type=${data.type}`, undefined, "get", header);
+    let res = await this.request(`/v2/web-classified-list?limit=${data.limit}&offset=${data.offset}&type=${data.type}&search_by=${data.search_by}&province=${data.province}&country=${data.country}&city=${data.city}`, undefined, "get", header);
     return res;
   }
 

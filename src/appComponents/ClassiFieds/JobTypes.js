@@ -12,6 +12,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
+import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
 function JobTypes() {
@@ -26,13 +27,13 @@ function JobTypes() {
 
   useEffect(() => {
     async function getWebClassifiedLists() {
-      const jobOfferQuery = { limit: 10, offset: 0, type: 6 };
+      const jobOfferQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER };
       const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
       dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
         console.log("response", responsejson);
       });
 
-      const jobSeekerQuery = { limit: 10, offset: 0, type: 7 };
+      const jobSeekerQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKER };
       const jobSeekerData = { userToken: userToken, whereQuery: jobSeekerQuery };
       dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
         console.log("response", responsejson);
