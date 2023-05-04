@@ -289,6 +289,21 @@ class SublyApi {
     return res;
   }
 
+   /* GET  /get company list: 
+  get book mark lists
+ 
+   Authorization required: Token
+   @returns {object} {token}
+   */
+   static async getBookMarkList(authToken, data) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/get-bookmark-list?limit=${data.limit}&offset=${data.offset}`,
+      "", undefined, header
+    );
+
+    return res;
+  }
+
 }
 
 // SublyApi.token =

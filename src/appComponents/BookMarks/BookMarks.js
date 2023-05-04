@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
 import { useTranslation } from "react-i18next";
 import ClassifiedCategoryList from "../ClassiFieds/ClassifiedCategoryList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./BookMarks.module.css";
+import { bookMarkListApi } from "../../store/slices/BookMarkSlice";
 
 function BookMarks() {
   const { t } = useTranslation();
   const { jobOfferWebList } = useSelector((state) => state.classified);
+  const { userToken, isLoading } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function getBookMark() {
+      const bookMarkRequired = { limit: 10, offset: 0 };
+      const BookMarkData = { userToken: userToken, requiredValue: bookMarkRequired };
+      dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
+        console.log("response", responsejson);
+      });
+    }
+    getBookMark()
+  }, []);
 
   return (
     <section className="main">

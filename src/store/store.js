@@ -7,12 +7,14 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from 'redux-thunk';
 import { combineReducers } from "redux";
 import classifiedSlice from './slices/ClassifiedSlice';
+import  bookMarkSlice  from './slices/BookMarkSlice';
 
 //redux method which combines reducer
 const rootReducer = combineReducers({
   user: userSlice,
   deal: dealSlice,
   classified: classifiedSlice,
+  bookMark: bookMarkSlice,
 
 });
 
