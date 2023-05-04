@@ -102,13 +102,8 @@ function Header() {
               ""
             )}
             {location.pathname == "/classifieds" ||
-<<<<<<< HEAD
               location.pathname == "/job-types" ? (
               <ClassifiedCountry />
-=======
-            location.pathname == "/job-types" ? (
-              <ClassifiedCountry/>
->>>>>>> 21fab4fda11f0a43e62bf49f962a5d6a574261c0
             ) : (
               ""
             )}
