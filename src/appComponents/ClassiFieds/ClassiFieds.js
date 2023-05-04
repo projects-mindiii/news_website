@@ -15,7 +15,7 @@ import Loader from "../../utils/Loader/Loader";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
-function ClassiFieds() {
+function ClassiFieds(LocationData) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
