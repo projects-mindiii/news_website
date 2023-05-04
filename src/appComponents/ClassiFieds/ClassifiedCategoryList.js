@@ -17,8 +17,6 @@ function ClassifiedCategoryList({ forSaleListData}) {
       {(forSaleListData) && forSaleListData.length > 0 &&
         forSaleListData.map((item, index) => { 
           return (
-            <Row key={index}>
-              <Col xs={12} sm={12} md={12} lg={12}>
                 <div className="classiFieds_forSaleBox">
                   <div className="classiFieds_forSale_about">
                     <div className="classiFieds_forSale">
@@ -91,9 +89,7 @@ function ClassifiedCategoryList({ forSaleListData}) {
 
                   <SocialMedaiShare />
                 </div>
-              </Col>
              
-            </Row>
           );
         })}
     </div>
