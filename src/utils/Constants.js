@@ -17,3 +17,9 @@ export const CLASSIFIED_CATEGORY_TYPE ={
   JOBOFFER:"6",
   JOBSEEKERS:"7"
 }
+
+export const COMPANY_REFERENCE_TYPE = {
+  PRODUCT_TYPE: "1",
+  SERVICE_TYPE: "2",
+  DEAL_TYPE: "3",
+}

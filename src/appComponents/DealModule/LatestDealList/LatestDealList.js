@@ -17,7 +17,6 @@ function LatestDealList(props) {
     }
     filterDeal();
   }, [props]);
-  console.log("filteredList",filteredList)
 
   return (
     <>

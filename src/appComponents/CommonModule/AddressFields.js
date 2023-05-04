@@ -8,7 +8,6 @@ import WhatsApp from "../../CommonComponent/Whatappshare";
 function AddressFields(props) {
     //set language
     const { t } = useTranslation();
-    
 
     return (
         <section>

@@ -6,8 +6,11 @@ import LatestDealList from "../LatestDealList/LatestDealList";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../../../utils/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 function LatestDeals() {
+  //set language
+  const { t } = useTranslation();
   const { latestDeals, isLoading } = useSelector((state) => state.deal);
   const [eventKeyValue, setEventKeyValue] = useState((latestDeals && latestDeals.length > 0) ? latestDeals[0].id : null);
 
@@ -53,7 +56,7 @@ function LatestDeals() {
                 </Col>
               </Row>
             </Tab.Container> :
-            <h4>--- NO DEALS TO DISPLAY ---</h4>}
+            <h4>{t("NO_DEAL")}</h4>}
         </Container> : <Loader />}
     </div>
   );

@@ -7,10 +7,13 @@ import CompanyOrderType from "./CompaniesOrderType";
 import { useLocation } from "react-router-dom";
 import Loader from "../../utils/Loader/Loader";
 import { REFERENCE_TYPE } from "../../utils/Constants";
+import { useTranslation } from "react-i18next";
 
 
 // -----------function for display companies of products,services and brands------------
 function CompanyList({ companyList, refrenceType }) {
+    //set language
+    const { t } = useTranslation();
     const location = useLocation();
     const [eventKeyValue, setEventKeyValue] = useState((companyList && companyList.length > 0) ? companyList[0].id : null);
 
@@ -61,9 +64,9 @@ function CompanyList({ companyList, refrenceType }) {
                         </Container>
 
                         : <>
-                            {refrenceType == REFERENCE_TYPE.PRODUCTS && <h4>--- NO PRODUCTS TO DISPLAY ---</h4>}
-                            {refrenceType == REFERENCE_TYPE.SERVICES && <h4>--- NO SERVICES TO DISPLAY ---</h4>}
-                            {refrenceType == REFERENCE_TYPE.BRANDS && <h4>--- NO BRANDS TO DISPLAY ---</h4>}
+                            {refrenceType == REFERENCE_TYPE.PRODUCTS && <h4>{t("NO_PRODUCT")}</h4>}
+                            {refrenceType == REFERENCE_TYPE.SERVICES && <h4>{t("NO_SERVICE")}</h4>}
+                            {refrenceType == REFERENCE_TYPE.BRANDS && <h4>{t("NO_BRAND")}</h4>}
                         </>
 
                     }

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import WhatsApp from "../../../CommonComponent/Whatappshare";
 import Loader from "../../../utils/Loader/Loader";
 
-
+// -------function for showing deal list-----------
 function DealList({ dealList, fromDeal }) {
     const navigate = useNavigate();
     //set language

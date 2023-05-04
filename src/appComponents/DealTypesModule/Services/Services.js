@@ -5,7 +5,7 @@ import { REFERENCE_TYPE } from "../../../utils/Constants";
 
 // -----------function for display services------------
 function Services() {
-    const { allDeals, isLoading } = useSelector((state) => state.deal);
+    const { allDeals } = useSelector((state) => state.deal);
     const [companyList, setCompanyList] = useState(allDeals.service_company_count_list);
     const refrenceType = REFERENCE_TYPE.SERVICES;
 

@@ -5,7 +5,7 @@ import CompanyList from "../CompanyList";
 
 // -----------function for display brands------------
 function Brands() {
-    const { allDeals, isLoading } = useSelector((state) => state.deal);
+    const { allDeals } = useSelector((state) => state.deal);
     const [companyList, setCompanyList] = useState(allDeals.brand_company_count_list);
     const refrenceType = REFERENCE_TYPE.BRANDS;
 

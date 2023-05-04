@@ -12,10 +12,10 @@
 .products h2 {
     font-weight: 500;
     font-size: 20px;
-    line-height: 50px;
     text-align: center;
     letter-spacing: -0.2px;
     color: #0A0000;
+    padding: 15px 10px;
 }
 
 .products span {
@@ -42,7 +42,6 @@
 }
 
 .productImg img {
-    /* width: 100%; */
     max-width: 150px;
 }
 
