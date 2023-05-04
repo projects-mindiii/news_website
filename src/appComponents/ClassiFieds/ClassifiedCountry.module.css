@@ -27,21 +27,6 @@ span.resultText {
 
 .countryIcon{
     padding: 5px;
-    margin-top: 5px;
-}
-
-
-
-/* new list css  */
-.classifiedList {
-    background-color: #ffffff;
-}
-
-.classiFiedsImage img {
-    width: 100%;
-    max-width: 200px;
-}
-
-.topSection {
-    padding: 18px;
+    /* margin-top: 5px; */
+    margin-top: 15px;
 }

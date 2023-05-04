@@ -6,13 +6,14 @@ const initialState = {
   yourAdvertTotalCount: 0,
   yourAdvertWebList: [],
   forSaleTotalCount: 0,
-  forSaleWebList: {},
+  forSaleWebList: [],
   wantedTotalCount: 0,
-  wantedWebList: {},
+  wantedWebList: [],
   jobOfferTotalCount: 0,
-  jobOfferWebList: {},
+  jobOfferWebList: [],
   jobSeekerTotalCount: 0,
-  jobSeekerWebList: {},
+  jobSeekerWebList: [],
+  classifiedType: 4,
   isLoading: false,
 }
 
@@ -20,12 +21,10 @@ const initialState = {
 export const yourAdvertListApi = createAsyncThunk(
 	"classified/yourAdvertListApi",
 	async (data, { rejectWithValue }) => {
-    console.log("data", data)
 		try {
 			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
 			return response;
 		} catch (error) {
-      console.log("error", error)
 			return rejectWithValue(error);
 		}
 	}
@@ -80,7 +79,6 @@ export const getJobSeekerListApi = createAsyncThunk(
 			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
 			return response;
 		} catch (error) {
-      console.log("error", error)
 			return rejectWithValue(error);
 		}
 	}
@@ -89,6 +87,9 @@ export const classifiedSlice = createSlice({
   name: 'classified',
   initialState,
   reducers: {
+    setClassfiedType: (state, action) => {
+      state.classifiedType = action.payload;
+    }
   },
   extraReducers: (builder) => {
     //web list
@@ -102,7 +103,7 @@ export const classifiedSlice = createSlice({
           state.forSaleWebList = response.data.list;
         }else{
           state.forSaleTotalCount = 0;
-          state.forSaleWebList = {};
+          state.forSaleWebList = [];
         }
         state.isLoading = false
     })
@@ -142,7 +143,7 @@ export const classifiedSlice = createSlice({
         state.success = true;
       } else {
         state.wantedTotalCount = 0;
-        state.wantedWebList = {};
+        state.wantedWebList = [];
         state.success = false;
       }
       state.isLoading = false
@@ -164,7 +165,7 @@ export const classifiedSlice = createSlice({
         state.success = true;
       } else {
         state.jobOfferTotalCount = 0;
-        state.jobOfferWebList = {};
+        state.jobOfferWebList = [];
         state.success = false;
       }
       state.isLoading = false
@@ -186,7 +187,7 @@ export const classifiedSlice = createSlice({
         state.success = true;
       } else {
         state.jobSeekerTotalCount = 0;
-        state.jobSeekerWebList = {};
+        state.jobSeekerWebList = [];
         state.success = false;
       }
       state.isLoading = false
@@ -196,4 +197,5 @@ export const classifiedSlice = createSlice({
     })
   },
 })
+export const { setClassfiedType } = classifiedSlice.actions;
 export default classifiedSlice.reducer

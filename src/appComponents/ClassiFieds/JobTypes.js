@@ -6,33 +6,37 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
 import ClassifiedCategoryList from "./ClassifiedCategoryList";
 import {
+  setClassfiedType,
   getJobOfferListApi,
   getJobSeekerListApi
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
+import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
 function JobTypes() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const {jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
+  const {classifiedType, jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
     useSelector((state) => state.classified);
   const { userToken,isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
 
   // function for classified webList
-
+  const setClassfiedTypeValue = (value) => {
+    dispatch(setClassfiedType(value));
+  };
   useEffect(() => {
     async function getWebClassifiedLists() {
-      const jobOfferQuery = { limit: 10, offset: 0, type: 6 };
+      const jobOfferQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER };
       const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
       dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
         console.log("response", responsejson);
       });
 
-      const jobSeekerQuery = { limit: 10, offset: 0, type: 7 };
+      const jobSeekerQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKER };
       const jobSeekerData = { userToken: userToken, whereQuery: jobSeekerQuery };
       dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
         console.log("response", responsejson);
@@ -54,7 +58,11 @@ console.log("showDefaultList",showDefaultList)
                 <Tab.Container id="left-tabs-example" defaultActiveKey={1} onSelect={(value)=>setShowDefaultList(value)}>
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                      <Nav.Link eventKey={1}>
+                      <Nav.Link  onClick={() =>
+                            setClassfiedTypeValue(
+                              CLASSIFIED_CATEGORY_TYPE.JOBOFFER
+                            )
+                          }eventKey={1}>
                         {t("JOB_OFFERS")}({jobOfferTotalCount})
                       </Nav.Link>
                       {showDefaultList == 1 ? (
@@ -74,7 +82,11 @@ console.log("showDefaultList",showDefaultList)
                       )}
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey={2} >
+                      <Nav.Link  onClick={() =>
+                            setClassfiedTypeValue(
+                              CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS
+                            )
+                          }eventKey={2}>
                       {t("JOB_SEEKER")} ({jobSeekerTotalCount})
                       </Nav.Link>
                       {showDefaultList == 2 ? (
@@ -98,14 +110,14 @@ console.log("showDefaultList",showDefaultList)
               </div>
               {showDefaultList == 1 ? (
               jobOfferWebList.length > 0 ? (
-                <ClassifiedCategoryList forSaleListData={jobOfferWebList}  classifiedDataType={6} />
+                <ClassifiedCategoryList forSaleListData={jobOfferWebList}  classifiedDataType={CLASSIFIED_CATEGORY_TYPE.JOBOFFER} />
               ) : (
-                <p className="nodataDisplay">--- {t("N0CLASSIFIED_DISPLAY")}  --- </p>
+                <p className="nodataDisplay">-- {t("N0CLASSIFIED_DISPLAY")}  -- </p>
               )
             ) : jobSeekerWebList.length ? (
-              <ClassifiedCategoryList forSaleListData={jobSeekerWebList}  classifiedDataType={7} />
+              <ClassifiedCategoryList forSaleListData={jobSeekerWebList}  classifiedDataType={CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS} />
             ) : (
-              <p className="nodataDisplay">--- {t("N0CLASSIFIED_DISPLAY")}  --- </p>
+              <p className="nodataDisplay">-- {t("N0CLASSIFIED_DISPLAY")}  -- </p>
             )}
             </Col>
             <Col xs={12} sm={12} md={12} lg={5}>
