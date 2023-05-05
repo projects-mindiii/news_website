@@ -10,7 +10,7 @@ import CustomBtn from "../../formComponent/Button/Button";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import { forSaleListApi, getJobOfferListApi, getJobSeekerListApi, getWantedListApi } from "../../store/slices/ClassifiedSlice";
 
-function ClassifiedFilter({closeModal}) {
+function ClassifiedFilter({closeModal, setCountryData}) {
   const { classifiedType } = useSelector((state) => state.classified);
   const { userToken, allMetaList, isLoading } = useSelector(
     (state) => state.user
@@ -75,6 +75,7 @@ function ClassifiedFilter({closeModal}) {
   }
 
   function handleChange(data) {
+    setCountryData(data)
     setProvinceSelected(data);
     if(data.value!='0'){
       closeModal();

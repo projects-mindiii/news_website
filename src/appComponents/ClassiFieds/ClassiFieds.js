@@ -33,6 +33,7 @@ function ClassiFieds() {
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
+    
   };
   useEffect(() => {
     setClassfiedTypeValue(
