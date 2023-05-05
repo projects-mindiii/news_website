@@ -62,6 +62,7 @@ button.btn:active {
     margin-bottom: 0px;
     margin-top: 4px;
     cursor: pointer;
+    line-break: anywhere;
 }
 
 

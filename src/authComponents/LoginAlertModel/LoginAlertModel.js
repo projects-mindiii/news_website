@@ -23,7 +23,7 @@ function LoginAlertModel(props) {
             <p>{t("LOGIN_SUB_TEXT")}</p>
             <div className={styles.createProfileBtn}>
               <CustomBtn
-                children={t("CREATE_PROFILE")}
+                children={t("CREATE_FREE_PROFILE")}
                 type={"button"}
                 onClick={() => navigate("/sign-up")}
               />

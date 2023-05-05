@@ -105,11 +105,11 @@ function LoginForm() {
 
                         <div className="socialLogo loginformcomponent">
                             <GoogleLogin />
-                            <span>
+                            {/* <span> */}
 
                                 <FacebookSocialLogin facebookText="" />
 
-                            </span>
+                            {/* </span> */}
 
                             <img src={Apple} alt="apple-logo" />
                             <img src={Linkedin} alt="linkedin-logo" />

@@ -14,7 +14,7 @@ import WhatsApp from "../../../CommonComponent/Whatappshare";
 import ReactPlayer from 'react-player';
 import AddressFields from "../../CommonModule/AddressFields";
 
-
+// ------function for company profile---------
 function CompanyProfile({ companyDetailData }) {
   //set language
   const { t } = useTranslation();
@@ -66,7 +66,7 @@ function CompanyProfile({ companyDetailData }) {
                     <ReactPlayer
                       className="playBox"
                       url={item.image}
-                      playing={true}
+                      playing={false}
                       controls={true}
                     />
                   ))}
@@ -136,7 +136,6 @@ function CompanyProfile({ companyDetailData }) {
           </div>
 
           <AddressFields addressSet={companyDetailData.branch_list} />
-
         </div>
         : ""}
     </section>

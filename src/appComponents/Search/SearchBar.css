@@ -28,3 +28,9 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
+@media only screen and (min-width: 1200px) {
+    .searchBar {
+        justify-content: flex-end;
+    }
+}

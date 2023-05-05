@@ -24,7 +24,6 @@ import Companies from "../appComponents/DealTypesModule/Companies/Companies";
 import LoginAlertModel from "../authComponents/LoginAlertModel/LoginAlertModel";
 import BookMarks from "../appComponents/BookMarks/BookMarks";
 
-
 //-------Create a component for manage routing--------
 function Routers() {
     const { currentUser } = useSelector((state) => state.user);

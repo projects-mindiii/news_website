@@ -2,7 +2,8 @@ import React from "react";
 import mapIcon from "../../assets/images/socialMedia_icon/map_ico.png";
 import { useTranslation } from "react-i18next";
 
-function MapLocation(address) {
+// --------function for showing address in view company-------
+function MapLocation({ address }) {
   //set language
   const { t } = useTranslation();
 
@@ -15,7 +16,7 @@ function MapLocation(address) {
         <img src={mapIcon} alt="mapIcon" />
         <div className="mapAddress">
           <h5>{t("ADDRESS")}</h5>
-          <p>{address.address}</p>
+          <p>{address}</p>
         </div>
       </div>
     </section>

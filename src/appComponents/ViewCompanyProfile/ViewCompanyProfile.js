@@ -7,15 +7,17 @@ import SublyApi from "../../helpers/Api";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
 import { useParams } from "react-router-dom";
+import { COMPANY_REFERENCE_TYPE } from "../../utils/Constants";
 
-
+// -------function for view company details----------
 function ViewCompanyProfile() {
   const [companyDetails, setcompanyDetails] = useState("");
-  const { userToken, isLoading } = useSelector((state) => state.user);
+  const { userToken } = useSelector((state) => state.user);
   const { id } = useParams();
 
   // --------function for get company details----------
-  const companyValue = { id: id, refrence_id: 0, refrence_type: 3 }
+  const companyValue = { id: id, refrence_id: 0, refrence_type: COMPANY_REFERENCE_TYPE.DEAL_TYPE }
+  // ---refrence_id,refrence_type set 0 case when only get direct compnay data-------
   useEffect(() => {
     async function getCompanyDetails() {
       const details = await SublyApi.companyDetails(
@@ -29,14 +31,9 @@ function ViewCompanyProfile() {
     }
     getCompanyDetails();
   }, []);
- 
 
   return (
-
     <section>
-      {isLoading === true ? (
-        <Loader />
-      ) : ""}
       <div className="dealContainer">
         <Container>
           <Row>
@@ -52,7 +49,7 @@ function ViewCompanyProfile() {
                     </div>
                   )}
                 </>
-                : ""}
+                : <Loader />}
 
               <DealList fromDeal={false} dealList={companyDetails.deal_list} />
             </Col>

@@ -47,11 +47,11 @@
     background: #000000 !important;
 }
 
-.createProfileBtn button :hover {
+.createProfileBtn button:hover {
     background-color: #000000 !important;
 }
 
-.createProfileBtn button :active  {
+.createProfileBtn button:active  {
     background: #000000 !important;
 }
 
