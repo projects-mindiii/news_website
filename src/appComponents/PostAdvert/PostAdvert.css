@@ -1,5 +1,5 @@
 .yourAdd {
-    margin-top: 18px;
+    /* margin-top: 18px; */
 }
 
 .post_Add_CategoryButton h5 {
@@ -12,17 +12,13 @@
 
 .post_Add_CategoryButton .headings {
     background: #DEDEDE;
-    border-radius: 10px;
-    height: 51px;
     color: #231F20;
-    width: 100%;
-    border: none;
-    font-weight: 600;
+    border-radius: 10px;
+    font-weight: 700;
     font-size: 22px;
     line-height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    padding: 10px;
 }
 
 .post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-label {
@@ -30,7 +26,7 @@
 }
 
 .post_Add_CategoryButton:first-child {
-    margin-top: 70px;
+    margin-top: 40px;
 }
 
 .post_Add_CategoryButton .post_AddForm .selectNew .form-check {
@@ -63,6 +59,20 @@
     height: 26px !important;
     width: 26px !important;
     position: relative !important;
+    background: #FFFFFF;
+    border: none !important;
+    box-shadow: 0px 2px 10px rgb(0 0 0 / 11%);
+    cursor: pointer;
+}
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input:focus {
+    border-color: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input:active {
+    filter: none !important;
 }
 
 .negotiable .negotiables .form-check-input {
@@ -70,7 +80,9 @@
     width: 26px !important;
     position: relative !important;
 }
-.negotiable .negotiables [type="checkbox"]:checked, [type="checkbox"]:not(:checked){
+
+.negotiable .negotiables [type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
     left: 0px !important;
 }
 
@@ -142,6 +154,8 @@
 
 .post_AddForm .heading {
     background-color: #F6F6F6;
+    border: none !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
 }
 
 .post_AddForm .heading::placeholder {
@@ -244,6 +258,8 @@
 
 .post_AddForm .post_Add_Discription {
     height: 176px;
+    border: none !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
 }
 
 .post_AddForm .post_Add_Discription::placeholder {
@@ -283,6 +299,7 @@
     align-items: center;
     border: 1px solid red;
     background-color: #EC4624;
+    cursor: pointer;
 }
 
 .post_Add_AddPhoto {
@@ -413,10 +430,6 @@
     position: relative;
 }
 
-/* .post_AddForm .amount_Control {
-    padding-left: 58px;
-} */
-
 .post_AddForm .amount div {
     position: absolute;
     bottom: 11px;
@@ -482,50 +495,57 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.post_Add_priceDiv .btn{
-width: 9% !important;
-   margin-top: 0px;
-   height: 37px;
-   font-weight: 400;
+
+.post_Add_priceDiv .btn {
+    width: 9% !important;
+    margin-top: 0px;
+    height: 37px;
+    font-weight: 400;
     line-height: 25px;
     color: #FFFFFF;
-background-color: black;
-display: flex;
-justify-content: space-around;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
 }
-.post_Add_priceDiv{
+
+.post_Add_priceDiv {
     width: 100% !important;
 }
 
-.post_Add_priceDiv .dropdown-toggle::after{
+.post_Add_priceDiv .dropdown-toggle::after {
     display: none !important;
 }
-.post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
-width: 91% !important;
+
+.post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    width: 91% !important;
 }
-.post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
-width: 91% !important;
+
+.post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    width: 91% !important;
 }
-.css-a0izu-control{
+
+.css-a0izu-control {
     background-color: black !important;
     color: white !important;
 }
-.post_Add_Heading_Flex{
+
+.post_Add_Heading_Flex {
     display: flex;
     justify-content: space-between;
     padding-left: 10px;
     padding-right: 10px;
     align-items: center;
 }
-.post_Add_Heading_Flex p{
-   color: #F05132;
-    margin-bottom:0px !important ;
+
+.post_Add_Heading_Flex p {
+    color: #F05132;
+    margin-bottom: 0px !important;
 }
 
 .Post_Add_ImageSet {
     width: 120px;
     height: 120px;
-position: relative;
+    position: relative;
     border: 1px solid #e7e4e4;
 }
 
@@ -536,17 +556,29 @@ position: relative;
     object-fit: cover;
     border: 1px solid #e7e4e4;
 }
+
 .Post_Add_ImageSet svg {
-    top:5px;
+    top: 5px;
     right: 5px;
     position: absolute;
 }
-.post_Add_ImagePreview{
+
+.post_Add_ImagePreview {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
 }
-.post_Add_ImagePreview > div{
-margin-right: 10px;
-margin-top: 10px;
+
+.post_Add_ImagePreview>div {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+
+.post_AddForm .form-control {
+    border: none !important;
+    height: 40px !important;
+    background: #FFFFFF !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+    border-radius: 7.26px !important;
 }

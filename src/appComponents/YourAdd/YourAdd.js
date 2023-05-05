@@ -18,26 +18,7 @@ function YourAdd() {
         (state) => state.user
     );
     const { yourAdvertWebList, yourAdvertTotalCount} = useSelector((state) => state.classified);
-
-    const [yourAds, setYourAds] = useState();
-    // useEffect(() => {
-    //     async function getClassifiedLists() {
-    //         var requestDatas = { "limit": "", "offset": "", "type": 1, "search_by": 0, "province": "", "country": "", "city": "" };
-    //         await SublyApi.getClassifiedList(requestDatas, userToken).then((responsejson) => {
-    //             console.log(responsejson)
-    //             if (responsejson.status_code == 500) {
-    //             } else if (responsejson.status_code == 400) {
-    //             } else {
-    //                 console.log(responsejson)
-    //                 if (responsejson.status_code == 200) {
-    //                     setYourAds(responsejson.data.list)
-    //                 }
-    //             }
-    //         });
-    //     }
-    //     getClassifiedLists();
-    // }, []);
-
+    
     useEffect(() => {
         async function getWebClassifiedLists() {
           const yourAdvertQuery = { limit: 10, offset: 0, type: 1 };
@@ -48,10 +29,6 @@ function YourAdd() {
         }
         getWebClassifiedLists();
       }, []);
-
-      console.log('yourAds',yourAds)
-      console.log('yourAdvertWebList',yourAdvertWebList)
-
 
     return (
         <div className="main">
@@ -69,10 +46,12 @@ function YourAdd() {
                             </div>
                         </Col>
                         <Col xs={12} sm={12} md={12} lg={6}>
-                            <ClassifiedCategoryList forSaleListData={yourAdvertWebList}  classifiedDataType={4}  />
-                            {/* {yourAds && yourAds.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5>}
-
-                            {yourAds && yourAds.map((item, index) => (
+                           <div className="postAdvertBox">
+                           {yourAdvertWebList && yourAdvertWebList.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5>}
+                            <ClassifiedCategoryList displayRoute="your_advert" forSaleListData={yourAdvertWebList}  classifiedDataType={4}  />
+                           </div>
+                            
+                            {/* {yourAdvertWebList && yourAdvertWebList.map((item, index) => (
                                 item.approval_status == 1 &&
                                 <div className="yourAdd_DataShow">
                                     <CommonDataShow yourdata={item} />
@@ -80,8 +59,8 @@ function YourAdd() {
                                     <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
                                 </div>
                             ))}
-                            {yourAds && yourAds.some(item => item.approval_status == 0) == true && <h5 className="youAdd_PendingApproval">---- PENDING APPROVAL ----</h5>}
-                            {yourAds && yourAds.map((item, index) => (
+                            {yourAdvertWebList && yourAdvertWebList.some(item => item.approval_status == 0) == true && <h5 className="youAdd_PendingApproval">---- PENDING APPROVAL ----</h5>}
+                            {yourAdvertWebList && yourAdvertWebList.map((item, index) => (
                                 item.approval_status == 0 &&
                                 <div className="yourAdd_DataShow">
                                     <CommonDataShow yourdata={item} />
