@@ -8,6 +8,22 @@
     font-size: 14px !important;
 }
 
+.countryIcon .imgIcon img {
+    margin-right: 10px !important;
+    margin-bottom: 4px !important;
+}
+
+.ClassifiedCountry_countryText__Rpovx {
+    margin-top: 2px !important;
+    color: #4B4B4B !important;
+    font-family: 'Nunito Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 32px;
+}
+
+
 span.countryText {
     margin: 8px;
     font-size: 15px;
@@ -25,8 +41,31 @@ span.resultText {
     font-family: 'Nunito' sans-serif !important;
 }
 
+.countryText span{
+    color: #EC4624;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 5px;
+    font-style: normal !important;
+    font-family: 'Nunito';
+
+}
+
+.ClassifiedCountry_countryText__Rpovx p {
+    color: #4B4B4B;
+  
+}
+
+
+
 .countryIcon{
+    display: flex;
     padding: 5px;
     /* margin-top: 5px; */
     margin-top: 15px;
+    
 }
+
+
+
+
