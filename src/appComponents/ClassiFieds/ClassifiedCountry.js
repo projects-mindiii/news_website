@@ -5,7 +5,12 @@ import { useTranslation } from "react-i18next";
 import styles from './ClassifiedCountry.module.css';
 import ClassifiedFilter from "./ClassifiedFilter";
 
+
 function ClassifiedCountry() {
+  function closeModal(){
+    return setIsOpen(false);
+  }
+
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,12 +20,13 @@ function ClassifiedCountry() {
         <span className={styles.imgIcon}>
           {" "}
           <img src={mapicon} alt={mapicon} width="25px" height="25px" />
+          
           <span className={styles.countryText}>
             All South Africa -<span className={styles.resultText}>0 Results</span>{" "}
-            {isOpen && <ClassifiedFilter setIsOpen={setIsOpen}/>}
           </span>
         </span>
       </div>
+      {isOpen && <ClassifiedFilter closeModal={closeModal}/>}
     </div>
   );
   

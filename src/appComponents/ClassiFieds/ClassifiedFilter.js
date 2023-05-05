@@ -10,7 +10,7 @@ import CustomBtn from "../../formComponent/Button/Button";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import { forSaleListApi, getJobOfferListApi, getJobSeekerListApi, getWantedListApi } from "../../store/slices/ClassifiedSlice";
 
-function ClassifiedFilter({setIsOpen}) {
+function ClassifiedFilter({closeModal}) {
   const { classifiedType } = useSelector((state) => state.classified);
   const { userToken, allMetaList, isLoading } = useSelector(
     (state) => state.user
@@ -21,7 +21,7 @@ function ClassifiedFilter({setIsOpen}) {
     register,
     setValue,
     getValues,
-    formState: { errors },
+    formState: { errors},
   } = useForm();
 
   const [countryOption, setCountryOption] = useState([
@@ -47,7 +47,6 @@ function ClassifiedFilter({setIsOpen}) {
   
 
   function searchApiCall(provinceValue){
-
     let search_by = 0;
     let province = 0;
     let country = 0;
@@ -72,21 +71,20 @@ function ClassifiedFilter({setIsOpen}) {
 
   function handleClick() {
       searchApiCall(provinceSelected.value);
+     
   }
 
   function handleChange(data) {
-    
     setProvinceSelected(data);
-    searchApiCall(data.value);
+    if(data.value!='0'){
+      closeModal();
+      searchApiCall(data.value);
+    }
   }
   
   async function getWebClassifiedLists(classfiedQuery) {
     const data = { userToken: userToken, whereQuery: classfiedQuery };
-   
-
-
     if(classifiedType==CLASSIFIED_CATEGORY_TYPE.FORSALE){
-      
       dispatch(forSaleListApi(data)).then((responsejson) => {console.log('responsejson',responsejson)});
     }
 
@@ -140,10 +138,10 @@ function ClassifiedFilter({setIsOpen}) {
       <div className={styles.ClassifiedsearchBar}>
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control type="search" placeholder={t("SEARCH_TEXT")} />
+            <Form.Control type="search" placeholder={t("SEARCH_TEXT")} onChange={()=>searchApiCall()} />
           </Form.Group>
         </Form>
-        <RxCross2 onClick={()=>setIsOpen(false)}/>
+        <RxCross2 onClick={closeModal}/>
       </div>
       <div className={styles.inputBox}>
         <Form.Group className="mb-3">
@@ -226,7 +224,12 @@ function ClassifiedFilter({setIsOpen}) {
         )}
 
         <div className="buttonAdd">
-          <CustomBtn onClick={() => handleClick()}>Done</CustomBtn>
+        {provinceSelected.value == 0 ? (
+        <CustomBtn onClick={() => handleClick()}>Done</CustomBtn>
+        ) : (
+          ""
+        )}
+         
         </div>
       </div>
     </div>
