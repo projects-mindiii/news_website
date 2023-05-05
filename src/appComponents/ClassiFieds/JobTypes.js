@@ -29,6 +29,9 @@ function JobTypes() {
     dispatch(setClassfiedType(value));
   };
   useEffect(() => {
+    setClassfiedTypeValue(
+      CLASSIFIED_CATEGORY_TYPE.JOBOFFER
+    )
     async function getWebClassifiedLists() {
       const jobOfferQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER};
       const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };

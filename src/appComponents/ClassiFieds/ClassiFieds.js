@@ -35,6 +35,9 @@ function ClassiFieds() {
     dispatch(setClassfiedType(value));
   };
   useEffect(() => {
+    setClassfiedTypeValue(
+      CLASSIFIED_CATEGORY_TYPE.FORSALE
+    )
     async function getWebClassifiedLists() {
       const forSaleQuery = {
         limit: 10,
