@@ -1,7 +1,7 @@
-import message from "../../../assets/images/Deal_icon/message.png";
-import contact from "../../../assets/images/Deal_icon/contact_ico.png";
+import message from "../../../assets/images/Deal_icon/contact.svg";
+import contact from "../../../assets/images/Deal_icon/call.svg";
 import globe from "../../../assets/images/Deal_icon/globe_ico.png";
-import mail from "../../../assets/images/Deal_icon/mail_ico.png";
+import mail from "../../../assets/images/Deal_icon/mail.svg";
 import watch from "../../../assets/images/Deal_icon/watch.png";
 import promotional from "../../../assets/images/Deal_icon/promotional.png";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,8 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={globe} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("WEBSITE")}</span>
-                                        <p>{item.contact_web_url}</p>
+                                        <a href={item.contact_web_url}>
+                                            <p>{item.contact_web_url}</p></a>
                                     </div>
                                 </div>
                             )}

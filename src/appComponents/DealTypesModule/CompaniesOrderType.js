@@ -56,9 +56,16 @@ function CompanyOrderType(props) {
                                     <img src={item.company_logo} alt="logo" />
                                 </div>
                                 <div className={styles.productDiscription}>
-                                    <h3>{item.name}</h3>
-                                    <p>{item.address}</p>
-                                    <h5>{item.deal_count} Deals</h5>
+                                    {item.name &&
+                                        <h3>{item.name}</h3>}
+                                    {item.address &&
+                                        <p>{item.address}</p>}
+
+                                    {item.deal_count > 0 ?
+                                        <h5>{item.deal_count}
+                                            {item.deal_count > 1 ? " Deals" : " Deal"}
+                                        </h5> : ""
+                                    }
                                 </div>
                             </div>
                         ))

@@ -148,3 +148,8 @@ button.whatsApp svg {
     margin-top: 30px;
     margin-bottom: 100px;
 }
+
+.websiteUrl a{
+    text-decoration: none !important;
+    color: #000000;
+}

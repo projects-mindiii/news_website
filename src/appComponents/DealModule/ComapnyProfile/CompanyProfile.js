@@ -19,6 +19,7 @@ function CompanyProfile({ companyDetailData }) {
   //set language
   const { t } = useTranslation();
 
+
   return (
     <section>
       {companyDetailData ?
@@ -100,7 +101,8 @@ function CompanyProfile({ companyDetailData }) {
                   <img src={globe} alt="img" />
                   <div className="dealText websiteUrl">
                     <span>{t("WEBSITE")}</span>
-                    <p>{companyDetailData.company_detail.webside_url}</p>
+                    <a href={companyDetailData.company_detail.webside_url}>
+                      <p>{companyDetailData.company_detail.webside_url}</p></a>
                   </div>
                 </div>
               )}
