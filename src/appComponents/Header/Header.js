@@ -17,7 +17,7 @@ import Loader from "../../utils/Loader/Loader";
 function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
-  
+
 
   const { guestUser, currentUser, isLoading, userToken } = useSelector(
     (state) => state.user
@@ -65,7 +65,7 @@ function Header() {
                   margin: "0px",
                   border: "none",
                   scrollBehavior: "none",
-                  allowfullscreen:"true"
+                  allowfullscreen: "true"
                 }}
               ></iframe>
             </div>
@@ -92,24 +92,6 @@ function Header() {
           </Navbar>
 
           {/* -------DealsHeaderSection-------- */}
-          {/* <div className="dealHeader">
-            {location.pathname == "/deals/latest-deals" ||
-              location.pathname.match("/deals/latest-deals/company-profile/") || location.pathname == "/deals/products"
-              || location.pathname == "/deals/services" || location.pathname == "/deals/brands" ||
-              location.pathname == "/deals/companies" ? (
-              <DealsHeader />
-            ) : (
-              ""
-            )}
-            {location.pathname == "/classifieds" ||
-              location.pathname == "/job-types" ? (
-              <ClassifiedCountry />
-            ) : (
-              ""
-            )}
-            <SearchBar />
-          </div> */}
-
           <Row>
             <Col xl={8} lg={12} md={12} sm={12}>
               {location.pathname == "/deals/latest-deals" ||

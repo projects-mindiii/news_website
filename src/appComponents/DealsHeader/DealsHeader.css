@@ -5,7 +5,7 @@
     font-size: 14px;
     line-height: 21px;
     color: #FFFFFF;
-    padding: 10px 17px;
+    padding: 10px 16px;
     margin-right: 9px;
     margin-top: 15px;
     text-decoration: none;
@@ -16,11 +16,8 @@
     background: #EC4624 !important;
 }
 
- .navHeader img.icon {
-   
-    margin-right: 9px;
-   
-   
+.navHeader img.icon {
+    margin-right: 7px;
 }
 
 @media only screen and (max-width: 991px) {
