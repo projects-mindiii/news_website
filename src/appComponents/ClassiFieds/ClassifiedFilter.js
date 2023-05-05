@@ -21,7 +21,7 @@ function ClassifiedFilter({setIsOpen}) {
     register,
     setValue,
     getValues,
-    formState: { errors },
+    formState: { errors},
   } = useForm();
 
   const [countryOption, setCountryOption] = useState([
@@ -47,7 +47,6 @@ function ClassifiedFilter({setIsOpen}) {
   
 
   function searchApiCall(provinceValue){
-
     let search_by = 0;
     let province = 0;
     let country = 0;
@@ -75,18 +74,13 @@ function ClassifiedFilter({setIsOpen}) {
   }
 
   function handleChange(data) {
-    
     setProvinceSelected(data);
     searchApiCall(data.value);
   }
   
   async function getWebClassifiedLists(classfiedQuery) {
     const data = { userToken: userToken, whereQuery: classfiedQuery };
-   
-
-
     if(classifiedType==CLASSIFIED_CATEGORY_TYPE.FORSALE){
-      
       dispatch(forSaleListApi(data)).then((responsejson) => {console.log('responsejson',responsejson)});
     }
 
@@ -134,6 +128,8 @@ function ClassifiedFilter({setIsOpen}) {
     }
     getMetaDetails();
   }, []);
+
+ 
 
   return (
     <div className={styles.filterBox}>

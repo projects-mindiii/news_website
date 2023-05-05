@@ -17,7 +17,7 @@ function ClassifiedCountry() {
           <img src={mapicon} alt={mapicon} width="25px" height="25px" />
           <span className={styles.countryText}>
             All South Africa -<span className={styles.resultText}>0 Results</span>{" "}
-            {isOpen && <ClassifiedFilter setIsOpen={setIsOpen}/>}
+            {isOpen && <ClassifiedFilter/>}
           </span>
         </span>
       </div>

@@ -30,13 +30,13 @@ function JobTypes() {
   };
   useEffect(() => {
     async function getWebClassifiedLists() {
-      const jobOfferQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER };
+      const jobOfferQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER};
       const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
       dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
         console.log("response", responsejson);
       });
 
-      const jobSeekerQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKER };
+      const jobSeekerQuery = { limit: 10, offset: 0, type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS};
       const jobSeekerData = { userToken: userToken, whereQuery: jobSeekerQuery };
       dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
         console.log("response", responsejson);

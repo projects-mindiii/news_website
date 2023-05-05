@@ -21,7 +21,6 @@ function ClassiFieds() {
   const dispatch = useDispatch();
 
   const {
-    classifiedType,
     forSaleTotalCount,
     forSaleWebList,
     wantedTotalCount,
