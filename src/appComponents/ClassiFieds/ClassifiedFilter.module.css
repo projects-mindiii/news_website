@@ -7,7 +7,7 @@
     z-index: 9999;
     background: #FFFFFF;
     box-shadow: 4px 4px 10px rgb(123 123 123 / 25%);
-    border-radius: 10px;
+   
 }
 
 
@@ -91,11 +91,7 @@
 }
 
 
-/* .inputBox .form-control {
-    background-color: #f6f6f6;
-    border: none;
-    height: 40px;
-} */
+
 
 .mb-3 input {
     background-color: #EDEDED !important;

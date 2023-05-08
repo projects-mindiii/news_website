@@ -1,15 +1,20 @@
 import React from "react";
-import emailicon from "../assets/images/emailIcon.png";
-import companyIcon from "../assets/images/companyIcon.png";
-import callicon from "../assets/images/contactIcon.png";
+// import companyIcon from "../assets/images/companyIcon.png";
+import emailicon from "../assets/images/email_ico.png";
+import callicon from "../assets/images/callIcon.png";
 import { useTranslation } from "react-i18next";
-//  import emailicon from "../../assets/images/emailIcon.png";
+import { AiOutlineStar } from "react-icons/ai";
+
 //-------Create a Deals Header component--------
 function ContactPerson(props) {
   const { t } = useTranslation();
+
   const handleClick = (e) => {
     e.preventDefault();
-    window.location.href = (`${props.forSaleListData[props.index].email}`);
+    const url = `https://mail.google.com/mail/?view=cm&to=
+    ${props.forSaleListData[props.index].email}&su=${"Report"}`;
+    window.open(url);
+    
   };
 
   return (
@@ -19,8 +24,8 @@ function ContactPerson(props) {
         {props.forSaleListData[props.index].contact_company && (
           <div className="classiFields_PersonAboutShow">
             <div className="classiFields_iconBackGround">
-              <img src={companyIcon} alt={companyIcon} />
-              {/* <AiOutlineStar /> */}
+              {/* <img src={companyIcon} alt={companyIcon} /> */}
+              <AiOutlineStar />
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("COMPANY")}</p>
@@ -35,9 +40,12 @@ function ContactPerson(props) {
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("CONTACT_PERSON_EMAIL")}</p>
-              <p href={props.forSaleListData[props.index].email} onClick={handleClick}>
-      {props.forSaleListData[props.index].email}
-    </p>
+              <p
+                href={props.forSaleListData[props.index].email}
+                onClick={handleClick}
+              >
+                {props.forSaleListData[props.index].email}
+              </p>
               {/* <p>{props.forSaleListData[props.index].email}</p> */}
             </div>
             <div></div>
