@@ -2,8 +2,8 @@ import message from "../../../assets/images/Deal_icon/contact.svg";
 import contact from "../../../assets/images/Deal_icon/call.svg";
 import globe from "../../../assets/images/Deal_icon/globe_ico.png";
 import mail from "../../../assets/images/Deal_icon/mail.svg";
-import watch from "../../../assets/images/Deal_icon/watch.png";
-import promotional from "../../../assets/images/Deal_icon/promotional.png";
+import watch from "../../../assets/images/Deal_icon/watch.svg";
+import promotional from "../../../assets/images/Deal_icon/Promotional_ico.svg";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -12,12 +12,19 @@ import Loader from "../../../utils/Loader/Loader";
 
 // -------function for showing deal list-----------
 function DealList({ dealList, fromDeal }) {
+    console.log("dealList", dealList)
     const navigate = useNavigate();
     //set language
     const { t } = useTranslation();
 
     useEffect(() => {
     }, [dealList]);
+
+
+    function handleClick() {
+        const url = `https://mail.google.com/mail/?view=cm&to=${dealList.contact_email}&su=${"Report"}`;
+        window.open(url);
+    }
 
     return (
         <section>
@@ -63,7 +70,11 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={mail} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("EMAIL_TEXT")}</span>
-                                        <p>{item.contact_email}</p>
+
+                                        {/* <p>{item.contact_email}</p> */}
+
+                                        <a href="#" onClick={handleClick}>
+                                            <p>{item.contact_email}</p> </a>
                                     </div>
                                 </div>
                             )}
@@ -89,7 +100,10 @@ function DealList({ dealList, fromDeal }) {
 
                         <div className="dealPrice">
                             <h4>
-                                {item.currency_code} {new Intl.NumberFormat().format(item.price)}
+                                {item.currency_code} {item.price ? item.price : "0"}
+                                {item.price.toString().includes(".")
+                                    ? ""
+                                    : ".00"}
                             </h4>{" "}
                             <span>{item.tax_lable}</span>
                         </div>

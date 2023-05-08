@@ -1,13 +1,20 @@
 import { Icon } from "@iconify/react";
-import mapIcon from "../../assets/images/socialMedia_icon/map_ico.png";
+import mapIcon from "../../assets/images/socialMedia_icon/map_ico1.svg";
 import { useTranslation } from "react-i18next";
-import contact from "../../assets/images/Deal_icon/contact_ico.png";
-import mail from "../../assets/images/Deal_icon/mail_ico.png";
+import contact from "../../assets/images/Deal_icon/call.svg";
+import mail from "../../assets/images/Deal_icon/mail.svg";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 
 function AddressFields(props) {
+    console.log("props", props)
     //set language
     const { t } = useTranslation();
+
+    function handleClick() {
+        const url = `https://mail.google.com/mail/?view=cm&to=${props.addressSet.email
+            }&su=${"Report"}`;
+        window.open(url);
+    }
 
     return (
         <section>
@@ -71,7 +78,9 @@ function AddressFields(props) {
                                                 <img src={mail} alt="img" />
                                                 <div className="dealText">
                                                     <h5>{t("EMAIL_TEXT")}</h5>
-                                                    <p>{item.email}</p>
+                                                    <a href="#" onClick={handleClick}>
+                                                        <p>{item.email}</p>
+                                                    </a>
                                                 </div>
                                             </div>
                                         )}

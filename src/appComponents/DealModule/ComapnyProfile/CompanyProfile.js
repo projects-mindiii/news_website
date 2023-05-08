@@ -1,14 +1,14 @@
 import "../LatestDealList/LatestDealList.css";
-import contact from "../../../assets/images/Deal_icon/contact_ico.png";
+import contact from "../../../assets/images/Deal_icon/call.svg";
 import globe from "../../../assets/images/Deal_icon/globe_ico.png";
-import mail from "../../../assets/images/Deal_icon/mail_ico.png";
+import mail from "../../../assets/images/Deal_icon/mail.svg";
 import "../../CommonModule/CommonModule.css";
 import MapLocation from "../../CommonModule/MapLocation";
-import insta from "../../../assets/images/socialMedia_icon/insta_black_ico.png";
-import facebook from "../../../assets/images/socialMedia_icon/facebook_ico.png";
-import linkedin from "../../../assets/images/socialMedia_icon/linkedin_black_ico.png";
+import insta from "../../../assets/images/socialMedia_icon/insta_ico1.svg";
+import facebook from "../../../assets/images/socialMedia_icon/facebook_ico1.svg";
+import linkedin from "../../../assets/images/socialMedia_icon/linkedin_ico1.svg";
 import youtube from "../../../assets/images/socialMedia_icon/youtube_play_ico.png";
-import twitter from "../../../assets/images/socialMedia_icon/twitter_ico.png";
+import twitter from "../../../assets/images/socialMedia_icon/youtube_ico1.svg";
 import { useTranslation } from "react-i18next";
 import WhatsApp from "../../../CommonComponent/Whatappshare";
 import ReactPlayer from 'react-player';
@@ -16,9 +16,15 @@ import AddressFields from "../../CommonModule/AddressFields";
 
 // ------function for company profile---------
 function CompanyProfile({ companyDetailData }) {
+  console.log("companyDetailData",companyDetailData)
   //set language
   const { t } = useTranslation();
 
+  function handleClick() {
+    const url = `https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email
+  }&su=${"Report"}`;
+    window.open(url);
+  }
 
   return (
     <section>
@@ -81,7 +87,8 @@ function CompanyProfile({ companyDetailData }) {
                   <img src={mail} alt="img" />
                   <div className="dealText">
                     <span>{t("EMAIL_TEXT")}</span>
-                    <p>{companyDetailData.company_detail.email}</p>
+                    <a href="#" onClick={handleClick}>
+                      <p>{companyDetailData.company_detail.email}</p></a>
                   </div>
                 </div>
               )}
@@ -90,7 +97,7 @@ function CompanyProfile({ companyDetailData }) {
                 <div className="detailsValue">
                   <img src={contact} alt="img" />
                   <div className="dealText">
-                    <span>{t("CONTACT_PERSON")}</span>
+                    <span>{t("CONTACT_NUMBER")}</span>
                     <p>{companyDetailData.company_detail.dial_code}{companyDetailData.company_detail.contact}</p>
                   </div>
                 </div>

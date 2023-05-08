@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Footer from "../appComponents/Footer/Footer";
 import Header from "../appComponents/Header/Header";
@@ -27,6 +27,7 @@ import BookMarks from "../appComponents/BookMarks/BookMarks";
 //-------Create a component for manage routing--------
 function Routers() {
     const { currentUser } = useSelector((state) => state.user);
+    const [show,setShow]=useState(true)
 
     return (
         <Router basename={"/"}>
@@ -47,9 +48,9 @@ function Routers() {
                 <Route exact path="/deals/services" element={<Services />} />
                 <Route exact path="/deals/brands" element={<Brands />} />
                 <Route exact path="/deals/companies" element={<Companies />} />
-                <Route exact path="/job-types" element={<JobTypes/>} />
-                <Route exact path="/Post-advert" element={Object.keys(currentUser).length !== 0 ? (<PostAdvert />) : (<LoginAlertModel modalValue={true}/>)} />
-                <Route exact path="/your-add" element={Object.keys(currentUser).length !== 0 ? (<YourAdd />) : (<LoginAlertModel modalValue={true}/>)} />
+                <Route exact path="/job-types" element={<JobTypes />} />
+                <Route exact path="/Post-advert" element={Object.keys(currentUser).length !== 0 ? (<PostAdvert />) : (<LoginAlertModel modalValue={show} setShow={setShow} />)} />
+                <Route exact path="/your-add" element={Object.keys(currentUser).length !== 0 ? (<YourAdd />) : (<LoginAlertModel modalValue={show} setShow={setShow} />)} />
                 <Route path="/book-marks" element={<BookMarks />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
