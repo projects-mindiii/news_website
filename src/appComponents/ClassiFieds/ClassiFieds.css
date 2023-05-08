@@ -95,14 +95,18 @@
     margin-bottom: 0px;
 }
 
-.classiFields_PersonAboutShow img {
+/* .classiFields_PersonAboutShow img {
     height: 18px;
     width: 18px;
     margin-left: 13px;
     margin-top: 10px;
+} */
+.classiFields_PersonAboutShow img {
+    height: 30px;
+    width: 30px;
+    margin-left: 6px;
+    margin-top: 5px;
 }
-
-
 
 .classiFieds_forSaledropdown button {
     background: #EC4624;
@@ -184,14 +188,10 @@
     line-height: 36px;
     letter-spacing: -0.48px;
     color: #E91F63;
-    /* letter-spacing: -0.48px; */
     color: #E91F63;
     font-family: 'Nunito';
     font-style: normal;
-      /* position: relative;
-    left: 14px;
-    right: 0px;
-    top: 0px; */
+    
 }
   
 

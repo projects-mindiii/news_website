@@ -4,22 +4,22 @@ import "../ClassiFieds/ClassiFieds.css";
 import { useTranslation } from "react-i18next";
 import styles from "./ClassifiedCountry.module.css";
 import ClassifiedFilter from "./ClassifiedFilter";
-import { useDispatch, useSelector } from "react-redux";
-import { setClassfiedType } from "../../store/slices/ClassifiedSlice";
-import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+
 
 function ClassifiedCountry() {
   function closeModal() {
     return setIsOpen(false);
   }
-  const { forSaleTotalCount, wantedTotalCount } = useSelector(
-    (state) => state.classified
-  );
+ 
 
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [countryData, setCountryData] = useState("");
-  console.log("countryData", countryData);
+  const [resultData, setResultData] = useState("");
+  console.log("resultData", resultData);
+   console.log("countryData", countryData);
+
+
 
   return (
     <div className={styles.classiFieds_map_serchbar}>
@@ -30,14 +30,14 @@ function ClassifiedCountry() {
         <div className={styles.countryText}>
           {countryData.label ? (
             <div className={styles.countryText}>
-              {countryData.label} -
+              <p className={styles.selectText}>{countryData.label} - </p>
               <span className={styles.resultText}>
-                {forSaleTotalCount} Results
+              {resultData} Results
               </span>{" "}
             </div>
           ) : (
             <p>
-              All South Africa - <span> 0 Result</span>
+              All South Africa - <span className={styles.resultText}> 0 Result</span>
             </p>
           )}
         </div>
@@ -46,6 +46,7 @@ function ClassifiedCountry() {
         <ClassifiedFilter
           closeModal={closeModal}
           setCountryData={setCountryData}
+          setResultData={setResultData}
         />
       )}
     </div>
