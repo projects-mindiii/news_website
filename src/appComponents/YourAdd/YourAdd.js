@@ -9,8 +9,9 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import ClassifiedCategoryList from "../ClassiFieds/ClassifiedCategoryList";
 import { yourAdvertListApi} from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
-
+import { Toast } from "../../utils/Toaster";
 //-------Create a Deals Header component--------
+import Loader from "../../utils/Loader/Loader";
 function YourAdd() {
   const dispatch = useDispatch();
 
@@ -18,7 +19,8 @@ function YourAdd() {
         (state) => state.user
     );
     const { yourAdvertWebList, yourAdvertTotalCount} = useSelector((state) => state.classified);
-    
+    const [isLoadings, setIsLoading] = useState(false)
+
     useEffect(() => {
         async function getWebClassifiedLists() {
           const yourAdvertQuery = { limit: 10, offset: 0, type: 1 };
@@ -28,10 +30,40 @@ function YourAdd() {
           });      
         }
         getWebClassifiedLists();
-      }, []);
+      }, [isLoadings]);
+
+     async function deleteClassiFieds(id){
+        setIsLoading(true)        
+        await SublyApi.deleteClassiFied( userToken,id).then((responsejson) => {
+            if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
+                setIsLoading(false)
+                Toast.fire({
+                    icon: "success",
+                    title: responsejson.message,
+                });
+            } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
+                setIsLoading(false)
+                Toast.fire({
+                    icon: "success",
+                    title: responsejson.message,
+                });
+            } else {
+                if (responsejson.status_code == STATUS_CODES.SUCCESS) {
+                    setIsLoading(false)
+                    Toast.fire({
+                        icon: "success",
+                        title: responsejson.message,
+                    });
+                }
+            }
+        });
+      }
 
     return (
         <div className="main">
+             {isLoadings === true ? (
+                <Loader />
+            ) : ""}
             <React.Fragment >
                 <Container>
                     <Row>
@@ -48,7 +80,7 @@ function YourAdd() {
                         <Col xs={12} sm={12} md={12} lg={6}>
                            <div className="postAdvertBox">
                            {yourAdvertWebList && yourAdvertWebList.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5>}
-                            <ClassifiedCategoryList displayRoute="your_advert" forSaleListData={yourAdvertWebList}  classifiedDataType={4}  />
+                            <ClassifiedCategoryList displayRoute="your_advert" forSaleListData={yourAdvertWebList}  classifiedDataType={4} deleteClassiFieds={deleteClassiFieds} />
                            </div>
                             
                             {/* {yourAdvertWebList && yourAdvertWebList.map((item, index) => (

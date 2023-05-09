@@ -1,6 +1,9 @@
 import "./PostAdvert.css";
 import { Row, Nav, Container, Col, Tab, FloatingLabel } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 import Select from "react-select";
+import Cropper,{ ReactCropperElement } from "react-cropper";
+import "cropperjs/dist/cropper.css";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SublyApi from "../../helpers/Api";
@@ -8,7 +11,7 @@ import Form from 'react-bootstrap/Form';
 import { Toast } from "../../utils/Toaster";
 import { Icon } from '@iconify/react';
 import CommonEmailField from "../../formComponent/CommonInputFields/CommonEmailField";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller,useController } from "react-hook-form";
 import nameicon from "../../assets/images/Deal_icon/support_ico.png";
 import staricon from "../../assets/images/Deal_icon/star_ico.png";
 import WatsappInput from "../../formComponent/CommonInputFields/WatsappInput";
@@ -29,15 +32,28 @@ function PostAdvert() {
     const {
         register,
         handleSubmit,
-        setValue,
+        setValue,reset,
         getValues,
         control,
         watch,
         formState: { errors },
     } = useForm();
+    const { field:heading } = useController({
+        control,
+        name: 'heading',
+      });
+      const { field:description } = useController({
+        control,
+        name:'description'
+      });
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false)
+    const [profilePreview, setProfilePreview] = useState([]);
+    const [profileImage, setProfileImage] = useState([]);
+    const [showHead, setShowHead] = useState(false);
+    const [cropper, setCropper] = useState("");
     const [watsappNo, setWatsappNo] = useState("");
+    const [image, setImage] = useState(null);
     const [dialCodeWatsapp, setDialCodeWatsapp] = useState("27");
     const [countryCodeWatsapp, setCountryCodeWatsapp] = useState("za");
     const [phoneNo, setPhoneNo] = useState("");
@@ -64,8 +80,6 @@ function PostAdvert() {
     }]);
     const [headingLength, setHeadingLength] = useState();
     const [descriptionLength, setDescriptionLength] = useState();
-    const [profilePreview, setProfilePreview] = useState([]);
-    const [profileImage, setProfileImage] = useState([]);
     const [countryValue, setCountryValue] = useState(isDefaultCountry[1]);
     const [provinces, setProvinces] = useState();
     const [provinceValue, setProvinceValue] = useState({ label: 'Free State', value: 932, id: 932 });
@@ -81,7 +95,6 @@ function PostAdvert() {
     useEffect(() => {
         async function getClassifiedLists() {
             if (Object.keys(allMetaList).length > 0) {
-                setIsLoading(false)
                 let earningOption = [];
                 let jobType = [];
                 let countyryOption = [];
@@ -140,14 +153,13 @@ function PostAdvert() {
 
                 }
             }
-            else {
-                setIsLoading(true)
-            }
+           
         }
         getClassifiedLists();
     }, []);
 
-    async function onSubmit(data) {
+    async function onSubmit(data,e) {
+        console.log(profileImage)
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
@@ -235,7 +247,7 @@ function PostAdvert() {
             "whatsapp_dail_code", dialCodeWatsapp ? dialCodeWatsapp : ""
         );
         requestData.append(
-            "classifiedGallery", profileImage ? profileImage : ""
+            "classifiedGallery", profileImage ? profileImage:""
         );
         await SublyApi.addClassifiedList(requestData, userToken).then((responsejson) => {
             if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
@@ -261,25 +273,80 @@ function PostAdvert() {
             }
         });
     }
-    async function onImageChange(e) {
-        let profileviews = [...profilePreview];
-        let profileimages = [...profileImage];
-        if (e.target.files.length !== 0) {
-            profileviews.push(URL.createObjectURL(e.target.files[0]));
-            profileimages.push(e.target.files[0]);
-            await setProfilePreview(profileviews);
-            await setProfileImage(profileimages);
+    const uploadImage = (e) => {
+        e.preventDefault();
+        let files;
+        if (e.dataTransfer) {
+          files = e.dataTransfer.files;
+        } else if (e.target) {
+          files = e.target.files;
         }
+        // setProfileImage(e.target.files[0]);
+        const reader = new FileReader();
+        reader.onload = () => {
+            setImage(reader.result);
+        };
+        reader.readAsDataURL(files[0]);
+    };
+
+    const imgCropper = () => {
+        showHead ? setShowHead(false) : setShowHead(true);
+    };
+    
+    const getCropData = () => {
+        let profileviews = [...profilePreview];
+             let profileimages = [...profileImage];
+        if (typeof cropper !== "undefined") {
+            let cropData = cropper
+                .getCroppedCanvas({
+                    width: 150,
+                    height: 150,
+                    maxWidth: 150,
+                    maxHeight: 150,
+                })
+                .toDataURL();
+            var block = cropData.split(";");
+            // Get the content type of the image
+            var contentTypes = block[0].split(":")[1]; // In this case "image/png"
+            // get the real base64 content of the file
+            var realData = block[1].split(",")[1];
+            var blobImg = b64toBlob(realData, contentTypes);
+            profileviews.push(cropData);
+            profileimages.push(blobImg);
+             setProfilePreview(profileviews);
+             setProfileImage(profileimages);
+        }
+    };
+    function b64toBlob(cropData, contentType, sliceSize) {
+        contentType = contentType || "";
+        sliceSize = sliceSize || 512;
+        var byteCharacters = window.atob(cropData); //decode string
+        var byteArrays = [];
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+            var byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        var blob = new Blob(byteArrays, { type: contentType });
+        return blob;
     }
-    function onImageRemove(e, index) {
+
+
+   async function onImageRemove(e, index) {
         console.log(index)
         e.preventDefault();
-        profilePreview.splice(index, 1);
-        profileImage.splice(index, 1);
-        setProfilePreview(profilePreview);
-        setProfileImage(profileImage);
+        let profileviews = [...profilePreview];
+             let profileimages = [...profileImage];
+             profileviews.splice(index, 1);
+             profileimages.splice(index, 1);
+        setProfilePreview(profileviews);
+        setProfileImage(profileimages);
     }
-    console.log(profilePreview)
+    console.log(image)
     return (
         <div className="main">
             {isLoading === true ? (
@@ -352,7 +419,8 @@ function PostAdvert() {
                                                             }
                                                             ,
                                                         })}
-                                                        onChange={(e) => { setHeadingLength(e.target.value.length) }}
+                                                        value={heading.value} 
+                                                        onChange={(e) => { heading.onChange(e); setHeadingLength(e.target.value.length) }}
 
                                                     />
                                                 </Form.Group>
@@ -377,7 +445,9 @@ function PostAdvert() {
                                                                 value: 3,
                                                                 message: t("POST_Description_MIN_ERROR")
                                                             },
-                                                        })} onChange={(e) => { setDescriptionLength(e.target.value.length) }}
+                                                        })} 
+                                                        value={description.value} 
+                                                        onChange={(e) => { description.onChange(e); setDescriptionLength(e.target.value.length) }}
                                                         className="post_Add_Discription" placeholder="Enter description" />
 
                                                 </Form.Group>
@@ -771,19 +841,21 @@ function PostAdvert() {
                                         <WatsappInput watsappNo={watsappNo} dialCodeWatsapp={dialCodeWatsapp} countryCodeWatsapp={countryCodeWatsapp}
                                             setWatsappNo={setWatsappNo} setDialCodeWatsapp={setDialCodeWatsapp} setCountryCodeWatsapp={setCountryCodeWatsapp} />
                                         <div className="post_Add_AddPhoto">
-                                            <label for="uploadImage"  >
+                                            <label for="imgUpdate"  >
                                                 <div>{t("ADD_PHOTOS")}</div>
                                             </label>
                                         </div>
                                         <input
-                                            id="uploadImage"
-                                            name="image"
-                                            type="file"
+                                        type="file"
+                                        accept="image/*"
+                                        id="imgUpdate"
                                             style={{
                                                 display: "none",
                                             }}
-                                            accept="image/*"
-                                            onChange={onImageChange}
+                                            onInputCapture={imgCropper}
+                                            onChange={(e) => {
+                                                uploadImage(e);
+                                            }}
                                         />
                                         <div className="post_Add_ImagePreview">
                                             {profilePreview ? profilePreview.map((item, index) => (
@@ -801,7 +873,55 @@ function PostAdvert() {
                                 </Form>
                             </div>
                         </Col>
+                        
                     </Row>
+                    <Modal show={showHead} onHide={imgCropper} backdrop="static" >
+                        <Modal.Header closeButton>
+                            <Modal.Title>{t("ImageCrop")}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div>
+                                <Cropper
+                                    style={{ height: 400, width: "100%" }}
+                                    // initialAspectRatio={2 / 2}
+                                    aspectRatio={2 / 2}
+                                    guides={false}
+                                    preview=".img-preview2"
+                                    src={image}
+                                    viewMode={1}
+                                    minCropBoxHeight={150}
+                                    minCropBoxWidth={150}
+                                    maxCropBoxWIdth={150}
+                                    maxCropBoxHeight={150}
+                                    cropBoxResizable={false}
+                                    background={false}
+                                    responsive={true}
+                                    autoCropArea={1}
+                                    checkOrientation={false}
+                                    center={true}
+                                    scalable={false}
+                                    onInitialized={(instance) => {
+                                        setCropper(instance);
+                                    }}
+                                />
+                            </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button
+                                variant="primary"
+                                
+                                onClick={() => {
+                                    getCropData();
+                                    imgCropper();
+                                }}
+                            >
+                                {t("Crop")}
+                            </button>
+                            <button variant="secondary" onClick={()=>{imgCropper()}}>
+                                {t("Close")}
+                            </button>
+                        </Modal.Footer>
+                    </Modal>
                 </Container>
             </React.Fragment>
         </div>

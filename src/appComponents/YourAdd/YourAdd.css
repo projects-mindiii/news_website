@@ -41,7 +41,7 @@
     margin-top: 10px;
 }
 
-.yourAdd_DataShow .edit_DeleteButton {
+ .edit_DeleteButton {
     margin-top: 15px;
     background: #000000;
     border-radius: 7.2px;
@@ -55,7 +55,7 @@
     min-height: 46px;
 }
 
-.yourAdd_DataShow .not_live {
+ .not_live {
     margin-top: 15px;
     background: linear-gradient(180deg, #EB235F 0%, #CD0F48 98.67%);
     border-radius: 6px;
