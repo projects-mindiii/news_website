@@ -23,3 +23,15 @@ export const COMPANY_REFERENCE_TYPE = {
   SERVICE_TYPE: "2",
   DEAL_TYPE: "3",
 }
+
+export const BOOK_TYPE = {
+  CLASSIFIED: "1",
+  NEWS: "2",
+  DEAL: "3"
+}
+
+export const BOOK_ACTION_TYPE = {
+  ADD: "1",
+  REMOVE: "0",
+  REMOVE_ALL: "2"
+}
