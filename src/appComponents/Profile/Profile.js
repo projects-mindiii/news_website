@@ -22,6 +22,7 @@ import WatsappInput from "../../formComponent/CommonInputFields/WatsappInput";
 import ContactInput from "../../formComponent/CommonInputFields/ContactInput";
 import CommonEmailField from "../../formComponent/CommonInputFields/CommonEmailField";
 import Loader from "../../utils/Loader/Loader";
+import { userLogout } from "../../store/slices/UserSlice";
 
 
 //--------Create a Profile component----------
@@ -135,6 +136,14 @@ function Profile() {
         dispatch(userDetails(userToken)).then((responsejson) => {
             const response = responsejson.payload;
             if (response.status_code === STATUS_CODES.SUCCESS) {
+                if (response.status === STATUS_CODES.INVALID_TOKEN) {
+                    Toast.fire({
+                        icon: "error",
+                        title: t("SESSION_EXPIRE"),
+                    });
+                    dispatch(userLogout());
+                   
+                }
                 setValue("fullName", (response.data[0].name) ? response.data[0].name : "");
                 setValue("email", (response.data[0].email) ? response.data[0].email : "");
                 setValue("companyName", (response.data[0].company_name) ? response.data[0].company_name : "");
@@ -154,6 +163,7 @@ function Profile() {
                 setCountrySelected(newCountryOption);
                 const newProvinceOption = provinceOptions.find(item => item.id === response.data[0].provinces);
                 setProvinceSelected(newProvinceOption);
+               
             } else {
                 Toast.fire({
                     icon: "error",
@@ -200,7 +210,7 @@ function Profile() {
             }
         });
     };
-   
+
 
 
     //------ function for delete user API -------

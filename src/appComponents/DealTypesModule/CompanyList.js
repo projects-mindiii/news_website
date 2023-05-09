@@ -41,7 +41,6 @@ function CompanyList({ companyList, refrenceType }) {
                                                     ))
                                                     : ""}
                                             </Nav.Item>
-
                                         </Nav>
                                     </Col>
                                     <Col lg={6} sm={12}>

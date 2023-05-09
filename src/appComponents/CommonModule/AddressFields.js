@@ -6,15 +6,8 @@ import mail from "../../assets/images/Deal_icon/mail.svg";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 
 function AddressFields(props) {
-    console.log("props", props)
     //set language
     const { t } = useTranslation();
-
-    function handleClick() {
-        const url = `https://mail.google.com/mail/?view=cm&to=${props.addressSet.email
-            }&su=${"Report"}`;
-        window.open(url);
-    }
 
     return (
         <section>
@@ -78,7 +71,7 @@ function AddressFields(props) {
                                                 <img src={mail} alt="img" />
                                                 <div className="dealText">
                                                     <h5>{t("EMAIL_TEXT")}</h5>
-                                                    <a href="#" onClick={handleClick}>
+                                                    <a href={`https://mail.google.com/mail/?view=cm&to=${item.email}&su=${"Subject"}`} >
                                                         <p>{item.email}</p>
                                                     </a>
                                                 </div>

@@ -21,7 +21,7 @@ function CompanyOrderType(props) {
             setLoader(true);
             const details = await SublyApi.getDealList(
                 userToken,
-                companyValue
+                companyValue.company_order
             );
 
             if (details.status_code == STATUS_CODES.SUCCESS) {

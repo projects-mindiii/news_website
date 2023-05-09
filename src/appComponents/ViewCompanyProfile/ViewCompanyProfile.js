@@ -38,7 +38,7 @@ function ViewCompanyProfile() {
     getCompanyDetails();
   }, []);
 
-  console.log("ompanyDetails.deal_list", companyDetails.deal_list)
+  console.log("companyDetails",companyDetails)
 
   return (
     <section>

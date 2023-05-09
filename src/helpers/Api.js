@@ -136,16 +136,15 @@ class SublyApi {
     return res;
   }
 
-  /* GET  /deal list api : { email }
+  /* GET  /deal list api : {  }
    deal list api
      Authorization required:none
-     @param data {Object} { email }
+     @param data {Object} { company_order }
      @returns {object} {token}
      */
-  static async getDealList(authToken,data) {
+  static async getDealList(authToken, data) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/deal-list?company_order=${data.company_order}`, undefined, "get", header);
-
+    let res = await this.request(`/v2/deal-list?company_order=${data}`, undefined, "get", header);
     return res;
   }
 
@@ -289,13 +288,13 @@ class SublyApi {
     return res;
   }
 
-   /* GET  /get company list: 
-  get book mark lists
+  /* GET  /get company list: 
+ get book mark lists
  
-   Authorization required: Token
-   @returns {object} {token}
-   */
-   static async getBookMarkList(authToken, data) {
+  Authorization required: Token
+  @returns {object} {token}
+  */
+  static async getBookMarkList(authToken, data) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/get-bookmark-list?limit=${data.limit}&offset=${data.offset}`,
       "", undefined, header

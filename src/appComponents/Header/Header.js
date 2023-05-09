@@ -93,7 +93,7 @@ function Header() {
 
           {/* -------DealsHeaderSection-------- */}
           <Row>
-            <Col xl={8} lg={12} md={12} sm={12}>
+            <Col xl={8} lg={8} md={12} sm={12}>
               {location.pathname == "/deals/latest-deals" ||
                 location.pathname.match("/deals/latest-deals/company-profile/") || location.pathname == "/deals/products"
                 || location.pathname == "/deals/services" || location.pathname == "/deals/brands" ||
@@ -109,7 +109,7 @@ function Header() {
                 ""
               )}
             </Col>
-            <Col xl={4} lg={12} md={12} sm={12}>
+            <Col xl={4} lg={4} md={12} sm={12}>
               <SearchBar />
             </Col>
           </Row>

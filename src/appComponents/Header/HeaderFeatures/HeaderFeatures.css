@@ -28,8 +28,43 @@
     padding-left: 10px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 379px) {
-    .headerAfterProfile{
+@media only screen and (min-width: 338px) and (max-width: 379px) {
+
+    /* .headerAfterProfile{
         height: 53px !important;
+    } */
+    .headerAfterProfile {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+
+    .headerAfterProfile h5 {
+        font-size: 14px !important;
+        letter-spacing: unset !important;
+    }
+}
+
+
+@media only screen and (min-width: 328px) and (max-width: 337px) {
+    .headerAfterProfile {
+        padding-right: 10px !important;
+        padding-left: 10px !important;
+    }
+
+    .headerAfterProfile h5 {
+        font-size: 14px !important;
+        letter-spacing: unset !important;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 327px) {
+    .headerAfterProfile {
+        padding-right: 6px !important;
+        padding-left: 6px !important;
+    }
+
+    .headerAfterProfile h5 {
+        font-size: 14px !important;
+        letter-spacing: unset !important;
     }
 }

@@ -8,7 +8,7 @@ import insta from "../../../assets/images/socialMedia_icon/insta_ico1.svg";
 import facebook from "../../../assets/images/socialMedia_icon/facebook_ico1.svg";
 import linkedin from "../../../assets/images/socialMedia_icon/linkedin_ico1.svg";
 import youtube from "../../../assets/images/socialMedia_icon/youtube_play_ico.png";
-import twitter from "../../../assets/images/socialMedia_icon/youtube_ico1.svg";
+import twitter from "../../../assets/images/socialMedia_icon/twitter_ico1.svg";
 import { useTranslation } from "react-i18next";
 import WhatsApp from "../../../CommonComponent/Whatappshare";
 import ReactPlayer from 'react-player';
@@ -16,15 +16,8 @@ import AddressFields from "../../CommonModule/AddressFields";
 
 // ------function for company profile---------
 function CompanyProfile({ companyDetailData }) {
-  console.log("companyDetailData",companyDetailData)
   //set language
   const { t } = useTranslation();
-
-  function handleClick() {
-    const url = `https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email
-  }&su=${"Report"}`;
-    window.open(url);
-  }
 
   return (
     <section>
@@ -87,7 +80,7 @@ function CompanyProfile({ companyDetailData }) {
                   <img src={mail} alt="img" />
                   <div className="dealText">
                     <span>{t("EMAIL_TEXT")}</span>
-                    <a href="#" onClick={handleClick}>
+                    <a href={`https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email}&su=${"Subject"}`} >
                       <p>{companyDetailData.company_detail.email}</p></a>
                   </div>
                 </div>

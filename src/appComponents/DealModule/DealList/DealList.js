@@ -12,19 +12,12 @@ import Loader from "../../../utils/Loader/Loader";
 
 // -------function for showing deal list-----------
 function DealList({ dealList, fromDeal }) {
-    console.log("dealList", dealList)
     const navigate = useNavigate();
     //set language
     const { t } = useTranslation();
 
     useEffect(() => {
     }, [dealList]);
-
-
-    function handleClick() {
-        const url = `https://mail.google.com/mail/?view=cm&to=${dealList.contact_email}&su=${"Report"}`;
-        window.open(url);
-    }
 
     return (
         <section>
@@ -70,10 +63,7 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={mail} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("EMAIL_TEXT")}</span>
-
-                                        {/* <p>{item.contact_email}</p> */}
-
-                                        <a href="#" onClick={handleClick}>
+                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
                                             <p>{item.contact_email}</p> </a>
                                     </div>
                                 </div>
@@ -100,10 +90,11 @@ function DealList({ dealList, fromDeal }) {
 
                         <div className="dealPrice">
                             <h4>
-                                {item.currency_code} {item.price ? item.price : "0"}
+                                {/* {item.currency_code} {item.price ? item.price : "0"}
                                 {item.price.toString().includes(".")
                                     ? ""
-                                    : ".00"}
+                                    : ".00"} */}
+                                     {item.currency_code} {item.price.toFixed(2)}
                             </h4>{" "}
                             <span>{item.tax_lable}</span>
                         </div>
