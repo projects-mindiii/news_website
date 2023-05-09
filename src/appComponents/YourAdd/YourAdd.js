@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { BOOK_TYPE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
+import Loader from "../../utils/Loader/Loader";
 function YourAdd() {
   const dispatch = useDispatch();
 
