@@ -14,10 +14,16 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+import { STATUS_CODES } from "../../utils/StatusCode";
+import { Toast } from "../../utils/Toaster";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 //-------Create a Deals Header component--------
 function ClassiFieds() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const {
@@ -46,7 +52,26 @@ function ClassiFieds() {
         type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
       };
       const data = { userToken: userToken, whereQuery: forSaleQuery };
-      dispatch(forSaleListApi(data)).then((responsejson) => {});
+      dispatch(forSaleListApi(data)).then(async (responsejson) => {
+        const response = responsejson.payload;
+        if (response.status_code !== STATUS_CODES.SUCCESS) {
+          if (response.status === STATUS_CODES.INVALID_TOKEN) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
+            await dispatch(userLogout());
+            await dispatch(guestUserLogin());
+            navigate("/login");
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: response.data.message,
+            });
+          }
+
+        }
+        });
 
       const wantedQuery = {
         limit: 10,

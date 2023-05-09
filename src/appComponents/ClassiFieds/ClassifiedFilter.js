@@ -19,12 +19,11 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
 
 function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
-  const { classifiedType } = useSelector((state) => state.classified);
-  const [loader, setLoader] = useState(false);
-
-  const { userToken, allMetaList, isLoading } = useSelector(
-    (state) => state.user
+  const { classifiedType, isLoading } = useSelector(
+    (state) => state.classified
   );
+
+  const { userToken, allMetaList } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const {
@@ -83,12 +82,11 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
       city: getValues("city"),
     };
 
-    getWebClassifiedLists(classfiedQuery);
+    getWebClassifiedListSearch(classfiedQuery);
   }
 
   function handleClick() {
     searchApiCall(provinceSelected.value);
-    setLoader(true);
   }
 
   function handleChange(data) {
@@ -96,11 +94,10 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
     setProvinceSelected(data);
     if (data.value != "0") {
       searchApiCall(data.value);
-      setLoader(true);
     }
   }
 
-  async function getWebClassifiedLists(classfiedQuery) {
+  async function getWebClassifiedListSearch(classfiedQuery) {
     const data = { userToken: userToken, whereQuery: classfiedQuery };
     if (classifiedType == CLASSIFIED_CATEGORY_TYPE.FORSALE) {
       dispatch(forSaleListApi(data)).then((responsejson) => {
@@ -108,48 +105,36 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
         if (response.status_code === STATUS_CODES.SUCCESS) {
           setResultData(response.data.total_count);
           closeModal();
-          setLoader(false);
-        }else{
-          setLoader(false);
         }
       });
     }
 
     if (classifiedType == CLASSIFIED_CATEGORY_TYPE.WANTED) {
-      setLoader(false);
       dispatch(getWantedListApi(data)).then((responsejson) => {
         const response = responsejson.payload;
         if (response.status_code === STATUS_CODES.SUCCESS) {
           setResultData(response.data.total_count);
           closeModal();
-        }else{
-          setLoader(false);
         }
       });
     }
 
     if (classifiedType == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) {
-      setLoader(false);
       dispatch(getJobOfferListApi(data)).then((responsejson) => {
         const response = responsejson.payload;
         if (response.status_code === STATUS_CODES.SUCCESS) {
           setResultData(response.data.total_count);
           closeModal();
-        }else{
-          setLoader(false);
         }
       });
     }
 
     if (classifiedType == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS) {
-      setLoader(false);
       dispatch(getJobSeekerListApi(data)).then((responsejson) => {
         const response = responsejson.payload;
         if (response.status_code === STATUS_CODES.SUCCESS) {
           setResultData(response.data.total_count);
           closeModal();
-        }else{
-          setLoader(false);
         }
       });
     }
@@ -186,9 +171,11 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
     getMetaDetails();
   }, []);
 
+  console.log("countrySelected", countrySelected);
+
   return (
     <>
-      {loader ? (
+      {isLoading ? (
         <div className="loader">
           <Loader />
         </div>
@@ -200,100 +187,112 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
               <Form.Control
                 type="search"
                 placeholder={t("SEARCH_TEXT")}
-                onChange={() => searchApiCall()}
+                // onChange={() => searchApiCall()}
               />
             </Form.Group>
           </Form>
           <RxCross2 onClick={closeModal} />
         </div>
-        <div className={styles.inputBox}>
-          <Form.Group className="mb-3">
-            <Select
-              id="province"
-              options={provinceOption}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder={t("SELECT_PROVINCE")}
-              value={provinceSelected && provinceSelected}
-              styles={{
-                placeholder: () => ({
-                  fontSize: "15px",
-                  color: "#cacaca",
-                  position: "absolute",
-                  top: "8px",
-                  left: "15px",
-                }),
-              }}
-              theme={(theme) => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  borderRadius: 0,
-                  primary25: "#f2f2f2",
-                  primary: "#000000;",
-                  primary50: "#f2f2f2",
-                },
-              })}
-            />
-          </Form.Group>
 
-          {provinceSelected.value == 0 ? (
-            <>
-              <Form.Group className={`mb-3 `}>
-                <Select
-                  id="country"
-                  options={countryOption}
-                  onChange={setCountrySelected}
-                  placeholder={t("COUNTRY_SET")}
-                  value={countrySelected}
-                  styles={{
-                    placeholder: () => ({
-                      fontSize: "15px",
-                      color: "#cacaca",
-                      position: "absolute",
-                      top: "8px",
-                      left: "15px",
-                    }),
-                  }}
-                  theme={(theme) => ({
-                    ...theme,
-                    colors: {
-                      ...theme.colors,
-                      borderRadius: 0,
-                      primary25: "#f2f2f2",
-                      primary: "#000000;",
-                      primary50: "#f2f2f2",
-                    },
-                  })}
-                />
-              </Form.Group>
+       
+          <div className={styles.inputBox}>
+            <Form.Group className="mb-3">
+              <Select
+                id="province"
+                options={provinceOption}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder={t("SELECT_PROVINCE")}
+                value={provinceSelected && provinceSelected}
+                styles={{
+                  placeholder: () => ({
+                    fontSize: "15px",
+                    color: "#cacaca",
+                    position: "absolute",
+                    top: "8px",
+                    left: "15px",
+                  }),
+                }}
+                theme={(theme) => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    borderRadius: 0,
+                    primary25: "#f2f2f2",
+                    primary: "#000000;",
+                    primary50: "#f2f2f2",
+                  },
+                })}
+              />
+            </Form.Group>
 
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="Input City/Town"
-                  {...register("city", {
-                    required: {
-                      value: true,
-                      message: "Input City/Town",
-                    },
-                  })}
-                />
-              </Form.Group>
-            </>
-          ) : (
-            ""
-          )}
-
-          <div className="buttonAdd">
             {provinceSelected.value == 0 ? (
-              <CustomBtn onClick={() => handleClick()}>Done</CustomBtn>
+              <>
+                <Form.Group className={`mb-3 `}>
+                  <Select
+                    id="country"
+                    options={countryOption}
+                    isSearchable={true}
+                    onChange={setCountrySelected}
+                    placeholder={t("COUNTRY_SET")}
+                    value={countrySelected}
+                    styles={{
+                      placeholder: () => ({
+                        fontSize: "15px",
+                        color: "#cacaca",
+                        position: "absolute",
+                        top: "8px",
+                        left: "15px",
+                      }),
+                    }}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        borderRadius: 0,
+                        primary25: "#f2f2f2",
+                        primary: "#000000;",
+                        primary50: "#f2f2f2",
+                      },
+                    })}
+                  />
+                </Form.Group>
+
+                {countrySelected.value !== "0" ? (
+                  <Form.Group className="mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Input City/Town"
+                      {...register("city", {
+                        required: {
+                          value: true,
+                          message: "Input City/Town",
+                        },
+                      })}
+                    />
+                  </Form.Group>
+                ) : (
+                  ""
+                )}
+              </>
             ) : (
               ""
             )}
+
+            <div className="buttonAdd">
+              {provinceSelected.value == 0 ? (
+                <CustomBtn onClick={() => handleClick()}>Done</CustomBtn>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-        </div>
+
+          
+           
+        
+       
       </div>
     </>
   );

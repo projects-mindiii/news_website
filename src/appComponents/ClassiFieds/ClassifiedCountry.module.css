@@ -53,6 +53,7 @@ line-height: 32px;
     display: flex !important;
     margin-top: 15px !important;
     padding: 5px !important;
+    cursor: pointer;
 }
 
 

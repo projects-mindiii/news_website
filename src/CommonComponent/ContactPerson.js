@@ -10,10 +10,10 @@ function ContactPerson(props) {
   const { t } = useTranslation();
 
   const handleClick = (e) => {
-    e.preventDefault();
-    const url = `https://mail.google.com/mail/?view=cm&to=
-    ${props.forSaleListData[props.index].email}&su=${"Report"}`;
-    window.open(url);
+    // e.preventDefault();
+    // const url = `https://mail.google.com/mail/?view=cm&to=
+    // ${props.forSaleListData[props.index].email}&su=${"Report"}`;
+    // window.open(url);
     
   };
 
@@ -29,7 +29,7 @@ function ContactPerson(props) {
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("COMPANY")}</p>
-              <p>{props.forSaleListData[props.index].contact_company}</p>
+              <span>{props.forSaleListData[props.index].contact_company}</span>
             </div>
           </div>
         )}
@@ -40,12 +40,15 @@ function ContactPerson(props) {
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("CONTACT_PERSON_EMAIL")}</p>
-              <p
-                href={props.forSaleListData[props.index].email}
+              <a href={`https://mail.google.com/mail/?view=cm&to= ${props.forSaleListData[props.index].email}&su=${"Subject"}`}>
+                                            <span> {props.forSaleListData[props.index].email}</span> </a>
+              {/* <p
+                href={`https://mail.google.com/mail/?view=cm&to=
+                ${props.forSaleListData[props.index].email}&su=${"Report"}`}
                 onClick={handleClick}
               >
                 {props.forSaleListData[props.index].email}
-              </p>
+              </p> */}
               {/* <p>{props.forSaleListData[props.index].email}</p> */}
             </div>
             <div></div>
@@ -57,8 +60,10 @@ function ContactPerson(props) {
               <img src={callicon} alt={callicon} />
             </div>
             <div className="classiFields_emailHeadingText">
-              <p>{t("CONTACT_NUMBER")}</p>
-              <p>{props.forSaleListData[props.index].contact}</p>
+            <p>{t("CONTACT_NUMBER")}</p> 
+              <span><a href={`tel:${props.forSaleListData[props.index].contact}`}>{props.forSaleListData[props.index].contact}</a></span>
+              {/* <p>{t("CONTACT_NUMBER")}</p> */}
+              {/* <p>{props.forSaleListData[props.index].contact}</p> */}
             </div>
             <div></div>
           </div>
