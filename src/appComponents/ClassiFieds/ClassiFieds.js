@@ -13,7 +13,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
-import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
@@ -34,6 +34,8 @@ function ClassiFieds() {
   } = useSelector((state) => state.classified);
   const { userToken, isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
+  const [updateList, setUpdateList] = useState(null)
+
 
   
   // function for classified webList
@@ -82,7 +84,7 @@ function ClassiFieds() {
       dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
     }
     getWebClassifiedLists();
-  }, []);
+  }, [updateList]);
   
   return (
     <div className="main">
@@ -161,6 +163,8 @@ function ClassiFieds() {
                     <ClassifiedCategoryList
                       forSaleListData={forSaleWebList}
                       classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
+                      bookType={BOOK_TYPE.CLASSIFIED}
+                      setUpdateList={setUpdateList}
                     />
                   ) : (
                     <p className="nodataDisplay">
@@ -171,6 +175,8 @@ function ClassiFieds() {
                   <ClassifiedCategoryList
                     forSaleListData={wantedWebList}
                     classifiedDataType={CLASSIFIED_CATEGORY_TYPE.WANTED}
+                    bookType={BOOK_TYPE.CLASSIFIED}
+                    setUpdateList={setUpdateList}
                   />
                 ) : (
                   <p className="nodataDisplay">
