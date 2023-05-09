@@ -1,6 +1,5 @@
 import mapicon from "../../assets/images/map_ico.png";
 import React from "react";
-import { Row, Col } from "react-bootstrap";
 import "../ClassiFieds/ClassiFieds.css";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
@@ -12,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 
 function ClassifiedCategoryList({ forSaleListData }) {
-  const { t } = useTranslation();
+  
   return (
     <div className="main">
       {forSaleListData &&
@@ -53,7 +52,7 @@ function ClassifiedCategoryList({ forSaleListData }) {
               </div>
 
               {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ||
-              item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBSEEKER ? (
+              item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS ? (
                 <div className="jobType">
                   <p>
                     {item.job_type_name ? item.job_type_name + `-` : ""}
@@ -67,15 +66,19 @@ function ClassifiedCategoryList({ forSaleListData }) {
               {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
               item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
                 <div className="classiFieds_RupeesText">
-                  <p>
-                    {/* {item.currency_code} {item.amount ? item.amount : "0"}
-                    {item.amount.toString().includes(".") ? "" : ".00"} */}
-                    {item.currency_code} {new Intl.NumberFormat().format(item.amount)}
-                  </p>
+                  {item.amount !== 0 && (
+                    <p>
+                      {/* {item.currency_code} {item.amount ? item.amount : "0"}
+                       {item.amount.toString().includes(".") ? "" : ".00"} */}
+                      {item.currency_code} {item.amount.toFixed(2)}
+                      {/* {item.currency_code} {new Intl.NumberFormat().format(item.amount)} */}
+                    </p>
+                  )}
+
                   <span>
-                    {item.category_type_id == 6
+                    {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER
                       ? item.earning_name
-                      : item.currency_name}{" "}
+                      : item.currency_name}
                     {item.is_negotiable ? "(Negotiable)" : ""}
                   </span>
                 </div>
@@ -85,10 +88,9 @@ function ClassifiedCategoryList({ forSaleListData }) {
 
               <div className="classiFieds_countryName ">
                 <span>
-                  <img src={mapicon} alt={mapicon} />{" "}
+                  <img src={mapicon} alt={mapicon} />
                   <span>
-                    {" "}
-                    {item.country_name}, {item.province_name}, {item.city}
+                    {(item.country_name)?item.country_name:""}{(item.province_name)?', '+item.province_name:""}{(item.city)?', '+item.city:""}
                   </span>
                 </span>
               </div>
