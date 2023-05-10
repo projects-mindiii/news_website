@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
 
-function ClassifiedCategoryList({ forSaleListData, bookType, setUpdateList }) {
+function ClassifiedCategoryList({ forSaleListData, bookType }) {
   const { t } = useTranslation();
   return (
     <div className="main">
@@ -50,7 +50,6 @@ function ClassifiedCategoryList({ forSaleListData, bookType, setUpdateList }) {
                         isBookmark={item.is_bookmark}
                         id={item.id}
                         bookType={bookType}
-                        setUpdateList={setUpdateList}
                       />
                     </div>
                   </div>

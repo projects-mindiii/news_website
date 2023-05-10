@@ -21,7 +21,7 @@ function YourAdd() {
   const { yourAdvertWebList, yourAdvertTotalCount } = useSelector(
     (state) => state.classified
   );
-  const [updateList, setUpdateList] = useState(null)
+  const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
 
   useEffect(() => {
     async function getWebClassifiedLists() {
@@ -32,7 +32,7 @@ function YourAdd() {
       });
     }
     getWebClassifiedLists();
-  }, [updateList]);
+  }, [bookMarkTotalCount]);
 
   return (
     <div className="main">
@@ -65,7 +65,6 @@ function YourAdd() {
                   forSaleListData={yourAdvertWebList}
                   classifiedDataType={4}
                   bookType={BOOK_TYPE.CLASSIFIED}
-                  setUpdateList={setUpdateList}
                 />
               </div>
 

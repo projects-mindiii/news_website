@@ -12,8 +12,9 @@ function BookMarks() {
   const { t } = useTranslation();
   const { jobOfferWebList } = useSelector((state) => state.classified);
   const { bookMarkList } = useSelector((state) => state.bookMark);
-  const [updateList, setUpdateList] = useState(null)
   const { userToken, isLoading } = useSelector((state) => state.user);
+  const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
+
 
   const dispatch = useDispatch();
 
@@ -30,7 +31,7 @@ function BookMarks() {
       });
     }
     getBookMark();
-  }, [updateList]);
+  }, [bookMarkTotalCount]);
 
   return (
     <section className="main">
@@ -51,7 +52,6 @@ function BookMarks() {
                 </div>
                 <ClassifiedCategoryList
                   forSaleListData={jobOfferWebList}
-                  setUpdateList={setUpdateList}
                 />
               </> : <h4 className="youAdd_NotShow">{t("NO_BOOK_MARKS")}</h4> }
             </Col>

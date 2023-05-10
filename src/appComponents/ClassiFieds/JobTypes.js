@@ -28,7 +28,7 @@ function JobTypes() {
   } = useSelector((state) => state.classified);
   const { userToken, isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  const [updateList, setUpdateList] = useState(null)
+  const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
 
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
@@ -59,7 +59,7 @@ function JobTypes() {
       });
     }
     getWebClassifiedLists();
-  }, [updateList]);
+  }, [bookMarkTotalCount]);
   return (
     <div className="main">
       {isLoading === true ? <Loader /> : ""}
@@ -137,7 +137,6 @@ function JobTypes() {
                     forSaleListData={jobOfferWebList}
                     classifiedDataType={CLASSIFIED_CATEGORY_TYPE.JOBOFFER}
                     bookType={BOOK_TYPE.CLASSIFIED}
-                    setUpdateList={setUpdateList}
                   />
                 ) : (
                   <p className="nodataDisplay">
@@ -149,7 +148,6 @@ function JobTypes() {
                   forSaleListData={jobSeekerWebList}
                   classifiedDataType={CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS}
                   bookType={BOOK_TYPE.CLASSIFIED}
-                  setUpdateList={setUpdateList}
                 />
               ) : (
                 <p className="nodataDisplay">

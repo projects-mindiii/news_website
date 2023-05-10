@@ -33,8 +33,8 @@ function ClassiFieds() {
     wantedWebList,
   } = useSelector((state) => state.classified);
   const { userToken, isLoading } = useSelector((state) => state.user);
+  const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  const [updateList, setUpdateList] = useState(null)
 
 
   
@@ -84,7 +84,8 @@ function ClassiFieds() {
       dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
     }
     getWebClassifiedLists();
-  }, [updateList]);
+  }, [bookMarkTotalCount]);
+
   
   return (
     <div className="main">
@@ -164,7 +165,6 @@ function ClassiFieds() {
                       forSaleListData={forSaleWebList}
                       classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
                       bookType={BOOK_TYPE.CLASSIFIED}
-                      setUpdateList={setUpdateList}
                     />
                   ) : (
                     <p className="nodataDisplay">
@@ -176,7 +176,6 @@ function ClassiFieds() {
                     forSaleListData={wantedWebList}
                     classifiedDataType={CLASSIFIED_CATEGORY_TYPE.WANTED}
                     bookType={BOOK_TYPE.CLASSIFIED}
-                    setUpdateList={setUpdateList}
                   />
                 ) : (
                   <p className="nodataDisplay">
