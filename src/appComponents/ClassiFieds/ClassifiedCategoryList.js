@@ -8,7 +8,7 @@ import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
 
 import { useTranslation } from "react-i18next";
-import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+import { useNavigate } from "react-router-dom";
 
 function ClassifiedCategoryList({ forSaleListData }) {
   
