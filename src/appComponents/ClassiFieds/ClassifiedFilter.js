@@ -23,6 +23,13 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
     (state) => state.classified
   );
 
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      width: '200px', // set width to desired value
+    }),
+  };
+
   const { userToken, allMetaList } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -181,7 +188,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
         </div>
       ) : null}
       <div className={styles.filterBox}>
-        <div className={styles.ClassifiedsearchBar}>
+        {/* <div className={styles.ClassifiedsearchBar}>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Control
@@ -192,9 +199,9 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
             </Form.Group>
           </Form>
           <RxCross2 onClick={closeModal} />
-        </div>
+        </div> */}
 
-       
+        <div className={styles.CrossIcon}>
           <div className={styles.inputBox}>
             <Form.Group className="mb-3">
               <Select
@@ -212,6 +219,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
                     position: "absolute",
                     top: "8px",
                     left: "15px",
+                    width:"200px"
                   }),
                 }}
                 theme={(theme) => ({
@@ -288,11 +296,11 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
               )}
             </div>
           </div>
-
-          
-           
-        
-       
+          <span className={styles.cancelIcon}>
+            {" "}
+            <RxCross2 onClick={closeModal} />
+          </span>
+        </div>
       </div>
     </>
   );
