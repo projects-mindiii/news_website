@@ -591,3 +591,18 @@
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
 }
+.post_Add_Delete button{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border: none;
+    width: 100%;
+    align-items: center;
+    
+}
+.post_Add_Delete {
+    margin-top: 18px;
+}
+.post_Add_Delete button svg {
+    margin-right: 10px;
+}

@@ -22,6 +22,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+import { BsTrash3 } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
 import { useLocation } from "react-router-dom";
@@ -31,7 +33,7 @@ function PostAdvert() {
         (state) => state.user
     );
     const location = useLocation();
-    console.log(location)
+    const navigate = useNavigate();
 
     const {
         register,
@@ -152,7 +154,7 @@ function PostAdvert() {
                         setValue("email", currentUser.email)
                         setValue("fullName", currentUser.name)
                         setValue("provinces", { label: 'Free State', value: 932, id: 932 })
-                        setValue("countries",{
+                        setValue("countries", {
                             label: "South Africa",
                             value: 2,
                             id: 1
@@ -233,8 +235,7 @@ function PostAdvert() {
                         }
                         setValue("earningoption", { id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
                         setEaringOptionValue({ id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
-
-                        setcurrencyvalue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location && location.state.currency_symbol, code: location && location.state.currency_code })
+                        setcurrencyvalue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location.state.currency_symbol, code: location.state.currency_code })
                     }
                 }
             }
@@ -243,12 +244,11 @@ function PostAdvert() {
     }, []);
 
     async function onSubmit(data, e) {
-        console.log(data)
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
         requestData.append('description', data.description ? data.description : "");
-        requestData.append('is_default_country', data.countries.id ? data.countries.id : ""
+        requestData.append('is_default_country', data.countries.id
         );
         requestData.append(
             'country_id', data.countries.id == 0 ? data.countriess.id : countryValue.id == 1 ? 204 : ""
@@ -257,7 +257,7 @@ function PostAdvert() {
             'classified_type', data.categorytype ? data.categorytype : ""
         );
         {
-            data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
+            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'emp_equity', data.employmentenquiry ? data.employmentenquiry : ""
                 );
@@ -269,25 +269,25 @@ function PostAdvert() {
             'city', data.city ? data.city : ""
         );
         {
-            data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
+            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'currency_id', currencyvalue && currencyvalue.id ? currencyvalue.id : ""
                 );
         }
         {
-            data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
+            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'is_negotiable', data.negotiabl == true ? 1 : 0
                 );
         }
         {
-            data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
+            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     "job_location_type", data.selectlocationtype ? data.selectlocationtype : ""
                 );
         }
         {
-            data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
+            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'price', data.amountvalue ? data.amountvalue : ""
                 );
@@ -331,9 +331,72 @@ function PostAdvert() {
             "whatsapp_dail_code", dialCodeWatsapp ? dialCodeWatsapp : ""
         );
         requestData.append(
-            "classifiedGallery", profileImage ? profileImage : ""
-        );
-        await SublyApi.addClassifiedList(requestData, userToken).then((responsejson) => {
+            "classifiedGallery",   Object.values(profileImage).map((item, index) => { return item })
+            );
+        if (location.state !== null) {
+            requestData.append(
+                "id", location.state.id ? location.state.id : ""
+            );
+        }
+        if (location.state !== null) {
+            requestData.append(
+                "removeImgId", ""
+            );
+        }
+        if (location.state == null) {
+            await SublyApi.addClassifiedList(requestData, userToken).then((responsejson) => {
+                if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
+                    setIsLoading(false)
+                    Toast.fire({
+                        icon: "success",
+                        title: responsejson.message,
+                    });
+                } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
+                    setIsLoading(false)
+                    Toast.fire({
+                        icon: "success",
+                        title: responsejson.message,
+                    });
+                } else {
+                    if (responsejson.status_code == STATUS_CODES.SUCCESS) {
+                        setIsLoading(false)
+                        Toast.fire({
+                            icon: "success",
+                            title: responsejson.message,
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            await SublyApi.updateAdvert(requestData, userToken).then((responsejson) => {
+                if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
+                    setIsLoading(false)
+                    Toast.fire({
+                        icon: "success",
+                        title: responsejson.message,
+                    });
+                } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
+                    setIsLoading(false)
+                    Toast.fire({
+                        icon: "success",
+                        title: responsejson.message,
+                    });
+                } else {
+                    if (responsejson.status_code == STATUS_CODES.SUCCESS) {
+                        setIsLoading(false)
+                        Toast.fire({
+                            icon: "success",
+                            title: responsejson.message,
+                        });
+                    }
+                }
+            });
+        }
+    }
+    async function deleteClassiFieds(id) {
+        setIsLoading(true)
+        await SublyApi.deleteClassiFied(userToken, id).then((responsejson) => {
             if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
                 setIsLoading(false)
                 Toast.fire({
@@ -348,11 +411,13 @@ function PostAdvert() {
                 });
             } else {
                 if (responsejson.status_code == STATUS_CODES.SUCCESS) {
+
                     setIsLoading(false)
                     Toast.fire({
                         icon: "success",
                         title: responsejson.message,
                     });
+                    navigate("/your-add")
                 }
             }
         });
@@ -429,7 +494,6 @@ function PostAdvert() {
         setProfilePreview(profileviews);
         setProfileImage(profileimages);
     }
-    console.log(getValues())
     return (
         <div className="main">
             {isLoading === true ? (
@@ -828,31 +892,31 @@ function PostAdvert() {
                                                             formState,
                                                         }) => (
                                                             <div className="selectOption">
-                                                            <Select
-                                                                options={country}
-                                                                onChange={(e) => onChange(setCountriessValue(e))}
-                                                                value={countriessValue ? countriessValue : ""}
-                                                                placeholder={countryValue.id == 0 && t("SELECT_COUNTRY")}
-                                                                id="countriess"
-                                                                styles={{
-                                                                    placeholder: () => ({
-                                                                        color: "#231F20",
-                                                                        position: "absolute",
+                                                                <Select
+                                                                    options={country}
+                                                                    onChange={(e) => onChange(setCountriessValue(e))}
+                                                                    value={countriessValue ? countriessValue : ""}
+                                                                    placeholder={countryValue.id == 0 && t("SELECT_COUNTRY")}
+                                                                    id="countriess"
+                                                                    styles={{
+                                                                        placeholder: () => ({
+                                                                            color: "#231F20",
+                                                                            position: "absolute",
 
-                                                                        left: "15px",
-                                                                    }),
-                                                                }}
-                                                                theme={(theme) => ({
-                                                                    ...theme,
-                                                                    colors: {
-                                                                        ...theme.colors,
-                                                                        borderRadius: 0,
-                                                                        primary25: "#f2f2f2",
-                                                                        primary: "#000000;",
-                                                                        primary50: "#f2f2f2",
-                                                                    },
-                                                                })}
-                                                            />
+                                                                            left: "15px",
+                                                                        }),
+                                                                    }}
+                                                                    theme={(theme) => ({
+                                                                        ...theme,
+                                                                        colors: {
+                                                                            ...theme.colors,
+                                                                            borderRadius: 0,
+                                                                            primary25: "#f2f2f2",
+                                                                            primary: "#000000;",
+                                                                            primary50: "#f2f2f2",
+                                                                        },
+                                                                    })}
+                                                                />
                                                             </div>
                                                         )}
                                                         rules={{ required: true }}
@@ -955,6 +1019,13 @@ function PostAdvert() {
                                                 <CustomBtn  >{t("SAVE")}</CustomBtn>
                                             </div>
                                         </div>
+                                        {location.state !== null &&
+                                            <div className="post_Add_Delete" >
+                                                <button onClick={() => deleteClassiFieds(location.state.id)}>
+                                                    <div><BsTrash3 /></div>
+                                                    <div>DELETE ADVERT</div>
+                                                </button>
+                                            </div>}
                                     </div>}
                                 </Form>
                             </div>
