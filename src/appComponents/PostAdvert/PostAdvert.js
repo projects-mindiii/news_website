@@ -2,7 +2,7 @@ import "./PostAdvert.css";
 import { Row, Nav, Container, Col, Tab, FloatingLabel } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Select from "react-select";
-import Cropper,{ ReactCropperElement } from "react-cropper";
+import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import Form from 'react-bootstrap/Form';
 import { Toast } from "../../utils/Toaster";
 import { Icon } from '@iconify/react';
 import CommonEmailField from "../../formComponent/CommonInputFields/CommonEmailField";
-import { useForm, Controller,useController } from "react-hook-form";
+import { useForm, Controller, useController } from "react-hook-form";
 import nameicon from "../../assets/images/Deal_icon/support_ico.png";
 import staricon from "../../assets/images/Deal_icon/star_ico.png";
 import WatsappInput from "../../formComponent/CommonInputFields/WatsappInput";
@@ -24,28 +24,32 @@ import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
+import { useLocation } from "react-router-dom";
 //-------Create a Deals Header component--------
 function PostAdvert() {
     const { userToken, currentUser, allMetaList } = useSelector(
         (state) => state.user
     );
+    const location = useLocation();
+    console.log(location)
+
     const {
         register,
         handleSubmit,
-        setValue,reset,
+        setValue, reset,
         getValues,
         control,
         watch,
         formState: { errors },
     } = useForm();
-    const { field:heading } = useController({
+    const { field: heading } = useController({
         control,
         name: 'heading',
-      });
-      const { field:description } = useController({
+    });
+    const { field: description } = useController({
         control,
-        name:'description'
-      });
+        name: 'description'
+    });
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false)
     const [profilePreview, setProfilePreview] = useState([]);
@@ -64,7 +68,7 @@ function PostAdvert() {
     const [employmentEquity, setEmploymentEquity] = useState([{ id: 1, name: "none" }, { id: 2, name: "EE/ AA Required" }])
     const [earingOption, setEaringOption] = useState();
     const [currencies, setCurrencies] = useState();
-    const [currencyvalue, setcurrencyvalue] = useState({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
+    const [currencyvalue, setcurrencyvalue] = useState();
     const [jobTypeOption, setJobTypeOption] = useState();
     const [CategoryValue, setCategoryValue] = useState();
     const [country, setCountry] = useState();
@@ -80,10 +84,12 @@ function PostAdvert() {
     }]);
     const [headingLength, setHeadingLength] = useState();
     const [descriptionLength, setDescriptionLength] = useState();
-    const [countryValue, setCountryValue] = useState(isDefaultCountry[1]);
+    const [countryValue, setCountryValue] = useState();
     const [provinces, setProvinces] = useState();
-    const [provinceValue, setProvinceValue] = useState({ label: 'Free State', value: 932, id: 932 });
-
+    const [provinceValue, setProvinceValue] = useState();
+    const [jobTypeValue, setJobTypeValue] = useState();
+    const [earningOptionValue, setEaringOptionValue] = useState();
+    const [countriessValue, setCountriessValue] = useState()
     function getCurrencyid() {
         if (currencyvalue || currencyvalue !== undefined) {
             setCurrencyError();
@@ -142,32 +148,110 @@ function PostAdvert() {
                     await setCountry(countyryOption);
                     await setProvinces(provinceOption)
                     await setCurrencies(currencyoption)
-                    setValue("email", currentUser.email)
-                    setValue("fullName", currentUser.name)
-                    setValue("countries", {
-                        label: "South Africa",
-                        value: 2,
-                        id: 1
-                    })
-                    setValue("provinces", { label: 'Free State', value: 932, id: 932 })
+                    if (location && location.state == null) {
+                        setValue("email", currentUser.email)
+                        setValue("fullName", currentUser.name)
+                        setValue("provinces", { label: 'Free State', value: 932, id: 932 })
+                        setValue("countries",{
+                            label: "South Africa",
+                            value: 2,
+                            id: 1
+                        })
+                        setCountryValue({
+                            label: "South Africa",
+                            value: 2,
+                            id: 1
+                        })
+                        setProvinceValue({ label: 'Free State', value: 932, id: 932 })
+                        setcurrencyvalue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
+                    }
+                    else {
+                        setValue("categorytype", location.state.category_type_id && location.state.category_type_id.toString())
+                        setCategoryValue(location.state.category_type_id.toString())
+                        setValue("fullName", location && location.state.user_name)
+                        setValue("heading", location && location.state.heading)
+                        setValue("description", location && location.state.description)
+                        setValue("amountvalue", location && location.state.amount)
+                        setValue("negotiabl", location && location.state.is_negotiable)
+                        setValue("city", location && location.state.city)
+                        setValue("companyName", location && location.state.contact_company)
+                        setValue("email", location && location.state.email)
+                        setDialCodeWatsapp(location && location.state.whatsapp_dail_code)
+                        setCountryCodeWatsapp(location && location.state.whatsapp_country_code)
+                        setWatsappNo(location && location.state.whatapp_contact_number)
+                        // setPhoneNo()
+                        setDialCode(location && location.state.dial_code)
+                        setCountryCode(location && location.state.country_code)
+                        setValue("employmentenquiry", location.state.emp_equity && location.state.emp_equity.toString())
+                        setValue("selectlocationtype", location && location.state.job_location_type_id)
+                        setValue("jobType", {
+                            label: location.state.job_type_name,
+                            value: location.state.job_type_id,
+                            id: location.state.job_type_id
+                        })
+                        setJobTypeValue({
+                            label: location.state.job_type_name,
+                            value: location.state.job_type_id,
+                            id: location.state.job_type_id
+                        })
+                        if (location.state.is_default_country == 1) {
+                            setValue("countries", {
+                                label: "South Africa",
+                                value: 1,
+                                id: 1
+                            })
 
+                            setCountryValue({
+                                label: "South Africa",
+                                value: 1,
+                                id: 1
+                            })
+                        }
+                        else {
+                            setValue("countries", {
+                                label: "Outside South Africa",
+                                value: 0,
+                                id: 0
+                            })
+
+                            setCountryValue({
+                                label: "Outside South Africa",
+                                value: 0,
+                                id: 0
+                            })
+                        }
+                        if (location.state.is_default_country == 1) {
+                            setValue("provinces", { label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
+                            setProvinceValue({ label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
+
+                        }
+                        else {
+                            setValue("provinces", { label: 'Free State', value: 932, id: 932 })
+                            setValue("countriess", { label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
+                            setProvinceValue({ label: 'Free State', value: 932, id: 932 })
+                            setCountriessValue({ label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
+                        }
+                        setValue("earningoption", { id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
+                        setEaringOptionValue({ id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
+
+                        setcurrencyvalue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location && location.state.currency_symbol, code: location && location.state.currency_code })
+                    }
                 }
             }
-           
         }
         getClassifiedLists();
     }, []);
 
-    async function onSubmit(data,e) {
-        console.log(profileImage)
+    async function onSubmit(data, e) {
+        console.log(data)
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
         requestData.append('description', data.description ? data.description : "");
-        requestData.append('is_default_country', countryValue.id ? countryValue.id : ""
+        requestData.append('is_default_country', data.countries.id ? data.countries.id : ""
         );
         requestData.append(
-            'country_id', countryValue.id == 0 ? data.countriess.id : countryValue.id == 1 ? 204 : ""
+            'country_id', data.countries.id == 0 ? data.countriess.id : countryValue.id == 1 ? 204 : ""
         );
         requestData.append(
             'classified_type', data.categorytype ? data.categorytype : ""
@@ -179,7 +263,7 @@ function PostAdvert() {
                 );
         }
         requestData.append(
-            'province', countryValue.id == 1 ? data.provinces.id : ""
+            'province', data.countries.id == 1 ? data.provinces.id : ""
         );
         requestData.append(
             'city', data.city ? data.city : ""
@@ -247,7 +331,7 @@ function PostAdvert() {
             "whatsapp_dail_code", dialCodeWatsapp ? dialCodeWatsapp : ""
         );
         requestData.append(
-            "classifiedGallery", profileImage ? profileImage:""
+            "classifiedGallery", profileImage ? profileImage : ""
         );
         await SublyApi.addClassifiedList(requestData, userToken).then((responsejson) => {
             if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
@@ -277,9 +361,9 @@ function PostAdvert() {
         e.preventDefault();
         let files;
         if (e.dataTransfer) {
-          files = e.dataTransfer.files;
+            files = e.dataTransfer.files;
         } else if (e.target) {
-          files = e.target.files;
+            files = e.target.files;
         }
         // setProfileImage(e.target.files[0]);
         const reader = new FileReader();
@@ -292,10 +376,10 @@ function PostAdvert() {
     const imgCropper = () => {
         showHead ? setShowHead(false) : setShowHead(true);
     };
-    
+
     const getCropData = () => {
         let profileviews = [...profilePreview];
-             let profileimages = [...profileImage];
+        let profileimages = [...profileImage];
         if (typeof cropper !== "undefined") {
             let cropData = cropper
                 .getCroppedCanvas({
@@ -313,8 +397,8 @@ function PostAdvert() {
             var blobImg = b64toBlob(realData, contentTypes);
             profileviews.push(cropData);
             profileimages.push(blobImg);
-             setProfilePreview(profileviews);
-             setProfileImage(profileimages);
+            setProfilePreview(profileviews);
+            setProfileImage(profileimages);
         }
     };
     function b64toBlob(cropData, contentType, sliceSize) {
@@ -336,17 +420,16 @@ function PostAdvert() {
     }
 
 
-   async function onImageRemove(e, index) {
-        console.log(index)
+    async function onImageRemove(e, index) {
         e.preventDefault();
         let profileviews = [...profilePreview];
-             let profileimages = [...profileImage];
-             profileviews.splice(index, 1);
-             profileimages.splice(index, 1);
+        let profileimages = [...profileImage];
+        profileviews.splice(index, 1);
+        profileimages.splice(index, 1);
         setProfilePreview(profileviews);
         setProfileImage(profileimages);
     }
-    console.log(image)
+    console.log(getValues())
     return (
         <div className="main">
             {isLoading === true ? (
@@ -419,7 +502,7 @@ function PostAdvert() {
                                                             }
                                                             ,
                                                         })}
-                                                        value={heading.value} 
+                                                        value={heading.value}
                                                         onChange={(e) => { heading.onChange(e); setHeadingLength(e.target.value.length) }}
 
                                                     />
@@ -445,8 +528,8 @@ function PostAdvert() {
                                                                 value: 3,
                                                                 message: t("POST_Description_MIN_ERROR")
                                                             },
-                                                        })} 
-                                                        value={description.value} 
+                                                        })}
+                                                        value={description.value}
                                                         onChange={(e) => { description.onChange(e); setDescriptionLength(e.target.value.length) }}
                                                         className="post_Add_Discription" placeholder="Enter description" />
 
@@ -477,7 +560,9 @@ function PostAdvert() {
                                                                     placeholder={t("SELECT_JOB_TYPE")}
                                                                     // value={{ value: 0, label: "Select Job Type", id: 0}}
                                                                     options={jobTypeOption}
-                                                                    onChange={onChange} // send value to hook form
+
+                                                                    onChange={(e) => onChange(setJobTypeValue(e))} // send value to hook form
+                                                                    value={jobTypeValue ? jobTypeValue : ""}
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "white",
@@ -607,7 +692,8 @@ function PostAdvert() {
                                                         }) => (
                                                             <Select
                                                                 options={earingOption}
-                                                                onChange={onChange}
+                                                                onChange={(e) => onChange(setEaringOptionValue(e))} // send value to hook form
+                                                                value={earningOptionValue ? earningOptionValue : ""}
                                                                 placeholder={t("SELECT_EARNING_OPTION")}
                                                                 id="earningoption"
                                                                 styles={{
@@ -698,9 +784,8 @@ function PostAdvert() {
                                                         }) => (
                                                             <div className="selectOption">
                                                                 <Select
-                                                                    options={countryValue && countryValue.id == 1 && country}
+                                                                    options={provinces}
                                                                     onChange={(e) => onChange(setProvinceValue(e))}
-                                                                    placeholder={countryValue.id == 0 ? t("SELECT_COUNTRY") : countryValue.id == 1 ? t("SELECT_PROVINCE") : t("SELECT_PROVINCE")}
                                                                     value={countryValue && countryValue.id == 1 && provinceValue}
                                                                     id="province"
                                                                     styles={{
@@ -745,9 +830,10 @@ function PostAdvert() {
                                                             <div className="selectOption">
                                                             <Select
                                                                 options={country}
-                                                                onChange={onChange}
+                                                                onChange={(e) => onChange(setCountriessValue(e))}
+                                                                value={countriessValue ? countriessValue : ""}
                                                                 placeholder={countryValue.id == 0 && t("SELECT_COUNTRY")}
-                                                                id="province"
+                                                                id="countriess"
                                                                 styles={{
                                                                     placeholder: () => ({
                                                                         color: "#231F20",
@@ -846,9 +932,9 @@ function PostAdvert() {
                                             </label>
                                         </div>
                                         <input
-                                        type="file"
-                                        accept="image/*"
-                                        id="imgUpdate"
+                                            type="file"
+                                            accept="image/*"
+                                            id="imgUpdate"
                                             style={{
                                                 display: "none",
                                             }}
@@ -873,7 +959,7 @@ function PostAdvert() {
                                 </Form>
                             </div>
                         </Col>
-                        
+
                     </Row>
                     <Modal show={showHead} onHide={imgCropper} backdrop="static" >
                         <Modal.Header closeButton>
@@ -909,7 +995,7 @@ function PostAdvert() {
                         <Modal.Footer>
                             <button
                                 variant="primary"
-                                
+
                                 onClick={() => {
                                     getCropData();
                                     imgCropper();
@@ -917,7 +1003,7 @@ function PostAdvert() {
                             >
                                 {t("Crop")}
                             </button>
-                            <button variant="secondary" onClick={()=>{imgCropper()}}>
+                            <button variant="secondary" onClick={() => { imgCropper() }}>
                                 {t("Close")}
                             </button>
                         </Modal.Footer>

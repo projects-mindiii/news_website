@@ -10,6 +10,7 @@ import watchicon from "../../assets/images/watch_ico.png";
 import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
+import { useNavigate } from "react-router-dom";
 
 function ClassifiedCategoryList({ forSaleListData, bookType }) {
   const { t } = useTranslation();
