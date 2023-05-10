@@ -35,6 +35,8 @@ function ClassiFieds() {
   const { userToken, isLoading } = useSelector((state) => state.user);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
+  const [updateList, setUpdateList] = useState(null)
+
 
 
   

@@ -319,6 +319,22 @@ class SublyApi {
     return res;
   }
 
+
+     /* POST  /Add book mark: 
+  add book mark 
+ 
+   Authorization required: Token
+   @returns {object} {token}
+   */
+   static async addBookMark(authToken, data) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/add-bookmark`,
+      data, "post", header
+    );
+
+    return res;
+  }
+
 }
 
 // SublyApi.token =
