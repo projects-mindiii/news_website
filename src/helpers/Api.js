@@ -316,6 +316,20 @@ class SublyApi {
 
     return res;
   }
+  /* POST  /edit advert: 
+  get book mark lists
+ 
+   Authorization required: Token
+   @returns {object} {token}
+   */
+   static async updateAdvert( data,authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/classified-update`,
+    data, "Post", header
+    );
+
+    return res;
+  }
 
 }
 

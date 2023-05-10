@@ -32,32 +32,7 @@ function YourAdd() {
         getWebClassifiedLists();
       }, [isLoadings]);
 
-     async function deleteClassiFieds(id){
-        setIsLoading(true)        
-        await SublyApi.deleteClassiFied( userToken,id).then((responsejson) => {
-            if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
-                setIsLoading(false)
-                Toast.fire({
-                    icon: "success",
-                    title: responsejson.message,
-                });
-            } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
-                setIsLoading(false)
-                Toast.fire({
-                    icon: "success",
-                    title: responsejson.message,
-                });
-            } else {
-                if (responsejson.status_code == STATUS_CODES.SUCCESS) {
-                    setIsLoading(false)
-                    Toast.fire({
-                        icon: "success",
-                        title: responsejson.message,
-                    });
-                }
-            }
-        });
-      }
+     
 
     return (
         <div className="main">
@@ -80,27 +55,8 @@ function YourAdd() {
                         <Col xs={12} sm={12} md={12} lg={6}>
                            <div className="postAdvertBox">
                            {yourAdvertWebList && yourAdvertWebList.length < 1 && <h5 className="youAdd_NotShow">---  NO ADVERTS TO DISPLAY  --- </h5>}
-                            <ClassifiedCategoryList displayRoute="your_advert" forSaleListData={yourAdvertWebList}  classifiedDataType={4} deleteClassiFieds={deleteClassiFieds} />
+                            <ClassifiedCategoryList displayRoute="your_advert" forSaleListData={yourAdvertWebList}  classifiedDataType={4} />
                            </div>
-                            
-                            {/* {yourAdvertWebList && yourAdvertWebList.map((item, index) => (
-                                item.approval_status == 1 &&
-                                <div className="yourAdd_DataShow">
-                                    <CommonDataShow yourdata={item} />
-                                    <WhatsappshareContact yourdata={item} />
-                                    <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
-                                </div>
-                            ))}
-                            {yourAdvertWebList && yourAdvertWebList.some(item => item.approval_status == 0) == true && <h5 className="youAdd_PendingApproval">---- PENDING APPROVAL ----</h5>}
-                            {yourAdvertWebList && yourAdvertWebList.map((item, index) => (
-                                item.approval_status == 0 &&
-                                <div className="yourAdd_DataShow">
-                                    <CommonDataShow yourdata={item} />
-                                    <WhatsappshareContact yourdata={item} />
-                                    <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
-                                    <button className="not_live">NOT LIVE - Pending Approvals</button>
-                                </div>
-                            ))} */}
                         </Col>
                     </Row>
                 </Container>
