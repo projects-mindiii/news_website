@@ -64,7 +64,8 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
     } else if (provinceValue == 0) {
       search_by = 2;
       province = "";
-      country = countrySelected.value;
+       country = countrySelected.value;
+      setCountryData(countrySelected);
     } else {
       search_by = 1;
       country = "";
@@ -85,6 +86,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
 
   function handleClick() {
     searchApiCall(provinceSelected.value);
+
   }
 
   function handleChange(data) {
@@ -169,8 +171,6 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
     getMetaDetails();
   }, []);
 
-  console.log("countrySelected", countrySelected);
-
   return (
     <>
       {isLoading ? (
@@ -221,7 +221,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
                     isSearchable={true}
                     onChange={setCountrySelected}
                     placeholder={t("COUNTRY_SET")}
-                    value={countrySelected}
+                    value={countrySelected && countrySelected}
                     styles={{
                       placeholder: () => ({
                         fontSize: "15px",
@@ -248,11 +248,11 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="text"
-                      placeholder="Input City/Town"
+                      placeholder={t("CITY_TEXT")}
                       {...register("city", {
                         required: {
                           value: true,
-                          message: "Input City/Town",
+                          message: `${t("CITY_TEXT")}`,
                         },
                       })}
                     />
@@ -267,7 +267,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
 
             <div className="buttonAdd">
               {provinceSelected.value == 0 ? (
-                <CustomBtn onClick={() => handleClick()}>Done</CustomBtn>
+                <CustomBtn onClick={() => handleClick()}>{t("DONE_BUTTON")}</CustomBtn>
               ) : (
                 ""
               )}

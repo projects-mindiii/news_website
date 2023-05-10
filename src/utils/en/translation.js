@@ -44,8 +44,11 @@ export const TRANSLATIONS_EN = {
   CONTACT_NUMBER: "CONTACT NUMBER",
   WHATSAPP: "WhatsApp",
   SHARE: "SHARE",
-  N0CLASSIFIED_DISPLAY: "NO CLASSIFIEDS TO DISPLAY",
+  NOCLASSIFIED_DISPLAY: "NO CLASSIFIEDS TO DISPLAY",
   SEARCH_TEXT:"Search Location",
+  CLASSIFIED_LIST_RESULT:"Results",
+  COUNTRY_NAME:"All South Africa",
+  DONE_BUTTON:"Done",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -141,6 +144,7 @@ export const TRANSLATIONS_EN = {
   CURRENT_PASSWORD: "Current Password",
   SELECT_PROVINCE: "Select Province",
   COUNTRY_SET: "Country Set",
+  CITY_TEXT:"Input City/Town",
 
 
   //---------- Form Lable Common Text---------------

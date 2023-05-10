@@ -6,8 +6,6 @@ import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
 import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
-
-import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
 
@@ -71,14 +69,15 @@ function ClassifiedCategoryList({ forSaleListData, bookType }) {
               {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
               item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
                 <div className="classiFieds_RupeesText">
-                  {item.amount && item.amount !== 0 && (
-                    <p>
-                      {/* {item.currency_code} {item.amount ? item.amount : "0"}
-                       {item.amount.toString().includes(".") ? "" : ".00"} */}
+                  {item.amount  === 0 ? "" : item.amount && <p>
                       {item.currency_code} {item.amount.toFixed(2)}
-                      {/* {item.currency_code} {new Intl.NumberFormat().format(item.amount)} */}
+                    </p>}
+
+                  {/* {item.amount && item.amount !== 0 && (
+                    <p>
+                      {item.currency_code} {item.amount.toFixed(2)}
                     </p>
-                  )}
+                  )} */}
 
                   <span>
                     {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER

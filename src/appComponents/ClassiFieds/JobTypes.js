@@ -18,15 +18,10 @@ import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE } from "../../utils/Constants";
 //-------Create a Deals Header component--------
 function JobTypes() {
   const { t } = useTranslation();
-  const dispatch = useDispatch()
-  const {
-    classifiedType,
-    jobOfferTotalCount,
-    jobOfferWebList,
-    jobSeekerTotalCount,
-    jobSeekerWebList,
-  } = useSelector((state) => state.classified);
-  const { userToken, isLoading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const {jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
+    useSelector((state) => state.classified);
+  const { userToken,isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
 
@@ -160,9 +155,6 @@ function JobTypes() {
                 <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168"></iframe>
               </div>
             </Col> */}
-
-           
-              
           </Row>
         </Container>
       </React.Fragment>
