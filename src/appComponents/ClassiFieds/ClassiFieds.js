@@ -170,7 +170,7 @@ function ClassiFieds() {
                     />
                   ) : (
                     <p className="nodataDisplay">
-                      --{t("N0CLASSIFIED_DISPLAY")}--
+                      --{t("NOCLASSIFIED_DISPLAY")}--
                     </p>
                   )
                 ) : wantedWebList.length ? (
@@ -181,7 +181,7 @@ function ClassiFieds() {
                   />
                 ) : (
                   <p className="nodataDisplay">
-                    --{t("N0CLASSIFIED_DISPLAY")}--
+                    --{t("NOCLASSIFIED_DISPLAY")}--
                   </p>
                 )}
               </Col>

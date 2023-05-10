@@ -5,21 +5,14 @@ import { useTranslation } from "react-i18next";
 import styles from "./ClassifiedCountry.module.css";
 import ClassifiedFilter from "./ClassifiedFilter";
 
-
 function ClassifiedCountry() {
   function closeModal() {
     return setIsOpen(false);
   }
- 
-
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [countryData, setCountryData] = useState("");
   const [resultData, setResultData] = useState("");
-  console.log("resultData", resultData);
-   console.log("countryData", countryData);
-
-
 
   return (
     <div className={styles.classiFieds_map_serchbar}>
@@ -32,12 +25,13 @@ function ClassifiedCountry() {
             <div className={styles.countryText}>
               <p className={styles.selectText}>{countryData.label} - </p>
               <span className={styles.resultText}>
-              {resultData} Results
+                {resultData} {t("CLASSIFIED_LIST_RESULT")}
               </span>{" "}
             </div>
           ) : (
             <p>
-              All South Africa - <span className={styles.resultText}> 0 Result</span>
+              {t("COUNTRY_NAME")} -{" "}
+              <span className={styles.resultText}> 0 {t("CLASSIFIED_LIST_RESULT")}</span>
             </p>
           )}
         </div>
