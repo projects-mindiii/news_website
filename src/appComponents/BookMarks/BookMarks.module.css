@@ -12,3 +12,15 @@
     text-align: center;
     padding: 10px;
 }
+
+.clearAll{
+    margin-bottom: 0px;
+    margin-top: 20px;
+    text-align: end;
+}
+
+.clearAll span{
+    color: #e74721;
+    font-weight: 600;
+    cursor: pointer;
+}

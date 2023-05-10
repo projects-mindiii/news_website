@@ -196,6 +196,8 @@ export const TRANSLATIONS_ES = {
   BOOK_MARK_DETAILTEXT: "Todos los artículos marcados están sujetos a vencimiento.",
   YOURS_BOOK_MARKS: "SUS MARCADORES",
   NO_BOOK_MARKS: "--- NO HAY MARCADORES PARA MOSTRAR ---",
+  CLEAR_ALL: "Limpiar todo",
+  REMOVE_ALL_BOOKMARK: "Está seguro ? Desea eliminar todos los marcadores.",
 
 
 };
