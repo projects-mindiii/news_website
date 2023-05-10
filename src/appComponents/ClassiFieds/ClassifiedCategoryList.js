@@ -9,9 +9,10 @@ import watchicon from "../../assets/images/watch_ico.png";
 
 import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+import AddBookMarks from "../BookMarks/AddBookMarks";
 
-function ClassifiedCategoryList({ forSaleListData }) {
-  
+function ClassifiedCategoryList({ forSaleListData, bookType }) {
+  const { t } = useTranslation();
   return (
     <div className="main">
       {forSaleListData &&
@@ -45,7 +46,11 @@ function ClassifiedCategoryList({ forSaleListData }) {
                       </span>
                     </div>
                     <div className="classiFieds_bookmarkicon">
-                      <img src={bookmarkicon} alt={bookmarkicon} />
+                      <AddBookMarks
+                        isBookmark={item.is_bookmark}
+                        id={item.id}
+                        bookType={bookType}
+                      />
                     </div>
                   </div>
                 </div>

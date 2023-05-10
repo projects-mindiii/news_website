@@ -197,6 +197,7 @@ export const TRANSLATIONS_EN = {
   BOOK_MARK_DETAILTEXT: "All bookmarked items are subject to expiration.",
   YOURS_BOOK_MARKS: "YOUR BOOKMARKS",
   NO_BOOK_MARKS: "--- NO BOOKMARKS TO DISPLAY ---",
-
+  CLEAR_ALL: "Clear All",
+  REMOVE_ALL_BOOKMARK: "Are you sure ? You want to delete all bookmark.",
 
 };
