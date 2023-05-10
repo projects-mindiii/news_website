@@ -123,11 +123,11 @@ console.log("showDefaultList",showDefaultList)
               <p className="nodataDisplay">-- {t("N0CLASSIFIED_DISPLAY")}  -- </p>
             )}
             </Col>
-            <Col xs={12} sm={12} md={12} lg={5}>
+            {/* <Col xs={12} sm={12} md={12} lg={5}>
               <div className="advertisment">
               <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168"></iframe>
               </div>
-            </Col>
+            </Col> */}
 
            
               

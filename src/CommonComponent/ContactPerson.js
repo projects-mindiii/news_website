@@ -1,53 +1,75 @@
 import React from "react";
+// import companyIcon from "../assets/images/companyIcon.png";
 import emailicon from "../assets/images/email_ico.png";
-import callicon from "../assets/images/call_ico.png";
-import { AiOutlineStar } from "react-icons/ai";
+import callicon from "../assets/images/callIcon.png";
 import { useTranslation } from "react-i18next";
+import { AiOutlineStar } from "react-icons/ai";
+
 //-------Create a Deals Header component--------
 function ContactPerson(props) {
   const { t } = useTranslation();
+
+  const handleClick = (e) => {
+    // e.preventDefault();
+    // const url = `https://mail.google.com/mail/?view=cm&to=
+    // ${props.forSaleListData[props.index].email}&su=${"Report"}`;
+    // window.open(url);
+    
+  };
+
   return (
-      <React.Fragment>
-        <div className="classiFields_contactPersondetail">
-          <p className="heading">{t("CONTACT_PERSON")}</p>
-          {props.forSaleListData[props.index].contact_company && (
-            <div className="classiFields_PersonAboutShow">
+    <React.Fragment>
+      <div className="classiFields_contactPersondetail">
+        <p className="heading">{t("CONTACT_PERSON")}</p>
+        {props.forSaleListData[props.index].contact_company && (
+          <div className="classiFields_PersonAboutShow">
             <div className="classiFields_iconBackGround">
+              {/* <img src={companyIcon} alt={companyIcon} /> */}
               <AiOutlineStar />
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("COMPANY")}</p>
-              <p>{props.forSaleListData[props.index].contact_company}</p>
+              <span>{props.forSaleListData[props.index].contact_company}</span>
             </div>
-          </div>)}
-         {props.forSaleListData[props.index].email &&(
+          </div>
+        )}
+        {props.forSaleListData[props.index].email && (
           <div className="classiFields_PersonAboutShow">
-          <div className="classiFields_iconBackGround">
-            <img src={emailicon} alt={emailicon} />
+            <div className="classiFields_iconBackGround">
+              <img src={emailicon} alt={emailicon} />
+            </div>
+            <div className="classiFields_emailHeadingText">
+              <p>{t("CONTACT_PERSON_EMAIL")}</p>
+              <a href={`https://mail.google.com/mail/?view=cm&to= ${props.forSaleListData[props.index].email}&su=${"Subject"}`}>
+                                            <span> {props.forSaleListData[props.index].email}</span> </a>
+              {/* <p
+                href={`https://mail.google.com/mail/?view=cm&to=
+                ${props.forSaleListData[props.index].email}&su=${"Report"}`}
+                onClick={handleClick}
+              >
+                {props.forSaleListData[props.index].email}
+              </p> */}
+              {/* <p>{props.forSaleListData[props.index].email}</p> */}
+            </div>
+            <div></div>
           </div>
-          <div className="classiFields_emailHeadingText">
-            <p>{t("CONTACT_PERSON_EMAIL")}</p>
-            <p>{props.forSaleListData[props.index].email}</p>
-          </div>
-          <div></div>
-        </div>
-         )}
-          {props.forSaleListData[props.index].contact && (
-            <div className="classiFields_PersonAboutShow classiFields_mobileMargingRemove">
+        )}
+        {props.forSaleListData[props.index].contact && (
+          <div className="classiFields_PersonAboutShow classiFields_mobileMargingRemove">
             <div className="classiFields_iconBackGround">
               <img src={callicon} alt={callicon} />
             </div>
             <div className="classiFields_emailHeadingText">
-              <p>{t("CONTACT_NUMBER")}</p>
-              <p>{props.forSaleListData[props.index].contact}</p>
+            <p>{t("CONTACT_NUMBER")}</p> 
+              <span><a href={`tel:${props.forSaleListData[props.index].contact}`}>{props.forSaleListData[props.index].contact}</a></span>
+              {/* <p>{t("CONTACT_NUMBER")}</p> */}
+              {/* <p>{props.forSaleListData[props.index].contact}</p> */}
             </div>
             <div></div>
           </div>
-          )}
-          
-        </div>
-      </React.Fragment>
-   
+        )}
+      </div>
+    </React.Fragment>
   );
 }
 export default ContactPerson;

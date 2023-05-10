@@ -1,11 +1,16 @@
-.countryIcon .css-13cymwt-control {
-    border: none !important;
-    height: 40px !important;
-    background: #FFFFFF !important;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
-    border-radius: 7.26px !important;
-    font-weight: 500 !important;
-    font-size: 14px !important;
+.countryIcon .imgIcon img {
+    margin-right: 10px !important;
+    margin-bottom: 4px !important;
+}
+
+.countryText  {
+    margin-top: -1px !important;
+    color: #4B4B4B;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 32px;
 }
 
 span.countryText {
@@ -16,17 +21,44 @@ span.countryText {
     font-family: 'Nunito';
 }
 
-span.resultText {
+/* span.resultText {
     color: #EC4624;
     font-size: 15px;
     font-weight: 400;
     font-family: 'Nunito';
-    margin: 5px;
     font-family: 'Nunito' sans-serif !important;
+} */
+
+.countryText span{
+    color: #EC4624;
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 5px;
+    font-style: normal !important;
+    font-family: 'Nunito';
+line-height: 32px;
+
 }
 
-.countryIcon{
-    padding: 5px;
-    /* margin-top: 5px; */
-    margin-top: 15px;
+.ClassifiedCountry_imgIcon__pmMlC {
+    margin-top: -3px;
 }
+
+.countryText {
+    display: flex;
+}
+
+
+.countryIcon {
+    display: flex !important;
+    margin-top: 15px !important;
+    padding: 5px !important;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
