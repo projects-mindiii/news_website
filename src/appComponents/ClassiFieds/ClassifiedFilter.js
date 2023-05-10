@@ -13,7 +13,6 @@ import {
   getJobOfferListApi,
   getJobSeekerListApi,
   getWantedListApi,
-  setClassfiedType,
 } from "../../store/slices/ClassifiedSlice";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
@@ -28,7 +27,6 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
   const { t } = useTranslation();
   const {
     register,
-    setValue,
     getValues,
     formState: { errors },
   } = useForm();
@@ -181,21 +179,8 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
         </div>
       ) : null}
       <div className={styles.filterBox}>
-        <div className={styles.ClassifiedsearchBar}>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control
-                type="search"
-                placeholder={t("SEARCH_TEXT")}
-                // onChange={() => searchApiCall()}
-              />
-            </Form.Group>
-          </Form>
-          <RxCross2 onClick={closeModal} />
-        </div>
-
-       
-          <div className={styles.inputBox}>
+        <div className={styles.CrossIcon}>
+          <div className="inputBox">
             <Form.Group className="mb-3">
               <Select
                 id="province"
@@ -288,11 +273,11 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
               )}
             </div>
           </div>
-
-          
-           
-        
-       
+          <span className={styles.cancelIcon}>
+            {" "}
+            <RxCross2 onClick={closeModal} />
+          </span>
+        </div>
       </div>
     </>
   );
