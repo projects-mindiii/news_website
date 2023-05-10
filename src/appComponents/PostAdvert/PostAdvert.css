@@ -78,7 +78,9 @@
 .negotiable .negotiables .form-check-input {
     height: 26px !important;
     width: 26px !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     position: relative !important;
+    border: none;
 }
 
 .negotiable .negotiables [type="checkbox"]:checked,
@@ -88,8 +90,8 @@
 
 .negotiable .negotiables .form-check-input[type="checkbox"]:checked::after {
     content: '';
-    width: 20px !important;
-    height: 20px !important;
+    width: 26px !important;
+    height: 26px !important;
     background: #EC4624 !important;
     position: absolute !important;
     display: flex !important;
@@ -99,8 +101,8 @@
 
 .negotiable .negotiables .form-check-input[type="checkbox"]:checked::before {
     content: "";
-    left: 8px;
-    top: 2px;
+    left: 10px;
+    top: 4px;
     z-index: 99 !important;
     width: 7px;
     height: 15px;
@@ -117,6 +119,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 
@@ -499,13 +502,19 @@
 .post_Add_priceDiv .btn {
     width: 9% !important;
     margin-top: 0px;
-    height: 37px;
+    height: 40px;
     font-weight: 400;
     line-height: 25px;
     color: #FFFFFF;
-    background-color: black;
+    background-color: #000000;
     display: flex;
     justify-content: space-around;
+    border-top-left-radius: 7.26px;
+    border-bottom-left-radius: 7.26px;
+}
+
+.post_Add_priceDiv .btn:hover {
+    background-color: #000000 !important;
 }
 
 .post_Add_priceDiv {

@@ -672,6 +672,7 @@ function PostAdvert() {
                                                             fieldState: { invalid, isTouched, isDirty, error },
                                                             formState,
                                                         }) => (
+                                                            <div className="selectOption">
                                                             <Select
                                                                 options={country}
                                                                 onChange={onChange}
@@ -696,6 +697,7 @@ function PostAdvert() {
                                                                     },
                                                                 })}
                                                             />
+                                                            </div>
                                                         )}
                                                         rules={{ required: true }}
                                                     />

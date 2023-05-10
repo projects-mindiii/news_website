@@ -1,4 +1,4 @@
-.loginAlertBox { 
+.loginAlertBox {
     text-align: center;
 }
 
@@ -36,11 +36,11 @@
 }
 
 .orText {
-   padding: 15px 0px;
-   font-weight: 700;
-   font-size: 16px;
-   margin-bottom: 0px;
-   color: #000000;
+    padding: 15px 0px;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 0px;
+    color: #000000;
 }
 
 .createProfileBtn button {
@@ -51,7 +51,7 @@
     background-color: #000000 !important;
 }
 
-.createProfileBtn button:active  {
+.createProfileBtn button:active {
     background: #000000 !important;
 }
 
@@ -63,6 +63,19 @@
     background: #ec4624 !important;
 }
 
-.loginToProfile button:active  {
+.loginToProfile button:active {
     background: #ec4624 !important;
+}
+
+.loginAlertCancel {
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.loginAlertCancel svg {
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
 }

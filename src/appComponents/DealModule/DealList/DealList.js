@@ -1,9 +1,9 @@
-import message from "../../../assets/images/Deal_icon/message.png";
-import contact from "../../../assets/images/Deal_icon/contact_ico.png";
+import message from "../../../assets/images/Deal_icon/contact.svg";
+import contact from "../../../assets/images/Deal_icon/call.svg";
 import globe from "../../../assets/images/Deal_icon/globe_ico.png";
-import mail from "../../../assets/images/Deal_icon/mail_ico.png";
-import watch from "../../../assets/images/Deal_icon/watch.png";
-import promotional from "../../../assets/images/Deal_icon/promotional.png";
+import mail from "../../../assets/images/Deal_icon/mail.svg";
+import watch from "../../../assets/images/Deal_icon/watch.svg";
+import promotional from "../../../assets/images/Deal_icon/Promotional_ico.svg";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -53,7 +53,8 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={globe} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("WEBSITE")}</span>
-                                        <p>{item.contact_web_url}</p>
+                                        <a href={item.contact_web_url}>
+                                            <p>{item.contact_web_url}</p></a>
                                     </div>
                                 </div>
                             )}
@@ -62,7 +63,8 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={mail} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("EMAIL_TEXT")}</span>
-                                        <p>{item.contact_email}</p>
+                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
+                                            <p>{item.contact_email}</p> </a>
                                     </div>
                                 </div>
                             )}
@@ -88,7 +90,11 @@ function DealList({ dealList, fromDeal }) {
 
                         <div className="dealPrice">
                             <h4>
-                                {item.currency_code} {new Intl.NumberFormat().format(item.price)}
+                                {/* {item.currency_code} {item.price ? item.price : "0"}
+                                {item.price.toString().includes(".")
+                                    ? ""
+                                    : ".00"} */}
+                                     {item.currency_code} {item.price.toFixed(2)}
                             </h4>{" "}
                             <span>{item.tax_lable}</span>
                         </div>

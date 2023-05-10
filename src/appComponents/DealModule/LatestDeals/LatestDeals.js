@@ -16,9 +16,9 @@ function LatestDeals() {
 
   return (
     <div className="dealContainer">
-      {/* {isLoading === true ? (
+      {isLoading === true ? (
         <Loader />
-      ) : ""} */}
+      ) : ""}
       {latestDeals ?
         <Container>
           {latestDeals.length > 0 ?
@@ -57,7 +57,7 @@ function LatestDeals() {
               </Row>
             </Tab.Container> :
             <h4>{t("NO_DEAL")}</h4>}
-        </Container> : <Loader />}
+        </Container> : ""}
     </div>
   );
 }

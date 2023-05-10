@@ -25,7 +25,7 @@ function DealsHeader() {
   //set language
 
   useEffect(() => {
-    dispatch(getDealList(userToken)).then(async (responsejson) => {
+    dispatch(getDealList({userToken: userToken, companyOrder:2})).then(async (responsejson) => {
       const response = responsejson.payload;
       if (response.status_code !== STATUS_CODES.SUCCESS) {
 
@@ -60,7 +60,7 @@ function DealsHeader() {
         </div>):""}
         <div>
           <Navbar bg="light" variant="light">
-            <Nav className="me-auto" as="ul">
+            <Nav className="me-auto ulValue1" as="ul">
               {dealsData.map((item, index) => (
                 <Nav.Item as="li" key={index}>
                   <NavLink

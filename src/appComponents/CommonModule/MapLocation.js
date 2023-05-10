@@ -1,5 +1,5 @@
 import React from "react";
-import mapIcon from "../../assets/images/socialMedia_icon/map_ico.png";
+import mapIcon from "../../assets/images/socialMedia_icon/map_ico1.svg";
 import { useTranslation } from "react-i18next";
 
 // --------function for showing address in view company-------

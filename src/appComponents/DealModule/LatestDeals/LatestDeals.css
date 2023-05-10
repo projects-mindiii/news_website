@@ -145,6 +145,16 @@ button.whatsApp svg {
     text-align: center;
     letter-spacing: -0.315px;
     color: #000000;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 100px;
+}
+
+.websiteUrl a{
+    text-decoration: none !important;
+    color: #000000;
+}
+
+.dealText a{
+ text-decoration: none !important;
+ color: #000000;
 }
