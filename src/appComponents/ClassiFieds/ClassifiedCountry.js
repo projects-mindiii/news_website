@@ -13,7 +13,7 @@ function ClassifiedCountry() {
   const [isOpen, setIsOpen] = useState(false);
   const [countryData, setCountryData] = useState("");
   const [resultData, setResultData] = useState("");
-
+  console.log("country data in main",countryData)
   return (
     <div className={styles.classiFieds_map_serchbar}>
       <div className={styles.countryIcon} onClick={() => setIsOpen(true)}>
@@ -38,6 +38,7 @@ function ClassifiedCountry() {
       </div>
       {isOpen && (
         <ClassifiedFilter
+        countryData={countryData}
           closeModal={closeModal}
           setCountryData={setCountryData}
           setResultData={setResultData}

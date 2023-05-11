@@ -15,6 +15,8 @@ const initialState = {
   jobSeekerWebList: [],
   classifiedType: 4,
   isLoading: false,
+  classifiedFilterData:[],
+  
 }
 
 // Thunk for your advert list
@@ -83,13 +85,22 @@ export const getJobSeekerListApi = createAsyncThunk(
 		}
 	}
 )
+
 export const classifiedSlice = createSlice({
   name: 'classified',
+  
   initialState,
   reducers: {
     setClassfiedType: (state, action) => {
       state.classifiedType = action.payload;
+      
+    },
+
+    setClassifiedFilterData: (state, action) => {
+      state.classifiedFilterData = action.payload;
     }
+   
+
   },
   extraReducers: (builder) => {
     //web list
@@ -197,5 +208,6 @@ export const classifiedSlice = createSlice({
     })
   },
 })
-export const { setClassfiedType } = classifiedSlice.actions;
+export const { setClassfiedType,setClassifiedFilterData } = classifiedSlice.actions;
+// export const { setClassifiedFilterData } = classifiedSlice.actions;
 export default classifiedSlice.reducer

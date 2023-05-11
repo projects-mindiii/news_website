@@ -13,20 +13,31 @@ import {
   getJobOfferListApi,
   getJobSeekerListApi,
   getWantedListApi,
+  setClassifiedFilterData,
 } from "../../store/slices/ClassifiedSlice";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
 
-function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
+function ClassifiedFilter({
+  countryData,
+  closeModal,
+  setCountryData,
+  setResultData,
+}) {
   const { classifiedType, isLoading } = useSelector(
     (state) => state.classified
   );
-
+  console.log("country data", countryData);
+  // useEffect(()=>{
+  //   console.log("classifiedfilteruseeffect")
+  // },[])
+  // console.log("classifiedfilter")
   const { userToken, allMetaList } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const {
     register,
+    setValue,
     getValues,
     formState: { errors },
   } = useForm();
@@ -41,7 +52,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
 
   const [countrySelected, setCountrySelected] = useState({
     label: "All Country",
-    value: "0",
+    value: "",
     id: "0",
   });
 
@@ -64,7 +75,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
     } else if (provinceValue == 0) {
       search_by = 2;
       province = "";
-       country = countrySelected.value;
+      country = countrySelected.value;
       setCountryData(countrySelected);
     } else {
       search_by = 1;
@@ -82,12 +93,14 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
     };
 
     getWebClassifiedListSearch(classfiedQuery);
+    dispatch(setClassifiedFilterData([{'isFilterApply':1,"search_by":search_by,"province":province,"country":country}]))
   }
 
   function handleClick() {
     searchApiCall(provinceSelected.value);
-
   }
+
+  
 
   function handleChange(data) {
     setCountryData(data);
@@ -105,6 +118,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
         if (response.status_code === STATUS_CODES.SUCCESS) {
           setResultData(response.data.total_count);
           closeModal();
+         
         }
       });
     }
@@ -115,6 +129,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
         if (response.status_code === STATUS_CODES.SUCCESS) {
           setResultData(response.data.total_count);
           closeModal();
+          
         }
       });
     }
@@ -189,7 +204,12 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
                   handleChange(e);
                 }}
                 placeholder={t("SELECT_PROVINCE")}
-                value={provinceSelected && provinceSelected}
+                // value={provinceSelected && provinceSelected}
+                value={
+                  countryData
+                    ? countryData
+                    : provinceSelected && provinceSelected
+                }
                 styles={{
                   placeholder: () => ({
                     fontSize: "15px",
@@ -221,7 +241,8 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
                     isSearchable={true}
                     onChange={setCountrySelected}
                     placeholder={t("COUNTRY_SET")}
-                    value={countrySelected && countrySelected}
+                     value={countrySelected && countrySelected}
+                      // value={countryData? countryData: countrySelected ? countrySelected:null}
                     styles={{
                       placeholder: () => ({
                         fontSize: "15px",
@@ -244,7 +265,7 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
                   />
                 </Form.Group>
 
-                {countrySelected.value !== "0" ? (
+                {countrySelected.value !== "" ? (
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="text"
@@ -267,7 +288,9 @@ function ClassifiedFilter({ closeModal, setCountryData, setResultData }) {
 
             <div className="buttonAdd">
               {provinceSelected.value == 0 ? (
-                <CustomBtn onClick={() => handleClick()}>{t("DONE_BUTTON")}</CustomBtn>
+                <CustomBtn onClick={() => handleClick()}>
+                  {t("DONE_BUTTON")}
+                </CustomBtn>
               ) : (
                 ""
               )}

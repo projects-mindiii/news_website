@@ -8,8 +8,9 @@ import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
+import { useTranslation } from "react-i18next";
 
-function ClassifiedCategoryList({ forSaleListData, bookType }) {
+function ClassifiedCategoryList({ forSaleListData, bookType}) {
   const { t } = useTranslation();
   return (
     <div className="main">
