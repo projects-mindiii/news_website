@@ -20,10 +20,9 @@ import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 
 //-------Create a Deals Header component--------
-function ClassiFieds() {
+function ClassiFieds({ setCountryData }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const {
@@ -31,30 +30,39 @@ function ClassiFieds() {
     forSaleWebList,
     wantedTotalCount,
     wantedWebList,
+    classifiedFilterData,
   } = useSelector((state) => state.classified);
   const { userToken, isLoading } = useSelector((state) => state.user);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  const [updateList, setUpdateList] = useState(null)
+  console.log("showDefaultList", showDefaultList);
+  const [updateList, setUpdateList] = useState(null);
 
-
-
-  
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
-    
   };
+
   useEffect(() => {
-    setClassfiedTypeValue(
-      CLASSIFIED_CATEGORY_TYPE.FORSALE
-    )
+    setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
     async function getWebClassifiedLists() {
-      const forSaleQuery = {
-        limit: 10,
-        offset: 0,
-        type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
-      };
+      let forSaleQuery = "";
+      if (classifiedFilterData && classifiedFilterData.length > 0) {
+        forSaleQuery = {
+          limit: 10,
+          offset: 0,
+          type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+          search_by: classifiedFilterData.search_by,
+          province: classifiedFilterData.province,
+          country: classifiedFilterData.country,
+        };
+      } else {
+        forSaleQuery = {
+          limit: 10,
+          offset: 0,
+          type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+        };
+      }
       const data = { userToken: userToken, whereQuery: forSaleQuery };
       dispatch(forSaleListApi(data)).then(async (responsejson) => {
         const response = responsejson.payload;
@@ -73,9 +81,8 @@ function ClassiFieds() {
               title: response.data.message,
             });
           }
-
         }
-        });
+      });
 
       const wantedQuery = {
         limit: 10,
@@ -88,7 +95,6 @@ function ClassiFieds() {
     getWebClassifiedLists();
   }, [bookMarkTotalCount]);
 
-  
   return (
     <div className="main">
       <div className="classifiedData">
@@ -106,11 +112,11 @@ function ClassiFieds() {
                     <Nav variant="pills" className="flex-column">
                       <Nav.Item key={1}>
                         <Nav.Link
-                          onClick={() =>
+                          onClick={() => {
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.FORSALE
-                            )
-                          }
+                            );
+                          }}
                           eventKey={1}
                         >
                           {t("FOR_SALE")}({forSaleTotalCount})

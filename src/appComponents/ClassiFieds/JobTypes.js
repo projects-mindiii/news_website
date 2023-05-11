@@ -135,7 +135,7 @@ function JobTypes() {
                   />
                 ) : (
                   <p className="nodataDisplay">
-                    -- {t("N0CLASSIFIED_DISPLAY")} --{" "}
+                    -- {t("NOCLASSIFIED_DISPLAY")} --{" "}
                   </p>
                 )
               ) : jobSeekerWebList.length ? (
@@ -146,7 +146,7 @@ function JobTypes() {
                 />
               ) : (
                 <p className="nodataDisplay">
-                  -- {t("N0CLASSIFIED_DISPLAY")} --{" "}
+                  -- {t("NOCLASSIFIED_DISPLAY")} --{" "}
                 </p>
               )}
             </Col>
