@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
 import { useLocation } from "react-router-dom";
+import NoteBoxModule from "../CommonModule/NoteBoxModule";
 //-------Create a Deals Header component--------
 function PostAdvert() {
     const { userToken, currentUser, allMetaList } = useSelector(
@@ -34,7 +35,7 @@ function PostAdvert() {
     );
     const location = useLocation();
     const navigate = useNavigate();
-
+    console.log(location)
     const {
         register,
         handleSubmit,
@@ -52,9 +53,10 @@ function PostAdvert() {
         control,
         name: 'description'
     });
+
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false)
-    const [profilePreview, setProfilePreview] = useState([]);
+    const [profilePreview, setProfilePreview] = useState()
     const [profileImage, setProfileImage] = useState([]);
     const [showHead, setShowHead] = useState(false);
     const [cropper, setCropper] = useState("");
@@ -68,37 +70,72 @@ function PostAdvert() {
     const [categoryType, setCategoryType] = useState("")
     const [locationType, setLocationType] = useState("");
     const [employmentEquity, setEmploymentEquity] = useState([{ id: 1, name: "none" }, { id: 2, name: "EE/ AA Required" }])
-    const [earingOption, setEaringOption] = useState();
-    const [currencies, setCurrencies] = useState();
-    const [currencyvalue, setcurrencyvalue] = useState();
-    const [jobTypeOption, setJobTypeOption] = useState();
+    const [earingOptions, setEaringOptions] = useState();
+    const [currenciesOptions, setCurrenciesOptions] = useState();
+    const [currencyValue, setCurrencyValue] = useState();
+    const [jobTypeOptions, setJobTypeOptions] = useState();
     const [CategoryValue, setCategoryValue] = useState();
-    const [country, setCountry] = useState();
-    const [currencyError, setCurrencyError] = useState("")
+    const [countryOptions, setCountryOptions] = useState();
     const [isDefaultCountry, setIsDefaultCountry] = useState([{
         label: "Outside South Africa",
-        value: 1,
+        value: 0,
         id: 0
     }, {
         label: "South Africa",
-        value: 2,
+        value: 1,
         id: 1
     }]);
     const [headingLength, setHeadingLength] = useState();
     const [descriptionLength, setDescriptionLength] = useState();
-    const [countryValue, setCountryValue] = useState();
-    const [provinces, setProvinces] = useState();
+    const [defaultCountry, setDefaultCountry] = useState();
+    const [provinceOptions, setProvincesOptions] = useState();
     const [provinceValue, setProvinceValue] = useState();
     const [jobTypeValue, setJobTypeValue] = useState();
     const [earningOptionValue, setEaringOptionValue] = useState();
-    const [countriessValue, setCountriessValue] = useState()
-    function getCurrencyid() {
-        if (currencyvalue || currencyvalue !== undefined) {
-            setCurrencyError();
-        }
-        else {
-            setCurrencyError(t("PLEASE_SEL_CURR"))
-        }
+    const [countryValue, setCountryValue] = useState()
+    //----- state for manage show/hide modal-----
+    const [showPopup, setShowPopup] = useState(false);
+
+    //----- for close modal-----
+    const handleClose = () => setShowPopup(false);
+    //----- for show modal-----
+    const handleShow = () => setShowPopup(true);
+
+    function setNewDefaultCountry(e) {
+        setTimeout(() => {
+            setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
+            setDefaultCountry({ label: e.label, value: e.value, id: e.id })
+        }, 1000);
+    }
+
+    function setNewJob(e) {
+        setTimeout(() => {
+            setValue("jobType", { label: e.label, value: e.value, id: e.id })
+            setJobTypeValue({ label: e.label, value: e.value, id: e.id })
+        }, 1000);
+    }
+    function setNewEarning(e) {
+        setTimeout(() => {
+            setValue("earningoption", { label: e.label, value: e.value, id: e.id })
+            setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
+        }, 1000);
+
+
+    }
+    function setNewCountry(e) {
+        setTimeout(() => {
+            setValue("country", { label: e.label, value: e.value, id: e.id })
+            setCountryValue({ label: e.label, value: e.value, id: e.id })
+        }, 1000);
+
+
+    }
+    function setNewProvinces(e) {
+        setTimeout(() => {
+            setValue("province", { label: e.label, value: e.value, id: e.id })
+            setProvinceValue({ label: e.label, value: e.value, id: e.id })
+        }, 1000);
+
     }
     useEffect(() => {
         async function getClassifiedLists() {
@@ -145,47 +182,49 @@ function PostAdvert() {
                     });
                     setCategoryType(allMetaList.category_type);
                     setLocationType(allMetaList.job_location_type);
-                    await setEaringOption(earningOption);
-                    await setJobTypeOption(jobType);
-                    await setCountry(countyryOption);
-                    await setProvinces(provinceOption)
-                    await setCurrencies(currencyoption)
+                    await setEaringOptions(earningOption);
+                    await setJobTypeOptions(jobType);
+                    await setCountryOptions(countyryOption);
+                    await setProvincesOptions(provinceOption)
+                    await setCurrenciesOptions(currencyoption)
                     if (location && location.state == null) {
                         setValue("email", currentUser.email)
                         setValue("fullName", currentUser.name)
-                        setValue("provinces", { label: 'Free State', value: 932, id: 932 })
-                        setValue("countries", {
+                        setValue("province", { label: 'Free State', value: 932, id: 932 })
+                        setValue("isDefaultCountry", {
                             label: "South Africa",
-                            value: 2,
+                            value: 1,
                             id: 1
                         })
-                        setCountryValue({
+                        setDefaultCountry({
                             label: "South Africa",
-                            value: 2,
+                            value: 1,
                             id: 1
                         })
                         setProvinceValue({ label: 'Free State', value: 932, id: 932 })
-                        setcurrencyvalue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
+                        setCurrencyValue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
                     }
                     else {
                         setValue("categorytype", location.state.category_type_id && location.state.category_type_id.toString())
-                        setCategoryValue(location.state.category_type_id.toString())
-                        setValue("fullName", location && location.state.user_name)
-                        setValue("heading", location && location.state.heading)
-                        setValue("description", location && location.state.description)
-                        setValue("amountvalue", location && location.state.amount)
-                        setValue("negotiabl", location && location.state.is_negotiable)
-                        setValue("city", location && location.state.city)
-                        setValue("companyName", location && location.state.contact_company)
-                        setValue("email", location && location.state.email)
-                        setDialCodeWatsapp(location && location.state.whatsapp_dail_code)
-                        setCountryCodeWatsapp(location && location.state.whatsapp_country_code)
-                        setWatsappNo(location && location.state.whatapp_contact_number)
-                        // setPhoneNo()
-                        setDialCode(location && location.state.dial_code)
-                        setCountryCode(location && location.state.country_code)
+                        setCategoryValue(location.state.category_type_id && location.state.category_type_id.toString())
+                        setValue("fullName",  location.state.user_name)
+                        setValue("heading", location.state.heading)
+                        setValue("description",  location.state.description)
+                        setValue("amountvalue",  location.state.amount)
+                        setValue("negotiable", location.state.is_negotiable)
+                        setValue("city",  location.state.city)
+                        setValue("companyName",  location.state.contact_company)
+                        setValue("email",  location.state.email)
+                        setDialCodeWatsapp(location.state.whatsapp_dail_code)
+                        setCountryCodeWatsapp( location.state.whatsapp_country_code)
+                        setWatsappNo( location.state.whatapp_contact_number)
+                        setPhoneNo(location.state.contact)
+                        setDialCode( location.state.dial_code)
+                        setCountryCode( location.state.country_code)
                         setValue("employmentenquiry", location.state.emp_equity && location.state.emp_equity.toString())
-                        setValue("selectlocationtype", location && location.state.job_location_type_id)
+                        setValue("selectlocationtype",  location.state.job_location_type_id)
+                        setProfileImage(location.state.gallery)
+                        setProfilePreview(location.state.gallery)
                         setValue("jobType", {
                             label: location.state.job_type_name,
                             value: location.state.job_type_id,
@@ -197,61 +236,61 @@ function PostAdvert() {
                             id: location.state.job_type_id
                         })
                         if (location.state.is_default_country == 1) {
-                            setValue("countries", {
+                            setValue("isDefaultCountry", {
                                 label: "South Africa",
                                 value: 1,
                                 id: 1
                             })
 
-                            setCountryValue({
+                            setDefaultCountry({
                                 label: "South Africa",
                                 value: 1,
                                 id: 1
                             })
                         }
                         else {
-                            setValue("countries", {
+                            setValue("isDefaultCountry", {
                                 label: "Outside South Africa",
                                 value: 0,
                                 id: 0
                             })
 
-                            setCountryValue({
+                            setDefaultCountry({
                                 label: "Outside South Africa",
                                 value: 0,
                                 id: 0
                             })
                         }
                         if (location.state.is_default_country == 1) {
-                            setValue("provinces", { label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
+                            setValue("province", { label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
                             setProvinceValue({ label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
-
                         }
                         else {
-                            setValue("provinces", { label: 'Free State', value: 932, id: 932 })
-                            setValue("countriess", { label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
+                            setValue("province", { label: 'Free State', value: 932, id: 932 })
+                            setValue("country", { label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
                             setProvinceValue({ label: 'Free State', value: 932, id: 932 })
-                            setCountriessValue({ label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
+                            setCountryValue({ label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
                         }
                         setValue("earningoption", { id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
                         setEaringOptionValue({ id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
-                        setcurrencyvalue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location.state.currency_symbol, code: location.state.currency_code })
+                        setCurrencyValue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location.state.currency_symbol, code: location.state.currency_code })
                     }
                 }
             }
         }
         getClassifiedLists();
     }, []);
-
+   
     async function onSubmit(data, e) {
+        
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
         requestData.append('description', data.description ? data.description : "");
-        requestData.append('is_default_country', data.countries.id
+        requestData.append('is_default_country', data.isDefaultCountry.id && data.isDefaultCountry.id == 0 ? 0 : data.isDefaultCountry.id
         );
         requestData.append(
-            'country_id', data.countries.id == 0 ? data.countriess.id : countryValue.id == 1 ? 204 : ""
+            'country_id', data.isDefaultCountry.id == 0 ? data.country.id : data.isDefaultCountry.id == 1 ? 204 : ""
         );
         requestData.append(
             'classified_type', data.categorytype ? data.categorytype : ""
@@ -263,7 +302,7 @@ function PostAdvert() {
                 );
         }
         requestData.append(
-            'province', data.countries.id == 1 ? data.provinces.id : ""
+            'province', data.isDefaultCountry.id == 1 ? data.province.id : ""
         );
         requestData.append(
             'city', data.city ? data.city : ""
@@ -271,13 +310,13 @@ function PostAdvert() {
         {
             (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
-                    'currency_id', currencyvalue && currencyvalue.id ? currencyvalue.id : ""
+                    'currency_id', currencyValue && currencyValue.id ? currencyValue.id : 154
                 );
         }
         {
             (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
-                    'is_negotiable', data.negotiabl == true ? 1 : 0
+                    'is_negotiable', data.negotiable == true ? 1 : 0
                 );
         }
         {
@@ -331,8 +370,8 @@ function PostAdvert() {
             "whatsapp_dail_code", dialCodeWatsapp ? dialCodeWatsapp : ""
         );
         requestData.append(
-            "classifiedGallery",   Object.values(profileImage).map((item, index) => { return item })
-            );
+            "classifiedGallery", 
+        );
         if (location.state !== null) {
             requestData.append(
                 "id", location.state.id ? location.state.id : ""
@@ -430,7 +469,6 @@ function PostAdvert() {
         } else if (e.target) {
             files = e.target.files;
         }
-        // setProfileImage(e.target.files[0]);
         const reader = new FileReader();
         reader.onload = () => {
             setImage(reader.result);
@@ -460,7 +498,7 @@ function PostAdvert() {
             // get the real base64 content of the file
             var realData = block[1].split(",")[1];
             var blobImg = b64toBlob(realData, contentTypes);
-            profileviews.push(cropData);
+            profileviews.push({img_url: cropData});
             profileimages.push(blobImg);
             setProfilePreview(profileviews);
             setProfileImage(profileimages);
@@ -503,19 +541,24 @@ function PostAdvert() {
                 <Container>
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={6}>
-                            <div className="yourAdd">
+                            {/* <div className="yourAdd">
                                 <p>{t("POST_CLASSIFIED_AD")}</p>
                                 <div className="yourAdd_Note">
                                     <p>
                                         {t("PLEASE_NOTE")}<small>{t("ALL_ADVERT_REMOVE_60")}</small>
                                     </p>
                                 </div>
-                            </div>
+                            </div> */}
+                            <NoteBoxModule
+                                headText={t("POST_CLASSIFIED_AD")}
+                                headSubText={t("PLEASE_NOTE")}
+                                detailText={t("ALL_ADVERT_REMOVE_60")}
+                            />
                         </Col>
                         <Col xs={12} sm={12} md={12} lg={6}>
                             <div className="post_Add_CategoryButton">
                                 <div className="headings">{t("CATEGORY")}</div>
-                                <Form className="post_AddForm" onSubmit={handleSubmit(onSubmit, getCurrencyid)}>
+                                <Form className="post_AddForm" onSubmit={handleSubmit(onSubmit)}>
                                     <div className="post_Add_CategoryType">
                                         {categoryType ? categoryType.map((type, index) => (
                                             <div key={index}>
@@ -553,7 +596,7 @@ function PostAdvert() {
                                                     <Form.Control
                                                         className="heading"
                                                         type="text"
-                                                        maxlength="80"
+                                                        maxLength="80"
                                                         placeholder="Enter Heading"
                                                         {...register("heading", {
                                                             required: {
@@ -583,7 +626,7 @@ function PostAdvert() {
 
                                                 <Form.Group >
                                                     <Form.Control as="textarea"
-                                                        maxlength="2000"
+                                                        maxLength="2000"
                                                         {...register("description", {
                                                             required: {
                                                                 value: true,
@@ -623,9 +666,9 @@ function PostAdvert() {
                                                                     id="jobtype"
                                                                     placeholder={t("SELECT_JOB_TYPE")}
                                                                     // value={{ value: 0, label: "Select Job Type", id: 0}}
-                                                                    options={jobTypeOption}
+                                                                    options={jobTypeOptions}
 
-                                                                    onChange={(e) => onChange(setJobTypeValue(e))} // send value to hook form
+                                                                    onChange={(e) => onChange(setNewJob(e))} // send value to hook form
                                                                     value={jobTypeValue ? jobTypeValue : ""}
                                                                     styles={{
                                                                         placeholder: () => ({
@@ -715,13 +758,11 @@ function PostAdvert() {
                                                 <InputGroup className="mb-3">
                                                     <DropdownButton
                                                         variant="outline-secondary"
-                                                        title={currencyvalue && currencyvalue.symbol ? currencyvalue.symbol : currencies && currencies.length > 0 && currencies[0].symbol}
+                                                        title={currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
                                                         id="input-group-dropdown-1"
-                                                    >{currencies && currencies.map((item, index) => (
+                                                    >{currenciesOptions && currenciesOptions.map((item, index) => (
                                                         <Dropdown.Item onClick={() => {
-                                                            setcurrencyvalue(item); setTimeout(() => {
-                                                                getCurrencyid()
-                                                            }, 2000);
+                                                            setCurrencyValue(item);
                                                         }}>{item.name}</Dropdown.Item>))}
                                                     </DropdownButton>
                                                     <Form.Group className="amount">
@@ -740,9 +781,7 @@ function PostAdvert() {
                                                     </Form.Group>
                                                 </InputGroup>
                                             </div>}
-                                        {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE) && !currencyError && errors.amountvalue && <div className="post_Add_Error"> {errors.amountvalue.message}</div>}
-                                        {CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE && (currencyError) ? <div className="post_Add_Error">{currencyError && currencyError}</div> : ""}
-
+                                        {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE)  && errors.amountvalue && <div className="post_Add_Error"> {errors.amountvalue.message}</div>}
                                         {CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
                                             <div className="mb-3">
                                                 <Form.Group >
@@ -755,11 +794,11 @@ function PostAdvert() {
                                                             formState,
                                                         }) => (
                                                             <Select
-                                                                options={earingOption}
-                                                                onChange={(e) => onChange(setEaringOptionValue(e))} // send value to hook form
-                                                                value={earningOptionValue ? earningOptionValue : ""}
-                                                                placeholder={t("SELECT_EARNING_OPTION")}
                                                                 id="earningoption"
+                                                                options={earingOptions}
+                                                                value={earningOptionValue ? earningOptionValue : ""}
+                                                                onChange={(e) => onChange(setNewEarning(e))} // send value to hook form
+                                                                placeholder={t("SELECT_EARNING_OPTION")}
                                                                 styles={{
                                                                     placeholder: () => ({
                                                                         color: "white",
@@ -788,18 +827,18 @@ function PostAdvert() {
 
                                             <div className="negotiable mb-3">
                                                 <Form.Check
-                                                    {...register("negotiabl")}
+                                                    {...register("negotiable")}
                                                     className="negotiables"
                                                     type="checkbox"
                                                     label={"Negotiable"}
-                                                    defaultChecked
                                                 />
                                             </div>}
                                         <div className="headings mb-3">{t("LOCATIONS")}</div>
                                         <div className="mb-3">
                                             <Form.Group>
                                                 <Controller
-                                                    name="countries"
+
+                                                    name="isDefaultCountry"
                                                     control={control}
                                                     render={({
                                                         field: { onChange, value, name, ref },
@@ -808,10 +847,12 @@ function PostAdvert() {
                                                     }) => (
                                                         <div className="selectOption">
                                                             <Select
+                                                                id="isDefaultCountry"
                                                                 options={isDefaultCountry}
-                                                                onChange={(e) => onChange(setCountryValue(e))}
-                                                                value={countryValue ? countryValue : isDefaultCountry[1]}
-                                                                id="countries" name="countries"
+                                                                value={defaultCountry}
+                                                                onChange={(e) => onChange(setNewDefaultCountry(e))}
+
+
                                                                 styles={{
                                                                     placeholder: () => ({
                                                                         color: "#231F20",
@@ -835,12 +876,12 @@ function PostAdvert() {
                                                 />
                                             </Form.Group>
                                         </div>
-                                        {countryValue && countryValue.id == 1 &&
+                                        {(defaultCountry && defaultCountry.id == 1) &&
                                             <div className="mb-3">
                                                 <Form.Group >
                                                     <Controller
                                                         control={control}
-                                                        name="provinces"
+                                                        name="province"
                                                         render={({
                                                             field: { onChange, value, name, ref },
                                                             fieldState: { invalid, isTouched, isDirty, error },
@@ -848,15 +889,14 @@ function PostAdvert() {
                                                         }) => (
                                                             <div className="selectOption">
                                                                 <Select
-                                                                    options={provinces}
-                                                                    onChange={(e) => onChange(setProvinceValue(e))}
-                                                                    value={countryValue && countryValue.id == 1 && provinceValue}
                                                                     id="province"
+                                                                    options={provinceOptions}
+                                                                    value={provinceValue}
+                                                                    onChange={(val) => onChange(setNewProvinces(val))}
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "#231F20",
                                                                             position: "absolute",
-
                                                                             left: "15px",
                                                                         }),
                                                                     }}
@@ -879,13 +919,13 @@ function PostAdvert() {
                                                     />
                                                 </Form.Group>
                                             </div>}
-                                        {errors.provinces && <div className="post_Add_Error">{t("SELECT_PROVINCE")}</div>}
-                                        {countryValue && countryValue.id == 0 &&
+                                        {(defaultCountry && defaultCountry.id == 1 && errors.province) && <div className="post_Add_Error">{t("SELECT_PROVINCE")}</div>}
+                                        {(defaultCountry && defaultCountry.id == 0) &&
                                             <div className="mb-3">
                                                 <Form.Group >
                                                     <Controller
                                                         control={control}
-                                                        name="countriess"
+                                                        name="country"
                                                         render={({
                                                             field: { onChange, value, name, ref },
                                                             fieldState: { invalid, isTouched, isDirty, error },
@@ -893,11 +933,11 @@ function PostAdvert() {
                                                         }) => (
                                                             <div className="selectOption">
                                                                 <Select
-                                                                    options={country}
-                                                                    onChange={(e) => onChange(setCountriessValue(e))}
-                                                                    value={countriessValue ? countriessValue : ""}
-                                                                    placeholder={countryValue.id == 0 && t("SELECT_COUNTRY")}
-                                                                    id="countriess"
+                                                                    id="country"
+                                                                    value={countryValue}
+                                                                    options={countryOptions}
+                                                                    onChange={(e) => onChange(setNewCountry(e))}
+                                                                    placeholder={t("SELECT_COUNTRY")}
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "#231F20",
@@ -923,7 +963,7 @@ function PostAdvert() {
                                                     />
                                                 </Form.Group>
                                             </div>}
-                                        {errors.countries && <div className="post_Add_Error">{t("SELECT_COUNTRY")}</div>}
+                                        {(defaultCountry && defaultCountry.id == 0 && errors.country) && <div className="post_Add_Error">{t("SELECT_COUNTRY")}</div>}
 
                                         <Form.Group className="mb-3">
                                             <Form.Control
@@ -991,7 +1031,7 @@ function PostAdvert() {
                                         <WatsappInput watsappNo={watsappNo} dialCodeWatsapp={dialCodeWatsapp} countryCodeWatsapp={countryCodeWatsapp}
                                             setWatsappNo={setWatsappNo} setDialCodeWatsapp={setDialCodeWatsapp} setCountryCodeWatsapp={setCountryCodeWatsapp} />
                                         <div className="post_Add_AddPhoto">
-                                            <label for="imgUpdate"  >
+                                            <label htmlFor="imgUpdate"  >
                                                 <div>{t("ADD_PHOTOS")}</div>
                                             </label>
                                         </div>
@@ -1011,7 +1051,7 @@ function PostAdvert() {
                                             {profilePreview ? profilePreview.map((item, index) => (
                                                 <div className="Post_Add_ImageSet" key={index} >
 
-                                                    <img src={item} alt={item} />
+                                                    <img src={item.img_url} alt={item} />
                                                     <Icon icon="charm:cross" color="red" width="30" height="30" onClick={(e) => onImageRemove(e, index)} />
                                                 </div>)) : ""}</div>
                                         <div className="post_Add_Save">
@@ -1021,7 +1061,7 @@ function PostAdvert() {
                                         </div>
                                         {location.state !== null &&
                                             <div className="post_Add_Delete" >
-                                                <button onClick={() => deleteClassiFieds(location.state.id)}>
+                                                <button type="button" onClick={() => handleShow(true)}>
                                                     <div><BsTrash3 /></div>
                                                     <div>DELETE ADVERT</div>
                                                 </button>
@@ -1041,7 +1081,7 @@ function PostAdvert() {
                                 <Cropper
                                     style={{ height: 400, width: "100%" }}
                                     // initialAspectRatio={2 / 2}
-                                    aspectRatio={2 / 2}
+                                    aspectRatio={4/ 3}
                                     guides={false}
                                     preview=".img-preview2"
                                     src={image}
@@ -1077,6 +1117,25 @@ function PostAdvert() {
                             <button variant="secondary" onClick={() => { imgCropper() }}>
                                 {t("Close")}
                             </button>
+                        </Modal.Footer>
+                    </Modal>
+                    <Modal
+                        show={showPopup}
+                        onHide={handleClose}
+                        className="deletePopup"
+                        keyboard={false}
+                        backdrop="static">
+                        <Modal.Header>
+                            <Modal.Title>{t("ALERT")}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>{t("DELETE_ADVERT")}</Modal.Body>
+                        <Modal.Footer>
+                            <div className="buttonAdd1">
+                                <CustomBtn type="button" onClick={handleClose}>{t("CANCEL")}</CustomBtn>
+                            </div>
+                            <div>
+                                <CustomBtn onClick={() => { deleteClassiFieds(location.state.id) }}>{t("DELETE")}</CustomBtn>
+                            </div>
                         </Modal.Footer>
                     </Modal>
                 </Container>

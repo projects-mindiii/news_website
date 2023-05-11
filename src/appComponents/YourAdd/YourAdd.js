@@ -13,8 +13,10 @@ import { BOOK_TYPE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
 import Loader from "../../utils/Loader/Loader";
+import NoteBoxModule from "../CommonModule/NoteBoxModule";
+import { useTranslation } from "react-i18next";
 function YourAdd() {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
   const { userToken, currentUser, isLoading } = useSelector(
     (state) => state.user

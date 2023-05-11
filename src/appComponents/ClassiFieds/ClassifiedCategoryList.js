@@ -118,7 +118,7 @@ function ClassifiedCategoryList({ forSaleListData, bookType,displayRoute }) {
               </div>
 
               <SocialMedaiShare />
-              <button className="edit_DeleteButton" onClick={()=>navigate("/Post-advert",{state:item})}>EDIT / DELETE ADVERT</button>
+              <button className="edit_DeleteButton" onClick={()=>navigate("/post-advert",{state:item})}>EDIT / DELETE ADVERT</button>
             </div>:<div className="classiFieds_forSaleBox">
               <div className="classiFieds_forSale_about">
                 <div className="classiFieds_forSale">
