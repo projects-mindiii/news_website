@@ -19,6 +19,11 @@ function ViewCompanyProfile() {
   const [loader, setLoader] = useState(false);
   const { id } = useParams();
 
+  // --------function for open component top of the page ----------
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   // --------function for get company details----------
   const companyValue = { id: id, refrence_id: 0, refrence_type: COMPANY_REFERENCE_TYPE.DEAL_TYPE }
   // ---refrence_id,refrence_type set 0 case when only get direct compnay data-------
@@ -37,8 +42,6 @@ function ViewCompanyProfile() {
     }
     getCompanyDetails();
   }, []);
-
-  console.log("companyDetails",companyDetails)
 
   return (
     <section>
@@ -66,7 +69,7 @@ function ViewCompanyProfile() {
                   : ""}
 
                 <DealList fromDeal={false} dealList={companyDetails.deal_list} />
-              </> : <h4>{t("NO_DEAL")}</h4>}
+              </> : <h4 className="displayNoText">{t("NO_DEAL")}</h4>}
             </Col>
           </Row>
         </Container>

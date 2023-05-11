@@ -24,6 +24,7 @@ import CommonEmailField from "../../formComponent/CommonInputFields/CommonEmailF
 import Loader from "../../utils/Loader/Loader";
 import { userLogout } from "../../store/slices/UserSlice";
 import DeleteAlertBox from "../DeleteAlertBox/DeleteAlertBox";
+import NoteBoxModule from "../CommonModule/NoteBoxModule";
 
 //--------Create a Profile component----------
 function Profile() {
@@ -147,6 +148,7 @@ function Profile() {
             title: t("SESSION_EXPIRE"),
           });
           dispatch(userLogout());
+          navigate("/login");
         }
         setValue(
           "fullName",
@@ -288,16 +290,21 @@ function Profile() {
         <Container>
           <div className="profile">
             <Row>
-              <Col sm={6}>
-                <div className="profileLeftPart">
+              <Col xs={12} sm={12} md={12} lg={6}>
+                {/* <div className="profileLeftPart">
                   <h3>{t("YOUR_PROFILE")}</h3>
                   <p>
                     <strong>{t("NOTE")}</strong>
                     {t("PROFILE_DETAILS")}
                   </p>
-                </div>
+                </div> */}
+                <NoteBoxModule
+                  headText={t("YOUR_PROFILE")}
+                  headSubText={t("NOTE")}
+                  detailText={t("PROFILE_DETAILS")}
+                />
               </Col>
-              <Col sm={6}>
+              <Col xs={12} sm={12} md={12} lg={6}>
                 <div className="profileRightPart">
                   <h4>{t("YOUR_PROFILE")}</h4>
                   <Form onSubmit={handleSubmit(onSubmit)}>
@@ -398,11 +405,10 @@ function Profile() {
                     </div>
 
                     <div
-                      className={`${
-                        locationSelected.value == 1
-                          ? "selectOption hideIcon"
-                          : "selectOption"
-                      }`}
+                      className={`${locationSelected.value == 1
+                        ? "selectOption hideIcon"
+                        : "selectOption"
+                        }`}
                     >
                       <Form.Group className="mb-3">
                         <Select
@@ -435,11 +441,10 @@ function Profile() {
                     </div>
 
                     <div
-                      className={`${
-                        locationSelected.value == 0
-                          ? "selectOption hideIcon"
-                          : "selectOption"
-                      }`}
+                      className={`${locationSelected.value == 0
+                        ? "selectOption hideIcon"
+                        : "selectOption"
+                        }`}
                     >
                       <Form.Group className="mb-3">
                         <Select

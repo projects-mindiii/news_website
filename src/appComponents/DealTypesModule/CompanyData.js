@@ -12,17 +12,20 @@ function CompanyData(props) {
     const navigate = useNavigate();
     const [companyList, setcompanyList] = useState("");
     const { userToken } = useSelector((state) => state.user);
+    const [loader, setLoader] = useState(false);
 
     // --------function for get company details----------
     const companyValue = { refrence_id: props.referenceId, refrence_type: props.refrenceType }
     useEffect(() => {
         async function companyList() {
+            setLoader(true);
             const details = await SublyApi.getCompanyList(
                 userToken,
                 companyValue
             );
             if (details.status_code == STATUS_CODES.SUCCESS) {
                 setcompanyList(details.data);
+                setLoader(false);
             }
             else {
                 Toast.fire({
@@ -38,6 +41,11 @@ function CompanyData(props) {
         <>
             {companyList ?
                 <div>
+                    {loader ? (
+                        <div className="loader">
+                            <Loader />
+                        </div>
+                    ) : null}
                     <div className={styles.products}>
                         <h2>{companyList.detail.name} - <span>{companyList.total_count} Results</span></h2>
                     </div>
@@ -65,7 +73,7 @@ function CompanyData(props) {
                         ))
                         : ""}
                 </div>
-                : <Loader />}
+                : ""}
         </>
     );
 }

@@ -30,10 +30,10 @@ function DealsHeader() {
       if (response.status_code !== STATUS_CODES.SUCCESS) {
 
         if (response.status === STATUS_CODES.INVALID_TOKEN) {
-          Toast.fire({
-            icon: "error",
-            title: t("SESSION_EXPIRE"),
-          });
+          // Toast.fire({
+          //   icon: "error",
+          //   title: t("SESSION_EXPIRE"),
+          // });
           await dispatch(userLogout());
           await dispatch(guestUserLogin());
           navigate("/login");

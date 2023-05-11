@@ -7,12 +7,13 @@ import Loader from '../../utils/Loader/Loader';
 import { Toast } from "../../utils/Toaster";
 import { useNavigate } from 'react-router-dom';
 
+
 //  -------function for display product list------
 function CompanyOrderType(props) {
     const navigate = useNavigate();
     const [companyList, setcompanyList] = useState("");
-    const [loader, setLoader] = useState(false);
     const { userToken } = useSelector((state) => state.user);
+    const [loader, setLoader] = useState(false);
 
     // --------function for get company details----------
     const companyValue = { company_order: props.companyList }
@@ -33,7 +34,6 @@ function CompanyOrderType(props) {
                     icon: "error",
                     title: details.data.message,
                 });
-                setLoader(false);
             }
         }
         companyList("companyList", companyList);
@@ -41,13 +41,13 @@ function CompanyOrderType(props) {
 
     return (
         <>
-            {loader ? (
-                <div className="loader">
-                    <Loader />
-                </div>
-            ) : null}
             {companyList ?
                 <div>
+                    {loader ? (
+                        <div className="loader">
+                            <Loader />
+                        </div>
+                    ) : null}
                     {companyList.length > 0
                         ? companyList.map((item, index) => (
                             <div className={styles.productslist} key={index}

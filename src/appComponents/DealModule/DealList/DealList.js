@@ -1,6 +1,6 @@
 import message from "../../../assets/images/Deal_icon/contact.svg";
 import contact from "../../../assets/images/Deal_icon/call.svg";
-import globe from "../../../assets/images/Deal_icon/globe_ico.png";
+import globe from "../../../assets/images/Deal_icon/website_ico.svg";
 import mail from "../../../assets/images/Deal_icon/mail.svg";
 import watch from "../../../assets/images/Deal_icon/watch.svg";
 import promotional from "../../../assets/images/Deal_icon/Promotional_ico.svg";
@@ -21,7 +21,7 @@ function DealList({ dealList, fromDeal }) {
 
     return (
         <section>
-            {dealList ?
+            {dealList && dealList.length > 0 ?
                 dealList.map((item, index) => (
                     <div className="latestDeals" key={index}>
                         <img src={item.gallery[0].img_url} alt="deals" />
@@ -34,6 +34,27 @@ function DealList({ dealList, fromDeal }) {
                                     <div className="dealText">
                                         <span>{t("CONTACT_PERSON")}</span>
                                         <p>{item.contact_name}</p>
+                                    </div>
+                                </div>
+                            )}
+
+                            {item.deal_expire_date && (
+                                <div className="detailsValue">
+                                    <img src={watch} alt="img" />
+                                    <div className="dealText">
+                                        <span>{t("EXPIRY")}</span>
+                                        <p>{item.deal_expire_date}</p>
+                                    </div>
+                                </div>
+                            )}
+
+                            {item.contact_email && (
+                                <div className="detailsValue">
+                                    <img src={mail} alt="img" />
+                                    <div className="dealText websiteUrl">
+                                        <span>{t("EMAIL_TEXT")}</span>
+                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
+                                            <p>{item.contact_email}</p> </a>
                                     </div>
                                 </div>
                             )}
@@ -58,25 +79,7 @@ function DealList({ dealList, fromDeal }) {
                                     </div>
                                 </div>
                             )}
-                            {item.contact_email && (
-                                <div className="detailsValue">
-                                    <img src={mail} alt="img" />
-                                    <div className="dealText websiteUrl">
-                                        <span>{t("EMAIL_TEXT")}</span>
-                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
-                                            <p>{item.contact_email}</p> </a>
-                                    </div>
-                                </div>
-                            )}
-                            {item.deal_expire_date && (
-                                <div className="detailsValue">
-                                    <img src={watch} alt="img" />
-                                    <div className="dealText">
-                                        <span>{t("EXPIRY")}</span>
-                                        <p>{item.deal_expire_date}</p>
-                                    </div>
-                                </div>
-                            )}
+
                             {item.promo_code && (
                                 <div className="detailsValue">
                                     <img src={promotional} alt="img" />
@@ -94,7 +97,7 @@ function DealList({ dealList, fromDeal }) {
                                 {item.price.toString().includes(".")
                                     ? ""
                                     : ".00"} */}
-                                     {item.currency_code} {item.price.toFixed(2)}
+                                {item.currency_code} {item.price.toFixed(2)}
                             </h4>{" "}
                             <span>{item.tax_lable}</span>
                         </div>
@@ -108,7 +111,7 @@ function DealList({ dealList, fromDeal }) {
 
                     </div>
                 ))
-                : <Loader />}
+                : <h4 className="displayNoText">{t("NO_DEAL")}</h4>}
         </section>
     );
 }
