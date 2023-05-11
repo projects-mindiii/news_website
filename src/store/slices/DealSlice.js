@@ -11,7 +11,6 @@ const initialState = {
 export const getDealList = createAsyncThunk(
   "deals/getDealList",
   async (data, { rejectWithValue }) => {
-    console.log("data",data)
     try {
       const response = await SublyApi.getDealList(data.userToken , data.companyOrder);
       return response;

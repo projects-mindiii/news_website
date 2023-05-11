@@ -71,7 +71,7 @@ function ClassifiedCategoryList({ forSaleListData, bookType }) {
               {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
               item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
                 <div className="classiFieds_RupeesText">
-                  {item.amount !== 0 && (
+                  {item.amount && item.amount !== 0 && (
                     <p>
                       {/* {item.currency_code} {item.amount ? item.amount : "0"}
                        {item.amount.toString().includes(".") ? "" : ".00"} */}

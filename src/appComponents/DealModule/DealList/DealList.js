@@ -1,6 +1,6 @@
 import message from "../../../assets/images/Deal_icon/contact.svg";
 import contact from "../../../assets/images/Deal_icon/call.svg";
-import globe from "../../../assets/images/Deal_icon/globe_ico.png";
+import globe from "../../../assets/images/Deal_icon/website_ico.svg";
 import mail from "../../../assets/images/Deal_icon/mail.svg";
 import watch from "../../../assets/images/Deal_icon/watch.svg";
 import promotional from "../../../assets/images/Deal_icon/Promotional_ico.svg";
@@ -21,7 +21,7 @@ function DealList({ dealList, fromDeal }) {
 
     return (
         <section>
-            {dealList ?
+            {dealList && dealList.length > 0 ?
                 dealList.map((item, index) => (
                     <div className="latestDeals" key={index}>
                         <img src={item.gallery[0].img_url} alt="deals" />
@@ -94,7 +94,7 @@ function DealList({ dealList, fromDeal }) {
                                 {item.price.toString().includes(".")
                                     ? ""
                                     : ".00"} */}
-                                     {item.currency_code} {item.price.toFixed(2)}
+                                {item.currency_code} {item.price.toFixed(2)}
                             </h4>{" "}
                             <span>{item.tax_lable}</span>
                         </div>
@@ -108,7 +108,7 @@ function DealList({ dealList, fromDeal }) {
 
                     </div>
                 ))
-                : <Loader />}
+                : <h4>{t("NO_DEAL")}</h4>}
         </section>
     );
 }

@@ -11,14 +11,12 @@ import { useNavigate } from 'react-router-dom';
 function CompanyOrderType(props) {
     const navigate = useNavigate();
     const [companyList, setcompanyList] = useState("");
-    const [loader, setLoader] = useState(false);
     const { userToken } = useSelector((state) => state.user);
 
     // --------function for get company details----------
     const companyValue = { company_order: props.companyList }
     useEffect(() => {
         async function companyList() {
-            setLoader(true);
             const details = await SublyApi.getDealList(
                 userToken,
                 companyValue.company_order
@@ -26,14 +24,12 @@ function CompanyOrderType(props) {
 
             if (details.status_code == STATUS_CODES.SUCCESS) {
                 setcompanyList(details.data.company_deal_count_list);
-                setLoader(false);
             }
             else {
                 Toast.fire({
                     icon: "error",
                     title: details.data.message,
                 });
-                setLoader(false);
             }
         }
         companyList("companyList", companyList);
@@ -41,11 +37,6 @@ function CompanyOrderType(props) {
 
     return (
         <>
-            {loader ? (
-                <div className="loader">
-                    <Loader />
-                </div>
-            ) : null}
             {companyList ?
                 <div>
                     {companyList.length > 0
@@ -71,7 +62,7 @@ function CompanyOrderType(props) {
                         ))
                         : ""}
                 </div>
-                : ""}
+                : <Loader />}
         </>
     );
 }

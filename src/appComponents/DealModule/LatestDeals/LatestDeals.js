@@ -16,9 +16,9 @@ function LatestDeals() {
 
   return (
     <div className="dealContainer">
-      {isLoading === true ? (
+      {/* {isLoading === true ? (
         <Loader />
-      ) : ""}
+      ) : ""} */}
       {latestDeals ?
         <Container>
           {latestDeals.length > 0 ?

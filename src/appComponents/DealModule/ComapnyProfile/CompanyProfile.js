@@ -1,6 +1,6 @@
 import "../LatestDealList/LatestDealList.css";
 import contact from "../../../assets/images/Deal_icon/call.svg";
-import globe from "../../../assets/images/Deal_icon/globe_ico.png";
+import globe from "../../../assets/images/Deal_icon/website_ico.svg";
 import mail from "../../../assets/images/Deal_icon/mail.svg";
 import "../../CommonModule/CommonModule.css";
 import MapLocation from "../../CommonModule/MapLocation";
