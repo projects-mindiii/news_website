@@ -163,7 +163,7 @@ button.btn:active {
     text-align: center;
     font-weight: 400;
     font-size: 14px;
-    letter-spacing: 0.28px;
+    /* letter-spacing: 0.28px; */
     color: #2B2C43;
     opacity: 0.6;
     margin-right: 10px;
@@ -193,5 +193,13 @@ button.btn:active {
 @media screen and (max-width: 381px) and (min-width: 374px) {
     .forgotCls h6 {
         font-size: 14px !important;
+    }
+}
+
+@media screen and (min-width: 367px) and (max-width: 379px) {
+    .LoginText p {
+        font-size: 13px !important;
+        margin-right: 7px !important;
+        margin-left: 7px !important;
     }
 }

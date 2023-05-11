@@ -69,7 +69,7 @@ function CompanyList({ companyList, refrenceType }) {
                         </>
 
                     }
-                </div> : <Loader />}
+                </div> : ""}
         </>
     );
 }

@@ -78,7 +78,7 @@ function CompanyProfile({ companyDetailData }) {
               {companyDetailData.company_detail.email && (
                 <div className="detailsValue">
                   <img src={mail} alt="img" />
-                  <div className="dealText">
+                  <div className="dealText websiteUrl">
                     <span>{t("EMAIL_TEXT")}</span>
                     <a href={`https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email}&su=${"Subject"}`} >
                       <p>{companyDetailData.company_detail.email}</p></a>
@@ -112,7 +112,8 @@ function CompanyProfile({ companyDetailData }) {
             {companyDetailData.company_detail.whatapp_contact_number && (
               <div className="watsappCls">
                 <WhatsApp watsApp={false} />
-              </div>)}
+              </div>
+              )}
 
           </div>
           <div className="socialShare">

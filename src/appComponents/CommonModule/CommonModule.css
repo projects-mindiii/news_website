@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     padding: 4px 0px;
+    margin-bottom: 13px;
 }
 
 .socialShare img {
@@ -24,11 +25,11 @@
 }
 
 .mapDetails h5 {
-    margin-top: 0px;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #000000;
+    margin-top: 0px !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    line-height: 20px !important;
+    color: #000000 !important;
 }
 
 .mapDetails p {
@@ -55,17 +56,18 @@
 }
 
 .mapLocationSet h5 {
-    margin-top: 0px;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #000000;
+    margin-top: 0px !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    line-height: 20px !important;
+    color: #000000 !important;
 }
 
 .mapLocationSet p {
     font-weight: 400;
-    font-size: 14.3px;
+    font-size: 14.3px !important;
     line-height: 17px;
+    line-break: unset;
 }
 
 .noteBoxClass p {
@@ -90,7 +92,7 @@
 
 @media screen and (max-width: 340px) {
     .socialShare img {
-        width: 41px !important;
+        width: 42px !important;
         margin-right: 15px;
     }
 }

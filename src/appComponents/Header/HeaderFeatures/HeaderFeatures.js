@@ -17,6 +17,7 @@ function HeaderFeatures() {
        const logout = async () => {
         
         dispatch(userLogout());
+        // navigate("/deals/latest-deals")
 
     };
     

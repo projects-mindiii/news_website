@@ -37,6 +37,27 @@ function DealList({ dealList, fromDeal }) {
                                     </div>
                                 </div>
                             )}
+
+                            {item.deal_expire_date && (
+                                <div className="detailsValue">
+                                    <img src={watch} alt="img" />
+                                    <div className="dealText">
+                                        <span>{t("EXPIRY")}</span>
+                                        <p>{item.deal_expire_date}</p>
+                                    </div>
+                                </div>
+                            )}
+
+                            {item.contact_email && (
+                                <div className="detailsValue">
+                                    <img src={mail} alt="img" />
+                                    <div className="dealText websiteUrl">
+                                        <span>{t("EMAIL_TEXT")}</span>
+                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
+                                            <p>{item.contact_email}</p> </a>
+                                    </div>
+                                </div>
+                            )}
                             {item.contact_number && (
                                 <div className="detailsValue">
                                     <img src={contact} alt="img" />
@@ -58,25 +79,7 @@ function DealList({ dealList, fromDeal }) {
                                     </div>
                                 </div>
                             )}
-                            {item.contact_email && (
-                                <div className="detailsValue">
-                                    <img src={mail} alt="img" />
-                                    <div className="dealText websiteUrl">
-                                        <span>{t("EMAIL_TEXT")}</span>
-                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
-                                            <p>{item.contact_email}</p> </a>
-                                    </div>
-                                </div>
-                            )}
-                            {item.deal_expire_date && (
-                                <div className="detailsValue">
-                                    <img src={watch} alt="img" />
-                                    <div className="dealText">
-                                        <span>{t("EXPIRY")}</span>
-                                        <p>{item.deal_expire_date}</p>
-                                    </div>
-                                </div>
-                            )}
+
                             {item.promo_code && (
                                 <div className="detailsValue">
                                     <img src={promotional} alt="img" />
@@ -108,7 +111,7 @@ function DealList({ dealList, fromDeal }) {
 
                     </div>
                 ))
-                : <h4>{t("NO_DEAL")}</h4>}
+                : <h4 className="displayNoText">{t("NO_DEAL")}</h4>}
         </section>
     );
 }

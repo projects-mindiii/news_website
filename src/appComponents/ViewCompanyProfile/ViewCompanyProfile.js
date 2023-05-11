@@ -69,7 +69,7 @@ function ViewCompanyProfile() {
                   : ""}
 
                 <DealList fromDeal={false} dealList={companyDetails.deal_list} />
-              </> : <h4>{t("NO_DEAL")}</h4>}
+              </> : <h4 className="displayNoText">{t("NO_DEAL")}</h4>}
             </Col>
           </Row>
         </Container>

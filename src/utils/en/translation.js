@@ -83,7 +83,7 @@ export const TRANSLATIONS_EN = {
   CHANGE_PASSWORD: "CHANGE PASSWORD",
   DELETE_ACCOUNT: "DELETE ACCOUNT",
   SAVE: "SAVE",
-  NOTE: "PLEASE NOTE -",
+  NOTE: "PLEASE NOTE",
   ALERT: "Alert",
   WANT_DELETE: "Are you sure ? You want to delete your account.",
   CANCEL: "CANCEL",

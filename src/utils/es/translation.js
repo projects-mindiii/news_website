@@ -84,7 +84,7 @@ export const TRANSLATIONS_ES = {
   CHANGE_PASSWORD: "CAMBIAR LA CONTRASEÑA",
   DELETE_ACCOUNT: "BORRAR CUENTA",
   SAVE: "AHORRAR",
-  NOTE: "TENGA EN CUENTA -",
+  NOTE: "TENGA EN CUENTA",
   ALERT: "Alerta",
   WANT_DELETE: "Está seguro ? Quiere eliminar su cuenta.",
   CANCEL: "CANCELAR",

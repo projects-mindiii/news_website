@@ -56,7 +56,7 @@ function LatestDeals() {
                 </Col>
               </Row>
             </Tab.Container> :
-            <h4>{t("NO_DEAL")}</h4>}
+            <h4 className="displayNoText">{t("NO_DEAL")}</h4>}
         </Container> : ""}
     </div>
   );
