@@ -53,7 +53,9 @@ function PostAdvert() {
         control,
         name: 'description'
     });
-    navigate(location.pathname, { replace: true });
+
+
+
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false)
     const [profilePreview, setProfilePreview] = useState()
@@ -137,6 +139,38 @@ function PostAdvert() {
         }, 1000);
 
     }
+    function resetDate() {
+        setHeadingLength("")
+        setDescriptionLength("")
+        reset();
+        setWatsappNo("");
+        setPhoneNo("");
+        if (location.state !== null) {
+            navigate("/post-advert", { state: "" })
+        }
+        setCategoryValue("");
+    }
+    function setDefaultValue() {
+        setDialCodeWatsapp("27");
+        setCountryCodeWatsapp("za");
+        setDialCode("27");
+        setCountryCode("za");
+        setValue("email", currentUser.email)
+        setValue("fullName", currentUser.name)
+        setValue("province", { label: 'Free State', value: 932, id: 932 })
+        setValue("isDefaultCountry", {
+            label: "South Africa",
+            value: 1,
+            id: 1
+        })
+        setDefaultCountry({
+            label: "South Africa",
+            value: 1,
+            id: 1
+        })
+        setProvinceValue({ label: 'Free State', value: 932, id: 932 })
+        setCurrencyValue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
+    }
     useEffect(() => {
         async function getClassifiedLists() {
             if (Object.keys(allMetaList).length > 0) {
@@ -188,41 +222,27 @@ function PostAdvert() {
                     await setProvincesOptions(provinceOption)
                     await setCurrenciesOptions(currencyoption)
                     if (location && location.state == null) {
-                        setValue("email", currentUser.email)
-                        setValue("fullName", currentUser.name)
-                        setValue("province", { label: 'Free State', value: 932, id: 932 })
-                        setValue("isDefaultCountry", {
-                            label: "South Africa",
-                            value: 1,
-                            id: 1
-                        })
-                        setDefaultCountry({
-                            label: "South Africa",
-                            value: 1,
-                            id: 1
-                        })
-                        setProvinceValue({ label: 'Free State', value: 932, id: 932 })
-                        setCurrencyValue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
+                        setDefaultValue();
                     }
                     else {
                         setValue("categorytype", location.state.category_type_id && location.state.category_type_id.toString())
                         setCategoryValue(location.state.category_type_id && location.state.category_type_id.toString())
-                        setValue("fullName",  location.state.user_name)
+                        setValue("fullName", location.state.user_name)
                         setValue("heading", location.state.heading)
-                        setValue("description",  location.state.description)
-                        setValue("amountvalue",  location.state.amount)
+                        setValue("description", location.state.description)
+                        setValue("amountvalue", location.state.amount)
                         setValue("negotiable", location.state.is_negotiable)
-                        setValue("city",  location.state.city)
-                        setValue("companyName",  location.state.contact_company)
-                        setValue("email",  location.state.email)
+                        setValue("city", location.state.city)
+                        setValue("companyName", location.state.contact_company)
+                        setValue("email", location.state.email)
                         setDialCodeWatsapp(location.state.whatsapp_dail_code)
-                        setCountryCodeWatsapp( location.state.whatsapp_country_code)
-                        setWatsappNo( location.state.whatapp_contact_number)
+                        setCountryCodeWatsapp(location.state.whatsapp_country_code)
+                        setWatsappNo(location.state.whatapp_contact_number)
                         setPhoneNo(location.state.contact)
-                        setDialCode( location.state.dial_code)
-                        setCountryCode( location.state.country_code)
+                        setDialCode(location.state.dial_code)
+                        setCountryCode(location.state.country_code)
                         setValue("employmentenquiry", location.state.emp_equity && location.state.emp_equity.toString())
-                        setValue("selectlocationtype",  location.state.job_location_type_id)
+                        setValue("selectlocationtype", location.state.job_location_type_id)
                         setProfileImage(location.state.gallery)
                         setProfilePreview(location.state.gallery)
                         setValue("jobType", {
@@ -280,9 +300,9 @@ function PostAdvert() {
         }
         getClassifiedLists();
     }, []);
-   
+
     async function onSubmit(data, e) {
-        
+
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
@@ -384,50 +404,56 @@ function PostAdvert() {
         }
         if (location.state == null) {
             await SublyApi.addClassifiedList(requestData, userToken).then((responsejson) => {
-                if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
+                if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
                     setIsLoading(false)
                     Toast.fire({
                         icon: "success",
-                        title: responsejson.message,
+                        title: responsejson.data.message,
                     });
-                } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
+                } else if (responsejson.status == STATUS_CODES.BAD_REQUEST || responsejson.status_code == STATUS_CODES.INVALID_PARAM) {
                     setIsLoading(false)
                     Toast.fire({
                         icon: "success",
-                        title: responsejson.message,
+                        title: responsejson.data.message,
                     });
                 } else {
                     if (responsejson.status_code == STATUS_CODES.SUCCESS) {
                         setIsLoading(false)
                         Toast.fire({
                             icon: "success",
-                            title: responsejson.message,
+                            title: responsejson.data.message,
                         });
+                        resetDate();
+                        setDefaultValue();
                     }
                 }
             });
         }
         else {
             await SublyApi.updateAdvert(requestData, userToken).then((responsejson) => {
-                if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
+                console.log(responsejson)
+
+                if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
                     setIsLoading(false)
                     Toast.fire({
                         icon: "success",
-                        title: responsejson.message,
+                        title: responsejson.data.message,
                     });
-                } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
+                } else if ((responsejson.status == STATUS_CODES.BAD_REQUEST) || (responsejson.status == STATUS_CODES.INVALID_PARAM)) {
                     setIsLoading(false)
                     Toast.fire({
                         icon: "success",
-                        title: responsejson.message,
+                        title: responsejson.data.message,
                     });
                 } else {
                     if (responsejson.status_code == STATUS_CODES.SUCCESS) {
                         setIsLoading(false)
                         Toast.fire({
                             icon: "success",
-                            title: responsejson.message,
+                            title: responsejson.data.message,
                         });
+                        resetDate();
+                        setDefaultValue();
                     }
                 }
             });
@@ -436,17 +462,17 @@ function PostAdvert() {
     async function deleteClassiFieds(id) {
         setIsLoading(true)
         await SublyApi.deleteClassiFied(userToken, id).then((responsejson) => {
-            if (responsejson.status_code == STATUS_CODES.INTERNAL_SERVER_ERROR) {
+            if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
                 setIsLoading(false)
                 Toast.fire({
                     icon: "success",
-                    title: responsejson.message,
+                    title: responsejson.data.message,
                 });
-            } else if (responsejson.status_code == STATUS_CODES.BAD_REQUEST) {
+            } else if (responsejson.status == STATUS_CODES.BAD_REQUEST) {
                 setIsLoading(false)
                 Toast.fire({
                     icon: "success",
-                    title: responsejson.message,
+                    title: responsejson.data.message,
                 });
             } else {
                 if (responsejson.status_code == STATUS_CODES.SUCCESS) {
@@ -454,7 +480,7 @@ function PostAdvert() {
                     setIsLoading(false)
                     Toast.fire({
                         icon: "success",
-                        title: responsejson.message,
+                        title: responsejson.data.message,
                     });
                     navigate("/your-add")
                 }
@@ -498,7 +524,7 @@ function PostAdvert() {
             // get the real base64 content of the file
             var realData = block[1].split(",")[1];
             var blobImg = b64toBlob(realData, contentTypes);
-            profileviews.push({img_url: cropData});
+            profileviews.push({ img_url: cropData });
             profileimages.push(blobImg);
             setProfilePreview(profileviews);
             setProfileImage(profileimages);
@@ -781,7 +807,7 @@ function PostAdvert() {
                                                     </Form.Group>
                                                 </InputGroup>
                                             </div>}
-                                        {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE)  && errors.amountvalue && <div className="post_Add_Error"> {errors.amountvalue.message}</div>}
+                                        {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE) && errors.amountvalue && <div className="post_Add_Error"> {errors.amountvalue.message}</div>}
                                         {CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
                                             <div className="mb-3">
                                                 <Form.Group >
@@ -850,7 +876,7 @@ function PostAdvert() {
                                                                 id="isDefaultCountry"
                                                                 options={isDefaultCountry}
                                                                 value={defaultCountry}
-                                                                onChange={(e) => {setNewDefaultCountry(e)}}
+                                                                onChange={(e) => { setNewDefaultCountry(e) }}
 
 
                                                                 styles={{
@@ -892,7 +918,7 @@ function PostAdvert() {
                                                                     id="province"
                                                                     options={provinceOptions}
                                                                     value={provinceValue}
-                                                                    onChange={(val) => {setNewProvinces(val)}}
+                                                                    onChange={(val) => { setNewProvinces(val) }}
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "#231F20",
@@ -936,7 +962,7 @@ function PostAdvert() {
                                                                     id="country"
                                                                     value={countryValue}
                                                                     options={countryOptions}
-                                                                    onChange={(e) => {setNewCountry(e)}}
+                                                                    onChange={(e) => { setNewCountry(e) }}
                                                                     placeholder={t("SELECT_COUNTRY")}
                                                                     styles={{
                                                                         placeholder: () => ({
@@ -1081,7 +1107,7 @@ function PostAdvert() {
                                 <Cropper
                                     style={{ height: 400, width: "100%" }}
                                     // initialAspectRatio={2 / 2}
-                                    aspectRatio={4/ 3}
+                                    aspectRatio={4 / 3}
                                     guides={false}
                                     preview=".img-preview2"
                                     src={image}
