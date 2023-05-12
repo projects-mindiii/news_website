@@ -10,7 +10,7 @@
 }
 
 .products h2 {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 20px;
     text-align: center;
     letter-spacing: -0.2px;
@@ -36,13 +36,13 @@
 .productImg {
     background: #FFFFFF;
     box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
-    border-radius: 6px;
+    border-radius: 5.75997px;
     width: 140px;
 }
 
 .productImg img {
     width: 140px;
-    border-radius: 6px;
+    border-radius: 5.75997px;
 }
 
 .productDiscription {

@@ -130,6 +130,7 @@
 .latestDeals .watsappCls svg {
     height: 28px;
     width: 28px;
+    margin-top: 0px;
 }
 
 .latestDeals .watsappCls span {
