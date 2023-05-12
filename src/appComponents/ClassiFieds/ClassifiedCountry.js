@@ -4,23 +4,23 @@ import "../ClassiFieds/ClassiFieds.css";
 import { useTranslation } from "react-i18next";
 import styles from "./ClassifiedCountry.module.css";
 import ClassifiedFilter from "./ClassifiedFilter";
-
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 function ClassifiedCountry() {
+  const {
+    classifiedFilterValues,
+    jobSeekerTotalCount,jobOfferTotalCount,forSaleTotalCount,wantedTotalCount
+  } = useSelector((state) => state.classified);
   function closeModal() {
     return setIsOpen(false);
   }
- 
-
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [countryData, setCountryData] = useState("");
   const [resultData, setResultData] = useState("");
-  console.log("resultData", resultData);
-   console.log("countryData", countryData);
+  const location = useLocation();
 
-
-
+  console.log("classifiedFilterValues",classifiedFilterValues)
   return (
     <div className={styles.classiFieds_map_serchbar}>
       <div className={styles.countryIcon} onClick={() => setIsOpen(true)}>
@@ -28,16 +28,17 @@ function ClassifiedCountry() {
           <img src={mapicon} alt={mapicon} width="25px" height="25px" />{" "}
         </div>
         <div className={styles.countryText}>
-          {countryData.label ? (
+          {classifiedFilterValues ? (
             <div className={styles.countryText}>
-              <p className={styles.selectText}>{countryData.label} - </p>
+              <p className={styles.selectText}>{classifiedFilterValues.name} - </p>
               <span className={styles.resultText}>
-              {resultData} Results
+                {(location.pathname == "/job-types")?(jobOfferTotalCount+jobSeekerTotalCount):(forSaleTotalCount+wantedTotalCount)} {t("CLASSIFIED_LIST_RESULT")}
               </span>{" "}
             </div>
           ) : (
             <p>
-              All South Africa - <span className={styles.resultText}> 0 Result</span>
+              {t("COUNTRY_NAME")} -{" "}
+              <span className={styles.resultText}> 0 {t("CLASSIFIED_LIST_RESULT")}</span>
             </p>
           )}
         </div>
@@ -45,8 +46,8 @@ function ClassifiedCountry() {
       {isOpen && (
         <ClassifiedFilter
           closeModal={closeModal}
-          setCountryData={setCountryData}
           setResultData={setResultData}
+          resultData={resultData}
         />
       )}
     </div>

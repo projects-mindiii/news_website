@@ -70,12 +70,11 @@ function ClassifiedList({forSaleListData, bookType, item, index, displayRoute}){
       {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
       item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
         <div className="classiFieds_RupeesText">
-          {item.amount !== 0 && (
+          {item.amount && item.amount !== 0 && (
             <p>
-              {/* {item.currency_code} {item.amount ? item.amount : "0"}
-               {item.amount.toString().includes(".") ? "" : ".00"} */}
+             
               {item.currency_code} {item.amount.toFixed(2)}
-              {/* {item.currency_code} {new Intl.NumberFormat().format(item.amount)} */}
+              
             </p>
           )}
 

@@ -9,18 +9,10 @@ import { AiOutlineStar } from "react-icons/ai";
 function ContactPerson(props) {
   const { t } = useTranslation();
 
-  const handleClick = (e) => {
-    // e.preventDefault();
-    // const url = `https://mail.google.com/mail/?view=cm&to=
-    // ${props.forSaleListData[props.index].email}&su=${"Report"}`;
-    // window.open(url);
-    
-  };
-
   return (
     <React.Fragment>
       <div className="classiFields_contactPersondetail">
-        <p className="heading">{t("CONTACT_PERSON")}</p>
+        <p className="heading">{t("CLASSIFIED_CONTACT_PERSON")}</p>
         {props.forSaleListData[props.index].contact_company && (
           <div className="classiFields_PersonAboutShow">
             <div className="classiFields_iconBackGround">
@@ -42,14 +34,6 @@ function ContactPerson(props) {
               <p>{t("CONTACT_PERSON_EMAIL")}</p>
               <a href={`https://mail.google.com/mail/?view=cm&to= ${props.forSaleListData[props.index].email}&su=${"Subject"}`}>
                                             <span> {props.forSaleListData[props.index].email}</span> </a>
-              {/* <p
-                href={`https://mail.google.com/mail/?view=cm&to=
-                ${props.forSaleListData[props.index].email}&su=${"Report"}`}
-                onClick={handleClick}
-              >
-                {props.forSaleListData[props.index].email}
-              </p> */}
-              {/* <p>{props.forSaleListData[props.index].email}</p> */}
             </div>
             <div></div>
           </div>
@@ -62,8 +46,6 @@ function ContactPerson(props) {
             <div className="classiFields_emailHeadingText">
             <p>{t("CONTACT_NUMBER")}</p> 
               <span><a href={`tel:${props.forSaleListData[props.index].contact}`}>{props.forSaleListData[props.index].contact}</a></span>
-              {/* <p>{t("CONTACT_NUMBER")}</p> */}
-              {/* <p>{props.forSaleListData[props.index].contact}</p> */}
             </div>
             <div></div>
           </div>

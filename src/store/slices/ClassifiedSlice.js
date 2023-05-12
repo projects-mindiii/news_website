@@ -15,6 +15,9 @@ const initialState = {
   jobSeekerWebList: [],
   classifiedType: 4,
   isLoading: false,
+  classifiedTotalCount:0,
+  classifiedFilterValues:{name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""},
+  
 }
 
 // Thunk for your advert list
@@ -83,13 +86,26 @@ export const getJobSeekerListApi = createAsyncThunk(
 		}
 	}
 )
+
 export const classifiedSlice = createSlice({
   name: 'classified',
+  
   initialState,
   reducers: {
+    setJobOfferTotalCount: (state, action) => {
+      state.jobOfferTotalCount = action.payload;
+    },
+    setJobSeekerTotalCount: (state, action) => {
+      state.jobSeekerCount = action.payload;
+    },
     setClassfiedType: (state, action) => {
       state.classifiedType = action.payload;
-    }
+    },
+    setClassifiedFilterName: (state, action) => {
+      console.log('setClassifiedFilterName action',action.payload)
+      state.classifiedFilterValues = action.payload;
+    },
+
   },
   extraReducers: (builder) => {
     //web list
@@ -197,5 +213,6 @@ export const classifiedSlice = createSlice({
     })
   },
 })
-export const { setClassfiedType } = classifiedSlice.actions;
+export const { setClassifiedFilterName,setClassfiedType,setJobOfferTotalCount,setJobSeekerTotalCount } = classifiedSlice.actions;
+
 export default classifiedSlice.reducer

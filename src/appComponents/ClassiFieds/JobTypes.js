@@ -9,6 +9,7 @@ import {
   setClassfiedType,
   getJobOfferListApi,
   getJobSeekerListApi,
+  setClassifiedFilterName,
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -18,15 +19,10 @@ import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE } from "../../utils/Constants";
 //-------Create a Deals Header component--------
 function JobTypes() {
   const { t } = useTranslation();
-  const dispatch = useDispatch()
-  const {
-    classifiedType,
-    jobOfferTotalCount,
-    jobOfferWebList,
-    jobSeekerTotalCount,
-    jobSeekerWebList,
-  } = useSelector((state) => state.classified);
-  const { userToken, isLoading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const {jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
+    useSelector((state) => state.classified);
+  const { userToken,isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
 
@@ -36,6 +32,7 @@ function JobTypes() {
   };
   useEffect(() => {
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.JOBOFFER);
+    dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
     async function getWebClassifiedLists() {
       const jobOfferQuery = {
         limit: 10,
@@ -140,7 +137,7 @@ function JobTypes() {
                   />
                 ) : (
                   <p className="nodataDisplay">
-                    -- {t("N0CLASSIFIED_DISPLAY")} --{" "}
+                    -- {t("NOCLASSIFIED_DISPLAY")} --{" "}
                   </p>
                 )
               ) : jobSeekerWebList.length ? (
@@ -151,7 +148,7 @@ function JobTypes() {
                 />
               ) : (
                 <p className="nodataDisplay">
-                  -- {t("N0CLASSIFIED_DISPLAY")} --{" "}
+                  -- {t("NOCLASSIFIED_DISPLAY")} --{" "}
                 </p>
               )}
             </Col>
@@ -160,9 +157,6 @@ function JobTypes() {
                 <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168"></iframe>
               </div>
             </Col> */}
-
-           
-              
           </Row>
         </Container>
       </React.Fragment>
