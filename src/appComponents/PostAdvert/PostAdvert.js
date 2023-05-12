@@ -53,7 +53,7 @@ function PostAdvert() {
         control,
         name: 'description'
     });
-
+    navigate(location.pathname, { replace: true });
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false)
     const [profilePreview, setProfilePreview] = useState()
