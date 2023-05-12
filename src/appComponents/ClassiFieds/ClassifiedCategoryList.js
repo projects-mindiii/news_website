@@ -128,20 +128,6 @@ function ClassifiedCategoryList({ forSaleListData, bookType,displayRoute}) {
         forSaleListData.length > 0 &&
         forSaleListData.map((item, index) => {
           if(displayRoute &&  displayRoute=="your_advert"){
-            // let approveForSaleListData = forSaleListData.filter( (a) => a.approval_status ==1);
-
-            // if(displayRoute &&  displayRoute=="your_advert" && item.approval_status == 1){
-            //   return (
-            //     <ClassifiedList key={index} index={index} item={item} forSaleListData={approveForSaleListData} bookType={bookType} ></ClassifiedList>
-            //   );
-            // }
-            // let newforSaleListData = forSaleListData.filter( (a) => a.approval_status ==0);
-
-            // if(displayRoute &&  displayRoute=="your_advert" && item.approval_status == 0){
-            //   return (
-            //     <ClassifiedList key={index} index={index} item={item} forSaleListData={newforSaleListData} bookType={bookType} ></ClassifiedList>
-            //   );
-            // }
             return (
               <ClassifiedList displayRoute="your_advert" key={index} index={index} item={item} forSaleListData={forSaleListData} bookType={bookType} ></ClassifiedList>
             );     
