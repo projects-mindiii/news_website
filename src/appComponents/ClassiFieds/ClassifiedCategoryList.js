@@ -72,14 +72,9 @@ function ClassifiedList({forSaleListData, bookType, item, index, displayRoute}){
         <div className="classiFieds_RupeesText">
           {item.amount && item.amount !== 0 && (
             <p>
-<<<<<<< HEAD
              
               {item.currency_code} {item.amount.toFixed(2)}
               
-=======
-              
-              {item.currency_code} {item.amount.toFixed(2)}
->>>>>>> 34547a1 (classified list remove unused code)
             </p>
           )}
 
