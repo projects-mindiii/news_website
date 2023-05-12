@@ -216,17 +216,17 @@
 }
 
 
-.post_AddForm #countries .css-13cymwt-control {
+.post_AddForm #country .css-13cymwt-control {
     color: black !important;
     border-radius: 10px;
 }
 
-.post_AddForm #countries .css-t3ipsp-control {
+.post_AddForm #country .css-t3ipsp-control {
     color: black !important;
     border-radius: 10px;
 }
 
-.post_AddForm #countries .css-tj5bde-Svg {
+.post_AddForm #country .css-tj5bde-Svg {
     fill: black !important;
 }
 
@@ -320,9 +320,9 @@
     background-color: #000000;
 }
 
-.post_Add_Save {
+/* .post_Add_Save {
     margin-top: 23px;
-}
+} */
 
 .post_Add_DeleteAdever button {
     height: 62px;
@@ -590,4 +590,19 @@
     background: #FFFFFF !important;
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
+}
+.post_Add_Delete button{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border: none;
+    width: 100%;
+    align-items: center;
+    
+}
+.post_Add_Delete {
+    margin-top: 18px;
+}
+.post_Add_Delete button svg {
+    margin-right: 10px;
 }

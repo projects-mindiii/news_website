@@ -151,7 +151,7 @@ export const TRANSLATIONS_ES = {
   //---------- Status Error Text---------------
   SESSION_EXPIRE: "¡Su sesión expiró!",
   //------------- Post Adever-------------
-  PLEASE_NOTE: `PLEASE NOTE -`,
+  PLEASE_NOTE: `PLEASE NOTE`,
   POST_CLASSIFIED_AD: `POST CLASSIFIED AD`,
   ALL_ADVERT_REMOVE_60: `All adverts are subject to approval. Adverts will be removed after 60 days. Delete or Edit your advert anytime`,
   CATEGORY: `CATEGORY`,
@@ -182,6 +182,7 @@ export const TRANSLATIONS_ES = {
   POST_Description_MIN_ERROR: `Description should have minimum length 3 characters.`,
   SELECT_COUNTRY: `SELECT COUNTRY`,
   PLEASE_SEL_CURR: `PLEASE SELECT CURRENCY`,
+  DELETE_ADVERT: "Are you sure  You want to delete?",
 
   //---------Login Alert Box---------
   LOGIN_REQUIRED: "NECESARIO INICIAR SESIÓN",
@@ -198,6 +199,10 @@ export const TRANSLATIONS_ES = {
   NO_BOOK_MARKS: "--- NO HAY MARCADORES PARA MOSTRAR ---",
   CLEAR_ALL: "Limpiar todo",
   REMOVE_ALL_BOOKMARK: "Está seguro ? Desea eliminar todos los marcadores.",
+
+  //------------- Your Ads-------------
+  YOUR_ADVERTS: "TUS ANUNCIOS",
+  ADVERT_NOTE: "Todos los anuncios están sujetos a aprobación. Los anuncios se eliminarán después de 60 días. Elimine o edite su anuncio en cualquier momento",
 
 
 };
