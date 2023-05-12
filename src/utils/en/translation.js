@@ -48,6 +48,7 @@ export const TRANSLATIONS_EN = {
   CLASSIFIED_LIST_RESULT:"Results",
   COUNTRY_NAME:"All South Africa",
   DONE_BUTTON:"Done",
+  CLASSIFIED_CONTACT_PERSON:"Contact Person",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,

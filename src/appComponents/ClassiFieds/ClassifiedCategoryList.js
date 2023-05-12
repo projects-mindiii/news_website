@@ -6,17 +6,21 @@ import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
 import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
-
 import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
 import { useNavigate } from "react-router-dom";
 
-function ClassifiedList({forSaleListData, bookType, item, index, displayRoute}){
+function ClassifiedList({
+  forSaleListData,
+  bookType,
+  item,
+  index,
+  displayRoute,
+}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
-    
     <div className="classiFieds_forSaleBox">
       <div className="classiFieds_forSale_about">
         <div className="classiFieds_forSale">
@@ -70,12 +74,9 @@ function ClassifiedList({forSaleListData, bookType, item, index, displayRoute}){
       {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
       item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
         <div className="classiFieds_RupeesText">
-          {item.amount !== 0 && (
+          {item.amount && item.amount !== 0 && (
             <p>
-              {/* {item.currency_code} {item.amount ? item.amount : "0"}
-               {item.amount.toString().includes(".") ? "" : ".00"} */}
               {item.currency_code} {item.amount.toFixed(2)}
-              {/* {item.currency_code} {new Intl.NumberFormat().format(item.amount)} */}
             </p>
           )}
 
@@ -94,7 +95,9 @@ function ClassifiedList({forSaleListData, bookType, item, index, displayRoute}){
         <span>
           <img src={mapicon} alt={mapicon} />
           <span>
-            {(item.country_name)?item.country_name:""}{(item.province_name)?', '+item.province_name:""}{(item.city)?', '+item.city:""}
+            {item.country_name ? item.country_name : ""}
+            {item.province_name ? ", " + item.province_name : ""}
+            {item.city ? ", " + item.city : ""}
           </span>
         </span>
       </div>
@@ -102,57 +105,68 @@ function ClassifiedList({forSaleListData, bookType, item, index, displayRoute}){
         <p>{item.description}</p>
       </div>
       <div className="classiFields_contactPerson">
-        <ContactPerson
-          forSaleListData={forSaleListData}
-          index={index}
-        />
-        {item.whatapp_contact_number.length > 0 && (
-          <WhatsApp watsApp={true} />
-        )}
+        <ContactPerson forSaleListData={forSaleListData} index={index} />
+        {item.whatapp_contact_number.length > 0 && <WhatsApp watsApp={true} />}
       </div>
 
       <SocialMedaiShare />
-      {(displayRoute &&  displayRoute=="your_advert" )?(<button className="edit_DeleteButton" onClick={()=>navigate("/post-advert",{state:item})}>EDIT / DELETE ADVERT</button>):""}
-      {(displayRoute &&  displayRoute=="your_advert" && item.approval_status==0 )?(<button className="not_live">NOT LIVE - Pending Approvals</button>):""}
+      {displayRoute && displayRoute == "your_advert" ? (
+        <button
+          className="edit_DeleteButton"
+          onClick={() => navigate("/post-advert", { state: item })}
+        >
+          EDIT / DELETE ADVERT
+        </button>
+      ) : (
+        ""
+      )}
+      {displayRoute &&
+      displayRoute == "your_advert" &&
+      item.approval_status == 0 ? (
+        <button className="not_live">NOT LIVE - Pending Approvals</button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
-function ClassifiedCategoryList({ forSaleListData, bookType,displayRoute}) {
-  if(displayRoute &&  displayRoute=="your_advert"){
-    let approveForSaleListData = forSaleListData.filter( (a) => a.approval_status ==1);
-    let pendingForSaleListData = forSaleListData.filter( (a) => a.approval_status ==0);
-    forSaleListData = approveForSaleListData.concat(pendingForSaleListData); 
+function ClassifiedCategoryList({ forSaleListData, bookType, displayRoute }) {
+  if (displayRoute && displayRoute == "your_advert") {
+    let approveForSaleListData = forSaleListData.filter(
+      (a) => a.approval_status == 1
+    );
+    let pendingForSaleListData = forSaleListData.filter(
+      (a) => a.approval_status == 0
+    );
+    forSaleListData = approveForSaleListData.concat(pendingForSaleListData);
   }
   return (
     <div className="main">
       {forSaleListData &&
         forSaleListData.length > 0 &&
         forSaleListData.map((item, index) => {
-          if(displayRoute &&  displayRoute=="your_advert"){
-            // let approveForSaleListData = forSaleListData.filter( (a) => a.approval_status ==1);
-
-            // if(displayRoute &&  displayRoute=="your_advert" && item.approval_status == 1){
-            //   return (
-            //     <ClassifiedList key={index} index={index} item={item} forSaleListData={approveForSaleListData} bookType={bookType} ></ClassifiedList>
-            //   );
-            // }
-            // let newforSaleListData = forSaleListData.filter( (a) => a.approval_status ==0);
-
-            // if(displayRoute &&  displayRoute=="your_advert" && item.approval_status == 0){
-            //   return (
-            //     <ClassifiedList key={index} index={index} item={item} forSaleListData={newforSaleListData} bookType={bookType} ></ClassifiedList>
-            //   );
-            // }
+          if (displayRoute && displayRoute == "your_advert") {
             return (
-              <ClassifiedList displayRoute="your_advert" key={index} index={index} item={item} forSaleListData={forSaleListData} bookType={bookType} ></ClassifiedList>
-            );     
-
-          }else{
+              <ClassifiedList
+                displayRoute="your_advert"
+                key={index}
+                index={index}
+                item={item}
+                forSaleListData={forSaleListData}
+                bookType={bookType}
+              ></ClassifiedList>
+            );
+          } else {
             return (
-              <ClassifiedList key={index} index={index} item={item} forSaleListData={forSaleListData} bookType={bookType} ></ClassifiedList>
+              <ClassifiedList
+                key={index}
+                index={index}
+                item={item}
+                forSaleListData={forSaleListData}
+                bookType={bookType}
+              ></ClassifiedList>
             );
           }
-          
         })}
     </div>
   );

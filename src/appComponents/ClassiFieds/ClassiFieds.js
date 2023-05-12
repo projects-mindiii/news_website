@@ -9,7 +9,7 @@ import {
   setClassfiedType,
   getWantedListApi,
   forSaleListApi,
-  setClassifiedFilterData,
+  setClassifiedFilterName,
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -32,11 +32,11 @@ function ClassiFieds() {
     wantedTotalCount,
     wantedWebList,
     classifiedFilterData,
+    classifiedFilterValues,
   } = useSelector((state) => state.classified);
   const { userToken, isLoading } = useSelector((state) => state.user);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  const [updateList, setUpdateList] = useState(null);
 
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
@@ -44,10 +44,12 @@ function ClassiFieds() {
   };
 
   useEffect(() => {
+    dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
+
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
     async function getWebClassifiedLists() {
       let forSaleQuery = "";
-      if (classifiedFilterData && classifiedFilterData.length > 0) {
+      if (classifiedFilterValues && classifiedFilterData.length > 0) {
         forSaleQuery = {
           limit: 10,
           offset: 0,
@@ -84,24 +86,6 @@ function ClassiFieds() {
         }
       });
 
-      // let wantedQuery = "";
-      // if (classifiedFilterData && classifiedFilterData.length > 0) {
-      //   wantedQuery = {
-      //     limit: 10,
-      //     offset: 0,
-      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
-      //     search_by: classifiedFilterData.search_by,
-      //     province: classifiedFilterData.province,
-      //     country: classifiedFilterData.country,
-      //   };
-      // } else {
-      //   wantedQuery = {
-      //     limit: 10,
-      //     offset: 0,
-      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
-      //   };
-      // }
-
       const wantedQuery = {
         limit: 10,
         offset: 0,
@@ -136,9 +120,7 @@ function ClassiFieds() {
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.FORSALE
                             );
-                            
                           }
-                            
                           }
                           eventKey={1}
                         >
@@ -166,9 +148,7 @@ function ClassiFieds() {
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.WANTED
                             );
-
                           }
-                           
                           }
                           eventKey={2}
                         >

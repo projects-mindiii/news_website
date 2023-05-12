@@ -13,28 +13,24 @@ import {
   getJobOfferListApi,
   getJobSeekerListApi,
   getWantedListApi,
-  setClassifiedFilterData,
+  setClassifiedFilterName,
 } from "../../store/slices/ClassifiedSlice";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
+import { useLocation } from "react-router-dom";
 
-function ClassifiedFilter({
-  countryData,
-  closeModal,
-  setCountryData,
-  setResultData,
-}) {
-  const { classifiedType, isLoading } = useSelector(
-    (state) => state.classified
-  );
-  console.log("country data", countryData);
- 
-  const { userToken, allMetaList } = useSelector((state) => state.user);
+function ClassifiedFilter({ closeModal, setResultData }) {
+  const location = useLocation();
+
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { isLoading, classifiedFilterValues } = useSelector(
+    (state) => state.classified
+  );
+
+  const { userToken, allMetaList } = useSelector((state) => state.user);
   const {
     register,
-    setValue,
     getValues,
     formState: { errors },
   } = useForm();
@@ -47,17 +43,47 @@ function ClassifiedFilter({
     },
   ]);
 
-  const [countrySelected, setCountrySelected] = useState({
+  let countrySelectedValue = {
     label: "All Country",
     value: "",
     id: "0",
-  });
+  };
 
-  const [provinceSelected, setProvinceSelected] = useState({
+  if (Object.keys(classifiedFilterValues).length !== 0) {
+    if (classifiedFilterValues.refrenceType == "2") {
+      if (classifiedFilterValues.countryId > 0) {
+        countrySelectedValue = {
+          value: classifiedFilterValues.countryId,
+          label: classifiedFilterValues.name,
+          id: classifiedFilterValues.countryId,
+        };
+      } else {
+        countrySelectedValue = {};
+      }
+    }
+  }
+
+  const [countrySelected, setCountrySelected] = useState(countrySelectedValue);
+  let provinceSelectedValue = {
     value: "all",
     label: "All South Africa",
     id: "all",
-  });
+  };
+
+  if (Object.keys(classifiedFilterValues).length !== 0) {
+    if (classifiedFilterValues.refrenceType == "1") {
+      provinceSelectedValue = {
+        value: classifiedFilterValues.refrenceId,
+        label: classifiedFilterValues.name,
+        id: classifiedFilterValues.refrenceId,
+      };
+    } else {
+      provinceSelectedValue = { value: 0, label: "Out of South Africa", id: 0 };
+    }
+  }
+  const [provinceSelected, setProvinceSelected] = useState(
+    provinceSelectedValue
+  );
   const [provinceOption, setProvinceOption] = useState([]);
 
   function searchApiCall(provinceValue) {
@@ -65,90 +91,117 @@ function ClassifiedFilter({
     let province = 0;
     let country = 0;
 
-    if (provinceValue == "all") {
+    if (provinceValue.value == "all") {
       search_by = 0;
       province = "";
       country = "";
-    } else if (provinceValue == 0) {
+      const value = {
+        name: "All South Africa",
+        refrenceType: "1",
+        refrenceId: "all",
+      };
+      dispatch(setClassifiedFilterName(value));
+    } else if (provinceValue.value == 0) {
       search_by = 2;
       province = "";
       country = countrySelected.value;
-      setCountryData(countrySelected);
+      let name = "Out of South Africa";
+      let countryId = 0;
+      let city = "";
+
+      if (countrySelected.value) {
+        name = countrySelected.label;
+        countryId = countrySelected.value;
+        city = getValues("city") ? getValues("city") : "";
+      }
+      const value = {
+        name: name,
+        refrenceType: "2",
+        refrenceId: 0,
+        countryId: countryId,
+        city: city,
+      };
+      dispatch(setClassifiedFilterName(value));
+
     } else {
       search_by = 1;
       country = "";
-      province = provinceValue;
+      province = provinceValue.value;
+      const value = {
+        name: provinceValue.label,
+        refrenceType: "1",
+        refrenceId: provinceValue.value,
+      };
+      dispatch(setClassifiedFilterName(value));
     }
     const classfiedQuery = {
       limit: 10,
       offset: 0,
-      type: classifiedType,
       search_by: search_by,
       province: province,
       country: country,
-      city: getValues("city"),
+      city: getValues("city") ? getValues("city") : "",
     };
 
     getWebClassifiedListSearch(classfiedQuery);
-    dispatch(setClassifiedFilterData([{'isFilterApply':1,"search_by":search_by,"province":province,"country":country}]))
   }
 
   function handleClick() {
-    searchApiCall(provinceSelected.value);
+    searchApiCall(provinceSelected);
   }
 
-  
-
   function handleChange(data) {
-    setCountryData(data);
     setProvinceSelected(data);
     if (data.value != "0") {
-      searchApiCall(data.value);
+      searchApiCall(data);
     }
   }
 
   async function getWebClassifiedListSearch(classfiedQuery) {
     const data = { userToken: userToken, whereQuery: classfiedQuery };
-    if (classifiedType == CLASSIFIED_CATEGORY_TYPE.FORSALE) {
-      dispatch(forSaleListApi(data)).then((responsejson) => {
-        const response = responsejson.payload;
-        if (response.status_code === STATUS_CODES.SUCCESS) {
-          setResultData(response.data.total_count);
-          closeModal();
-         
-        }
-      });
+    if (location.pathname == "/classifieds") {
+      if (CLASSIFIED_CATEGORY_TYPE.FORSALE) {
+        data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.FORSALE;
+        dispatch(forSaleListApi(data)).then((responsejson) => {
+          const response = responsejson.payload;
+          if (response.status_code === STATUS_CODES.SUCCESS) {
+            setResultData(response.data.total_count);
+            closeModal();
+          }
+        });
+      }
+
+      if (CLASSIFIED_CATEGORY_TYPE.WANTED) {
+        data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.WANTED;
+        dispatch(getWantedListApi(data)).then((responsejson) => {
+          const response = responsejson.payload;
+          if (response.status_code === STATUS_CODES.SUCCESS) {
+            setResultData(response.data.total_count);
+            closeModal();
+          }
+        });
+      }
     }
 
-    if (classifiedType == CLASSIFIED_CATEGORY_TYPE.WANTED) {
-      dispatch(getWantedListApi(data)).then((responsejson) => {
-        const response = responsejson.payload;
-        if (response.status_code === STATUS_CODES.SUCCESS) {
-          setResultData(response.data.total_count);
-          closeModal();
-          
-        }
-      });
-    }
-
-    if (classifiedType == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) {
-      dispatch(getJobOfferListApi(data)).then((responsejson) => {
-        const response = responsejson.payload;
-        if (response.status_code === STATUS_CODES.SUCCESS) {
-          setResultData(response.data.total_count);
-          closeModal();
-        }
-      });
-    }
-
-    if (classifiedType == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS) {
-      dispatch(getJobSeekerListApi(data)).then((responsejson) => {
-        const response = responsejson.payload;
-        if (response.status_code === STATUS_CODES.SUCCESS) {
-          setResultData(response.data.total_count);
-          closeModal();
-        }
-      });
+    if (location.pathname == "/job-types") {
+      if (CLASSIFIED_CATEGORY_TYPE.JOBOFFER) {
+        data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.JOBOFFER;
+        dispatch(getJobOfferListApi(data)).then(async (responsejson) => {
+          const response = responsejson.payload;
+          if (response.status_code === STATUS_CODES.SUCCESS) {
+            closeModal();
+          }
+        });
+      }
+      if (CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS) {
+        data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS;
+        dispatch(getJobSeekerListApi(data)).then(async (responsejson) => {
+          const response = responsejson.payload;
+          if (response.status_code === STATUS_CODES.SUCCESS) {
+            closeModal();
+          }
+        });
+      }
     }
   }
 
@@ -201,12 +254,7 @@ function ClassifiedFilter({
                   handleChange(e);
                 }}
                 placeholder={t("SELECT_PROVINCE")}
-                // value={provinceSelected && provinceSelected}
-                value={
-                  countryData
-                    ? countryData
-                    : provinceSelected && provinceSelected
-                }
+                value={provinceSelected && provinceSelected}
                 styles={{
                   placeholder: () => ({
                     fontSize: "15px",
@@ -238,8 +286,7 @@ function ClassifiedFilter({
                     isSearchable={true}
                     onChange={setCountrySelected}
                     placeholder={t("COUNTRY_SET")}
-                     value={countrySelected && countrySelected}
-                      // value={countryData? countryData: countrySelected ? countrySelected:null}
+                    value={countrySelected && countrySelected}
                     styles={{
                       placeholder: () => ({
                         fontSize: "15px",

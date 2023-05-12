@@ -9,6 +9,7 @@ import {
   setClassfiedType,
   getJobOfferListApi,
   getJobSeekerListApi,
+  setClassifiedFilterName,
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -31,6 +32,7 @@ function JobTypes() {
   };
   useEffect(() => {
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.JOBOFFER);
+    dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
     async function getWebClassifiedLists() {
       const jobOfferQuery = {
         limit: 10,
