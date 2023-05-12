@@ -59,7 +59,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
           id: classifiedFilterValues.countryId,
         };
       } else {
-        countrySelectedValue = {};
+        countrySelectedValue = countrySelectedValue;
       }
     }
   }
