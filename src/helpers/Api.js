@@ -265,7 +265,7 @@ class SublyApi {
        @returns {object} {token}
        */
   static async addClassifiedList(requestdata, authToken) {
-    let header = { "access-token": ` ${authToken}` };
+    let header = { "access-token": ` ${authToken}`,"Content-Type": "multipart/form-data", };
     let res = await this.request(`/v2/add-classified`,
       requestdata, "post", header
     );

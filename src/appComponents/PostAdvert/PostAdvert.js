@@ -35,7 +35,6 @@ function PostAdvert() {
     );
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location)
     const {
         register,
         handleSubmit,
@@ -58,8 +57,9 @@ function PostAdvert() {
 
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false)
-    const [profilePreview, setProfilePreview] = useState()
+    const [profilePreview, setProfilePreview] = useState([])
     const [profileImage, setProfileImage] = useState([]);
+    const[orignamImage,setOrignalImage]=useState([]);
     const [showHead, setShowHead] = useState(false);
     const [cropper, setCropper] = useState("");
     const [watsappNo, setWatsappNo] = useState("");
@@ -300,7 +300,6 @@ function PostAdvert() {
         }
         getClassifiedLists();
     }, []);
-
     async function onSubmit(data, e) {
 
         setIsLoading(true)
@@ -392,6 +391,13 @@ function PostAdvert() {
         requestData.append(
             "classifiedGallery", ""
         );
+        profileImage.forEach((item,index)=>{          
+            requestData.append('classifiedGallery', item)
+    })
+    orignamImage.forEach((item,index)=>{          
+                requestData.append('classifiedGalleryOriginal', item)
+        })
+      
         if (location.state !== null) {
             requestData.append(
                 "id", location.state.id ? location.state.id : ""
@@ -431,7 +437,6 @@ function PostAdvert() {
         }
         else {
             await SublyApi.updateAdvert(requestData, userToken).then((responsejson) => {
-                console.log(responsejson)
 
                 if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
                     setIsLoading(false)
@@ -488,6 +493,7 @@ function PostAdvert() {
         });
     }
     const uploadImage = (e) => {
+        const setorignal=[...orignamImage];
         e.preventDefault();
         let files;
         if (e.dataTransfer) {
@@ -495,9 +501,12 @@ function PostAdvert() {
         } else if (e.target) {
             files = e.target.files;
         }
+        setorignal.push(e.target.files[0])
+        setOrignalImage(setorignal)
         const reader = new FileReader();
         reader.onload = () => {
             setImage(reader.result);
+            // setOrignalImage()
         };
         reader.readAsDataURL(files[0]);
     };
