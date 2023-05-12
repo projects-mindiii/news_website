@@ -23,7 +23,7 @@ function ClassifiedList({forSaleListData, bookType, item, index, displayRoute}){
           <img src={item.img_url} alt={item.img_url} />
         </div>
         <div className="classiFields_heading">
-          <p className="text">{item.heading}</p>
+          <p className="text">{item.heading.toUpperCase()}</p>
           <div className="classiFieds_time_action">
             <div className="classiFieds_time">
               <button
