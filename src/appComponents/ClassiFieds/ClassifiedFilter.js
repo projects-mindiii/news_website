@@ -50,6 +50,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
   };
 
   if (Object.keys(classifiedFilterValues).length !== 0) {
+    console.log("classifiedFilterValues", classifiedFilterValues);
     if (classifiedFilterValues.refrenceType == "2") {
       if (classifiedFilterValues.countryId > 0) {
         countrySelectedValue = {
@@ -254,6 +255,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
                   handleChange(e);
                 }}
                 placeholder={t("SELECT_PROVINCE")}
+                // value={provinceSelected && provinceSelected}
                 value={provinceSelected && provinceSelected}
                 styles={{
                   placeholder: () => ({
@@ -287,6 +289,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
                     onChange={setCountrySelected}
                     placeholder={t("COUNTRY_SET")}
                     value={countrySelected && countrySelected}
+                    // value={countryData? countryData: countrySelected ? countrySelected:null}
                     styles={{
                       placeholder: () => ({
                         fontSize: "15px",

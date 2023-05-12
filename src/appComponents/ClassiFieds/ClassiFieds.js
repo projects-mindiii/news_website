@@ -37,6 +37,7 @@ function ClassiFieds() {
   const { userToken, isLoading } = useSelector((state) => state.user);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
+  const [updateList, setUpdateList] = useState(null);
 
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
@@ -86,6 +87,24 @@ function ClassiFieds() {
         }
       });
 
+      // let wantedQuery = "";
+      // if (classifiedFilterData && classifiedFilterData.length > 0) {
+      //   wantedQuery = {
+      //     limit: 10,
+      //     offset: 0,
+      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+      //     search_by: classifiedFilterData.search_by,
+      //     province: classifiedFilterData.province,
+      //     country: classifiedFilterData.country,
+      //   };
+      // } else {
+      //   wantedQuery = {
+      //     limit: 10,
+      //     offset: 0,
+      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+      //   };
+      // }
+
       const wantedQuery = {
         limit: 10,
         offset: 0,
@@ -120,7 +139,9 @@ function ClassiFieds() {
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.FORSALE
                             );
+                            
                           }
+                            
                           }
                           eventKey={1}
                         >
@@ -148,7 +169,9 @@ function ClassiFieds() {
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.WANTED
                             );
+
                           }
+                           
                           }
                           eventKey={2}
                         >

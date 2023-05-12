@@ -20,6 +20,7 @@ function ClassifiedCountry() {
   const [resultData, setResultData] = useState("");
   const location = useLocation();
 
+  console.log("classifiedFilterValues",classifiedFilterValues)
   return (
     <div className={styles.classiFieds_map_serchbar}>
       <div className={styles.countryIcon} onClick={() => setIsOpen(true)}>
