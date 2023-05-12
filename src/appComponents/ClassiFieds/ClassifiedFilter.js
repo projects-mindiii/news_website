@@ -28,10 +28,7 @@ function ClassifiedFilter({
     (state) => state.classified
   );
   console.log("country data", countryData);
-  // useEffect(()=>{
-  //   console.log("classifiedfilteruseeffect")
-  // },[])
-  // console.log("classifiedfilter")
+ 
   const { userToken, allMetaList } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { t } = useTranslation();

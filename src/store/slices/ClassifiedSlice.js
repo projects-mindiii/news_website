@@ -209,5 +209,5 @@ export const classifiedSlice = createSlice({
   },
 })
 export const { setClassfiedType,setClassifiedFilterData } = classifiedSlice.actions;
-// export const { setClassifiedFilterData } = classifiedSlice.actions;
+
 export default classifiedSlice.reducer

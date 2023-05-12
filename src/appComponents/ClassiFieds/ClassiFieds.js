@@ -9,6 +9,7 @@ import {
   setClassfiedType,
   getWantedListApi,
   forSaleListApi,
+  setClassifiedFilterData,
 } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -20,7 +21,7 @@ import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 
 //-------Create a Deals Header component--------
-function ClassiFieds({ setCountryData }) {
+function ClassiFieds() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +36,6 @@ function ClassiFieds({ setCountryData }) {
   const { userToken, isLoading } = useSelector((state) => state.user);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  console.log("showDefaultList", showDefaultList);
   const [updateList, setUpdateList] = useState(null);
 
   // function for classified webList
@@ -84,15 +84,35 @@ function ClassiFieds({ setCountryData }) {
         }
       });
 
+      // let wantedQuery = "";
+      // if (classifiedFilterData && classifiedFilterData.length > 0) {
+      //   wantedQuery = {
+      //     limit: 10,
+      //     offset: 0,
+      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+      //     search_by: classifiedFilterData.search_by,
+      //     province: classifiedFilterData.province,
+      //     country: classifiedFilterData.country,
+      //   };
+      // } else {
+      //   wantedQuery = {
+      //     limit: 10,
+      //     offset: 0,
+      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+      //   };
+      // }
+
       const wantedQuery = {
         limit: 10,
         offset: 0,
         type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+    
       };
       const wantedData = { userToken: userToken, whereQuery: wantedQuery };
       dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
     }
     getWebClassifiedLists();
+  
   }, [bookMarkTotalCount]);
 
   return (
@@ -112,11 +132,14 @@ function ClassiFieds({ setCountryData }) {
                     <Nav variant="pills" className="flex-column">
                       <Nav.Item key={1}>
                         <Nav.Link
-                          onClick={() => {
+                          onClick={() =>{
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.FORSALE
                             );
-                          }}
+                            
+                          }
+                            
+                          }
                           eventKey={1}
                         >
                           {t("FOR_SALE")}({forSaleTotalCount})
@@ -139,10 +162,13 @@ function ClassiFieds({ setCountryData }) {
                       </Nav.Item>
                       <Nav.Item key={2}>
                         <Nav.Link
-                          onClick={() =>
+                          onClick={() =>{
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.WANTED
-                            )
+                            );
+
+                          }
+                           
                           }
                           eventKey={2}
                         >
@@ -173,6 +199,8 @@ function ClassiFieds({ setCountryData }) {
                       forSaleListData={forSaleWebList}
                       classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
                       bookType={BOOK_TYPE.CLASSIFIED}
+                      
+
                     />
                   ) : (
                     <p className="nodataDisplay">
