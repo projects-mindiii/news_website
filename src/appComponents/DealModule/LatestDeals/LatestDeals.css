@@ -48,7 +48,8 @@
 }
 
 .detailsValue img {
-    width: 42px;
+    width: 100%;
+    max-width: 42px;
     margin-right: 20px;
 }
 
