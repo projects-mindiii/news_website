@@ -15,10 +15,8 @@ function HeaderFeatures() {
     const { currentUser, isLoading } = useSelector((state) => state.user);
        //-----------function for submit login form-----------
        const logout = async () => {
-        
         dispatch(userLogout());
-        // navigate("/deals/latest-deals")
-
+        navigate("/login")
     };
     
     return (

@@ -370,7 +370,7 @@ function PostAdvert() {
             "whatsapp_dail_code", dialCodeWatsapp ? dialCodeWatsapp : ""
         );
         requestData.append(
-            "classifiedGallery", 
+            "classifiedGallery", ""
         );
         if (location.state !== null) {
             requestData.append(
@@ -668,7 +668,7 @@ function PostAdvert() {
                                                                     // value={{ value: 0, label: "Select Job Type", id: 0}}
                                                                     options={jobTypeOptions}
 
-                                                                    onChange={(e) => onChange(setNewJob(e))} // send value to hook form
+                                                                    onChange={(e) => setNewJob(e)} // send value to hook form
                                                                     value={jobTypeValue ? jobTypeValue : ""}
                                                                     styles={{
                                                                         placeholder: () => ({
@@ -797,7 +797,7 @@ function PostAdvert() {
                                                                 id="earningoption"
                                                                 options={earingOptions}
                                                                 value={earningOptionValue ? earningOptionValue : ""}
-                                                                onChange={(e) => onChange(setNewEarning(e))} // send value to hook form
+                                                                onChange={(e) => setNewEarning(e)} // send value to hook form
                                                                 placeholder={t("SELECT_EARNING_OPTION")}
                                                                 styles={{
                                                                     placeholder: () => ({
@@ -850,7 +850,7 @@ function PostAdvert() {
                                                                 id="isDefaultCountry"
                                                                 options={isDefaultCountry}
                                                                 value={defaultCountry}
-                                                                onChange={(e) => onChange(setNewDefaultCountry(e))}
+                                                                onChange={(e) => {setNewDefaultCountry(e)}}
 
 
                                                                 styles={{
@@ -892,7 +892,7 @@ function PostAdvert() {
                                                                     id="province"
                                                                     options={provinceOptions}
                                                                     value={provinceValue}
-                                                                    onChange={(val) => onChange(setNewProvinces(val))}
+                                                                    onChange={(val) => {setNewProvinces(val)}}
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "#231F20",
@@ -936,7 +936,7 @@ function PostAdvert() {
                                                                     id="country"
                                                                     value={countryValue}
                                                                     options={countryOptions}
-                                                                    onChange={(e) => onChange(setNewCountry(e))}
+                                                                    onChange={(e) => {setNewCountry(e)}}
                                                                     placeholder={t("SELECT_COUNTRY")}
                                                                     styles={{
                                                                         placeholder: () => ({

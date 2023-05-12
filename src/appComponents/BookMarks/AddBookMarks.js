@@ -13,7 +13,7 @@ import Loader from "../../utils/Loader/Loader";
 
 function AddBookMarks(props) {
   const dispatch = useDispatch();
-  const { userToken } = useSelector((state) => state.user);
+  const { userToken,currentUser } = useSelector((state) => state.user);
   const { isLoading } = useSelector((state) => state.bookMark);
 
   async function handleAddBookMark(id, action) {
@@ -63,7 +63,7 @@ function AddBookMarks(props) {
               height="28"
               cursor={"pointer"}
               onClick={() => {
-                handleAddBookMark(props.id, BOOK_ACTION_TYPE.ADD);
+                if(props.isApproved==1 && Object.keys(currentUser).length !== 0) {handleAddBookMark(props.id, BOOK_ACTION_TYPE.ADD)};
               }}
             />
           ) : (
