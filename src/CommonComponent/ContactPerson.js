@@ -1,5 +1,5 @@
 import React from "react";
-// import companyIcon from "../assets/images/companyIcon.png";
+import companyIcon from "../assets/images/company_ico.svg";
 import emailicon from "../assets/images/email_ico.png";
 import callicon from "../assets/images/callIcon.png";
 import { useTranslation } from "react-i18next";
@@ -16,8 +16,8 @@ function ContactPerson(props) {
         {props.forSaleListData[props.index].contact_company && (
           <div className="classiFields_PersonAboutShow">
             <div className="classiFields_iconBackGround">
-              {/* <img src={companyIcon} alt={companyIcon} /> */}
-              <AiOutlineStar />
+              <img src={companyIcon} alt={companyIcon} />
+              {/* <AiOutlineStar /> */}
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("COMPANY")}</p>
