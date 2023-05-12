@@ -2,7 +2,7 @@
 export const TRANSLATIONS_EN = {
   CREATEACCOUNT: "CREATE ACCOUNT",
   SUBSCRIPTION_TEXT: "Subscribe to our newsletter",
-  EXISTING_ACCOUNT: "Already have an account ?",
+  EXISTING_ACCOUNT: "Already have an account?",
   LOGIN: "LOGIN",
   LOGIN_IN: "Login",
   SIGNUP: "Sign Up",
@@ -11,7 +11,7 @@ export const TRANSLATIONS_EN = {
   LOGIN_FACEBOOK: "Login with Facebook",
   LOGIN_APPLE: "Login with Apple",
   LOGIN_LINKEDIN: "Login with Linkedin",
-  DONT_ACCOUNT: "Don't have an account ?",
+  DONT_ACCOUNT: "Don't have an account?",
   EMAIL_LOGIN: "EMAIL LOGIN",
   FORGOT_PASSWORD: "Forgot password?",
   LOGIN_WITH: "or login with",

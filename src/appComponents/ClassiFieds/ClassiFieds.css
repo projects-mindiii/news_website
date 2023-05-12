@@ -10,10 +10,12 @@
   align-items: flex-start;
   margin-bottom: 6px;
 }
+
 .classiFields_mobileMargingRemove {
   margin-bottom: 0px !important;
 }
-.classiFieds_forSale_about > div {
+
+.classiFieds_forSale_about>div {
   margin-right: 10px;
 }
 
@@ -40,6 +42,7 @@
   margin-bottom: 5px;
   margin-left: 5px;
 }
+
 .classiFieds_forSale_about .classiFields_heading {
   margin-top: 10px;
   margin-left: 10px;
@@ -52,9 +55,8 @@
   align-items: center;
 }
 
-.classiFieds_forSale_about
-  .classiFieds_time_action
-  .classiFieds_forSale_button {
+.classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+  /* background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%); */
   border-radius: 14px;
   line-height: 20px;
   border: none !important;
@@ -88,7 +90,7 @@
   cursor: pointer;
 }
 
-.classiFields_contactPerson .classiFields_PersonAboutShow > div {
+.classiFields_contactPerson .classiFields_PersonAboutShow>div {
   margin-right: 15px;
 }
 
@@ -182,9 +184,6 @@
   line-height: 36px;
   letter-spacing: -0.48px;
   color: #e91f63;
-  color: #e91f63;
-  font-family: "Nunito";
-  font-style: normal;
 }
 
 .classiFieds_countryName img {
@@ -218,18 +217,11 @@
   margin-top: 15px;
 }
 
-.classiFields_whatAppIcon img {
+.classiFields_whatAppIcon svg {
   width: 28px;
   height: 28px;
-  margin-right: 10px;
+  margin-top: 3px;
 }
-
-/* .classiFieds_bookmarkicon img {
-    width: 14px;
-    height: 20px;
-    margin-left: 10px;
-    cursor: pointer;
-} */
 
 .classiFields_shareMedia {
   height: 66px;
@@ -251,58 +243,72 @@
   margin-bottom: -10px;
 }
 
-.classiFields_shareicons span > span {
+.classiFields_shareicons span>span {
   margin-right: 5px;
 }
+
 .classiFields_shareIcon img {
   width: 4px;
   height: 4px;
   margin: 5px;
 }
+
 .classiFields_advertise {
   width: 339px;
   height: 277px;
   margin-bottom: 15px;
 }
+
 .classiFields_advertise img {
   max-width: 100%;
   max-height: 100%;
   display: block;
 }
+
 .classiFields_whatAppIcon span {
   color: #ffffff;
   font-weight: 600;
+  font-weight: 500 !important;
+  font-size: 19.2px !important;
+  line-height: 36px !important;
+  display: flex;
+  justify-content: center;
+  margin-left: 6px;
 }
+
 .classiFieds_forSaledropdown {
   margin-bottom: 15px;
 }
+
 @media only screen and (max-width: 991px) {
   .advertisment {
     margin-top: 10px;
   }
 }
+
 @media only screen and (max-width: 480px) {
   .classiFieds_forSale_about .classiFieds_forSale img {
     width: 116.83px;
     height: 87.62px;
     font-weight: 600;
   }
+
   .classiFieds_forSaleBox .classiFieds_forSale_about {
     align-items: flex-start;
   }
+
   .classiFieds_forSale_about .classiFields_heading .text {
     font-weight: 500;
     font-size: 16.0467px;
     line-height: 17px;
     margin-bottom: 0px;
   }
+
   .classiFieds_forSale_about .classiFields_heading {
     margin-top: 5px;
   }
 
-  .classiFieds_forSale_about
-    .classiFieds_time_action
-    .classiFieds_forSale_button {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     font-weight: 600;
     font-size: 8.4378px;
     line-height: 13px;
@@ -435,6 +441,7 @@
     width: 12.05px;
     height: 12.05px;
   }
+
   .classiFields_shareIcon img {
     width: 2.68px;
     height: 2.68px;
@@ -454,16 +461,19 @@
     height: 277px;
   }
 }
+
 .advertisment {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .classiFieds_map_serchbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .classiFieds_country_select {
   max-height: 200px;
   overflow-y: scroll;
@@ -471,7 +481,8 @@
   position: absolute;
   background: #ec4624;
 }
-.classiFieds_country_select > div {
+
+.classiFieds_country_select>div {
   border: 1px solid #ec4624;
   color: white;
 }
@@ -526,8 +537,6 @@
 .classiFields_emailHeadingText a {
   text-decoration: none;
   color: #000000;
-  font-family: "Poppins";
-  font-style: normal;
   font-weight: 400;
   font-size: 16.5px;
   line-height: 25px;
@@ -535,8 +544,6 @@
 
 .classiFields_emailHeadingText p {
   color: #000000;
-  font-family: "Poppins";
-  font-style: normal;
   font-weight: 500;
   font-size: 10px;
   line-height: 15px;
@@ -544,8 +551,6 @@
 
 .classiFields_emailHeadingText span {
   color: #000000;
-  font-family: "Poppins";
-  font-style: normal;
   font-weight: 400;
   font-size: 16.5px;
   line-height: 25px;

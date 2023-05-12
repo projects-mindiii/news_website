@@ -67,7 +67,7 @@
     font-weight: 400;
     font-size: 14.3px !important;
     line-height: 17px;
-    line-break: unset;
+    /* line-break: unset; */
 }
 
 .noteBoxClass p {

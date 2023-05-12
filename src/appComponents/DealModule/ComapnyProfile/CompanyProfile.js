@@ -7,7 +7,7 @@ import MapLocation from "../../CommonModule/MapLocation";
 import insta from "../../../assets/images/socialMedia_icon/insta_ico1.svg";
 import facebook from "../../../assets/images/socialMedia_icon/facebook_ico1.svg";
 import linkedin from "../../../assets/images/socialMedia_icon/linkedin_ico1.svg";
-import youtube from "../../../assets/images/socialMedia_icon/youtube_play_ico.png";
+import youtube from "../../../assets/images/socialMedia_icon/youtube_ico1.svg";
 import twitter from "../../../assets/images/socialMedia_icon/twitter_ico1.svg";
 import { useTranslation } from "react-i18next";
 import WhatsApp from "../../../CommonComponent/Whatappshare";

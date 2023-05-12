@@ -2,7 +2,7 @@
 export const TRANSLATIONS_ES = {
   CREATEACCOUNT: "CREAR UNA CUENTA",
   SUBSCRIPTION_TEXT: "Suscríbete a nuestro boletín",
-  EXISTING_ACCOUNT: "Ya tienes una cuenta ?",
+  EXISTING_ACCOUNT: "Ya tienes una cuenta?",
   LOGIN: "ACCESO",
   LOGIN_IN: "Acceso",
   SIGNUP: "Inscribirse",
@@ -11,7 +11,7 @@ export const TRANSLATIONS_ES = {
   LOGIN_FACEBOOK: "Iniciar sesión con Facebook",
   LOGIN_APPLE: "Iniciar sesión con Apple",
   LOGIN_LINKEDIN: "Ingresar con LinkedIn",
-  DONT_ACCOUNT: "no tengo una cuenta ?",
+  DONT_ACCOUNT: "no tengo una cuenta?",
   EMAIL_LOGIN: "INICIO DE SESIÓN DE CORREO ELECTRÓNICO",
   FORGOT_PASSWORD: "Has olvidado tu contraseña ?",
   LOGIN_WITH: "o inicia sesión con",
