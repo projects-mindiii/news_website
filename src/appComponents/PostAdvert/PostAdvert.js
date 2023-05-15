@@ -59,7 +59,7 @@ function PostAdvert() {
     const [isLoading, setIsLoading] = useState(false)
     const [profilePreview, setProfilePreview] = useState([])
     const [profileImage, setProfileImage] = useState([]);
-    const[orignamImage,setOrignalImage]=useState([]);
+    const [orignamImage, setOrignalImage] = useState([]);
     const [showHead, setShowHead] = useState(false);
     const [cropper, setCropper] = useState("");
     const [watsappNo, setWatsappNo] = useState("");
@@ -97,7 +97,7 @@ function PostAdvert() {
     const [countryValue, setCountryValue] = useState()
     //----- state for manage show/hide modal-----
     const [showPopup, setShowPopup] = useState(false);
-
+    const [removeImage, setRemoveImage] = useState("");
     //----- for close modal-----
     const handleClose = () => setShowPopup(false);
     //----- for show modal-----
@@ -225,6 +225,7 @@ function PostAdvert() {
                         setDefaultValue();
                     }
                     else {
+                        console.log(location)
                         setValue("categorytype", location.state.category_type_id && location.state.category_type_id.toString())
                         setCategoryValue(location.state.category_type_id && location.state.category_type_id.toString())
                         setValue("fullName", location.state.user_name)
@@ -245,16 +246,18 @@ function PostAdvert() {
                         setValue("selectlocationtype", location.state.job_location_type_id)
                         setProfileImage(location.state.gallery)
                         setProfilePreview(location.state.gallery)
-                        setValue("jobType", {
-                            label: location.state.job_type_name,
-                            value: location.state.job_type_id,
-                            id: location.state.job_type_id
-                        })
-                        setJobTypeValue({
-                            label: location.state.job_type_name,
-                            value: location.state.job_type_id,
-                            id: location.state.job_type_id
-                        })
+                        if (location.state.job_type_id) {
+                            setValue("jobType", {
+                                label: location.state.job_type_name,
+                                value: location.state.job_type_id,
+                                id: location.state.job_type_id
+                            })
+                            setJobTypeValue({
+                                label: location.state.job_type_name,
+                                value: location.state.job_type_id,
+                                id: location.state.job_type_id
+                            })
+                        }
                         if (location.state.is_default_country == 1) {
                             setValue("isDefaultCountry", {
                                 label: "South Africa",
@@ -291,8 +294,11 @@ function PostAdvert() {
                             setProvinceValue({ label: 'Free State', value: 932, id: 932 })
                             setCountryValue({ label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
                         }
-                        setValue("earningoption", { id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
-                        setEaringOptionValue({ id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
+                        if (location.state.earning_option_id) {
+                            setValue("earningoption", { id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
+                            setEaringOptionValue({ id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
+                        }
+
                         setCurrencyValue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location.state.currency_symbol, code: location.state.currency_code })
                     }
                 }
@@ -388,16 +394,24 @@ function PostAdvert() {
         requestData.append(
             "whatsapp_dail_code", dialCodeWatsapp ? dialCodeWatsapp : ""
         );
-        requestData.append(
-            "classifiedGallery", ""
-        );
-        profileImage.forEach((item,index)=>{          
-            requestData.append('classifiedGallery', item)
-    })
-    orignamImage.forEach((item,index)=>{          
+        if(profileImage && profileImage.length > 0 ){
+            profileImage.forEach((item, index) => {
+                requestData.append('classifiedGallery', item)
+            })
+        }
+        else{
+            requestData.append('classifiedGallery', "")
+        }
+
+        if( orignamImage && orignamImage.length > 0 ){
+           orignamImage.forEach((item, index) => {
                 requestData.append('classifiedGalleryOriginal', item)
-        })
-      
+            })
+        }
+        else{
+            requestData.append('classifiedGalleryOriginal', "")
+        }      
+
         if (location.state !== null) {
             requestData.append(
                 "id", location.state.id ? location.state.id : ""
@@ -408,8 +422,10 @@ function PostAdvert() {
                 "removeImgId", ""
             );
         }
+        
+           
         if (location.state == null) {
-            await SublyApi.addClassifiedList(requestData, userToken).then((responsejson) => {
+            await SublyApi.addClassifiedList(requestData, userToken).then(async(responsejson) => {
                 if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
                     setIsLoading(false)
                     Toast.fire({
@@ -436,7 +452,7 @@ function PostAdvert() {
             });
         }
         else {
-            await SublyApi.updateAdvert(requestData, userToken).then((responsejson) => {
+            await SublyApi.updateAdvert(requestData, userToken).then(async(responsejson) => {
 
                 if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
                     setIsLoading(false)
@@ -493,7 +509,7 @@ function PostAdvert() {
         });
     }
     const uploadImage = (e) => {
-        const setorignal=[...orignamImage];
+        const setorignal = [...orignamImage];
         e.preventDefault();
         let files;
         if (e.dataTransfer) {
@@ -558,15 +574,22 @@ function PostAdvert() {
     }
 
 
-    async function onImageRemove(e, index) {
+    async function onImageRemove(e, index, item) {
         e.preventDefault();
         let profileviews = [...profilePreview];
+        let remiveImageArray = [...removeImage]
         let profileimages = [...profileImage];
         profileviews.splice(index, 1);
         profileimages.splice(index, 1);
         setProfilePreview(profileviews);
         setProfileImage(profileimages);
+        if (item.id && item.id !== "") {
+            remiveImageArray.push(item.id)
+            setRemoveImage(remiveImageArray)
+        }
+
     }
+    console.log("removeImage",removeImage)
     return (
         <div className="main">
             {isLoading === true ? (
@@ -1087,7 +1110,7 @@ function PostAdvert() {
                                                 <div className="Post_Add_ImageSet" key={index} >
 
                                                     <img src={item.img_url} alt={item} />
-                                                    <Icon icon="charm:cross" color="red" width="30" height="30" onClick={(e) => onImageRemove(e, index)} />
+                                                    <Icon icon="charm:cross" color="red" width="30" height="30" onClick={(e) => onImageRemove(e, index, item)} />
                                                 </div>)) : ""}</div>
                                         <div className="post_Add_Save">
                                             <div className="buttonAdd1">
