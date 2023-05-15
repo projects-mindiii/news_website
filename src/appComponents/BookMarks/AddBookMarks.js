@@ -9,12 +9,10 @@ import {
   addBookMarkApi,
   bookMarkListApi,
 } from "../../store/slices/BookMarkSlice";
-import Loader from "../../utils/Loader/Loader";
 
 function AddBookMarks(props) {
   const dispatch = useDispatch();
-  const { userToken,currentUser } = useSelector((state) => state.user);
-  const { isLoading } = useSelector((state) => state.bookMark);
+  const { userToken, currentUser } = useSelector((state) => state.user);
 
   async function handleAddBookMark(id, action) {
     const requestData = new FormData();
@@ -51,35 +49,36 @@ function AddBookMarks(props) {
   return (
     <>
       {" "}
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <section>
-          {props.isBookmark == 0 ? (
-            <Icon
-              icon="ic:baseline-bookmark-border"
-              color="black"
-              width="28"
-              height="28"
-              cursor={"pointer"}
-              onClick={() => {
-                if(props.isApproved==1 && Object.keys(currentUser).length !== 0) {handleAddBookMark(props.id, BOOK_ACTION_TYPE.ADD)};
-              }}
-            />
-          ) : (
-            <Icon
-              icon="ic:baseline-bookmark"
-              color="black"
-              width="28"
-              height="28"
-              cursor={"pointer"}
-              onClick={() => {
-                handleAddBookMark(props.id, BOOK_ACTION_TYPE.REMOVE);
-              }}
-            />
-          )}
-        </section>
-      )}
+      <section>
+        {props.isBookmark == 0 ? (
+          <Icon
+            icon="ic:baseline-bookmark-border"
+            color="black"
+            width="28"
+            height="28"
+            cursor={"pointer"}
+            onClick={() => {
+              if (
+                props.isApproved == 1 &&
+                Object.keys(currentUser).length !== 0
+              ) {
+                handleAddBookMark(props.id, BOOK_ACTION_TYPE.ADD);
+              }
+            }}
+          />
+        ) : (
+          <Icon
+            icon="ic:baseline-bookmark"
+            color="black"
+            width="28"
+            height="28"
+            cursor={"pointer"}
+            onClick={() => {
+              handleAddBookMark(props.id, BOOK_ACTION_TYPE.REMOVE);
+            }}
+          />
+        )}
+      </section>
     </>
   );
 }

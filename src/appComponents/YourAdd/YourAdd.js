@@ -16,15 +16,15 @@ import Loader from "../../utils/Loader/Loader";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
 import { useTranslation } from "react-i18next";
 function YourAdd() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  const { userToken, currentUser, isLoading } = useSelector(
-    (state) => state.user
-  );
+  const { userToken } = useSelector((state) => state.user);
   const { yourAdvertWebList, yourAdvertTotalCount } = useSelector(
     (state) => state.classified
   );
-  const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
+  const { bookMarkTotalCount, isLoading } = useSelector(
+    (state) => state.bookMark
+  );
 
   useEffect(() => {
     async function getWebClassifiedLists() {
@@ -39,6 +39,7 @@ function YourAdd() {
 
   return (
     <div className="main">
+      {isLoading === true ? <Loader /> : ""} 
       <React.Fragment>
         <Container>
           <Row>

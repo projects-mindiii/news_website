@@ -35,10 +35,10 @@ function ClassiFieds() {
     classifiedFilterValues,
   } = useSelector((state) => state.classified);
   const { userToken, isLoading } = useSelector((state) => state.user);
+  const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  const [updateList, setUpdateList] = useState(null);
-
+  
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
@@ -50,7 +50,7 @@ function ClassiFieds() {
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
     async function getWebClassifiedLists() {
       let forSaleQuery = "";
-      if (classifiedFilterValues && classifiedFilterData.length > 0) {
+      if (classifiedFilterValues && classifiedFilterData && classifiedFilterData.length > 0) {
         forSaleQuery = {
           limit: 10,
           offset: 0,
@@ -121,7 +121,7 @@ function ClassiFieds() {
   return (
     <div className="main">
       <div className="classifiedData">
-        {isLoading === true ? <Loader /> : ""}
+        {isLoading === true || bookmarkLoader ? <Loader /> : ""}
         <React.Fragment>
           <Container>
             <Row>
@@ -198,7 +198,7 @@ function ClassiFieds() {
                 </div>
                 {showDefaultList == 1 ? (
                   forSaleWebList.length > 0 ? (
-                    <ClassifiedCategoryList
+                    <ClassifiedCategoryList key={0}
                       forSaleListData={forSaleWebList}
                       classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
                       bookType={BOOK_TYPE.CLASSIFIED}
@@ -211,7 +211,7 @@ function ClassiFieds() {
                     </p>
                   )
                 ) : wantedWebList.length ? (
-                  <ClassifiedCategoryList
+                  <ClassifiedCategoryList key={1}
                     forSaleListData={wantedWebList}
                     classifiedDataType={CLASSIFIED_CATEGORY_TYPE.WANTED}
                     bookType={BOOK_TYPE.CLASSIFIED}
