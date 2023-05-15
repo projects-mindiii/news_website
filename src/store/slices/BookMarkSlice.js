@@ -50,7 +50,7 @@ export const bookMarkSlice = createSlice({
     builder.addCase(bookMarkListApi.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.status_code == STATUS_CODES.SUCCESS) {
-        state.bookMarkList = response.data;
+        state.bookMarkList = response.data.list;
         state.bookMarkTotalCount = response.data.total_count;
       } else {
         state.bookMarkTotalCount = 0;
