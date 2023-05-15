@@ -1,12 +1,11 @@
 import mapicon from "../../assets/images/map_ico.png";
-import React from "react";
+import React, { useState } from "react";
 import "../ClassiFieds/ClassiFieds.css";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
 import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
-
 import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
@@ -20,7 +19,9 @@ function ClassifiedList({
   displayRoute,
 }) {
   const { t } = useTranslation();
+ 
   const navigate = useNavigate();
+  
   return (
     <div className="classiFieds_forSaleBox">
       <div className="classiFieds_forSale_about">
@@ -120,36 +121,33 @@ function ClassifiedList({
       </div>
 
       <SocialMedaiShare />
-      {displayRoute && displayRoute == "your_advert" ? (
-        <button
-          className="edit_DeleteButton"
-          onClick={() => navigate("/post-advert", { state: item })}
-        >
-          EDIT / DELETE ADVERT
-        </button>
-      ) : (
-        ""
-      )}
-      {displayRoute &&
-      displayRoute == "your_advert" &&
-      item.approval_status == 0 ? (
-        <button className="not_live">NOT LIVE - Pending Approvals</button>
-      ) : (
-        ""
-      )}
+      
+      {(displayRoute &&  displayRoute=="your_advert" )?(<button className="edit_DeleteButton" onClick={()=>navigate("/post-advert",{state:item})}>EDIT / DELETE ADVERT</button>):""}
+      {(displayRoute &&  displayRoute=="your_advert" && item.approval_status==0 )?(<button className="not_live">NOT LIVE - Pending Approvals</button>):""}
     </div>
+   
+   
+    
   );
+
 }
-function ClassifiedCategoryList({ forSaleListData, bookType, displayRoute }) {
-  if (displayRoute && displayRoute == "your_advert") {
-    let approveForSaleListData = forSaleListData.filter(
-      (a) => a.approval_status == 1
-    );
-    let pendingForSaleListData = forSaleListData.filter(
-      (a) => a.approval_status == 0
-    );
-    forSaleListData = approveForSaleListData.concat(pendingForSaleListData);
+function ClassifiedCategoryList({forSaleListData, bookType,displayRoute}) {
+  if(displayRoute &&  displayRoute=="your_advert"){
+    let approveForSaleListData = forSaleListData.filter( (a) => a.approval_status ==1);
+    let pendingForSaleListData = forSaleListData.filter( (a) => a.approval_status ==0);
+    forSaleListData = approveForSaleListData.concat(pendingForSaleListData); 
   }
+  const [index1, setIndex1]= useState("")
+  const[isCompleted, setIsCompleted]=useState("")
+  // const loadMore = () => {
+  //   setIndex1(index1 + 5)
+  //   console.log(index1)
+  //   if (index1 >= updateList.length) {
+  //     setIsCompleted(true)
+  //   } else {
+  //     setIsCompleted(false)
+  //   }
+  // }
   return (
     <div className="main">
       {forSaleListData &&
@@ -189,6 +187,10 @@ function ClassifiedCategoryList({ forSaleListData, bookType, displayRoute }) {
             );
           }
         })}
+ <button  type="button" className="btn btn-danger">
+            Load More +
+          </button>
+
     </div>
   );
 }

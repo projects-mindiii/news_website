@@ -38,11 +38,14 @@ function ClassiFieds() {
   const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
+  const [updateList, setUpdateList] = useState("");
   
+
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
   };
+  // console.log("classifiedFilterData", classifiedFilterData)
 
   useEffect(() => {
     dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
@@ -55,7 +58,7 @@ function ClassiFieds() {
           limit: 10,
           offset: 0,
           type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
-          search_by: classifiedFilterData.search_by,
+          search_by: classifiedFilterData.search_by ? classifiedFilterData.search_by : 0,
           province: classifiedFilterData.province,
           country: classifiedFilterData.country,
         };
@@ -64,11 +67,14 @@ function ClassiFieds() {
           limit: 10,
           offset: 0,
           type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+          search_by:0,
         };
       }
       const data = { userToken: userToken, whereQuery: forSaleQuery };
       dispatch(forSaleListApi(data)).then(async (responsejson) => {
         const response = responsejson.payload;
+        console.log("updateList", response)
+        setUpdateList(response.data.offset)
         if (response.status_code !== STATUS_CODES.SUCCESS) {
           if (response.status === STATUS_CODES.INVALID_TOKEN) {
             Toast.fire({
@@ -86,29 +92,11 @@ function ClassiFieds() {
           }
         }
       });
-
-      // let wantedQuery = "";
-      // if (classifiedFilterData && classifiedFilterData.length > 0) {
-      //   wantedQuery = {
-      //     limit: 10,
-      //     offset: 0,
-      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
-      //     search_by: classifiedFilterData.search_by,
-      //     province: classifiedFilterData.province,
-      //     country: classifiedFilterData.country,
-      //   };
-      // } else {
-      //   wantedQuery = {
-      //     limit: 10,
-      //     offset: 0,
-      //     type: CLASSIFIED_CATEGORY_TYPE.WANTED,
-      //   };
-      // }
-
       const wantedQuery = {
         limit: 10,
         offset: 0,
         type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+        search_by: classifiedFilterData.search_by ? classifiedFilterData.search_by : 0,
     
       };
       const wantedData = { userToken: userToken, whereQuery: wantedQuery };
@@ -202,6 +190,7 @@ function ClassiFieds() {
                       forSaleListData={forSaleWebList}
                       classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
                       bookType={BOOK_TYPE.CLASSIFIED}
+                    
                       
 
                     />

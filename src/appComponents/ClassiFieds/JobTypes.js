@@ -20,7 +20,8 @@ import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE } from "../../utils/Constants";
 function JobTypes() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const {jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
+  const {    classifiedFilterData,
+    classifiedFilterValues,jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
     useSelector((state) => state.classified);
   const { userToken,isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
@@ -35,11 +36,30 @@ function JobTypes() {
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.JOBOFFER);
     dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
     async function getWebClassifiedLists() {
-      const jobOfferQuery = {
-        limit: 10,
-        offset: 0,
-        type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
-      };
+      let jobOfferQuery = "";
+      if (classifiedFilterValues && classifiedFilterData.length > 0) {
+        jobOfferQuery = {
+          limit: 10,
+          offset: 0,
+          type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
+          search_by: classifiedFilterData.search_by ? classifiedFilterData.search_by : 0,
+          province: classifiedFilterData.province,
+          country: classifiedFilterData.country,
+        };
+      } else {
+        jobOfferQuery = {
+          limit: 10,
+          offset: 0,
+          type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+          search_by:0,
+        };
+      }
+
+      // const jobOfferQuery = {
+      //   limit: 10,
+      //   offset: 0,
+      //   type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
+      // };
       const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
       dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
       });
@@ -48,6 +68,7 @@ function JobTypes() {
         limit: 10,
         offset: 0,
         type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS,
+        search_by: classifiedFilterData.search_by ? classifiedFilterData.search_by : 0,
       };
       const jobSeekerData = {
         userToken: userToken,
