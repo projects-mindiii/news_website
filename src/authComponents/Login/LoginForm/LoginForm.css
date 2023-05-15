@@ -17,26 +17,6 @@
     font-weight: 400;
 }
 
-/* .signupForm .btn {
-    background-color: #ec4624;
-    border: none;
-    border-radius: 4px;
-    color: #ffffff;
-    width: 100%;
-    font-size: 16px;
-    margin-top: 10px;
-    font-weight: 500;
-    height: 40px;
-}
-
-button.btn:hover {
-    background-color: #ec4624;
-}
-
-button.btn:active {
-    background-color: #ec4624 !important;
-} */
-
 .passwordinput {
     position: relative;
 }
@@ -44,7 +24,7 @@ button.btn:active {
 .passwordicon svg {
     font-size: 18px;
     position: absolute;
-    bottom: 8px;
+    bottom: 11px;
     right: 7px;
     color: #9c9ca6b3;
     cursor: pointer;
@@ -62,7 +42,6 @@ button.btn:active {
     margin-bottom: 0px;
     margin-top: 4px;
     cursor: pointer;
-    line-break: anywhere;
 }
 
 
@@ -78,7 +57,7 @@ button.btn:active {
     position: relative;
     padding-left: 32px;
     cursor: pointer;
-    /* line-height: 25px; */
+    line-height: 25px;
     display: inline-block;
     color: #666;
     padding-right: 20px;
@@ -190,11 +169,20 @@ button.btn:active {
     }
 }
 
-@media screen and (max-width: 381px) and (min-width: 374px) {
+ @media screen and (min-width: 368px) and (max-width: 387px) {
     .forgotCls h6 {
-        font-size: 14px !important;
+        font-size: 13px !important;
     }
-}
+
+    .customCheck label {
+        font-size: 13px;
+    }
+
+    .customCheck [type="checkbox"]:checked+label,
+    .customCheck [type="checkbox"]:not(:checked)+label {
+        padding-left: 28px;
+    }
+} 
 
 @media screen and (min-width: 367px) and (max-width: 379px) {
     .LoginText p {

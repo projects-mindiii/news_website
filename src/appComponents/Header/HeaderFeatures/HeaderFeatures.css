@@ -8,6 +8,7 @@
     justify-content: right;
     width: 100%;
     max-width: fit-content;
+    /* max-width: 357px; */
     height: 39px !important;
 }
 
@@ -29,10 +30,6 @@
 }
 
 @media only screen and (min-width: 338px) and (max-width: 379px) {
-
-    /* .headerAfterProfile{
-        height: 53px !important;
-    } */
     .headerAfterProfile {
         padding-right: 15px !important;
         padding-left: 15px !important;

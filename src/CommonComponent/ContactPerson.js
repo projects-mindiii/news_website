@@ -1,7 +1,7 @@
 import React from "react";
 import companyIcon from "../assets/images/company_ico.svg";
-import emailicon from "../assets/images/email_ico.png";
-import callicon from "../assets/images/callIcon.png";
+import emailicon from "../assets/images/Deal_icon/mail.svg";
+import callicon from "../assets/images/Deal_icon/call.svg";
 import { useTranslation } from "react-i18next";
 import { AiOutlineStar } from "react-icons/ai";
 

@@ -109,16 +109,4 @@ function BookMarks() {
             </Row>
           </div>
         </Container>
-        <DeleteAlertBox
-          handleClose={handleClose}
-          showPopup={showPopup}
-          setShowPopup={setShowPopup}
-          deleteHandle={removeAllBookmark}
-          alertText={t("REMOVE_ALL_BOOKMARK")}
-        />
-      </section>
-    </>
-  );
-}
-
-export default BookMarks;
+        <Del
