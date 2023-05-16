@@ -1,5 +1,5 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
 import Banner from "../../assets/images/classifiedheader.png";
 import DealsHeader from "../DealsHeader/DealsHeader";
@@ -9,22 +9,44 @@ import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { guestUserLogin, getMetaListApi } from "../../store/slices/UserSlice";
+import { guestUserLogin, getMetaListApi, userLogout } from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
 import Loader from "../../utils/Loader/Loader";
-
+import { STATUS_CODES } from "../../utils/StatusCode";
+import { Toast } from "../../utils/Toaster";
 //-------Create a Header component--------
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
 
+  function handleResponse(responsejson) {
+    console.log('aaaaaaaaaresponsejson', responsejson)
+    if (responsejson.status_code) {
+      if (responsejson.status_code === STATUS_CODES.INVALID_TOKEN) {
+        dispatch(userLogout());
+        dispatch(guestUserLogin());
+        navigate("/login");
+      }
+    } else {
+      if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+        dispatch(userLogout());
+        dispatch(guestUserLogin());
+        navigate("/login");
+      }
+    }
+
+  }
 
   const { guestUser, currentUser, isLoading, userToken } = useSelector(
     (state) => state.user
   );
 
   function GetMetaList(userToken) {
-    dispatch(getMetaListApi(userToken));
+    dispatch(getMetaListApi(userToken)).then((responseJson) => {
+      const response = responseJson.payload;
+      handleResponse(response);
+    });
   }
 
   function GuestLogin() {

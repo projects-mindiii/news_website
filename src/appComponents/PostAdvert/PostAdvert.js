@@ -5,7 +5,7 @@ import Select from "react-select";
 import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SublyApi from "../../helpers/Api";
 import Form from 'react-bootstrap/Form';
 import { Toast } from "../../utils/Toaster";
@@ -28,8 +28,11 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
 import { useLocation } from "react-router-dom";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
+
 //-------Create a Deals Header component--------
 function PostAdvert() {
+    const dispatch = useDispatch();
     const { userToken, currentUser, allMetaList } = useSelector(
         (state) => state.user
     );
@@ -103,41 +106,87 @@ function PostAdvert() {
     //----- for show modal-----
     const handleShow = () => setShowPopup(true);
 
+
+    function handleResponse(responsejson){
+
+        if (responsejson.status_code) {
+            if (responsejson.status_code == STATUS_CODES.SUCCESS) {
+                Toast.fire({
+                    icon: "success",
+                    title: responsejson.message,
+                });
+                navigate("/your-add");
+            } else {
+                if (responsejson.status_code === STATUS_CODES.INVALID_TOKEN) {
+                    Toast.fire({
+                        icon: "error",
+                        title: t("SESSION_EXPIRE"),
+                    });
+                    dispatch(userLogout());
+                    dispatch(guestUserLogin());
+                    navigate("/login");
+                } else {
+                    Toast.fire({
+                        icon: "error",
+                        title: responsejson.message,
+                    });
+                }
+            }
+          }else{
+            if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+                Toast.fire({
+                  icon: "error",
+                  title: t("SESSION_EXPIRE"),
+                });
+                dispatch(userLogout());
+                dispatch(guestUserLogin());
+                navigate("/login");
+              } else {
+                Toast.fire({
+                  icon: "error",
+                  title: responsejson.data.message,
+                });
+              }
+          }
+    }
+    
     function setNewDefaultCountry(e) {
-        setTimeout(() => {
-            setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
-            setDefaultCountry({ label: e.label, value: e.value, id: e.id })
-        }, 1000);
+        // setTimeout(() => {
+        //     setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
+        //     setDefaultCountry({ label: e.label, value: e.value, id: e.id })
+        // }, 1000);
+        setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
+        setDefaultCountry({ label: e.label, value: e.value, id: e.id })
     }
 
     function setNewJob(e) {
-        setTimeout(() => {
-            setValue("jobType", { label: e.label, value: e.value, id: e.id })
-            setJobTypeValue({ label: e.label, value: e.value, id: e.id })
-        }, 1000);
+        // setTimeout(() => {
+        //     setValue("jobType", { label: e.label, value: e.value, id: e.id })
+        //     setJobTypeValue({ label: e.label, value: e.value, id: e.id })
+        // }, 1000);
+        setValue("jobType", { label: e.label, value: e.value, id: e.id })
+        setJobTypeValue({ label: e.label, value: e.value, id: e.id })
     }
     function setNewEarning(e) {
-        setTimeout(() => {
-            setValue("earningoption", { label: e.label, value: e.value, id: e.id })
-            setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
-        }, 1000);
-
-
+        // setTimeout(() => {
+        //     setValue("earningoption", { label: e.label, value: e.value, id: e.id })
+        //     setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
+        // }, 1000);
+        setValue("earningoption", { label: e.label, value: e.value, id: e.id })
+        setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
     }
     function setNewCountry(e) {
-        setTimeout(() => {
-            setValue("country", { label: e.label, value: e.value, id: e.id })
-            setCountryValue({ label: e.label, value: e.value, id: e.id })
-        }, 1000);
-
+        // setTimeout(() => {
+        //     setValue("country", { label: e.label, value: e.value, id: e.id })
+        //     setCountryValue({ label: e.label, value: e.value, id: e.id })
+        // }, 1000);
+        setValue("country", { label: e.label, value: e.value, id: e.id })
+        setCountryValue({ label: e.label, value: e.value, id: e.id })
 
     }
     function setNewProvinces(e) {
-        setTimeout(() => {
-            setValue("province", { label: e.label, value: e.value, id: e.id })
-            setProvinceValue({ label: e.label, value: e.value, id: e.id })
-        }, 1000);
-
+        setValue("province", { label: e.label, value: e.value, id: e.id })
+        setProvinceValue({ label: e.label, value: e.value, id: e.id })
     }
     function resetDate() {
         setHeadingLength("")
@@ -375,7 +424,7 @@ function PostAdvert() {
             "email", data.email ? data.email : ""
         );
         requestData.append(
-            "contact_compan", data.companyName ? data.companyName : ""
+            "contact_company", data.companyName ? data.companyName : ""
         );
         requestData.append(
             "dial_code", dialCode ? dialCode : ""
@@ -394,23 +443,23 @@ function PostAdvert() {
         requestData.append(
             "whatsapp_dail_code", dialCodeWatsapp ? dialCodeWatsapp : ""
         );
-        if(profileImage && profileImage.length > 0 ){
+        if (profileImage && profileImage.length > 0) {
             profileImage.forEach((item, index) => {
                 requestData.append('classifiedGallery', item)
             })
         }
-        else{
+        else {
             requestData.append('classifiedGallery', "")
         }
 
-        if( orignamImage && orignamImage.length > 0 ){
-           orignamImage.forEach((item, index) => {
+        if (orignamImage && orignamImage.length > 0) {
+            orignamImage.forEach((item, index) => {
                 requestData.append('classifiedGalleryOriginal', item)
             })
         }
-        else{
+        else {
             requestData.append('classifiedGalleryOriginal', "")
-        }      
+        }
 
         if (location.state !== null) {
             requestData.append(
@@ -419,93 +468,28 @@ function PostAdvert() {
         }
         if (location.state !== null) {
             requestData.append(
-                "removeImgId", ""
+                "removeImgId", (removeImage)?removeImage:""
             );
         }
-        
-           
+
+
         if (location.state == null) {
-            await SublyApi.addClassifiedList(requestData, userToken).then(async(responsejson) => {
-                if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
-                    setIsLoading(false)
-                    Toast.fire({
-                        icon: "success",
-                        title: responsejson.data.message,
-                    });
-                } else if (responsejson.status == STATUS_CODES.BAD_REQUEST || responsejson.status_code == STATUS_CODES.INVALID_PARAM) {
-                    setIsLoading(false)
-                    Toast.fire({
-                        icon: "success",
-                        title: responsejson.data.message,
-                    });
-                } else {
-                    if (responsejson.status_code == STATUS_CODES.SUCCESS) {
-                        setIsLoading(false)
-                        Toast.fire({
-                            icon: "success",
-                            title: responsejson.data.message,
-                        });
-                        resetDate();
-                        setDefaultValue();
-                    }
-                }
+            await SublyApi.addClassifiedList(requestData, userToken).then(async (responsejson) => {
+                setIsLoading(false)
+                handleResponse(responsejson);
             });
         }
         else {
-            await SublyApi.updateAdvert(requestData, userToken).then(async(responsejson) => {
-
-                if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
-                    setIsLoading(false)
-                    Toast.fire({
-                        icon: "success",
-                        title: responsejson.data.message,
-                    });
-                } else if ((responsejson.status == STATUS_CODES.BAD_REQUEST) || (responsejson.status == STATUS_CODES.INVALID_PARAM)) {
-                    setIsLoading(false)
-                    Toast.fire({
-                        icon: "success",
-                        title: responsejson.data.message,
-                    });
-                } else {
-                    if (responsejson.status_code == STATUS_CODES.SUCCESS) {
-                        setIsLoading(false)
-                        Toast.fire({
-                            icon: "success",
-                            title: responsejson.data.message,
-                        });
-                        resetDate();
-                        setDefaultValue();
-                    }
-                }
+            await SublyApi.updateAdvert(requestData, userToken).then(async (responsejson) => {
+                setIsLoading(false)
+                handleResponse(responsejson);
             });
         }
     }
     async function deleteClassiFieds(id) {
         setIsLoading(true)
         await SublyApi.deleteClassiFied(userToken, id).then((responsejson) => {
-            if (responsejson.status == STATUS_CODES.INTERNAL_SERVER_ERROR) {
-                setIsLoading(false)
-                Toast.fire({
-                    icon: "success",
-                    title: responsejson.data.message,
-                });
-            } else if (responsejson.status == STATUS_CODES.BAD_REQUEST) {
-                setIsLoading(false)
-                Toast.fire({
-                    icon: "success",
-                    title: responsejson.data.message,
-                });
-            } else {
-                if (responsejson.status_code == STATUS_CODES.SUCCESS) {
-
-                    setIsLoading(false)
-                    Toast.fire({
-                        icon: "success",
-                        title: responsejson.data.message,
-                    });
-                    navigate("/your-add")
-                }
-            }
+            handleResponse(responsejson);
         });
     }
     const uploadImage = (e) => {
@@ -589,7 +573,7 @@ function PostAdvert() {
         }
 
     }
-    console.log("removeImage",removeImage)
+    console.log("removeImage", removeImage)
     return (
         <div className="main">
             {isLoading === true ? (
