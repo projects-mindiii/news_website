@@ -192,7 +192,7 @@
 .classiFieds_countryName img {
   width: 20px;
   margin-bottom: 7px;
-  margin-right: 6px;
+  margin-right: 10px;
 }
 
 .classiFieds_aboutText p {
@@ -218,7 +218,7 @@
   width: 100%;
   background: linear-gradient(180deg, #85d51d 0%, #6aae1b 98.67%);
   border-radius: 6px;
-  height: 38px;
+  height: 40px;
   border: none;
   margin-top: 15px;
 }
@@ -226,7 +226,7 @@
 .classiFields_whatAppIcon svg {
   width: 28px;
   height: 28px;
-  margin-top: 3px;
+  margin-top: 5px;
 }
 
 .classiFields_shareMedia {
@@ -258,6 +258,7 @@
   width: 4px;
   height: 4px;
   margin: 5px;
+  border-radius: 50%;
 }
 
 .classiFields_advertise {
@@ -277,7 +278,7 @@
   font-weight: 600;
   font-weight: 500 !important;
   font-size: 19.2px !important;
-  line-height: 36px !important;
+  line-height: 40px !important;
   display: flex;
   justify-content: center;
   margin-left: 6px;

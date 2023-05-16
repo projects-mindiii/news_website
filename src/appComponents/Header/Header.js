@@ -1,12 +1,12 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../../assets/images/logo.png";
+import { NavLink, useLocation ,useNavigate} from "react-router-dom";
+import Logo from "../../assets/images/news_logo.svg";
 import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
 import "./Header.css";
 import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guestUserLogin, getMetaListApi, userLogout } from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";

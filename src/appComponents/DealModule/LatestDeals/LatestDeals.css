@@ -45,7 +45,12 @@
     width: 100%;
     height: 46px;
     border: none;
-    border-radius: 5px;
+    border-radius: 7.2px;
+    font-weight: 600;
+    font-size: 19.2px;
+    line-height: 29px;
+    letter-spacing: -0.654545px;
+    color: #FFFFFF;
 }
 
 .detailsValue img {
@@ -163,11 +168,11 @@ button.whatsApp svg {
 
 @media screen and (min-width: 320px) and (max-width: 400px) {
     .websiteUrl p {
-        font-size: 15px !important;
+        font-size: 14px !important;
     }
 
     .dealText p {
-        font-size: 15px !important;
+        font-size: 14px !important;
     }
 
     .dealPrice h4 {
