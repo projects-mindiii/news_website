@@ -24,6 +24,7 @@ function JobTypes() {
     useSelector((state) => state.classified);
   const { userToken,isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
+  const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
 
   // function for classified webList
@@ -59,7 +60,7 @@ function JobTypes() {
   }, [bookMarkTotalCount]);
   return (
     <div className="main">
-      {isLoading === true ? <Loader /> : ""}
+      {isLoading === true || bookmarkLoader ? <Loader /> : ""}
       <React.Fragment>
         <Container>
           <Row>

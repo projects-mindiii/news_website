@@ -296,7 +296,7 @@ class SublyApi {
   */
   static async getBookMarkList(authToken, data) {
     let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/get-bookmark-list?limit=${data.limit}&offset=${data.offset}`,
+    let res = await this.request(`/v2/get-web-bookmark-list?limit=${data.limit}&offset=${data.offset}`,
       "", undefined, header
     );
 
@@ -326,22 +326,6 @@ class SublyApi {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/classified-update`,
     data, "Post", header
-    );
-
-    return res;
-  }
-
-
-     /* POST  /Add book mark: 
-  add book mark 
- 
-   Authorization required: Token
-   @returns {object} {token}
-   */
-   static async addBookMark(authToken, data) {
-    let header = { "access-token": ` ${authToken}` };
-    let res = await this.request(`/v2/add-bookmark`,
-      data, "post", header
     );
 
     return res;

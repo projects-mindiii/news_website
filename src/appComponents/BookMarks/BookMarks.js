@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
 import { useTranslation } from "react-i18next";
 import ClassifiedCategoryList from "../ClassiFieds/ClassifiedCategoryList";
@@ -12,15 +12,17 @@ import {
 import { STATUS_CODES } from "../../utils/StatusCode";
 import DeleteAlertBox from "../DeleteAlertBox/DeleteAlertBox";
 import { Toast } from "../../utils/Toaster";
-import { BOOK_ACTION_TYPE } from "../../utils/Constants";
+import { BOOK_ACTION_TYPE, BOOK_TYPE } from "../../utils/Constants";
 import Loader from "../../utils/Loader/Loader";
 
 function BookMarks() {
   const { t } = useTranslation();
   const { jobOfferWebList } = useSelector((state) => state.classified);
-  const { bookMarkList, bookMarkTotalCount, isLoading } = useSelector((state) => state.bookMark);
+  const { bookMarkList, bookMarkTotalCount, isLoading } = useSelector(
+    (state) => state.bookMark
+  );
   const { userToken } = useSelector((state) => state.user);
- 
+  const [offset, setOffset] = useState(0)
   const dispatch = useDispatch();
   //----- state for manage show/hide modal-----
   const [showPopup, setShowPopup] = useState(false);
@@ -32,7 +34,7 @@ function BookMarks() {
 
   useEffect(() => {
     async function getBookMark() {
-      const bookMarkRequired = { limit: 10, offset: 0 };
+      const bookMarkRequired = { limit: 10, offset: offset };
       const BookMarkData = {
         userToken: userToken,
         requiredValue: bookMarkRequired,
@@ -43,7 +45,7 @@ function BookMarks() {
       });
     }
     getBookMark();
-  }, [bookMarkTotalCount]);
+  }, [offset, bookMarkTotalCount]);
 
   async function removeAllBookmark() {
     const requestData = new FormData();
@@ -72,51 +74,49 @@ function BookMarks() {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <section className="main">
-          <Container>
-            <div>
-              <Row>
-                <Col xs={12} sm={12} md={12} lg={6}>
-                  <NoteBoxModule
-                    headText={t("BOOK_MARK_HEADING")}
-                    headSubText={t("BOOK_MARK_SUBHEAD")}
-                    detailText={t("BOOK_MARK_DETAILTEXT")}
-                  />
-                </Col>
-                <Col xs={12} sm={12} md={12} lg={6}>
-                  {bookMarkList.list && bookMarkList.list.length > 0 ? (
-                    <>
-                      <div className={styles.bookmarkHeading}>
-                        <h3>{t("YOURS_BOOK_MARKS")}</h3>
-                      </div>
-                      <p className={styles.clearAll}>
-                        <span onClick={() => handleShow()}>
-                          {t("CLEAR_ALL")}
-                        </span>
-                      </p>
-                      <ClassifiedCategoryList
-                        forSaleListData={jobOfferWebList}
-                      />
-                    </>
-                  ) : (
-                    <h4 className="youAdd_NotShow">{t("NO_BOOK_MARKS")}</h4>
-                  )}
-                </Col>
-              </Row>
-            </div>
-          </Container>
-          <DeleteAlertBox
-            handleClose={handleClose}
-            showPopup={showPopup}
-            setShowPopup={setShowPopup}
-            deleteHandle={removeAllBookmark}
-            alertText={t("REMOVE_ALL_BOOKMARK")}
-          />
-        </section>
-      )}
+      {isLoading ? <Loader /> : ""}
+      <section className="main">
+        <Container>
+          <div>
+            <Row>
+              <Col xs={12} sm={12} md={12} lg={6}>
+                <NoteBoxModule
+                  headText={t("BOOK_MARK_HEADING")}
+                  headSubText={t("BOOK_MARK_SUBHEAD")}
+                  detailText={t("BOOK_MARK_DETAILTEXT")}
+                />
+              </Col>
+              <Col xs={12} sm={12} md={12} lg={6}>
+                {bookMarkList && bookMarkList.length > 0 ? (
+                  <>
+                    <div className={styles.bookmarkHeading}>
+                      <h3>{t("YOURS_BOOK_MARKS")}</h3>
+                    </div>
+                    <p className={styles.clearAll}>
+                      <span onClick={() => handleShow()}>{t("CLEAR_ALL")}</span>
+                    </p>
+                    <ClassifiedCategoryList
+                      displayRoute="bookmark"
+                      forSaleListData={bookMarkList}
+                      bookType={BOOK_TYPE.CLASSIFIED}
+                    />
+                    <Button type="button" onClick={()=>setOffset(10)}>Load More</Button>
+                  </>
+                ) : (
+                  <h4 className="youAdd_NotShow">{t("NO_BOOK_MARKS")}</h4>
+                )}
+              </Col>
+            </Row>
+          </div>
+        </Container>
+        <DeleteAlertBox
+          handleClose={handleClose}
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
+          deleteHandle={removeAllBookmark}
+          alertText={t("REMOVE_ALL_BOOKMARK")}
+        />
+      </section>
     </>
   );
 }
