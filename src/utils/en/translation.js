@@ -122,7 +122,7 @@ export const TRANSLATIONS_EN = {
   NAME_MAXLENGTH: "Name must be 20 character or small",
   NAME_MINLENGTH: "Please enter atleast 3 character",
   ENTER_NAME: "please enter full name",
-  ENTER_EMAIL: "please enter Email address",
+  ENTER_EMAIL: "please enter email address",
   NEW_PASSWORD: "Please Enter New Password",
   REPEAT_PASS: "Please Enter Repeat Password",
   NOT_MATCH: "Repeat password does not match",
