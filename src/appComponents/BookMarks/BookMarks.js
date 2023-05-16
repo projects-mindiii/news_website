@@ -22,10 +22,12 @@ function BookMarks() {
     (state) => state.bookMark
   );
   const { userToken } = useSelector((state) => state.user);
-  const [offset, setOffset] = useState(0)
+  const [offset, setOffset] = useState(0);
   const dispatch = useDispatch();
   //----- state for manage show/hide modal-----
   const [showPopup, setShowPopup] = useState(false);
+  const [bookmarkValue, setBookmarkValue] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   //----- for close modal-----
   const handleClose = () => setShowPopup(false);
@@ -34,6 +36,10 @@ function BookMarks() {
 
   useEffect(() => {
     async function getBookMark() {
+      if (offset == 0) {
+        bookmarkValue.splice(0, bookmarkValue.length);
+      }
+      const bookmarkArray = [...bookmarkValue];
       const bookMarkRequired = { limit: 10, offset: offset };
       const BookMarkData = {
         userToken: userToken,
@@ -41,11 +47,29 @@ function BookMarks() {
       };
       dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
         if (responsejson.payload.status_code == STATUS_CODES.SUCCESS) {
+          responsejson.payload.data.list.map((item, index) => {
+            bookmarkArray.push(item);
+          });
+          setBookmarkValue(bookmarkArray);
         }
       });
     }
     getBookMark();
   }, [offset, bookMarkTotalCount]);
+
+  const loadMore = () => {
+    setOffset(offset + 10);
+  };
+
+  useEffect(() => {
+    if ( offset > bookmarkValue.length || bookMarkTotalCount <= bookmarkValue.length ) {
+      setIsCompleted(true);
+    } else {
+      setIsCompleted(false);
+    }
+  }, [bookmarkValue.length]);
+
+  console.log("bookmarkValue", bookmarkValue);
 
   async function removeAllBookmark() {
     const requestData = new FormData();
@@ -100,10 +124,14 @@ function BookMarks() {
                       forSaleListData={bookMarkList}
                       bookType={BOOK_TYPE.CLASSIFIED}
                     />
-                    <Button type="button" onClick={()=>setOffset(10)}>Load More</Button>
+                    {isCompleted === false && (
+                      <Button type="button" onClick={() => loadMore()}>
+                        Load More
+                      </Button>
+                    )}
                   </>
                 ) : (
-                  <h4 className="youAdd_NotShow">{t("NO_BOOK_MARKS")}</h4>
+                  <h5 className="youAdd_NotShow">{t("NO_BOOK_MARKS")}</h5>
                 )}
               </Col>
             </Row>
