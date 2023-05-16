@@ -50,7 +50,6 @@ function ClassifiedFilter({ closeModal, setResultData }) {
   };
 
   if (Object.keys(classifiedFilterValues).length !== 0) {
-    // console.log("classifiedFilterValues", classifiedFilterValues);
     if (classifiedFilterValues.refrenceType == "2") {
       if (classifiedFilterValues.countryId > 0) {
         countrySelectedValue = {

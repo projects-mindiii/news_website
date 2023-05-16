@@ -19,7 +19,7 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
-import { slice } from 'lodash'
+
 
 //-------Create a Deals Header component--------
 function ClassiFieds() {
@@ -40,60 +40,70 @@ function ClassiFieds() {
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
 
-  const [updateList, setUpdateList] = useState([]);
-  const [isCompleted, setIsCompleted] = useState(false)
-  const [offset, setOffset] = useState(10)
+  const [offset, setOffset] = useState(0);
   // const forSaleListApi = slice(updateList, 0, offset)
 
-  
   const loadMore = () => {
-    setOffset(offset + 10)
-    console.log(offset)
-    if (offset >= updateList.length) {
-      setIsCompleted(true)
+    setOffset(offset + 2);
+   
+    if (
+      offset >= classifiedFilterValues &&
+      classifiedFilterData &&
+      classifiedFilterData.length > 0
+    ) {
+      setClassifiedFilterName(true);
     } else {
-      setIsCompleted(false)
+      setClassifiedFilterName(false);
     }
-  }
- 
-  console.log("offset", offset)
-  
-  
+  };
+
+
 
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
   };
-  // console.log("classifiedFilterData", classifiedFilterData)
 
   useEffect(() => {
-    dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
+    dispatch(
+      setClassifiedFilterName({
+        name: "All South Africa",
+        refrenceType: "1",
+        refrenceId: "all",
+        countryId: "0",
+        city: "",
+      })
+    );
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
     async function getWebClassifiedLists() {
       let forSaleQuery = "";
-      if (classifiedFilterValues && classifiedFilterData && classifiedFilterData.length > 0) {
+      if (
+        classifiedFilterValues &&
+        classifiedFilterData &&
+        classifiedFilterData.length > 0
+      ) {
         forSaleQuery = {
-          limit: 10,
-          offset: 0,
+          limit: 2,
+          offset: offset,
           type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
-          search_by: classifiedFilterData.search_by ? classifiedFilterData.search_by : 0,
+          search_by: classifiedFilterData.search_by
+            ? classifiedFilterData.search_by
+            : 0,
           province: classifiedFilterData.province,
           country: classifiedFilterData.country,
         };
       } else {
         forSaleQuery = {
-          limit: 10,
-          offset: 0,
+          limit: 2,
+          offset: offset,
           type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
-          search_by:0,
+          search_by: 0,
         };
       }
+
       const data = { userToken: userToken, whereQuery: forSaleQuery };
       dispatch(forSaleListApi(data)).then(async (responsejson) => {
         const response = responsejson.payload;
-        const forSaleWebList = slice(updateList, 0, offset)
-         console.log("updateList", response)
-        setUpdateList(response.data.offset)
         if (response.status_code !== STATUS_CODES.SUCCESS) {
           if (response.status === STATUS_CODES.INVALID_TOKEN) {
             Toast.fire({
@@ -112,17 +122,17 @@ function ClassiFieds() {
         }
       });
       const wantedQuery = {
-        limit: 10,
-        offset: 0,
+        limit: 2,
+        offset: offset,
         type: CLASSIFIED_CATEGORY_TYPE.WANTED,
-        search_by: classifiedFilterData.search_by ? classifiedFilterData.search_by : 0,
-    
+        search_by: classifiedFilterData.search_by
+          ? classifiedFilterData.search_by
+          : 0,
       };
       const wantedData = { userToken: userToken, whereQuery: wantedQuery };
       dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
     }
     getWebClassifiedLists();
-  
   }, [offset]);
 
   return (
@@ -142,14 +152,11 @@ function ClassiFieds() {
                     <Nav variant="pills" className="flex-column">
                       <Nav.Item key={1}>
                         <Nav.Link
-                          onClick={() =>{
+                          onClick={() => {
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.FORSALE
                             );
-                            
-                          }
-                            
-                          }
+                          }}
                           eventKey={1}
                         >
                           {t("FOR_SALE")}({forSaleTotalCount})
@@ -172,14 +179,11 @@ function ClassiFieds() {
                       </Nav.Item>
                       <Nav.Item key={2}>
                         <Nav.Link
-                          onClick={() =>{
+                          onClick={() => {
                             setClassfiedTypeValue(
                               CLASSIFIED_CATEGORY_TYPE.WANTED
                             );
-
-                          }
-                           
-                          }
+                          }}
                           eventKey={2}
                         >
                           {t("WANTED")} ({wantedTotalCount})
@@ -205,13 +209,11 @@ function ClassiFieds() {
                 </div>
                 {showDefaultList == 1 ? (
                   forSaleWebList.length > 0 ? (
-                    <ClassifiedCategoryList key={0}
+                    <ClassifiedCategoryList
+                      key={0}
                       forSaleListData={forSaleWebList}
                       classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
                       bookType={BOOK_TYPE.CLASSIFIED}
-                    
-                      
-
                     />
                   ) : (
                     <p className="nodataDisplay">
@@ -219,7 +221,8 @@ function ClassiFieds() {
                     </p>
                   )
                 ) : wantedWebList.length ? (
-                  <ClassifiedCategoryList key={1}
+                  <ClassifiedCategoryList
+                    key={1}
                     forSaleListData={wantedWebList}
                     classifiedDataType={CLASSIFIED_CATEGORY_TYPE.WANTED}
                     bookType={BOOK_TYPE.CLASSIFIED}
@@ -229,6 +232,19 @@ function ClassiFieds() {
                     --{t("NOCLASSIFIED_DISPLAY")}--
                   </p>
                 )}
+                <div className="loadMoreBtn">
+                  {forSaleWebList.length > 0 ? (
+                    <button
+                      onClick={loadMore}
+                      type="button"
+                      className="btn"
+                    >
+                      Load More 
+                    </button>
+                  ) : (
+                   ""
+                  )}
+                </div>
               </Col>
               {/* <Col xs={12} sm={12} md={12} lg={6}>
               <div className="advertisment">
@@ -238,21 +254,6 @@ function ClassiFieds() {
             </Row>
           </Container>
         </React.Fragment>
-        <div className="d-grid mt-3 mb-5">
-        {isCompleted ? (
-          <button
-            onClick={loadMore}
-            type="button"
-            className="btn btn-danger disabled"
-          >
-            That's It
-          </button>
-        ) : (
-          <button onClick={loadMore} type="button" className="btn btn-danger">
-            Load More +
-          </button>
-        )}
-      </div>
       </div>
     </div>
   );

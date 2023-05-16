@@ -50,16 +50,11 @@ function JobTypes() {
         jobOfferQuery = {
           limit: 10,
           offset: 0,
-          type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+          type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
           search_by:0,
         };
       }
 
-      // const jobOfferQuery = {
-      //   limit: 10,
-      //   offset: 0,
-      //   type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
-      // };
       const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
       dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
       });
