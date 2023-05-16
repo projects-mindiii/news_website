@@ -26,7 +26,8 @@
     color: #FFFFFF;
     margin-bottom: 0px;
 }
-.yourAdd_Note p small{
+
+.yourAdd_Note p small {
     font-weight: 700;
     font-size: 17px;
     line-height: 30px;
@@ -41,7 +42,7 @@
     margin-top: 10px;
 }
 
- .edit_DeleteButton {
+.edit_DeleteButton {
     margin-top: 15px;
     background: #000000;
     border-radius: 7.2px;
@@ -55,7 +56,7 @@
     min-height: 46px;
 }
 
- .not_live {
+.not_live {
     margin-top: 15px;
     background: linear-gradient(180deg, #EB235F 0%, #CD0F48 98.67%);
     border-radius: 6px;
@@ -71,17 +72,24 @@
 
 .youAdd_NotShow {
     text-align: center;
-    margin-top: 70px;
+    margin-top: 78px;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: -0.315px;
+    color: #000000;
 }
-.post_Add_Discription{
+
+.post_Add_Discription {
     min-height: 114.9px !important;
     background-color: #F6F6F6 !important;
 }
+
 .youAdd_PendingApproval {
     text-align: center;
     margin-top: 0.5rem;
 }
 
-.postAdvertBox{
+.postAdvertBox {
     margin-top: 18px;
 }
