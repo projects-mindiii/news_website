@@ -26,50 +26,33 @@ function BookMarks() {
   const dispatch = useDispatch();
   //----- state for manage show/hide modal-----
   const [showPopup, setShowPopup] = useState(false);
-  const [bookmarkValue, setBookmarkValue] = useState([]);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   //----- for close modal-----
   const handleClose = () => setShowPopup(false);
   //----- for show modal-----
   const handleShow = () => setShowPopup(true);
 
-  useEffect(() => {
-    async function getBookMark() {
-      if (offset == 0) {
-        bookmarkValue.splice(0, bookmarkValue.length);
+  async function getBookMark(loadMore, offsetValue) {
+    const bookMarkRequired = { limit: 10, offset: offsetValue };
+    const BookMarkData = {
+      userToken: userToken,
+      requiredValue: bookMarkRequired,
+      loadMore: loadMore,
+    };
+    dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
+      if (responsejson.payload.status_code == STATUS_CODES.SUCCESS) {
       }
-      const bookmarkArray = [...bookmarkValue];
-      const bookMarkRequired = { limit: 10, offset: offset };
-      const BookMarkData = {
-        userToken: userToken,
-        requiredValue: bookMarkRequired,
-      };
-      dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
-        if (responsejson.payload.status_code == STATUS_CODES.SUCCESS) {
-          responsejson.payload.data.list.map((item, index) => {
-            bookmarkArray.push(item);
-          });
-          setBookmarkValue(bookmarkArray);
-        }
-      });
-    }
-    getBookMark();
-  }, [offset, bookMarkTotalCount]);
-
-  const loadMore = () => {
-    setOffset(offset + 10);
-  };
-
+    });
+  }
   useEffect(() => {
-    if ( offset > bookmarkValue.length || bookMarkTotalCount <= bookmarkValue.length ) {
-      setIsCompleted(true);
-    } else {
-      setIsCompleted(false);
-    }
-  }, [bookmarkValue.length]);
+    getBookMark(false, offset);
+  }, []);
 
-  console.log("bookmarkValue", bookmarkValue);
+  function loadmore() {
+    setOffset(offset + 10);
+    getBookMark(true, offset + 10);
+  }
+
 
   async function removeAllBookmark() {
     const requestData = new FormData();
@@ -84,7 +67,7 @@ function BookMarks() {
           icon: "success",
           title: response.payload.message,
         });
-        const requiredValue = { limit: 10, offset: 0 };
+        const requiredValue = { limit: 10, offset: offset };
         dispatch(bookMarkListApi({ userToken: userToken, requiredValue }));
         handleClose();
       } else if (response.payload.status == STATUS_CODES.BAD_REQUEST) {
@@ -124,8 +107,10 @@ function BookMarks() {
                       forSaleListData={bookMarkList}
                       bookType={BOOK_TYPE.CLASSIFIED}
                     />
-                    {isCompleted === false && (
-                      <Button type="button" onClick={() => loadMore()}>
+                    {bookMarkList.length >= bookMarkTotalCount ? (
+                      ""
+                    ) : (
+                      <Button type="button" onClick={() => loadmore()}>
                         Load More
                       </Button>
                     )}
