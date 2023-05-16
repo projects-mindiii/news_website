@@ -19,6 +19,7 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
+import { slice } from 'lodash'
 
 //-------Create a Deals Header component--------
 function ClassiFieds() {
@@ -38,7 +39,25 @@ function ClassiFieds() {
   const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  const [updateList, setUpdateList] = useState("");
+
+  const [updateList, setUpdateList] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false)
+  const [offset, setOffset] = useState(10)
+  // const forSaleListApi = slice(updateList, 0, offset)
+
+  
+  const loadMore = () => {
+    setOffset(offset + 10)
+    console.log(offset)
+    if (offset >= updateList.length) {
+      setIsCompleted(true)
+    } else {
+      setIsCompleted(false)
+    }
+  }
+ 
+  console.log("offset", offset)
+  
   
 
   // function for classified webList
@@ -49,7 +68,6 @@ function ClassiFieds() {
 
   useEffect(() => {
     dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
-
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
     async function getWebClassifiedLists() {
       let forSaleQuery = "";
@@ -73,7 +91,8 @@ function ClassiFieds() {
       const data = { userToken: userToken, whereQuery: forSaleQuery };
       dispatch(forSaleListApi(data)).then(async (responsejson) => {
         const response = responsejson.payload;
-        console.log("updateList", response)
+        const forSaleWebList = slice(updateList, 0, offset)
+         console.log("updateList", response)
         setUpdateList(response.data.offset)
         if (response.status_code !== STATUS_CODES.SUCCESS) {
           if (response.status === STATUS_CODES.INVALID_TOKEN) {
@@ -104,7 +123,7 @@ function ClassiFieds() {
     }
     getWebClassifiedLists();
   
-  }, [bookMarkTotalCount]);
+  }, [offset]);
 
   return (
     <div className="main">
@@ -219,6 +238,21 @@ function ClassiFieds() {
             </Row>
           </Container>
         </React.Fragment>
+        <div className="d-grid mt-3 mb-5">
+        {isCompleted ? (
+          <button
+            onClick={loadMore}
+            type="button"
+            className="btn btn-danger disabled"
+          >
+            That's It
+          </button>
+        ) : (
+          <button onClick={loadMore} type="button" className="btn btn-danger">
+            Load More +
+          </button>
+        )}
+      </div>
       </div>
     </div>
   );

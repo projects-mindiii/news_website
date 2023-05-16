@@ -187,9 +187,9 @@ function ClassifiedCategoryList({forSaleListData, bookType,displayRoute}) {
             );
           }
         })}
- <button  type="button" className="btn btn-danger">
+ {/* <button  type="button" className="btn btn-danger">
             Load More +
-          </button>
+          </button> */}
 
     </div>
   );
