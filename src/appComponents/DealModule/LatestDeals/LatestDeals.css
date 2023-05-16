@@ -36,7 +36,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 14px !important;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .latestDeals button {
