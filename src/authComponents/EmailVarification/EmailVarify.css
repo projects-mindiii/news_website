@@ -1,6 +1,7 @@
 .forgotPassword {
   text-align: center;
 }
+
 .forgotPassword img {
   width: 100%;
   max-width: 100px;
@@ -46,10 +47,10 @@
 
 .otpbox {
   text-align: center;
-    padding: 5px 6px;
-    display: flex;
-    margin-top: 20px;
-    justify-content: center;
+  padding: 5px 6px;
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
 }
 
 .otpbox input::placeholder {
@@ -87,4 +88,17 @@
   box-shadow: none;
   border: none;
   outline: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 402px) {
+  .forgotPassword p {
+    padding: 0px 0px !important;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 333px) {
+  .forgotPassword h1 {
+    font-size: 18px;
+    font-weight: 500;
+  }
 }

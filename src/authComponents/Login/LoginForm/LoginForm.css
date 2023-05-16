@@ -124,9 +124,9 @@
 
 .LoginText {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .LoginText span {
@@ -142,7 +142,6 @@
     text-align: center;
     font-weight: 400;
     font-size: 14px;
-    /* letter-spacing: 0.28px; */
     color: #2B2C43;
     opacity: 0.6;
     margin-right: 10px;
@@ -152,7 +151,9 @@
 
 .socialLogo {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    margin-left: -11px;
+    margin-right: -11px;
 }
 
 .socialLogo img {
@@ -182,16 +183,7 @@
     .customCheck [type="checkbox"]:not(:checked)+label {
         padding-left: 28px;
     }
-
-    .customCheck label {
-        font-size: 13px;
-    }
-
-    .customCheck [type="checkbox"]:checked+label,
-    .customCheck [type="checkbox"]:not(:checked)+label {
-        padding-left: 28px;
-    }
-} 
+}
 
 @media screen and (min-width: 356px) and (max-width: 367px) {
     .forgotCls h6 {

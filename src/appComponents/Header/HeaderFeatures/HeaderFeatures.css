@@ -15,7 +15,7 @@
 .headerFeature h5 {
     font-weight: 500;
     font-size: 15px;
-    padding-top: 12px;
+    padding-top: 10px;
     color: #474747;
     letter-spacing: 0.2px;
     cursor: pointer;
@@ -24,7 +24,7 @@
 .headerFeature span {
     color: #EC4624;
     font-weight: 600;
-    padding-top: 10px;
+    padding-top: 8px;
     padding-right: 10px;
     padding-left: 10px;
 }
