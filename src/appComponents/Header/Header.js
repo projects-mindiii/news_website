@@ -1,5 +1,5 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/news_logo.svg";
 import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
