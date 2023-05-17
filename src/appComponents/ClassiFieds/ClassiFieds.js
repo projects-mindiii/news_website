@@ -89,7 +89,6 @@ function ClassiFieds() {
     };
     dispatch(forSaleListApi(data)).then(async (responsejson) => {
       const response = responsejson.payload.response;
-      console.log("updateListFFF", response);
       if (response.status_code !== STATUS_CODES.SUCCESS) {
         if (response.status === STATUS_CODES.INVALID_TOKEN) {
           Toast.fire({
@@ -123,8 +122,24 @@ function ClassiFieds() {
       whereQuery: wantedQuery,
       loadmore: loadmore,
     };
-    dispatch(getWantedListApi(wantedData)).then((responsejson) => {
+    dispatch(getWantedListApi(wantedData)).then(async(responsejson) => {
       const response = responsejson.payload;
+      if (response.status_code !== STATUS_CODES.SUCCESS) {
+        if (response.status === STATUS_CODES.INVALID_TOKEN) {
+          Toast.fire({
+            icon: "error",
+            title: t("SESSION_EXPIRE"),
+          });
+          await dispatch(userLogout());
+          await dispatch(guestUserLogin());
+          navigate("/login");
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      }
     });
   }
 
