@@ -1,5 +1,5 @@
 import mapicon from "../../assets/images/map_ico.svg";
-import React, { useState } from "react";
+import React from "react";
 import "../ClassiFieds/ClassiFieds.css";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
@@ -42,9 +42,8 @@ function ClassifiedList({
               </button>
 
               <span>
-                <span>
-                  <img src={watchicon} alt={watchicon} />{" "}
-                </span>{" "}
+                <img src={watchicon} alt={watchicon} />{" "}
+                {" "}
                 {item.created_date}
               </span>
             </div>

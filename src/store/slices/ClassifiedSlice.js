@@ -40,7 +40,7 @@ export const forSaleListApi = createAsyncThunk(
     console.log("data", data)
 		try {
 			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
-			return response;
+      return { response: response, loadmore: data.loadmore };
 		} catch (error) {
       console.log("error", error)
 			return rejectWithValue(error);
@@ -52,8 +52,8 @@ export const getWantedListApi = createAsyncThunk(
 	"classified/getWantedListApi",
 	async (data, { rejectWithValue }) => {
 		try {
-			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
-			return response;
+			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery,);
+      return { response: response, loadmore: data.loadmore };
 		} catch (error) {
       console.log("error", error)
 			return rejectWithValue(error);
@@ -65,8 +65,8 @@ export const getJobOfferListApi = createAsyncThunk(
 	"jobtypes/getJobOfferListApi",
 	async (data, { rejectWithValue }) => {
 		try {
-			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
-			return response;
+			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery,);
+      return { response: response, loadmore: data.loadmore };
 		} catch (error) {
       console.log("error", error)
 			return rejectWithValue(error);
@@ -80,7 +80,7 @@ export const getJobSeekerListApi = createAsyncThunk(
 	async (data, { rejectWithValue }) => {
 		try {
 			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
-			return response;
+      return { response: response, loadmore: data.loadmore };
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -102,33 +102,15 @@ export const classifiedSlice = createSlice({
       state.classifiedType = action.payload;
     },
     setClassifiedFilterName: (state, action) => {
-      console.log('setClassifiedFilterName action',action.payload)
+      // console.log('setClassifiedFilterName action',action.payload)
       state.classifiedFilterValues = action.payload;
     },
 
   },
-  extraReducers: (builder) => {
-    //web list
-    builder.addCase(forSaleListApi.pending, (state) => {
-        state.isLoading = true
-    })
-    builder.addCase(forSaleListApi.fulfilled, (state, action) => {
-        const response = action.payload;
-        if(response.status_code==STATUS_CODES.SUCCESS){
-          state.forSaleTotalCount = response.data.total_count;
-          state.forSaleWebList = response.data.list;
-        }else{
-          state.forSaleTotalCount = 0;
-          state.forSaleWebList = [];
-        }
-        state.isLoading = false
-    })
-    builder.addCase(forSaleListApi.rejected, (state, action) => {
-        state.isLoading = false
-    })
 
-    //your advert list
-    builder.addCase(yourAdvertListApi.pending, (state) => {
+  extraReducers: (builder) => {
+     //your advert list
+     builder.addCase(yourAdvertListApi.pending, (state) => {
       state.isLoading = true
     })
     builder.addCase(yourAdvertListApi.fulfilled, (state, action) => {
@@ -146,16 +128,47 @@ export const classifiedSlice = createSlice({
         state.isLoading = false
     })
 
+
+    //Forsale list api
+    builder.addCase(forSaleListApi.pending, (state) => {
+        state.isLoading = true
+    })
+    builder.addCase(forSaleListApi.fulfilled, (state, action) => {
+        const response = action.payload.response;
+        if(response.status_code==STATUS_CODES.SUCCESS){
+          if (action.payload.loadmore == true) {
+            state.forSaleWebList = state.forSaleWebList.concat(response.data.list);
+          } else{
+            state.forSaleWebList = response.data.list;
+          }
+          state.forSaleTotalCount = response.data.total_count;
+         
+        }else{
+          state.forSaleTotalCount = 0;
+          state.forSaleWebList = [];
+        }
+        state.isLoading = false
+    })
+    builder.addCase(forSaleListApi.rejected, (state, action) => {
+        state.isLoading = false
+    })
+
+   
+
     // wanted list api
     builder.addCase(getWantedListApi.pending, (state) => {
       state.isLoading = true
     })
     builder.addCase(getWantedListApi.fulfilled, (state, action) => {
-      const response = action.payload;
-
+      console.log("action",action)
+      const response = action.payload.response;
       if (response.status_code === STATUS_CODES.SUCCESS) {
+        if (action.payload.loadmore == true) {
+          state.wantedWebList = state.wantedWebList.concat(response.data.list);
+        }else{
+          state.wantedWebList = response.data.list;
+        } 
         state.wantedTotalCount = response.data.total_count;
-        state.wantedWebList = response.data.list;
         state.success = true;
       } else {
         state.wantedTotalCount = 0;
@@ -173,11 +186,14 @@ export const classifiedSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(getJobOfferListApi.fulfilled, (state, action) => {
-      const response = action.payload;
-
+      const response = action.payload.response;
       if (response.status_code === STATUS_CODES.SUCCESS) {
+        if (action.payload.loadmore == true) {
+          state.jobOfferWebList = state.jobOfferWebList.concat(response.data.list);
+        }else{
+          state.jobOfferWebList = response.data.list;
+        } 
         state.jobOfferTotalCount = response.data.total_count;
-        state.jobOfferWebList = response.data.list;
         state.success = true;
       } else {
         state.jobOfferTotalCount = 0;
@@ -195,11 +211,14 @@ export const classifiedSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(getJobSeekerListApi.fulfilled, (state, action) => {
-      const response = action.payload;
-
+      const response = action.payload.response;
       if (response.status_code === STATUS_CODES.SUCCESS) {
+        if (action.payload.loadmore == true) {
+          state.jobSeekerWebList = state.jobSeekerWebList.concat(response.data.list);
+        }else{
+          state.jobSeekerWebList = response.data.list;
+        } 
         state.jobSeekerTotalCount = response.data.total_count;
-        state.jobSeekerWebList = response.data.list;
         state.success = true;
       } else {
         state.jobSeekerTotalCount = 0;

@@ -19,7 +19,7 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
-
+import CustomBtn from "../../formComponent/Button/Button";
 
 //-------Create a Deals Header component--------
 function ClassiFieds() {
@@ -32,7 +32,6 @@ function ClassiFieds() {
     forSaleWebList,
     wantedTotalCount,
     wantedWebList,
-    classifiedFilterData,
     classifiedFilterValues,
   } = useSelector((state) => state.classified);
   const { userToken, isLoading } = useSelector((state) => state.user);
@@ -40,29 +39,99 @@ function ClassiFieds() {
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
 
-  const [offset, setOffset] = useState(0);
-  // const forSaleListApi = slice(updateList, 0, offset)
+  const[defaultOffset, setDefaultOffset] = useState(0);
+  const [offsetForSale, setOffsetForSale] = useState(0);
+  const [offsetWanted, setOffsetWanted] = useState(0);
 
-  const loadMore = () => {
-    setOffset(offset + 2);
-   
-    if (
-      offset >= classifiedFilterValues &&
-      classifiedFilterData &&
-      classifiedFilterData.length > 0
-    ) {
-      setClassifiedFilterName(true);
-    } else {
-      setClassifiedFilterName(false);
-    }
+  const loadmoreForsale = () => {
+    setOffsetForSale(offsetForSale + 2);
+    getForSaleList(true, offsetForSale + 2);
   };
 
-
+  const loadmoreWanted = () => {
+    setOffsetWanted(offsetWanted + 2);
+    getWantedList(true, offsetWanted + 2);
+  };
 
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
   };
+
+  function getForSaleList(loadmore, offsetValue){
+    let forSaleQuery = "";
+    if (
+      classifiedFilterValues && classifiedFilterValues.length > 0
+    ) {
+      forSaleQuery = {
+        limit: 2,
+        offset: offsetValue ? offsetValue : offsetForSale,
+        type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+        search_by: classifiedFilterValues.search_by
+          ? classifiedFilterValues.search_by
+          : 0,
+        province: classifiedFilterValues.province,
+        country: classifiedFilterValues.country,
+      };
+    } else {
+      forSaleQuery = {
+        limit: 2,
+        offset: offsetValue ? offsetValue : offsetForSale,
+        type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
+        search_by: 0,
+      };
+    }
+
+    const data = {
+      userToken: userToken,
+      whereQuery: forSaleQuery,
+      loadmore: loadmore,
+    };
+    dispatch(forSaleListApi(data)).then(async (responsejson) => {
+      const response = responsejson.payload.response;
+      console.log("updateListFFF", response);
+      if (response.status_code !== STATUS_CODES.SUCCESS) {
+        if (response.status === STATUS_CODES.INVALID_TOKEN) {
+          Toast.fire({
+            icon: "error",
+            title: t("SESSION_EXPIRE"),
+          });
+          await dispatch(userLogout());
+          await dispatch(guestUserLogin());
+          navigate("/login");
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      }
+    });
+  }
+
+  function getWantedList(loadmore, offsetValue){
+    const wantedQuery = {
+      limit: 2,
+      offset: offsetValue ? offsetValue : offsetWanted,
+      type: CLASSIFIED_CATEGORY_TYPE.WANTED,
+      search_by: classifiedFilterValues.search_by
+        ? classifiedFilterValues.search_by
+        : 0,
+    };
+    const wantedData = {
+      userToken: userToken,
+      whereQuery: wantedQuery,
+      loadmore: loadmore,
+    };
+    dispatch(getWantedListApi(wantedData)).then((responsejson) => {
+      const response = responsejson.payload;
+    });
+  }
+
+  async function getWebClassifiedLists(loadmore, offsetValue) {
+    getForSaleList(loadmore, offsetValue);
+    getWantedList(loadmore, offsetValue);
+  }
 
   useEffect(() => {
     dispatch(
@@ -74,66 +143,10 @@ function ClassiFieds() {
         city: "",
       })
     );
-    setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
-    async function getWebClassifiedLists() {
-      let forSaleQuery = "";
-      if (
-        classifiedFilterValues &&
-        classifiedFilterData &&
-        classifiedFilterData.length > 0
-      ) {
-        forSaleQuery = {
-          limit: 2,
-          offset: offset,
-          type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
-          search_by: classifiedFilterData.search_by
-            ? classifiedFilterData.search_by
-            : 0,
-          province: classifiedFilterData.province,
-          country: classifiedFilterData.country,
-        };
-      } else {
-        forSaleQuery = {
-          limit: 2,
-          offset: offset,
-          type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
-          search_by: 0,
-        };
-      }
 
-      const data = { userToken: userToken, whereQuery: forSaleQuery };
-      dispatch(forSaleListApi(data)).then(async (responsejson) => {
-        const response = responsejson.payload;
-        if (response.status_code !== STATUS_CODES.SUCCESS) {
-          if (response.status === STATUS_CODES.INVALID_TOKEN) {
-            Toast.fire({
-              icon: "error",
-              title: t("SESSION_EXPIRE"),
-            });
-            await dispatch(userLogout());
-            await dispatch(guestUserLogin());
-            navigate("/login");
-          } else {
-            Toast.fire({
-              icon: "error",
-              title: response.data.message,
-            });
-          }
-        }
-      });
-      const wantedQuery = {
-        limit: 2,
-        offset: offset,
-        type: CLASSIFIED_CATEGORY_TYPE.WANTED,
-        search_by: classifiedFilterData.search_by
-          ? classifiedFilterData.search_by
-          : 0,
-      };
-      const wantedData = { userToken: userToken, whereQuery: wantedQuery };
-      dispatch(getWantedListApi(wantedData)).then((responsejson) => {});
-    }
-    getWebClassifiedLists();
-  }, [offset]);
+    setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
+    getWebClassifiedLists(false, defaultOffset);
+  }, [bookMarkTotalCount]);
 
   return (
     <div className="main">
@@ -159,7 +172,7 @@ function ClassiFieds() {
                           }}
                           eventKey={1}
                         >
-                          {t("FOR_SALE")}({forSaleTotalCount})
+                          {t("FOR_SALE")} ({forSaleTotalCount})
                         </Nav.Link>
                         {showDefaultList == 1 ? (
                           <MdKeyboardArrowDown
@@ -209,42 +222,49 @@ function ClassiFieds() {
                 </div>
                 {showDefaultList == 1 ? (
                   forSaleWebList.length > 0 ? (
-                    <ClassifiedCategoryList
-                      key={0}
-                      forSaleListData={forSaleWebList}
-                      classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
-                      bookType={BOOK_TYPE.CLASSIFIED}
-                    />
+                    <>
+                      <ClassifiedCategoryList
+                        key={0}
+                        forSaleListData={forSaleWebList}
+                        classifiedDataType={CLASSIFIED_CATEGORY_TYPE.FORSALE}
+                        bookType={BOOK_TYPE.CLASSIFIED}
+                      />
+                      {forSaleWebList.length >= forSaleTotalCount ? (
+                        ""
+                      ) : (
+                        <div className="loadmoreBtn">
+                        <CustomBtn type="button" onClick={() => loadmoreForsale()}>
+                         {t("LOADMORE_BUTTON")}
+                        </CustomBtn></div>
+                      )}
+                    </>
                   ) : (
                     <p className="nodataDisplay">
                       --{t("NOCLASSIFIED_DISPLAY")}--
                     </p>
                   )
                 ) : wantedWebList.length ? (
-                  <ClassifiedCategoryList
-                    key={1}
-                    forSaleListData={wantedWebList}
-                    classifiedDataType={CLASSIFIED_CATEGORY_TYPE.WANTED}
-                    bookType={BOOK_TYPE.CLASSIFIED}
-                  />
+                  <>
+                    <ClassifiedCategoryList
+                      key={1}
+                      forSaleListData={wantedWebList}
+                      classifiedDataType={CLASSIFIED_CATEGORY_TYPE.WANTED}
+                      bookType={BOOK_TYPE.CLASSIFIED}
+                    />
+                    {wantedWebList.length >= wantedTotalCount ? (
+                      ""
+                    ) : (
+                      <div className="loadmoreBtn">
+                      <CustomBtn type="button" onClick={() => loadmoreWanted()}>
+                      {t("LOADMORE_BUTTON")}
+                      </CustomBtn></div>
+                    )}
+                  </>
                 ) : (
                   <p className="nodataDisplay">
                     --{t("NOCLASSIFIED_DISPLAY")}--
                   </p>
                 )}
-                <div className="loadMoreBtn">
-                  {forSaleWebList.length > 0 ? (
-                    <button
-                      onClick={loadMore}
-                      type="button"
-                      className="btn"
-                    >
-                      Load More 
-                    </button>
-                  ) : (
-                   ""
-                  )}
-                </div>
               </Col>
               {/* <Col xs={12} sm={12} md={12} lg={6}>
               <div className="advertisment">

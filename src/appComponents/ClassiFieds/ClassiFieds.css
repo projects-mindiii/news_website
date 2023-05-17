@@ -592,3 +592,20 @@
     font-size: 13.5px;
   }
 }
+
+.loadmoreBtn .btn a{
+  background-color: #ec4624!important;
+}
+
+
+.loadmoreBtn button {
+  background: #ec4624!important;
+}
+
+.loadmoreBtn button:hover {
+  background-color: #ec4624!important;
+}
+
+.loadmoreBtn button:active {
+  background: #ec4624 !important;
+}

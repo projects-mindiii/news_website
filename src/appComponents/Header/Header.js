@@ -20,7 +20,6 @@ function Header() {
   const location = useLocation();
 
   function handleResponse(responsejson) {
-    console.log('aaaaaaaaaresponsejson', responsejson)
     if (responsejson.status_code) {
       if (responsejson.status_code === STATUS_CODES.INVALID_TOKEN) {
         dispatch(userLogout());
