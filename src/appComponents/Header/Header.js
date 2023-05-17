@@ -1,13 +1,12 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
-import Banner from "../../assets/images/classifiedheader.png";
 import DealsHeader from "../DealsHeader/DealsHeader";
 import SearchBar from "../Search/SearchBar";
 import "./Header.css";
 import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guestUserLogin, getMetaListApi, userLogout } from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
@@ -21,7 +20,6 @@ function Header() {
   const location = useLocation();
 
   function handleResponse(responsejson) {
-    console.log('aaaaaaaaaresponsejson', responsejson)
     if (responsejson.status_code) {
       if (responsejson.status_code === STATUS_CODES.INVALID_TOKEN) {
         dispatch(userLogout());

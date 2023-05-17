@@ -21,7 +21,6 @@ import { useLocation } from "react-router-dom";
 
 function ClassifiedFilter({ closeModal, setResultData }) {
   const location = useLocation();
-
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { isLoading, classifiedFilterValues } = useSelector(
@@ -49,8 +48,8 @@ function ClassifiedFilter({ closeModal, setResultData }) {
     id: "0",
   };
 
+  // function for default south africa
   if (Object.keys(classifiedFilterValues).length !== 0) {
-    console.log("classifiedFilterValues", classifiedFilterValues);
     if (classifiedFilterValues.refrenceType == "2") {
       if (classifiedFilterValues.countryId > 0) {
         countrySelectedValue = {
@@ -71,6 +70,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
     id: "all",
   };
 
+   // function for Outside south africa
   if (Object.keys(classifiedFilterValues).length !== 0) {
     if (classifiedFilterValues.refrenceType == "1") {
       provinceSelectedValue = {
@@ -87,6 +87,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
   );
   const [provinceOption, setProvinceOption] = useState([]);
 
+  // function for filter api
   function searchApiCall(provinceValue) {
     let search_by = 0;
     let province = 0;
@@ -149,15 +150,18 @@ function ClassifiedFilter({ closeModal, setResultData }) {
 
   function handleClick() {
     searchApiCall(provinceSelected);
+    closeModal();
   }
 
   function handleChange(data) {
     setProvinceSelected(data);
     if (data.value != "0") {
       searchApiCall(data);
+      closeModal();
     }
   }
 
+  // function for categoryList api
   async function getWebClassifiedListSearch(classfiedQuery) {
     const data = { userToken: userToken, whereQuery: classfiedQuery };
     if (location.pathname == "/classifieds") {
@@ -206,6 +210,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
     }
   }
 
+  // function for get all metaList
   useEffect(() => {
     let countryOption = [];
     let provinceOption = [
@@ -255,7 +260,6 @@ function ClassifiedFilter({ closeModal, setResultData }) {
                   handleChange(e);
                 }}
                 placeholder={t("SELECT_PROVINCE")}
-                // value={provinceSelected && provinceSelected}
                 value={provinceSelected && provinceSelected}
                 styles={{
                   placeholder: () => ({
@@ -289,7 +293,6 @@ function ClassifiedFilter({ closeModal, setResultData }) {
                     onChange={setCountrySelected}
                     placeholder={t("COUNTRY_SET")}
                     value={countrySelected && countrySelected}
-                    // value={countryData? countryData: countrySelected ? countrySelected:null}
                     styles={{
                       placeholder: () => ({
                         fontSize: "15px",

@@ -1,5 +1,5 @@
 import "./ClassiFieds.css";
-import { Row, Nav, Container, Col, Tab } from "react-bootstrap";
+import {Button, Row, Nav, Container, Col, Tab } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
@@ -14,49 +14,99 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
-import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE } from "../../utils/Constants";
+import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE , PAGINATION_VALUE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
 function JobTypes() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const {jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
+  const {
+    classifiedFilterValues,jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
     useSelector((state) => state.classified);
   const { userToken,isLoading } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
   const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
 
+
+  const [offsetJobOffer, setOffsetJobOffer] = useState(0);
+  const [offsetJobSeeker, setOffsetJobSeeker] = useState(0);
+  const[defaultOffset, setDefaultOffset] = useState(0);
+
+  const loadmoreJobOffer = () => {
+    setOffsetJobOffer(offsetJobOffer + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getJobOfferList(true, offsetJobOffer + PAGINATION_VALUE.DEFAULT_LIMIT);
+  };
+
+  const loadmoreJobSeeker = () => {
+    setOffsetJobSeeker(offsetJobSeeker + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getJobSeekerList(true, offsetJobSeeker + PAGINATION_VALUE.DEFAULT_LIMIT);
+  };
+
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
   };
-  useEffect(() => {
-    setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.JOBOFFER);
-    dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
-    async function getWebClassifiedLists() {
-      const jobOfferQuery = {
-        limit: 10,
-        offset: 0,
-        type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
-      };
-      const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery };
-      dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
-      });
 
-      const jobSeekerQuery = {
-        limit: 10,
-        offset: 0,
-        type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS,
+ 
+
+  function getJobOfferList(loadmore, offsetValue){
+    let jobOfferQuery = "";
+    if (classifiedFilterValues && classifiedFilterValues.length > 0) {
+      jobOfferQuery = {
+        limit: PAGINATION_VALUE.DEFAULT_LIMIT,
+        offset: offsetValue ? offsetValue : offsetJobOffer,
+        type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
+        search_by: classifiedFilterValues.search_by ? classifiedFilterValues.search_by : 0,
+        province: classifiedFilterValues.province,
+        country: classifiedFilterValues.country,
       };
-      const jobSeekerData = {
-        userToken: userToken,
-        whereQuery: jobSeekerQuery,
+    } else {
+      jobOfferQuery = {
+        limit:PAGINATION_VALUE.DEFAULT_LIMIT,
+        offset: offsetValue ? offsetValue : offsetJobOffer,
+        type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
+        search_by:0,
       };
-      dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
-      });
     }
-    getWebClassifiedLists();
+
+    const jobOfferData = { userToken: userToken, whereQuery: jobOfferQuery ,loadmore: loadmore};
+    dispatch(getJobOfferListApi(jobOfferData)).then((responsejson) => {
+      const response = responsejson.payload.response;
+    });
+   
+  }
+
+  function getJobSeekerList(loadmore, offsetValue){
+    const jobSeekerQuery = {
+      limit:PAGINATION_VALUE.DEFAULT_LIMIT,
+      offset: offsetValue ? offsetValue : offsetJobSeeker,
+      type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS,
+      search_by: classifiedFilterValues.search_by
+        ? classifiedFilterValues.search_by
+        : 0,
+    };
+    const jobSeekerData = {
+      userToken: userToken,
+      whereQuery: jobSeekerQuery,
+      loadmore: loadmore,
+    };
+    dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
+      const response = responsejson.payload.response;
+    });
+  }
+
+  async function getWebClassifiedLists(loadmore, offsetValue) {
+    getJobOfferList(loadmore, offsetValue);
+    getJobSeekerList(loadmore, offsetValue);
+  }
+
+
+  useEffect(() => {
+    dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
+    setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.JOBOFFER);
+    
+    getWebClassifiedLists(false, PAGINATION_VALUE.DEFAULT_OFFSET);
   }, [bookMarkTotalCount]);
   return (
     <div className="main">
@@ -131,22 +181,46 @@ function JobTypes() {
               </div>
               {showDefaultList == 1 ? (
                 jobOfferWebList.length > 0 ? (
-                  <ClassifiedCategoryList
+                  <>
+                   <ClassifiedCategoryList
+                    key={0}
                     forSaleListData={jobOfferWebList}
                     classifiedDataType={CLASSIFIED_CATEGORY_TYPE.JOBOFFER}
                     bookType={BOOK_TYPE.CLASSIFIED}
                   />
+                  {jobOfferWebList.length >= jobOfferTotalCount ? (
+                        ""
+                      ) : (
+                        <div className="loadmoreBtn">
+                        <Button type="button" onClick={() => loadmoreJobOffer()}>
+                        {t("LOADMORE_BUTTON")}
+                        </Button></div>
+                      )}
+                  </>
+                 
                 ) : (
                   <p className="nodataDisplay">
                     -- {t("NOCLASSIFIED_DISPLAY")} --{" "}
                   </p>
                 )
               ) : jobSeekerWebList.length ? (
+                <>
                 <ClassifiedCategoryList
+                 key={1}
                   forSaleListData={jobSeekerWebList}
                   classifiedDataType={CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS}
                   bookType={BOOK_TYPE.CLASSIFIED}
                 />
+                 {jobSeekerWebList.length >= jobSeekerTotalCount ? (
+                      ""
+                    ) : (
+                      <div className="loadmoreBtn">
+                      <Button type="button" onClick={() => loadmoreJobSeeker()}>
+                      {t("LOADMORE_BUTTON")}
+                      </Button></div>
+                    )}
+                </>
+                
               ) : (
                 <p className="nodataDisplay">
                   -- {t("NOCLASSIFIED_DISPLAY")} --{" "}

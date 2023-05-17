@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import mapicon from "../../assets/images/map_ico.png";
 import mapicon from "../../assets/images/map_ico.svg";
 import "../ClassiFieds/ClassiFieds.css";
 import { useTranslation } from "react-i18next";
@@ -21,7 +20,6 @@ function ClassifiedCountry() {
   const [resultData, setResultData] = useState("");
   const location = useLocation();
 
-  console.log("classifiedFilterValues",classifiedFilterValues)
   return (
     <div className={styles.classiFieds_map_serchbar}>
       <div className={styles.countryIcon} onClick={() => setIsOpen(true)}>

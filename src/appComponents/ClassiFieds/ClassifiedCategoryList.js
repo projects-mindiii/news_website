@@ -1,13 +1,10 @@
-import mapicon from "../../assets/images/map_ico.png";
+import mapicon from "../../assets/images/map_ico.svg";
 import React from "react";
 import "../ClassiFieds/ClassiFieds.css";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
-import bookmarkicon from "../../assets/images/bookmark_ico.png";
 import watchicon from "../../assets/images/watch_ico.png";
-
-import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +16,10 @@ function ClassifiedList({
   index,
   displayRoute,
 }) {
-  const { t } = useTranslation();
+
+ 
   const navigate = useNavigate();
+  
   return (
     <div className="classiFieds_forSaleBox">
       <div className="classiFieds_forSale_about">
@@ -42,9 +41,8 @@ function ClassifiedList({
               </button>
 
               <span>
-                <span>
-                  <img src={watchicon} alt={watchicon} />{" "}
-                </span>{" "}
+                <img src={watchicon} alt={watchicon} />{" "}
+                {" "}
                 {item.created_date}
               </span>
             </div>
@@ -80,21 +78,17 @@ function ClassifiedList({
       ) : (
         ""
       )}
-
       {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
       item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
         <div className="classiFieds_RupeesText">
-          {item.amount && item.amount !== 0 && (
-            <p>
-              {item.currency_code} {item.amount.toFixed(2)}
-            </p>
-          )}
-
+           {item.amount  === 0 ? "" : item.amount && <p>
+                      {item.currency_code} {item.amount.toFixed(2)}
+                    </p>}
           <span>
             {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER
-              ? item.earning_name
-              : item.currency_name}
-            {item.is_negotiable ? "(Negotiable)" : ""}
+              ? item.earning_name.toUpperCase()
+              : item.currency_name.toUpperCase()}
+            {item.is_negotiable ? "(NEGOTIABLE)" : ""}
           </span>
         </div>
       ) : (
@@ -120,36 +114,21 @@ function ClassifiedList({
       </div>
 
       <SocialMedaiShare />
-      {displayRoute && displayRoute == "your_advert" ? (
-        <button
-          className="edit_DeleteButton"
-          onClick={() => navigate("/post-advert", { state: item })}
-        >
-          EDIT / DELETE ADVERT
-        </button>
-      ) : (
-        ""
-      )}
-      {displayRoute &&
-      displayRoute == "your_advert" &&
-      item.approval_status == 0 ? (
-        <button className="not_live">NOT LIVE - Pending Approvals</button>
-      ) : (
-        ""
-      )}
+      
+      {(displayRoute &&  displayRoute=="your_advert" )?(<button className="edit_DeleteButton" onClick={()=>navigate("/post-advert",{state:item})}>EDIT / DELETE ADVERT</button>):""}
+      {(displayRoute &&  displayRoute=="your_advert" && item.approval_status==0 )?(<button className="not_live">NOT LIVE - Pending Approvals</button>):""}
     </div>
+    
   );
+
 }
-function ClassifiedCategoryList({ forSaleListData, bookType, displayRoute }) {
-  if (displayRoute && displayRoute == "your_advert") {
-    let approveForSaleListData = forSaleListData.filter(
-      (a) => a.approval_status == 1
-    );
-    let pendingForSaleListData = forSaleListData.filter(
-      (a) => a.approval_status == 0
-    );
-    forSaleListData = approveForSaleListData.concat(pendingForSaleListData);
+function ClassifiedCategoryList({forSaleListData, bookType,displayRoute}) {
+  if(displayRoute &&  displayRoute=="your_advert"){
+    let approveForSaleListData = forSaleListData.filter( (a) => a.approval_status ==1);
+    let pendingForSaleListData = forSaleListData.filter( (a) => a.approval_status ==0);
+    forSaleListData = approveForSaleListData.concat(pendingForSaleListData); 
   }
+  
   return (
     <div className="main">
       {forSaleListData &&
@@ -189,6 +168,7 @@ function ClassifiedCategoryList({ forSaleListData, bookType, displayRoute }) {
             );
           }
         })}
+
     </div>
   );
 }
