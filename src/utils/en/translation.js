@@ -50,6 +50,8 @@ export const TRANSLATIONS_EN = {
   DONE_BUTTON:"Done",
   CLASSIFIED_CONTACT_PERSON:"Contact Person",
   LOADMORE_BUTTON:" Load More",
+  ALL_SOUTH_AFRICA:"All South Africa",
+  REFRENCE_ID:"all",
 
 
   //----Footer Text------

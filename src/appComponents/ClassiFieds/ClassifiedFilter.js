@@ -150,6 +150,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
 
   function handleClick() {
     searchApiCall(provinceSelected);
+    closeModal();
   }
 
   function handleChange(data) {

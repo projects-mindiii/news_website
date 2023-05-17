@@ -5,7 +5,6 @@ import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
 import watchicon from "../../assets/images/watch_ico.png";
-import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookMarks from "../BookMarks/AddBookMarks";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +16,7 @@ function ClassifiedList({
   index,
   displayRoute,
 }) {
-  const { t } = useTranslation();
+
  
   const navigate = useNavigate();
   

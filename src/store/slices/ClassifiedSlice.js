@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import SublyApi from '../../helpers/Api'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import SublyApi from "../../helpers/Api";
 import { STATUS_CODES } from "../../utils/StatusCode";
 
 const initialState = {
@@ -15,81 +15,96 @@ const initialState = {
   jobSeekerWebList: [],
   classifiedType: 4,
   isLoading: false,
-  classifiedTotalCount:0,
-  classifiedFilterValues:{name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""},
-  
-}
+  classifiedTotalCount: 0,
+  classifiedFilterValues: {
+    name: "All South Africa",
+    refrenceType: "1",
+    refrenceId: "all",
+    countryId: "0",
+    city: "",
+  },
+};
 
 // Thunk for your advert list
 export const yourAdvertListApi = createAsyncThunk(
-	"classified/yourAdvertListApi",
-	async (data, { rejectWithValue }) => {
-		try {
-			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
-			return response;
-		} catch (error) {
-			return rejectWithValue(error);
-		}
-	}
+  "classified/yourAdvertListApi",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await SublyApi.getWebClassiFiedList(
+        data.userToken,
+        data.whereQuery
+      );
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
 );
 
 // Thunk for for sale classfied list
 export const forSaleListApi = createAsyncThunk(
-	"classified/forSaleListApi",
-	async (data, { rejectWithValue }) => {
-    console.log("data", data)
-		try {
-			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
+  "classified/forSaleListApi",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await SublyApi.getWebClassiFiedList(
+        data.userToken,
+        data.whereQuery
+      );
       return { response: response, loadmore: data.loadmore };
-		} catch (error) {
-      console.log("error", error)
-			return rejectWithValue(error);
-		}
-	}
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
 );
 
 export const getWantedListApi = createAsyncThunk(
-	"classified/getWantedListApi",
-	async (data, { rejectWithValue }) => {
-		try {
-			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery,);
+  "classified/getWantedListApi",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await SublyApi.getWebClassiFiedList(
+        data.userToken,
+        data.whereQuery
+      );
       return { response: response, loadmore: data.loadmore };
-		} catch (error) {
-      console.log("error", error)
-			return rejectWithValue(error);
-		}
-	}
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
 );
 
 export const getJobOfferListApi = createAsyncThunk(
-	"jobtypes/getJobOfferListApi",
-	async (data, { rejectWithValue }) => {
-		try {
-			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery,);
+  "jobtypes/getJobOfferListApi",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await SublyApi.getWebClassiFiedList(
+        data.userToken,
+        data.whereQuery
+      );
       return { response: response, loadmore: data.loadmore };
-		} catch (error) {
-      console.log("error", error)
-			return rejectWithValue(error);
-		}
-	}
-)
-
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const getJobSeekerListApi = createAsyncThunk(
-	"jobtypes/getJobSeekerListApi",
-	async (data, { rejectWithValue }) => {
-		try {
-			const response = await SublyApi.getWebClassiFiedList(data.userToken, data.whereQuery);
+  "jobtypes/getJobSeekerListApi",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await SublyApi.getWebClassiFiedList(
+        data.userToken,
+        data.whereQuery
+      );
       return { response: response, loadmore: data.loadmore };
-		} catch (error) {
-			return rejectWithValue(error);
-		}
-	}
-)
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const classifiedSlice = createSlice({
-  name: 'classified',
-  
+  name: "classified",
+
   initialState,
   reducers: {
     setJobOfferTotalCount: (state, action) => {
@@ -102,72 +117,67 @@ export const classifiedSlice = createSlice({
       state.classifiedType = action.payload;
     },
     setClassifiedFilterName: (state, action) => {
-      // console.log('setClassifiedFilterName action',action.payload)
       state.classifiedFilterValues = action.payload;
     },
-
   },
 
   extraReducers: (builder) => {
-     //your advert list
-     builder.addCase(yourAdvertListApi.pending, (state) => {
-      state.isLoading = true
-    })
+    //your advert list
+    builder.addCase(yourAdvertListApi.pending, (state) => {
+      state.isLoading = true;
+    });
     builder.addCase(yourAdvertListApi.fulfilled, (state, action) => {
-        const response = action.payload;
-        if(response.status_code==STATUS_CODES.SUCCESS){
-          state.yourAdvertTotalCount = response.data.total_count;
-          state.yourAdvertWebList = response.data.list;
-        }else{
-          state.yourAdvertTotalCount = 0;
-          state.yourAdvertWebList = [];
-        }
-        state.isLoading = false
-    })
+      const response = action.payload;
+      if (response.status_code == STATUS_CODES.SUCCESS) {
+        state.yourAdvertTotalCount = response.data.total_count;
+        state.yourAdvertWebList = response.data.list;
+      } else {
+        state.yourAdvertTotalCount = 0;
+        state.yourAdvertWebList = [];
+      }
+      state.isLoading = false;
+    });
     builder.addCase(yourAdvertListApi.rejected, (state, action) => {
-        state.isLoading = false
-    })
-
+      state.isLoading = false;
+    });
 
     //Forsale list api
     builder.addCase(forSaleListApi.pending, (state) => {
-        state.isLoading = true
-    })
+      state.isLoading = true;
+    });
     builder.addCase(forSaleListApi.fulfilled, (state, action) => {
-        const response = action.payload.response;
-        if(response.status_code==STATUS_CODES.SUCCESS){
-          if (action.payload.loadmore == true) {
-            state.forSaleWebList = state.forSaleWebList.concat(response.data.list);
-          } else{
-            state.forSaleWebList = response.data.list;
-          }
-          state.forSaleTotalCount = response.data.total_count;
-         
-        }else{
-          state.forSaleTotalCount = 0;
-          state.forSaleWebList = [];
+      const response = action.payload.response;
+      if (response.status_code == STATUS_CODES.SUCCESS) {
+        if (action.payload.loadmore == true) {
+          state.forSaleWebList = state.forSaleWebList.concat(
+            response.data.list
+          );
+        } else {
+          state.forSaleWebList = response.data.list;
         }
-        state.isLoading = false
-    })
+        state.forSaleTotalCount = response.data.total_count;
+      } else {
+        state.forSaleTotalCount = 0;
+        state.forSaleWebList = [];
+      }
+      state.isLoading = false;
+    });
     builder.addCase(forSaleListApi.rejected, (state, action) => {
-        state.isLoading = false
-    })
-
-   
+      state.isLoading = false;
+    });
 
     // wanted list api
     builder.addCase(getWantedListApi.pending, (state) => {
-      state.isLoading = true
-    })
+      state.isLoading = true;
+    });
     builder.addCase(getWantedListApi.fulfilled, (state, action) => {
-      console.log("action",action)
       const response = action.payload.response;
       if (response.status_code === STATUS_CODES.SUCCESS) {
         if (action.payload.loadmore == true) {
           state.wantedWebList = state.wantedWebList.concat(response.data.list);
-        }else{
+        } else {
           state.wantedWebList = response.data.list;
-        } 
+        }
         state.wantedTotalCount = response.data.total_count;
         state.success = true;
       } else {
@@ -175,24 +185,26 @@ export const classifiedSlice = createSlice({
         state.wantedWebList = [];
         state.success = false;
       }
-      state.isLoading = false
-    })
+      state.isLoading = false;
+    });
     builder.addCase(getWantedListApi.rejected, (state, action) => {
-        state.isLoading = false
-    })
+      state.isLoading = false;
+    });
 
-     // JobOffer list api
-     builder.addCase(getJobOfferListApi.pending, (state) => {
-      state.isLoading = true
-    })
+    // JobOffer list api
+    builder.addCase(getJobOfferListApi.pending, (state) => {
+      state.isLoading = true;
+    });
     builder.addCase(getJobOfferListApi.fulfilled, (state, action) => {
       const response = action.payload.response;
       if (response.status_code === STATUS_CODES.SUCCESS) {
         if (action.payload.loadmore == true) {
-          state.jobOfferWebList = state.jobOfferWebList.concat(response.data.list);
-        }else{
+          state.jobOfferWebList = state.jobOfferWebList.concat(
+            response.data.list
+          );
+        } else {
           state.jobOfferWebList = response.data.list;
-        } 
+        }
         state.jobOfferTotalCount = response.data.total_count;
         state.success = true;
       } else {
@@ -200,24 +212,26 @@ export const classifiedSlice = createSlice({
         state.jobOfferWebList = [];
         state.success = false;
       }
-      state.isLoading = false
-    })
+      state.isLoading = false;
+    });
     builder.addCase(getJobOfferListApi.rejected, (state, action) => {
-        state.isLoading = false
-    })
+      state.isLoading = false;
+    });
 
-     // JobSeeker list api
-     builder.addCase(getJobSeekerListApi.pending, (state) => {
-      state.isLoading = true
-    })
+    // JobSeeker list api
+    builder.addCase(getJobSeekerListApi.pending, (state) => {
+      state.isLoading = true;
+    });
     builder.addCase(getJobSeekerListApi.fulfilled, (state, action) => {
       const response = action.payload.response;
       if (response.status_code === STATUS_CODES.SUCCESS) {
         if (action.payload.loadmore == true) {
-          state.jobSeekerWebList = state.jobSeekerWebList.concat(response.data.list);
-        }else{
+          state.jobSeekerWebList = state.jobSeekerWebList.concat(
+            response.data.list
+          );
+        } else {
           state.jobSeekerWebList = response.data.list;
-        } 
+        }
         state.jobSeekerTotalCount = response.data.total_count;
         state.success = true;
       } else {
@@ -225,13 +239,18 @@ export const classifiedSlice = createSlice({
         state.jobSeekerWebList = [];
         state.success = false;
       }
-      state.isLoading = false
-    })
+      state.isLoading = false;
+    });
     builder.addCase(getJobSeekerListApi.rejected, (state, action) => {
-        state.isLoading = false
-    })
+      state.isLoading = false;
+    });
   },
-})
-export const { setClassifiedFilterName,setClassfiedType,setJobOfferTotalCount,setJobSeekerTotalCount } = classifiedSlice.actions;
+});
+export const {
+  setClassifiedFilterName,
+  setClassfiedType,
+  setJobOfferTotalCount,
+  setJobSeekerTotalCount,
+} = classifiedSlice.actions;
 
-export default classifiedSlice.reducer
+export default classifiedSlice.reducer;
