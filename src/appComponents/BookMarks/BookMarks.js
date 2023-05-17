@@ -51,7 +51,7 @@ function BookMarks() {
       loadMore: loadMore,
     };
     dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
-      if (responsejson.payload.status === STATUS_CODES.INVALID_TOKEN) {
+      if (responsejson.payload.response.status === STATUS_CODES.INVALID_TOKEN) {
         Toast.fire({
           icon: "error",
           title: t("SESSION_EXPIRE"),
