@@ -3,14 +3,19 @@ import { Icon } from "@iconify/react";
 import SublyApi from "../../helpers/Api";
 import { useSelector, useDispatch } from "react-redux";
 import { STATUS_CODES } from "../../utils/StatusCode";
-import { BOOK_ACTION_TYPE } from "../../utils/Constants";
+import { BOOK_ACTION_TYPE, PAGINATION_VALUE } from "../../utils/Constants";
 import { Toast } from "../../utils/Toaster";
 import {
   addBookMarkApi,
   bookMarkListApi,
 } from "../../store/slices/BookMarkSlice";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 function AddBookMarks(props) {
+  const { t } = useTranslation(); 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userToken, currentUser } = useSelector((state) => state.user);
 
@@ -28,14 +33,20 @@ function AddBookMarks(props) {
             icon: "success",
             title: response.payload.message,
           });
-          const requiredValue = { limit: 10, offset: 0 };
+          const requiredValue = {
+            limit: PAGINATION_VALUE.DEFAULT_LIMIT,
+            offset: PAGINATION_VALUE.DEFAULT_OFFSET,
+          };
           dispatch(bookMarkListApi({ userToken: userToken, requiredValue }));
         } else {
           Toast.fire({
             icon: "success",
             title: response.payload.message,
           });
-          const requiredValue = { limit: 10, offset: 0 };
+          const requiredValue = {
+            limit: PAGINATION_VALUE.DEFAULT_LIMIT,
+            offset: PAGINATION_VALUE.DEFAULT_OFFSET,
+          };
           dispatch(bookMarkListApi({ userToken: userToken, requiredValue }));
         }
       } else if (response.payload.status == STATUS_CODES.BAD_REQUEST) {
@@ -43,6 +54,14 @@ function AddBookMarks(props) {
           icon: "error",
           title: response.payload.data.message,
         });
+      } else if (response.payload.status === STATUS_CODES.INVALID_TOKEN) {
+        Toast.fire({
+          icon: "error",
+          title: t("SESSION_EXPIRE"),
+        });
+        dispatch(userLogout());
+        dispatch(guestUserLogin());
+        navigate("/login");
       }
     });
   }
