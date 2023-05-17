@@ -35,3 +35,8 @@ export const BOOK_ACTION_TYPE = {
   REMOVE: "0",
   REMOVE_ALL: "2"
 }
+
+export const PAGINATION_VALUE = {
+  DEFAULT_OFFSET: 0,
+  DEFAULT_LIMIT: 10,
+} 
