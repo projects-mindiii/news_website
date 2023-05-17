@@ -169,7 +169,6 @@ function ClassifiedCategoryList({forSaleListData, bookType,displayRoute}) {
           }
         })}
 
-
     </div>
   );
 }

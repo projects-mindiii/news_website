@@ -14,7 +14,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
-import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE } from "../../utils/Constants";
+import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE,PAGINATION_VALUE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
@@ -38,25 +38,24 @@ function ClassiFieds() {
   const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
   const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
   const [showDefaultList, setShowDefaultList] = useState(1);
-
-  const[defaultOffset, setDefaultOffset] = useState(0);
   const [offsetForSale, setOffsetForSale] = useState(0);
   const [offsetWanted, setOffsetWanted] = useState(0);
 
   const loadmoreForsale = () => {
-    setOffsetForSale(offsetForSale + 2);
-    getForSaleList(true, offsetForSale + 2);
+    setOffsetForSale(offsetForSale + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getForSaleList(true, offsetForSale + PAGINATION_VALUE.DEFAULT_LIMIT);
   };
 
   const loadmoreWanted = () => {
-    setOffsetWanted(offsetWanted + 2);
-    getWantedList(true, offsetWanted + 2);
+    setOffsetWanted(offsetWanted + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getWantedList(true, offsetWanted + PAGINATION_VALUE.DEFAULT_LIMIT);
   };
 
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
   };
+  // console.log("classifiedFilterData", classifiedFilterData)
 
   function getForSaleList(loadmore, offsetValue){
     let forSaleQuery = "";
@@ -64,7 +63,7 @@ function ClassiFieds() {
       classifiedFilterValues && classifiedFilterValues.length > 0
     ) {
       forSaleQuery = {
-        limit: 2,
+        limit: PAGINATION_VALUE.DEFAULT_LIMIT,
         offset: offsetValue ? offsetValue : offsetForSale,
         type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
         search_by: classifiedFilterValues.search_by
@@ -75,7 +74,7 @@ function ClassiFieds() {
       };
     } else {
       forSaleQuery = {
-        limit: 2,
+        limit: PAGINATION_VALUE.DEFAULT_LIMIT,
         offset: offsetValue ? offsetValue : offsetForSale,
         type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
         search_by: 0,
@@ -110,7 +109,7 @@ function ClassiFieds() {
 
   function getWantedList(loadmore, offsetValue){
     const wantedQuery = {
-      limit: 2,
+      limit: PAGINATION_VALUE.DEFAULT_LIMIT,
       offset: offsetValue ? offsetValue : offsetWanted,
       type: CLASSIFIED_CATEGORY_TYPE.WANTED,
       search_by: classifiedFilterValues.search_by
@@ -160,7 +159,7 @@ function ClassiFieds() {
     );
 
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
-    getWebClassifiedLists(false, defaultOffset);
+    getWebClassifiedLists(false, PAGINATION_VALUE.DEFAULT_OFFSET);
   }, [bookMarkTotalCount]);
 
   return (

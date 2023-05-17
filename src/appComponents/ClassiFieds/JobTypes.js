@@ -14,7 +14,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
-import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE } from "../../utils/Constants";
+import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE , PAGINATION_VALUE } from "../../utils/Constants";
 
 //-------Create a Deals Header component--------
 function JobTypes() {
@@ -34,13 +34,13 @@ function JobTypes() {
   const[defaultOffset, setDefaultOffset] = useState(0);
 
   const loadmoreJobOffer = () => {
-    setOffsetJobOffer(offsetJobOffer + 2);
-    getJobOfferList(true, offsetJobOffer + 2);
+    setOffsetJobOffer(offsetJobOffer + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getJobOfferList(true, offsetJobOffer + PAGINATION_VALUE.DEFAULT_LIMIT);
   };
 
   const loadmoreJobSeeker = () => {
-    setOffsetJobSeeker(offsetJobSeeker + 2);
-    getJobSeekerList(true, offsetJobSeeker + 2);
+    setOffsetJobSeeker(offsetJobSeeker + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getJobSeekerList(true, offsetJobSeeker + PAGINATION_VALUE.DEFAULT_LIMIT);
   };
 
   // function for classified webList
@@ -54,7 +54,7 @@ function JobTypes() {
     let jobOfferQuery = "";
     if (classifiedFilterValues && classifiedFilterValues.length > 0) {
       jobOfferQuery = {
-        limit: 2,
+        limit: PAGINATION_VALUE.DEFAULT_LIMIT,
         offset: offsetValue ? offsetValue : offsetJobOffer,
         type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
         search_by: classifiedFilterValues.search_by ? classifiedFilterValues.search_by : 0,
@@ -63,7 +63,7 @@ function JobTypes() {
       };
     } else {
       jobOfferQuery = {
-        limit: 2,
+        limit:PAGINATION_VALUE.DEFAULT_LIMIT,
         offset: offsetValue ? offsetValue : offsetJobOffer,
         type: CLASSIFIED_CATEGORY_TYPE.JOBOFFER,
         search_by:0,
@@ -79,7 +79,7 @@ function JobTypes() {
 
   function getJobSeekerList(loadmore, offsetValue){
     const jobSeekerQuery = {
-      limit: 2,
+      limit:PAGINATION_VALUE.DEFAULT_LIMIT,
       offset: offsetValue ? offsetValue : offsetJobSeeker,
       type: CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS,
       search_by: classifiedFilterValues.search_by
@@ -106,7 +106,7 @@ function JobTypes() {
     dispatch(setClassifiedFilterName({name:"All South Africa","refrenceType":"1","refrenceId":'all',"countryId":"0",'city':""}))
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.JOBOFFER);
     
-    getWebClassifiedLists(false, defaultOffset);
+    getWebClassifiedLists(false, PAGINATION_VALUE.DEFAULT_OFFSET);
   }, [bookMarkTotalCount]);
   return (
     <div className="main">
