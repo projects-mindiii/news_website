@@ -15,10 +15,6 @@
   margin-bottom: 0px !important;
 }
 
-/* .classiFieds_forSale_about>div {
-  margin-right: 10px;
-} */
-
 .classiFieds_forSale_about .classiFieds_forSale {
   display: flex;
   justify-content: center;
@@ -38,27 +34,25 @@
 .classiFieds_forSale_about .classiFields_heading .text {
   font-weight: 500;
   font-size: 20px;
-  line-height: 22px;
+  line-height: 26px;
   color: #000000;
   margin-bottom: 5px;
   margin-left: 5px;
 }
 
 .classiFieds_forSale_about .classiFields_heading {
-  margin-top: 10px;
-  /* margin-left: 10px; */
   width: 100%;
 }
 
 .classiFieds_forSale_about .classiFieds_time_action {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
+  align-items: center;
   margin-top: 10px;
+  position: relative;
 }
 
 .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
-  /* background: linear-gradient(95.02deg, #F13A43 0%, #EC275C 95.1%); */
   border-radius: 14px;
   line-height: 20px;
   border: none !important;
@@ -92,10 +86,6 @@
   cursor: pointer;
 }
 
-/* .classiFields_contactPerson .classiFields_PersonAboutShow>div {
-  margin-right: 15px;
-} */
-
 .classiFields_PersonAboutShow p {
   margin-bottom: 0px;
 }
@@ -105,7 +95,10 @@
   height: 30px;
   width: 30px;
   margin-left: 6px;
-  margin-top: 5px;
+  background: #E5E5E5;
+  mix-blend-mode: multiply;
+  border-radius: 6px;
+  margin-right: 15px;
 }
 
 .classiFieds_forSaledropdown button {
@@ -149,13 +142,11 @@
 }
 
 .classiFieds_time span {
-  /* padding-left: 10px; */
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: -0.3px;
   color: #000000;
-  /* margin: 4px; */
   margin-left: 7px;
 }
 
@@ -192,7 +183,7 @@
 .classiFieds_countryName img {
   width: 20px;
   margin-bottom: 7px;
-  margin-right: 6px;
+  margin-right: 10px;
 }
 
 .classiFieds_aboutText p {
@@ -204,21 +195,11 @@
   margin-top: 10px;
 }
 
-.classiFields_iconBackGround {
-  width: 100%;
-  max-width: 42px;
-  height: 41px;
-  background: #e5e5e5;
-  mix-blend-mode: multiply;
-  border-radius: 6px;
-  margin-right: 15px;
-}
-
 .classiFields_whatAppIcon {
   width: 100%;
   background: linear-gradient(180deg, #85d51d 0%, #6aae1b 98.67%);
   border-radius: 6px;
-  height: 38px;
+  height: 40px;
   border: none;
   margin-top: 15px;
 }
@@ -226,7 +207,7 @@
 .classiFields_whatAppIcon svg {
   width: 28px;
   height: 28px;
-  margin-top: 3px;
+  margin-top: 5px;
 }
 
 .classiFields_shareMedia {
@@ -248,6 +229,11 @@
 
 .classiFields_shareIcon p {
   margin-bottom: -10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+  margin-left: 2px;
 }
 
 .classiFields_shareicons span>span {
@@ -258,6 +244,7 @@
   width: 4px;
   height: 4px;
   margin: 5px;
+  border-radius: 50%;
 }
 
 .classiFields_advertise {
@@ -277,7 +264,7 @@
   font-weight: 600;
   font-weight: 500 !important;
   font-size: 19.2px !important;
-  line-height: 36px !important;
+  line-height: 40px !important;
   display: flex;
   justify-content: center;
   margin-left: 6px;
@@ -292,176 +279,6 @@
     margin-top: 10px;
   }
 }
-
-/* 
-@media only screen and (max-width: 480px) {
-  .classiFieds_forSale_about .classiFieds_forSale img {
-    width: 116.83px;
-    height: 87.62px;
-    font-weight: 600;
-  }
-
-  .classiFieds_forSaleBox .classiFieds_forSale_about {
-    align-items: flex-start;
-  }
-
-  .classiFieds_forSale_about .classiFields_heading .text {
-    font-weight: 500;
-    font-size: 16.0467px;
-    line-height: 17px;
-    margin-bottom: 0px;
-  }
-
-  .classiFieds_forSale_about .classiFields_heading {
-    margin-top: 5px;
-  }
-
-  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
-    font-weight: 600;
-    font-size: 8.4378px;
-    line-height: 13px;
-    height: 18px;
-    width: 56px;
-  }
-
-  .classiFieds_time span {
-    font-weight: 400;
-    font-size: 7.78876px;
-    line-height: 12px;
-    letter-spacing: -0.194719px;
-    color: #000000;
-  }
-
-  .classiFieds_bookmarkicon img {
-    width: 11.2px;
-    height: 16px;
-  }
-
-  .classiFieds_RupeesText {
-    margin-top: 6px;
-  }
-
-  .classiFieds_RupeesText p {
-    font-weight: 500;
-    font-size: 19.8272px;
-    line-height: 30px;
-    letter-spacing: -0.129813px;
-    color: #e91f63;
-  }
-
-  .classiFieds_RupeesText p small {
-    font-weight: 400;
-    font-size: 9.91359px;
-    line-height: 15px;
-    letter-spacing: -0.0594973px;
-    color: #000000;
-  }
-
-  .classiFieds_countryName span {
-    font-weight: 600;
-    font-size: 9.02628px;
-    line-height: 23px;
-    letter-spacing: -0.31155px;
-    color: #e91f63;
-  }
-
-  .classiFieds_aboutText p {
-    font-weight: 400;
-    font-size: 14.0409px;
-    line-height: 15px;
-    letter-spacing: -0.194719px;
-    color: #000000;
-  }
-
-  .classiFieds_forSaleBox .classiFields_contactPerson {
-    background: #e8e8e8;
-    box-shadow: 0px 6.69137px 6.69137px rgba(0, 0, 0, 0.0311407);
-    border-radius: 4.01483px;
-  }
-
-  .classiFieds_forSaleBox .heading {
-    font-weight: 600;
-    font-size: 15.8617px;
-    line-height: 14px;
-    color: #000000;
-  }
-
-  .classiFields_PersonAboutShow img {
-    width: 24.45px;
-    height: 24.77px;
-  }
-
-  .classiFields_emailHeadingText p:first-child {
-    font-weight: 500;
-    font-size: 8.74189px;
-    line-height: 13px;
-    color: #000000;
-  }
-
-  .classiFields_emailHeadingText p:nth-child(2) {
-    font-weight: 400;
-    font-size: 14.2056px;
-    line-height: 21px;
-    letter-spacing: -0.422967px;
-    color: #000000;
-  }
-
-  .classiFields_whatAppIcon {
-    margin-top: 15px;
-    height: 43.62px;
-  }
-
-  .classiFields_whatAppIcon img {
-    width: 27.76px;
-    height: 27.76px;
-  }
-
-  .classiFields_shareMedia {
-    height: 44.17px;
-  }
-
-  .classiFields_shareicons img {
-    width: 32.12px;
-    height: 32.12px;
-  }
-
-  .classiFields_shareIcon p {
-    font-weight: 500;
-    font-size: 9.36972px;
-    line-height: 14px;
-    color: #000000;
-  }
-
-  .classiFieds_forSaledropdown button {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 9px;
-  }
-
-  .classiFieds_wanteddropdown button {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 9px;
-  }
-
-  .classiFieds_time span img {
-    vertical-align: sub !important;
-    width: 12.05px;
-    height: 12.05px;
-  }
-
-  .classiFields_shareIcon img {
-    width: 2.68px;
-    height: 2.68px;
-    margin: 3px;
-  }
-} */
-
-/* @media only screen and (max-width: 349px) {
-  .classiFieds_time span {
-    padding-left: 3px;
-  }
-} */
 
 @media only screen and (max-width: 377px) {
   .classiFields_advertise {
@@ -548,7 +365,7 @@
 }
 
 .classiFields_emailHeadingText p {
-  color: #000000;
+  color: #787878;
   font-weight: 500;
   font-size: 10px;
   line-height: 15px;
@@ -557,24 +374,21 @@
 .classiFields_emailHeadingText span {
   font-weight: 400;
   font-size: 16.5px;
-  line-height: 4px;
   line-break: anywhere;
+  line-height: 25px;
+  letter-spacing: -0.515625px;
 }
 
 .classiFieds_countryName {
   margin-top: 10px;
 }
 
-@media only screen and (max-width: 480px) {
-  .classiFieds_forSale_about .classiFieds_forSale img {
-    width: 116.83px;
-    height: 110.62px;
-  }
 
-  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
-    width: 80.63px;
-  }
-
+.classiFieds_bookmarkicon svg {
+  color: #000000;
+  position: absolute;
+  right: 0px;
+  top: 0;
 }
 
 @media only screen and (max-width: 380px) {
@@ -593,5 +407,129 @@
   }
 }
 
+@media only screen and (min-width: 422px) and (max-width: 480px) {
+  .classiFieds_forSale_about .classiFieds_forSale img {
+    width: 116.83px;
+    height: 110.62px;
+  }
 
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 89.63px;
+  }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 421px) {
+  .classiFieds_forSale_about .classiFieds_forSale img {
+    width: 100.83px;
+    height: 95.62px;
+  }
+
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 74.63px;
+    font-size: 10.4378px;
+    height: 25.89px;
+  }
+
+  .classiFieds_forSale_about .classiFields_heading .text {
+    font-size: 16.0467px;
+    line-height: 17px;
+  }
+
+  .classiFieds_time span img {
+    height: 14.57px;
+    width: 14.57px;
+  }
+
+  .classiFieds_time span {
+    font-size: 10.78876px;
+    line-height: 12px;
+  }
+}
+
+@media only screen and (min-width: 340px) and (max-width: 360px) {
+  .classiFieds_bookmarkicon svg {
+    color: #000000;
+    position: absolute;
+    right: -9px;
+    top: 0;
+    width: 22px;
+  }
+
+  .classiFieds_forSale_about .classiFieds_forSale img {
+    width: 87.83px;
+    height: 84.62px;
+    margin-right: 10px;
+  }
+
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 74.63px;
+    font-size: 10.4378px;
+    height: 25.89px;
+  }
+
+  .classiFieds_forSale_about .classiFields_heading .text {
+    font-size: 15.0467px;
+    line-height: 17px;
+  }
+
+  .classiFieds_time span img {
+    height: 14.57px;
+    width: 14.57px;
+  }
+
+  .classiFieds_time span {
+    font-size: 10.78876px;
+    line-height: 12px;
+  }
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 339px) {
+  .classiFieds_bookmarkicon svg {
+    color: #000000;
+    position: absolute;
+    right: -9px;
+    top: 0;
+    width: 22px;
+  }
+
+  .classiFieds_forSale_about .classiFieds_forSale img {
+    width: 87.83px;
+    height: 84.62px;
+    margin-right: 10px;
+  }
+
+  .classiFieds_forSale_about .classiFields_heading .text {
+    font-size: 14.0467px;
+    line-height: 17px;
+  }
+
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 62.63px;
+    font-size: 8.4378px;
+    height: 21.89px;
+  }
+
+  .classiFieds_time span img {
+    height: 14.57px;
+    width: 14.57px;
+  }
+
+  .classiFieds_time span {
+    font-size: 10.78876px;
+    line-height: 12px;
+  }
+}
+
+.loadmoreBtn button {
+  background: #ec4624 !important;
+}
+
+.loadmoreBtn button:hover {
+  background-color: #ec4624 !important;
+}
+
+.loadmoreBtn button:active {
+  background: #ec4624 !important;
+}
 

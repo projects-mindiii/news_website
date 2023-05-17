@@ -291,13 +291,6 @@ function Profile() {
           <div className="profile">
             <Row>
               <Col xs={12} sm={12} md={12} lg={6}>
-                {/* <div className="profileLeftPart">
-                  <h3>{t("YOUR_PROFILE")}</h3>
-                  <p>
-                    <strong>{t("NOTE")}</strong>
-                    {t("PROFILE_DETAILS")}
-                  </p>
-                </div> */}
                 <NoteBoxModule
                   headText={t("YOUR_PROFILE")}
                   headSubText={t("NOTE")}

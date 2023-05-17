@@ -45,7 +45,16 @@
     height: 302px;
 }
 
-.inputBox .css-b62m3t-container{
+.inputBox .css-b62m3t-container {
     width: 100%;
     min-width: 300px;
+}
+
+@media screen and (min-width: 360px) and (max-width: 575px) {
+    .alertBody .modal-dialog {
+        max-width: 342px !important;
+        height: 302px;
+        margin: auto;
+        margin-top: 28px;
+    }
 }

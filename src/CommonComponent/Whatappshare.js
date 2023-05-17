@@ -1,4 +1,3 @@
-import whatsappicon from "../assets/images/whatsapp_icon_only.png";
 import React from "react";
 import { WhatsappShareButton } from "react-share";
 import { useTranslation } from "react-i18next";
@@ -13,9 +12,8 @@ function WhatsApp(props) {
       <button className="classiFields_whatAppIcon">
         <WhatsappShareButton url={"https://www.example.com"}>
           <span>
-              {/* <img src={whatsappicon} alt={whatsappicon} /> */}
-              <BsWhatsapp />
-              {props.watsApp === true ? (<span>{t("WHATSAPP")}</span>) : <span>{t("WHATSAPP_ME")}</span>}
+            <BsWhatsapp />
+            {props.watsApp === true ? (<span>{t("WHATSAPP")}</span>) : <span>{t("WHATSAPP_ME")}</span>}
           </span>
         </WhatsappShareButton>
       </button>

@@ -583,14 +583,6 @@ function PostAdvert() {
                 <Container>
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={6}>
-                            {/* <div className="yourAdd">
-                                <p>{t("POST_CLASSIFIED_AD")}</p>
-                                <div className="yourAdd_Note">
-                                    <p>
-                                        {t("PLEASE_NOTE")}<small>{t("ALL_ADVERT_REMOVE_60")}</small>
-                                    </p>
-                                </div>
-                            </div> */}
                             <NoteBoxModule
                                 headText={t("POST_CLASSIFIED_AD")}
                                 headSubText={t("PLEASE_NOTE")}

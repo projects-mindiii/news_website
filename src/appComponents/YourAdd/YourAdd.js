@@ -10,14 +10,14 @@ import ClassifiedCategoryList from "../ClassiFieds/ClassifiedCategoryList";
 import { yourAdvertListApi } from "../../store/slices/ClassifiedSlice";
 import { useDispatch } from "react-redux";
 import { BOOK_TYPE } from "../../utils/Constants";
-
-//-------Create a Deals Header component--------
 import Loader from "../../utils/Loader/Loader";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
 import { useTranslation } from "react-i18next";
+
+// -----function for your advert module----------
 function YourAdd() {
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const { userToken } = useSelector((state) => state.user);
   const { yourAdvertWebList, yourAdvertTotalCount } = useSelector(
     (state) => state.classified
@@ -39,23 +39,16 @@ function YourAdd() {
 
   return (
     <div className="main">
-      {isLoading === true ? <Loader /> : ""} 
+      {isLoading === true ? <Loader /> : ""}
       <React.Fragment>
         <Container>
           <Row>
             <Col xs={12} sm={12} md={12} lg={6}>
-              <div className="yourAdd">
-                <p>YOUR ADVERTS</p>
-                <div className="yourAdd_Note">
-                  <p>
-                    PLEASE NOTE -
-                    <small>
-                      All adverts are subject to approval. Adverts will be
-                      removed after 60 days. Delete or Edit your advert anytime
-                    </small>
-                  </p>
-                </div>
-              </div>
+              <NoteBoxModule
+                headText={t("YOUR_ADVERTS")}
+                headSubText={t("NOTE")}
+                detailText={t("ADVERT_NOTE")}
+              />
             </Col>
             <Col xs={12} sm={12} md={12} lg={6}>
               <div className="postAdvertBox">
