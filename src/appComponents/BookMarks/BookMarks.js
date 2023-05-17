@@ -12,8 +12,15 @@ import {
 import { STATUS_CODES } from "../../utils/StatusCode";
 import DeleteAlertBox from "../DeleteAlertBox/DeleteAlertBox";
 import { Toast } from "../../utils/Toaster";
-import { BOOK_ACTION_TYPE, BOOK_TYPE } from "../../utils/Constants";
+import {
+  BOOK_ACTION_TYPE,
+  BOOK_TYPE,
+  PAGINATION_VALUE,
+} from "../../utils/Constants";
 import Loader from "../../utils/Loader/Loader";
+import CustomBtn from "../../formComponent/Button/Button";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 function BookMarks() {
   const { t } = useTranslation();
@@ -22,30 +29,48 @@ function BookMarks() {
     (state) => state.bookMark
   );
   const { userToken } = useSelector((state) => state.user);
-  const [offset, setOffset] = useState(0)
+  const [offset, setOffset] = useState(PAGINATION_VALUE.DEFAULT_OFFSET);
   const dispatch = useDispatch();
   //----- state for manage show/hide modal-----
   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
 
   //----- for close modal-----
   const handleClose = () => setShowPopup(false);
   //----- for show modal-----
   const handleShow = () => setShowPopup(true);
 
+  async function getBookMark(loadMore, offsetValue) {
+    const bookMarkRequired = {
+      limit: PAGINATION_VALUE.DEFAULT_LIMIT,
+      offset: offsetValue,
+    };
+    const BookMarkData = {
+      userToken: userToken,
+      requiredValue: bookMarkRequired,
+      loadMore: loadMore,
+    };
+    dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
+      if (responsejson.payload.response.status === STATUS_CODES.INVALID_TOKEN) {
+        Toast.fire({
+          icon: "error",
+          title: t("SESSION_EXPIRE"),
+        });
+        dispatch(userLogout());
+        dispatch(guestUserLogin());
+        navigate("/login");
+      }
+    });
+  }
   useEffect(() => {
-    async function getBookMark() {
-      const bookMarkRequired = { limit: 10, offset: offset };
-      const BookMarkData = {
-        userToken: userToken,
-        requiredValue: bookMarkRequired,
-      };
-      dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
-        if (responsejson.payload.status_code == STATUS_CODES.SUCCESS) {
-        }
-      });
-    }
-    getBookMark();
-  }, [offset, bookMarkTotalCount]);
+    getBookMark(false, offset);
+    setOffset(PAGINATION_VALUE.DEFAULT_OFFSET);
+  }, []);
+
+  function loadmore() {
+    setOffset(offset + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getBookMark(true, offset + PAGINATION_VALUE.DEFAULT_LIMIT);
+  }
 
   async function removeAllBookmark() {
     const requestData = new FormData();
@@ -60,7 +85,10 @@ function BookMarks() {
           icon: "success",
           title: response.payload.message,
         });
-        const requiredValue = { limit: 10, offset: 0 };
+        const requiredValue = {
+          limit: PAGINATION_VALUE.DEFAULT_LIMIT,
+          offset: offset,
+        };
         dispatch(bookMarkListApi({ userToken: userToken, requiredValue }));
         handleClose();
       } else if (response.payload.status == STATUS_CODES.BAD_REQUEST) {
@@ -68,6 +96,14 @@ function BookMarks() {
           icon: "error",
           title: response.payload.data.message,
         });
+      } else if (response.payload.status === STATUS_CODES.INVALID_TOKEN) {
+        Toast.fire({
+          icon: "error",
+          title: t("SESSION_EXPIRE"),
+        });
+        dispatch(userLogout());
+        dispatch(guestUserLogin());
+        navigate("/login");
       }
     });
   }
@@ -100,10 +136,18 @@ function BookMarks() {
                       forSaleListData={bookMarkList}
                       bookType={BOOK_TYPE.CLASSIFIED}
                     />
-                    <Button type="button" onClick={()=>setOffset(10)}>Load More</Button>
+                    {bookMarkList.length >= bookMarkTotalCount ? (
+                      ""
+                    ) : (
+                      <CustomBtn
+                        children={t("LOAD_MORE")}
+                        type={"button"}
+                        onClick={() => loadmore()}
+                      />
+                    )}
                   </>
                 ) : (
-                  <h4 className="youAdd_NotShow">{t("NO_BOOK_MARKS")}</h4>
+                  <h5 className="youAdd_NotShow">{t("NO_BOOK_MARKS")}</h5>
                 )}
               </Col>
             </Row>

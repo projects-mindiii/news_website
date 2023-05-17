@@ -17,7 +17,7 @@ export const bookMarkListApi = createAsyncThunk(
         data.userToken,
         data.requiredValue
       );
-      return response;
+      return { response: response, loadmore: data.loadMore };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -48,9 +48,13 @@ export const bookMarkSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(bookMarkListApi.fulfilled, (state, action) => {
-      const response = action.payload;
+      const response = action.payload.response;
       if (response.status_code == STATUS_CODES.SUCCESS) {
-        state.bookMarkList = response.data.list;
+        if (action.payload.loadmore == true) {
+          state.bookMarkList = state.bookMarkList.concat(response.data.list);
+        } else {
+          state.bookMarkList = response.data.list;
+        }
         state.bookMarkTotalCount = response.data.total_count;
       } else {
         state.bookMarkTotalCount = 0;
