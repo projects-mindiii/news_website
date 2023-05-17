@@ -199,6 +199,7 @@ export const TRANSLATIONS_ES = {
   NO_BOOK_MARKS: "--- NO HAY MARCADORES PARA MOSTRAR ---",
   CLEAR_ALL: "Limpiar todo",
   REMOVE_ALL_BOOKMARK: "Está seguro ? Desea eliminar todos los marcadores.",
+  LOAD_MORE: "Carga más",
 
   //------------- Your Ads-------------
   YOUR_ADVERTS: "TUS ANUNCIOS",

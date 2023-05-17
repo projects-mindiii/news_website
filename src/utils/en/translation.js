@@ -204,6 +204,7 @@ export const TRANSLATIONS_EN = {
   NO_BOOK_MARKS: "--- NO BOOKMARKS TO DISPLAY ---",
   CLEAR_ALL: "Clear All",
   REMOVE_ALL_BOOKMARK: "Are you sure ? You want to delete all bookmark.",
+  LOAD_MORE: "Load More",
 
   //------------- Your Ads-------------
   YOUR_ADVERTS: "YOUR ADVERTS",
