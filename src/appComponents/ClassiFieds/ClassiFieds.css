@@ -521,4 +521,15 @@
   }
 }
 
+.loadmoreBtn button {
+  background: #ec4624 !important;
+}
+
+.loadmoreBtn button:hover {
+  background-color: #ec4624 !important;
+}
+
+.loadmoreBtn button:active {
+  background: #ec4624 !important;
+}
 
