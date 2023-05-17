@@ -93,10 +93,6 @@ function DealList({ dealList, fromDeal }) {
 
                         <div className="dealPrice">
                             <h4>
-                                {/* {item.currency_code} {item.price ? item.price : "0"}
-                                {item.price.toString().includes(".")
-                                    ? ""
-                                    : ".00"} */}
                                 {item.currency_code} {item.price.toFixed(2)}
                             </h4>{" "}
                             <span>{item.tax_lable}</span>
