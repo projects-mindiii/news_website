@@ -18,6 +18,11 @@ export const CLASSIFIED_CATEGORY_TYPE ={
   JOBSEEKERS:"7"
 }
 
+export const CLASSIFIED_REFRENCE_TYPE ={
+ ALL_SOUTH_AFRICA:1,
+ OUTSIDE_SOUTH_AFRICA:2,
+}
+
 export const COMPANY_REFERENCE_TYPE = {
   PRODUCT_TYPE: "1",
   SERVICE_TYPE: "2",
@@ -39,4 +44,20 @@ export const BOOK_ACTION_TYPE = {
 export const PAGINATION_VALUE = {
   DEFAULT_OFFSET: 0,
   DEFAULT_LIMIT: 10,
-} 
+}
+
+export const SEARCH_TYPE = {
+  ALL_SOUTH_AFRICA: 0,
+  PROVINCE: 1,
+  OUTSIDE_SOUTH_AFRICA:2,
+}
+
+export const SERACH_REFRENCE_TYPE = {
+  CLASSIFIED:1,
+  NEWS:2,
+  DEAL:3,
+  COMPANY:4,
+ 
+}
+
+
