@@ -50,7 +50,6 @@ export const TRANSLATIONS_EN = {
   DONE_BUTTON: "Done",
   CLASSIFIED_CONTACT_PERSON: "Contact Person",
   LOADMORE_BUTTON: " Load More",
-  ALL_SOUTH_AFRICA: "All South Africa",
   REFRENCE_ID: "all",
 
   ALL_COUNTRY: "All Country",
@@ -153,9 +152,8 @@ export const TRANSLATIONS_EN = {
   REPEAT_PASSWORD: "Repeat Password",
   CURRENT_PASSWORD: "Current Password",
   SELECT_PROVINCE: "Select Province",
-  COUNTRY_SET: "Set Country",
+  COUNTRY_SET: "Country Set",
   CITY_TEXT: "Input City/Town",
-
 
   //---------- Form Lable Common Text---------------
   REMEMBER_ME: "Remember me",
