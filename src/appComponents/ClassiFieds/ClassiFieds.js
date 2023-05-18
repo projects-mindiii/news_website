@@ -14,14 +14,14 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
-import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE,PAGINATION_VALUE } from "../../utils/Constants";
+import {CLASSIFIED_REFRENCE_TYPE, CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE,PAGINATION_VALUE, SEARCH_TYPE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 import CustomBtn from "../../formComponent/Button/Button";
 
-//-------Create a Deals Header component--------
+
 function ClassiFieds() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -41,11 +41,13 @@ function ClassiFieds() {
   const [offsetForSale, setOffsetForSale] = useState(0);
   const [offsetWanted, setOffsetWanted] = useState(0);
 
+  //function for loadmore forsale
   const loadmoreForsale = () => {
     setOffsetForSale(offsetForSale + PAGINATION_VALUE.DEFAULT_LIMIT);
     getForSaleList(true, offsetForSale + PAGINATION_VALUE.DEFAULT_LIMIT);
   };
 
+ //function for loadmore for wanted
   const loadmoreWanted = () => {
     setOffsetWanted(offsetWanted + PAGINATION_VALUE.DEFAULT_LIMIT);
     getWantedList(true, offsetWanted + PAGINATION_VALUE.DEFAULT_LIMIT);
@@ -55,8 +57,8 @@ function ClassiFieds() {
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
   };
-  // console.log("classifiedFilterData", classifiedFilterData)
 
+  // function for forSaleList Api
   function getForSaleList(loadmore, offsetValue){
     let forSaleQuery = "";
     if (
@@ -68,7 +70,7 @@ function ClassiFieds() {
         type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
         search_by: classifiedFilterValues.search_by
           ? classifiedFilterValues.search_by
-          : 0,
+          : SEARCH_TYPE.ALL_SOUTH_AFRICA,
         province: classifiedFilterValues.province,
         country: classifiedFilterValues.country,
       };
@@ -77,7 +79,7 @@ function ClassiFieds() {
         limit: PAGINATION_VALUE.DEFAULT_LIMIT,
         offset: offsetValue ? offsetValue : offsetForSale,
         type: CLASSIFIED_CATEGORY_TYPE.FORSALE,
-        search_by: 0,
+        search_by: SEARCH_TYPE.ALL_SOUTH_AFRICA,
       };
     }
 
@@ -107,6 +109,7 @@ function ClassiFieds() {
     });
   }
 
+   // function for wantedlist Api
   function getWantedList(loadmore, offsetValue){
     const wantedQuery = {
       limit: PAGINATION_VALUE.DEFAULT_LIMIT,
@@ -114,7 +117,7 @@ function ClassiFieds() {
       type: CLASSIFIED_CATEGORY_TYPE.WANTED,
       search_by: classifiedFilterValues.search_by
         ? classifiedFilterValues.search_by
-        : 0,
+        : SEARCH_TYPE.ALL_SOUTH_AFRICA,
     };
     const wantedData = {
       userToken: userToken,
@@ -122,7 +125,7 @@ function ClassiFieds() {
       loadmore: loadmore,
     };
     dispatch(getWantedListApi(wantedData)).then(async(responsejson) => {
-      const response = responsejson.payload;
+      const response = responsejson.payload.response;
       if (response.status_code !== STATUS_CODES.SUCCESS) {
         if (response.status === STATUS_CODES.INVALID_TOKEN) {
           Toast.fire({
@@ -142,6 +145,7 @@ function ClassiFieds() {
     });
   }
 
+  //function for loadmore
   async function getWebClassifiedLists(loadmore, offsetValue) {
     getForSaleList(loadmore, offsetValue);
     getWantedList(loadmore, offsetValue);
@@ -150,9 +154,9 @@ function ClassiFieds() {
   useEffect(() => {
     dispatch(
       setClassifiedFilterName({
-        name: "All South Africa",
-        refrenceType: "1",
-        refrenceId: "all",
+        name:`${t("COUNTRY_NAME")}`,
+        refrenceType: CLASSIFIED_REFRENCE_TYPE.ALL_SOUTH_AFRICA,
+        refrenceId: `${t("REFRENCE_ID")}`,
         countryId: "0",
         city: "",
       })

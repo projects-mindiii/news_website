@@ -12,7 +12,7 @@ import { guestUserLogin, getMetaListApi, userLogout } from "../../store/slices/U
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
 import Loader from "../../utils/Loader/Loader";
 import { STATUS_CODES } from "../../utils/StatusCode";
-import { Toast } from "../../utils/Toaster";
+
 //-------Create a Header component--------
 function Header() {
   const dispatch = useDispatch();

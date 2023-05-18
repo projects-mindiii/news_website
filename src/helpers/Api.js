@@ -194,7 +194,6 @@ class SublyApi {
       @returns {object} {token}
       */
   static async getWebClassiFiedList(token, data) {
-    console.log("data", data)
     let header = { "access-token": ` ${token}` };
     let res = await this.request(`/v2/web-classified-list?limit=${data.limit}&offset=${data.offset}&type=${data.type}&search_by=${data.search_by}&province=${data.province}&country=${data.country}&city=${data.city}`, undefined, "get", header);
     return res;
@@ -342,6 +341,21 @@ class SublyApi {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/add-bookmark`,
       data, "post", header
+    );
+
+    return res;
+  }
+
+   /* GET  /get search list: 
+ get all serach list
+ 
+  Authorization required: Token
+  @returns {object} {token}
+  */
+  static async getWebSearchList(authToken, data) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/web-search?limit=${data.limit}&offset=${data.offset}&search=${data.search}`,
+      "", undefined, header
     );
 
     return res;

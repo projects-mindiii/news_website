@@ -46,6 +46,18 @@ export const TRANSLATIONS_ES = {
   CONTACT_NUMBER: "NÚMERO DE CONTACTO",
   WHATSAPP: "WhatsApp",
   SHARE: "COMPARTIR",
+  NOCLASSIFIED_DISPLAY: "NO HAY CLASIFICADOS PARA MOSTRAR",
+  SEARCH_TEXT: "Buscar ubicación",
+  CLASSIFIED_LIST_RESULT: "Resultados",
+  COUNTRY_NAME: "Toda Sudáfrica",
+  DONE_BUTTON: "Hecho",
+  CLASSIFIED_CONTACT_PERSON: "Persona de contacto",
+  LOADMORE_BUTTON: "Carga más",
+  REFRENCE_ID: "todo",
+  ALL_COUNTRY: "Todo el país",
+  OUTOF_SOUTH: "Fuera de Sudáfrica",
+  EDIT_ADVERT: "EDITAR / ELIMINAR ANUNCIO",
+  NOT_LIVE: "NO ACTIVO - Aprobaciones pendientes",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
@@ -107,7 +119,6 @@ export const TRANSLATIONS_ES = {
   NO_SERVICE: "--- NO HAY SERVICIOS PARA MOSTRAR ---",
   NO_BRAND: "--- NO HAY MARCAS PARA MOSTRAR ---",
   NO_DEAL: "--- NO HAY OFERTAS PARA MOSTRAR ---",
-
 
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
@@ -186,7 +197,8 @@ export const TRANSLATIONS_ES = {
 
   //---------Login Alert Box---------
   LOGIN_REQUIRED: "NECESARIO INICIAR SESIÓN",
-  LOGIN_SUB_TEXT: "Necesitas crear un perfil para publicar un artículo. Inicie sesión ahora si tiene un perfil o cree uno.",
+  LOGIN_SUB_TEXT:
+    "Necesitas crear un perfil para publicar un artículo. Inicie sesión ahora si tiene un perfil o cree uno.",
   CREATE_FREE_PROFILE: "Crear perfil GRATIS",
   OR: "OR",
   LOGIN_TO_PROFILE: "Inicie sesión en su perfil",
@@ -194,7 +206,8 @@ export const TRANSLATIONS_ES = {
   //-------Book mraks module--------
   BOOK_MARK_HEADING: "MARCADO",
   BOOK_MARK_SUBHEAD: "TENGA EN CUENTA",
-  BOOK_MARK_DETAILTEXT: "Todos los artículos marcados están sujetos a vencimiento.",
+  BOOK_MARK_DETAILTEXT:
+    "Todos los artículos marcados están sujetos a vencimiento.",
   YOURS_BOOK_MARKS: "SUS MARCADORES",
   NO_BOOK_MARKS: "--- NO HAY MARCADORES PARA MOSTRAR ---",
   CLEAR_ALL: "Limpiar todo",
@@ -203,7 +216,6 @@ export const TRANSLATIONS_ES = {
 
   //------------- Your Ads-------------
   YOUR_ADVERTS: "TUS ANUNCIOS",
-  ADVERT_NOTE: "Todos los anuncios están sujetos a aprobación. Los anuncios se eliminarán después de 60 días. Elimine o edite su anuncio en cualquier momento",
-
-
+  ADVERT_NOTE:
+    "Todos los anuncios están sujetos a aprobación. Los anuncios se eliminarán después de 60 días. Elimine o edite su anuncio en cualquier momento",
 };
