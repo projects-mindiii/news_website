@@ -1,7 +1,3 @@
-.yourAdd {
-    /* margin-top: 18px; */
-}
-
 .post_Add_CategoryButton h5 {
     font-style: normal;
     font-weight: 400 !important;
@@ -26,7 +22,7 @@
 }
 
 .post_Add_CategoryButton:first-child {
-    margin-top: 40px;
+    margin-top: 32px;
 }
 
 .post_Add_CategoryButton .post_AddForm .selectNew .form-check {
@@ -46,11 +42,17 @@
 }
 
 .post_Add_CategoryType {
-    margin-bottom: 28px !important;
+    /* margin-bottom: 28px !important;
     margin-top: 26px !important;
     gap: 9px 0px;
     width: 267px;
-    margin: auto;
+    margin: auto; */
+    margin-bottom: 28px !important;
+    margin-top: 26px !important;
+    gap: 9px 0px;
+    /* width: 386px;  */
+    /* margin: auto;  */
+    margin-left: 50px;
 }
 
 
@@ -124,6 +126,11 @@
 
 .post_Add_CategoryButton .post_AddForm .form-check .form-check-label {
     margin-left: 10px;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    color: #343434;
+    margin-top: 5px;
 }
 
 .post_Add_CategoryButton .post_AddForm .post_Add_category .form-check-input[type=radio]:checked::after {
@@ -163,99 +170,10 @@
 .post_AddForm .heading::placeholder {
     color: #999999 !important;
     height: 42px !important;
+    font-size: 16px;
+    font-weight: 400;
 }
 
-
-.post_AddForm #location .css-13cymwt-control {
-    color: white !important;
-    background-color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #location .css-t3ipsp-control {
-    color: white !important;
-    background-color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #location .css-1dimb5e-singleValue {
-    color: white !important;
-}
-
-.post_AddForm #jobtype .css-13cymwt-control {
-    color: white !important;
-    background-color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #jobtype .css-t3ipsp-control {
-    color: white !important;
-    background-color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #jobtype .css-1dimb5e-singleValue {
-    color: white !important;
-}
-
-.post_AddForm #earningoption .css-13cymwt-control {
-    color: white !important;
-    background-color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #earningoption .css-t3ipsp-control {
-    color: white !important;
-    background-color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #earningoption .css-1dimb5e-singleValue {
-    color: white !important;
-}
-
-
-.post_AddForm #country .css-13cymwt-control {
-    color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #country .css-t3ipsp-control {
-    color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #country .css-tj5bde-Svg {
-    fill: black !important;
-}
-
-.post_AddForm #province .css-13cymwt-control {
-    color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #province .css-t3ipsp-control {
-    color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #province .css-tj5bde-Svg {
-    fill: black !important;
-}
-
-.post_AddForm #cities .css-13cymwt-control {
-    color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #cities .css-t3ipsp-control {
-    color: black !important;
-    border-radius: 10px;
-}
-
-.post_AddForm #cities .css-tj5bde-Svg {
-    fill: black !important;
-}
 
 
 .post_AddForm .post_Add_Discription {
@@ -481,6 +399,7 @@
     color: #999999 !important;
 }
 
+
 .post_Add_Error {
     height: 51px;
     background: #A8ECDC;
@@ -499,7 +418,7 @@
 }
 
 .post_Add_priceDiv .btn {
-    width: 9% !important;
+    width: 50px !important;
     margin-top: 0px;
     height: 40px;
     font-weight: 400;
@@ -510,6 +429,7 @@
     justify-content: space-around;
     border-top-left-radius: 7.26px;
     border-bottom-left-radius: 7.26px;
+    position: absolute;
 }
 
 .post_Add_priceDiv .btn:hover {
@@ -525,11 +445,15 @@
 }
 
 .post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-    width: 91% !important;
+    width: 100% !important;
 }
 
 .post_Add_priceDiv .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-    width: 91% !important;
+    width: 100% !important;
+}
+
+.post_Add_priceDiv input.amount_Control.form-control {
+    padding-left: 58px;
 }
 
 .css-a0izu-control {
@@ -548,6 +472,8 @@
 .post_Add_Heading_Flex p {
     color: #F05132;
     margin-bottom: 0px !important;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .Post_Add_ImageSet {
@@ -590,18 +516,151 @@
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
 }
-.post_Add_Delete button{
+
+.post_Add_Delete button {
     text-align: center;
     display: flex;
     justify-content: center;
     border: none;
     width: 100%;
     align-items: center;
-    
+
 }
+
 .post_Add_Delete {
     margin-top: 18px;
 }
+
 .post_Add_Delete button svg {
     margin-right: 10px;
+}
+
+.post_Add_CategoryButton .post_AddForm .negotiable .form-check .form-check-label {
+    margin-left: 10px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+}
+
+
+@media only screen and (min-width: 400px) and (max-width: 575px) {
+    .post_Add_CategoryType {
+        width: 386px;
+        margin: auto;
+    }
+
+    .post_Add_CategoryButton .post_AddForm .form-check .form-check-label {
+        font-size: 18px;
+    }
+
+    .post_Add_CategoryButton .headings {
+        font-size: 19px;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 399px) {
+    .post_Add_CategoryType {
+        margin: auto;
+    }
+
+    .post_Add_CategoryButton .post_AddForm .form-check .form-check-label {
+        font-size: 16px;
+    }
+
+    .post_Add_CategoryButton .headings {
+        font-size: 19px;
+    }
+}
+
+/* css for select input */
+
+.selectOptionPost .css-b62m3t-container {
+    z-index: 999 !important;
+}
+
+.selectOptionPost .css-a0izu-control:hover {
+    border-color: unset !important;
+}
+
+.selectOptionPost .css-a0izu-control {
+    border: none !important;
+    background: #000000 !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+    border-radius: 7.26px !important;
+    font-weight: 500 !important;
+}
+
+.selectOptionPost .css-13cymwt-control {
+    border: none !important;
+    background: #000000 !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+    border-radius: 7.26px !important;
+    font-weight: 500 !important;
+}
+
+.selectOptionPost .css-13cymwt-control:hover {
+    border-color: unset !important;
+}
+
+.selectOptionPost .css-1xz3in2-control {
+    border: none !important;
+    background: #000000 !important;
+    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+    border-radius: 7.26px !important;
+    font-weight: 500 !important;
+}
+
+.selectOptionPost .css-1xz3in2-control:hover {
+    border-color: unset !important;
+}
+
+.selectOptionPost .css-1u9des2-indicatorSeparator {
+    display: none !important;
+}
+
+.selectOptionPost .css-tj5bde-Svg {
+    fill: #FFFFFF !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.post_AddForm #location .css-1dimb5e-singleValue {
+    color: white !important;
+}
+
+
+.post_AddForm #jobtype .css-1dimb5e-singleValue {
+    color: white !important;
+}
+
+.post_AddForm #earningoption .css-1dimb5e-singleValue {
+    color: white !important;
+}
+
+
+.post_AddForm #country .css-13cymwt-control {
+    color: black !important;
+}
+
+.post_AddForm #country .css-t3ipsp-control {
+    color: black !important;
+}
+
+
+.post_AddForm #province .css-13cymwt-control {
+    color: black !important;
+}
+
+.post_AddForm #province .css-t3ipsp-control {
+    color: black !important;
+}
+
+
+.post_AddForm #cities .css-13cymwt-control {
+    color: black !important;
+}
+
+.post_AddForm #cities .css-t3ipsp-control {
+    color: black !important;
 }

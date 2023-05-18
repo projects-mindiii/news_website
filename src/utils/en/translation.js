@@ -44,14 +44,14 @@ export const TRANSLATIONS_EN = {
   WHATSAPP: "WhatsApp",
   SHARE: "SHARE",
   NOCLASSIFIED_DISPLAY: "NO CLASSIFIEDS TO DISPLAY",
-  SEARCH_TEXT:"Search Location",
-  CLASSIFIED_LIST_RESULT:"Results",
-  COUNTRY_NAME:"All South Africa",
-  DONE_BUTTON:"Done",
-  CLASSIFIED_CONTACT_PERSON:"Contact Person",
-  LOADMORE_BUTTON:" Load More",
-  ALL_SOUTH_AFRICA:"All South Africa",
-  REFRENCE_ID:"all",
+  SEARCH_TEXT: "Search Location",
+  CLASSIFIED_LIST_RESULT: "Results",
+  COUNTRY_NAME: "All South Africa",
+  DONE_BUTTON: "Done",
+  CLASSIFIED_CONTACT_PERSON: "Contact Person",
+  LOADMORE_BUTTON: " Load More",
+  ALL_SOUTH_AFRICA: "All South Africa",
+  REFRENCE_ID: "all",
 
 
   //----Footer Text------
@@ -95,6 +95,8 @@ export const TRANSLATIONS_EN = {
   WANT_DELETE: "Are you sure ? You want to delete your account.",
   CANCEL: "CANCEL",
   DELETE: "DELETE",
+  SOUTH_AFRICA_SET: "South Africa",
+
 
   //----Deals Text------
   CONTACT_PERSON: "CONTACT PERSON",
@@ -147,8 +149,8 @@ export const TRANSLATIONS_EN = {
   REPEAT_PASSWORD: "Repeat Password",
   CURRENT_PASSWORD: "Current Password",
   SELECT_PROVINCE: "Select Province",
-  COUNTRY_SET: "Country Set",
-  CITY_TEXT:"Input City/Town",
+  COUNTRY_SET: "Set Country",
+  CITY_TEXT: "Input City/Town",
 
 
   //---------- Form Lable Common Text---------------
@@ -189,9 +191,14 @@ export const TRANSLATIONS_EN = {
   ADD_PHOTOS: `ADD PHOTOS`,
   POST_HEADING_MIN_ERROR: `Heading should have minimum length 3 characters.`,
   POST_Description_MIN_ERROR: `Description should have minimum length 3 characters.`,
-  SELECT_COUNTRY: `SELECT COUNTRY`,
+  SELECT_COUNTRY: `Selected Country`,
   PLEASE_SEL_CURR: `PLEASE SELECT CURRENCY`,
   DELETE_ADVERT: "Are you sure  You want to delete?",
+  SELECT_PROVIN: `Selected Province`,
+  ENTER_HEAD: "Enter Heading",
+  ENTER_DISCRIPT: "Enter description",
+  AMOUNT_OPTIONAL: "Amount (optional)",
+  OPTINAL_COMPANY: "Company Name (optional)",
 
   //---------Login Alert Box---------
   LOGIN_REQUIRED: "LOGIN REQUIRED",
@@ -213,6 +220,6 @@ export const TRANSLATIONS_EN = {
   //------------- Your Ads-------------
   YOUR_ADVERTS: "YOUR ADVERTS",
   ADVERT_NOTE: "All adverts are subject to approval. Adverts will be removed after 60 days. Delete or Edit your advert anytime",
-
+  NO_ADVERT: "--- NO ADVERTS TO DISPLAY ---",
 
 };
