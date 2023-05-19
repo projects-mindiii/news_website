@@ -44,35 +44,35 @@ function Profile() {
   const [profilePreview, setProfilePreview] = useState(ProfileImg);
   const [profileImage, setProfileImage] = useState("");
   const locationOption = [
-    { value: 1, label: "South Africa", id: 1 },
-    { value: 0, label: "Outside South Africa", id: 0 },
+    { value: 1, label: `${t("SOUTH_AFRICA_SET")}`, id: 1 },
+    { value: 0, label: `${t("OUTOF_SOUTH")}`, id: 0 },
   ];
   const [locationSelected, setLocationSelected] = useState({
     value: 1,
-    label: "South Africa",
+    label: `${t("SOUTH_AFRICA_SET")}`,
     id: 1,
   });
   const [countryOption, setCountryOption] = useState([
     {
-      label: "Set Country",
+      label: `${t("COUNTRY_SET")}`,
       value: "0",
       id: "0",
     },
   ]);
   const [countrySelected, setCountrySelected] = useState({
-    label: "Set Country",
+    label: `${t("COUNTRY_SET")}`,
     value: "0",
     id: "0",
   });
   const [provinceOption, setProvinceOption] = useState([
     {
-      label: "Select Province",
+      label: `${t("SELECT_PROVINCE")}`,
       value: "0",
       id: "0",
     },
   ]);
   const [provinceSelected, setProvinceSelected] = useState({
-    label: "Select Province",
+    label: `${t("SELECT_PROVINCE")}`,
     value: "0",
     id: "0",
   });

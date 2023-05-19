@@ -96,6 +96,7 @@ export const TRANSLATIONS_EN = {
   CANCEL: "CANCEL",
   DELETE: "DELETE",
   SOUTH_AFRICA_SET: "South Africa",
+  OUTOF_SOUTH:"Outside South Africa",
 
 
   //----Deals Text------
@@ -173,7 +174,7 @@ export const TRANSLATIONS_EN = {
   ADVERT_DESCRIPTION: `Advert Description`,
   INCLUDE_DESCRIPTION: `Include a Description`,
   JOB_TYPE: `JOB TYPE`,
-  SELECT_JOB_TYPE: `Select Job Type`,
+  SELECT_JOB_TYPE: `SELECT JOB TYPE`,
   ON_HYBRID_REMOTE: `ON SITE, HYBRID OR REMOTE?`,
   SELECT_OPTION: `Select Option`,
   EMPLOYMENT_EQUITY: `EMPLOYMENT EQUITY`,
@@ -181,7 +182,7 @@ export const TRANSLATIONS_EN = {
   RENUMERATION: `RENUMERATION`,
   PLEACE_ENTER_AMOUNT: `Please enter amount`,
   PLEASE_FILL_AMOUNT: `Please Fill Amount`,
-  SELECT_EARNING_OPTION: `Select Earning Option`,
+  SELECT_EARNING_OPTION: `SELECT EARNING OPTION`,
   PLEACT_CLICK: `Please checkbox Click`,
   LOCATIONS: `LOCATION`,
   INPUT_CITY_TOWN: `Input City/Town`,
