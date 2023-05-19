@@ -237,10 +237,6 @@
     background-color: #000000;
 }
 
-/* .post_Add_Save {
-    margin-top: 23px;
-} */
-
 .post_Add_DeleteAdever button {
     height: 62px;
     font-weight: 600;
@@ -271,7 +267,7 @@
 }
 
 .post_AddForm .companyName .companyName_Control {
-    padding-left: 58px;
+    padding-left: 63px;
     position: relative;
 }
 
@@ -309,7 +305,7 @@
 }
 
 .post_AddForm .names .names_Control {
-    padding-left: 58px;
+    padding-left: 63px;
     position: relative;
 }
 
@@ -453,7 +449,7 @@
 }
 
 .post_Add_priceDiv input.amount_Control.form-control {
-    padding-left: 58px;
+    padding-left: 63px;
 }
 
 .css-a0izu-control {

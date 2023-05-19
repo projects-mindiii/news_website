@@ -183,9 +183,9 @@ function PostAdvert() {
         setCountryCodeWatsapp("za");
         setDialCode("27");
         setCountryCode("za");
-        setValue("email", currentUser.email)
-        setValue("fullName", currentUser.name)
-        setValue("province", { label: 'Free State', value: 932, id: 932 })
+        setValue("email", currentUser.email);
+        setValue("fullName", currentUser.name);
+        setValue("province", { label: 'Selected Province', value: 932, id: 932 })
         setValue("isDefaultCountry", {
             label:`${t("SOUTH_AFRICA_SET")}`,
             value: 1,
@@ -196,9 +196,11 @@ function PostAdvert() {
             value: 1,
             id: 1
         })
-        setProvinceValue({ label: 'Free State', value: 932, id: 932 })
+        setProvinceValue({ label: 'Selected Province', value: 932, id: 932 })
         setCurrencyValue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
+        
     }
+   
     useEffect(() => {
         async function getClassifiedLists() {
             if (Object.keys(allMetaList).length > 0) {

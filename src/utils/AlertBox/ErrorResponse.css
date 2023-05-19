@@ -51,3 +51,7 @@
   --bs-alert-margin-bottom: 0px !important;
   
 }
+
+.alertBox .btn-close:focus{
+  box-shadow: unset !important;
+}
