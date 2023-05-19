@@ -3,9 +3,12 @@ import "./SearchBar.css";
 import { FiSearch } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import SublyApi from "../../helpers/Api";
-import { STATUS_CODES } from "../../utils/StatusCode";
 import {useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+ searchListApi
+} from "../../store/slices/SearchSlice";
 
 
 //-------Create a Search component--------
@@ -14,32 +17,25 @@ function SearchBar() {
     const { userToken } = useSelector((state) => state.user);
     //set language
     const { t } = useTranslation();
-
-    // function searchListApi(searchValues) {
-    //   let search = SERACH_REFRENCE_TYPE.CLASSIFIED;
-    //     dispatch(setClassifiedFilterName(value));
-   
-    // }
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
  
 
   const handleSearch = async () => {
     const searchValues = {limit: 10, offset: 0, search: results}
-    await SublyApi.getWebSearchList(userToken, searchValues).then((response) => {
-      if (response.status_code === STATUS_CODES.SUCCESS) {
-        console.log("respose",response )
-       
-      }
+    dispatch(searchListApi({ userToken: userToken, searchValues })).then(async (responsejson) => {
+      
     });
   };
+
     return (
-        <div className="searchBar">
-            <Form>
+        <div className="searchBar" onClick={()=>{navigate("/search-list")}}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Control type="search" placeholder={t("Search")} onChange={(e)=>setResults(e.target.value)} />
                 </Form.Group>
-            </Form>
-            <FiSearch onClick={handleSearch}/>
+            <FiSearch onClick={()=>{handleSearch(); }}/>
         </div>
     )
 }
 export default SearchBar;
+
