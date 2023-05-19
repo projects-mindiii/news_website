@@ -33,10 +33,11 @@ function ClassiFieds() {
     wantedTotalCount,
     wantedWebList,
     classifiedFilterValues,
+    isLoading
   } = useSelector((state) => state.classified);
-  const { userToken, isLoading } = useSelector((state) => state.user);
-  const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
-  const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
+  const { userToken } = useSelector((state) => state.user);
+  const bookmarkLoader = useSelector((state) => state.bookmark.isLoading);
+  const { bookmarkTotalCount } = useSelector((state) => state.bookmark);
   const [showDefaultList, setShowDefaultList] = useState(1);
   const [offsetForSale, setOffsetForSale] = useState(0);
   const [offsetWanted, setOffsetWanted] = useState(0);
@@ -122,7 +123,7 @@ function ClassiFieds() {
       loadmore: loadmore,
     };
     dispatch(getWantedListApi(wantedData)).then(async(responsejson) => {
-      const response = responsejson.payload;
+      const response = responsejson.payload.response;
       if (response.status_code !== STATUS_CODES.SUCCESS) {
         if (response.status === STATUS_CODES.INVALID_TOKEN) {
           Toast.fire({
@@ -160,7 +161,7 @@ function ClassiFieds() {
 
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.FORSALE);
     getWebClassifiedLists(false, PAGINATION_VALUE.DEFAULT_OFFSET);
-  }, [bookMarkTotalCount]);
+  }, [bookmarkTotalCount]);
 
   return (
     <div className="main">

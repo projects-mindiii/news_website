@@ -15,18 +15,23 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
 import { CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE , PAGINATION_VALUE } from "../../utils/Constants";
+import { useNavigate } from "react-router-dom";
+import { STATUS_CODES } from "../../utils/StatusCode";
+import { Toast } from "../../utils/Toaster";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
 //-------Create a Deals Header component--------
 function JobTypes() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
   const {
-    classifiedFilterValues,jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, } =
+    classifiedFilterValues,jobOfferTotalCount, jobOfferWebList, jobSeekerTotalCount, jobSeekerWebList, isLoading } =
     useSelector((state) => state.classified);
-  const { userToken,isLoading } = useSelector((state) => state.user);
+  const { userToken } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
-  const bookmarkLoader = useSelector((state) => state.bookMark.isLoading);
-  const { bookMarkTotalCount } = useSelector((state) => state.bookMark);
+  const bookmarkLoader = useSelector((state) => state.bookmark.isLoading);
+  const { bookmarkTotalCount } = useSelector((state) => state.bookmark);
 
 
   const [offsetJobOffer, setOffsetJobOffer] = useState(0);
@@ -91,8 +96,17 @@ function JobTypes() {
       whereQuery: jobSeekerQuery,
       loadmore: loadmore,
     };
-    dispatch(getJobSeekerListApi(jobSeekerData)).then((responsejson) => {
+    dispatch(getJobSeekerListApi(jobSeekerData)).then(async(responsejson) => {
       const response = responsejson.payload.response;
+      if (response.status === STATUS_CODES.INVALID_TOKEN) {
+        Toast.fire({
+          icon: "error",
+          title: t("SESSION_EXPIRE"),
+        });
+        await dispatch(userLogout());
+        await dispatch(guestUserLogin());
+        navigate("/login");
+      }
     });
   }
 
@@ -107,7 +121,7 @@ function JobTypes() {
     setClassfiedTypeValue(CLASSIFIED_CATEGORY_TYPE.JOBOFFER);
     
     getWebClassifiedLists(false, PAGINATION_VALUE.DEFAULT_OFFSET);
-  }, [bookMarkTotalCount]);
+  }, [bookmarkTotalCount]);
   return (
     <div className="main">
       {isLoading === true || bookmarkLoader ? <Loader /> : ""}

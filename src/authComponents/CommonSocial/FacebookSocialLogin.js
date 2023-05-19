@@ -4,19 +4,14 @@ import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { isSocialLogin, socialSignup } from "../../store/slices/UserSlice";
 import { SOCIAL_TYPE } from "../../utils/Constants";
 import FacebookLogin from "react-facebook-login";
 
 function FacebookSocialLogin(props) {
   const navigate = useNavigate();
-  //set language
-  const { t } = useTranslation();
-
   const dispatch = useDispatch();
 
-  const { currentUser, isLoading } = useSelector((state) => state.user);
   // Social Login with facebook.
   const responseFacebook = async (response) => {
     let userData = response;
@@ -67,8 +62,6 @@ function FacebookSocialLogin(props) {
         callback={responseFacebook}
         cssClass="my-facebook-button-class"
          textButton={props.facebookText && <h3>{props.facebookText}</h3>}
-        // textButton={<h3></h3>}
-        // onFailure={(value) => console.log(value)}
       />
       </>
     

@@ -22,7 +22,7 @@ import Services from "../appComponents/DealTypesModule/Services/Services";
 import Brands from "../appComponents/DealTypesModule/Brands/Brands";
 import Companies from "../appComponents/DealTypesModule/Companies/Companies";
 import LoginAlertModel from "../authComponents/LoginAlertModel/LoginAlertModel";
-import BookMarks from "../appComponents/BookMarks/BookMarks";
+import BookMarks from "../appComponents/Bookmarks/Bookmarks";
 
 //-------Create a component for manage routing--------
 function Routers() {

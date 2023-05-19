@@ -142,14 +142,6 @@ function Profile() {
     dispatch(userDetails(userToken)).then((responsejson) => {
       const response = responsejson.payload;
       if (response.status_code === STATUS_CODES.SUCCESS) {
-        if (response.status === STATUS_CODES.INVALID_TOKEN) {
-          Toast.fire({
-            icon: "error",
-            title: t("SESSION_EXPIRE"),
-          });
-          dispatch(userLogout());
-          navigate("/login");
-        }
         setValue(
           "fullName",
           response.data[0].name ? response.data[0].name : ""
@@ -206,6 +198,13 @@ function Profile() {
           (item) => item.id === response.data[0].provinces
         );
         setProvinceSelected(newProvinceOption);
+      } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+        Toast.fire({
+          icon: "error",
+          title: t("SESSION_EXPIRE"),
+        });
+        dispatch(userLogout());
+        navigate("/login");
       } else {
         Toast.fire({
           icon: "error",
@@ -256,6 +255,13 @@ function Profile() {
           icon: "success",
           title: response.message,
         });
+      } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+        Toast.fire({
+          icon: "error",
+          title: t("SESSION_EXPIRE"),
+        });
+        dispatch(userLogout());
+        navigate("/login");
       } else {
         Toast.fire({
           icon: "error",
@@ -275,6 +281,13 @@ function Profile() {
       });
       handleClose();
       navigate("/login-form");
+    } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+      Toast.fire({
+        icon: "error",
+        title: t("SESSION_EXPIRE"),
+      });
+      dispatch(userLogout());
+      navigate("/login");
     } else {
       Toast.fire({
         icon: "error",

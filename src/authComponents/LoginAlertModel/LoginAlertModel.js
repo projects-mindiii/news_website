@@ -13,6 +13,7 @@ function LoginAlertModel(props) {
   const navigate = useNavigate();
   const [show,setShow]=useState(props.modalValue)
 
+  // ====function for close modal and redirect to login screen====
   function closeModal(){
     setShow(false);
     navigate('/login')

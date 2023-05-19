@@ -13,33 +13,47 @@ import { BOOK_TYPE } from "../../utils/Constants";
 import Loader from "../../utils/Loader/Loader";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
+import { Toast } from "../../utils/Toaster";
 
 // -----function for your advert module----------
 function YourAdd() {
   const dispatch = useDispatch();
+  const navigate = useNavigate() 
   const { t } = useTranslation();
   const { userToken } = useSelector((state) => state.user);
-  const { yourAdvertWebList, yourAdvertTotalCount } = useSelector(
+  const { yourAdvertWebList, yourAdvertTotalCount, isLoading } = useSelector(
     (state) => state.classified
   );
-  const { bookMarkTotalCount, isLoading } = useSelector(
-    (state) => state.bookMark
+  const bookmarkLoader = useSelector((state) => state.bookmark.isLoading);
+  const { bookmarkTotalCount } = useSelector(
+    (state) => state.bookmark
   );
 
   useEffect(() => {
     async function getWebClassifiedLists() {
       const yourAdvertQuery = { limit: 10, offset: 0, type: 1 };
       const data = { userToken: userToken, whereQuery: yourAdvertQuery };
-      dispatch(yourAdvertListApi(data)).then((responsejson) => {
-        console.log("responsejsonresponsejson", responsejson);
+      dispatch(yourAdvertListApi(data)).then(async(responsejson) => {
+        const response = responsejson.payload.response;
+        if (response.status === STATUS_CODES.INVALID_TOKEN) {
+          Toast.fire({
+            icon: "error",
+            title: t("SESSION_EXPIRE"),
+          });
+          await dispatch(userLogout());
+          await dispatch(guestUserLogin());
+          navigate("/login");
+        }
       });
     }
     getWebClassifiedLists();
-  }, [bookMarkTotalCount]);
+  }, [bookmarkTotalCount]);
 
   return (
     <div className="main">
-      {isLoading === true ? <Loader /> : ""}
+      {isLoading === true || bookmarkLoader ? <Loader /> : ""}
       <React.Fragment>
         <Container>
           <Row>
@@ -64,25 +78,6 @@ function YourAdd() {
                   bookType={BOOK_TYPE.CLASSIFIED}
                 />
               </div>
-
-              {/* {yourAdvertWebList && yourAdvertWebList.map((item, index) => (
-                                item.approval_status == 1 &&
-                                <div className="yourAdd_DataShow">
-                                    <CommonDataShow yourdata={item} />
-                                    <WhatsappshareContact yourdata={item} />
-                                    <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
-                                </div>
-                            ))}
-                            {yourAdvertWebList && yourAdvertWebList.some(item => item.approval_status == 0) == true && <h5 className="youAdd_PendingApproval">---- PENDING APPROVAL ----</h5>}
-                            {yourAdvertWebList && yourAdvertWebList.map((item, index) => (
-                                item.approval_status == 0 &&
-                                <div className="yourAdd_DataShow">
-                                    <CommonDataShow yourdata={item} />
-                                    <WhatsappshareContact yourdata={item} />
-                                    <button className="edit_DeleteButton">EDIT / DELETE ADVERT</button>
-                                    <button className="not_live">NOT LIVE - Pending Approvals</button>
-                                </div>
-                            ))} */}
             </Col>
           </Row>
         </Container>

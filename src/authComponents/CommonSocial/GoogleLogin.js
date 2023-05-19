@@ -5,19 +5,13 @@ import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import Google from "../../assets/images/google_logo.png";
 import { isSocialLogin, socialSignup } from "../../store/slices/UserSlice";
 import { SOCIAL_TYPE } from "../../utils/Constants";
 
 function GoogleLogin(props) {
   const navigate = useNavigate();
-  //set language
-  const { t } = useTranslation();
-
   const dispatch = useDispatch();
-
-  const { currentUser, isLoading } = useSelector((state) => state.user);
 
   // Social Login with google
   const login = useGoogleLogin({

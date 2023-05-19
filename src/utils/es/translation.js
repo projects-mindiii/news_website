@@ -212,4 +212,7 @@ export const TRANSLATIONS_ES = {
   ADVERT_NOTE: "Todos los anuncios están sujetos a aprobación. Los anuncios se eliminarán después de 60 días. Elimine o edite su anuncio en cualquier momento",
   NO_ADVERT: "--- SIN ANUNCIOS PARA MOSTRAR ---",
 
+  EDIT_DELETE_BTN: "EDITAR / ELIMINAR ANUNCIO",
+  PENDING_APPROVAL: "NO ACTIVO - Aprobaciones pendientes",
+
 };
