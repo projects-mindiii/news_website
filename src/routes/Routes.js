@@ -22,7 +22,8 @@ import Services from "../appComponents/DealTypesModule/Services/Services";
 import Brands from "../appComponents/DealTypesModule/Brands/Brands";
 import Companies from "../appComponents/DealTypesModule/Companies/Companies";
 import LoginAlertModel from "../authComponents/LoginAlertModel/LoginAlertModel";
-import BookMarks from "../appComponents/Bookmarks/Bookmarks";
+import BookMarks from "../appComponents/BookMarks/BookMarks";
+import SearchList from "../appComponents/Search/SearchList";
 
 //-------Create a component for manage routing--------
 function Routers() {
@@ -50,6 +51,7 @@ function Routers() {
                 <Route exact path="/post-advert" element={Object.keys(currentUser).length !== 0 ? (<PostAdvert />) : (<LoginAlertModel modalValue={true} />)} />
                 <Route exact path="/your-add" element={Object.keys(currentUser).length !== 0 ? (<YourAdd />) : (<LoginAlertModel modalValue={true} />)} />
                 <Route path="/book-marks" element={<BookMarks />} />
+                <Route path="/search-list" element={<SearchList />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />
