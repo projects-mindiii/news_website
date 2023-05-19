@@ -90,15 +90,24 @@
   margin-bottom: 0px;
 }
 
-
-.classiFields_PersonAboutShow img {
-  height: 30px;
-  width: 30px;
-  margin-left: 6px;
+.classiFields_iconBackGround {
+  height: 40px;
+  width: 40px;
   background: #E5E5E5;
   mix-blend-mode: multiply;
   border-radius: 6px;
   margin-right: 15px;
+  margin-bottom: 5px;
+}
+
+.classiFields_PersonAboutShow img {
+  height: 40px;
+  width: 40px;
+  /* margin-left: 6px;
+  background: #E5E5E5;
+  mix-blend-mode: multiply;
+  border-radius: 6px;
+  margin-right: 15px; */
 }
 
 .classiFieds_forSaledropdown button {
@@ -233,7 +242,11 @@
   font-size: 14px;
   line-height: 21px;
   color: #000000;
-  margin-left: 2px;
+  margin-left: -6px;
+}
+
+.classiFields_shareIcon {
+  margin-left: 20px;
 }
 
 .classiFields_shareicons span>span {
@@ -243,7 +256,7 @@
 .classiFields_shareIcon img {
   width: 4px;
   height: 4px;
-  margin: 5px;
+  margin: 2px;
   border-radius: 50%;
 }
 
@@ -407,6 +420,18 @@
   }
 }
 
+@media only screen and (min-width: 381px) and (max-width: 390px) {
+  .classiFields_emailHeadingText span {
+    font-size: 15.5px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 340px) {
+  .classiFields_emailHeadingText span {
+    font-size: 11.5px;
+  }
+}
+
 @media only screen and (min-width: 422px) and (max-width: 480px) {
   .classiFieds_forSale_about .classiFieds_forSale img {
     width: 116.83px;
@@ -532,4 +557,3 @@
 .loadmoreBtn button:active {
   background: #ec4624 !important;
 }
-

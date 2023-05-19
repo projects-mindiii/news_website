@@ -54,7 +54,7 @@ function YourAdd() {
               <div className="postAdvertBox">
                 {yourAdvertWebList && yourAdvertWebList.length < 1 && (
                   <h5 className="youAdd_NotShow">
-                    --- NO ADVERTS TO DISPLAY ---{" "}
+                    {t("NO_ADVERT")}
                   </h5>
                 )}
                 <ClassifiedCategoryList

@@ -1,8 +1,8 @@
 import "./PostAdvert.css";
-import { Row, Nav, Container, Col, Tab, FloatingLabel } from "react-bootstrap";
+import { Row, Container, Col } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Select from "react-select";
-import Cropper, { ReactCropperElement } from "react-cropper";
+import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -42,9 +42,7 @@ function PostAdvert() {
         register,
         handleSubmit,
         setValue, reset,
-        getValues,
         control,
-        watch,
         formState: { errors },
     } = useForm();
     const { field: heading } = useController({
@@ -55,8 +53,6 @@ function PostAdvert() {
         control,
         name: 'description'
     });
-
-
 
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false)
@@ -107,8 +103,7 @@ function PostAdvert() {
     const handleShow = () => setShowPopup(true);
 
 
-    function handleResponse(responsejson){
-
+    function handleResponse(responsejson) {
         if (responsejson.status_code) {
             if (responsejson.status_code == STATUS_CODES.SUCCESS) {
                 Toast.fire({
@@ -132,54 +127,38 @@ function PostAdvert() {
                     });
                 }
             }
-          }else{
+        } else {
             if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
                 Toast.fire({
-                  icon: "error",
-                  title: t("SESSION_EXPIRE"),
+                    icon: "error",
+                    title: t("SESSION_EXPIRE"),
                 });
                 dispatch(userLogout());
                 dispatch(guestUserLogin());
                 navigate("/login");
-              } else {
+            } else {
                 Toast.fire({
-                  icon: "error",
-                  title: responsejson.data.message,
+                    icon: "error",
+                    title: responsejson.data.message,
                 });
-              }
-          }
+            }
+        }
     }
-    
+
     function setNewDefaultCountry(e) {
-        // setTimeout(() => {
-        //     setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
-        //     setDefaultCountry({ label: e.label, value: e.value, id: e.id })
-        // }, 1000);
         setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
         setDefaultCountry({ label: e.label, value: e.value, id: e.id })
     }
 
     function setNewJob(e) {
-        // setTimeout(() => {
-        //     setValue("jobType", { label: e.label, value: e.value, id: e.id })
-        //     setJobTypeValue({ label: e.label, value: e.value, id: e.id })
-        // }, 1000);
         setValue("jobType", { label: e.label, value: e.value, id: e.id })
         setJobTypeValue({ label: e.label, value: e.value, id: e.id })
     }
     function setNewEarning(e) {
-        // setTimeout(() => {
-        //     setValue("earningoption", { label: e.label, value: e.value, id: e.id })
-        //     setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
-        // }, 1000);
         setValue("earningoption", { label: e.label, value: e.value, id: e.id })
         setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
     }
     function setNewCountry(e) {
-        // setTimeout(() => {
-        //     setValue("country", { label: e.label, value: e.value, id: e.id })
-        //     setCountryValue({ label: e.label, value: e.value, id: e.id })
-        // }, 1000);
         setValue("country", { label: e.label, value: e.value, id: e.id })
         setCountryValue({ label: e.label, value: e.value, id: e.id })
 
@@ -264,6 +243,7 @@ function PostAdvert() {
                         });
                     });
                     setCategoryType(allMetaList.category_type);
+                    setCategoryValue(allMetaList.category_type[0].id)
                     setLocationType(allMetaList.job_location_type);
                     await setEaringOptions(earningOption);
                     await setJobTypeOptions(jobType);
@@ -468,7 +448,7 @@ function PostAdvert() {
         }
         if (location.state !== null) {
             requestData.append(
-                "removeImgId", (removeImage)?removeImage:""
+                "removeImgId", (removeImage) ? removeImage : ""
             );
         }
 
@@ -573,7 +553,8 @@ function PostAdvert() {
         }
 
     }
-    console.log("removeImage", removeImage)
+
+
     return (
         <div className="main">
             {isLoading === true ? (
@@ -609,7 +590,7 @@ function PostAdvert() {
                                                     type="radio"
                                                     label={type.name}
                                                     value={type.id}
-
+                                                    defaultChecked={index === 0}
                                                 />
                                             </div>
                                         )) : ""}
@@ -619,6 +600,7 @@ function PostAdvert() {
                                             {errors.categorytype.message}
                                         </div>
                                     )}
+
                                     {CategoryValue && <div>
                                         <div className="mb-3">
                                             <div className="headings mb-3" >{t("ADD_DETAIL")}</div>
@@ -631,7 +613,7 @@ function PostAdvert() {
                                                         className="heading"
                                                         type="text"
                                                         maxLength="80"
-                                                        placeholder="Enter Heading"
+                                                        placeholder={t("ENTER_HEAD")}
                                                         {...register("heading", {
                                                             required: {
                                                                 value: true,
@@ -672,7 +654,7 @@ function PostAdvert() {
                                                         })}
                                                         value={description.value}
                                                         onChange={(e) => { description.onChange(e); setDescriptionLength(e.target.value.length) }}
-                                                        className="post_Add_Discription" placeholder="Enter description" />
+                                                        className="post_Add_Discription" placeholder={t("ENTER_DISCRIPT")} />
 
                                                 </Form.Group>
                                             </div>
@@ -696,33 +678,33 @@ function PostAdvert() {
                                                                 fieldState: { invalid, isTouched, isDirty, error },
                                                                 formState,
                                                             }) => (
-                                                                <Select
-                                                                    id="jobtype"
-                                                                    placeholder={t("SELECT_JOB_TYPE")}
-                                                                    // value={{ value: 0, label: "Select Job Type", id: 0}}
-                                                                    options={jobTypeOptions}
-
-                                                                    onChange={(e) => setNewJob(e)} // send value to hook form
-                                                                    value={jobTypeValue ? jobTypeValue : ""}
-                                                                    styles={{
-                                                                        placeholder: () => ({
-                                                                            color: "white",
-                                                                            position: "absolute",
-                                                                            display: "flex",
-                                                                            left: "15px",
-                                                                        }),
-                                                                    }}
-                                                                    theme={(theme) => ({
-                                                                        ...theme,
-                                                                        colors: {
-                                                                            ...theme.colors,
-                                                                            borderRadius: 0,
-                                                                            primary25: "#f2f2f2",
-                                                                            primary: "black",
-                                                                            primary50: "#f2f2f2",
-                                                                        },
-                                                                    })}
-                                                                />
+                                                                <div className="selectOptionPost">
+                                                                    <Select
+                                                                        id="jobtype"
+                                                                        placeholder={t("SELECT_JOB_TYPE")}
+                                                                        options={jobTypeOptions}
+                                                                        onChange={(e) => setNewJob(e)} // send value to hook form
+                                                                        value={jobTypeValue ? jobTypeValue : ""}
+                                                                        styles={{
+                                                                            placeholder: () => ({
+                                                                                color: "white",
+                                                                                position: "absolute",
+                                                                                display: "flex",
+                                                                                left: "15px",
+                                                                            }),
+                                                                        }}
+                                                                        theme={(theme) => ({
+                                                                            ...theme,
+                                                                            colors: {
+                                                                                ...theme.colors,
+                                                                                borderRadius: 0,
+                                                                                primary25: "#f2f2f2",
+                                                                                primary: "black",
+                                                                                primary50: "#f2f2f2",
+                                                                            },
+                                                                        })}
+                                                                    />
+                                                                </div>
                                                             )}
                                                             rules={{ required: true }}
                                                         />
@@ -809,7 +791,7 @@ function PostAdvert() {
                                                             })}
                                                             className="amount_Control"
                                                             type="text"
-                                                            placeholder="Amount (optional)"
+                                                            placeholder={t("AMOUNT_OPTIONAL")}
 
                                                         />
                                                     </Form.Group>
@@ -827,30 +809,32 @@ function PostAdvert() {
                                                             fieldState: { invalid, isTouched, isDirty, error },
                                                             formState,
                                                         }) => (
-                                                            <Select
-                                                                id="earningoption"
-                                                                options={earingOptions}
-                                                                value={earningOptionValue ? earningOptionValue : ""}
-                                                                onChange={(e) => setNewEarning(e)} // send value to hook form
-                                                                placeholder={t("SELECT_EARNING_OPTION")}
-                                                                styles={{
-                                                                    placeholder: () => ({
-                                                                        color: "white",
-                                                                        position: "absolute",
-                                                                        left: "15px",
-                                                                    }),
-                                                                }}
-                                                                theme={(theme) => ({
-                                                                    ...theme,
-                                                                    colors: {
-                                                                        ...theme.colors,
-                                                                        borderRadius: 0,
-                                                                        primary25: "#f2f2f2",
-                                                                        primary: "black",
-                                                                        primary50: "#f2f2f2",
-                                                                    },
-                                                                })}
-                                                            />
+                                                            <div className="selectOptionPost">
+                                                                <Select
+                                                                    id="earningoption"
+                                                                    options={earingOptions}
+                                                                    value={earningOptionValue ? earningOptionValue : ""}
+                                                                    onChange={(e) => setNewEarning(e)} // send value to hook form
+                                                                    placeholder={t("SELECT_EARNING_OPTION")}
+                                                                    styles={{
+                                                                        placeholder: () => ({
+                                                                            color: "white",
+                                                                            position: "absolute",
+                                                                            left: "15px",
+                                                                        }),
+                                                                    }}
+                                                                    theme={(theme) => ({
+                                                                        ...theme,
+                                                                        colors: {
+                                                                            ...theme.colors,
+                                                                            borderRadius: 0,
+                                                                            primary25: "#f2f2f2",
+                                                                            primary: "black",
+                                                                            primary50: "#f2f2f2",
+                                                                        },
+                                                                    })}
+                                                                />
+                                                            </div>
                                                         )}
                                                         rules={{ required: true }}
                                                     />
@@ -865,6 +849,7 @@ function PostAdvert() {
                                                     className="negotiables"
                                                     type="checkbox"
                                                     label={"Negotiable"}
+                                                    defaultChecked
                                                 />
                                             </div>}
                                         <div className="headings mb-3">{t("LOCATIONS")}</div>
@@ -926,6 +911,7 @@ function PostAdvert() {
                                                                     id="province"
                                                                     options={provinceOptions}
                                                                     value={provinceValue}
+                                                                    placeholder={t("SELECT_PROVIN")}
                                                                     onChange={(val) => { setNewProvinces(val) }}
                                                                     styles={{
                                                                         placeholder: () => ({
@@ -1046,7 +1032,7 @@ function PostAdvert() {
                                                 <Form.Control
                                                     className="companyName_Control"
                                                     type="text"
-                                                    placeholder="Company Name (optional)"
+                                                    placeholder={t("OPTINAL_COMPANY")}
                                                     {...register("companyName"
                                                     )}
                                                 />
