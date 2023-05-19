@@ -2,7 +2,6 @@ import React from "react";
 import "./CommonModule.css"
 
 function NoteBoxModule(props) {
-    console.log("propsprops", props)
   return (
     <section>
       <div className="noteBoxClass">

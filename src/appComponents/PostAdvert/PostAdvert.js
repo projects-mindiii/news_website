@@ -78,11 +78,11 @@ function PostAdvert() {
     const [CategoryValue, setCategoryValue] = useState();
     const [countryOptions, setCountryOptions] = useState();
     const [isDefaultCountry, setIsDefaultCountry] = useState([{
-        label: "Outside South Africa",
+        label: `${t("OUTOF_SOUTH")}`,
         value: 0,
         id: 0
     }, {
-        label: "South Africa",
+        label: `${t("SOUTH_AFRICA_SET")}`,
         value: 1,
         id: 1
     }]);
@@ -183,22 +183,24 @@ function PostAdvert() {
         setCountryCodeWatsapp("za");
         setDialCode("27");
         setCountryCode("za");
-        setValue("email", currentUser.email)
-        setValue("fullName", currentUser.name)
-        setValue("province", { label: 'Free State', value: 932, id: 932 })
+        setValue("email", currentUser.email);
+        setValue("fullName", currentUser.name);
+        setValue("province", { label: 'Selected Province', value: 932, id: 932 })
         setValue("isDefaultCountry", {
-            label: "South Africa",
+            label:`${t("SOUTH_AFRICA_SET")}`,
             value: 1,
             id: 1
         })
         setDefaultCountry({
-            label: "South Africa",
+            label: `${t("SOUTH_AFRICA_SET")}`,
             value: 1,
             id: 1
         })
-        setProvinceValue({ label: 'Free State', value: 932, id: 932 })
+        setProvinceValue({ label: 'Selected Province', value: 932, id: 932 })
         setCurrencyValue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
+        
     }
+   
     useEffect(() => {
         async function getClassifiedLists() {
             if (Object.keys(allMetaList).length > 0) {
@@ -289,26 +291,26 @@ function PostAdvert() {
                         }
                         if (location.state.is_default_country == 1) {
                             setValue("isDefaultCountry", {
-                                label: "South Africa",
+                                label: `${t("SOUTH_AFRICA_SET")}`,
                                 value: 1,
                                 id: 1
                             })
 
                             setDefaultCountry({
-                                label: "South Africa",
+                                label: `${t("SOUTH_AFRICA_SET")}`,
                                 value: 1,
                                 id: 1
                             })
                         }
                         else {
                             setValue("isDefaultCountry", {
-                                label: "Outside South Africa",
+                                label: `${t("SOUTH_AFRICA_SET")}`,
                                 value: 0,
                                 id: 0
                             })
 
                             setDefaultCountry({
-                                label: "Outside South Africa",
+                                label: `${t("SOUTH_AFRICA_SET")}`,
                                 value: 0,
                                 id: 0
                             })
@@ -870,8 +872,6 @@ function PostAdvert() {
                                                                 options={isDefaultCountry}
                                                                 value={defaultCountry}
                                                                 onChange={(e) => { setNewDefaultCountry(e) }}
-
-
                                                                 styles={{
                                                                     placeholder: () => ({
                                                                         color: "#231F20",

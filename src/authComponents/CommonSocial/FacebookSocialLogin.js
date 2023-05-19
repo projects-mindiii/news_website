@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { isSocialLogin, socialSignup } from "../../store/slices/UserSlice";
 import { SOCIAL_TYPE } from "../../utils/Constants";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 function FacebookSocialLogin(props) {
   const navigate = useNavigate();
@@ -58,20 +59,31 @@ function FacebookSocialLogin(props) {
   };
 
   return (
-   <>
-      <img src={Facebook} alt="facebook-logo" />
+    <>
+      {/* <img src={Facebook} alt="facebook-logo" /> 
+        <FacebookLogin
+        appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+        autoLoad={false}
+        fields="name,email,picture"
+        callback={responseFacebook}
+        cssClass="my-facebook-button-class"
+        textButton={props.facebookText && <h3>{props.facebookText}</h3>}
+      // textButton={<h3></h3>}
+      // onFailure={(value) => console.log(value)}
+      />   */}
+
       <FacebookLogin
         appId={process.env.REACT_APP_FACEBOOK_APP_ID}
         autoLoad={false}
         fields="name,email,picture"
         callback={responseFacebook}
         cssClass="my-facebook-button-class"
-         textButton={props.facebookText && <h3>{props.facebookText}</h3>}
-        // textButton={<h3></h3>}
-        // onFailure={(value) => console.log(value)}
+        render={renderProps => (
+          <button onClick={renderProps.onClick}><img src={Facebook} alt="facebook-logo" /><h3>{props.facebookText}</h3></button>
+        )}
       />
-      </>
-    
+    </>
+
   );
 }
 

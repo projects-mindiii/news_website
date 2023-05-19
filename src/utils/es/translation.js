@@ -90,6 +90,7 @@ export const TRANSLATIONS_ES = {
   CANCEL: "CANCELAR",
   DELETE: "BORRAR",
   SOUTH_AFRICA_SET: "Sudáfrica",
+  OUTOF_SOUTH:"Fuera de Sudáfrica",
 
   //----Deals Text------
   CONTACT_PERSON: "PERSONA DE CONTACTO",
@@ -163,7 +164,7 @@ export const TRANSLATIONS_ES = {
   ADVERT_DESCRIPTION: `Descripción del anuncio`,
   INCLUDE_DESCRIPTION: `Incluir una descripción`,
   JOB_TYPE: `EL TIPO DE TRABAJO`,
-  SELECT_JOB_TYPE: `Seleccionar tipo de trabajo`,
+  SELECT_JOB_TYPE: `SELECCIONE EL TIPO DE TRABAJO`,
   ON_HYBRID_REMOTE: `EN EL SITIO, HÍBRIDO O REMOTO?`,
   SELECT_OPTION: `Seleccionar opción`,
   EMPLOYMENT_EQUITY: `EQUIDAD EN EL EMPLEO`,
@@ -171,7 +172,7 @@ export const TRANSLATIONS_ES = {
   RENUMERATION: `RENUMERACIÓN`,
   PLEACE_ENTER_AMOUNT: `Por favor ingrese la cantidad`,
   PLEASE_FILL_AMOUNT: `Por favor complete la cantidad`,
-  SELECT_EARNING_OPTION: `Seleccione la opción de ganancia`,
+  SELECT_EARNING_OPTION: `SELECCIONE LA OPCIÓN DE GANANCIA`,
   PLEACT_CLICK: `Marque la casilla Haga clic en`,
   LOCATIONS: `UBICACIÓN`,
   INPUT_CITY_TOWN: `Ingresar Ciudad/Pueblo`,

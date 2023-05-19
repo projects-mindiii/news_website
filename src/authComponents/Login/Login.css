@@ -33,7 +33,7 @@
     font-weight: 400;
     font-size: 16px;
     color: #000000;
-    margin-bottom: 0px;
+    margin-bottom: 3px;
 }
 
 .loginComponents img {
@@ -65,28 +65,22 @@
 
 /* social signup facebook css */
 
-.loginComponents button.my-facebook-button-class.metro {
-    border: none !important;
-    background-color: #F6F6F6;
-    font-weight: 400;
-    font-size: 16px;
-    color: #000000;
-    margin-bottom: 0px;
-    cursor: pointer;
-    padding: 0px !important;
-    text-align: left;
+.loginComponents button {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    margin-left: -6px;
 }
 
-.loginformcomponent button.my-facebook-button-class.metro {
-    border: none !important;
-    font-weight: 400;
-    font-size: 16px;
-    color: #000000;
-    margin-bottom: 0px;
-    cursor: pointer;
-    margin-top: 36px;
+.loginformcomponent button {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
 }
-
 
 @media screen and (min-width: 320px) and (max-width: 325px) {
     .accountType p {
@@ -98,9 +92,15 @@
     }
 }
 
-@media screen and (min-width: 376px) and (max-width: 390px) {
+@media screen and (min-width: 391px) and (max-width: 398px) {
     .loginComponents h3 {
         font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 390px) {
+    .loginComponents h3 {
+        font-size: 14px;
     }
 
     .loginComponents img {
@@ -118,7 +118,7 @@
     }
 
     .loginComponents h3 {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
@@ -134,7 +134,7 @@
     }
 
     .loginComponents h3 {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
@@ -150,6 +150,13 @@
     }
 
     .loginComponents h3 {
-        font-size: 14px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 400px) {
+    .loginformcomponent button {
+        width: 100%;
+        min-width: 30px;
     }
 }

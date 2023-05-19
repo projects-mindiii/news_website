@@ -237,10 +237,6 @@
     background-color: #000000;
 }
 
-/* .post_Add_Save {
-    margin-top: 23px;
-} */
-
 .post_Add_DeleteAdever button {
     height: 62px;
     font-weight: 600;
@@ -271,7 +267,7 @@
 }
 
 .post_AddForm .companyName .companyName_Control {
-    padding-left: 58px;
+    padding-left: 63px;
     position: relative;
 }
 
@@ -309,7 +305,7 @@
 }
 
 .post_AddForm .names .names_Control {
-    padding-left: 58px;
+    padding-left: 63px;
     position: relative;
 }
 
@@ -422,7 +418,7 @@
     margin-top: 0px;
     height: 40px;
     font-weight: 400;
-    line-height: 25px;
+    line-height: 28px;
     color: #FFFFFF;
     background-color: #000000;
     display: flex;
@@ -453,7 +449,7 @@
 }
 
 .post_Add_priceDiv input.amount_Control.form-control {
-    padding-left: 58px;
+    padding-left: 63px;
 }
 
 .css-a0izu-control {
@@ -588,7 +584,9 @@
     background: #000000 !important;
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
-    font-weight: 500 !important;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
 }
 
 .selectOptionPost .css-13cymwt-control {
@@ -596,7 +594,9 @@
     background: #000000 !important;
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
-    font-weight: 500 !important;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
 }
 
 .selectOptionPost .css-13cymwt-control:hover {
@@ -608,7 +608,9 @@
     background: #000000 !important;
     box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
     border-radius: 7.26px !important;
-    font-weight: 500 !important;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
 }
 
 .selectOptionPost .css-1xz3in2-control:hover {

@@ -14,7 +14,7 @@ import PasswordInput from "../../../formComponent/PasswordInput/PasswordInput";
 import CustomBtn from "../../../formComponent/Button/Button";
 import { useState } from "react";
 import ErrorResponse from "../../../utils/AlertBox/ErrorResponse";
-import { userLogin,getMetaListApi } from "../../../store/slices/UserSlice";
+import { userLogin, getMetaListApi } from "../../../store/slices/UserSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleLogin from "../../CommonSocial/GoogleLogin";
 import FacebookSocialLogin from "../../CommonSocial/FacebookSocialLogin";
@@ -50,7 +50,7 @@ function LoginForm() {
         requestData.append("password", formdata.password);
         dispatch(userLogin(requestData)).then((responsejson) => {
             const response = responsejson.payload;
-            console.log('response',response)
+            console.log('response', response)
             if (response.status_code === 200) {
                 dispatch(getMetaListApi(response.data.token));
                 setValue("email", "");
@@ -107,11 +107,8 @@ function LoginForm() {
 
                         <div className="socialLogo loginformcomponent">
                             <GoogleLogin />
-                            {/* <span> */}
 
-                                <FacebookSocialLogin facebookText="" />
-
-                            {/* </span> */}
+                            <FacebookSocialLogin facebookText=""/>
 
                             <img src={Apple} alt="apple-logo" />
                             <img src={Linkedin} alt="linkedin-logo" />
