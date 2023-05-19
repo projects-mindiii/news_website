@@ -57,6 +57,7 @@ export const forSaleListApi = createAsyncThunk(
   }
 );
 
+// Thunk for for wanted classfied list
 export const getWantedListApi = createAsyncThunk(
   "classified/getWantedListApi",
   async (data, { rejectWithValue }) => {
@@ -72,6 +73,7 @@ export const getWantedListApi = createAsyncThunk(
   }
 );
 
+// Thunk for for job classfied list
 export const getJobOfferListApi = createAsyncThunk(
   "jobtypes/getJobOfferListApi",
   async (data, { rejectWithValue }) => {
@@ -87,6 +89,7 @@ export const getJobOfferListApi = createAsyncThunk(
   }
 );
 
+// Thunk for for job seeker classfied list
 export const getJobSeekerListApi = createAsyncThunk(
   "jobtypes/getJobSeekerListApi",
   async (data, { rejectWithValue }) => {

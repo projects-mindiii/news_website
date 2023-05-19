@@ -6,8 +6,9 @@ import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
 import ContactPerson from "../../CommonComponent/ContactPerson";
 import watchicon from "../../assets/images/watch_ico.png";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
-import AddBookMarks from "../BookMarks/AddBookMarks";
+import AddBookmarks from "../Bookmarks/AddBookmarks";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function ClassifiedList({
   forSaleListData,
@@ -17,7 +18,7 @@ function ClassifiedList({
   displayRoute,
 }) {
 
- 
+  const { t } = useTranslation(); 
   const navigate = useNavigate();
   
   return (
@@ -48,14 +49,14 @@ function ClassifiedList({
             </div>
             <div className="classiFieds_bookmarkicon">
               {displayRoute && displayRoute == "bookmark" ? (
-                <AddBookMarks
+                <AddBookmarks
                   isBookmark={item.is_bookmark}
                   id={item.refrence_id}
                   bookType={bookType}
                   isApproved={item.approval_status}
                 />
               ) : (
-                <AddBookMarks
+                <AddBookmarks
                   isBookmark={item.is_bookmark}
                   id={item.id}
                   bookType={bookType}
@@ -115,12 +116,10 @@ function ClassifiedList({
 
       <SocialMedaiShare />
       
-      {(displayRoute &&  displayRoute=="your_advert" )?(<button className="edit_DeleteButton" onClick={()=>navigate("/post-advert",{state:item})}>EDIT / DELETE ADVERT</button>):""}
-      {(displayRoute &&  displayRoute=="your_advert" && item.approval_status==0 )?(<button className="not_live">NOT LIVE - Pending Approvals</button>):""}
+      {(displayRoute &&  displayRoute=="your_advert" )?(<button className="edit_DeleteButton" onClick={()=>navigate("/post-advert",{state:item})}>{t("EDIT_DELETE_BTN")}</button>):""}
+      {(displayRoute &&  displayRoute=="your_advert" && item.approval_status==0 )?(<button className="not_live">{t("PENDING_APPROVAL")}</button>):""}
     </div>
-    
   );
-
 }
 function ClassifiedCategoryList({forSaleListData, bookType,displayRoute}) {
   if(displayRoute &&  displayRoute=="your_advert"){

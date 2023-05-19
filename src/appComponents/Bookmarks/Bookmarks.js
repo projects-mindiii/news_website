@@ -4,11 +4,11 @@ import NoteBoxModule from "../CommonModule/NoteBoxModule";
 import { useTranslation } from "react-i18next";
 import ClassifiedCategoryList from "../ClassiFieds/ClassifiedCategoryList";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./BookMarks.module.css";
+import styles from "./Bookmarks.module.css";
 import {
-  addBookMarkApi,
-  bookMarkListApi,
-} from "../../store/slices/BookMarkSlice";
+  addBookmarkApi,
+  bookmarkListApi,
+} from "../../store/slices/BookmarkSlice";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import DeleteAlertBox from "../DeleteAlertBox/DeleteAlertBox";
 import { Toast } from "../../utils/Toaster";
@@ -22,11 +22,11 @@ import CustomBtn from "../../formComponent/Button/Button";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 
-function BookMarks() {
+function Bookmarks() {
   const { t } = useTranslation();
   const { jobOfferWebList } = useSelector((state) => state.classified);
-  const { bookMarkList, bookMarkTotalCount, isLoading } = useSelector(
-    (state) => state.bookMark
+  const { bookmarkList, bookmarkTotalCount, isLoading } = useSelector(
+    (state) => state.bookmark
   );
   const { userToken } = useSelector((state) => state.user);
   const [offset, setOffset] = useState(PAGINATION_VALUE.DEFAULT_OFFSET);
@@ -40,17 +40,17 @@ function BookMarks() {
   //----- for show modal-----
   const handleShow = () => setShowPopup(true);
 
-  async function getBookMark(loadMore, offsetValue) {
-    const bookMarkRequired = {
+  async function getBookmark(loadMore, offsetValue) {
+    const bookmarkRequired = {
       limit: PAGINATION_VALUE.DEFAULT_LIMIT,
       offset: offsetValue,
     };
-    const BookMarkData = {
+    const BookmarkData = {
       userToken: userToken,
-      requiredValue: bookMarkRequired,
+      requiredValue: bookmarkRequired,
       loadMore: loadMore,
     };
-    dispatch(bookMarkListApi(BookMarkData)).then((responsejson) => {
+    dispatch(bookmarkListApi(BookmarkData)).then((responsejson) => {
       if (responsejson.payload.response.status === STATUS_CODES.INVALID_TOKEN) {
         Toast.fire({
           icon: "error",
@@ -63,22 +63,23 @@ function BookMarks() {
     });
   }
   useEffect(() => {
-    getBookMark(false, offset);
+    getBookmark(false, offset);
     setOffset(PAGINATION_VALUE.DEFAULT_OFFSET);
   }, []);
 
   function loadmore() {
     setOffset(offset + PAGINATION_VALUE.DEFAULT_LIMIT);
-    getBookMark(true, offset + PAGINATION_VALUE.DEFAULT_LIMIT);
+    getBookmark(true, offset + PAGINATION_VALUE.DEFAULT_LIMIT);
   }
 
+  // =====Here Calling API for remove all bookmark=====
   async function removeAllBookmark() {
     const requestData = new FormData();
     requestData.append("id", 0);
     requestData.append("status", BOOK_ACTION_TYPE.REMOVE_ALL);
     requestData.append("type", 0);
     dispatch(
-      addBookMarkApi({ userToken: userToken, requestData: requestData })
+      addBookmarkApi({ userToken: userToken, requestData: requestData })
     ).then((response) => {
       if (response.payload.status_code == STATUS_CODES.SUCCESS) {
         Toast.fire({
@@ -89,7 +90,7 @@ function BookMarks() {
           limit: PAGINATION_VALUE.DEFAULT_LIMIT,
           offset: offset,
         };
-        dispatch(bookMarkListApi({ userToken: userToken, requiredValue }));
+        dispatch(bookmarkListApi({ userToken: userToken, requiredValue }));
         handleClose();
       } else if (response.payload.status == STATUS_CODES.BAD_REQUEST) {
         Toast.fire({
@@ -123,7 +124,7 @@ function BookMarks() {
                 />
               </Col>
               <Col xs={12} sm={12} md={12} lg={6}>
-                {bookMarkList && bookMarkList.length > 0 ? (
+                {bookmarkList && bookmarkList.length > 0 ? (
                   <>
                     <div className={styles.bookmarkHeading}>
                       <h3>{t("YOURS_BOOK_MARKS")}</h3>
@@ -133,10 +134,10 @@ function BookMarks() {
                     </p>
                     <ClassifiedCategoryList
                       displayRoute="bookmark"
-                      forSaleListData={bookMarkList}
+                      forSaleListData={bookmarkList}
                       bookType={BOOK_TYPE.CLASSIFIED}
                     />
-                    {bookMarkList.length >= bookMarkTotalCount ? (
+                    {bookmarkList.length >= bookmarkTotalCount ? (
                       ""
                     ) : (
                       <CustomBtn
@@ -165,4 +166,4 @@ function BookMarks() {
   );
 }
 
-export default BookMarks;
+export default Bookmarks;

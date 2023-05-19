@@ -3,17 +3,17 @@ import SublyApi from "../../helpers/Api";
 import { STATUS_CODES } from "../../utils/StatusCode";
 
 const initialState = {
-  bookMarkTotalCount: 0,
-  bookMarkList: [],
+  bookmarkTotalCount: 0,
+  bookmarkList: [],
   isLoading: false,
 };
 
-// Thunk for getWeb list
-export const bookMarkListApi = createAsyncThunk(
-  "bookMark/bookMarkListApi",
+// Thunk for getting bookmark list
+export const bookmarkListApi = createAsyncThunk(
+  "bookmark/bookmarkListApi",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await SublyApi.getBookMarkList(
+      const response = await SublyApi.getBookmarkList(
         data.userToken,
         data.requiredValue
       );
@@ -24,11 +24,12 @@ export const bookMarkListApi = createAsyncThunk(
   }
 );
 
-export const addBookMarkApi = createAsyncThunk(
-  "addBookMark/addBookMarkApi",
+// ====add or remove bookmark====
+export const addBookmarkApi = createAsyncThunk(
+  "addBookmark/addBookmarkApi",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await SublyApi.addBookMark(
+      const response = await SublyApi.addBookmark(
         data.userToken,
         data.requestData
       );
@@ -39,38 +40,39 @@ export const addBookMarkApi = createAsyncThunk(
   }
 );
 
-export const bookMarkSlice = createSlice({
-  name: "bookMark",
+export const bookmarkSlice = createSlice({
+  name: "bookmark",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(bookMarkListApi.pending, (state) => {
+    builder.addCase(bookmarkListApi.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(bookMarkListApi.fulfilled, (state, action) => {
+    builder.addCase(bookmarkListApi.fulfilled, (state, action) => {
       const response = action.payload.response;
       if (response.status_code == STATUS_CODES.SUCCESS) {
-        if (action.payload.loadmore == true) {
-          state.bookMarkList = state.bookMarkList.concat(response.data.list);
+        // ===here managing load more functionality===
+         if (action.payload.loadmore == true) {   
+          state.bookmarkList = state.bookmarkList.concat(response.data.list);
         } else {
-          state.bookMarkList = response.data.list;
+          state.bookmarkList = response.data.list;
         }
-        state.bookMarkTotalCount = response.data.total_count;
+        state.bookmarkTotalCount = response.data.total_count;
       } else {
-        state.bookMarkTotalCount = 0;
-        state.bookMarkList = [];
+        state.bookmarkTotalCount = 0;
+        state.bookmarkList = [];
       }
       state.isLoading = false;
     });
-    builder.addCase(bookMarkListApi.rejected, (state, action) => {
+    builder.addCase(bookmarkListApi.rejected, (state, action) => {
       state.isLoading = false;
     });
 
     // Cases while adding or removing bookmark
-    builder.addCase(addBookMarkApi.pending, (state) => {
+    builder.addCase(addBookmarkApi.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(addBookMarkApi.fulfilled, (state, action) => {
+    builder.addCase(addBookmarkApi.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.status_code == STATUS_CODES.SUCCESS) {
         state.isLoading = false;
@@ -78,9 +80,9 @@ export const bookMarkSlice = createSlice({
         state.isLoading = false;
       }
     });
-    builder.addCase(addBookMarkApi.rejected, (state, action) => {
+    builder.addCase(addBookmarkApi.rejected, (state, action) => {
       state.isLoading = false;
     });
   },
 });
-export default bookMarkSlice.reducer;
+export default bookmarkSlice.reducer;

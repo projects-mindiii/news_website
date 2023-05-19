@@ -50,7 +50,6 @@ function LoginForm() {
         requestData.append("password", formdata.password);
         dispatch(userLogin(requestData)).then((responsejson) => {
             const response = responsejson.payload;
-            console.log('response', response)
             if (response.status_code === 200) {
                 dispatch(getMetaListApi(response.data.token));
                 setValue("email", "");
