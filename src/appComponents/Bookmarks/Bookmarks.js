@@ -24,7 +24,6 @@ import { useNavigate } from "react-router-dom";
 
 function Bookmarks() {
   const { t } = useTranslation();
-  const { jobOfferWebList } = useSelector((state) => state.classified);
   const { bookmarkList, bookmarkTotalCount, isLoading } = useSelector(
     (state) => state.bookmark
   );

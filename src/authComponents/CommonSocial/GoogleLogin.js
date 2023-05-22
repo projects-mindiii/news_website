@@ -51,7 +51,6 @@ function GoogleLogin(props) {
           localStorage.setItem("token", response.data.token);
         } else if (response.data.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
-            console.log("api socialSignup responsejson", signresponsejson);
             const response = signresponsejson.payload;
             if (response.status_code === STATUS_CODES.SUCCESS) {
               Toast.fire({

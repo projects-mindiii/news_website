@@ -50,9 +50,11 @@ export const TRANSLATIONS_EN = {
   DONE_BUTTON: "Done",
   CLASSIFIED_CONTACT_PERSON: "Contact Person",
   LOADMORE_BUTTON: " Load More",
-  ALL_SOUTH_AFRICA: "All South Africa",
   REFRENCE_ID: "all",
 
+  ALL_COUNTRY: "All Country",
+  EDIT_ADVERT: "EDIT / DELETE ADVERT",
+  NOT_LIVE: "NOT LIVE - Pending Approvals",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -78,7 +80,8 @@ export const TRANSLATIONS_EN = {
   YOUR_PROFILE: "YOUR PROFILE",
   PROFILE: "Your Profile Details",
   PROFILE_PARA: "Tell us a little about you, used for classifieds",
-  PROFILE_DETAILS: "A profile is required to post and manage classified adverts. You can create or edit yout profile here.",
+  PROFILE_DETAILS:
+    "A profile is required to post and manage classified adverts. You can create or edit yout profile here.",
   LOCATION: "Your Location",
   LOCATION_PARA: "Not public, used for your classified adverts",
   PROFILE_PHOTO: "Your Profile Photo",
@@ -117,12 +120,12 @@ export const TRANSLATIONS_EN = {
   NO_BRAND: "--- NO BRANDS TO DISPLAY ---",
   NO_DEAL: "--- NO DEALS TO DISPLAY ---",
 
-
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Form incomplete, please fill all fields",
   INVALID_EMAIL: "Invalid Email Address",
   EMAIL_MAXLENGTH: "Email must be 50 character or small",
-  INVALID_PASSWORD: "Password should have 1 upper case, 1 lower case, 1 number, 1 special character min 4 char.",
+  INVALID_PASSWORD:
+    "Password should have 1 upper case, 1 lower case, 1 number, 1 special character min 4 char.",
   PASS_MAXLENGTH: "Password must be 8 character or small",
   PASS_MINLENGTH: "password must be 4 character or long",
   INVALID_NAME: "Please enter valid name",
@@ -135,7 +138,6 @@ export const TRANSLATIONS_EN = {
   NOT_MATCH: "Repeat password does not match",
   MATCH_PASS: "Passwords have to match",
   CURRENT_PASS: "Please Enter current password",
-
 
   //---------- Placeholder Common Text---------------
   NAME: "Full Name",
@@ -150,9 +152,8 @@ export const TRANSLATIONS_EN = {
   REPEAT_PASSWORD: "Repeat Password",
   CURRENT_PASSWORD: "Current Password",
   SELECT_PROVINCE: "Select Province",
-  COUNTRY_SET: "Set Country",
+  COUNTRY_SET: "Country Set",
   CITY_TEXT: "Input City/Town",
-
 
   //---------- Form Lable Common Text---------------
   REMEMBER_ME: "Remember me",
@@ -203,7 +204,8 @@ export const TRANSLATIONS_EN = {
 
   //---------Login Alert Box---------
   LOGIN_REQUIRED: "LOGIN REQUIRED",
-  LOGIN_SUB_TEXT: "You need to create a profile in order to post an item. Login now if you have a profile or create one.",
+  LOGIN_SUB_TEXT:
+    "You need to create a profile in order to post an item. Login now if you have a profile or create one.",
   CREATE_FREE_PROFILE: "Create FREE Profile",
   OR: "OR",
   LOGIN_TO_PROFILE: "Login to your Profile",

@@ -8,11 +8,16 @@ import HeaderFeatures from "./HeaderFeatures/HeaderFeatures";
 import HeaderData from "./HeaderData";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { guestUserLogin, getMetaListApi, userLogout } from "../../store/slices/UserSlice";
+import {
+  guestUserLogin,
+  getMetaListApi,
+  userLogout,
+} from "../../store/slices/UserSlice";
 import ClassifiedCountry from "../ClassiFieds/ClassifiedCountry";
 import Loader from "../../utils/Loader/Loader";
 import { STATUS_CODES } from "../../utils/StatusCode";
-import { Toast } from "../../utils/Toaster";
+import SearchTotalCount from "../Search/SearchTotalCount";
+
 //-------Create a Header component--------
 function Header() {
   const dispatch = useDispatch();
@@ -33,7 +38,6 @@ function Header() {
         navigate("/login");
       }
     }
-
   }
 
   const { guestUser, currentUser, isLoading, userToken } = useSelector(
@@ -75,7 +79,7 @@ function Header() {
             <img src={Logo} alt="news-logo" />
           </div>
           {location.pathname == "/classifieds" ||
-            location.pathname == "/job-types" ? (
+          location.pathname == "/job-types" ? (
             <div className="bannerImg">
               <iframe
                 src={process.env.REACT_APP_CLASSIFIED_HEADER_IFRAME_URL}
@@ -85,7 +89,7 @@ function Header() {
                   margin: "0px",
                   border: "none",
                   scrollBehavior: "none",
-                  allowfullscreen: "true"
+                  allowfullscreen: "true",
                 }}
               ></iframe>
             </div>
@@ -115,19 +119,22 @@ function Header() {
           <Row>
             <Col xl={8} lg={8} md={12} sm={12}>
               {location.pathname == "/deals/latest-deals" ||
-                location.pathname.match("/deals/latest-deals/company-profile/") || location.pathname == "/deals/products"
-                || location.pathname == "/deals/services" || location.pathname == "/deals/brands" ||
-                location.pathname == "/deals/companies" ? (
+              location.pathname.match("/deals/latest-deals/company-profile/") ||
+              location.pathname == "/deals/products" ||
+              location.pathname == "/deals/services" ||
+              location.pathname == "/deals/brands" ||
+              location.pathname == "/deals/companies" ? (
                 <DealsHeader />
               ) : (
                 ""
               )}
               {location.pathname == "/classifieds" ||
-                location.pathname == "/job-types" ? (
+              location.pathname == "/job-types" ? (
                 <ClassifiedCountry />
               ) : (
                 ""
               )}
+              {location.pathname == "/search-list" ? <SearchTotalCount /> : ""}
             </Col>
             <Col xl={4} lg={4} md={12} sm={12}>
               <SearchBar />

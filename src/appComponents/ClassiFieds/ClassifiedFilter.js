@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import CustomBtn from "../../formComponent/Button/Button";
-import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
+import { CLASSIFIED_CATEGORY_TYPE,PAGINATION_VALUE, SEARCH_TYPE, CLASSIFIED_REFRENCE_TYPE } from "../../utils/Constants";
 import {
   forSaleListApi,
   getJobOfferListApi,
@@ -38,21 +38,21 @@ function ClassifiedFilter({ closeModal, setResultData }) {
 
   const [countryOption, setCountryOption] = useState([
     {
-      label: "All country ",
+      label:`${t("ALL_COUNTRY")}`,
       value: "0",
       id: "0",
     },
   ]);
 
   let countrySelectedValue = {
-    label: "All Country",
+    label:`${t("ALL_COUNTRY")}`,
     value: "",
     id: "0",
   };
 
   // function for default south africa
   if (Object.keys(classifiedFilterValues).length !== 0) {
-    if (classifiedFilterValues.refrenceType == "2") {
+    if (classifiedFilterValues.refrenceType == CLASSIFIED_REFRENCE_TYPE.OUTSIDE_SOUTH_AFRICA) {
       if (classifiedFilterValues.countryId > 0) {
         countrySelectedValue = {
           value: classifiedFilterValues.countryId,
@@ -67,21 +67,21 @@ function ClassifiedFilter({ closeModal, setResultData }) {
 
   const [countrySelected, setCountrySelected] = useState(countrySelectedValue);
   let provinceSelectedValue = {
-    value: "all",
-    label: "All South Africa",
-    id: "all",
+    value:`${t("REFRENCE_ID")}`,
+    label:`${t("COUNTRY_NAME")}`,
+    id:`${t("REFRENCE_ID")}`,
   };
 
    // function for Outside south africa
   if (Object.keys(classifiedFilterValues).length !== 0) {
-    if (classifiedFilterValues.refrenceType == "1") {
+    if (classifiedFilterValues.refrenceType == CLASSIFIED_REFRENCE_TYPE.ALL_SOUTH_AFRICA) {
       provinceSelectedValue = {
         value: classifiedFilterValues.refrenceId,
         label: classifiedFilterValues.name,
         id: classifiedFilterValues.refrenceId,
       };
     } else {
-      provinceSelectedValue = { value: 0, label: "Out of South Africa", id: 0 };
+      provinceSelectedValue = { value: 0, label:`${t("OUTOF_SOUTH")}`, id: 0 };
     }
   }
   const [provinceSelected, setProvinceSelected] = useState(
@@ -91,25 +91,25 @@ function ClassifiedFilter({ closeModal, setResultData }) {
 
   // function for filter api
   function searchApiCall(provinceValue) {
-    let search_by = 0;
+    let search_by = SEARCH_TYPE.ALL_SOUTH_AFRICA;
     let province = 0;
     let country = 0;
 
-    if (provinceValue.value == "all") {
-      search_by = 0;
+    if (provinceValue.value == `${t("REFRENCE_ID")}`) {
+      search_by =  SEARCH_TYPE.ALL_SOUTH_AFRICA;
       province = "";
       country = "";
       const value = {
-        name: "All South Africa",
-        refrenceType: "1",
-        refrenceId: "all",
+        name:`${t("COUNTRY_NAME")}`,
+        refrenceType: CLASSIFIED_REFRENCE_TYPE.ALL_SOUTH_AFRICA,
+        refrenceId:`${t("REFRENCE_ID")}`,
       };
       dispatch(setClassifiedFilterName(value));
     } else if (provinceValue.value == 0) {
-      search_by = 2;
+      search_by =  SEARCH_TYPE.OUTSIDE_SOUTH_AFRICA;
       province = "";
       country = countrySelected.value;
-      let name = "Out of South Africa";
+      let name = `${t("OUTOF_SOUTH")}`;
       let countryId = 0;
       let city = "";
 
@@ -120,7 +120,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
       }
       const value = {
         name: name,
-        refrenceType: "2",
+        refrenceType: CLASSIFIED_REFRENCE_TYPE.OUTSIDE_SOUTH_AFRICA,
         refrenceId: 0,
         countryId: countryId,
         city: city,
@@ -128,19 +128,19 @@ function ClassifiedFilter({ closeModal, setResultData }) {
       dispatch(setClassifiedFilterName(value));
 
     } else {
-      search_by = 1;
+      search_by = SEARCH_TYPE.PROVINCE;
       country = "";
       province = provinceValue.value;
       const value = {
         name: provinceValue.label,
-        refrenceType: "1",
+        refrenceType: CLASSIFIED_REFRENCE_TYPE.ALL_SOUTH_AFRICA,
         refrenceId: provinceValue.value,
       };
       dispatch(setClassifiedFilterName(value));
     }
     const classfiedQuery = {
-      limit: 10,
-      offset: 0,
+      limit: PAGINATION_VALUE.DEFAULT_LIMIT,
+      offset: PAGINATION_VALUE.DEFAULT_OFFSET,
       search_by: search_by,
       province: province,
       country: country,
@@ -249,7 +249,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
   useEffect(() => {
     let countryOption = [];
     let provinceOption = [
-      { value: "all", label: "All South Africa", id: "all" },
+      { value:`${t("REFRENCE_ID")}`, label:`${t("COUNTRY_NAME")}`, id:`${t("REFRENCE_ID")}` },
     ];
     async function getMetaDetails() {
       if (Object.keys(allMetaList).length > 0) {
@@ -269,7 +269,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
             id: item.id,
           });
         }); //getting selection option in array as province list
-        provinceOption.push({ value: 0, label: "Out of South Africa", id: 0 });
+        provinceOption.push({ value: 0, label: `${t("OUTOF_SOUTH")}`, id: 0 });
 
         await setProvinceOption(provinceOption);
       }
