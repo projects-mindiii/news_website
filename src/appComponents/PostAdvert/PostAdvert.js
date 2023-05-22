@@ -28,7 +28,8 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
 import { useLocation } from "react-router-dom";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
-import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
+import { guestUserLogin, userLogout, userDetails } from "../../store/slices/UserSlice";
+
 
 //-------Create a Deals Header component--------
 function PostAdvert() {
@@ -58,7 +59,7 @@ function PostAdvert() {
     const [isLoading, setIsLoading] = useState(false)
     const [profilePreview, setProfilePreview] = useState([])
     const [profileImage, setProfileImage] = useState([]);
-    const [orignamImage, setOrignalImage] = useState([]);
+    const [orignalImage, setOrignalImage] = useState([]);
     const [showHead, setShowHead] = useState(false);
     const [cropper, setCropper] = useState("");
     const [watsappNo, setWatsappNo] = useState("");
@@ -178,29 +179,7 @@ function PostAdvert() {
         }
         setCategoryValue("");
     }
-    function setDefaultValue() {
-        setDialCodeWatsapp("27");
-        setCountryCodeWatsapp("za");
-        setDialCode("27");
-        setCountryCode("za");
-        setValue("email", currentUser.email);
-        setValue("fullName", currentUser.name);
-        setValue("province", { label: 'Selected Province', value: 932, id: 932 })
-        setValue("isDefaultCountry", {
-            label:`${t("SOUTH_AFRICA_SET")}`,
-            value: 1,
-            id: 1
-        })
-        setDefaultCountry({
-            label: `${t("SOUTH_AFRICA_SET")}`,
-            value: 1,
-            id: 1
-        })
-        setProvinceValue({ label: 'Selected Province', value: 932, id: 932 })
-        setCurrencyValue({ id: 154, name: 'South African rand', symbol: 'R', code: 'ZAR' });
-        
-    }
-   
+
     useEffect(() => {
         async function getClassifiedLists() {
             if (Object.keys(allMetaList).length > 0) {
@@ -252,11 +231,82 @@ function PostAdvert() {
                     await setCountryOptions(countyryOption);
                     await setProvincesOptions(provinceOption)
                     await setCurrenciesOptions(currencyoption)
+
                     if (location && location.state == null) {
-                        setDefaultValue();
+                        dispatch(userDetails(userToken)).then((responsejson) => {
+                            const response = responsejson.payload;
+                            if (response.status_code === STATUS_CODES.SUCCESS) {
+                                setValue(
+                                    "fullName",
+                                    response.data[0].name ? response.data[0].name : ""
+                                );
+                                setValue("email", response.data[0].email ? response.data[0].email : "");
+                                setValue("city", response.data[0].city ? response.data[0].city : "");
+                                setValue("companyName", response.data[0].company_name ? response.data[0].company_name : "");
+
+
+                                setDialCodeWatsapp(response.data[0].whatsapp_dail_code ? response.data[0].whatsapp_dail_code : "27");
+                                setWatsappNo(response.data[0].whatapp_contact_number ? response.data[0].whatapp_contact_number : "");
+                                setCountryCodeWatsapp(response.data[0].whatsapp_country_code ? response.data[0].whatsapp_country_code : "za");
+
+                                setDialCode(response.data[0].dial_code
+                                    ? response.data[0].dial_code
+                                    : "27");
+                                setPhoneNo(response.data[0].contact
+                                    ? response.data[0].contact
+                                    : "");
+                                setCountryCode(response.data[0].country_code
+                                    ? response.data[0].country_code
+                                    : "za");
+
+
+                                if(response.data[0].is_default_country==1){
+                                    setValue("isDefaultCountry", {
+                                        label: `${t("SOUTH_AFRICA_SET")}`,
+                                        value: 1,
+                                        id: 1
+                                    })
+                                    setDefaultCountry({
+                                        label: `${t("SOUTH_AFRICA_SET")}`,
+                                        value: 1,
+                                        id: 1
+                                    })
+                                }else{ 
+                                    setValue("isDefaultCountry", {
+                                        label: `${t("OUTOF_SOUTH")}`,
+                                        value: 0,
+                                        id: 0
+                                    })
+                                    setDefaultCountry({
+                                        label: `${t("OUTOF_SOUTH")}`,
+                                        value: 0,
+                                        id: 0
+                                    })
+                                }
+                                
+                                if(response.data[0].provinces && response.data[0].provinces>0){
+                                    const newProvinceOption = provinceOption.find(
+                                        (item) => item.id === response.data[0].provinces
+                                    );
+                                    setNewProvinces(newProvinceOption);
+                                }else{
+                                    setNewProvinces({ label: 'Selected Province', value: "", id: "" })
+                                }
+
+                               
+                                if(response.data[0].country_id && response.data[0].country_id>0){
+                                    const newCountryOption = countyryOption.find(
+                                        (item) => item.id === response.data[0].country_id
+                                    );
+                                    setNewCountry(newCountryOption);
+                                }else{
+                                    setNewCountry({ label: 'Selected Country', value: "", id: "" })
+                                }
+                            }
+                        });
                     }
                     else {
-                        console.log(location)
+                        
                         setValue("categorytype", location.state.category_type_id && location.state.category_type_id.toString())
                         setCategoryValue(location.state.category_type_id && location.state.category_type_id.toString())
                         setValue("fullName", location.state.user_name)
@@ -315,22 +365,22 @@ function PostAdvert() {
                                 id: 0
                             })
                         }
+
                         if (location.state.is_default_country == 1) {
-                            setValue("province", { label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
-                            setProvinceValue({ label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
+                            setNewProvinces({ label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
                         }
                         else {
-                            setValue("province", { label: 'Free State', value: 932, id: 932 })
-                            setValue("country", { label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
-                            setProvinceValue({ label: 'Free State', value: 932, id: 932 })
-                            setCountryValue({ label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
+                            // setNewProvinces({ label: 'Selected Province', value: "", id: "" })
+                            setNewCountry({ label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
                         }
+
                         if (location.state.earning_option_id) {
                             setValue("earningoption", { id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
                             setEaringOptionValue({ id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
                         }
 
                         setCurrencyValue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location.state.currency_symbol, code: location.state.currency_code })
+
                     }
                 }
             }
@@ -434,8 +484,8 @@ function PostAdvert() {
             requestData.append('classifiedGallery', "")
         }
 
-        if (orignamImage && orignamImage.length > 0) {
-            orignamImage.forEach((item, index) => {
+        if (orignalImage && orignalImage.length > 0) {
+            orignalImage.forEach((item, index) => {
                 requestData.append('classifiedGalleryOriginal', item)
             })
         }
@@ -475,7 +525,7 @@ function PostAdvert() {
         });
     }
     const uploadImage = (e) => {
-        const setorignal = [...orignamImage];
+        const setorignal = [...orignalImage];
         e.preventDefault();
         let files;
         if (e.dataTransfer) {

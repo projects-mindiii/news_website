@@ -135,7 +135,7 @@ function CompanyProfile({ companyDetailData }) {
           </div>
 
           <div className="mapClass">
-            <MapLocation address={companyDetailData.company_detail.address} />
+            <MapLocation address={companyDetailData.company_detail} />
           </div>
 
           <AddressFields addressSet={companyDetailData.branch_list} />
