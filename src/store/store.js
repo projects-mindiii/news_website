@@ -7,7 +7,7 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from 'redux-thunk';
 import { combineReducers } from "redux";
 import classifiedSlice from './slices/ClassifiedSlice';
-import  bookmarkSlice  from './slices/bookmarkSlice';
+import  BookmarkSlice  from './slices/BookmarkSlice';
 import  searchSlice  from './slices/SearchSlice';
 
 //redux method which combines reducer
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   user: userSlice,
   deal: dealSlice,
   classified: classifiedSlice,
-  bookmark: bookmarkSlice,
+  bookmark: BookmarkSlice,
   search: searchSlice,
 });
 
