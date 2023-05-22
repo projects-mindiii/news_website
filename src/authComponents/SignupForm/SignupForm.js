@@ -32,9 +32,6 @@ function SignupForm() {
   //----- set state for show alert box for error response------
   const [showError, setShowError] = useState(null);
 
-  //-------sets toggle for subscribe button on/off--------------
-  // const [notification, setNotification] = useState(false);
-
   //--------function for form validation using useform-----------
   const {
     register,
@@ -44,6 +41,7 @@ function SignupForm() {
     formState: { errors },
   } = useForm();
 
+  // ====Form submition handling and calling api====
   const onSubmit = async (formdata) => {
     let requestData = new FormData();
     requestData.append("name", formdata.fullName);
@@ -77,6 +75,8 @@ function SignupForm() {
       }
     });
   };
+
+  // ====Here set values for perticuler fields====
   useEffect(() => {
     if (signupDetails && signupDetails.isChangeEmail == true) {
       setValue("fullName", signupDetails.name);
@@ -106,30 +106,12 @@ function SignupForm() {
             <EmailInput register={register}/>
             <PasswordInput register={register}/>
             <ConfirmPassInput register={register}watch={watch}/>
-
-            {/* <div className="notification">
-              {notification ? (
-                <BsToggleOn
-                  className="icon"
-                  onClick={() => setNotification(!notification)}
-                />
-              ) : (
-                <BsToggleOff
-                  className="icon"
-                  onClick={() => setNotification(!notification)}
-                />
-              )}
-              <p>{t("SUBSCRIPTION_TEXT")}</p>
-            </div> */}
-
             <div className="errorSet">
               <span className="errorShow">
                 {errors[Object.keys(errors)[0]] &&
                   errors[Object.keys(errors)[0]].message}{" "}
               </span>
             </div>
-
-
             <CustomBtn>{t("CREATEACCOUNT")}</CustomBtn>
             <div className="accountType">
               <p>

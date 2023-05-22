@@ -6,26 +6,27 @@ import { STATUS_CODES } from "../../utils/StatusCode";
 import { BOOK_ACTION_TYPE, PAGINATION_VALUE } from "../../utils/Constants";
 import { Toast } from "../../utils/Toaster";
 import {
-  addBookMarkApi,
-  bookMarkListApi,
-} from "../../store/slices/BookMarkSlice";
+  addBookmarkApi,
+  bookmarkListApi,
+} from "../../store/slices/BookmarkSlice";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-function AddBookMarks(props) {
+function AddBookmarks(props) {
   const { t } = useTranslation(); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userToken, currentUser } = useSelector((state) => state.user);
 
-  async function handleAddBookMark(id, action) {
+  // =====Here managing add and remove bookmark and calling api=====
+  async function handleAddBookmark(id, action) {
     const requestData = new FormData();
     requestData.append("id", id);
     requestData.append("status", action);
     requestData.append("type", props.bookType);
     dispatch(
-      addBookMarkApi({ userToken: userToken, requestData: requestData })
+      addBookmarkApi({ userToken: userToken, requestData: requestData })
     ).then((response) => {
       if (response.payload.status_code == STATUS_CODES.SUCCESS) {
         if (action == BOOK_ACTION_TYPE.ADD) {
@@ -37,7 +38,7 @@ function AddBookMarks(props) {
             limit: PAGINATION_VALUE.DEFAULT_LIMIT,
             offset: PAGINATION_VALUE.DEFAULT_OFFSET,
           };
-          dispatch(bookMarkListApi({ userToken: userToken, requiredValue }));
+          dispatch(bookmarkListApi({ userToken: userToken, requiredValue }));
         } else {
           Toast.fire({
             icon: "success",
@@ -47,7 +48,7 @@ function AddBookMarks(props) {
             limit: PAGINATION_VALUE.DEFAULT_LIMIT,
             offset: PAGINATION_VALUE.DEFAULT_OFFSET,
           };
-          dispatch(bookMarkListApi({ userToken: userToken, requiredValue }));
+          dispatch(bookmarkListApi({ userToken: userToken, requiredValue }));
         }
       } else if (response.payload.status == STATUS_CODES.BAD_REQUEST) {
         Toast.fire({
@@ -81,7 +82,7 @@ function AddBookMarks(props) {
                 props.isApproved == 1 &&
                 Object.keys(currentUser).length !== 0
               ) {
-                handleAddBookMark(props.id, BOOK_ACTION_TYPE.ADD);
+                handleAddBookmark(props.id, BOOK_ACTION_TYPE.ADD);
               }
             }}
           />
@@ -93,7 +94,7 @@ function AddBookMarks(props) {
             height="28"
             cursor={"pointer"}
             onClick={() => {
-              handleAddBookMark(props.id, BOOK_ACTION_TYPE.REMOVE);
+              handleAddBookmark(props.id, BOOK_ACTION_TYPE.REMOVE);
             }}
           />
         )}
@@ -102,4 +103,4 @@ function AddBookMarks(props) {
   );
 }
 
-export default AddBookMarks;
+export default AddBookmarks;

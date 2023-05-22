@@ -17,7 +17,9 @@ import {
 } from "../../store/slices/ClassifiedSlice";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import Loader from "../../utils/Loader/Loader";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Toast } from "../../utils/Toaster";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
 function ClassifiedFilter({ closeModal, setResultData }) {
   const location = useLocation();
@@ -26,7 +28,7 @@ function ClassifiedFilter({ closeModal, setResultData }) {
   const { isLoading, classifiedFilterValues } = useSelector(
     (state) => state.classified
   );
-
+  const navigate = useNavigate()
   const { userToken, allMetaList } = useSelector((state) => state.user);
   const {
     register,
@@ -167,22 +169,38 @@ function ClassifiedFilter({ closeModal, setResultData }) {
     if (location.pathname == "/classifieds") {
       if (CLASSIFIED_CATEGORY_TYPE.FORSALE) {
         data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.FORSALE;
-        dispatch(forSaleListApi(data)).then((responsejson) => {
-          const response = responsejson.payload;
+        dispatch(forSaleListApi(data)).then(async (responsejson) => {
+          const response = responsejson.payload.response;
           if (response.status_code === STATUS_CODES.SUCCESS) {
             setResultData(response.data.total_count);
             closeModal();
+          } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
+            await dispatch(userLogout());
+            await dispatch(guestUserLogin());
+            navigate("/login");
           }
         });
       }
 
       if (CLASSIFIED_CATEGORY_TYPE.WANTED) {
         data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.WANTED;
-        dispatch(getWantedListApi(data)).then((responsejson) => {
-          const response = responsejson.payload;
+        dispatch(getWantedListApi(data)).then(async(responsejson) => {
+          const response = responsejson.payload.response;
           if (response.status_code === STATUS_CODES.SUCCESS) {
             setResultData(response.data.total_count);
             closeModal();
+          } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
+            await dispatch(userLogout());
+            await dispatch(guestUserLogin());
+            navigate("/login");
           }
         });
       }
@@ -192,23 +210,40 @@ function ClassifiedFilter({ closeModal, setResultData }) {
       if (CLASSIFIED_CATEGORY_TYPE.JOBOFFER) {
         data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.JOBOFFER;
         dispatch(getJobOfferListApi(data)).then(async (responsejson) => {
-          const response = responsejson.payload;
+          const response = responsejson.payload.response;
           if (response.status_code === STATUS_CODES.SUCCESS) {
             closeModal();
+          }
+           else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
+            await dispatch(userLogout());
+            await dispatch(guestUserLogin());
+            navigate("/login");
           }
         });
       }
       if (CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS) {
         data.whereQuery.type = CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS;
         dispatch(getJobSeekerListApi(data)).then(async (responsejson) => {
-          const response = responsejson.payload;
+          const response = responsejson.payload.response;
           if (response.status_code === STATUS_CODES.SUCCESS) {
             closeModal();
+          } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
+            await dispatch(userLogout());
+            await dispatch(guestUserLogin());
+            navigate("/login");
           }
         });
       }
     }
-  }
+  } 
 
   // function for get all metaList
   useEffect(() => {

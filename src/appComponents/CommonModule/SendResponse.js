@@ -4,10 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { STATUS_CODES } from "../../utils/StatusCode";
-function SendResponse(responsejson) {
-    // alert('asdsad',responsejson)
-    console.log('responsejsonresponsejsonaaaaaaaaaaaa',responsejson)
-  
+function SendResponse(responsejson) {  
     const navigate = useNavigate();
     const dispatch = useDispatch();
     navigate("/login");

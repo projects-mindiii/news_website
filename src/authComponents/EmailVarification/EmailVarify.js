@@ -25,6 +25,7 @@ function EmailVarify() {
   //----- set state for show alert box for error response------
   const [showError, setShowError] = useState(null);
 
+  // ====calling api for sending verification otp to email====
   async function SendEmailOtp() {
     let requestData = new FormData();
     requestData.append("name", detail.name);
@@ -47,6 +48,7 @@ function EmailVarify() {
     });
   }
 
+  // ====handling verify otp api and response====
   async function VarifyOtp() {
     let requestData = new FormData();
     requestData.append("name", detail.fullName);

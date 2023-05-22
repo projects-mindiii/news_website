@@ -223,4 +223,7 @@ export const TRANSLATIONS_EN = {
   ADVERT_NOTE: "All adverts are subject to approval. Adverts will be removed after 60 days. Delete or Edit your advert anytime",
   NO_ADVERT: "--- NO ADVERTS TO DISPLAY ---",
 
+  EDIT_DELETE_BTN: "EDIT / DELETE ADVERT",
+  PENDING_APPROVAL: "NOT LIVE - Pending Approvals",
+
 };
