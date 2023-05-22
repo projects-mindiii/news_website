@@ -34,7 +34,6 @@ function FacebookSocialLogin(props) {
           responsejson.data.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND
         ) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
-            console.log("api socialSignup responsejson", signresponsejson);
             if (responsejson.status_code === STATUS_CODES.SUCCESS) {
               Toast.fire({
                 icon: "success",
@@ -55,18 +54,6 @@ function FacebookSocialLogin(props) {
 
   return (
     <>
-      {/* <img src={Facebook} alt="facebook-logo" /> 
-        <FacebookLogin
-        appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-        autoLoad={false}
-        fields="name,email,picture"
-        callback={responseFacebook}
-        cssClass="my-facebook-button-class"
-        textButton={props.facebookText && <h3>{props.facebookText}</h3>}
-      // textButton={<h3></h3>}
-      // onFailure={(value) => console.log(value)}
-      />   */}
-
       <FacebookLogin
         appId={process.env.REACT_APP_FACEBOOK_APP_ID}
         autoLoad={false}

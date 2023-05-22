@@ -41,7 +41,6 @@ function LoginForm() {
         setValue,
         formState: { errors },
     } = useForm();
-    console.log("isLoading", isLoading)
 
     //-----------function for submit login form-----------
     const onSubmit = async (formdata) => {

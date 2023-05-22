@@ -4,6 +4,7 @@ import globe from "../../../assets/images/Deal_icon/website_ico.svg";
 import mail from "../../../assets/images/Deal_icon/mail.svg";
 import watch from "../../../assets/images/Deal_icon/watch.svg";
 import promotional from "../../../assets/images/Deal_icon/Promotional_ico.svg";
+import dealIcon from "../../../assets/images/Bitmap.png"
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -24,7 +25,7 @@ function DealList({ dealList, fromDeal }) {
             {dealList && dealList.length > 0 ?
                 dealList.map((item, index) => (
                     <div className="latestDeals" key={index}>
-                        <img src={item.gallery[0].img_url} alt="deals" />
+                        <img src={item.gallery ? item.gallery[0].img_url : dealIcon} alt="deals" />
                         <h3>{item.name}</h3>
                         <p className="dealSubText">{item.description}</p>
                         <div className="dealDetails">
