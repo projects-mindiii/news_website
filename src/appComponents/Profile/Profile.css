@@ -409,3 +409,7 @@
 .buttonAdd1 .btn {
     background-color: #000000 !important;
 }
+
+.profileImg .profileIcon label {
+    margin-bottom: 0px;
+}

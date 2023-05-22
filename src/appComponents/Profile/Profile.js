@@ -194,7 +194,7 @@ function Profile() {
           (item) => item.id === response.data[0].country_id
         );
         setCountrySelected(newCountryOption);
-        
+
         const newProvinceOption = provinceOptions.find(
           (item) => item.id === response.data[0].provinces
         );
@@ -214,6 +214,7 @@ function Profile() {
       }
     });
   }, []);
+ 
 
   //-----------function for update profile api-----------
   const onSubmit = async (formdata) => {

@@ -4,21 +4,27 @@ import { useTranslation } from "react-i18next";
 import contact from "../../assets/images/Deal_icon/call.svg";
 import mail from "../../assets/images/Deal_icon/mail.svg";
 import WhatsApp from "../../CommonComponent/Whatappshare";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { useMemo } from "react";
 
 function AddressFields(props) {
     //set language
     const { t } = useTranslation();
 
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    });
+
     return (
         <section>
             {props.addressSet.length > 0 && (
                 <>
-                    {props.addressSet.length > 0 && props.addressSet.map((item, index) => (<div class="accordion mapAccordion" id="accordionExample">
-                        <div class="card" key={index}>
-                            <div class="card-header" id={item.id}>
-                                <h2 class="mb-0">
+                    {props.addressSet.length > 0 && props.addressSet.map((item, index) => (<div className="accordion mapAccordion" id="accordionExample">
+                        <div className="card" key={index}>
+                            <div className="card-header" id={item.id}>
+                                <h2 className="mb-0">
                                     <button
-                                        class="btn-link btn-block text-left collapsed"
+                                        className="btn-link btn-block text-left collapsed"
                                         type="button"
                                         data-toggle="collapse"
                                         data-target={"#collapseOne" + item.id}
@@ -43,13 +49,23 @@ function AddressFields(props) {
                             </div>
                             <div
                                 id={"collapseOne" + item.id}
-                                class="collapse"
+                                className="collapse"
                                 aria-labelledby={item.id}
                                 data-parent="#accordionExample"
                             >
-                                <div class="card-body">
-                                    <div className="mapBox">
-
+                                <div className="card-body">
+                                    <div className="mapBoxCls">
+                                        {!isLoaded ? (
+                                            <h1>Loading...</h1>
+                                        ) : (
+                                            <GoogleMap
+                                                mapContainerClassName="map-container"
+                                                center={{ lat: parseFloat(item.latitude), lng: parseFloat(item.longitude) }}
+                                                zoom={10}
+                                            >
+                                                <Marker position={{ lat: parseFloat(item.latitude), lng: parseFloat(item.longitude) }} />
+                                            </GoogleMap>
+                                        )}
                                     </div>
                                     <div className="mapLocationSet">
                                         {item.contact_person && (

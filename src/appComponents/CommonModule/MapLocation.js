@@ -12,8 +12,9 @@ function MapLocation({ address }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
-  const center = useMemo(() => ({  lat: 18.5642, lng: 73.7769  }), []);
- 
+
+  const center = useMemo(() => ({ lat: parseFloat(address.latitude), lng: parseFloat(address.longitude) }), []);
+
   return (
     <section>
       <div className="mapBoxCls">
@@ -25,7 +26,7 @@ function MapLocation({ address }) {
             center={center}
             zoom={10}
           >
-            <Marker position={{  lat: 18.5642, lng: 73.7769  }} />
+            <Marker position={{ lat: parseFloat(address.latitude), lng: parseFloat(address.longitude) }} />
           </GoogleMap>
         )}
       </div>
@@ -33,7 +34,7 @@ function MapLocation({ address }) {
         <img src={mapIcon} alt="mapIcon" />
         <div className="mapAddress">
           <h5>{t("ADDRESS")}</h5>
-          <p>{address}</p>
+          <p>{address.address}</p>
         </div>
       </div>
     </section>
