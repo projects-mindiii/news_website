@@ -228,5 +228,7 @@ export const TRANSLATIONS_ES = {
 
   EDIT_DELETE_BTN: "EDITAR / ELIMINAR ANUNCIO",
   PENDING_APPROVAL: "NO ACTIVO - Aprobaciones pendientes",
+  NO_SEARCH_DATA: "--- NO SE ENCONTRÓ LA BÚSQUEDA ---",
+
 
 };

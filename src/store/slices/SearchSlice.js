@@ -27,7 +27,13 @@ export const searchListApi = createAsyncThunk(
 export const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {},
+  reducers: {
+    clearSearchData: (state, action) => {
+      state.isLoading = false;
+      state.searchTotalCount = 0;
+      state.searchList = [];
+    },
+  },
 
   extraReducers: (builder) => {
     //search list
@@ -50,5 +56,5 @@ export const searchSlice = createSlice({
     });
   },
 });
-
+export const { clearSearchData } = searchSlice.actions;
 export default searchSlice.reducer;
