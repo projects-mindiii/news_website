@@ -15,11 +15,22 @@ function Footer() {
 
     return (
         <>
-       {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
-            <div className="bannerImg">
-              <iframe src={process.env.REACT_APP_CLASSIFIED_FOOTER_IFRAME_URL}></iframe></div>
-           : ""}
-
+            <Container>
+                {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
+                    <div className="bannerImg">
+                        <iframe src={process.env.REACT_APP_CLASSIFIED_FOOTER_IFRAME_URL}
+                            style={{
+                                width: "100%",
+                                height: "95%",
+                                margin: "0px",
+                                border: "none",
+                                scrollBehavior: "none",
+                                allowfullscreen: "true",
+                            }}>
+                        </iframe></div>
+                    : ""}
+            </Container>
+            
             <section className="footer">
                 <Container>
                     <div className="footerContent">

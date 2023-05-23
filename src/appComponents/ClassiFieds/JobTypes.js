@@ -291,11 +291,11 @@ function JobTypes() {
                 </p>
               )}
             </Col>
-            {/* <Col xs={12} sm={12} md={12} lg={5}>
+            <Col xs={12} sm={12} md={12} lg={5}>
               <div className="advertisment">
-                <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168"></iframe>
+              <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168" height="930" scrolling="no"></iframe>
               </div>
-            </Col> */}
+            </Col>
           </Row>
         </Container>
       </React.Fragment>

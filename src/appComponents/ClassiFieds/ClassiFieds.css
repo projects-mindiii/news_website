@@ -3,6 +3,7 @@
   background-color: #ffffff;
   box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.03);
   margin-bottom: 25px;
+  border-radius: 6px;
 }
 
 .classiFieds_forSaleBox .classiFieds_forSale_about {
@@ -287,23 +288,23 @@
   margin-bottom: 15px;
 }
 
-@media only screen and (max-width: 991px) {
+/* @media only screen and (max-width: 991px) {
   .advertisment {
     margin-top: 10px;
   }
-}
+} */
 
-@media only screen and (max-width: 377px) {
+/* @media only screen and (max-width: 377px) {
   .classiFields_advertise {
     width: 300px;
     height: 277px;
   }
-}
+} */
 
 .advertisment {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .classiFieds_map_serchbar {
@@ -361,7 +362,7 @@
   font-weight: 500;
 }
 
-.advertisment iframe {
+/* .advertisment iframe {
   width: 100%;
   height: 140px;
   width: 1px;
@@ -370,7 +371,7 @@
   height: 100%;
   border: 0;
   scroll-behavior: unset;
-}
+} */
 
 .classiFields_emailHeadingText a {
   text-decoration: none;
@@ -557,3 +558,7 @@
 .loadmoreBtn button:active {
   background: #ec4624 !important;
 }
+
+/* .advertisment iframe {
+  overflow: hidden;
+}  */
