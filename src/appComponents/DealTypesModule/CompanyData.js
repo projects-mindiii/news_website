@@ -10,11 +10,11 @@ import { Button } from "react-bootstrap";
 import CustomBtn from "../../formComponent/Button/Button";
 import { useTranslation } from "react-i18next";
 import { PAGINATION_VALUE } from "../../utils/Constants";
+import CompanyDataModule from "./CompanyDataModule";
 
 //  -------function for display company list of products ,services and brands------
 function CompanyData(props) {
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation(); 
+  const { t, i18n } = useTranslation();
   const [companyList, setcompanyList] = useState("");
   const [companyListValue, setCompanyListValue] = useState(null);
   const { userToken } = useSelector((state) => state.user);
@@ -55,7 +55,6 @@ function CompanyData(props) {
     companyListHandle(true, offset + PAGINATION_VALUE.DEFAULT_LIMIT);
   }
 
-
   useEffect(() => {
     companyListHandle(false, PAGINATION_VALUE.DEFAULT_OFFSET);
     setOffset(PAGINATION_VALUE.DEFAULT_OFFSET);
@@ -76,33 +75,9 @@ function CompanyData(props) {
               <span>{companyList.total_count} Results</span>
             </h2>
           </div>
-
           {companyListValue.length > 0
             ? companyListValue.map((item, index) => (
-                <div
-                  className={styles.productslist}
-                  key={index}
-                  onClick={() => {
-                    navigate(`/deals/latest-deals/company-profile/${item.id}`);
-                  }}
-                >
-                  <div className={styles.productImg}>
-                    <img src={item.company_logo} alt="logo" />
-                  </div>
-                  <div className={styles.productDiscription}>
-                    {item.name && <h3>{item.name}</h3>}
-                    {item.address && <p>{item.address}</p>}
-
-                    {item.deal_count > 0 ? (
-                      <h5>
-                        {item.deal_count}
-                        {item.deal_count > 1 ? " Deals" : " Deal"}
-                      </h5>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
+                <CompanyDataModule companyListValue={item} />
               ))
             : ""}
           {companyListValue.length >= companyList.total_count ? (

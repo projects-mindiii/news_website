@@ -37,8 +37,9 @@ function JobTypes() {
     jobOfferWebList,
     jobSeekerTotalCount,
     jobSeekerWebList,
+    isLoading
   } = useSelector((state) => state.classified);
-  const { userToken, isLoading } = useSelector((state) => state.user);
+  const { userToken } = useSelector((state) => state.user);
   const [showDefaultList, setShowDefaultList] = useState(1);
   const bookmarkLoader = useSelector((state) => state.bookmark.isLoading);
   const { bookmarkTotalCount } = useSelector((state) => state.bookmark);

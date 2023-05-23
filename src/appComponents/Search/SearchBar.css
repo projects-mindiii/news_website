@@ -28,6 +28,33 @@
     cursor: pointer;
 }
 
+.searchedComponent .latestDeals  {
+    margin-top: 23px !important;
+    margin-bottom: 0px !important;
+}
+
+.searchedComponent .CompanyData_productslist__S3jUx {
+    margin-top: 23px !important;
+    margin-bottom: 0px !important;
+}
+
+.searchedComponent .classiFieds_forSaleBox {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.searchedComponent .main {
+    margin-bottom: 0px !important;
+}
+
+.backBtnSearch {
+    align-items: baseline !important;
+}
+
+.searchModuleBox {
+    margin-bottom: 40px;
+}
+
 @media only screen and (min-width: 1200px) {
     .searchBar {
         justify-content: flex-end;

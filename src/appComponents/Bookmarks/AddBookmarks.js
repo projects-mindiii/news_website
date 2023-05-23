@@ -12,12 +12,14 @@ import {
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import LoginAlertModel from "../../authComponents/LoginAlertModel/LoginAlertModel";
 
 function AddBookmarks(props) {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userToken, currentUser } = useSelector((state) => state.user);
+  const [shwoAlertPopup, setShowAlertPopup] = useState(false);
 
   // =====Here managing add and remove bookmark and calling api=====
   async function handleAddBookmark(id, action) {
@@ -83,6 +85,8 @@ function AddBookmarks(props) {
                 Object.keys(currentUser).length !== 0
               ) {
                 handleAddBookmark(props.id, BOOK_ACTION_TYPE.ADD);
+              } else if (!Object.keys(currentUser).length) {
+                setShowAlertPopup(true);
               }
             }}
           />
@@ -99,6 +103,7 @@ function AddBookmarks(props) {
           />
         )}
       </section>
+      {shwoAlertPopup && <LoginAlertModel modalValue={true} bookmark={true} />}
     </>
   );
 }

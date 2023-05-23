@@ -43,6 +43,7 @@
 .alertBody .modal-dialog {
     max-width: 342px !important;
     height: 302px;
+    transform: translate(0,140px) !important;
 }
 
 .inputBox .css-b62m3t-container {

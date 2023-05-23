@@ -11,26 +11,24 @@ import { RxCross2 } from "react-icons/rx";
 function LoginAlertModel(props) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const [show,setShow]=useState(props.modalValue)
+  const [show, setShow] = useState(props.modalValue);
 
   // ====function for close modal and redirect to login screen====
-  function closeModal(){
+  function closeModal() {
     setShow(false);
-    navigate('/login')
+    if (!props.bookmark) {
+      navigate(-1);
+    }
   }
-  
+
   return (
     <section>
-      <Modal
-        show={show}
-        className={`${styles.loginAlertBox} alertBody`}
-      >
+      <Modal show={show} className={`${styles.loginAlertBox} alertBody`}>
         <Modal.Body>
-
           <div className={styles.alertSubBody}>
             <div className={styles.loginAlertCancel}>
               <h5>{t("LOGIN_REQUIRED")}</h5>
-              <RxCross2 onClick={() => closeModal() } />
+              <RxCross2 onClick={() => closeModal()} />
             </div>
             <p>{t("LOGIN_SUB_TEXT")}</p>
             <div className={styles.createProfileBtn}>
