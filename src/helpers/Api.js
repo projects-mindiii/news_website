@@ -264,7 +264,7 @@ class SublyApi {
        @returns {object} {token}
        */
   static async addClassifiedList(requestdata, authToken) {
-    let header = { "access-token": ` ${authToken}`,"Content-Type": "multipart/form-data", };
+    let header = { "access-token": ` ${authToken}`, "Content-Type": "multipart/form-data", };
     let res = await this.request(`/v2/add-classified`,
       requestdata, "post", header
     );
@@ -301,16 +301,16 @@ class SublyApi {
 
     return res;
   }
-   /* GET  /get company list: 
-  get book mark lists
+  /* GET  /get company list: 
+ get book mark lists
  
-   Authorization required: Token
-   @returns {object} {token}
-   */
-   static async deleteClassiFied(authToken, data) {
+  Authorization required: Token
+  @returns {object} {token}
+  */
+  static async deleteClassiFied(authToken, data) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/classified-delete?id=${data}`,
-    "", "Get", header
+      "", "Get", header
     );
 
     return res;
@@ -321,23 +321,23 @@ class SublyApi {
    Authorization required: Token
    @returns {object} {token}
    */
-   static async updateAdvert( data,authToken) {
+  static async updateAdvert(data, authToken) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/classified-update`,
-    data, "Post", header
+      data, "Post", header
     );
 
     return res;
   }
 
 
-     /* POST  /Add book mark: 
-  add book mark 
+  /* POST  /Add book mark: 
+add book mark 
  
-   Authorization required: Token
-   @returns {object} {token}
-   */
-   static async addBookmark(authToken, data) {
+Authorization required: Token
+@returns {object} {token}
+*/
+  static async addBookmark(authToken, data) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/add-bookmark`,
       data, "post", header
@@ -346,18 +346,30 @@ class SublyApi {
     return res;
   }
 
-   /* GET  /get search list: 
- get all serach list
+  /* GET  /get search list: 
+get all serach list
  
-  Authorization required: Token
-  @returns {object} {token}
-  */
+ Authorization required: Token
+ @returns {object} {token}
+ */
   static async getWebSearchList(authToken, data) {
     let header = { "access-token": ` ${authToken}` };
     let res = await this.request(`/v2/web-search?limit=${data.limit}&offset=${data.offset}&search=${data.search}`,
       "", undefined, header
     );
 
+    return res;
+  }
+
+  /* POST  /Add share view: 
+    Add share view
+ 
+     Authorization required: Token
+     @returns {object} {token}
+     */
+  static async updateCount(data, authToken) {
+    let header = { "access-token": ` ${authToken}` };
+    let res = await this.request(`/v2/share-view`, data, "post", header);
     return res;
   }
 

@@ -70,7 +70,7 @@ export const TRANSLATIONS_EN = {
   JOBS: "JOBS",
   POST_ADVERT: "POST ADVERT",
   YOUR_ADS: "YOUR ADS",
-  LALEST_DEALS: " LALEST DEALS",
+  LALEST_DEALS: " LATEST DEALS",
   PRODUCTS: "PRODUCTS",
   SERVICES: "SERVICES",
   BRANDS: "BRANDS",
@@ -152,7 +152,7 @@ export const TRANSLATIONS_EN = {
   REPEAT_PASSWORD: "Repeat Password",
   CURRENT_PASSWORD: "Current Password",
   SELECT_PROVINCE: "Select Province",
-  COUNTRY_SET: "Country Set",
+  COUNTRY_SET: "Select Country",
   CITY_TEXT: "Input City/Town",
 
   //---------- Form Lable Common Text---------------

@@ -1,4 +1,4 @@
-import { Col, Container, Form, Modal, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import "./Profile.css";
 import { useEffect, useState } from "react";
 import ProfileImg from "../../assets/images/profile.png";
@@ -111,6 +111,16 @@ function Profile() {
     formState: { errors },
   } = useForm();
 
+  async function setLocationChanged(e) {
+    setLocationSelected(e);
+    if(e.value==0){
+      setCountrySelected({
+        label: `${t("COUNTRY_SET")}`,
+        value: "0",
+        id: "0",
+      })
+    }
+  }
   //-------function for get profile Api-------
   useEffect(() => {
     let countryOptions = [];
@@ -189,6 +199,8 @@ function Profile() {
         const newLocationOption = locationOption.find(
           (item) => item.id === response.data[0].is_default_country
         );
+
+        console.log('response.data[0]',response.data[0])
         setLocationSelected(newLocationOption);
         const newCountryOption = countryOptions.find(
           (item) => item.id === response.data[0].country_id
@@ -387,7 +399,7 @@ function Profile() {
                           id="location"
                           name="location"
                           options={locationOption}
-                          onChange={setLocationSelected}
+                          onChange={(e)=>setLocationChanged(e)}
                           value={locationSelected}
                           styles={{
                             placeholder: () => ({

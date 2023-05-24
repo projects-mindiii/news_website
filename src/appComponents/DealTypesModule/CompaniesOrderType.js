@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Loader from '../../utils/Loader/Loader';
 import { Toast } from "../../utils/Toaster";
 import { useNavigate } from 'react-router-dom';
-
+import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
 
 //  -------function for display product list------
 function CompanyOrderType(props) {
@@ -14,7 +14,7 @@ function CompanyOrderType(props) {
     const [companyList, setcompanyList] = useState("");
     const { userToken } = useSelector((state) => state.user);
     const [loader, setLoader] = useState(false);
-
+   
     // --------function for get company details----------
     const companyValue = { company_order: props.companyList }
     useEffect(() => {
@@ -39,6 +39,26 @@ function CompanyOrderType(props) {
         companyList("companyList", companyList);
     }, [props]);
 
+    //------ function for share view count-------
+    async function handleCount(id) {
+        let requestData = new FormData();
+        requestData.append("id", id);
+        requestData.append("type", COUNT.VIEW);
+        requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
+        requestData.append("share_in", 0);
+        await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
+            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+               
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: responsejson.data.message,
+                });
+            }
+        })
+    }
+
+
     return (
         <>
             {companyList ?
@@ -51,7 +71,7 @@ function CompanyOrderType(props) {
                     {companyList.length > 0
                         ? companyList.map((item, index) => (
                             <div className={styles.productslist} key={index}
-                                onClick={() => { navigate(`/deals/latest-deals/company-profile/${item.id}`) }}>
+                                onClick={() => { navigate(`/deals/latest-deals/company-profile/${item.id}`); handleCount(item.id) }}>
                                 <div className={styles.productImg}>
                                     <img src={item.company_logo} alt="logo" />
                                 </div>
