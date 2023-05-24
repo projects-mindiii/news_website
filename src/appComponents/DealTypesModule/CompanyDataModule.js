@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./CompanyData.module.css";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
@@ -36,7 +36,7 @@ function CompanyDataModule({ companyListValue }) {
         className={styles.productslist}
         onClick={() => {
           navigate(
-            `/deals/latest-deals/company-profile/${companyListValue.id}`
+            `/deals/companies/company-profile/${companyListValue.id}`
           ); handleCount()
         }}
       >

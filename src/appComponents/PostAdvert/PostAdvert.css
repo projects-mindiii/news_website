@@ -666,3 +666,11 @@
 .post_AddForm #cities .css-t3ipsp-control {
     color: black !important;
 }
+
+.dropdown_menu .dropdown-menu.show{
+    max-height: 300px !important;
+    overflow-y: scroll !important;
+
+}
+.dropdown_menu  .dropdown-item.active, .dropdown-item:active{
+background-color: black !important; }

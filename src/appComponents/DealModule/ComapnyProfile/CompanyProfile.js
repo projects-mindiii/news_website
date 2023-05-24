@@ -107,7 +107,7 @@ function CompanyProfile({ companyDetailData }) {
                   <img src={mail} alt="img" />
                   <div className="dealText websiteUrl">
                     <span>{t("EMAIL_TEXT")}</span>
-                    <a href={`https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email}&su=${"Subject"}`} >
+                    <a href={`https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email}&su=${"Subject"}`} target="blank">
                       <p>{companyDetailData.company_detail.email}</p></a>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ function CompanyProfile({ companyDetailData }) {
                   <img src={globe} alt="img" />
                   <div className="dealText websiteUrl">
                     <span>{t("WEBSITE")}</span>
-                    <a href={companyDetailData.company_detail.webside_url}>
+                    <a href={companyDetailData.company_detail.webside_url} target="blank">
                       <p>{companyDetailData.company_detail.webside_url}</p></a>
                   </div>
                 </div>
@@ -145,19 +145,19 @@ function CompanyProfile({ companyDetailData }) {
           </div>
           <div className="socialShare">
             {companyDetailData.company_detail.facebook_link && (
-              <a href={companyDetailData.company_detail.facebook_link}><img src={facebook} /></a>
+              <a href={companyDetailData.company_detail.facebook_link} target="blank"><img src={facebook} /></a>
             )}
             {companyDetailData.company_detail.twitter_link && (
-              <a href={companyDetailData.company_detail.twitter_link}><img src={twitter} /></a>
+              <a href={companyDetailData.company_detail.twitter_link} target="blank"><img src={twitter} /></a>
             )}
             {companyDetailData.company_detail.instagrame_link && (
-              <a href={companyDetailData.company_detail.instagrame_link}><img src={insta} /></a>
+              <a href={companyDetailData.company_detail.instagrame_link} target="blank"><img src={insta} /></a>
             )}
             {companyDetailData.company_detail.linkedin_link && (
-              <a href={companyDetailData.company_detail.linkedin_link}><img src={linkedin} /></a>
+              <a href={companyDetailData.company_detail.linkedin_link} target="blank"><img src={linkedin} /></a>
             )}
             {companyDetailData.company_detail.youtube_link && (
-              <a href={companyDetailData.company_detail.youtube_link}><img src={youtube} /></a>
+              <a href={companyDetailData.company_detail.youtube_link} target="blank"><img src={youtube} /></a>
             )}
           </div>
 

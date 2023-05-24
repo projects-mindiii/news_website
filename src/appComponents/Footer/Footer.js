@@ -45,6 +45,7 @@ function Footer() {
                                         <a
                                             href={item.link}
                                             key={index}
+                                            target="blank"
                                         >
                                             <img src={item.logo} alt="social-logo" />
                                         </a>
@@ -58,7 +59,7 @@ function Footer() {
                                     {(footerData.socialapp).map((item1, index1) => (
                                         <a
                                             href="#"
-                                            target="_blank"
+                                            target="blank"
                                             key={index1}
                                         >
                                             <img src={item1.socialapp} alt="apps" />

@@ -80,7 +80,7 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={mail} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("EMAIL_TEXT")}</span>
-                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
+                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`} target="blank">
                                             <p>{item.contact_email}</p> </a>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={globe} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("WEBSITE")}</span>
-                                        <a href={item.contact_web_url}>
+                                        <a href={item.contact_web_url} target="blank">
                                             <p>{item.contact_web_url}</p></a>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@ function DealList({ dealList, fromDeal }) {
                             </div>
                         )}
 
-                        {fromDeal == true ? (<button className="viewProfile" onClick={() => { navigate(`/deals/latest-deals/company-profile/${item.company_id}`); handleCount(item.company_id) }}>{t("COMPANY_PROFILE")}</button>) : ""}
+                        {fromDeal == true ? (<button className="viewProfile" onClick={() => { navigate(`/deals/companies/company-profile/${item.company_id}`); handleCount(item.company_id) }}>{t("COMPANY_PROFILE")}</button>) : ""}
 
                     </div>
                 ))

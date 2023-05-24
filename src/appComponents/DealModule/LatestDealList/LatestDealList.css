@@ -134,7 +134,7 @@
 }
 
 .latestDeals .watsappCls span {
-    font-weight: 500 !important;
+    font-weight: 500;
     font-size: 19.2px !important;
     line-height: 21px !important;
     display: flex;
