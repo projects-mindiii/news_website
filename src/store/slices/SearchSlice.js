@@ -17,7 +17,7 @@ export const searchListApi = createAsyncThunk(
         data.userToken,
         data.searchValues
       );
-      return response;
+      return { response: response, loadmore: data.Loadmore };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -27,11 +27,16 @@ export const searchListApi = createAsyncThunk(
 export const searchSlice = createSlice({
   name: "search",
   initialState,
+  searchValue: null,
   reducers: {
     clearSearchData: (state, action) => {
-      state.isLoading = false;
       state.searchTotalCount = 0;
       state.searchList = [];
+      state.searchValue = null;
+    },
+
+    storeSearchValue: (state, action) => {
+      state.searchValue = action.payload;
     },
   },
 
@@ -41,10 +46,15 @@ export const searchSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(searchListApi.fulfilled, (state, action) => {
-      const response = action.payload;
+      const response = action.payload.response;
       if (response.status_code == STATUS_CODES.SUCCESS) {
+        // ===here managing load more functionality===
+        if (action.payload.loadmore == true) {
+          state.searchList = state.searchList.concat(response.data.list);
+        } else {
+          state.searchList = response.data.list;
+        }
         state.searchTotalCount = response.data.total_count;
-        state.searchList = response.data.list;
       } else {
         state.searchTotalCount = 0;
         state.searchList = [];
@@ -56,5 +66,5 @@ export const searchSlice = createSlice({
     });
   },
 });
-export const { clearSearchData } = searchSlice.actions;
+export const { clearSearchData, storeSearchValue } = searchSlice.actions;
 export default searchSlice.reducer;
