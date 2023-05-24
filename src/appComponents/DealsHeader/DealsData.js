@@ -9,7 +9,7 @@ import Icon5 from "../../assets/images/icon5.svg";
 export const dealsData = [
     {
         id: "1",
-        text: `${t("LALEST_DEALS")}`,
+        text: `${t("LATEST_DEALS")}`,
         link: `/deals/latest-deals`,
         icon: `${Icon1}`,
     },

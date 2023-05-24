@@ -38,7 +38,7 @@
   line-height: 26px;
   color: #000000;
   margin-bottom: 5px;
-  margin-left: 5px;
+  margin-left: 0px;
 }
 
 .classiFieds_forSale_about .classiFields_heading {
@@ -188,6 +188,7 @@
   line-height: 36px;
   letter-spacing: -0.48px;
   color: #e91f63;
+  font-family: 'Nunito Sans';
 }
 
 .classiFieds_countryName img {
@@ -203,6 +204,7 @@
   line-height: 23px;
   letter-spacing: -0.3px;
   margin-top: 10px;
+  font-family: 'Nunito Sans';
 }
 
 .classiFields_whatAppIcon {
@@ -275,8 +277,7 @@
 
 .classiFields_whatAppIcon span {
   color: #ffffff;
-  font-weight: 600;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   font-size: 19.2px !important;
   line-height: 40px !important;
   display: flex;

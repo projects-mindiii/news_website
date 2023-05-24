@@ -32,7 +32,7 @@ function ContactPerson(props) {
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("CONTACT_PERSON_EMAIL")}</p>
-              <a href={`https://mail.google.com/mail/?view=cm&to= ${props.forSaleListData[props.index].email}&su=${"Subject"}`}>
+              <a href={`https://mail.google.com/mail/?view=cm&to= ${props.forSaleListData[props.index].email}&su=${"Subject"}`} target="blank">
                                             <span> {props.forSaleListData[props.index].email}</span> </a>
             </div>
             <div></div>
@@ -45,7 +45,7 @@ function ContactPerson(props) {
             </div>
             <div className="classiFields_emailHeadingText">
             <p>{t("CONTACT_NUMBER")}</p> 
-              <span><a href={`tel:${props.forSaleListData[props.index].contact}`}>+{props.forSaleListData[props.index].dial_code} {props.forSaleListData[props.index].contact}</a></span>
+              <span><a href={`tel:${props.forSaleListData[props.index].contact}`} target="blank">+{props.forSaleListData[props.index].dial_code} {props.forSaleListData[props.index].contact}</a></span>
             </div>
             <div></div>
           </div>

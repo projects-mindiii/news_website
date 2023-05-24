@@ -41,7 +41,7 @@ function Routers() {
                 <Route exact path="/email-varify" element={<EmailVarify />} />
                 <Route exact path="/deals/latest-deals" element={<LatestDeals />} />
                 <Route exact path="/view-profile" element={Object.keys(currentUser).length !== 0 ? (<Profile />) : (<Navigate to="/login" />)} />
-                <Route exact path="/deals/latest-deals/company-profile/:id" element={<ViewCompanyProfile />} />
+                <Route exact path="/deals/companies/company-profile/:id" element={<ViewCompanyProfile />} />
                 <Route exact path="/classifieds" element={<ClassiFieds />} />
                 <Route exact path="/deals/products" element={<Products />} />
                 <Route exact path="/deals/services" element={<Services />} />

@@ -71,7 +71,7 @@ function CompanyOrderType(props) {
                     {companyList.length > 0
                         ? companyList.map((item, index) => (
                             <div className={styles.productslist} key={index}
-                                onClick={() => { navigate(`/deals/latest-deals/company-profile/${item.id}`); handleCount(item.id) }}>
+                                onClick={() => { navigate(`/deals/companies/company-profile/${item.id}`); handleCount(item.id) }}>
                                 <div className={styles.productImg}>
                                     <img src={item.company_logo} alt="logo" />
                                 </div>

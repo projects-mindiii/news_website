@@ -823,13 +823,13 @@ function PostAdvert() {
                                         {CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE ? <div className="headings mb-3"> {t("PRICE")}</div> : CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER && <div className="headings mb-3">{t("RENUMERATION")}</div>}
                                         {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                                             <div className="post_Add_priceDiv">
-                                                <InputGroup className="mb-3">
+                                                <InputGroup className="mb-3 dropdown_menu">
                                                     <DropdownButton
                                                         variant="outline-secondary"
                                                         title={currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
                                                         id="input-group-dropdown-1"
                                                     >{currenciesOptions && currenciesOptions.map((item, index) => (
-                                                        <Dropdown.Item onClick={() => {
+                                                        <Dropdown.Item active={currencyValue ?  currencyValue.name == item.name : index==0} onClick={() => {
                                                             setCurrencyValue(item);
                                                         }}>{item.name}</Dropdown.Item>))}
                                                     </DropdownButton>
