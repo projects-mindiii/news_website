@@ -15,7 +15,13 @@ function SearchTotalCount() {
     <>
       <div className={`${styles.countryIcon} backBtnSearch`}>
         <div className="backarrowButton">
-          <MdOutlineKeyboardArrowLeft onClick={() => {navigate(-1); dispatch(clearSearchData())} } className="mt-0" />
+          <MdOutlineKeyboardArrowLeft
+            onClick={() => {
+              navigate(-1);
+              dispatch(clearSearchData());
+            }}
+            className="mt-0"
+          />
         </div>
         <div className={styles.countryText}>
           <span className={styles.resultText}>
