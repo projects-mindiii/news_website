@@ -69,11 +69,11 @@ export const TRANSLATIONS_ES = {
 
   //----Header Text------
   DEALS: "OFERTAS/CENTRO",
-  CLASSIFIEDS: " CLASIFICADOS",
+  CLASSIFIEDS: "CLASIFICADOS",
   JOBS: "TRABAJOS",
   POST_ADVERT: "ANUNCIO POSTAL",
   YOUR_ADS: "SUS ANUNCIOS",
-  LALEST_DEALS: " ÚLTIMAS OFERTAS",
+  LALEST_DEALS: "ÚLTIMAS OFERTAS",
   PRODUCTS: "PRODUCTOS",
   SERVICES: "SERVICIOS",
   BRANDS: "MARCAS",
@@ -154,7 +154,7 @@ export const TRANSLATIONS_ES = {
   REPEAT_PASSWORD: "Repita la contraseña",
   CURRENT_PASSWORD: "Contraseña actual",
   SELECT_PROVINCE: "Seleccione Provincia",
-  COUNTRY_SET: "Establecer país",
+  COUNTRY_SET: "Seleccionar país",
 
   //---------- Form Lable Common Text---------------
   REMEMBER_ME: "Acuérdate de mí",

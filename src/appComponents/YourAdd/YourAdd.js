@@ -36,15 +36,17 @@ function YourAdd() {
       const yourAdvertQuery = { limit: 10, offset: 0, type: 1 };
       const data = { userToken: userToken, whereQuery: yourAdvertQuery };
       dispatch(yourAdvertListApi(data)).then(async(responsejson) => {
-        const response = responsejson.payload.response;
-        if (response.status === STATUS_CODES.INVALID_TOKEN) {
-          Toast.fire({
-            icon: "error",
-            title: t("SESSION_EXPIRE"),
-          });
-          await dispatch(userLogout());
-          await dispatch(guestUserLogin());
-          navigate("/login");
+        const response = responsejson.payload;
+        if(response.status){
+          if (response.status === STATUS_CODES.INVALID_TOKEN) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
+            await dispatch(userLogout());
+            await dispatch(guestUserLogin());
+            navigate("/login");
+          }
         }
       });
     }
