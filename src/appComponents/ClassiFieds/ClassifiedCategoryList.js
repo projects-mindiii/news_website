@@ -18,9 +18,9 @@ function ClassifiedList({
   displayRoute,
 }) {
 
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  
+
   return (
     <div className="classiFieds_forSaleBox">
       <div className="classiFieds_forSale_about">
@@ -42,9 +42,7 @@ function ClassifiedList({
               </button>
 
               <span>
-                <img src={watchicon} alt={watchicon} />{" "}
-                {" "}
-                {item.created_date}
+                <img src={watchicon} alt={watchicon} />{" "}{item.created_date}
               </span>
             </div>
             <div className="classiFieds_bookmarkicon">
@@ -69,7 +67,7 @@ function ClassifiedList({
       </div>
 
       {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ||
-      item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS ? (
+        item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS ? (
         <div className="jobType">
           <p>
             {item.job_type_name ? item.job_type_name + `-` : ""}
@@ -80,11 +78,11 @@ function ClassifiedList({
         ""
       )}
       {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
-      item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
+        item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
         <div className="classiFieds_RupeesText">
-           {item.amount  === 0 ? "" : item.amount && <p>
-                      {item.currency_code} {item.amount.toFixed(2)}
-                    </p>}
+          {item.amount === 0 ? "" : item.amount && <p>
+            {item.currency_code} {item.amount.toFixed(2)}
+          </p>}
           <span>
             {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER
               ? item.earning_name.toUpperCase()
@@ -115,19 +113,19 @@ function ClassifiedList({
       </div>
 
       <SocialMedaiShare />
-      
-      {(displayRoute &&  displayRoute=="your_advert" )?(<button className="edit_DeleteButton" onClick={()=>navigate("/post-advert",{state:item})}>{t("EDIT_DELETE_BTN")}</button>):""}
-      {(displayRoute &&  displayRoute=="your_advert" && item.approval_status==0 )?(<button className="not_live">{t("PENDING_APPROVAL")}</button>):""}
+
+      {(displayRoute && displayRoute == "your_advert") ? (<button className="edit_DeleteButton" onClick={() => navigate("/post-advert", { state: item })}>{t("EDIT_DELETE_BTN")}</button>) : ""}
+      {(displayRoute && displayRoute == "your_advert" && item.approval_status == 0) ? (<button className="not_live">{t("PENDING_APPROVAL")}</button>) : ""}
     </div>
   );
 }
-function ClassifiedCategoryList({forSaleListData, bookType,displayRoute}) {
-  if(displayRoute &&  displayRoute=="your_advert"){
-    let approveForSaleListData = forSaleListData.filter( (a) => a.approval_status ==1);
-    let pendingForSaleListData = forSaleListData.filter( (a) => a.approval_status ==0);
-    forSaleListData = approveForSaleListData.concat(pendingForSaleListData); 
+function ClassifiedCategoryList({ forSaleListData, bookType, displayRoute }) {
+  if (displayRoute && displayRoute == "your_advert") {
+    let approveForSaleListData = forSaleListData.filter((a) => a.approval_status == 1);
+    let pendingForSaleListData = forSaleListData.filter((a) => a.approval_status == 0);
+    forSaleListData = approveForSaleListData.concat(pendingForSaleListData);
   }
-  
+
   return (
     <div className="main">
       {forSaleListData &&

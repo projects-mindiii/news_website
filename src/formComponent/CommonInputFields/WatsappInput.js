@@ -8,9 +8,12 @@ function WatsappInput(props) {
 
         <div className="phoneInputSet watsappInput">
             <BsWhatsapp />
-            <p>{props.countryCodeWatsapp.toUpperCase()} + {props.dialCodeWatsapp.toString()}</p>
+            <div className="phoneCountry">
+                <p>{props.countryCodeWatsapp.toUpperCase()}</p>
+                <span>+{props.dialCodeWatsapp.toString()}</span>
+            </div>
             <PhoneInput
-             
+
                 country={"za"}
                 value={props.dialCodeWatsapp.toString() +
                     props.watsappNo.toString()}

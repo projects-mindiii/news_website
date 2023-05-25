@@ -63,6 +63,18 @@ export const TRANSLATIONS_EN = {
   JOB_LINKS: "Jobs",
   ADVERTIES_LINKS: "Advertise",
   OUR_MEDIA: "OUR MEDIA",
+  DEALS_LINKS: "Deals/Hub",
+  CLASSIFIEDS_LINKS: " Classified",
+  POST_ADVERT_LINKS: "Post Advert",
+  YOUR_ADS_LINKS: "Your ADS",
+  LATEST_DEALS_LINKS: " Latest Deals",
+  PRODUCTS_LINKS: "Products",
+  SERVICES_LINKS: "Services",
+  BRANDS_LINKS: "Brands",
+  COMPANIES_LINKS: "Companies",
+  BOOKMARKS_LINKS: "Bookmarks",
+  PROFILE_LINKS: "View Profile",
+
 
   //----Header Text------
   DEALS: "DEALS/HUB",
@@ -99,7 +111,7 @@ export const TRANSLATIONS_EN = {
   CANCEL: "CANCEL",
   DELETE: "DELETE",
   SOUTH_AFRICA_SET: "South Africa",
-  OUTOF_SOUTH:"Outside South Africa",
+  OUTOF_SOUTH: "Outside South Africa",
 
 
   //----Deals Text------

@@ -66,6 +66,17 @@ export const TRANSLATIONS_ES = {
   JOB_LINKS: "Trabajos",
   ADVERTIES_LINKS: "Anunciar",
   OUR_MEDIA: "NUESTROS MEDIOS",
+  DEALS_LINKS: "Ofertas/Centro",
+  CLASSIFIEDS_LINKS: "Clasificada",
+  POST_ADVERT_LINKS: "Anuncio Postal",
+  YOUR_ADS_LINKS: "Tus ANUNCIOS",
+  LATEST_DEALS_LINKS: "Últimas ofertas",
+  PRODUCTS_LINKS: "Productos",
+  SERVICES_LINKS: "Servicios",
+  BRANDS_LINKS: "Marcas",
+  COMPANIES_LINKS: "Compañías",
+  BOOKMARKS_LINKS: "Marcadores",
+  PROFILE_LINKS: "Ver perfil",
 
   //----Header Text------
   DEALS: "OFERTAS/CENTRO",
@@ -102,7 +113,7 @@ export const TRANSLATIONS_ES = {
   CANCEL: "CANCELAR",
   DELETE: "BORRAR",
   SOUTH_AFRICA_SET: "Sudáfrica",
-  OUTOF_SOUTH:"Fuera de Sudáfrica",
+  OUTOF_SOUTH: "Fuera de Sudáfrica",
 
   //----Deals Text------
   CONTACT_PERSON: "PERSONA DE CONTACTO",
