@@ -131,6 +131,8 @@ export const TRANSLATIONS_EN = {
   NO_SERVICE: "--- NO SERVICES TO DISPLAY ---",
   NO_BRAND: "--- NO BRANDS TO DISPLAY ---",
   NO_DEAL: "--- NO DEALS TO DISPLAY ---",
+  DEAL: "DEAL",
+  DEALS_TEXT: "DEALS",
 
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Form incomplete, please fill all fields",

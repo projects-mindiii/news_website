@@ -45,7 +45,7 @@ function ContactPerson(props) {
             </div>
             <div className="classiFields_emailHeadingText">
             <p>{t("CONTACT_NUMBER")}</p> 
-              <span><a href={`tel:${props.forSaleListData[props.index].contact}`} target="blank">+{props.forSaleListData[props.index].dial_code} {props.forSaleListData[props.index].contact}</a></span>
+              <span><a href={`tel:${props.forSaleListData[props.index].dial_code} ${props.forSaleListData[props.index].contact}`} target="blank">+{props.forSaleListData[props.index].dial_code} {props.forSaleListData[props.index].contact}</a></span>
             </div>
             <div></div>
           </div>

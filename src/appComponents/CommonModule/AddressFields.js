@@ -87,7 +87,7 @@ function AddressFields(props) {
                                                 <img src={mail} alt="img" />
                                                 <div className="dealText">
                                                     <h5>{t("EMAIL_TEXT")}</h5>
-                                                    <a href={`https://mail.google.com/mail/?view=cm&to=${item.email}&su=${"Subject"}`} >
+                                                    <a href={`https://mail.google.com/mail/?view=cm&to=${item.email}&su=${"Subject"}`} target="blank">
                                                         <p>{item.email}</p>
                                                     </a>
                                                 </div>
@@ -99,7 +99,7 @@ function AddressFields(props) {
                                                 <img src={contact} alt="img" />
                                                 <div className="dealText">
                                                     <h5>{t("CONTACT_PERSON")}</h5>
-                                                    <p>+{item.dial_code}{item.contact}</p>
+                                                    <p>+{item.dial_code} {item.contact}</p>
                                                 </div>
                                             </div>
                                         )}

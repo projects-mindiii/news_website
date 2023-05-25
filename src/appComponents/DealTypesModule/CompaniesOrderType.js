@@ -7,14 +7,16 @@ import Loader from '../../utils/Loader/Loader';
 import { Toast } from "../../utils/Toaster";
 import { useNavigate } from 'react-router-dom';
 import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
+import { useTranslation } from "react-i18next";
 
 //  -------function for display product list------
 function CompanyOrderType(props) {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [companyList, setcompanyList] = useState("");
     const { userToken } = useSelector((state) => state.user);
     const [loader, setLoader] = useState(false);
-   
+
     // --------function for get company details----------
     const companyValue = { company_order: props.companyList }
     useEffect(() => {
@@ -48,7 +50,7 @@ function CompanyOrderType(props) {
         requestData.append("share_in", 0);
         await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
             if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-               
+
             } else {
                 Toast.fire({
                     icon: "error",
@@ -83,7 +85,7 @@ function CompanyOrderType(props) {
 
                                     {item.deal_count > 0 ?
                                         <h5>{item.deal_count}
-                                            {item.deal_count > 1 ? " Deals" : " Deal"}
+                                            {item.deal_count > 1 ? `${t("DEALS_TEXT")}` : `${t("DEAL")}`}
                                         </h5> : ""
                                     }
                                 </div>

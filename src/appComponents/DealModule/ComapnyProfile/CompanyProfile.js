@@ -36,7 +36,7 @@ function CompanyProfile({ companyDetailData }) {
     requestData.append("share_in", 0);
     await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
       if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-      
+
       } else {
         Toast.fire({
           icon: "error",
@@ -77,7 +77,7 @@ function CompanyProfile({ companyDetailData }) {
           <div className="brandPrasent">
             {companyDetailData.brand_list.length > 0 && (
               <>
-                <h3>{t("BRAND_REPRESENT")}</h3>
+                <h5>{t("BRAND_REPRESENT")}</h5>
                 <div className="brandType">
                   {companyDetailData.brand_list.length > 0 && companyDetailData.brand_list.map((item2, index2) => (
                     <p key={index2}>{item2.name}</p>
@@ -88,7 +88,7 @@ function CompanyProfile({ companyDetailData }) {
 
             {companyDetailData.vedio_list.length > 0 && (
               <>
-                <div className="brandType">
+                <div className="vidioPlay">
                   {companyDetailData.vedio_list.length > 0 && companyDetailData.vedio_list.map((item, index) => (
                     <ReactPlayer
                       className="playBox"
@@ -114,11 +114,12 @@ function CompanyProfile({ companyDetailData }) {
               )}
 
               {companyDetailData.company_detail.contact && (
-                <div className="detailsValue">
+                <div className="detailsValue" onClick={() => handleCount()}>
                   <img src={contact} alt="img" />
                   <div className="dealText">
                     <span>{t("CONTACT_NUMBER")}</span>
-                    <p>{companyDetailData.company_detail.dial_code}{companyDetailData.company_detail.contact}</p>
+                    <a href={`tel:${companyDetailData.company_detail.dial_code} ${companyDetailData.company_detail.contact}`} target="blank">
+                      <p>{companyDetailData.company_detail.dial_code} {companyDetailData.company_detail.contact}</p></a>
                   </div>
                 </div>
               )}
