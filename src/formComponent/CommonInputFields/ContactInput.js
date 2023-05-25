@@ -8,7 +8,10 @@ function ContactInput(props) {
 
         <div className="phoneInputSet">
             <MdPhonelinkRing />
-            <p>{props.country.toUpperCase()} + {props.dialCode.toString()}</p>
+            <div className="phoneCountry">
+                <p>{props.country.toUpperCase()} </p>
+                <span>+{props.dialCode.toString()}</span>
+            </div>
             <PhoneInput
                 country={"za"}
                 value={props.dialCode.toString() +
