@@ -15,17 +15,20 @@ import ReactPlayer from 'react-player';
 import AddressFields from "../../CommonModule/AddressFields";
 import SublyApi from "../../../helpers/Api";
 import { Toast } from "../../../utils/Toaster";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { COUNT, COUNT_REFFRENCE } from "../../../utils/Constants";
 import { STATUS_CODES } from "../../../utils/StatusCode";
+import { guestUserLogin, userLogout } from "../../../store/slices/UserSlice";
 
 // ------function for company profile---------
 function CompanyProfile({ companyDetailData }) {
   //set language
   const { t } = useTranslation();
-  const { userToken } = useSelector((state) => state.user);
+  const { userToken, currentUser } = useSelector((state) => state.user);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //------ function for share view count-------
   async function handleCount() {
@@ -37,11 +40,14 @@ function CompanyProfile({ companyDetailData }) {
     await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
       if (responsejson.status_code === STATUS_CODES.SUCCESS) {
 
-      } else {
+      } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
         Toast.fire({
           icon: "error",
-          title: responsejson.data.message,
+          title: t("SESSION_EXPIRE"),
         });
+        dispatch(userLogout(userToken));
+        dispatch(guestUserLogin());
+        navigate("/login");
       }
     })
   }
@@ -103,7 +109,12 @@ function CompanyProfile({ companyDetailData }) {
 
             <div className="dealDetailsList">
               {companyDetailData.company_detail.email && (
-                <div className="detailsValue" onClick={() => handleCount()}>
+                <div className="detailsValue"
+                  onClick={() => {
+                    if (Object.keys(currentUser).length !== 0) {
+                      handleCount()
+                    }
+                  }}>
                   <img src={mail} alt="img" />
                   <div className="dealText websiteUrl">
                     <span>{t("EMAIL_TEXT")}</span>
@@ -114,7 +125,12 @@ function CompanyProfile({ companyDetailData }) {
               )}
 
               {companyDetailData.company_detail.contact && (
-                <div className="detailsValue" onClick={() => handleCount()}>
+                <div className="detailsValue"
+                  onClick={() => {
+                    if (Object.keys(currentUser).length !== 0) {
+                      handleCount()
+                    }
+                  }}>
                   <img src={contact} alt="img" />
                   <div className="dealText">
                     <span>{t("CONTACT_NUMBER")}</span>
@@ -125,7 +141,12 @@ function CompanyProfile({ companyDetailData }) {
               )}
 
               {companyDetailData.company_detail.webside_url && (
-                <div className="detailsValue" onClick={() => handleCount()}>
+                <div className="detailsValue"
+                  onClick={() => {
+                    if (Object.keys(currentUser).length !== 0) {
+                      handleCount()
+                    }
+                  }}>
                   <img src={globe} alt="img" />
                   <div className="dealText websiteUrl">
                     <span>{t("WEBSITE")}</span>

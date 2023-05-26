@@ -40,13 +40,13 @@ function SearchList() {
     ).then(async (responsejson) => {
       if (responsejson.response.status_code) {
         if (responsejson.response.status_code === STATUS_CODES.INVALID_TOKEN) {
-          dispatch(userLogout());
+          dispatch(userLogout(userToken));
           dispatch(guestUserLogin());
           navigate("/login");
         }
       } else {
         if (responsejson.response.status === STATUS_CODES.INVALID_TOKEN) {
-          dispatch(userLogout());
+          dispatch(userLogout(userToken));
           dispatch(guestUserLogin());
           navigate("/login");
         }

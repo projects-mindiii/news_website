@@ -200,7 +200,6 @@ function Profile() {
           (item) => item.id === response.data[0].is_default_country
         );
 
-        console.log('response.data[0]',response.data[0])
         setLocationSelected(newLocationOption);
         const newCountryOption = countryOptions.find(
           (item) => item.id === response.data[0].country_id
@@ -216,7 +215,7 @@ function Profile() {
           icon: "error",
           title: t("SESSION_EXPIRE"),
         });
-        dispatch(userLogout());
+        dispatch(userLogout(userToken));
         navigate("/login");
       } else {
         Toast.fire({
@@ -274,7 +273,7 @@ function Profile() {
           icon: "error",
           title: t("SESSION_EXPIRE"),
         });
-        dispatch(userLogout());
+        dispatch(userLogout(userToken));
         navigate("/login");
       } else {
         Toast.fire({
@@ -300,7 +299,7 @@ function Profile() {
         icon: "error",
         title: t("SESSION_EXPIRE"),
       });
-      dispatch(userLogout());
+      dispatch(userLogout(userToken));
       navigate("/login");
     } else {
       Toast.fire({

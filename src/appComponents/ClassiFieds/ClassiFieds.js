@@ -97,7 +97,7 @@ function ClassiFieds() {
             icon: "error",
             title: t("SESSION_EXPIRE"),
           });
-          await dispatch(userLogout());
+          await dispatch(userLogout(userToken));
           await dispatch(guestUserLogin());
           navigate("/login");
         } else {
@@ -133,7 +133,7 @@ function ClassiFieds() {
             icon: "error",
             title: t("SESSION_EXPIRE"),
           });
-          await dispatch(userLogout());
+          await dispatch(userLogout(userToken));
           await dispatch(guestUserLogin());
           navigate("/login");
         } else {

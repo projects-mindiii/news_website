@@ -373,6 +373,24 @@ get all serach list
     return res;
   }
 
+   /* GET  /user logout: 
+      User logout
+  
+       Authorization required: Token
+       @returns {object} {token}
+       */
+       static async userLogout(authToken) {
+        let header = { "access-token": ` ${authToken}` };
+        let res = await this.request(
+          `/v2/logout`,
+          undefined,
+          undefined,
+          header
+        );
+    
+        return res;
+      }
+
 }
 
 // SublyApi.token =

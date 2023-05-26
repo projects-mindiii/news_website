@@ -23,11 +23,10 @@ function DealList({ dealList, fromDeal }) {
     const dispatch = useDispatch();
     //set language
     const { t } = useTranslation();
+    const { userToken, currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
     }, [dealList]);
-    const { userToken, currentUser } = useSelector((state) => state.user);
-
 
     //------ function for share view count-------
     async function handleCount(id) {
@@ -44,7 +43,7 @@ function DealList({ dealList, fromDeal }) {
                     icon: "error",
                     title: t("SESSION_EXPIRE"),
                 });
-                dispatch(userLogout());
+                dispatch(userLogout(userToken));
                 dispatch(guestUserLogin());
                 navigate("/login");
             }
