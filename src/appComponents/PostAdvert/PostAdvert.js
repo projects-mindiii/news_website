@@ -2,9 +2,18 @@ import "./PostAdvert.css";
 import { Row, Container, Col } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Select from "react-select";
-import Cropper from "react-cropper";
-import "cropperjs/dist/cropper.css";
-import React, { useEffect, useState } from "react";
+import Cropper from "react-easy-crop";
+
+import { getCroppedImg, getRotatedImage} from '../PageNotFound/canvasUtils'
+import { CropperStyles } from '../PageNotFound/styles'
+import Slider from '@material-ui/core/Slider'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import ImgDialog from '../PageNotFound/ImgDialog'
+import { getOrientation } from 'get-orientation/browser'
+
+import React, { useEffect, useState,useCallback} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SublyApi from "../../helpers/Api";
 import Form from 'react-bootstrap/Form';
@@ -30,9 +39,115 @@ import { useLocation } from "react-router-dom";
 import NoteBoxModule from "../CommonModule/NoteBoxModule";
 import { guestUserLogin, userLogout, userDetails } from "../../store/slices/UserSlice";
 
-
+const ORIENTATION_TO_ANGLE = {
+    '3': 180,
+    '6': 90,
+    '8': -90,
+  }
 //-------Create a Deals Header component--------
-function PostAdvert() {
+function PostAdvert({ classes }) {
+    const [imageSrc, setImageSrc] = React.useState(null)
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [rotation, setRotation] = useState(0)
+    const [zoom, setZoom] = useState(1)
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+    const [croppedImage, setCroppedImage] = useState(null)
+
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        setCroppedAreaPixels(croppedAreaPixels)
+    }, [])
+    const showCroppedImage = useCallback(async () => {
+        try {
+
+            var block = imageSrc.split(";");
+            // Get the content type of the image
+            var contentTypes = block[0].split(":")[1]; // In this case "image/png"
+            // get the real base64 content of the file
+            var realData = block[1].split(",")[1];
+            var blobImg = b64toBlob(realData, contentTypes);
+
+            const originalImageData = [...orignalImage];
+            const originalPreviewData = [...originalPreview];
+
+            originalImageData.push(blobImg);
+            originalPreviewData.push({ original_img_url: imageSrc });
+            
+            setOrignalImage(originalImageData)
+            setOriginalPreview(originalPreviewData)
+
+            const croppedImage = await getCroppedImg(
+                imageSrc,
+                croppedAreaPixels,
+                rotation
+            )
+            console.log('donee', { croppedImage })
+            setCroppedImage(croppedImage)
+            imgCropper();
+
+            var blockCrop = croppedImage.split(";");
+            // Get the content type of the image
+            var cropContentTypes = blockCrop[0].split(":")[1]; // In this case "image/png"
+            // get the real base64 content of the file
+            var blockRealData = blockCrop[1].split(",")[1];
+
+            var cropBlobImg = await b64toBlob(blockRealData,cropContentTypes);
+            let profileImageData = [...profileImage];
+
+            profileImageData.push(cropBlobImg);
+            setProfileImage(profileImageData);
+
+            let profileViewData = [...profilePreview];
+            profileViewData.push({ img_url: croppedImage });
+            setProfilePreview(profileViewData);
+
+        } catch (e) {
+          console.error(e)
+        }
+      }, [imageSrc, croppedAreaPixels, rotation])
+
+      function blobToBase64(blob) {
+        return new Promise((resolve, _) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+        });
+      }
+    
+    const onClose = useCallback(() => {
+        setCroppedImage(null)
+    }, [])
+    
+    const onFileChange = async (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          const file = e.target.files[0]
+        //   const file = e.target.files[0];
+          let imageDataUrl = await readFile(file)
+          setRotation(0);
+          try {
+            // apply rotation if needed
+            const orientation = await getOrientation(file)
+            const rotation = ORIENTATION_TO_ANGLE[orientation]
+            if (rotation) {
+              imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
+            }
+            
+
+          } catch (e) {
+            console.warn('failed to detect the orientation')
+          }
+          setImageSrc(imageDataUrl)
+        }
+      }
+
+      function readFile(file) {
+        return new Promise((resolve) => {
+          const reader = new FileReader()
+          reader.addEventListener('load', () => resolve(reader.result), false)
+          reader.readAsDataURL(file)
+        })
+      }
+
+
     const dispatch = useDispatch();
     const { userToken, currentUser, allMetaList } = useSelector(
         (state) => state.user
@@ -59,9 +174,10 @@ function PostAdvert() {
     const [isLoading, setIsLoading] = useState(false)
     const [profilePreview, setProfilePreview] = useState([])
     const [profileImage, setProfileImage] = useState([]);
+    const [originalPreview, setOriginalPreview] = useState([])
     const [orignalImage, setOrignalImage] = useState([]);
     const [showHead, setShowHead] = useState(false);
-    const [cropper, setCropper] = useState("");
+    // const [cropper, setCropper] = useState("");
     const [watsappNo, setWatsappNo] = useState("");
     const [image, setImage] = useState(null);
     const [dialCodeWatsapp, setDialCodeWatsapp] = useState("27");
@@ -327,6 +443,8 @@ function PostAdvert() {
                         setValue("selectlocationtype", location.state.job_location_type_id)
                         setProfileImage(location.state.gallery)
                         setProfilePreview(location.state.gallery)
+                        setOriginalPreview(location.state.gallery)
+                        setOrignalImage(location.state.gallery)
                         if (location.state.job_type_id) {
                             setValue("jobType", {
                                 label: location.state.job_type_name,
@@ -524,53 +642,11 @@ function PostAdvert() {
             handleResponse(responsejson);
         });
     }
-    const uploadImage = (e) => {
-        const setorignal = [...orignalImage];
-        e.preventDefault();
-        let files;
-        if (e.dataTransfer) {
-            files = e.dataTransfer.files;
-        } else if (e.target) {
-            files = e.target.files;
-        }
-        setorignal.push(e.target.files[0])
-        setOrignalImage(setorignal)
-        const reader = new FileReader();
-        reader.onload = () => {
-            setImage(reader.result);
-            // setOrignalImage()
-        };
-        reader.readAsDataURL(files[0]);
-    };
 
     const imgCropper = () => {
         showHead ? setShowHead(false) : setShowHead(true);
     };
 
-    const getCropData = () => {
-        let profileviews = [...profilePreview];
-        let profileimages = [...profileImage];
-        if (typeof cropper !== "undefined") {
-            let cropData = cropper
-                .getCroppedCanvas({
-                    width: 150,
-                    height: 150,
-                    maxWidth: 150,
-                    maxHeight: 150,
-                })
-                .toDataURL();
-            var block = cropData.split(";");
-            // Get the content type of the image
-            var contentTypes = block[0].split(":")[1]; // In this case "image/png"
-            // get the real base64 content of the file
-            var realData = block[1].split(",")[1];
-            var blobImg = b64toBlob(realData, contentTypes);
-            profileviews.push({ img_url: cropData });
-            profileimages.push(blobImg);
-            setProfilePreview(profileviews);
-            setProfileImage(profileimages);
-        }
-    };
     function b64toBlob(cropData, contentType, sliceSize) {
         contentType = contentType || "";
         sliceSize = sliceSize || 512;
@@ -593,17 +669,28 @@ function PostAdvert() {
     async function onImageRemove(e, index, item) {
         e.preventDefault();
         let profileviews = [...profilePreview];
-        let remiveImageArray = [...removeImage]
-        let profileimages = [...profileImage];
         profileviews.splice(index, 1);
+
+        let profileimages = [...profileImage];
         profileimages.splice(index, 1);
+        
         setProfilePreview(profileviews);
         setProfileImage(profileimages);
+
+        let orignalImageViews = [...orignalImage];
+        orignalImageViews.splice(index, 1);
+        setOrignalImage(orignalImageViews);
+
+        let originalPreviews = [...originalPreview];
+        originalPreviews.splice(index, 1);
+        setOriginalPreview(originalPreviews);
+
+        let remiveImageArray = [...removeImage];
         if (item.id && item.id !== "") {
             remiveImageArray.push(item.id)
             setRemoveImage(remiveImageArray)
         }
-
+        
     }
 
 
@@ -1114,16 +1201,29 @@ function PostAdvert() {
                                             }}
                                             onInputCapture={imgCropper}
                                             onChange={(e) => {
-                                                uploadImage(e);
+                                                onFileChange(e);
+                                                // uploadImage(e);
                                             }}
                                         />
                                         <div className="post_Add_ImagePreview">
                                             {profilePreview ? profilePreview.map((item, index) => (
                                                 <div className="Post_Add_ImageSet" key={index} >
 
-                                                    <img src={item.img_url} alt={item} />
+                                                    <img src={item.img_url} alt={item.img_url} />
                                                     <Icon icon="charm:cross" color="red" width="30" height="30" onClick={(e) => onImageRemove(e, index, item)} />
                                                 </div>)) : ""}</div>
+
+
+                                                <div className="post_Add_ImagePreview">
+                                                    <h3>origin image</h3>
+                                            {originalPreview ? originalPreview.map((item, index) => (
+                                                <div className="Post_Add_ImageSet" key={index} >
+
+                                                    <img src={item.original_img_url} alt={item.original_img_url} />
+                                                    <Icon icon="charm:cross" color="red" width="30" height="30" onClick={(e) => onImageRemove(e, index, item)} />
+                                                </div>)) : ""}</div>
+
+                                                
                                         <div className="post_Add_Save">
                                             <div className="buttonAdd1">
                                                 <CustomBtn  >{t("SAVE")}</CustomBtn>
@@ -1147,40 +1247,83 @@ function PostAdvert() {
                             <Modal.Title>{t("ImageCrop")}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <div>
-                                <Cropper
-                                    style={{ height: 400, width: "100%" }}
-                                    // initialAspectRatio={2 / 2}
-                                    aspectRatio={4 / 3}
-                                    guides={false}
-                                    preview=".img-preview2"
-                                    src={image}
-                                    viewMode={1}
-                                    minCropBoxHeight={150}
-                                    minCropBoxWidth={150}
-                                    maxCropBoxWIdth={150}
-                                    maxCropBoxHeight={150}
-                                    cropBoxResizable={false}
-                                    background={false}
-                                    responsive={true}
-                                    autoCropArea={1}
-                                    checkOrientation={false}
-                                    center={true}
-                                    scalable={false}
-                                    onInitialized={(instance) => {
-                                        setCropper(instance);
-                                    }}
-                                />
-                            </div>
+                        <React.Fragment>
+          <div className={classes.cropContainer}>
+                    <Cropper
+                    image={imageSrc}
+                    crop={crop}
+                    rotation={rotation}
+                    zoom={zoom}
+                    aspect={4 / 3}
+                    onCropChange={setCrop}
+                    onRotationChange={setRotation}
+                    onCropComplete={onCropComplete}
+                    onZoomChange={setZoom}
+                    />
+                </div>
+                <div className={classes.controls}>
+                    <div className={classes.sliderContainer}>
+                    <Typography
+                        variant="overline"
+                        classes={{ root: classes.sliderLabel }}
+                    >
+                        Zoom
+                    </Typography>
+                    <Slider
+                        value={zoom}
+                        min={1}
+                        max={3}
+                        step={0.1}
+                        aria-labelledby="Zoom"
+                        classes={{ root: classes.slider }}
+                        onChange={(e, zoom) => setZoom(zoom)}
+                    />
+                    </div>
+                    <div className={classes.sliderContainer}>
+                    <Typography
+                        variant="overline"
+                        classes={{ root: classes.sliderLabel }}
+                    >
+                        Rotation
+                    </Typography>
+                    <Slider
+                        value={rotation}
+                        min={0}
+                        max={360}
+                        step={1}
+                        aria-labelledby="Rotation"
+                        classes={{ root: classes.slider }}
+                        onChange={(e, rotation) => setRotation(rotation)}
+                    />
+                    </div>
+                    {/* <Button
+                    onClick={showCroppedImage}
+                    variant="contained"
+                    color="primary"
+                    classes={{ root: classes.cropButton }}
+                    >
+                    Show Result
+                    </Button> */}
+                </div>
+                {/* <ImgDialog img={croppedImage} onClose={onClose} /> */}
+                </React.Fragment>
                         </Modal.Body>
                         <Modal.Footer>
+                        <Button
+                                onClick={showCroppedImage}
+                                variant="contained"
+                                color="primary"
+                                classes={{ root: classes.cropButton }}
+                                >
+                                {t("Crop")}
+                         </Button>
                             <button
                                 variant="primary"
-
-                                onClick={() => {
-                                    getCropData();
-                                    imgCropper();
-                                }}
+                                // onClick={showCroppedImage}
+                                // onClick={() => {
+                                //     // getCropData();
+                                //     // imgCropper();
+                                // }}
                             >
                                 {t("Crop")}
                             </button>
@@ -1213,4 +1356,6 @@ function PostAdvert() {
         </div>
     );
 }
-export default PostAdvert;
+
+const StyledDemo = withStyles(CropperStyles)(PostAdvert)
+export default StyledDemo;
