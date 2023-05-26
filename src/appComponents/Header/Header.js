@@ -119,7 +119,7 @@ function Header() {
           <Row>
             <Col xl={8} lg={8} md={12} sm={12}>
               {location.pathname == "/deals/latest-deals" ||
-              location.pathname.match("/deals/latest-deals/company-profile/") ||
+              location.pathname.match("/deals/companies/company-profile/") ||
               location.pathname == "/deals/products" ||
               location.pathname == "/deals/services" ||
               location.pathname == "/deals/brands" ||

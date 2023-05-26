@@ -71,6 +71,50 @@ export const footerData = {
             id: "3",
             text: `${t("ADVERTIES_LINKS")}`,
         },
+        {
+            id: "4",
+            text: `${t("DEALS_LINKS")}`,
+        },
+        {
+            id: "5",
+            text: `${t("CLASSIFIEDS_LINKS")}`,
+        },
+        {
+            id: "6",
+            text: `${t("POST_ADVERT_LINKS")}`,
+        },
+        {
+            id: "7",
+            text: `${t("YOUR_ADS_LINKS")}`,
+        },
+        {
+            id: "8",
+            text: `${t("LATEST_DEALS_LINKS")}`,
+        },
+        {
+            id: "9",
+            text: `${t("PRODUCTS_LINKS")}`,
+        },
+        {
+            id: "10",
+            text: `${t("SERVICES_LINKS")}`,
+        },
+        {
+            id: "11",
+            text: `${t("BRANDS_LINKS")}`,
+        },
+        {
+            id: "12",
+            text: `${t("COMPANIES_LINKS")}`,
+        },
+        {
+            id: "13",
+            text: `${t("BOOKMARKS_LINKS")}`,
+        },
+        {
+            id: "14",
+            text: `${t("PROFILE_LINKS")}`,
+        },
     ],
 };
 

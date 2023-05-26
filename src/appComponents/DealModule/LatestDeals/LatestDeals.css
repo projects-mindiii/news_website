@@ -18,6 +18,7 @@
     line-height: 36px;
     margin-bottom: 0px;
     padding: 12px 0px;
+    letter-spacing: -0.315px;
 }
 
 .latestDeals p {
@@ -26,6 +27,8 @@
     font-size: 19px;
     line-height: 25px;
     margin-bottom: 0px;
+    letter-spacing: -0.36px;
+    font-family: 'Nunito Sans';
 }
 
 .dealSubText {
@@ -36,8 +39,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .latestDeals button {
@@ -64,14 +67,20 @@
 }
 
 .dealText p {
-    font-size: 18px;
-    line-height: 20px;
     line-break: anywhere;
+    line-height: 20px;
+    font-size: 18px;
+    color: #000000;
+    letter-spacing: -0.61875px;
+    font-weight: 400;
+    font-family: 'Poppins';
 }
 
 .dealText span {
     font-size: 11px;
     color: #828282;
+    font-weight: 500;
+    line-height: 16px;
 }
 
 .dealPrice {
@@ -92,6 +101,7 @@
     font-weight: 300;
     font-size: 12px;
     color: #000000;
+    line-height: 18px;
 }
 
 .whatsApp {
@@ -117,12 +127,17 @@ button.whatsApp svg {
 
 .dealContainer {
     padding-bottom: 15px;
+    margin-top: 23px;
 }
 
 .websiteUrl p {
     line-break: anywhere;
     line-height: 20px;
-    font-size: 17px;
+    font-size: 18px;
+    color: #000000;
+    letter-spacing: -0.61875px;
+    font-weight: 400;
+    font-family: 'Poppins';
 }
 
 .stickyClass {

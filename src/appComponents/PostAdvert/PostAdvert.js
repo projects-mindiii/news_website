@@ -4,16 +4,15 @@ import Modal from "react-bootstrap/Modal";
 import Select from "react-select";
 import Cropper from "react-easy-crop";
 
-import { getCroppedImg, getRotatedImage} from '../PageNotFound/canvasUtils'
-import { CropperStyles } from '../PageNotFound/styles'
+import { getCroppedImg, getRotatedImage } from '../Cropper/canvasUtils'
+import { CropperStyles } from '../Cropper/styles'
 import Slider from '@material-ui/core/Slider'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import ImgDialog from '../PageNotFound/ImgDialog'
 import { getOrientation } from 'get-orientation/browser'
 
-import React, { useEffect, useState,useCallback} from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SublyApi from "../../helpers/Api";
 import Form from 'react-bootstrap/Form';
@@ -43,7 +42,7 @@ const ORIENTATION_TO_ANGLE = {
     '3': 180,
     '6': 90,
     '8': -90,
-  }
+}
 //-------Create a Deals Header component--------
 function PostAdvert({ classes }) {
     const [imageSrc, setImageSrc] = React.useState(null)
@@ -71,7 +70,7 @@ function PostAdvert({ classes }) {
 
             originalImageData.push(blobImg);
             originalPreviewData.push({ original_img_url: imageSrc });
-            
+
             setOrignalImage(originalImageData)
             setOriginalPreview(originalPreviewData)
 
@@ -90,7 +89,7 @@ function PostAdvert({ classes }) {
             // get the real base64 content of the file
             var blockRealData = blockCrop[1].split(",")[1];
 
-            var cropBlobImg = await b64toBlob(blockRealData,cropContentTypes);
+            var cropBlobImg = await b64toBlob(blockRealData, cropContentTypes);
             let profileImageData = [...profileImage];
 
             profileImageData.push(cropBlobImg);
@@ -101,51 +100,51 @@ function PostAdvert({ classes }) {
             setProfilePreview(profileViewData);
 
         } catch (e) {
-          console.error(e)
+            console.error(e)
         }
-      }, [imageSrc, croppedAreaPixels, rotation])
+    }, [imageSrc, croppedAreaPixels, rotation])
 
-      function blobToBase64(blob) {
+    function blobToBase64(blob) {
         return new Promise((resolve, _) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.readAsDataURL(blob);
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
         });
-      }
-    
+    }
+
     const onClose = useCallback(() => {
         setCroppedImage(null)
     }, [])
-    
+
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
-          const file = e.target.files[0]
-        //   const file = e.target.files[0];
-          let imageDataUrl = await readFile(file)
-          setRotation(0);
-          try {
-            // apply rotation if needed
-            const orientation = await getOrientation(file)
-            const rotation = ORIENTATION_TO_ANGLE[orientation]
-            if (rotation) {
-              imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
+            const file = e.target.files[0]
+            //   const file = e.target.files[0];
+            let imageDataUrl = await readFile(file)
+            setRotation(0);
+            try {
+                // apply rotation if needed
+                const orientation = await getOrientation(file)
+                const rotation = ORIENTATION_TO_ANGLE[orientation]
+                if (rotation) {
+                    imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
+                }
+
+
+            } catch (e) {
+                console.warn('failed to detect the orientation')
             }
-            
-
-          } catch (e) {
-            console.warn('failed to detect the orientation')
-          }
-          setImageSrc(imageDataUrl)
+            setImageSrc(imageDataUrl)
         }
-      }
+    }
 
-      function readFile(file) {
+    function readFile(file) {
         return new Promise((resolve) => {
-          const reader = new FileReader()
-          reader.addEventListener('load', () => resolve(reader.result), false)
-          reader.readAsDataURL(file)
+            const reader = new FileReader()
+            reader.addEventListener('load', () => resolve(reader.result), false)
+            reader.readAsDataURL(file)
         })
-      }
+    }
 
 
     const dispatch = useDispatch();
@@ -376,7 +375,7 @@ function PostAdvert({ classes }) {
                                     : "za");
 
 
-                                if(response.data[0].is_default_country==1){
+                                if (response.data[0].is_default_country == 1) {
                                     setValue("isDefaultCountry", {
                                         label: `${t("SOUTH_AFRICA_SET")}`,
                                         value: 1,
@@ -387,7 +386,7 @@ function PostAdvert({ classes }) {
                                         value: 1,
                                         id: 1
                                     })
-                                }else{ 
+                                } else {
                                     setValue("isDefaultCountry", {
                                         label: `${t("OUTOF_SOUTH")}`,
                                         value: 0,
@@ -399,30 +398,30 @@ function PostAdvert({ classes }) {
                                         id: 0
                                     })
                                 }
-                                
-                                if(response.data[0].provinces && response.data[0].provinces>0){
+
+                                if (response.data[0].provinces && response.data[0].provinces > 0) {
                                     const newProvinceOption = provinceOption.find(
                                         (item) => item.id === response.data[0].provinces
                                     );
                                     setNewProvinces(newProvinceOption);
-                                }else{
+                                } else {
                                     setNewProvinces({ label: 'Selected Province', value: "", id: "" })
                                 }
 
-                               
-                                if(response.data[0].country_id && response.data[0].country_id>0){
+
+                                if (response.data[0].country_id && response.data[0].country_id > 0) {
                                     const newCountryOption = countyryOption.find(
                                         (item) => item.id === response.data[0].country_id
                                     );
                                     setNewCountry(newCountryOption);
-                                }else{
+                                } else {
                                     setNewCountry({ label: 'Selected Country', value: "", id: "" })
                                 }
                             }
                         });
                     }
                     else {
-                        
+
                         setValue("categorytype", location.state.category_type_id && location.state.category_type_id.toString())
                         setCategoryValue(location.state.category_type_id && location.state.category_type_id.toString())
                         setValue("fullName", location.state.user_name)
@@ -673,7 +672,7 @@ function PostAdvert({ classes }) {
 
         let profileimages = [...profileImage];
         profileimages.splice(index, 1);
-        
+
         setProfilePreview(profileviews);
         setProfileImage(profileimages);
 
@@ -690,7 +689,7 @@ function PostAdvert({ classes }) {
             remiveImageArray.push(item.id)
             setRemoveImage(remiveImageArray)
         }
-        
+
     }
 
 
@@ -910,13 +909,13 @@ function PostAdvert({ classes }) {
                                         {CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE ? <div className="headings mb-3"> {t("PRICE")}</div> : CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER && <div className="headings mb-3">{t("RENUMERATION")}</div>}
                                         {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                                             <div className="post_Add_priceDiv">
-                                                <InputGroup className="mb-3">
+                                                <InputGroup className="mb-3 dropdown_menu">
                                                     <DropdownButton
                                                         variant="outline-secondary"
                                                         title={currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
                                                         id="input-group-dropdown-1"
                                                     >{currenciesOptions && currenciesOptions.map((item, index) => (
-                                                        <Dropdown.Item onClick={() => {
+                                                        <Dropdown.Item active={currencyValue ? currencyValue.name == item.name : index == 0} onClick={() => {
                                                             setCurrencyValue(item);
                                                         }}>{item.name}</Dropdown.Item>))}
                                                     </DropdownButton>
@@ -1214,16 +1213,6 @@ function PostAdvert({ classes }) {
                                                 </div>)) : ""}</div>
 
 
-                                                <div className="post_Add_ImagePreview">
-                                                    <h3>origin image</h3>
-                                            {originalPreview ? originalPreview.map((item, index) => (
-                                                <div className="Post_Add_ImageSet" key={index} >
-
-                                                    <img src={item.original_img_url} alt={item.original_img_url} />
-                                                    <Icon icon="charm:cross" color="red" width="30" height="30" onClick={(e) => onImageRemove(e, index, item)} />
-                                                </div>)) : ""}</div>
-
-                                                
                                         <div className="post_Add_Save">
                                             <div className="buttonAdd1">
                                                 <CustomBtn  >{t("SAVE")}</CustomBtn>
@@ -1247,89 +1236,75 @@ function PostAdvert({ classes }) {
                             <Modal.Title>{t("ImageCrop")}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                        <React.Fragment>
-          <div className={classes.cropContainer}>
-                    <Cropper
-                    image={imageSrc}
-                    crop={crop}
-                    rotation={rotation}
-                    zoom={zoom}
-                    aspect={4 / 3}
-                    onCropChange={setCrop}
-                    onRotationChange={setRotation}
-                    onCropComplete={onCropComplete}
-                    onZoomChange={setZoom}
-                    />
-                </div>
-                <div className={classes.controls}>
-                    <div className={classes.sliderContainer}>
-                    <Typography
-                        variant="overline"
-                        classes={{ root: classes.sliderLabel }}
-                    >
-                        Zoom
-                    </Typography>
-                    <Slider
-                        value={zoom}
-                        min={1}
-                        max={3}
-                        step={0.1}
-                        aria-labelledby="Zoom"
-                        classes={{ root: classes.slider }}
-                        onChange={(e, zoom) => setZoom(zoom)}
-                    />
-                    </div>
-                    <div className={classes.sliderContainer}>
-                    <Typography
-                        variant="overline"
-                        classes={{ root: classes.sliderLabel }}
-                    >
-                        Rotation
-                    </Typography>
-                    <Slider
-                        value={rotation}
-                        min={0}
-                        max={360}
-                        step={1}
-                        aria-labelledby="Rotation"
-                        classes={{ root: classes.slider }}
-                        onChange={(e, rotation) => setRotation(rotation)}
-                    />
-                    </div>
-                    {/* <Button
-                    onClick={showCroppedImage}
-                    variant="contained"
-                    color="primary"
-                    classes={{ root: classes.cropButton }}
-                    >
-                    Show Result
-                    </Button> */}
-                </div>
-                {/* <ImgDialog img={croppedImage} onClose={onClose} /> */}
-                </React.Fragment>
+                            <React.Fragment>
+                                <div className={classes.cropContainer}>
+                                    <Cropper
+                                        image={imageSrc}
+                                        crop={crop}
+                                        rotation={rotation}
+                                        zoom={zoom}
+                                        aspect={4 / 3}
+                                        onCropChange={setCrop}
+                                        onRotationChange={setRotation}
+                                        onCropComplete={onCropComplete}
+                                        onZoomChange={setZoom}
+                                    />
+                                </div>
+                                <div className={classes.controls}>
+                                    <div className={classes.sliderContainer}>
+                                        <Typography
+                                            variant="overline"
+                                            classes={{ root: classes.sliderLabel }}
+                                        >
+                                            Zoom
+                                        </Typography>
+                                        <Slider
+                                            value={zoom}
+                                            min={1}
+                                            max={3}
+                                            step={0.1}
+                                            aria-labelledby="Zoom"
+                                            classes={{ root: classes.slider }}
+                                            onChange={(e, zoom) => setZoom(zoom)}
+                                        />
+                                    </div>
+                                    <div className={classes.sliderContainer}>
+                                        <Typography
+                                            variant="overline"
+                                            classes={{ root: classes.sliderLabel }}
+                                        >
+                                            Rotation
+                                        </Typography>
+                                        <Slider
+                                            value={rotation}
+                                            min={0}
+                                            max={360}
+                                            step={1}
+                                            aria-labelledby="Rotation"
+                                            classes={{ root: classes.slider }}
+                                            onChange={(e, rotation) => setRotation(rotation)}
+                                        />
+                                    </div>
+                                </div>
+                            </React.Fragment>
                         </Modal.Body>
                         <Modal.Footer>
-                        <Button
+                            <Button
                                 onClick={showCroppedImage}
                                 variant="contained"
                                 color="primary"
                                 classes={{ root: classes.cropButton }}
-                                >
-                                {t("Crop")}
-                         </Button>
-                            <button
-                                variant="primary"
-                                // onClick={showCroppedImage}
-                                // onClick={() => {
-                                //     // getCropData();
-                                //     // imgCropper();
-                                // }}
                             >
                                 {t("Crop")}
-                            </button>
-                            <button variant="secondary" onClick={() => { imgCropper() }}>
+                            </Button>
+                            <Button
+                                onClick={() => { imgCropper() }}
+                                variant="contained"
+                                color="secondary"
+                                classes={{ root: classes.cropButton }}
+                            >
                                 {t("Close")}
-                            </button>
+                            </Button>
                         </Modal.Footer>
                     </Modal>
                     <Modal

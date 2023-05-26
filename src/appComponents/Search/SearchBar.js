@@ -6,7 +6,11 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clearSearchData, searchListApi } from "../../store/slices/SearchSlice";
+import {
+  clearSearchData,
+  searchListApi,
+  storeSearchValue,
+} from "../../store/slices/SearchSlice";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
@@ -20,17 +24,18 @@ function SearchBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSearch = async () => {
+    dispatch(storeSearchValue(results));
     const searchValues = { limit: 10, offset: 0, search: results };
     dispatch(searchListApi({ userToken: userToken, searchValues })).then(
       async (responsejson) => {
-        if (responsejson.status_code) {
-          if (responsejson.status_code === STATUS_CODES.INVALID_TOKEN) {
+        if (responsejson.response.status_code) {
+          if (responsejson.response.status_code === STATUS_CODES.INVALID_TOKEN) {
             dispatch(userLogout());
             dispatch(guestUserLogin());
             navigate("/login");
           }
         } else {
-          if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+          if (responsejson.response.status === STATUS_CODES.INVALID_TOKEN) {
             dispatch(userLogout());
             dispatch(guestUserLogin());
             navigate("/login");
@@ -50,8 +55,10 @@ function SearchBar() {
     <div
       className="searchBar"
       onClick={() => {
-        navigate("/search-list");
-        dispatch(clearSearchData());
+        if (location.pathname !== "/search-list") {
+          navigate("/search-list");
+          dispatch(clearSearchData());
+        }
       }}
     >
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

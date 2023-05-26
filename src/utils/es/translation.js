@@ -66,14 +66,25 @@ export const TRANSLATIONS_ES = {
   JOB_LINKS: "Trabajos",
   ADVERTIES_LINKS: "Anunciar",
   OUR_MEDIA: "NUESTROS MEDIOS",
+  DEALS_LINKS: "Ofertas/Centro",
+  CLASSIFIEDS_LINKS: "Clasificada",
+  POST_ADVERT_LINKS: "Anuncio Postal",
+  YOUR_ADS_LINKS: "Tus ANUNCIOS",
+  LATEST_DEALS_LINKS: "Últimas ofertas",
+  PRODUCTS_LINKS: "Productos",
+  SERVICES_LINKS: "Servicios",
+  BRANDS_LINKS: "Marcas",
+  COMPANIES_LINKS: "Compañías",
+  BOOKMARKS_LINKS: "Marcadores",
+  PROFILE_LINKS: "Ver perfil",
 
   //----Header Text------
   DEALS: "OFERTAS/CENTRO",
-  CLASSIFIEDS: " CLASIFICADOS",
+  CLASSIFIEDS: "CLASIFICADOS",
   JOBS: "TRABAJOS",
   POST_ADVERT: "ANUNCIO POSTAL",
   YOUR_ADS: "SUS ANUNCIOS",
-  LALEST_DEALS: " ÚLTIMAS OFERTAS",
+  LATEST_DEALS: " ÚLTIMAS OFERTAS",
   PRODUCTS: "PRODUCTOS",
   SERVICES: "SERVICIOS",
   BRANDS: "MARCAS",
@@ -102,7 +113,7 @@ export const TRANSLATIONS_ES = {
   CANCEL: "CANCELAR",
   DELETE: "BORRAR",
   SOUTH_AFRICA_SET: "Sudáfrica",
-  OUTOF_SOUTH:"Fuera de Sudáfrica",
+  OUTOF_SOUTH: "Fuera de Sudáfrica",
 
   //----Deals Text------
   CONTACT_PERSON: "PERSONA DE CONTACTO",
@@ -121,6 +132,8 @@ export const TRANSLATIONS_ES = {
   NO_SERVICE: "--- NO HAY SERVICIOS PARA MOSTRAR ---",
   NO_BRAND: "--- NO HAY MARCAS PARA MOSTRAR ---",
   NO_DEAL: "--- NO HAY OFERTAS PARA MOSTRAR ---",
+  DEAL: "TRATO",
+  DEALS_TEXT: "OFERTAS_TEXTO",
 
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",
@@ -154,7 +167,7 @@ export const TRANSLATIONS_ES = {
   REPEAT_PASSWORD: "Repita la contraseña",
   CURRENT_PASSWORD: "Contraseña actual",
   SELECT_PROVINCE: "Seleccione Provincia",
-  COUNTRY_SET: "Establecer país",
+  COUNTRY_SET: "Seleccionar país",
 
   //---------- Form Lable Common Text---------------
   REMEMBER_ME: "Acuérdate de mí",

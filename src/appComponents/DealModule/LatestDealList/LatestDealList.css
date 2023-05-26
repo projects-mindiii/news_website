@@ -1,9 +1,19 @@
 .companyDetails h3 {
     font-weight: 600;
-    font-size: 20.8px;
-    padding-bottom: 0px;
+    font-size: 30px;
+    line-height: 30px;
+    color: #000000;
+    letter-spacing: unset;
 }
 
+.companyDetails p {
+    font-family: 'Nunito Sans';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.39px;
+    color: #000000;
+}
 
 .companyDetails h5 {
     font-weight: 600;
@@ -50,6 +60,7 @@
     font-size: 18.2px;
     line-height: 27px;
     text-align: center;
+    font-family: 'Poppins';
 }
 
 .playBox {
@@ -134,13 +145,15 @@
 }
 
 .latestDeals .watsappCls span {
-    font-weight: 500 !important;
+    font-weight: 500;
     font-size: 19.2px !important;
     line-height: 21px !important;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 6px;
+    letter-spacing: -0.32px;
+    color: #FFFFFF;
 }
 
 .dealDetailsList {
@@ -154,3 +167,24 @@
         font-size: 16px !important;
     }
 }
+
+
+ .companyDetails .dealText p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: -0.61875px;
+    color: #000000;
+}
+
+.companyDetails .websiteUrl p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: -0.61875px;
+    color: #000000;
+} 

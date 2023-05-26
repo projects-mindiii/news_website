@@ -13,11 +13,38 @@ import { useTranslation } from "react-i18next";
 import WhatsApp from "../../../CommonComponent/Whatappshare";
 import ReactPlayer from 'react-player';
 import AddressFields from "../../CommonModule/AddressFields";
+import SublyApi from "../../../helpers/Api";
+import { Toast } from "../../../utils/Toaster";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { COUNT, COUNT_REFFRENCE } from "../../../utils/Constants";
+import { STATUS_CODES } from "../../../utils/StatusCode";
 
 // ------function for company profile---------
 function CompanyProfile({ companyDetailData }) {
   //set language
   const { t } = useTranslation();
+  const { userToken } = useSelector((state) => state.user);
+  const { id } = useParams();
+
+  //------ function for share view count-------
+  async function handleCount() {
+    let requestData = new FormData();
+    requestData.append("id", id);
+    requestData.append("type", COUNT.CLICK);
+    requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
+    requestData.append("share_in", 0);
+    await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
+      if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: responsejson.data.message,
+        });
+      }
+    })
+  }
 
   return (
     <section>
@@ -50,7 +77,7 @@ function CompanyProfile({ companyDetailData }) {
           <div className="brandPrasent">
             {companyDetailData.brand_list.length > 0 && (
               <>
-                <h3>{t("BRAND_REPRESENT")}</h3>
+                <h5>{t("BRAND_REPRESENT")}</h5>
                 <div className="brandType">
                   {companyDetailData.brand_list.length > 0 && companyDetailData.brand_list.map((item2, index2) => (
                     <p key={index2}>{item2.name}</p>
@@ -61,7 +88,7 @@ function CompanyProfile({ companyDetailData }) {
 
             {companyDetailData.vedio_list.length > 0 && (
               <>
-                <div className="brandType">
+                <div className="vidioPlay">
                   {companyDetailData.vedio_list.length > 0 && companyDetailData.vedio_list.map((item, index) => (
                     <ReactPlayer
                       className="playBox"
@@ -76,32 +103,33 @@ function CompanyProfile({ companyDetailData }) {
 
             <div className="dealDetailsList">
               {companyDetailData.company_detail.email && (
-                <div className="detailsValue">
+                <div className="detailsValue" onClick={() => handleCount()}>
                   <img src={mail} alt="img" />
                   <div className="dealText websiteUrl">
                     <span>{t("EMAIL_TEXT")}</span>
-                    <a href={`https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email}&su=${"Subject"}`} >
+                    <a href={`https://mail.google.com/mail/?view=cm&to=${companyDetailData.company_detail.email}&su=${"Subject"}`} target="blank">
                       <p>{companyDetailData.company_detail.email}</p></a>
                   </div>
                 </div>
               )}
 
               {companyDetailData.company_detail.contact && (
-                <div className="detailsValue">
+                <div className="detailsValue" onClick={() => handleCount()}>
                   <img src={contact} alt="img" />
                   <div className="dealText">
                     <span>{t("CONTACT_NUMBER")}</span>
-                    <p>{companyDetailData.company_detail.dial_code}{companyDetailData.company_detail.contact}</p>
+                    <a href={`tel:${companyDetailData.company_detail.dial_code} ${companyDetailData.company_detail.contact}`} target="blank">
+                      <p>{companyDetailData.company_detail.dial_code} {companyDetailData.company_detail.contact}</p></a>
                   </div>
                 </div>
               )}
 
               {companyDetailData.company_detail.webside_url && (
-                <div className="detailsValue">
+                <div className="detailsValue" onClick={() => handleCount()}>
                   <img src={globe} alt="img" />
                   <div className="dealText websiteUrl">
                     <span>{t("WEBSITE")}</span>
-                    <a href={companyDetailData.company_detail.webside_url}>
+                    <a href={companyDetailData.company_detail.webside_url} target="blank">
                       <p>{companyDetailData.company_detail.webside_url}</p></a>
                   </div>
                 </div>
@@ -113,24 +141,24 @@ function CompanyProfile({ companyDetailData }) {
               <div className="watsappCls">
                 <WhatsApp watsApp={false} />
               </div>
-              )}
+            )}
 
           </div>
           <div className="socialShare">
             {companyDetailData.company_detail.facebook_link && (
-              <a href={companyDetailData.company_detail.facebook_link}><img src={facebook} /></a>
+              <a href={companyDetailData.company_detail.facebook_link} target="blank"><img src={facebook} /></a>
             )}
             {companyDetailData.company_detail.twitter_link && (
-              <a href={companyDetailData.company_detail.twitter_link}><img src={twitter} /></a>
+              <a href={companyDetailData.company_detail.twitter_link} target="blank"><img src={twitter} /></a>
             )}
             {companyDetailData.company_detail.instagrame_link && (
-              <a href={companyDetailData.company_detail.instagrame_link}><img src={insta} /></a>
+              <a href={companyDetailData.company_detail.instagrame_link} target="blank"><img src={insta} /></a>
             )}
             {companyDetailData.company_detail.linkedin_link && (
-              <a href={companyDetailData.company_detail.linkedin_link}><img src={linkedin} /></a>
+              <a href={companyDetailData.company_detail.linkedin_link} target="blank"><img src={linkedin} /></a>
             )}
             {companyDetailData.company_detail.youtube_link && (
-              <a href={companyDetailData.company_detail.youtube_link}><img src={youtube} /></a>
+              <a href={companyDetailData.company_detail.youtube_link} target="blank"><img src={youtube} /></a>
             )}
           </div>
 

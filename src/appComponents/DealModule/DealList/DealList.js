@@ -10,6 +10,11 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import WhatsApp from "../../../CommonComponent/Whatappshare";
 import Loader from "../../../utils/Loader/Loader";
+import SublyApi from "../../../helpers/Api";
+import { Toast } from "../../../utils/Toaster";
+import { useSelector } from "react-redux";
+import { COUNT, COUNT_REFFRENCE } from "../../../utils/Constants";
+import { STATUS_CODES } from "../../../utils/StatusCode";
 
 // -------function for showing deal list-----------
 function DealList({ dealList, fromDeal }) {
@@ -19,6 +24,27 @@ function DealList({ dealList, fromDeal }) {
 
     useEffect(() => {
     }, [dealList]);
+    const { userToken } = useSelector((state) => state.user);
+
+
+    //------ function for share view count-------
+    async function handleCount(id) {
+        let requestData = new FormData();
+        requestData.append("id", id);
+        requestData.append("type", COUNT.VIEW);
+        requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
+        requestData.append("share_in", 0);
+        await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
+            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: responsejson.data.message,
+                });
+            }
+        })
+    }
 
     return (
         <section>
@@ -54,7 +80,7 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={mail} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("EMAIL_TEXT")}</span>
-                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`}>
+                                        <a href={`https://mail.google.com/mail/?view=cm&to=${item.contact_email}&su=${"Subject"}`} target="blank">
                                             <p>{item.contact_email}</p> </a>
                                     </div>
                                 </div>
@@ -64,9 +90,10 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={contact} alt="img" />
                                     <div className="dealText">
                                         <span>{t("CONTACT_NUMBER")}</span>
-                                        <p>
-                                            +{item.contact_dial_code} {item.contact_number}
-                                        </p>
+                                        <a href={`tel:${item.contact_dial_code} ${item.contact_number}`} target="blank">
+                                            <p>
+                                                +{item.contact_dial_code} {item.contact_number}
+                                            </p></a>
                                     </div>
                                 </div>
                             )}
@@ -75,7 +102,7 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={globe} alt="img" />
                                     <div className="dealText websiteUrl">
                                         <span>{t("WEBSITE")}</span>
-                                        <a href={item.contact_web_url}>
+                                        <a href={item.contact_web_url} target="blank">
                                             <p>{item.contact_web_url}</p></a>
                                     </div>
                                 </div>
@@ -104,7 +131,7 @@ function DealList({ dealList, fromDeal }) {
                             </div>
                         )}
 
-                        {fromDeal == true ? (<button className="viewProfile" onClick={() => { navigate(`/deals/latest-deals/company-profile/${item.company_id}`) }}>{t("COMPANY_PROFILE")}</button>) : ""}
+                        {fromDeal == true ? (<button className="viewProfile" onClick={() => { navigate(`/deals/companies/company-profile/${item.company_id}`); handleCount(item.company_id) }}>{t("COMPANY_PROFILE")}</button>) : ""}
 
                     </div>
                 ))

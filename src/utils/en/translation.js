@@ -63,6 +63,18 @@ export const TRANSLATIONS_EN = {
   JOB_LINKS: "Jobs",
   ADVERTIES_LINKS: "Advertise",
   OUR_MEDIA: "OUR MEDIA",
+  DEALS_LINKS: "Deals/Hub",
+  CLASSIFIEDS_LINKS: " Classified",
+  POST_ADVERT_LINKS: "Post Advert",
+  YOUR_ADS_LINKS: "Your ADS",
+  LATEST_DEALS_LINKS: " Latest Deals",
+  PRODUCTS_LINKS: "Products",
+  SERVICES_LINKS: "Services",
+  BRANDS_LINKS: "Brands",
+  COMPANIES_LINKS: "Companies",
+  BOOKMARKS_LINKS: "Bookmarks",
+  PROFILE_LINKS: "View Profile",
+
 
   //----Header Text------
   DEALS: "DEALS/HUB",
@@ -70,7 +82,7 @@ export const TRANSLATIONS_EN = {
   JOBS: "JOBS",
   POST_ADVERT: "POST ADVERT",
   YOUR_ADS: "YOUR ADS",
-  LALEST_DEALS: " LALEST DEALS",
+  LATEST_DEALS: " LATEST DEALS",
   PRODUCTS: "PRODUCTS",
   SERVICES: "SERVICES",
   BRANDS: "BRANDS",
@@ -99,7 +111,7 @@ export const TRANSLATIONS_EN = {
   CANCEL: "CANCEL",
   DELETE: "DELETE",
   SOUTH_AFRICA_SET: "South Africa",
-  OUTOF_SOUTH:"Outside South Africa",
+  OUTOF_SOUTH: "Outside South Africa",
 
 
   //----Deals Text------
@@ -119,6 +131,8 @@ export const TRANSLATIONS_EN = {
   NO_SERVICE: "--- NO SERVICES TO DISPLAY ---",
   NO_BRAND: "--- NO BRANDS TO DISPLAY ---",
   NO_DEAL: "--- NO DEALS TO DISPLAY ---",
+  DEAL: "DEAL",
+  DEALS_TEXT: "DEALS",
 
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Form incomplete, please fill all fields",
@@ -152,7 +166,7 @@ export const TRANSLATIONS_EN = {
   REPEAT_PASSWORD: "Repeat Password",
   CURRENT_PASSWORD: "Current Password",
   SELECT_PROVINCE: "Select Province",
-  COUNTRY_SET: "Country Set",
+  COUNTRY_SET: "Select Country",
   CITY_TEXT: "Input City/Town",
 
   //---------- Form Lable Common Text---------------

@@ -54,7 +54,7 @@ function DealsHeader() {
         <Loader />
       ) : ""}
       <div className="navHeader d-flex">
-        {(location.pathname.match("/deals/latest-deals/company-profile/"))?
+        {(location.pathname.match("/deals/companies/company-profile/"))?
         (<div className="backarrowButton" >
           <MdOutlineKeyboardArrowLeft onClick={() => navigate(-1)} />
         </div>):""}

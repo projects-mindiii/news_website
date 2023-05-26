@@ -30,7 +30,7 @@ function Footer() {
                         </iframe></div>
                     : ""}
             </Container>
-            
+
             <section className="footer">
                 <Container>
                     <div className="footerContent">
@@ -45,6 +45,7 @@ function Footer() {
                                         <a
                                             href={item.link}
                                             key={index}
+                                            target="blank"
                                         >
                                             <img src={item.logo} alt="social-logo" />
                                         </a>
@@ -58,7 +59,7 @@ function Footer() {
                                     {(footerData.socialapp).map((item1, index1) => (
                                         <a
                                             href="#"
-                                            target="_blank"
+                                            target="blank"
                                             key={index1}
                                         >
                                             <img src={item1.socialapp} alt="apps" />
@@ -79,14 +80,15 @@ function Footer() {
                                     </div>
                                 </div>
                             </Col>
-                            <Col lg={4} md={4}>
-                                <div className="linkHeading">
-                                    <h6>{t("OUR MEDIA")}</h6>
-                                    <div className="companyImg">
-                                        <img src={Image2} alt="africa-print" />
-                                        <img src={Image3} alt="modern-marketing" />
-                                    </div>
-                                    {/*<div className="subscribeForm">
+                            <Col lg={4} md={4} >
+                                <div className="linkHeadingWrapper">
+                                    <div className="linkHeading">
+                                        <h6>{t("OUR MEDIA")}</h6>
+                                        <div className="companyImg">
+                                            <img src={Image2} alt="africa-print" />
+                                            <img src={Image3} alt="modern-marketing" />
+                                        </div>
+                                        {/*<div className="subscribeForm">
                                         <h5>{t("SUBSCRIPTION_TEXT")}</h5>
                                         <Form onSubmit={handleSubmit(onsubmit)}>
                                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -124,6 +126,7 @@ function Footer() {
                                             </Button>
                                         </Form>
                                     </div> */}
+                                    </div>
                                 </div>
                             </Col>
                         </Row>

@@ -38,7 +38,7 @@
   line-height: 26px;
   color: #000000;
   margin-bottom: 5px;
-  margin-left: 5px;
+  margin-left: 0px;
 }
 
 .classiFieds_forSale_about .classiFields_heading {
@@ -53,7 +53,9 @@
   position: relative;
 }
 
-.classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+.classiFieds_forSale_about
+  .classiFieds_time_action
+  .classiFieds_forSale_button {
   border-radius: 14px;
   line-height: 20px;
   border: none !important;
@@ -94,7 +96,7 @@
 .classiFields_iconBackGround {
   height: 40px;
   width: 40px;
-  background: #E5E5E5;
+  background: #e5e5e5;
   mix-blend-mode: multiply;
   border-radius: 6px;
   margin-right: 15px;
@@ -162,6 +164,7 @@
 
 .classiFieds_time span img {
   height: 18.57px;
+  margin-right: 6px;
   width: 18.57px;
   vertical-align: sub;
 }
@@ -188,6 +191,7 @@
   line-height: 36px;
   letter-spacing: -0.48px;
   color: #e91f63;
+  font-family: "Nunito Sans";
 }
 
 .classiFieds_countryName img {
@@ -203,6 +207,7 @@
   line-height: 23px;
   letter-spacing: -0.3px;
   margin-top: 10px;
+  font-family: "Nunito Sans";
 }
 
 .classiFields_whatAppIcon {
@@ -250,7 +255,7 @@
   margin-left: 20px;
 }
 
-.classiFields_shareicons span>span {
+.classiFields_shareicons span > span {
   margin-right: 5px;
 }
 
@@ -275,8 +280,7 @@
 
 .classiFields_whatAppIcon span {
   color: #ffffff;
-  font-weight: 600;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   font-size: 19.2px !important;
   line-height: 40px !important;
   display: flex;
@@ -321,7 +325,7 @@
   background: #ec4624;
 }
 
-.classiFieds_country_select>div {
+.classiFieds_country_select > div {
   border: 1px solid #ec4624;
   color: white;
 }
@@ -397,7 +401,6 @@
   margin-top: 10px;
 }
 
-
 .classiFieds_bookmarkicon svg {
   color: #000000;
   position: absolute;
@@ -439,7 +442,9 @@
     height: 110.62px;
   }
 
-  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+  .classiFieds_forSale_about
+    .classiFieds_time_action
+    .classiFieds_forSale_button {
     width: 89.63px;
   }
 }
@@ -450,7 +455,9 @@
     height: 95.62px;
   }
 
-  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+  .classiFieds_forSale_about
+    .classiFieds_time_action
+    .classiFieds_forSale_button {
     width: 74.63px;
     font-size: 10.4378px;
     height: 25.89px;
@@ -487,7 +494,9 @@
     margin-right: 10px;
   }
 
-  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+  .classiFieds_forSale_about
+    .classiFieds_time_action
+    .classiFieds_forSale_button {
     width: 74.63px;
     font-size: 10.4378px;
     height: 25.89px;
@@ -509,7 +518,6 @@
   }
 }
 
-
 @media only screen and (min-width: 320px) and (max-width: 339px) {
   .classiFieds_bookmarkicon svg {
     color: #000000;
@@ -530,7 +538,9 @@
     line-height: 17px;
   }
 
-  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+  .classiFieds_forSale_about
+    .classiFieds_time_action
+    .classiFieds_forSale_button {
     width: 62.63px;
     font-size: 8.4378px;
     height: 21.89px;
