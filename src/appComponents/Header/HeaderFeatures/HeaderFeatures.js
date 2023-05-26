@@ -14,10 +14,10 @@ function HeaderFeatures() {
   //set language
   const { t } = useTranslation();
 
-  const { currentUser, isLoading } = useSelector((state) => state.user);
+  const { currentUser, isLoading,userToken } = useSelector((state) => state.user);
   //-----------function for submit login form-----------
   const logout = async () => {
-    dispatch(userLogout(currentUser));
+    dispatch(userLogout(userToken));
     navigate("/login");
   };
 
