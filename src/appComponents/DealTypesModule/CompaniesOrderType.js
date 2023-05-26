@@ -2,19 +2,21 @@ import styles from './CompanyData.module.css';
 import { useEffect, useState } from 'react';
 import { STATUS_CODES } from "../../utils/StatusCode";
 import SublyApi from '../../helpers/Api';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../utils/Loader/Loader';
 import { Toast } from "../../utils/Toaster";
 import { useNavigate } from 'react-router-dom';
 import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
 import { useTranslation } from "react-i18next";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
 //  -------function for display product list------
 function CompanyOrderType(props) {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [companyList, setcompanyList] = useState("");
-    const { userToken } = useSelector((state) => state.user);
+    const { userToken, currentUser } = useSelector((state) => state.user);
     const [loader, setLoader] = useState(false);
 
     // --------function for get company details----------
@@ -51,11 +53,14 @@ function CompanyOrderType(props) {
         await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
             if (responsejson.status_code === STATUS_CODES.SUCCESS) {
 
-            } else {
+            } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
                 Toast.fire({
                     icon: "error",
-                    title: responsejson.data.message,
+                    title: t("SESSION_EXPIRE"),
                 });
+                dispatch(userLogout());
+                dispatch(guestUserLogin());
+                navigate("/login");
             }
         })
     }
@@ -73,7 +78,16 @@ function CompanyOrderType(props) {
                     {companyList.length > 0
                         ? companyList.map((item, index) => (
                             <div className={styles.productslist} key={index}
-                                onClick={() => { navigate(`/deals/companies/company-profile/${item.id}`); handleCount(item.id) }}>
+                                onClick={() => {
+                                    if (
+                                        Object.keys(currentUser).length !== 0
+                                    ) {
+                                        handleCount(item.id)
+                                        navigate(`/deals/companies/company-profile/${item.id}`)
+                                    } else if (!Object.keys(currentUser).length) {
+                                        navigate(`/deals/companies/company-profile/${item.id}`)
+                                    }
+                                }}>
                                 <div className={styles.productImg}>
                                     <img src={item.company_logo} alt="logo" />
                                 </div>

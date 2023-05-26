@@ -3,15 +3,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./CompanyData.module.css";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { useTranslation } from "react-i18next";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
 function CompanyDataModule({ companyListValue }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userToken } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { userToken, currentUser } = useSelector((state) => state.user);
 
   //------ function for share view count-------
   async function handleCount() {
@@ -23,11 +25,14 @@ function CompanyDataModule({ companyListValue }) {
     await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
       if (responsejson.status_code === STATUS_CODES.SUCCESS) {
 
-      } else {
+      } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
         Toast.fire({
           icon: "error",
-          title: responsejson.data.message,
+          title: t("SESSION_EXPIRE"),
         });
+        dispatch(userLogout());
+        dispatch(guestUserLogin());
+        navigate("/login");
       }
     })
   }
@@ -37,11 +42,16 @@ function CompanyDataModule({ companyListValue }) {
       <div
         className={styles.productslist}
         onClick={() => {
-          navigate(
-            `/deals/companies/company-profile/${companyListValue.id}`
-          ); handleCount()
-        }}
-      >
+          if (
+            Object.keys(currentUser).length !== 0
+          ) {
+            handleCount()
+            navigate(`/deals/companies/company-profile/${companyListValue.id}`)
+          } else if (!Object.keys(currentUser).length) {
+            navigate(`/deals/companies/company-profile/${companyListValue.id}`)
+          }
+        }}>
+
         <div className={styles.productImg}>
           <img src={companyListValue.company_logo} alt="logo" />
         </div>
