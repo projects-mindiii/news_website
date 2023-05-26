@@ -159,6 +159,7 @@ function PostAdvert({ classes }) {
         setValue, reset,
         control,
         formState: { errors },
+        clearErrors
     } = useForm();
     const { field: heading } = useController({
         control,
@@ -262,6 +263,8 @@ function PostAdvert({ classes }) {
     }
 
     function setNewDefaultCountry(e) {
+        setCountryValue({ label: 'Selected Country', value: '', id: '' })
+        setProvinceValue({ label: 'Selected Province', value: '', id: '' })
         setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
         setDefaultCountry({ label: e.label, value: e.value, id: e.id })
     }
@@ -691,8 +694,8 @@ function PostAdvert({ classes }) {
         }
 
     }
-
-
+    console.log("province", provinceValue)
+    console.log("defaultCountry && defaultCountry.id ", defaultCountry && defaultCountry.id)
     return (
         <div className="main">
             {isLoading === true ? (
@@ -723,7 +726,7 @@ function PostAdvert({ classes }) {
                                                         }
                                                     })}
 
-                                                    onChange={() => setCategoryValue(type.id)}
+                                                    onChange={() => { setCategoryValue(type.id); clearErrors() }}
                                                     className="post_Add_category"
                                                     type="radio"
                                                     label={type.name}
@@ -926,6 +929,10 @@ function PostAdvert({ classes }) {
                                                                     value: true,
                                                                     message: t("PLEACE_ENTER_AMOUNT"),
                                                                 },
+                                                                min: {
+                                                                    value: 1,
+                                                                    message: t("MIN_AMOUNT_VALUE")
+                                                                }
                                                             })}
                                                             className="amount_Control"
                                                             type="text"

@@ -196,6 +196,7 @@ export const TRANSLATIONS_EN = {
   PRICE: `PRICE`,
   RENUMERATION: `RENUMERATION`,
   PLEACE_ENTER_AMOUNT: `Please enter amount`,
+  MIN_AMOUNT_VALUE: `Please fill valid amount`,
   PLEASE_FILL_AMOUNT: `Please Fill Amount`,
   SELECT_EARNING_OPTION: `SELECT EARNING OPTION`,
   PLEACT_CLICK: `Please checkbox Click`,
