@@ -132,6 +132,8 @@ export const TRANSLATIONS_ES = {
   NO_SERVICE: "--- NO HAY SERVICIOS PARA MOSTRAR ---",
   NO_BRAND: "--- NO HAY MARCAS PARA MOSTRAR ---",
   NO_DEAL: "--- NO HAY OFERTAS PARA MOSTRAR ---",
+  DEAL: "TRATO",
+  DEALS_TEXT: "OFERTAS_TEXTO",
 
   //---------------Error Messages Common Text----------
   INCOMPLETE: "Formulario incompleto, por favor llene todos los campos",

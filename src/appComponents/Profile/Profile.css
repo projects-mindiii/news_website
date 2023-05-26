@@ -39,7 +39,7 @@
     line-height: 25px;
     color: #FFFFFF;
     text-align: center;
-    padding: 10px;
+    padding: 16px
 }
 
 .profileRightPart h3 {
@@ -47,7 +47,7 @@
     font-size: 22px;
     text-align: center;
     color: #000000;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .profileRightPart p {
@@ -56,6 +56,7 @@
     line-height: 17px;
     text-align: center;
     color: #000000;
+    font-family: 'Nunito Sans';
 }
 
 /* form control css */
@@ -124,29 +125,32 @@
 }
 
 .profileImageSet {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 1px solid #e7e4e4;
 }
 
 .profileImageSet img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid #e7e4e4;
 }
 
 .profileIcon svg {
-    font-size: 33px;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
     margin-right: 20px;
     margin-left: 20px;
 }
 
 .profileIcon .addCls {
+    font-weight: 600;
     font-size: 14.52px;
+    line-height: 29px;
     text-align: center;
     color: #40475F;
 }
@@ -172,7 +176,7 @@
 
 .changePassword .changeIcon h6 {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16.0259px;
     line-height: 24px;
     color: #000000;
     margin-bottom: 0px;
@@ -183,6 +187,7 @@
     color: #000000;
     font-size: 30px;
     cursor: pointer;
+    margin-bottom: 3px;
 }
 
 /* button css */
@@ -192,9 +197,9 @@
     width: 100%;
     font-size: 22px;
     margin-top: 10px;
-    line-height: 10px;
+    line-height: 25px;
     font-weight: 700;
-    height: 40px;
+    height: 46px;
     background: #000000;
     border-radius: 10px;
 }
@@ -217,17 +222,17 @@
 .deleteIcon {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 25px;
     cursor: pointer;
 }
 
 .deleteIcon h6 {
     font-weight: 600;
     font-size: 16px;
-    line-height: 26px;
+    line-height: 24px;
     color: #000000;
-    margin-bottom: 0px;
-    margin-left: 4px;
+    margin-left: 7px;
+    margin-top: 2px;
 }
 
 .deleteIcon svg {
@@ -250,13 +255,28 @@
     color: #FFFFFF;
 }
 
+.phoneCountry {
+    position: relative;
+    width: 90px;
+    max-width: 100%;
+}
+
 .phoneInputSet p {
     position: absolute;
-    bottom: -5px;
-    left: 29px;
-    font-size: 12px;
+    top: 12px;
+    left: 26px;
+    font-size: 15px;
     z-index: 999;
-    color: #FFFFFF;
+    color: #ffffff;
+}
+
+.phoneCountry span {
+    position: absolute;
+    top: 10px;
+    right: 2px;
+    font-size: 15px;
+    z-index: 999;
+    color: #ffffff;
 }
 
 .phoneInputSet .downArrow {
@@ -412,4 +432,31 @@
 
 .profileImg .profileIcon label {
     margin-bottom: 0px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 340px) {
+    .profileRightPart p {
+        font-size: 15px;
+    }
+
+    .profileImageSet img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profileImageSet {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profileIcon svg {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media screen and (min-width: 341px) and (max-width: 380px) {
+    .profileRightPart p {
+        font-size: 16px;
+    }
 }

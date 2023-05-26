@@ -6,8 +6,10 @@ import { Toast } from "../../utils/Toaster";
 import { useSelector } from "react-redux";
 import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
+import { useTranslation } from "react-i18next";
 
 function CompanyDataModule({ companyListValue }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { userToken } = useSelector((state) => state.user);
 
@@ -50,7 +52,7 @@ function CompanyDataModule({ companyListValue }) {
           {companyListValue.deal_count > 0 ? (
             <h5>
               {companyListValue.deal_count}
-              {companyListValue.deal_count > 1 ? " Deals" : " Deal"}
+              {companyListValue.deal_count > 1 ? `${t("DEALS_TEXT")}` : `${t("DEAL")}`}
             </h5>
           ) : (
             ""
