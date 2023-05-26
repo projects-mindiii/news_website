@@ -29,6 +29,17 @@
     padding-left: 10px;
 }
 
+.infoIcon svg{
+    margin-top: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.infoIcon svg:focus{
+    outline: none;
+}
+
+
 @media only screen and (min-width: 338px) and (max-width: 379px) {
     .headerAfterProfile {
         padding-right: 15px !important;
@@ -63,5 +74,11 @@
     .headerAfterProfile h5 {
         font-size: 14px !important;
         letter-spacing: unset !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .tooltipClass {
+        width: 300px !important;
     }
 }
