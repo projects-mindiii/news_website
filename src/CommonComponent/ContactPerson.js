@@ -2,6 +2,7 @@ import React from "react";
 import companyIcon from "../assets/images/company_ico.svg";
 import emailicon from "../assets/images/Deal_icon/mail.svg";
 import callicon from "../assets/images/Deal_icon/call.svg";
+import contactPerson from "../assets/images/Deal_icon/contact.svg";
 import { useTranslation } from "react-i18next";
 import { AiOutlineStar } from "react-icons/ai";
 
@@ -13,6 +14,17 @@ function ContactPerson(props) {
     <React.Fragment>
       <div className="classiFields_contactPersondetail">
         <p className="heading">{t("CLASSIFIED_CONTACT_PERSON")}</p>
+        {props.forSaleListData[props.index].contact_name && (
+          <div className="classiFields_PersonAboutShow">
+            <div className="classiFields_iconBackGround">
+              <img src={contactPerson} alt={contactPerson} />
+            </div>
+            <div className="classiFields_emailHeadingText">
+              <p>{t("CONTACT_PERSON")}</p>
+              <span>{props.forSaleListData[props.index].contact_name}</span>
+            </div>
+          </div>
+        )}
         {props.forSaleListData[props.index].contact_company && (
           <div className="classiFields_PersonAboutShow">
             <div className="classiFields_iconBackGround">
@@ -32,8 +44,14 @@ function ContactPerson(props) {
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("CONTACT_PERSON_EMAIL")}</p>
-              <a href={`https://mail.google.com/mail/?view=cm&to= ${props.forSaleListData[props.index].email}&su=${"Subject"}`} target="blank">
-                                            <span> {props.forSaleListData[props.index].email}</span> </a>
+              <a
+                href={`https://mail.google.com/mail/?view=cm&to= ${
+                  props.forSaleListData[props.index].email
+                }&su=${"Subject"}`}
+                target="blank"
+              >
+                <span> {props.forSaleListData[props.index].email}</span>{" "}
+              </a>
             </div>
             <div></div>
           </div>
@@ -44,8 +62,18 @@ function ContactPerson(props) {
               <img src={callicon} alt={callicon} />
             </div>
             <div className="classiFields_emailHeadingText">
-            <p>{t("CONTACT_NUMBER")}</p> 
-              <span><a href={`tel:${props.forSaleListData[props.index].dial_code} ${props.forSaleListData[props.index].contact}`} target="blank">+{props.forSaleListData[props.index].dial_code} {props.forSaleListData[props.index].contact}</a></span>
+              <p>{t("CONTACT_NUMBER")}</p>
+              <span>
+                <a
+                  href={`tel:${props.forSaleListData[props.index].dial_code} ${
+                    props.forSaleListData[props.index].contact
+                  }`}
+                  target="blank"
+                >
+                  +{props.forSaleListData[props.index].dial_code}{" "}
+                  {props.forSaleListData[props.index].contact}
+                </a>
+              </span>
             </div>
             <div></div>
           </div>

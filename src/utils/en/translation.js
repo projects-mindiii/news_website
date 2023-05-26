@@ -242,5 +242,6 @@ export const TRANSLATIONS_EN = {
   EDIT_DELETE_BTN: "EDIT / DELETE ADVERT",
   PENDING_APPROVAL: "NOT LIVE - Pending Approvals",
   NO_SEARCH_DATA: "--- NO SEARCH FOUND ---",
+  TOOLTIP_TEXT: "You can access website except add post advert and bookmark.",
 
 };
