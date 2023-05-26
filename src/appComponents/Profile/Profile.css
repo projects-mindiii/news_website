@@ -1,462 +1,463 @@
 .errorDisplay {
-    color: #D62D2D;
-    font-size: 14px;
-    display: flex;
-    justify-content: left;
-    margin-top: -11px;
-    margin-bottom: 10px;
-    margin-left: 8px;
+  color: #d62d2d;
+  font-size: 14px;
+  display: flex;
+  justify-content: left;
+  margin-top: -11px;
+  margin-bottom: 10px;
+  margin-left: 8px;
 }
 
 .profileLeftPart h3 {
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 25px;
-    text-align: center;
-    color: #474747;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 25px;
+  text-align: center;
+  color: #474747;
 }
 
 .profileLeftPart p {
-    font-weight: 700;
-    font-size: 19px;
-    line-height: 30px;
-    text-align: center;
-    color: #FFFFFF;
-    background: #000000;
-    border-radius: 14px;
-    padding: 30px;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+  background: #000000;
+  border-radius: 14px;
+  padding: 30px;
 }
 
 .profileRightPart {
-    margin-top: 33px;
+  margin-top: 33px;
 }
 
 .profileRightPart h4 {
-    background: #000000;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 25px;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 16px
+  background: #000000;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 25px;
+  color: #ffffff;
+  text-align: center;
+  padding: 16px;
 }
 
 .profileRightPart h3 {
-    font-weight: 600;
-    font-size: 22px;
-    text-align: center;
-    color: #000000;
-    margin-top: 30px;
+  font-weight: 600;
+  font-size: 22px;
+  text-align: center;
+  color: #000000;
+  margin-top: 30px;
 }
 
 .profileRightPart p {
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 17px;
-    text-align: center;
-    color: #000000;
-    font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+  font-family: "Nunito Sans";
 }
 
 /* form control css */
 .profileRightPart .form-control {
-    border: none;
-    height: 40px;
-    background: #FFFFFF;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
-    border-radius: 7.26px;
-    font-weight: 500;
-    font-size: 16.94px;
+  border: none;
+  height: 40px;
+  background: #ffffff;
+  box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+  border-radius: 7.26px;
+  font-weight: 500;
+  font-size: 16.94px;
 }
 
 .profileRightPart .form-control:focus {
-    background-color: #FFFFFF;
-    outline: none !important;
-    border: none !important;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+  background-color: #ffffff;
+  outline: none !important;
+  border: none !important;
+  box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
 }
 
 .profileRightPart .form-select {
-    border: none;
-    height: 40px;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
-    border-radius: 7.26px;
-    font-weight: 500;
-    font-size: 14px;
-    background-size: 19px 19px !important;
-    color: #727272 !important;
+  border: none;
+  height: 40px;
+  box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+  border-radius: 7.26px;
+  font-weight: 500;
+  font-size: 14px;
+  background-size: 19px 19px !important;
+  color: #727272 !important;
 }
 
 .profileRightPart .form-select:focus {
-    background-color: #FFFFFF;
-    outline: none !important;
-    border: none !important;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+  background-color: #ffffff;
+  outline: none !important;
+  border: none !important;
+  box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
 }
 
 /* form control for email css */
 .emailSet {
-    position: relative;
+  position: relative;
 }
 
 .emailSet .form-control {
-    padding-left: 63px;
+  padding-left: 63px;
 }
 
 .emailSet svg {
-    position: absolute;
-    bottom: 11px;
-    background: #000000;
-    border-top-left-radius: 7.26px;
-    border-bottom-left-radius: 7.26px;
-    height: 40px;
-    color: white;
-    width: 50px;
-    margin-bottom: -11px;
-    padding: 9px;
+  position: absolute;
+  bottom: 11px;
+  background: #000000;
+  border-top-left-radius: 7.26px;
+  border-bottom-left-radius: 7.26px;
+  height: 40px;
+  color: white;
+  width: 50px;
+  margin-bottom: -11px;
+  padding: 9px;
 }
 
 /* profile image css */
 .profileImg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileImageSet {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 1px solid #e7e4e4;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid #e7e4e4;
 }
 
 .profileImageSet img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #e7e4e4;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e7e4e4;
 }
 
 .profileIcon svg {
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    margin-right: 20px;
-    margin-left: 20px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .profileIcon .addCls {
-    font-weight: 600;
-    font-size: 14.52px;
-    line-height: 29px;
-    text-align: center;
-    color: #40475F;
+  font-weight: 600;
+  font-size: 14.52px;
+  line-height: 29px;
+  text-align: center;
+  color: #40475f;
 }
 
 /* change password css */
 .hidePassword {
-    border: none;
-    height: 40px;
-    background: #FFFFFF;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
-    border-radius: 7.26px;
-    font-weight: 500;
-    font-size: 14px;
-    padding: 12px 20px;
-    margin-bottom: 10px;
+  border: none;
+  height: 40px;
+  background: #ffffff;
+  box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%);
+  border-radius: 7.26px;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 12px 20px;
+  margin-bottom: 10px;
 }
 
 .changePassword .changeIcon {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .changePassword .changeIcon h6 {
-    font-weight: 600;
-    font-size: 16.0259px;
-    line-height: 24px;
-    color: #000000;
-    margin-bottom: 0px;
-    margin-left: 4px;
+  font-weight: 600;
+  font-size: 16.0259px;
+  line-height: 24px;
+  color: #000000;
+  margin-bottom: 0px;
+  margin-left: 4px;
 }
 
 .changePassword .changeIcon svg {
-    color: #000000;
-    font-size: 30px;
-    cursor: pointer;
-    margin-bottom: 3px;
+  color: #000000;
+  font-size: 30px;
+  cursor: pointer;
+  margin-bottom: 3px;
 }
 
 /* button css */
 .buttonAdd .btn {
-    border: none;
-    color: #ffffff;
-    width: 100%;
-    font-size: 22px;
-    margin-top: 10px;
-    line-height: 25px;
-    font-weight: 700;
-    height: 46px;
-    background: #000000;
-    border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  width: 100%;
+  font-size: 22px;
+  margin-top: 10px;
+  line-height: 25px;
+  font-weight: 700;
+  height: 46px;
+  background: #000000;
+  border-radius: 10px;
 }
 
 .buttonAdd .btn:hover {
-    background: #000000 !important;
-    color: #FFFFFF !important;
+  background: #000000 !important;
+  color: #ffffff !important;
 }
 
 .buttonAdd .btn:active {
-    background: #000000 !important;
+  background: #000000 !important;
 }
 
 .buttonAdd .btn :focus {
-    outline: 0;
-    box-shadow: none !important;
+  outline: 0;
+  box-shadow: none !important;
 }
 
 /* delete account css */
 .deleteIcon {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  cursor: pointer;
 }
 
 .deleteIcon h6 {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-    margin-left: 7px;
-    margin-top: 2px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  margin-left: 7px;
+  margin-top: 2px;
 }
 
 .deleteIcon svg {
-    color: #000000;
-    font-size: 23px;
+  color: #000000;
+  font-size: 23px;
 }
-
 
 /* phone input css */
 .phoneInputSet {
-    position: relative;
+  position: relative;
 }
 
 .phoneInputSet svg {
-    position: absolute;
-    bottom: 10px;
-    left: 4px;
-    font-size: 20px;
-    z-index: 999;
-    color: #FFFFFF;
+  position: absolute;
+  bottom: 10px;
+  left: 4px;
+  font-size: 20px;
+  z-index: 999;
+  color: #ffffff;
 }
 
 .phoneCountry {
-    position: relative;
-    width: 90px;
-    max-width: 100%;
+  position: relative;
+  width: 90px;
+  max-width: 100%;
 }
 
 .phoneInputSet p {
-    position: absolute;
-    top: 12px;
-    left: 26px;
-    font-size: 15px;
-    z-index: 999;
-    color: #ffffff;
+  position: absolute;
+  top: 12px;
+  left: 26px;
+  font-size: 15px;
+  z-index: 999;
+  color: #ffffff;
+}
+
+.post_Add_CategoryButton .phoneInputSet p {
+  top: 10px !important;
 }
 
 .phoneCountry span {
-    position: absolute;
-    top: 10px;
-    right: 2px;
-    font-size: 15px;
-    z-index: 999;
-    color: #ffffff;
+  position: absolute;
+  top: 10px;
+  right: 2px;
+  font-size: 15px;
+  z-index: 999;
+  color: #ffffff;
 }
 
 .phoneInputSet .downArrow {
-    position: absolute;
-    bottom: 6px;
-    left: 82px;
-    font-size: 28px;
-    z-index: 999;
-    color: #FFFFFF;
+  position: absolute;
+  bottom: 6px;
+  left: 82px;
+  font-size: 28px;
+  z-index: 999;
+  color: #ffffff;
 }
 
 .phoneInputSet .form-control {
-    position: relative;
-    /* font-size: 14px; */
-    letter-spacing: .01rem;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-left: 48px;
-    margin-left: 0;
-    background: #FFFFFF;
-    border: none !important;
-    border-radius: 7.26px;
-    line-height: 25px;
-    height: 40px !important;
-    width: 100% !important;
-    outline: none;
-    padding-left: 120px !important;
-    font-weight: 500;
-    font-size: 16.94px !important;
+  position: relative;
+  /* font-size: 14px; */
+  letter-spacing: 0.01rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 48px;
+  margin-left: 0;
+  background: #ffffff;
+  border: none !important;
+  border-radius: 7.26px;
+  line-height: 25px;
+  height: 40px !important;
+  width: 100% !important;
+  outline: none;
+  padding-left: 120px !important;
+  font-weight: 500;
+  font-size: 16.94px !important;
 }
 
 .phoneInputSet .react-tel-input .flag-dropdown {
-    border: none !important;
-    background: #000000 !important;
-    width: 110px !important;
-    border-top-left-radius: 7.26px !important;
-    border-bottom-left-radius: 7.26px !important;
+  border: none !important;
+  background: #000000 !important;
+  width: 110px !important;
+  border-top-left-radius: 7.26px !important;
+  border-bottom-left-radius: 7.26px !important;
 }
 
 .phoneInputSet .react-tel-input .selected-flag .flag {
-    display: none !important;
-    z-index: 0;
+  display: none !important;
+  z-index: 0;
 }
-
 
 .phoneInputSet .react-tel-input .selected-flag:hover,
 .phoneInputSet .react-tel-input .selected-flag:focus {
-    background: #000000 !important;
+  background: #000000 !important;
 }
 
 .phoneInputSet .react-tel-input .selected-flag {
-    outline: none;
-    position: relative;
-    width: 110px !important;
-    height: 100%;
-    padding: 0 0 0 8px;
-    background: #000000 !important;
+  outline: none;
+  position: relative;
+  width: 110px !important;
+  height: 100%;
+  padding: 0 0 0 8px;
+  background: #000000 !important;
 }
 
 .phoneInputSet .react-tel-input .selected-flag {
-    border-top-left-radius: 7.26px !important;
-    border-bottom-left-radius: 7.26px !important;
+  border-top-left-radius: 7.26px !important;
+  border-bottom-left-radius: 7.26px !important;
 }
 
 .phoneInputSet:before {
-    content: "";
-    border-top: 6px solid;
-    border-right: 6px solid transparent;
-    border-bottom: 0;
-    border-left: 6px solid transparent;
-    position: absolute;
-    left: 89px;
-    top: 17px;
-    z-index: 999;
-    color: #FFFFFF !important;
+  content: "";
+  border-top: 6px solid;
+  border-right: 6px solid transparent;
+  border-bottom: 0;
+  border-left: 6px solid transparent;
+  position: absolute;
+  left: 89px;
+  top: 17px;
+  z-index: 999;
+  color: #ffffff !important;
 }
 
 /* watsapp input css */
 .watsappInput {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 .watsappInput .react-tel-input .selected-flag {
-    background: #29af29 !important;
+  background: #29af29 !important;
 }
 
 .watsappInput .react-tel-input .selected-flag:hover,
 .watsappInput .react-tel-input .selected-flag:focus {
-    background: #29af29 !important;
+  background: #29af29 !important;
 }
 
-
 .watsappInput .react-tel-input .selected-flag {
-    background: #29af29 !important;
+  background: #29af29 !important;
 }
 
 /* css for select input */
 .selectOption .css-13cymwt-control {
-    border: none !important;
-    height: 40px !important;
-    background: #FFFFFF !important;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
-    border-radius: 7.26px !important;
-    font-weight: 500 !important;
-    font-size: 16.94px !important;
+  border: none !important;
+  height: 40px !important;
+  background: #ffffff !important;
+  box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+  border-radius: 7.26px !important;
+  font-weight: 500 !important;
+  font-size: 16.94px !important;
 }
 
 .selectOption .css-13cymwt-control:hover {
-    border-color: unset !important;
+  border-color: unset !important;
 }
 
 .selectOption .css-1xz3in2-control {
-    border: none !important;
-    height: 40px !important;
-    background: #FFFFFF !important;
-    box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
-    border-radius: 7.26px !important;
-    font-weight: 500 !important;
-    font-size: 16.94px !important;
+  border: none !important;
+  height: 40px !important;
+  background: #ffffff !important;
+  box-shadow: 2.42px 4.84px 12.1px rgb(0 0 0 / 6%) !important;
+  border-radius: 7.26px !important;
+  font-weight: 500 !important;
+  font-size: 16.94px !important;
 }
 
 .selectOption .css-1xz3in2-control:hover {
-    border-color: unset !important;
+  border-color: unset !important;
 }
 
 .selectOption .css-1u9des2-indicatorSeparator {
-    display: none !important;
+  display: none !important;
 }
 
 .selectOption .css-tj5bde-Svg {
-    fill: #000000 !important;
-    width: 28px !important;
-    height: 28px !important;
+  fill: #000000 !important;
+  width: 28px !important;
+  height: 28px !important;
 }
 
 /* css for delete popup modal */
 .deletePopup .modal-footer {
-    border-top: none !important;
+  border-top: none !important;
 }
 
 .deletePopup .modal-header {
-    border-bottom: none !important;
+  border-bottom: none !important;
 }
 
 .deletePopup .modal-body {
-    padding: 0px !important;
-    padding-left: 15px !important;
+  padding: 0px !important;
+  padding-left: 15px !important;
 }
 
 .buttonAdd1 .btn {
-    background-color: #000000 !important;
+  background-color: #000000 !important;
 }
 
 .profileImg .profileIcon label {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 340px) {
-    .profileRightPart p {
-        font-size: 15px;
-    }
+  .profileRightPart p {
+    font-size: 15px;
+  }
 
-    .profileImageSet img {
-        width: 120px;
-        height: 120px;
-    }
+  .profileImageSet img {
+    width: 120px;
+    height: 120px;
+  }
 
-    .profileImageSet {
-        width: 120px;
-        height: 120px;
-    }
+  .profileImageSet {
+    width: 120px;
+    height: 120px;
+  }
 
-    .profileIcon svg {
-        width: 36px;
-        height: 36px;
-    }
+  .profileIcon svg {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 @media screen and (min-width: 341px) and (max-width: 380px) {
-    .profileRightPart p {
-        font-size: 16px;
-    }
+  .profileRightPart p {
+    font-size: 16px;
+  }
 }
