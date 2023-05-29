@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import GoogleLogin from "../CommonSocial/GoogleLogin";
 import FacebookSocialLogin from "../CommonSocial/FacebookSocialLogin";
+import AppleLogin from "../CommonSocial/AppleSocialLogin";
+import LinkedInLogin from "../CommonSocial/LinkedInLogin";
 
 //--------Create a Login component----------
 function Login() {
@@ -38,12 +40,10 @@ function Login() {
           </div>
 
           <div className="loginComponents">
-            <img src={Apple} alt="apple-logo" />
-            <h3>{t("LOGIN_APPLE")}</h3>
+            <AppleLogin appleText={t("LOGIN_APPLE")} />
           </div>
           <div className="loginComponents">
-            <img src={Linkedin} alt="linkedin-logo" />
-            <h3>{t("LOGIN_LINKEDIN")}</h3>
+            <LinkedInLogin linkedinText={t("LOGIN_LINKEDIN")}/>
           </div>
 
           <div className="accountType">
