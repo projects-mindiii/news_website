@@ -51,7 +51,7 @@ function PostAdvert({ classes }) {
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
     const [croppedImage, setCroppedImage] = useState(null)
-
+    const { yourAdvertWebList } = useSelector( (state) => state.classified );
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
@@ -79,7 +79,6 @@ function PostAdvert({ classes }) {
                 croppedAreaPixels,
                 rotation
             )
-            console.log('donee', { croppedImage })
             setCroppedImage(croppedImage)
             imgCropper();
 
@@ -214,10 +213,23 @@ function PostAdvert({ classes }) {
     //----- state for manage show/hide modal-----
     const [showPopup, setShowPopup] = useState(false);
     const [removeImage, setRemoveImage] = useState("");
+    const [filterValue, setFilterValue] = useState(null)
     //----- for close modal-----
     const handleClose = () => setShowPopup(false);
     //----- for show modal-----
     const handleShow = () => setShowPopup(true);
+
+    useEffect(()=>{
+        function GetFilterData() {
+            if (location.state !== null) {
+            const advertData = yourAdvertWebList.filter((item, index)=>(
+                item.id === location.state.id
+            ))
+            setFilterValue(advertData[0])
+        }
+    }
+        GetFilterData()
+    },[])
 
 
     function handleResponse(responsejson) {
@@ -424,42 +436,44 @@ function PostAdvert({ classes }) {
                         });
                     }
                     else {
-
-                        setValue("categorytype", location.state.category_type_id && location.state.category_type_id.toString())
-                        setCategoryValue(location.state.category_type_id && location.state.category_type_id.toString())
-                        setValue("fullName", location.state.user_name)
-                        setValue("heading", location.state.heading)
-                        setValue("description", location.state.description)
-                        setValue("amountvalue", location.state.amount)
-                        setValue("negotiable", location.state.is_negotiable)
-                        setValue("city", location.state.city)
-                        setValue("companyName", location.state.contact_company)
-                        setValue("email", location.state.email)
-                        setDialCodeWatsapp(location.state.whatsapp_dail_code)
-                        setCountryCodeWatsapp(location.state.whatsapp_country_code)
-                        setWatsappNo(location.state.whatapp_contact_number)
-                        setPhoneNo(location.state.contact)
-                        setDialCode(location.state.dial_code)
-                        setCountryCode(location.state.country_code)
-                        setValue("employmentenquiry", location.state.emp_equity && location.state.emp_equity.toString())
-                        setValue("selectlocationtype", location.state.job_location_type_id)
-                        setProfileImage(location.state.gallery)
-                        setProfilePreview(location.state.gallery)
-                        setOriginalPreview(location.state.gallery)
-                        setOrignalImage(location.state.gallery)
-                        if (location.state.job_type_id) {
+                        const advertValue = yourAdvertWebList.filter((item, index)=>(
+                            item.id === location.state.id
+                        ))
+                        setValue("categorytype", advertValue[0].category_type_id && advertValue[0].category_type_id.toString())
+                        setCategoryValue(advertValue[0].category_type_id && advertValue[0].category_type_id.toString())
+                        setValue("fullName", advertValue[0].user_name)
+                        setValue("heading", advertValue[0].heading)
+                        setValue("description", advertValue[0].description)
+                        setValue("amountvalue", advertValue[0].amount)
+                        setValue("negotiable", advertValue[0].is_negotiable)
+                        setValue("city", advertValue[0].city)
+                        setValue("companyName", advertValue[0].contact_company)
+                        setValue("email", advertValue[0].email)
+                        setDialCodeWatsapp(advertValue[0].whatsapp_dail_code)
+                        setCountryCodeWatsapp(advertValue[0].whatsapp_country_code)
+                        setWatsappNo(advertValue[0].whatapp_contact_number)
+                        setPhoneNo(advertValue[0].contact)
+                        setDialCode(advertValue[0].dial_code)
+                        setCountryCode(advertValue[0].country_code)
+                        setValue("employmentenquiry", advertValue[0].emp_equity && advertValue[0].emp_equity.toString())
+                        setValue("selectlocationtype", advertValue[0].job_location_type_id)
+                        setProfileImage(advertValue[0].gallery)
+                        setProfilePreview(advertValue[0].gallery)
+                        setOriginalPreview(advertValue[0].gallery)
+                        setOrignalImage(advertValue[0].gallery)
+                        if (advertValue[0].job_type_id) {
                             setValue("jobType", {
-                                label: location.state.job_type_name,
-                                value: location.state.job_type_id,
-                                id: location.state.job_type_id
+                                label: advertValue[0].job_type_name,
+                                value: advertValue[0].job_type_id,
+                                id: advertValue[0].job_type_id
                             })
                             setJobTypeValue({
-                                label: location.state.job_type_name,
-                                value: location.state.job_type_id,
-                                id: location.state.job_type_id
+                                label: advertValue[0].job_type_name,
+                                value: advertValue[0].job_type_id,
+                                id: advertValue[0].job_type_id
                             })
                         }
-                        if (location.state.is_default_country == 1) {
+                        if (advertValue[0].is_default_country == 1) {
                             setValue("isDefaultCountry", {
                                 label: `${t("SOUTH_AFRICA_SET")}`,
                                 value: 1,
@@ -486,20 +500,20 @@ function PostAdvert({ classes }) {
                             })
                         }
 
-                        if (location.state.is_default_country == 1) {
-                            setNewProvinces({ label: location.state.province_name, value: location.state.province_id, id: location.state.province_id })
+                        if (advertValue[0].is_default_country == 1) {
+                            setNewProvinces({ label: advertValue[0].province_name, value: advertValue[0].province_id, id: advertValue[0].province_id })
                         }
                         else {
                             // setNewProvinces({ label: 'Selected Province', value: "", id: "" })
-                            setNewCountry({ label: location.state.country_name, value: location.state.country_id, id: location.state.country_id })
+                            setNewCountry({ label: advertValue[0].country_name, value: advertValue[0].country_id, id: advertValue[0].country_id })
                         }
 
-                        if (location.state.earning_option_id) {
-                            setValue("earningoption", { id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
-                            setEaringOptionValue({ id: location.state.earning_option_id, name: location && location.state.earning_option_id, label: location.state.earning_name })
+                        if (advertValue[0].earning_option_id) {
+                            setValue("earningoption", { id: advertValue[0].earning_option_id, name: location && advertValue[0].earning_option_id, label: advertValue[0].earning_name })
+                            setEaringOptionValue({ id: advertValue[0].earning_option_id, name: location && advertValue[0].earning_option_id, label: advertValue[0].earning_name })
                         }
 
-                        setCurrencyValue({ id: location.state.currency_id, name: location.state.currency_name, symbol: location.state.currency_symbol, code: location.state.currency_code })
+                        setCurrencyValue({ id: advertValue[0].currency_id, name: advertValue[0].currency_name, symbol: advertValue[0].currency_symbol, code: advertValue[0].currency_code })
 
                     }
                 }
@@ -615,7 +629,7 @@ function PostAdvert({ classes }) {
 
         if (location.state !== null) {
             requestData.append(
-                "id", location.state.id ? location.state.id : ""
+                "id", filterValue && filterValue.id ? filterValue && filterValue.id : ""
             );
         }
         if (location.state !== null) {
@@ -694,8 +708,7 @@ function PostAdvert({ classes }) {
         }
 
     }
-    console.log("province", provinceValue)
-    console.log("defaultCountry && defaultCountry.id ", defaultCountry && defaultCountry.id)
+
     return (
         <div className="main">
             {isLoading === true ? (
@@ -1329,7 +1342,7 @@ function PostAdvert({ classes }) {
                                 <CustomBtn type="button" onClick={handleClose}>{t("CANCEL")}</CustomBtn>
                             </div>
                             <div>
-                                <CustomBtn onClick={() => { deleteClassiFieds(location.state.id) }}>{t("DELETE")}</CustomBtn>
+                                <CustomBtn onClick={() => { deleteClassiFieds(filterValue && filterValue.id) }}>{t("DELETE")}</CustomBtn>
                             </div>
                         </Modal.Footer>
                     </Modal>

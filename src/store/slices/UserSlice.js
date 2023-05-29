@@ -159,6 +159,7 @@ export const userSlice = createSlice({
     // guest user login
     builder.addCase(guestUserLogin.fulfilled, (state, action) => {
       const response = action.payload;
+      state.isLoading = false;
       if (response.status_code === STATUS_CODES.SUCCESS) {
         state.guestUser = response.data;
         state.userToken = response.data.token;
