@@ -26,7 +26,34 @@ function DealList({ dealList, fromDeal }) {
     const { userToken, currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
+        async function handleCount() {
+            {
+                dealList && dealList.length > 0 &&
+                dealList.map((item, index) => {
+                    let requestData = new FormData();
+                    requestData.append("id", item.id);
+                    requestData.append("type", COUNT.VIEW);
+                    requestData.append("refrence_type", COUNT_REFFRENCE.DEAL);
+                    requestData.append("share_in", 0);
+                    SublyApi.updateCount(requestData, userToken).then((responsejson) => {
+                        if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+
+                        } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+                            Toast.fire({
+                                icon: "error",
+                                title: t("SESSION_EXPIRE"),
+                            });
+                            dispatch(userLogout(userToken));
+                            dispatch(guestUserLogin());
+                            navigate("/login");
+                        }
+                    })
+                })
+            }
+        }
+        handleCount();
     }, [dealList]);
+
 
     //------ function for share view count-------
     async function handleCount(id) {

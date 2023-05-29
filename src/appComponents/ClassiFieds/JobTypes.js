@@ -195,14 +195,14 @@ function JobTypes() {
                         {t("JOB_OFFERS")}({jobOfferTotalCount})
                       </Nav.Link>
                       {showDefaultList == 1 ? (
-                        <MdKeyboardArrowDown
+                        <MdKeyboardArrowUp
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
                           color="white"
                         />
                       ) : (
-                        <MdKeyboardArrowUp
+                        <MdKeyboardArrowDown
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
@@ -222,14 +222,14 @@ function JobTypes() {
                         {t("JOB_SEEKER")} ({jobSeekerTotalCount})
                       </Nav.Link>
                       {showDefaultList == 2 ? (
-                        <MdKeyboardArrowDown
+                        <MdKeyboardArrowUp
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
                           color="white"
                         />
                       ) : (
-                        <MdKeyboardArrowUp
+                        <MdKeyboardArrowDown
                           icon="ic:baseline-keyboard-arrow-down"
                           width="24"
                           height="24"
@@ -293,7 +293,7 @@ function JobTypes() {
             </Col>
             <Col xs={12} sm={12} md={12} lg={5}>
               <div className="advertisment">
-              <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168" height="930" scrolling="no"></iframe>
+                <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168" height="930" scrolling="no"></iframe>
               </div>
             </Col>
           </Row>
