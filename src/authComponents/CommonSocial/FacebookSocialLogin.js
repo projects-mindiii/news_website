@@ -31,13 +31,13 @@ function FacebookSocialLogin(props) {
           });
           navigate("/deals/latest-deals");
         } else if (
-          responsejson.data.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND
+          responsejson.data?.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND
         ) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
             if (responsejson.status_code === STATUS_CODES.SUCCESS) {
               Toast.fire({
                 icon: "success",
-                title: responsejson.message,
+                title: responsejson.data.message,
               });
               navigate("/deals/latest-deals");
             }
