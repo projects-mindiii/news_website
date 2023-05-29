@@ -98,9 +98,9 @@ function ClassifiedList({
         <span>
           <img src={mapicon} alt={mapicon} />
           <span>
-            {item.country_name ? item.country_name : ""}
+            {item.city ? item.city : ""}
             {item.province_name ? ", " + item.province_name : ""}
-            {item.city ? ", " + item.city : ""}
+            {item.country_name ? ", " + item.country_name : ""}
           </span>
         </span>
       </div>

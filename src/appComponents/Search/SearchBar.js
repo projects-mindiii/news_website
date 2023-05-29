@@ -28,14 +28,14 @@ function SearchBar() {
     const searchValues = { limit: 10, offset: 0, search: results };
     dispatch(searchListApi({ userToken: userToken, searchValues })).then(
       async (responsejson) => {
-        if (responsejson.response.status_code) {
+        if (responsejson.response?.status_code) {
           if (responsejson.response.status_code === STATUS_CODES.INVALID_TOKEN) {
             dispatch(userLogout(userToken));
             dispatch(guestUserLogin());
             navigate("/login");
           }
         } else {
-          if (responsejson.response.status === STATUS_CODES.INVALID_TOKEN) {
+          if (responsejson.response?.status === STATUS_CODES.INVALID_TOKEN) {
             dispatch(userLogout(userToken));
             dispatch(guestUserLogin());
             navigate("/login");

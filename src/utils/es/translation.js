@@ -243,6 +243,6 @@ export const TRANSLATIONS_ES = {
   PENDING_APPROVAL: "NO ACTIVO - Aprobaciones pendientes",
   NO_SEARCH_DATA: "--- NO SE ENCONTRÓ LA BÚSQUEDA ---",
 
-  TOOLTIP_TEXT: "Puede acceder al sitio web, excepto agregar un anuncio de publicación y un marcador.",
+  TOOLTIP_TEXT: "Puede acceder al sitio web, excepto publicar anuncios y marcadores.",
 
 };
