@@ -1,5 +1,5 @@
 import mapicon from "../../assets/images/map_ico.svg";
-import React from "react";
+import React, { useEffect } from "react";
 import "../ClassiFieds/ClassiFieds.css";
 import WhatsApp from "../../CommonComponent/Whatappshare";
 import SocialMedaiShare from "../../CommonComponent/SocialMediaShare";
@@ -9,6 +9,12 @@ import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
 import AddBookmarks from "../Bookmarks/AddBookmarks";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import SublyApi from "../../helpers/Api";
+import { Toast } from "../../utils/Toaster";
+import { useDispatch, useSelector } from "react-redux";
+import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
+import { STATUS_CODES } from "../../utils/StatusCode";
+import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
 function ClassifiedList({
   forSaleListData,
@@ -20,6 +26,41 @@ function ClassifiedList({
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { userToken, currentUser } = useSelector((state) => state.user);
+
+
+  // useEffect(() => {
+  //   if (Object.keys(currentUser).length !== 0) {
+  //     async function handleCount() {
+  //       {
+  //         forSaleListData && forSaleListData.length > 0 &&
+  //         forSaleListData.map((item, index) => {
+  //             let requestData = new FormData();
+  //             requestData.append("id", item.id);
+  //             requestData.append("type", COUNT.VIEW);
+  //             requestData.append("refrence_type", COUNT_REFFRENCE.CLASSIFIED);
+  //             requestData.append("share_in", 0);
+  //             SublyApi.updateCount(requestData, userToken).then((responsejson) => {
+  //               if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+
+  //               } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+  //                 Toast.fire({
+  //                   icon: "error",
+  //                   title: t("SESSION_EXPIRE"),
+  //                 });
+  //                 dispatch(userLogout(userToken));
+  //                 dispatch(guestUserLogin());
+  //                 navigate("/login");
+  //               }
+  //             })
+  //           })
+  //       }
+  //     }
+  //     handleCount();
+  //   }
+  // }, [forSaleListData]);
+
 
   return (
     <div className="classiFieds_forSaleBox">

@@ -79,6 +79,7 @@ function Profile() {
 
   const [changePassword, setChangePassword] = useState(0);
   const [isPassword, setIsPassword] = useState("");
+  const [removeimage, setRemoveimage] = useState(0);
 
   //----- state for manage show/hide modal-----
   const [showPopup, setShowPopup] = useState(false);
@@ -255,6 +256,7 @@ function Profile() {
     );
     requestData.append("image", profileImage);
     requestData.append("is_password_change", changePassword);
+    requestData.append("is_image_remove", removeimage);
     requestData.append(
       "current_password",
       formdata ? formdata.currentPassword : ""
@@ -526,7 +528,7 @@ function Profile() {
                         />
                       </div>
                       <div className="profileIcon">
-                        <MdOutlineCancel onClick={(e) => onImageRemove(e)} />
+                      <MdOutlineCancel onClick={(e) => { onImageRemove(e); setRemoveimage(1) }} />
                         <h6 className="addCls">{t("CLEAR")}</h6>
                       </div>
                     </div>
