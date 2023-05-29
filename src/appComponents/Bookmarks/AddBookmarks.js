@@ -62,7 +62,7 @@ function AddBookmarks(props) {
           icon: "error",
           title: t("SESSION_EXPIRE"),
         });
-        dispatch(userLogout());
+        dispatch(userLogout(userToken));
         dispatch(guestUserLogin());
         navigate("/login");
       }

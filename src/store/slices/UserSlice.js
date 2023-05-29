@@ -106,6 +106,19 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
+// Thunk for user logout
+export const userLogout = createAsyncThunk(
+  "user/logout",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await SublyApi.userLogout(data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 // manage user login session 
 const userSessionLogin = (state, response) => {
   if (response.status_code === STATUS_CODES.SUCCESS) {
@@ -137,7 +150,7 @@ export const userSlice = createSlice({
   reducers: {
     userLogout: (state, action) => {
       state.currentUser = {};
-      state.isLoading=false;
+      state.isLoading = false;
       state.guestUser = {};
       state.userToken = null;
     }
@@ -169,6 +182,23 @@ export const userSlice = createSlice({
       state.isLoading = false
       state.error = action.error.message
     })
+
+    // user logout
+    builder.addCase(userLogout.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.status_code === STATUS_CODES.SUCCESS) {
+      state.isLoading = false
+      state.currentUser = {};
+      state.isLoading = false;
+      state.guestUser = {};
+      state.userToken = null;
+      } 
+
+    })
+   
 
     // social signup
     builder.addCase(socialSignup.pending, (state) => {
@@ -244,5 +274,4 @@ export const userSlice = createSlice({
 
   },
 })
-export const { userLogout } = userSlice.actions;
 export default userSlice.reducer

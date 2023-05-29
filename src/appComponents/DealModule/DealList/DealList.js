@@ -12,20 +12,21 @@ import WhatsApp from "../../../CommonComponent/Whatappshare";
 import Loader from "../../../utils/Loader/Loader";
 import SublyApi from "../../../helpers/Api";
 import { Toast } from "../../../utils/Toaster";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { COUNT, COUNT_REFFRENCE } from "../../../utils/Constants";
 import { STATUS_CODES } from "../../../utils/StatusCode";
+import { guestUserLogin, userLogout } from "../../../store/slices/UserSlice";
 
 // -------function for showing deal list-----------
 function DealList({ dealList, fromDeal }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     //set language
     const { t } = useTranslation();
+    const { userToken, currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
     }, [dealList]);
-    const { userToken } = useSelector((state) => state.user);
-
 
     //------ function for share view count-------
     async function handleCount(id) {
@@ -37,11 +38,14 @@ function DealList({ dealList, fromDeal }) {
         await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
             if (responsejson.status_code === STATUS_CODES.SUCCESS) {
 
-            } else {
+            } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
                 Toast.fire({
                     icon: "error",
-                    title: responsejson.data.message,
+                    title: t("SESSION_EXPIRE"),
                 });
+                dispatch(userLogout(userToken));
+                dispatch(guestUserLogin());
+                navigate("/login");
             }
         })
     }
@@ -131,7 +135,17 @@ function DealList({ dealList, fromDeal }) {
                             </div>
                         )}
 
-                        {fromDeal == true ? (<button className="viewProfile" onClick={() => { navigate(`/deals/companies/company-profile/${item.company_id}`); handleCount(item.company_id) }}>{t("COMPANY_PROFILE")}</button>) : ""}
+                        {fromDeal == true ? (<button className="viewProfile" onClick={() => {
+                            if (
+                                Object.keys(currentUser).length !== 0
+                            ) {
+                                handleCount(item.company_id)
+                                navigate(`/deals/companies/company-profile/${item.company_id}`);
+                            } else if (!Object.keys(currentUser).length) {
+                                navigate(`/deals/companies/company-profile/${item.company_id}`);
+                            }
+                        }}
+                        >{t("COMPANY_PROFILE")}</button>) : ""}
 
                     </div>
                 ))
