@@ -13,6 +13,7 @@ import {
 } from "../../store/slices/SearchSlice";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
+import { Toast } from "../../utils/Toaster";
 
 //-------Create a Search component--------
 function SearchBar() {
@@ -28,14 +29,30 @@ function SearchBar() {
     const searchValues = { limit: 10, offset: 0, search: results };
     dispatch(searchListApi({ userToken: userToken, searchValues })).then(
       async (responsejson) => {
-        if (responsejson.response?.status_code) {
-          if (responsejson.response.status_code === STATUS_CODES.INVALID_TOKEN) {
+        if (
+          responsejson.payload.response.status_code === STATUS_CODES.SUCCESS
+        ) {
+        } else if (responsejson.payload.response.status_code) {
+          if (
+            responsejson.payload.response.status_code ===
+            STATUS_CODES.INVALID_TOKEN
+          ) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
             dispatch(userLogout(userToken));
             dispatch(guestUserLogin());
             navigate("/login");
           }
         } else {
-          if (responsejson.response?.status === STATUS_CODES.INVALID_TOKEN) {
+          if (
+            responsejson.payload.response.status === STATUS_CODES.INVALID_TOKEN
+          ) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
             dispatch(userLogout(userToken));
             dispatch(guestUserLogin());
             navigate("/login");

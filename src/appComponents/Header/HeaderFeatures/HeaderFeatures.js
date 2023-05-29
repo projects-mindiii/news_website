@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./HeaderFeatures.css";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { userLogout } from "../../../store/slices/UserSlice";
+import { guestUserLogin, userLogout } from "../../../store/slices/UserSlice";
 import { Icon } from "@iconify/react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
@@ -18,6 +18,7 @@ function HeaderFeatures() {
   //-----------function for submit login form-----------
   const logout = async () => {
     dispatch(userLogout(userToken));
+    dispatch(guestUserLogin());
     navigate("/login");
   };
 
