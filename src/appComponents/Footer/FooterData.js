@@ -59,61 +59,75 @@ export const footerData = {
         },
     ],
     links: [
-        {
-            id: "1",
-            text: `${t("NEWS_LINKS")}`,
-        },
+        // {
+        //     id: "1",
+        //     text: `${t("NEWS_LINKS")}`,
+        //     link: `/`,
+        // },
         {
             id: "2",
             text: `${t("JOB_LINKS")}`,
+            link: `/job-types`,
         },
         {
             id: "3",
             text: `${t("ADVERTIES_LINKS")}`,
+            link: `/your-add`,
         },
         {
             id: "4",
             text: `${t("DEALS_LINKS")}`,
+            link: `/deals/latest-deals`,
         },
         {
             id: "5",
             text: `${t("CLASSIFIEDS_LINKS")}`,
+            link: `/classifieds`,
         },
         {
             id: "6",
             text: `${t("POST_ADVERT_LINKS")}`,
+            link: `/post-advert`,
         },
         {
             id: "7",
             text: `${t("YOUR_ADS_LINKS")}`,
+            link: `/your-add`,
         },
         {
             id: "8",
             text: `${t("LATEST_DEALS_LINKS")}`,
+            link: `/deals/latest-deals`,
         },
         {
             id: "9",
             text: `${t("PRODUCTS_LINKS")}`,
+            link: `/deals/products`,
         },
         {
             id: "10",
             text: `${t("SERVICES_LINKS")}`,
+            link: `/deals/services`,
         },
         {
             id: "11",
             text: `${t("BRANDS_LINKS")}`,
+            link: `/deals/brands`,
         },
         {
             id: "12",
             text: `${t("COMPANIES_LINKS")}`,
+            link: `/deals/companies`,
         },
         {
             id: "13",
             text: `${t("BOOKMARKS_LINKS")}`,
+            link: `/book-marks`,
         },
         {
             id: "14",
             text: `${t("PROFILE_LINKS")}`,
+            link: `/view-profile`,
         },
     ],
 };
