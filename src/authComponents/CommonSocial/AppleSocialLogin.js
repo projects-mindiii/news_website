@@ -1,5 +1,5 @@
 import React from "react";
- import Apple from "../../assets/images/apple_logo.png";
+import Apple from "../../assets/images/apple_logo.png";
 import { Toast } from "../../utils/Toaster";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
