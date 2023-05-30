@@ -257,11 +257,16 @@ function Profile() {
     requestData.append("image", profileImage);
     requestData.append("is_password_change", changePassword);
     requestData.append("is_image_remove", removeimage);
+    // requestData.append(
+    //   "current_password",
+    //   formdata ? formdata.currentPassword : ""
+    // );
+    // requestData.append("new_passsword", formdata ? formdata.setPassword : "");
     requestData.append(
       "current_password",
-      formdata ? formdata.currentPassword : ""
+      formdata ? formdata.setPassword : ""
     );
-    requestData.append("new_passsword", formdata ? formdata.setPassword : "");
+    requestData.append("new_passsword", formdata ? formdata.repeatPassword : "");
     const data = { requestData: requestData, userToken: userToken };
     dispatch(updateProfile(data)).then((responsejson) => {
       const response = responsejson.payload;
@@ -553,7 +558,7 @@ function Profile() {
 
                       {changePassword == 1 && (
                         <div>
-                          <Form.Group className="mb-3">
+                          {/* <Form.Group className="mb-3">
                             <Form.Control
                               type="password"
                               placeholder={t("CURRENT_PASSWORD")}
@@ -574,7 +579,7 @@ function Profile() {
                             <span className="errorDisplay">
                               {errors.currentPassword.message}
                             </span>
-                          )}
+                          )} */}
                           <Form.Group className="mb-3">
                             <Form.Control
                               type="password"

@@ -72,23 +72,23 @@ function Footer() {
                                 <div className="linkHeading">
                                     <h6>{t("QUICK_LINKS")}</h6>
                                     <div className="linkNames">
-
                                         {(footerData.links).map((item2, index2) => (
-                                            <h6 key={index2}> {item2.text}</h6>
-                                        ))}
-
-                                    </div>
+                                                  <a href={item2.link}>
+                                                <h6 key={index2}> {item2.text}</h6>
+                                                </a>
+                                            ))}
                                 </div>
-                            </Col>
-                            <Col lg={4} md={4} >
-                                <div className="linkHeadingWrapper">
-                                    <div className="linkHeading">
-                                        <h6>{t("OUR MEDIA")}</h6>
-                                        <div className="companyImg">
-                                            <img src={Image2} alt="africa-print" />
-                                            <img src={Image3} alt="modern-marketing" />
-                                        </div>
-                                        {/*<div className="subscribeForm">
+                            </div>
+                        </Col>
+                        <Col lg={4} md={4} >
+                            <div className="linkHeadingWrapper">
+                                <div className="linkHeading">
+                                    <h6>{t("OUR MEDIA")}</h6>
+                                    <div className="companyImg">
+                                        <img src={Image2} alt="africa-print" />
+                                        <img src={Image3} alt="modern-marketing" />
+                                    </div>
+                                    {/*<div className="subscribeForm">
                                         <h5>{t("SUBSCRIPTION_TEXT")}</h5>
                                         <Form onSubmit={handleSubmit(onsubmit)}>
                                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -126,13 +126,13 @@ function Footer() {
                                             </Button>
                                         </Form>
                                     </div> */}
-                                    </div>
                                 </div>
-                            </Col>
-                        </Row>
-                    </div>
-                </Container>
-            </section>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+            </Container>
+        </section >
             <section className="footerBottom">
 
             </section>

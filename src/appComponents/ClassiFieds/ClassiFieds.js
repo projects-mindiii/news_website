@@ -57,7 +57,9 @@ function ClassiFieds() {
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
-    handleCount(value);
+    
+    // we will do this point later after client discussion.
+    // handleCount(value);  
   };
 
   // function for forSaleList Api
@@ -147,6 +149,7 @@ function ClassiFieds() {
     });
   }
 
+  //---------function for view count for classifieds--------
   async function handleCount(value) {
     let classifiedListData = [];
     if(CLASSIFIED_CATEGORY_TYPE.FORSALE==value){
