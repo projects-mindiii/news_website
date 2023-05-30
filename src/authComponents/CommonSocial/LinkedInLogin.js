@@ -11,25 +11,16 @@ import { useNavigate } from "react-router-dom";
 
 
 function LinkedInLogin(props) {
-  // const { linkedInLogin } = useLinkedIn({
-  //   clientId: "86vhj2q7ukf83q",
-  //   redirectUri: `${window.location.origin}/linkedin`, 
-  //   onSuccess: (code) => {
-  //     console.log(code);
-  //   },
-  //   onError: (error) => {
-  //     console.log(error);
-  //   },
-  // });
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
   const onSuccess = async (response) => {
+    console.log(onSuccess)
     let userData = response;
     if (userData) {
       let requestData = new FormData();
       requestData.append("name", userData.name);
+      requestData.append("social_id", response.authorization.id_token);
       requestData.append("social_type", SOCIAL_TYPE.LINKEDIN);
       requestData.append("social_key", userData.id);
       requestData.append("email", userData.email);
@@ -66,11 +57,11 @@ function LinkedInLogin(props) {
 
   return (
     <LinkedIn
-    clientId="86vhj2q7ukf83q"
-    redirectUri={`${window.location.origin}/linkedin`}
-    onSuccess={(responseLinkdln) => {
-      console.log(responseLinkdln);
-    }}
+    clientId="78m8hi9xqyr2n6"
+    //  redirectUri="http://localhost:8080"
+     redirectUrl='https://www.news-web.com/linkedin'
+    // redirectUri={`${window.location.origin}/linkedin`}
+    onSuccess={onSuccess}
     onError={(error) => {
       console.log(error);
     }}
@@ -89,14 +80,7 @@ function LinkedInLogin(props) {
     )}
    
   </LinkedIn>
-    // <>
-    //   <img
-    //     onClick={linkedInLogin}
-    //     src={Linkedin}
-    //     alt="Sign in with Linked In"
-    //   />
-    //  {props.linkedinText && <h3 onClick={linkedInLogin}>{props.linkedinText}</h3>}
-    // </>
+  
   );
 }
 
