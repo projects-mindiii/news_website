@@ -57,7 +57,7 @@ function LoginForm() {
                     icon: "success",
                     title: response.message,
                 });
-                navigate("/view-profile");
+                navigate("/deals/latest-deals");
             } else {
                 setShowError(response.data.message)
             }
