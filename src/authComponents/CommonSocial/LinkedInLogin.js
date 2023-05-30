@@ -1,21 +1,20 @@
 import React from "react";
 import { useLinkedIn } from "react-linkedin-login-oauth2";
 import Linkedin from "../../assets/images/linkdin_logo.png";
-import { LinkedIn } from 'react-linkedin-login-oauth2';
+import { LinkedIn } from "react-linkedin-login-oauth2";
 import { SOCIAL_TYPE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { isSocialLogin, socialSignup } from "../../store/slices/UserSlice";
 import { Toast } from "../../utils/Toaster";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 
 function LinkedInLogin(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const onSuccess = async (response) => {
-    console.log(onSuccess)
+    console.log(onSuccess);
     let userData = response;
     if (userData) {
       let requestData = new FormData();
@@ -54,33 +53,28 @@ function LinkedInLogin(props) {
     }
   };
 
-
   return (
     <LinkedIn
-    clientId="78m8hi9xqyr2n6"
-    //  redirectUri="http://localhost:8080"
-     redirectUrl='https://www.news-web.com/linkedin'
-    // redirectUri={`${window.location.origin}/linkedin`}
-    onSuccess={onSuccess}
-    onError={(error) => {
-      console.log(error);
-    }}
-  >
-    {({ linkedInLogin }) => (
-      <>
-      <img
-        onClick={linkedInLogin}
-        src={Linkedin}
-        alt="Sign in with Linked In"
-       
-      />
-      {props.linkedinText && <h3 onClick={linkedInLogin}>{props.linkedinText}</h3>}
-      </>
-      
-    )}
-   
-  </LinkedIn>
-  
+      clientId="86vhj2q7ukf83q"
+      redirectUri={`${window.location.origin}/linkedin`}
+      onSuccess={onSuccess}
+      onError={(error) => {
+        console.log(error);
+      }}
+    >
+      {({ linkedInLogin }) => (
+        <>
+          <img
+            onClick={linkedInLogin}
+            src={Linkedin}
+            alt="Sign in with Linked In"
+          />
+          {props.linkedinText && (
+            <h3 onClick={linkedInLogin}>{props.linkedinText}</h3>
+          )}
+        </>
+      )}
+    </LinkedIn>
   );
 }
 
