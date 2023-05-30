@@ -231,7 +231,6 @@ function PostAdvert({ classes }) {
         GetFilterData()
     },[])
 
-
     function handleResponse(responsejson) {
         if (responsejson.status_code) {
             if (responsejson.status_code == STATUS_CODES.SUCCESS) {
@@ -281,21 +280,23 @@ function PostAdvert({ classes }) {
         setDefaultCountry({ label: e.label, value: e.value, id: e.id })
     }
 
-    function setNewJob(e) {
-        setValue("jobType", { label: e.label, value: e.value, id: e.id })
-        setJobTypeValue({ label: e.label, value: e.value, id: e.id })
-    }
-    function setNewEarning(e) {
-        setValue("earningoption", { label: e.label, value: e.value, id: e.id })
-        setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
-    }
+    // function setNewJob(e) {
+    //     setValue("jobType", { label: e.label, value: e.value, id: e.id })
+    //     setJobTypeValue({ label: e.label, value: e.value, id: e.id })
+    // }
+    // function setNewEarning(e) {
+    //     setValue("earningoption", { label: e.label, value: e.value, id: e.id })
+    //     setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
+    // }
     function setNewCountry(e) {
         setValue("country", { label: e.label, value: e.value, id: e.id })
         setCountryValue({ label: e.label, value: e.value, id: e.id })
 
     }
     function setNewProvinces(e) {
+        if(e.id) {
         setValue("province", { label: e.label, value: e.value, id: e.id })
+        }
         setProvinceValue({ label: e.label, value: e.value, id: e.id })
     }
     function resetDate() {
@@ -522,7 +523,6 @@ function PostAdvert({ classes }) {
         getClassifiedLists();
     }, []);
     async function onSubmit(data, e) {
-
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
@@ -837,8 +837,8 @@ function PostAdvert({ classes }) {
                                                                         id="jobtype"
                                                                         placeholder={t("SELECT_JOB_TYPE")}
                                                                         options={jobTypeOptions}
-                                                                        onChange={(e) => setNewJob(e)} // send value to hook form
-                                                                        value={jobTypeValue ? jobTypeValue : ""}
+                                                                        onChange={onChange} // send value to hook form
+                                                                        value={value}
                                                                         styles={{
                                                                             placeholder: () => ({
                                                                                 color: "white",
@@ -971,8 +971,8 @@ function PostAdvert({ classes }) {
                                                                 <Select
                                                                     id="earningoption"
                                                                     options={earingOptions}
-                                                                    value={earningOptionValue ? earningOptionValue : ""}
-                                                                    onChange={(e) => setNewEarning(e)} // send value to hook form
+                                                                    value={value}
+                                                                    onChange={onChange} // send value to hook form
                                                                     placeholder={t("SELECT_EARNING_OPTION")}
                                                                     styles={{
                                                                         placeholder: () => ({
@@ -1066,9 +1066,9 @@ function PostAdvert({ classes }) {
                                                                 <Select
                                                                     id="province"
                                                                     options={provinceOptions}
-                                                                    value={provinceValue}
+                                                                    value={value}
                                                                     placeholder={t("SELECT_PROVIN")}
-                                                                    onChange={(val) => { setNewProvinces(val) }}
+                                                                    onChange={onChange}
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "#231F20",
@@ -1110,10 +1110,10 @@ function PostAdvert({ classes }) {
                                                             <div className="selectOption">
                                                                 <Select
                                                                     id="country"
-                                                                    value={countryValue}
                                                                     options={countryOptions}
-                                                                    onChange={(e) => { setNewCountry(e) }}
+                                                                    value={value}
                                                                     placeholder={t("SELECT_COUNTRY")}
+                                                                    onChange={onChange}
                                                                     styles={{
                                                                         placeholder: () => ({
                                                                             color: "#231F20",
