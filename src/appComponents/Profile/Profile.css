@@ -413,6 +413,12 @@
   height: 28px !important;
 }
 
+.selectOption .css-8mmkcg {
+  fill: #000000 !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
 /* css for delete popup modal */
 .deletePopup .modal-footer {
   border-top: none !important;

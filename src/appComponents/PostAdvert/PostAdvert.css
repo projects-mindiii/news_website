@@ -627,6 +627,12 @@
     height: 28px !important;
 }
 
+.selectOptionPost .css-8mmkcg {
+    fill: #FFFFFF !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+
 .post_AddForm #location .css-1dimb5e-singleValue {
     color: white !important;
 }
@@ -667,10 +673,13 @@
     color: black !important;
 }
 
-.dropdown_menu .dropdown-menu.show{
+.dropdown_menu .dropdown-menu.show {
     max-height: 300px !important;
     overflow-y: scroll !important;
 
 }
-.dropdown_menu  .dropdown-item.active, .dropdown-item:active{
-background-color: black !important; }
+
+.dropdown_menu .dropdown-item.active,
+.dropdown-item:active {
+    background-color: black !important;
+}

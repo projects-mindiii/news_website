@@ -59,7 +59,7 @@ function ClassifiedList({
   //     }
   //     handleCount();
   //   }
-  // }, [forSaleListData]);
+  // }, []);
 
 
   return (

@@ -14,13 +14,13 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
-import { CLASSIFIED_REFRENCE_TYPE, CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE, PAGINATION_VALUE, SEARCH_TYPE } from "../../utils/Constants";
+import { CLASSIFIED_REFRENCE_TYPE, CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE, PAGINATION_VALUE, SEARCH_TYPE, COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 import CustomBtn from "../../formComponent/Button/Button";
-
+import SublyApi from "../../helpers/Api"
 
 function ClassiFieds() {
   const { t } = useTranslation();
@@ -57,6 +57,7 @@ function ClassiFieds() {
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
+    handleCount(value);
   };
 
   // function for forSaleList Api
@@ -145,6 +146,35 @@ function ClassiFieds() {
       }
     });
   }
+
+  async function handleCount(value) {
+    let classifiedListData = [];
+    if(CLASSIFIED_CATEGORY_TYPE.FORSALE==value){
+      classifiedListData = forSaleWebList;
+    }else{
+      classifiedListData = wantedWebList
+    }
+    classifiedListData && classifiedListData.length > 0 &&
+    classifiedListData.map((item, index) => {
+        let requestData = new FormData();
+        requestData.append("id", item.id);
+        requestData.append("type", COUNT.VIEW);
+        requestData.append("refrence_type", COUNT_REFFRENCE.CLASSIFIED);
+        requestData.append("share_in", 0);
+        SublyApi.updateCount(requestData, userToken).then((responsejson) => {
+          if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+            Toast.fire({
+              icon: "error",
+              title: t("SESSION_EXPIRE"),
+            });
+            dispatch(userLogout(userToken));
+            dispatch(guestUserLogin());
+            navigate("/login");
+          }
+        })
+      })
+  }
+
 
   //function for loadmore
   async function getWebClassifiedLists(loadmore, offsetValue) {
