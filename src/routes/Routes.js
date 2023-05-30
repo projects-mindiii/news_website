@@ -33,9 +33,9 @@ function Routers() {
             <Header />
             <Routes>
                 <Route exact path="/" element={<Navigate to="/deals/latest-deals" />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/login-form" element={<LoginForm />} />
-                <Route exact path="/sign-up" element={<SignupForm />} />
+                <Route exact path="/login" element={Object.keys(currentUser).length == 0 ? <Login /> : <Navigate to="/deals/latest-deals" />} />
+                <Route exact path="/login-form" element={Object.keys(currentUser).length == 0 ? <LoginForm /> : <Navigate to="/deals/latest-deals" />} />
+                <Route exact path="/sign-up" element={Object.keys(currentUser).length == 0 ? <SignupForm /> : <Navigate to="/deals/latest-deals" />} />
                 <Route exact path="/forgot-password" element={<ForgotPassword />} />
                 <Route exact path="/password-sent" element={<PasswordSent />} />
                 <Route exact path="/email-varify" element={<EmailVarify />} />

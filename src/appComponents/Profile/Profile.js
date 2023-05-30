@@ -16,7 +16,7 @@ import CustomBtn from "../../formComponent/Button/Button";
 import Select from "react-select";
 import { Toast } from "../../utils/Toaster";
 import { STATUS_CODES } from "../../utils/StatusCode";
-import { updateProfile, userDetails } from "../../store/slices/UserSlice";
+import { updateProfile, userDetails, userLogoutClear } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 import WatsappInput from "../../formComponent/CommonInputFields/WatsappInput";
 import ContactInput from "../../formComponent/CommonInputFields/ContactInput";
@@ -295,6 +295,7 @@ function Profile() {
         title: response.message,
       });
       handleClose();
+      dispatch(userLogoutClear()) 
       navigate("/login-form");
     } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
       Toast.fire({

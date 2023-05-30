@@ -148,7 +148,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    userLogout: (state, action) => {
+    userLogoutClear: (state, action) => {
       state.currentUser = {};
       state.isLoading = false;
       state.guestUser = {};
@@ -275,4 +275,6 @@ export const userSlice = createSlice({
 
   },
 })
+
+export const {userLogoutClear} = userSlice.actions
 export default userSlice.reducer
