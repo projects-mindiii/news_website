@@ -57,15 +57,16 @@ export const SERACH_REFRENCE_TYPE = {
   NEWS: 2,
   DEAL: 3,
   COMPANY: 4,
-}
+} 
 
 export const COUNT = {
   VIEW: 1,
-  SHARE: 2,
+  SHARES: 2,
   CLICK: 3
 }
 
 export const SHARE_COUNT = {
+  SHARE: 0,
   WHATSAPP: 1,
   FACEBOOK: 2,
   TWITTER: 3,

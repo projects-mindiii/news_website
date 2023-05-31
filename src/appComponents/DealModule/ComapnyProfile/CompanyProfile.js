@@ -17,7 +17,7 @@ import SublyApi from "../../../helpers/Api";
 import { Toast } from "../../../utils/Toaster";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { COUNT, COUNT_REFFRENCE } from "../../../utils/Constants";
+import { COUNT, COUNT_REFFRENCE, SHARE_COUNT } from "../../../utils/Constants";
 import { STATUS_CODES } from "../../../utils/StatusCode";
 import { guestUserLogin, userLogout } from "../../../store/slices/UserSlice";
 
@@ -36,7 +36,7 @@ function CompanyProfile({ companyDetailData }) {
     requestData.append("id", id);
     requestData.append("type", COUNT.CLICK);
     requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
-    requestData.append("share_in", 0);
+    requestData.append("share_in", SHARE_COUNT.SHARE);
     await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
       if (responsejson.status_code === STATUS_CODES.SUCCESS) {
 
@@ -111,9 +111,10 @@ function CompanyProfile({ companyDetailData }) {
               {companyDetailData.company_detail.email && (
                 <div className="detailsValue"
                   onClick={() => {
-                    if (Object.keys(currentUser).length !== 0) {
-                      handleCount()
-                    }
+                    // if (Object.keys(currentUser).length !== 0) {
+                    //   handleCount()
+                    // }
+                    handleCount()
                   }}>
                   <img src={mail} alt="img" />
                   <div className="dealText websiteUrl">
@@ -127,9 +128,10 @@ function CompanyProfile({ companyDetailData }) {
               {companyDetailData.company_detail.contact && (
                 <div className="detailsValue"
                   onClick={() => {
-                    if (Object.keys(currentUser).length !== 0) {
-                      handleCount()
-                    }
+                    // if (Object.keys(currentUser).length !== 0) {
+                    //   handleCount()
+                    // }
+                    handleCount()
                   }}>
                   <img src={contact} alt="img" />
                   <div className="dealText">
@@ -143,9 +145,10 @@ function CompanyProfile({ companyDetailData }) {
               {companyDetailData.company_detail.webside_url && (
                 <div className="detailsValue"
                   onClick={() => {
-                    if (Object.keys(currentUser).length !== 0) {
-                      handleCount()
-                    }
+                    // if (Object.keys(currentUser).length !== 0) {
+                    //   handleCount()
+                    // }
+                    handleCount()
                   }}>
                   <img src={globe} alt="img" />
                   <div className="dealText websiteUrl">

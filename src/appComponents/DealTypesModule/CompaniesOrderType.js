@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../utils/Loader/Loader';
 import { Toast } from "../../utils/Toaster";
 import { useNavigate } from 'react-router-dom';
-import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
+import { COUNT, COUNT_REFFRENCE, SHARE_COUNT } from "../../utils/Constants";
 import { useTranslation } from "react-i18next";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
@@ -49,7 +49,7 @@ function CompanyOrderType(props) {
         requestData.append("id", id);
         requestData.append("type", COUNT.VIEW);
         requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
-        requestData.append("share_in", 0);
+        requestData.append("share_in", SHARE_COUNT.SHARE);
         await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
             if (responsejson.status_code === STATUS_CODES.SUCCESS) {
 
@@ -79,14 +79,15 @@ function CompanyOrderType(props) {
                         ? companyList.map((item, index) => (
                             <div className={styles.productslist} key={index}
                                 onClick={() => {
-                                    if (
-                                        Object.keys(currentUser).length !== 0
-                                    ) {
-                                        handleCount(item.id)
-                                        navigate(`/deals/companies/company-profile/${item.id}`)
-                                    } else if (!Object.keys(currentUser).length) {
-                                        navigate(`/deals/companies/company-profile/${item.id}`)
-                                    }
+                                    // if (
+                                    //     Object.keys(currentUser).length !== 0
+                                    // ) {
+                                    //     handleCount(item.id)
+                                    //     navigate(`/deals/companies/company-profile/${item.id}`)
+                                    // } else if (!Object.keys(currentUser).length) {
+                                    //     navigate(`/deals/companies/company-profile/${item.id}`)
+                                    // }
+                                    navigate(`/deals/companies/company-profile/${item.id}`); handleCount(item.id)
                                 }}>
                                 <div className={styles.productImg}>
                                     <img src={item.company_logo} alt="logo" />
