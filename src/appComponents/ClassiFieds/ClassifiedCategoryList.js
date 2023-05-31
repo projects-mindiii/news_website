@@ -112,7 +112,7 @@ function ClassifiedList({
         {item.whatapp_contact_number.length > 0 && <WhatsApp watsApp={true} />}
       </div>
 
-      <SocialMedaiShare />
+      <SocialMedaiShare id={item.id}/>
 
       {(displayRoute && displayRoute == "your_advert") ? (<button className="edit_DeleteButton" onClick={() => navigate("/post-advert", { state: item })}>{t("EDIT_DELETE_BTN")}</button>) : ""}
       {(displayRoute && displayRoute == "your_advert" && item.approval_status == 0) ? (<button className="not_live">{t("PENDING_APPROVAL")}</button>) : ""}

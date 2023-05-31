@@ -4,7 +4,7 @@ import styles from "./CompanyData.module.css";
 import SublyApi from "../../helpers/Api";
 import { Toast } from "../../utils/Toaster";
 import { useDispatch, useSelector } from "react-redux";
-import { COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
+import { COUNT, COUNT_REFFRENCE, SHARE_COUNT } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { useTranslation } from "react-i18next";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
@@ -21,7 +21,7 @@ function CompanyDataModule({ companyListValue }) {
     requestData.append("id", companyListValue.id);
     requestData.append("type", COUNT.VIEW);
     requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
-    requestData.append("share_in", 0);
+    requestData.append("share_in", SHARE_COUNT.SHARE);
     await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
       if (responsejson.status_code === STATUS_CODES.SUCCESS) {
 
@@ -42,14 +42,16 @@ function CompanyDataModule({ companyListValue }) {
       <div
         className={styles.productslist}
         onClick={() => {
-          if (
-            Object.keys(currentUser).length !== 0
-          ) {
-            handleCount()
-            navigate(`/deals/companies/company-profile/${companyListValue.id}`)
-          } else if (!Object.keys(currentUser).length) {
-            navigate(`/deals/companies/company-profile/${companyListValue.id}`)
-          }
+          // if (
+          //   Object.keys(currentUser).length !== 0
+          // ) {
+          //   handleCount()
+          //   navigate(`/deals/companies/company-profile/${companyListValue.id}`)
+          // } else if (!Object.keys(currentUser).length) {
+          //   navigate(`/deals/companies/company-profile/${companyListValue.id}`)
+          // }
+
+          navigate(`/deals/companies/company-profile/${companyListValue.id}`); handleCount()
         }}>
 
         <div className={styles.productImg}>
