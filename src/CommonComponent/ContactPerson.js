@@ -4,7 +4,6 @@ import emailicon from "../assets/images/Deal_icon/mail.svg";
 import callicon from "../assets/images/Deal_icon/call.svg";
 import contactPerson from "../assets/images/Deal_icon/contact.svg";
 import { useTranslation } from "react-i18next";
-import { AiOutlineStar } from "react-icons/ai";
 
 //-------Create a Deals Header component--------
 function ContactPerson(props) {
@@ -29,7 +28,6 @@ function ContactPerson(props) {
           <div className="classiFields_PersonAboutShow">
             <div className="classiFields_iconBackGround">
               <img src={companyIcon} alt={companyIcon} />
-              {/* <AiOutlineStar /> */}
             </div>
             <div className="classiFields_emailHeadingText">
               <p>{t("COMPANY")}</p>
