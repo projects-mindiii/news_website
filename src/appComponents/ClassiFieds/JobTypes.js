@@ -99,9 +99,10 @@ function JobTypes() {
             icon: "error",
             title: t("SESSION_EXPIRE"),
           });
-          await dispatch(userLogout(userToken));
-          await dispatch(guestUserLogin());
+          await dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
           navigate("/login");
+        })
         } else {
           Toast.fire({
             icon: "error",
@@ -135,9 +136,10 @@ function JobTypes() {
             icon: "error",
             title: t("SESSION_EXPIRE"),
           });
-          await dispatch(userLogout(userToken));
-          await dispatch(guestUserLogin());
+          await dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
           navigate("/login");
+        })
         } else {
           Toast.fire({
             icon: "error",

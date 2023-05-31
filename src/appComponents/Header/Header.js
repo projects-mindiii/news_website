@@ -27,15 +27,17 @@ function Header() {
   function handleResponse(responsejson) {
     if (responsejson.status_code) {
       if (responsejson.status_code === STATUS_CODES.INVALID_TOKEN) {
-        dispatch(userLogout(userToken));
-        dispatch(guestUserLogin());
-        navigate("/login");
+        dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
+          navigate("/login");
+        })
       }
     } else {
       if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
-        dispatch(userLogout(userToken));
-        dispatch(guestUserLogin());
-        navigate("/login");
+        dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
+          navigate("/login");
+        })
       }
     }
   }

@@ -190,14 +190,10 @@ export const userSlice = createSlice({
     })
     builder.addCase(userLogout.fulfilled, (state, action) => {
       const response = action.payload;
-      if (response.status_code === STATUS_CODES.SUCCESS) {
       state.isLoading = false
       state.currentUser = {};
-      state.isLoading = false;
       state.guestUser = {};
       state.userToken = null;
-      } 
-
     })
    
 

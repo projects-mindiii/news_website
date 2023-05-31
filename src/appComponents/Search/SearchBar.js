@@ -32,6 +32,13 @@ function SearchBar() {
         if (
           responsejson.payload.response.status_code === STATUS_CODES.SUCCESS
         ) {
+        } else if (
+          responsejson.payload.response.data.status_code === STATUS_CODES.BAD_REQUEST
+        ) {
+          Toast.fire({
+            icon: "error",
+            title: t(responsejson.payload.response.data.message),
+          });
         } else if (responsejson.payload.response.status_code) {
           if (
             responsejson.payload.response.status_code ===
@@ -41,9 +48,10 @@ function SearchBar() {
               icon: "error",
               title: t("SESSION_EXPIRE"),
             });
-            dispatch(userLogout(userToken));
-            dispatch(guestUserLogin());
-            navigate("/login");
+            dispatch(userLogout(userToken)).then(() => {
+              dispatch(guestUserLogin());
+              navigate("/login");
+            });
           }
         } else {
           if (
@@ -53,9 +61,10 @@ function SearchBar() {
               icon: "error",
               title: t("SESSION_EXPIRE"),
             });
-            dispatch(userLogout(userToken));
-            dispatch(guestUserLogin());
-            navigate("/login");
+            dispatch(userLogout(userToken)).then(() => {
+              dispatch(guestUserLogin());
+              navigate("/login");
+            });
           }
         }
       }

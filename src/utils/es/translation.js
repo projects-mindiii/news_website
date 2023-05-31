@@ -244,5 +244,6 @@ export const TRANSLATIONS_ES = {
   NO_SEARCH_DATA: "--- NO SE ENCONTRÓ LA BÚSQUEDA ---",
 
   TOOLTIP_TEXT: "Puede acceder al sitio web, excepto publicar anuncios y marcadores.",
+  TMG_UPLOAD_ERROR: "Solo se permite cargar 5 archivos.",
 
 };

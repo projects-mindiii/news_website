@@ -245,9 +245,10 @@ function PostAdvert({ classes }) {
                         icon: "error",
                         title: t("SESSION_EXPIRE"),
                     });
-                    dispatch(userLogout(userToken));
-                    dispatch(guestUserLogin());
-                    navigate("/login");
+                    dispatch(userLogout(userToken)).then(() => {
+                        dispatch(guestUserLogin());
+                        navigate("/login");
+                      })
                 } else {
                     Toast.fire({
                         icon: "error",
@@ -261,9 +262,10 @@ function PostAdvert({ classes }) {
                     icon: "error",
                     title: t("SESSION_EXPIRE"),
                 });
-                dispatch(userLogout(userToken));
-                dispatch(guestUserLogin());
-                navigate("/login");
+                dispatch(userLogout(userToken)).then(() => {
+                    dispatch(guestUserLogin());
+                    navigate("/login");
+                  })
             } else {
                 Toast.fire({
                     icon: "error",
@@ -274,8 +276,8 @@ function PostAdvert({ classes }) {
     }
 
     function setNewDefaultCountry(e) {
-        setCountryValue({ label: 'Selected Country', value: '', id: '' })
-        setProvinceValue({ label: 'Selected Province', value: '', id: '' })
+        setValue("province", { label: 'Selected Province', value: '', id: '' })
+        setValue("country", { label: 'Selected Country', value: '', id: '' })
         setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
         setDefaultCountry({ label: e.label, value: e.value, id: e.id })
     }
@@ -288,16 +290,14 @@ function PostAdvert({ classes }) {
     //     setValue("earningoption", { label: e.label, value: e.value, id: e.id })
     //     setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
     // }
+    
     function setNewCountry(e) {
         setValue("country", { label: e.label, value: e.value, id: e.id })
-        setCountryValue({ label: e.label, value: e.value, id: e.id })
-
     }
     function setNewProvinces(e) {
         if(e.id) {
         setValue("province", { label: e.label, value: e.value, id: e.id })
         }
-        setProvinceValue({ label: e.label, value: e.value, id: e.id })
     }
     function resetDate() {
         setHeadingLength("")
@@ -709,6 +709,19 @@ function PostAdvert({ classes }) {
 
     }
 
+    function keyHandle (e) {
+        const key = e.keyCode;
+        const keyValue = e.target.value.match(/\./g)
+        if (key >= 96  && key <= 105 || key == 8 ||  key == 13 ||  key == 46 || key >=37 && key <=40) {
+            return true;
+        } else if(key == 110 && !keyValue) {
+            return true;
+        } else {
+            e.preventDefault();
+            return false;
+        }
+    }
+
     return (
         <div className="main">
             {isLoading === true ? (
@@ -937,7 +950,7 @@ function PostAdvert({ classes }) {
                                                     </DropdownButton>
                                                     <Form.Group className="amount">
                                                         <Form.Control
-                                                            {...register("amountvalue", CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE && {
+                                                            {...register("amountvalue", CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE ? {
                                                                 required: {
                                                                     value: true,
                                                                     message: t("PLEACE_ENTER_AMOUNT"),
@@ -946,11 +959,13 @@ function PostAdvert({ classes }) {
                                                                     value: 1,
                                                                     message: t("MIN_AMOUNT_VALUE")
                                                                 }
-                                                            })}
+                                                            }: {required: {
+                                                                value: false,
+                                                            }})}
                                                             className="amount_Control"
                                                             type="text"
                                                             placeholder={t("AMOUNT_OPTIONAL")}
-
+                                                            onKeyDown={(e)=>keyHandle(e)}
                                                         />
                                                     </Form.Group>
                                                 </InputGroup>
@@ -1218,9 +1233,16 @@ function PostAdvert({ classes }) {
                                             style={{
                                                 display: "none",
                                             }}
-                                            onInputCapture={imgCropper}
+                                            onInputCapture={()=>{
+                                                if(profileImage.length < 5) {
+                                                    imgCropper()
+                                                }}}
                                             onChange={(e) => {
-                                                onFileChange(e);
+                                                profileImage.length < 5 ?
+                                                onFileChange(e):  Toast.fire({
+                                                    icon: "error",
+                                                    title: t("TMG_UPLOAD_ERROR"),
+                                                  });
                                                 // uploadImage(e);
                                             }}
                                         />

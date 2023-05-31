@@ -30,9 +30,10 @@ function CompanyDataModule({ companyListValue }) {
           icon: "error",
           title: t("SESSION_EXPIRE"),
         });
-        dispatch(userLogout(userToken));
-        dispatch(guestUserLogin());
-        navigate("/login");
+        dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
+          navigate("/login");
+        })
       }
     })
   }
