@@ -100,9 +100,10 @@ function ClassiFieds() {
             icon: "error",
             title: t("SESSION_EXPIRE"),
           });
-          await dispatch(userLogout(userToken));
-          await dispatch(guestUserLogin());
+          await dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
           navigate("/login");
+        })
         } else {
           Toast.fire({
             icon: "error",
@@ -136,9 +137,10 @@ function ClassiFieds() {
             icon: "error",
             title: t("SESSION_EXPIRE"),
           });
-          await dispatch(userLogout(userToken));
-          await dispatch(guestUserLogin());
+          await dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
           navigate("/login");
+        })
         } else {
           Toast.fire({
             icon: "error",
@@ -170,9 +172,10 @@ function ClassiFieds() {
               icon: "error",
               title: t("SESSION_EXPIRE"),
             });
-            dispatch(userLogout(userToken));
-            dispatch(guestUserLogin());
-            navigate("/login");
+            dispatch(userLogout(userToken)).then(() => {
+              dispatch(guestUserLogin());
+              navigate("/login");
+            })
           }
         })
       })
