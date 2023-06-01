@@ -97,7 +97,8 @@ function PostAdvert({ classes }) {
             let profileViewData = [...profilePreview];
             profileViewData.push({ img_url: croppedImage });
             setProfilePreview(profileViewData);
-
+            setImageSrc('');
+            setCroppedImage('');
         } catch (e) {
             console.error(e)
         }
@@ -115,7 +116,8 @@ function PostAdvert({ classes }) {
         setCroppedImage(null)
     }, [])
 
-    const onFileChange = async (e) => {
+    const onFileChange = async (e) => {  
+
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
             //   const file = e.target.files[0];
@@ -207,6 +209,8 @@ function PostAdvert({ classes }) {
     const [defaultCountry, setDefaultCountry] = useState();
     const [provinceOptions, setProvincesOptions] = useState();
     const [provinceValue, setProvinceValue] = useState();
+    const selectProvince = { label: 'Selected Province', value: "", id: "" };
+    const selectCountry = { label: 'Selected Country', value: "", id: "" };
     const [jobTypeValue, setJobTypeValue] = useState();
     const [earningOptionValue, setEaringOptionValue] = useState();
     const [countryValue, setCountryValue] = useState()
@@ -276,8 +280,9 @@ function PostAdvert({ classes }) {
     }
 
     function setNewDefaultCountry(e) {
-        setValue("province", { label: 'Selected Province', value: '', id: '' })
-        setValue("country", { label: 'Selected Country', value: '', id: '' })
+        reset({province: "", country: ""})
+        // setValue("province", { label: 'Selected Province', value: '', id: '' })
+        // setValue("country", { label: 'Selected Country', value: '', id: '' })
         setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
         setDefaultCountry({ label: e.label, value: e.value, id: e.id })
     }
@@ -296,7 +301,7 @@ function PostAdvert({ classes }) {
     }
     function setNewProvinces(e) {
         if(e.id) {
-        setValue("province", { label: e.label, value: e.value, id: e.id })
+            setValue("province", { label: e.label, value: e.value, id: e.id })
         }
     }
     function resetDate() {
@@ -360,6 +365,8 @@ function PostAdvert({ classes }) {
                     await setEaringOptions(earningOption);
                     await setJobTypeOptions(jobType);
                     await setCountryOptions(countyryOption);
+                    // await provinceOption.unshift(selectProvince)
+                    // await countyryOption.unshift(selectCountry)
                     await setProvincesOptions(provinceOption)
                     await setCurrenciesOptions(currencyoption)
 
@@ -421,7 +428,7 @@ function PostAdvert({ classes }) {
                                     );
                                     setNewProvinces(newProvinceOption);
                                 } else {
-                                    setNewProvinces({ label: 'Selected Province', value: "", id: "" })
+                                    setNewProvinces(selectProvince)
                                 }
 
 
@@ -431,7 +438,7 @@ function PostAdvert({ classes }) {
                                     );
                                     setNewCountry(newCountryOption);
                                 } else {
-                                    setNewCountry({ label: 'Selected Country', value: "", id: "" })
+                                    setNewCountry(selectCountry)
                                 }
                             }
                         });
@@ -442,7 +449,7 @@ function PostAdvert({ classes }) {
                         ))
                         setValue("categorytype", advertValue[0].category_type_id && advertValue[0].category_type_id.toString())
                         setCategoryValue(advertValue[0].category_type_id && advertValue[0].category_type_id.toString())
-                        setValue("fullName", advertValue[0].user_name)
+                        setValue("fullName", advertValue[0].contact_name)
                         setValue("heading", advertValue[0].heading)
                         setValue("description", advertValue[0].description)
                         setValue("amountvalue", advertValue[0].amount)
@@ -489,13 +496,13 @@ function PostAdvert({ classes }) {
                         }
                         else {
                             setValue("isDefaultCountry", {
-                                label: `${t("SOUTH_AFRICA_SET")}`,
+                                label: `${t("OUTOF_SOUTH")}`,
                                 value: 0,
                                 id: 0
                             })
 
                             setDefaultCountry({
-                                label: `${t("SOUTH_AFRICA_SET")}`,
+                                label: `${t("OUTOF_SOUTH")}`,
                                 value: 0,
                                 id: 0
                             })
@@ -659,8 +666,12 @@ function PostAdvert({ classes }) {
         });
     }
 
-    const imgCropper = () => {
-        showHead ? setShowHead(false) : setShowHead(true);
+    const imgCropper = (e) => {
+        if((e) && e.target.files && e.target.files.length==0){
+         return false;
+        }else{
+            showHead ? setShowHead(false) : setShowHead(true);
+        }
     };
 
     function b64toBlob(cropData, contentType, sliceSize) {
@@ -721,6 +732,36 @@ function PostAdvert({ classes }) {
             return false;
         }
     }
+
+    // -----Here added costum search bar in dropdwon-----
+    const DropdownSearch = React.forwardRef(
+        ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+          const [value, setValue] = useState('');
+      
+          return (
+            <div
+              ref={ref}
+              style={style}
+              className={className}
+              aria-labelledby={labeledBy}
+            >
+              <Form.Control
+                autoFocus
+                className="mx-3 my-2 w-auto"
+                placeholder="Search..."
+                onChange={(e) => setValue(e.target.value)}
+                value={value}
+              />
+              <ul className="list-unstyled">
+                {React.Children.toArray(children).filter(
+                  (child) =>
+                    !value || child.props.children.toLowerCase().startsWith(value),
+                )}
+              </ul>
+            </div>
+          );
+        },
+      );
 
     return (
         <div className="main">
@@ -939,15 +980,21 @@ function PostAdvert({ classes }) {
                                         {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                                             <div className="post_Add_priceDiv">
                                                 <InputGroup className="mb-3 dropdown_menu">
-                                                    <DropdownButton
+                                                <Dropdown>
+                                                    {/* <DropdownButton
                                                         variant="outline-secondary"
                                                         title={currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
                                                         id="input-group-dropdown-1"
-                                                    >{currenciesOptions && currenciesOptions.map((item, index) => (
+                                                    ></DropdownButton> */}
+                                                    <Dropdown.Toggle id="dropdown-custom-components">
+                                                    {currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu as={DropdownSearch}>{currenciesOptions && currenciesOptions.map((item, index) => (
                                                         <Dropdown.Item active={currencyValue ? currencyValue.name == item.name : index == 0} onClick={() => {
                                                             setCurrencyValue(item);
                                                         }}>{item.name}</Dropdown.Item>))}
-                                                    </DropdownButton>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
                                                     <Form.Group className="amount">
                                                         <Form.Control
                                                             {...register("amountvalue", CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE ? {
@@ -1082,7 +1129,7 @@ function PostAdvert({ classes }) {
                                                                     id="province"
                                                                     options={provinceOptions}
                                                                     value={value}
-                                                                    placeholder={t("SELECT_PROVIN")}
+                                                                    placeholder={t("Selected Province")}
                                                                     onChange={onChange}
                                                                     styles={{
                                                                         placeholder: () => ({
@@ -1127,7 +1174,7 @@ function PostAdvert({ classes }) {
                                                                     id="country"
                                                                     options={countryOptions}
                                                                     value={value}
-                                                                    placeholder={t("SELECT_COUNTRY")}
+                                                                    placeholder={t("Selected Country")}
                                                                     onChange={onChange}
                                                                     styles={{
                                                                         placeholder: () => ({
@@ -1233,9 +1280,9 @@ function PostAdvert({ classes }) {
                                             style={{
                                                 display: "none",
                                             }}
-                                            onInputCapture={()=>{
+                                            onInputCapture={(e)=>{
                                                 if(profileImage.length < 5) {
-                                                    imgCropper()
+                                                    imgCropper(e)
                                                 }}}
                                             onChange={(e) => {
                                                 profileImage.length < 5 ?
