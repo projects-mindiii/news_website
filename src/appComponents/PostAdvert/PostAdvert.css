@@ -697,4 +697,13 @@
     .selectOptionPost .css-1xz3in2-control {
         font-size: 18px;
     }
+
+    .post_Add_priceDiv .dropdown_menu .dropdown-menu.show input{
+        width: 250px !important;
+    }
+
+    .dropdown_menu .dropdown-menu.show {
+        width: 300px !important;
+    }
+
 }
