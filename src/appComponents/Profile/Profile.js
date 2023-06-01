@@ -114,7 +114,7 @@ function Profile() {
 
   async function setLocationChanged(e) {
     setLocationSelected(e);
-    if(e.value==0){
+    if (e.value == 0) {
       setCountrySelected({
         label: `${t("COUNTRY_SET")}`,
         value: "0",
@@ -216,8 +216,8 @@ function Profile() {
           icon: "error",
           title: t("SESSION_EXPIRE"),
         });
-         dispatch(userLogout(userToken)).then(() => {
-          dispatch(guestUserLogin()); 
+        dispatch(userLogout(userToken)).then(() => {
+          dispatch(guestUserLogin());
           navigate("/login");
         })
       } else {
@@ -228,7 +228,7 @@ function Profile() {
       }
     });
   }, []);
- 
+
 
   //-----------function for update profile api-----------
   const onSubmit = async (formdata) => {
@@ -270,29 +270,51 @@ function Profile() {
     );
     requestData.append("new_passsword", formdata ? formdata.repeatPassword : "");
     const data = { requestData: requestData, userToken: userToken };
-    dispatch(updateProfile(data)).then((responsejson) => {
-      const response = responsejson.payload;
-      if (response.status_code === STATUS_CODES.SUCCESS) {
-        Toast.fire({
-          icon: "success",
-          title: response.message,
-        });
-      } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
-        Toast.fire({
-          icon: "error",
-          title: t("SESSION_EXPIRE"),
-        });
-         dispatch(userLogout(userToken)).then(() => {
-          dispatch(guestUserLogin());
-          navigate("/login");
-        })
-      } else {
-        Toast.fire({
-          icon: "error",
-          title: response.data.message,
-        });
-      }
-    });
+    if (changePassword == 1) {
+      dispatch(updateProfile(data)).then((responsejson) => {
+        const response = responsejson.payload;
+        if (response.status_code === STATUS_CODES.SUCCESS) {
+          Toast.fire({
+            icon: "success",
+            title: response.message,
+          });
+          dispatch(userLogout(userToken)).then(() => {
+            dispatch(guestUserLogin());
+            navigate("/login");
+          })
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      });
+    }
+    else {
+      dispatch(updateProfile(data)).then((responsejson) => {
+        const response = responsejson.payload;
+        if (response.status_code === STATUS_CODES.SUCCESS) {
+          Toast.fire({
+            icon: "success",
+            title: response.message,
+          });
+        } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
+          Toast.fire({
+            icon: "error",
+            title: t("SESSION_EXPIRE"),
+          });
+          dispatch(userLogout(userToken)).then(() => {
+            dispatch(guestUserLogin());
+            navigate("/login");
+          })
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      });
+    }
   };
 
   //------ function for delete user API -------
@@ -304,7 +326,7 @@ function Profile() {
         title: response.message,
       });
       handleClose();
-      dispatch(userLogoutClear()) 
+      dispatch(userLogoutClear())
       navigate("/login");
     } else if (response.status === STATUS_CODES.INVALID_TOKEN) {
       Toast.fire({
@@ -412,7 +434,7 @@ function Profile() {
                           id="location"
                           name="location"
                           options={locationOption}
-                          onChange={(e)=>setLocationChanged(e)}
+                          onChange={(e) => setLocationChanged(e)}
                           value={locationSelected}
                           styles={{
                             placeholder: () => ({
@@ -540,7 +562,7 @@ function Profile() {
                         />
                       </div>
                       <div className="profileIcon">
-                      <MdOutlineCancel onClick={(e) => { onImageRemove(e); setRemoveimage(1) }} />
+                        <MdOutlineCancel onClick={(e) => { onImageRemove(e); setRemoveimage(1) }} />
                         <h6 className="addCls">{t("CLEAR")}</h6>
                       </div>
                     </div>

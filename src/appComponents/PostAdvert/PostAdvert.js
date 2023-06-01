@@ -1311,7 +1311,7 @@ function PostAdvert({ classes }) {
                                             <div className="post_Add_Delete" >
                                                 <button type="button" onClick={() => handleShow(true)}>
                                                     <div><BsTrash3 /></div>
-                                                    <div>DELETE ADVERT</div>
+                                                    <div className="deletePost">DELETE ADVERT</div>
                                                 </button>
                                             </div>}
                                     </div>}

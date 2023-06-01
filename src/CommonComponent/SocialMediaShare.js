@@ -45,7 +45,7 @@ function SocialMedaiShare(props) {
         navigate("/login");
       }
     })
-  } console.log("social", socialType);
+  }
 
   return (
     <React.Fragment>
