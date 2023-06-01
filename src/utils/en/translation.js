@@ -51,10 +51,12 @@ export const TRANSLATIONS_EN = {
   CLASSIFIED_CONTACT_PERSON: "Contact Person",
   LOADMORE_BUTTON: " Load More",
   REFRENCE_ID: "all",
-
   ALL_COUNTRY: "All Country",
   EDIT_ADVERT: "EDIT / DELETE ADVERT",
   NOT_LIVE: "NOT LIVE - Pending Approvals",
+  NOCLASSIFIEDSALES_DISPLAY: "NO SALES TO DISPLAY",
+  NOCLASSIFIEDWANTED_DISPLAY: "NO WANTED TO DISPLAY",
+  NOCLASSIFIEDJOB_DISPLAY: " NO JOBS TO DISPLAY",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa provides the latest news, insights and trends in wide format, garment & textile print, branding and all visual communications in Southern Africa.`,
@@ -74,7 +76,6 @@ export const TRANSLATIONS_EN = {
   COMPANIES_LINKS: "Companies",
   BOOKMARKS_LINKS: "Bookmarks",
   PROFILE_LINKS: "View Profile",
-
 
   //----Header Text------
   DEALS: "DEALS/HUB",
@@ -112,7 +113,6 @@ export const TRANSLATIONS_EN = {
   DELETE: "DELETE",
   SOUTH_AFRICA_SET: "South Africa",
   OUTOF_SOUTH: "Outside South Africa",
-
 
   //----Deals Text------
   CONTACT_PERSON: "CONTACT PERSON",
@@ -237,7 +237,8 @@ export const TRANSLATIONS_EN = {
 
   //------------- Your Ads-------------
   YOUR_ADVERTS: "YOUR ADVERTS",
-  ADVERT_NOTE: "All adverts are subject to approval. Adverts will be removed after 60 days. Delete or Edit your advert anytime",
+  ADVERT_NOTE:
+    "All adverts are subject to approval. Adverts will be removed after 60 days. Delete or Edit your advert anytime",
   NO_ADVERT: "--- NO ADVERTS TO DISPLAY ---",
 
   EDIT_DELETE_BTN: "EDIT / DELETE ADVERT",
@@ -245,5 +246,4 @@ export const TRANSLATIONS_EN = {
   NO_SEARCH_DATA: "--- NO SEARCH FOUND ---",
   TOOLTIP_TEXT: "You can access website except post advert and bookmark.",
   TMG_UPLOAD_ERROR: "Only 5 files are allowed to upload.",
-
 };

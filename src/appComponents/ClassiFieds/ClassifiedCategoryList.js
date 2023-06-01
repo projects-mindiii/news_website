@@ -87,13 +87,13 @@ function ClassifiedList({
             {item.currency_code} {item.amount.toFixed(2)}
           </p>}
 
-          {item.amount === 0 ? "" : item.amount && 
+          
          <span>
          {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER
            ? item.earning_name.toUpperCase()
            : item.currency_name.toUpperCase()}
          {item.is_negotiable ? "(NEGOTIABLE)" : ""}
-       </span>}
+       </span>
           
         </div>
       ) : (
