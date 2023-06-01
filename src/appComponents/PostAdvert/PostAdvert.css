@@ -529,7 +529,17 @@
 }
 
 .post_Add_Delete button svg {
-    margin-right: 10px;
+    margin-right: 7px;
+    color: #000000;
+    font-size: 23px;
+    margin-bottom: 4px;
+}
+
+.post_Add_Delete .deletePost {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
 }
 
 .post_Add_CategoryButton .post_AddForm .negotiable .form-check .form-check-label {
@@ -689,16 +699,16 @@
     .selectOptionPost .css-a0izu-control {
         font-size: 18px;
     }
-    
+
     .selectOptionPost .css-13cymwt-control {
         font-size: 18px;
     }
-    
+
     .selectOptionPost .css-1xz3in2-control {
         font-size: 18px;
     }
 
-    .post_Add_priceDiv .dropdown_menu .dropdown-menu.show input{
+    .post_Add_priceDiv .dropdown_menu .dropdown-menu.show input {
         width: 250px !important;
     }
 
@@ -706,4 +716,10 @@
         width: 300px !important;
     }
 
+}
+
+@media only screen and (max-width: 400px) {
+    .post_Add_AddPhoto div {
+        min-width: 205px;
+    }
 }
