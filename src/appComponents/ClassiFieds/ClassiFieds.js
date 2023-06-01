@@ -14,13 +14,21 @@ import {
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Loader from "../../utils/Loader/Loader";
-import { CLASSIFIED_REFRENCE_TYPE, CLASSIFIED_CATEGORY_TYPE, BOOK_TYPE, PAGINATION_VALUE, SEARCH_TYPE, COUNT, COUNT_REFFRENCE } from "../../utils/Constants";
+import {
+  CLASSIFIED_REFRENCE_TYPE,
+  CLASSIFIED_CATEGORY_TYPE,
+  BOOK_TYPE,
+  PAGINATION_VALUE,
+  SEARCH_TYPE,
+  COUNT,
+  COUNT_REFFRENCE,
+} from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { Toast } from "../../utils/Toaster";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 import CustomBtn from "../../formComponent/Button/Button";
-import SublyApi from "../../helpers/Api"
+import SublyApi from "../../helpers/Api";
 
 function ClassiFieds() {
   const { t } = useTranslation();
@@ -33,7 +41,7 @@ function ClassiFieds() {
     wantedTotalCount,
     wantedWebList,
     classifiedFilterValues,
-    isLoading
+    isLoading,
   } = useSelector((state) => state.classified);
   const { userToken } = useSelector((state) => state.user);
   const bookmarkLoader = useSelector((state) => state.bookmark.isLoading);
@@ -57,17 +65,15 @@ function ClassiFieds() {
   // function for classified webList
   const setClassfiedTypeValue = (value) => {
     dispatch(setClassfiedType(value));
-    
+
     // we will do this point later after client discussion.
-    // handleCount(value);  
+    // handleCount(value);
   };
 
   // function for forSaleList Api
   function getForSaleList(loadmore, offsetValue) {
     let forSaleQuery = "";
-    if (
-      classifiedFilterValues && classifiedFilterValues.length > 0
-    ) {
+    if (classifiedFilterValues && classifiedFilterValues.length > 0) {
       forSaleQuery = {
         limit: PAGINATION_VALUE.DEFAULT_LIMIT,
         offset: offsetValue ? offsetValue : offsetForSale,
@@ -101,9 +107,9 @@ function ClassiFieds() {
             title: t("SESSION_EXPIRE"),
           });
           await dispatch(userLogout(userToken)).then(() => {
-          dispatch(guestUserLogin());
-          navigate("/login");
-        })
+            dispatch(guestUserLogin());
+            navigate("/login");
+          });
         } else {
           Toast.fire({
             icon: "error",
@@ -138,9 +144,9 @@ function ClassiFieds() {
             title: t("SESSION_EXPIRE"),
           });
           await dispatch(userLogout(userToken)).then(() => {
-          dispatch(guestUserLogin());
-          navigate("/login");
-        })
+            dispatch(guestUserLogin());
+            navigate("/login");
+          });
         } else {
           Toast.fire({
             icon: "error",
@@ -154,13 +160,14 @@ function ClassiFieds() {
   //---------function for view count for classifieds--------
   async function handleCount(value) {
     let classifiedListData = [];
-    if(CLASSIFIED_CATEGORY_TYPE.FORSALE==value){
+    if (CLASSIFIED_CATEGORY_TYPE.FORSALE == value) {
       classifiedListData = forSaleWebList;
-    }else{
-      classifiedListData = wantedWebList
+    } else {
+      classifiedListData = wantedWebList;
     }
-    classifiedListData && classifiedListData.length > 0 &&
-    classifiedListData.map((item, index) => {
+    classifiedListData &&
+      classifiedListData.length > 0 &&
+      classifiedListData.map((item, index) => {
         let requestData = new FormData();
         requestData.append("id", item.id);
         requestData.append("type", COUNT.VIEW);
@@ -175,12 +182,11 @@ function ClassiFieds() {
             dispatch(userLogout(userToken)).then(() => {
               dispatch(guestUserLogin());
               navigate("/login");
-            })
+            });
           }
-        })
-      })
+        });
+      });
   }
-
 
   //function for loadmore
   async function getWebClassifiedLists(loadmore, offsetValue) {
@@ -288,15 +294,26 @@ function ClassiFieds() {
                         ""
                       ) : (
                         <div className="loadmoreBtn">
-                          <CustomBtn type="button" onClick={() => loadmoreForsale()}>
+                          <CustomBtn
+                            type="button"
+                            onClick={() => loadmoreForsale()}
+                          >
                             {t("LOADMORE_BUTTON")}
-                          </CustomBtn></div>
+                          </CustomBtn>
+                        </div>
                       )}
                     </>
-                  ) : (
+                  ) : 
+                  forSaleTotalCount === 0 && wantedTotalCount === 0 ? (
                     <p className="nodataDisplay">
-                      --{t("NOCLASSIFIED_DISPLAY")}--
+                      -- {t("NOCLASSIFIED_DISPLAY")} --
                     </p>
+                  ) : forSaleTotalCount === 0 ? (
+                    <p className="nodataDisplay">
+                      -- {t("NOCLASSIFIEDSALES_DISPLAY")} --
+                    </p>
+                  ) : (
+                    ""
                   )
                 ) : wantedWebList.length ? (
                   <>
@@ -310,20 +327,34 @@ function ClassiFieds() {
                       ""
                     ) : (
                       <div className="loadmoreBtn">
-                        <CustomBtn type="button" onClick={() => loadmoreWanted()}>
+                        <CustomBtn
+                          type="button"
+                          onClick={() => loadmoreWanted()}
+                        >
                           {t("LOADMORE_BUTTON")}
-                        </CustomBtn></div>
+                        </CustomBtn>
+                      </div>
                     )}
                   </>
-                ) : (
+                ) : forSaleTotalCount === 0 && wantedTotalCount === 0 ? (
                   <p className="nodataDisplay">
-                    --{t("NOCLASSIFIED_DISPLAY")}--
+                    -- {t("NOCLASSIFIED_DISPLAY")} --
                   </p>
+                ) : wantedTotalCount === 0 ? (
+                  <p className="nodataDisplay">
+                    -- {t("NOCLASSIFIEDWANTED_DISPLAY")} --
+                  </p>
+                ) : (
+                  ""
                 )}
               </Col>
               <Col xs={12} sm={12} md={12} lg={6}>
                 <div className="advertisment">
-                  <iframe src="https://www.signafrica.com?_dnid=84043&t=1682677168" height="930" scrolling="no"></iframe>
+                  <iframe
+                    src="https://www.signafrica.com?_dnid=84043&t=1682677168"
+                    height="930"
+                    scrolling="no"
+                  ></iframe>
                 </div>
               </Col>
             </Row>

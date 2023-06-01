@@ -1,25 +1,26 @@
-import "../Login/Login.css";
-import Facebook from "../../assets/images/facebook_logo.png";
-import { Toast } from "../../utils/Toaster";
-import { STATUS_CODES } from "../../utils/StatusCode";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { isSocialLogin, socialSignup } from "../../store/slices/UserSlice";
+import React from "react";
+import { useLinkedIn } from "react-linkedin-login-oauth2";
+import Linkedin from "../../assets/images/linkdin_logo.png";
+import { LinkedIn } from "react-linkedin-login-oauth2";
 import { SOCIAL_TYPE } from "../../utils/Constants";
-// import FacebookLogin from "react-facebook-login";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { STATUS_CODES } from "../../utils/StatusCode";
+import { isSocialLogin, socialSignup } from "../../store/slices/UserSlice";
+import { Toast } from "../../utils/Toaster";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-function FacebookSocialLogin(props) {
+function LinkedInLogin(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Social Login with facebook.
-  const responseFacebook = async (response) => {
+  const onSuccess = async (response) => {
+    console.log(onSuccess);
     let userData = response;
     if (userData) {
       let requestData = new FormData();
       requestData.append("name", userData.name);
-      requestData.append("social_type", SOCIAL_TYPE.FACEBOOK);
+      requestData.append("social_id", response.authorization.id_token);
+      requestData.append("social_type", SOCIAL_TYPE.LINKEDIN);
       requestData.append("social_key", userData.id);
       requestData.append("email", userData.email);
       requestData.append("profile_url", "");
@@ -53,20 +54,28 @@ function FacebookSocialLogin(props) {
   };
 
   return (
-    <>
-      <FacebookLogin
-        appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-        autoLoad={false}
-        fields="name,email,picture"
-        callback={responseFacebook}
-        cssClass="my-facebook-button-class"
-        render={renderProps => (
-          <button onClick={renderProps.onClick}><img src={Facebook} alt="facebook-logo" /><h3>{props.facebookText}</h3></button>
-        )}
-      />
-    </>
-
+    <LinkedIn
+      clientId="86vhj2q7ukf83q"
+      redirectUri={`${window.location.origin}/linkedin`}
+      onSuccess={onSuccess}
+      onError={(error) => {
+        console.log(error);
+      }}
+    >
+      {({ linkedInLogin }) => (
+        <>
+          <img
+            onClick={linkedInLogin}
+            src={Linkedin}
+            alt="Sign in with Linked In"
+          />
+          {props.linkedinText && (
+            <h3 onClick={linkedInLogin}>{props.linkedinText}</h3>
+          )}
+        </>
+      )}
+    </LinkedIn>
   );
 }
 
-export default FacebookSocialLogin;
+export default LinkedInLogin;

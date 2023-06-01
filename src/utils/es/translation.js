@@ -58,6 +58,9 @@ export const TRANSLATIONS_ES = {
   OUTOF_SOUTH: "Fuera de Sudáfrica",
   EDIT_ADVERT: "EDITAR / ELIMINAR ANUNCIO",
   NOT_LIVE: "NO ACTIVO - Aprobaciones pendientes",
+  NOCLASSIFIEDSALES_DISPLAY: "SIN VENTAS PARA MOSTRAR",
+  NOCLASSIFIEDWANTED_DISPLAY: "NO QUERÍA MOSTRAR",
+  NOCLASSIFIEDJOB_DISPLAY: "NO HAY TRABAJOS PARA MOSTRAR",
 
   //----Footer Text------
   FOOTER_TEXT: `Sign Africa proporciona las últimas noticias, conocimientos y tendencias en gran formato, impresión de prendas y textiles, creación de marcas y todas las comunicaciones visuales en el sur de África..`,
