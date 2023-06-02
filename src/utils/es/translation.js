@@ -117,6 +117,8 @@ export const TRANSLATIONS_ES = {
   DELETE: "BORRAR",
   SOUTH_AFRICA_SET: "Sudáfrica",
   OUTOF_SOUTH: "Fuera de Sudáfrica",
+  Error_text: "Perfil actualizado con éxito. Inicie sesión con una nueva contraseña.",
+
 
   //----Deals Text------
   CONTACT_PERSON: "PERSONA DE CONTACTO",
