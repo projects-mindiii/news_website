@@ -18,7 +18,9 @@ import { userLogin, getMetaListApi } from "../../../store/slices/UserSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleLogin from "../../CommonSocial/GoogleLogin";
 import FacebookSocialLogin from "../../CommonSocial/FacebookSocialLogin";
+import AppleSocialLogin from "../../CommonSocial/AppleSocialLogin";
 import Loader from "../../../utils/Loader/Loader";
+import LinkedInLogin from "../../CommonSocial/LinkedInLogin";
 
 //--------Create a Login with email component----------
 function LoginForm() {
@@ -75,6 +77,7 @@ function LoginForm() {
                         <ErrorResponse message={showError} setShowError={setShowError} /> : ""}
                     <div className="topHeading">
                         <h1>{t("EMAIL_LOGIN")}</h1>
+                     
                     </div>
                     <Form onSubmit={handleSubmit(onSubmit)}>
 
@@ -106,8 +109,10 @@ function LoginForm() {
                         <div className="socialLogo loginformcomponent">
                             <GoogleLogin />
                             <FacebookSocialLogin facebookText=""/>
-                            <img src={Apple} alt="apple-logo" />
-                            <img src={Linkedin} alt="linkedin-logo" />
+                            <AppleSocialLogin/>
+                            <LinkedInLogin/>
+                            {/* <img src={Apple} alt="apple-logo" />
+                            <img src={Linkedin} alt="linkedin-logo" /> */}
                         </div>
                     </Form>
                 </div>
