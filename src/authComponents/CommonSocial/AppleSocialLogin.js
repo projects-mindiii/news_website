@@ -15,11 +15,12 @@ function AppleSocialLogin(props) {
   // function for apple login
   const responseApple = async (response) => {
     console.log(response);
-    if (!response.error) {
+    if (!response) {
       console.log(response);
       let requestData = new FormData();
-      requestData.append("social_id", response.authorization.id_token);
+      requestData.append("social_id", response?.authorization.id_token);
       requestData.append("social_type", SOCIAL_TYPE.APPLE);
+      requestData.append("social_key", requestData.id);
       requestData.append(
         "email",
         response && response.user && response.user.email
@@ -59,7 +60,7 @@ function AppleSocialLogin(props) {
 
   return (
     <>
-      <img src={Apple} alt="apple-logo" />
+      <img src={Apple} alt="apple-logo" onClick={() => responseApple()}/>
       <AppleSignin
         authOptions={{
           clientId: "qvaring.reactJs.com",
@@ -71,10 +72,12 @@ function AppleSocialLogin(props) {
         }}
         className="apple-auth-btn"
         onSuccess={() => responseApple}
-        onError={(error) => console.error(error)}
+        // onError={(error) => console.error(error)}
         render={(renderProps) => (
           <div onClick={renderProps.onClick} disabled={renderProps.disabled}>
-            {props.appleText && <h3>{props.appleText}</h3>}
+              {props.appleText && <h3>{props.appleText}</h3>}
+            {/* {props.appleText && <h3 onClick={() => responseApple()}>{props.appleText} </h3>} */}
+            
           </div>
         )}
       />

@@ -39,7 +39,7 @@ function FacebookSocialLogin(props) {
                 icon: "success",
                 title: responsejson.data.message,
               });
-              navigate("/deals/latest-deals");
+              // navigate("/deals/latest-deals");
             }
           });
         } else {
