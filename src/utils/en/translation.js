@@ -113,6 +113,7 @@ export const TRANSLATIONS_EN = {
   DELETE: "DELETE",
   SOUTH_AFRICA_SET: "South Africa",
   OUTOF_SOUTH: "Outside South Africa",
+  Error_text: "Profile updated successfully.Please login with new password.",
 
   //----Deals Text------
   CONTACT_PERSON: "CONTACT PERSON",

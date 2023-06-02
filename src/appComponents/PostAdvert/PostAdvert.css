@@ -85,7 +85,7 @@
 }
 
 .negotiable .negotiables [type="checkbox"]:checked,
-[type="checkbox"]:not(:checked) {
+.negotiable .negotiables [type="checkbox"]:not(:checked) {
     left: 0px !important;
 }
 
@@ -678,6 +678,12 @@
 
 .post_AddForm #cities .css-13cymwt-control {
     color: black !important;
+}
+
+.selectOption .css-1onb4m5-Placeholder {
+    color: #231F20;
+    position: absolute;
+    left: 10px !important;
 }
 
 .post_AddForm #cities .css-t3ipsp-control {

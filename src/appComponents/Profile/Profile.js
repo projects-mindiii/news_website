@@ -276,7 +276,7 @@ function Profile() {
         if (response.status_code === STATUS_CODES.SUCCESS) {
           Toast.fire({
             icon: "success",
-            title: response.message,
+            title: t("Error_text"),
           });
           dispatch(userLogout(userToken)).then(() => {
             dispatch(guestUserLogin());
@@ -543,7 +543,7 @@ function Profile() {
                     <p>{t("ADD_PHOTO")}</p>
                     <div className="profileImg ">
                       <div className="profileIcon">
-                        <label for="uploadImage">
+                        <label htmlFor="uploadImage">
                           <MdAddCircleOutline />
                         </label>
                         <h6 className="addCls">{t("ADD")}</h6>
