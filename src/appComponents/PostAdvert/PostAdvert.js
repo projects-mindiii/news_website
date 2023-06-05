@@ -51,7 +51,7 @@ function PostAdvert({ classes }) {
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
     const [croppedImage, setCroppedImage] = useState(null)
-    const { yourAdvertWebList } = useSelector( (state) => state.classified );
+    const { yourAdvertWebList } = useSelector((state) => state.classified);
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
@@ -116,7 +116,7 @@ function PostAdvert({ classes }) {
         setCroppedImage(null)
     }, [])
 
-    const onFileChange = async (e) => {  
+    const onFileChange = async (e) => {
 
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
@@ -223,17 +223,17 @@ function PostAdvert({ classes }) {
     //----- for show modal-----
     const handleShow = () => setShowPopup(true);
 
-    useEffect(()=>{
+    useEffect(() => {
         function GetFilterData() {
             if (location.state !== null) {
-            const advertData = yourAdvertWebList.filter((item, index)=>(
-                item.id === location.state.id
-            ))
-            setFilterValue(advertData[0])
+                const advertData = yourAdvertWebList.filter((item, index) => (
+                    item.id === location.state.id
+                ))
+                setFilterValue(advertData[0])
+            }
         }
-    }
         GetFilterData()
-    },[])
+    }, [])
 
     function handleResponse(responsejson) {
         if (responsejson.status_code) {
@@ -252,7 +252,7 @@ function PostAdvert({ classes }) {
                     dispatch(userLogout(userToken)).then(() => {
                         dispatch(guestUserLogin());
                         navigate("/login");
-                      })
+                    })
                 } else {
                     Toast.fire({
                         icon: "error",
@@ -269,7 +269,7 @@ function PostAdvert({ classes }) {
                 dispatch(userLogout(userToken)).then(() => {
                     dispatch(guestUserLogin());
                     navigate("/login");
-                  })
+                })
             } else {
                 Toast.fire({
                     icon: "error",
@@ -280,27 +280,18 @@ function PostAdvert({ classes }) {
     }
 
     function setNewDefaultCountry(e) {
-        reset({province: "", country: ""})
-        // setValue("province", { label: 'Selected Province', value: '', id: '' })
-        // setValue("country", { label: 'Selected Country', value: '', id: '' })
+        setValue("province", null)
+        setValue("country", null)
         setValue("isDefaultCountry", { label: e.label, value: e.value, id: e.id })
         setDefaultCountry({ label: e.label, value: e.value, id: e.id })
     }
 
-    // function setNewJob(e) {
-    //     setValue("jobType", { label: e.label, value: e.value, id: e.id })
-    //     setJobTypeValue({ label: e.label, value: e.value, id: e.id })
-    // }
-    // function setNewEarning(e) {
-    //     setValue("earningoption", { label: e.label, value: e.value, id: e.id })
-    //     setEaringOptionValue({ label: e.label, value: e.value, id: e.id })
-    // }
-    
+
     function setNewCountry(e) {
         setValue("country", { label: e.label, value: e.value, id: e.id })
     }
     function setNewProvinces(e) {
-        if(e.id) {
+        if (e.id) {
             setValue("province", { label: e.label, value: e.value, id: e.id })
         }
     }
@@ -444,7 +435,7 @@ function PostAdvert({ classes }) {
                         });
                     }
                     else {
-                        const advertValue = yourAdvertWebList.filter((item, index)=>(
+                        const advertValue = yourAdvertWebList.filter((item, index) => (
                             item.id === location.state.id
                         ))
                         setValue("categorytype", advertValue[0].category_type_id && advertValue[0].category_type_id.toString())
@@ -667,9 +658,9 @@ function PostAdvert({ classes }) {
     }
 
     const imgCropper = (e) => {
-        if((e) && e.target.files && e.target.files.length==0){
-         return false;
-        }else{
+        if ((e) && e.target.files && e.target.files.length == 0) {
+            return false;
+        } else {
             showHead ? setShowHead(false) : setShowHead(true);
         }
     };
@@ -720,12 +711,12 @@ function PostAdvert({ classes }) {
 
     }
 
-    function keyHandle (e) {
+    function keyHandle(e) {
         const key = e.keyCode;
         const keyValue = e.target.value.match(/\./g)
-        if (key >= 96  && key <= 105 || key == 8 ||  key == 13 ||  key == 46 || key >=37 && key <=40) {
+        if (key >= 96 && key <= 105 || key == 8 || key == 13 || key == 46 || key >= 37 && key <= 40) {
             return true;
-        } else if(key == 110 && !keyValue) {
+        } else if (key == 110 && !keyValue) {
             return true;
         } else {
             e.preventDefault();
@@ -736,32 +727,32 @@ function PostAdvert({ classes }) {
     // -----Here added costum search bar in dropdwon-----
     const DropdownSearch = React.forwardRef(
         ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-          const [value, setValue] = useState('');
-      
-          return (
-            <div
-              ref={ref}
-              style={style}
-              className={className}
-              aria-labelledby={labeledBy}
-            >
-              <Form.Control
-                autoFocus
-                className="mx-3 my-2 w-auto"
-                placeholder="Search..."
-                onChange={(e) => setValue(e.target.value)}
-                value={value}
-              />
-              <ul className="list-unstyled">
-                {React.Children.toArray(children).filter(
-                  (child) =>
-                    !value || child.props.children.toLowerCase().startsWith(value),
-                )}
-              </ul>
-            </div>
-          );
+            const [value, setValue] = useState('');
+
+            return (
+                <div
+                    ref={ref}
+                    style={style}
+                    className={className}
+                    aria-labelledby={labeledBy}
+                >
+                    <Form.Control
+                        autoFocus
+                        className="mx-3 my-2 w-auto"
+                        placeholder="Search..."
+                        onChange={(e) => setValue(e.target.value)}
+                        value={value}
+                    />
+                    <ul className="list-unstyled">
+                        {React.Children.toArray(children).filter(
+                            (child) =>
+                                !value || child.props.children.toLowerCase().startsWith(value),
+                        )}
+                    </ul>
+                </div>
+            );
         },
-      );
+    );
 
     return (
         <div className="main">
@@ -980,21 +971,21 @@ function PostAdvert({ classes }) {
                                         {(CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                                             <div className="post_Add_priceDiv">
                                                 <InputGroup className="mb-3 dropdown_menu">
-                                                <Dropdown>
-                                                    {/* <DropdownButton
+                                                    <Dropdown>
+                                                        {/* <DropdownButton
                                                         variant="outline-secondary"
                                                         title={currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
                                                         id="input-group-dropdown-1"
                                                     ></DropdownButton> */}
-                                                    <Dropdown.Toggle id="dropdown-custom-components">
-                                                    {currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu as={DropdownSearch}>{currenciesOptions && currenciesOptions.map((item, index) => (
-                                                        <Dropdown.Item active={currencyValue ? currencyValue.name == item.name : index == 0} onClick={() => {
-                                                            setCurrencyValue(item);
-                                                        }}>{item.name}</Dropdown.Item>))}
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
+                                                        <Dropdown.Toggle id="dropdown-custom-components">
+                                                            {currencyValue && currencyValue.symbol !== "" ? currencyValue.symbol : currenciesOptions && currenciesOptions.length > 0 && currenciesOptions[0].symbol}
+                                                        </Dropdown.Toggle>
+                                                        <Dropdown.Menu as={DropdownSearch}>{currenciesOptions && currenciesOptions.map((item, index) => (
+                                                            <Dropdown.Item active={currencyValue ? currencyValue.name == item.name : index == 0} onClick={() => {
+                                                                setCurrencyValue(item);
+                                                            }}>{item.name}</Dropdown.Item>))}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
                                                     <Form.Group className="amount">
                                                         <Form.Control
                                                             {...register("amountvalue", CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE ? {
@@ -1006,13 +997,15 @@ function PostAdvert({ classes }) {
                                                                     value: 1,
                                                                     message: t("MIN_AMOUNT_VALUE")
                                                                 }
-                                                            }: {required: {
-                                                                value: false,
-                                                            }})}
+                                                            } : {
+                                                                required: {
+                                                                    value: false,
+                                                                }
+                                                            })}
                                                             className="amount_Control"
                                                             type="text"
                                                             placeholder={t("AMOUNT_OPTIONAL")}
-                                                            onKeyDown={(e)=>keyHandle(e)}
+                                                            onKeyDown={(e) => keyHandle(e)}
                                                         />
                                                     </Form.Group>
                                                 </InputGroup>
@@ -1280,16 +1273,17 @@ function PostAdvert({ classes }) {
                                             style={{
                                                 display: "none",
                                             }}
-                                            onInputCapture={(e)=>{
-                                                if(profileImage.length < 5) {
+                                            onInputCapture={(e) => {
+                                                if (profileImage.length < 5) {
                                                     imgCropper(e)
-                                                }}}
+                                                }
+                                            }}
                                             onChange={(e) => {
                                                 profileImage.length < 5 ?
-                                                onFileChange(e):  Toast.fire({
-                                                    icon: "error",
-                                                    title: t("TMG_UPLOAD_ERROR"),
-                                                  });
+                                                    onFileChange(e) : Toast.fire({
+                                                        icon: "error",
+                                                        title: t("TMG_UPLOAD_ERROR"),
+                                                    });
                                                 // uploadImage(e);
                                             }}
                                         />

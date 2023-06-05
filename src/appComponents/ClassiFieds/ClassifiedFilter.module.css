@@ -7,6 +7,8 @@
   z-index: 9999;
   background: #ffffff;
   box-shadow: 4px 4px 10px rgb(123 123 123 / 25%);
+  width: 100%;
+  max-width: fit-content;
 }
 
 .CrossIcon {

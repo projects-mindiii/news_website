@@ -26,34 +26,31 @@ function DealList({ dealList, fromDeal }) {
     const { userToken, currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
-        if (Object.keys(currentUser).length !== 0){
-            async function handleCount() {
-                    dealList && dealList.length > 0 &&
-                    dealList.map((item, index) => {
-                        let requestData = new FormData();
-                        requestData.append("id", item.id);
-                        requestData.append("type", COUNT.VIEW);
-                        requestData.append("refrence_type", COUNT_REFFRENCE.DEAL);
-                        requestData.append("share_in", 0);
-                        SublyApi.updateCount(requestData, userToken).then((responsejson) => {
-                            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-    
-                            } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
-                                Toast.fire({
-                                    icon: "error",
-                                    title: t("SESSION_EXPIRE"),
-                                });
-                                dispatch(userLogout(userToken)).then(() => {
-                                    dispatch(guestUserLogin());
-                                    navigate("/login");
-                                  })
-                            }
-                        })
+        async function handleCount() {
+            dealList && dealList.length > 0 &&
+                dealList.map((item, index) => {
+                    let requestData = new FormData();
+                    requestData.append("id", item.id);
+                    requestData.append("type", COUNT.VIEW);
+                    requestData.append("refrence_type", COUNT_REFFRENCE.DEAL);
+                    requestData.append("share_in", 0);
+                    SublyApi.updateCount(requestData, userToken).then((responsejson) => {
+                        if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+
+                        } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+                            Toast.fire({
+                                icon: "error",
+                                title: t("SESSION_EXPIRE"),
+                            });
+                            dispatch(userLogout(userToken)).then(() => {
+                                dispatch(guestUserLogin());
+                                navigate("/login");
+                            })
+                        }
                     })
-                }
+                })
         }
         handleCount();
-        // }
     }, [dealList]);
 
 
@@ -75,7 +72,7 @@ function DealList({ dealList, fromDeal }) {
                 dispatch(userLogout(userToken)).then(() => {
                     dispatch(guestUserLogin());
                     navigate("/login");
-                  })
+                })
             }
         })
     }
@@ -178,7 +175,7 @@ function DealList({ dealList, fromDeal }) {
                             }
                             }
                         >{t("COMPANY_PROFILE")}</button>) : ""} */}
-                         {fromDeal == true ? (<button className="viewProfile" onClick={() => {  navigate(`/deals/companies/company-profile/${item.company_id}`); handleCount(item.company_id) }}>{t("COMPANY_PROFILE")}</button>) : ""}
+                        {fromDeal == true ? (<button className="viewProfile" onClick={() => { navigate(`/deals/companies/company-profile/${item.company_id}`); handleCount(item.company_id) }}>{t("COMPANY_PROFILE")}</button>) : ""}
 
                     </div>
                 ))
