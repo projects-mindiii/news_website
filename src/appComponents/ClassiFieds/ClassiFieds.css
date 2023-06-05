@@ -53,9 +53,7 @@
   position: relative;
 }
 
-.classiFieds_forSale_about
-  .classiFieds_time_action
-  .classiFieds_forSale_button {
+.classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
   border-radius: 14px;
   line-height: 20px;
   border: none !important;
@@ -249,7 +247,7 @@
   margin-left: 20px;
 }
 
-.classiFields_shareicons span > span {
+.classiFields_shareicons span>span {
   margin-right: 5px;
 }
 
@@ -318,7 +316,7 @@
   background: #ec4624;
 }
 
-.classiFieds_country_select > div {
+.classiFieds_country_select>div {
   border: 1px solid #ec4624;
   color: white;
 }
@@ -435,9 +433,7 @@
     height: 110.62px;
   }
 
-  .classiFieds_forSale_about
-    .classiFieds_time_action
-    .classiFieds_forSale_button {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 89.63px;
   }
 }
@@ -448,9 +444,7 @@
     height: 95.62px;
   }
 
-  .classiFieds_forSale_about
-    .classiFieds_time_action
-    .classiFieds_forSale_button {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 74.63px;
     font-size: 10.4378px;
     height: 25.89px;
@@ -487,9 +481,7 @@
     margin-right: 10px;
   }
 
-  .classiFieds_forSale_about
-    .classiFieds_time_action
-    .classiFieds_forSale_button {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 74.63px;
     font-size: 10.4378px;
     height: 25.89px;
@@ -531,9 +523,7 @@
     line-height: 17px;
   }
 
-  .classiFieds_forSale_about
-    .classiFieds_time_action
-    .classiFieds_forSale_button {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 62.63px;
     font-size: 8.4378px;
     height: 21.89px;
@@ -565,3 +555,36 @@
 /* .advertisment iframe {
   overflow: hidden;
 }  */
+
+.inputBox .css-tj5bde-Svg {
+  fill: #000000 !important;
+}
+
+.inputBox .css-8mmkcg {
+  fill: #000000 !important;
+}
+
+.inputBox .form-control:focus {
+  border-color: #ced4da !important;
+  outline: 0;
+  border-radius: 4px !important;
+  box-shadow: unset !important;
+}
+
+.inputBox .form-control {
+  border-radius: 4px !important;
+}
+
+.inputBox .css-13cymwt-control {
+  border-color: #ced4da !important;
+  box-shadow: unset !important;
+}
+
+.inputBox .css-13cymwt-control:hover {
+  border-color: #ced4da !important;
+}
+
+.inputBox .css-1xz3in2-control {
+  border-color: #ced4da !important;
+  box-shadow: unset !important;
+}

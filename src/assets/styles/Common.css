@@ -61,3 +61,10 @@
         margin-top: 28px;
     }
 }
+
+@media screen and (min-width: 320px) and (max-width: 400px) {
+    .inputBox .css-b62m3t-container {
+        width: 100%;
+        min-width: unset !important
+    }
+}

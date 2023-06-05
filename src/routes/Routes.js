@@ -36,9 +36,9 @@ function Routers() {
                 <Route exact path="/login" element={Object.keys(currentUser).length == 0 ? <Login /> : <Navigate to="/deals/latest-deals" />} />
                 <Route exact path="/login-form" element={Object.keys(currentUser).length == 0 ? <LoginForm /> : <Navigate to="/deals/latest-deals" />} />
                 <Route exact path="/sign-up" element={Object.keys(currentUser).length == 0 ? <SignupForm /> : <Navigate to="/deals/latest-deals" />} />
-                <Route exact path="/forgot-password" element={<ForgotPassword />} />
-                <Route exact path="/password-sent" element={<PasswordSent />} />
-                <Route exact path="/email-varify" element={<EmailVarify />} />
+                <Route exact path="/forgot-password" element={Object.keys(currentUser).length == 0 ? <ForgotPassword /> : <Navigate to="/deals/latest-deals" />} />
+                <Route exact path="/password-sent" element={Object.keys(currentUser).length == 0 ? <PasswordSent /> : <Navigate to="/deals/latest-deals" />} />
+                <Route exact path="/email-varify" element={Object.keys(currentUser).length == 0 ? <EmailVarify /> : <Navigate to="/deals/latest-deals" />} />
                 <Route exact path="/deals/latest-deals" element={<LatestDeals />} />
                 <Route exact path="/view-profile" element={Object.keys(currentUser).length !== 0 ? (<Profile />) : (<Navigate to="/login" />)} />
                 <Route exact path="/deals/companies/company-profile/:id" element={<ViewCompanyProfile />} />
@@ -50,9 +50,9 @@ function Routers() {
                 <Route exact path="/job-types" element={<JobTypes />} />
                 <Route exact path="/post-advert" element={Object.keys(currentUser).length !== 0 ? (<PostAdvert />) : (<LoginAlertModel modalValue={true} />)} />
                 <Route exact path="/your-add" element={Object.keys(currentUser).length !== 0 ? (<YourAdd />) : (<LoginAlertModel modalValue={true} />)} />
-                <Route path="/book-marks" element={<Bookmarks />} />
-                <Route path="/search-list" element={<SearchList />} />
-                <Route path="*" element={<PageNotFound />} />
+                <Route exact path="/book-marks" element={Object.keys(currentUser).length !== 0 ? (<Bookmarks />) : (<Navigate to="/login" />)} />
+                <Route exact path="/search-list" element={<SearchList />} />
+                <Route exact path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />
         </Router>
