@@ -113,8 +113,6 @@
 
 }
 
-
-
 /* back arrow button css  */
 .backarrowButton svg {
     background: #232323;
@@ -132,4 +130,10 @@
         padding-right: 11px !important;
         padding-left: 11px !important;
     }
+}
+
+.headerLinks .active .nav-link {
+    background: #FFFFFF !important;
+    color: #000000;
+    opacity: unset !important;
 }
