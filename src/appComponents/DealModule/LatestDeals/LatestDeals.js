@@ -20,7 +20,7 @@ function LatestDeals() {
   const { latestDeals, isLoading } = useSelector((state) => state.deal);
   const [eventKeyValue, setEventKeyValue] = useState((latestDeals && latestDeals.length > 0) ? latestDeals[0].id : null);
   const { userToken, currentUser } = useSelector((state) => state.user);
- 
+
 
 
   return (
@@ -29,7 +29,7 @@ function LatestDeals() {
         <Loader />
       ) : ""}
       {latestDeals ?
-        <Container>
+        <Container className="screenOverride">
           {latestDeals.length > 0 ?
             <Tab.Container id="left-tabs-example" defaultActiveKey={eventKeyValue}>
               <Row>

@@ -20,7 +20,7 @@ import { Toast } from "../../utils/Toaster";
 // -----function for your advert module----------
 function YourAdd() {
   const dispatch = useDispatch();
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
   const { t } = useTranslation();
   const { userToken } = useSelector((state) => state.user);
   const { yourAdvertWebList, yourAdvertTotalCount, isLoading } = useSelector(
@@ -35,17 +35,17 @@ function YourAdd() {
     async function getWebClassifiedLists() {
       const yourAdvertQuery = { limit: 10, offset: 0, type: 1 };
       const data = { userToken: userToken, whereQuery: yourAdvertQuery };
-      dispatch(yourAdvertListApi(data)).then(async(responsejson) => {
+      dispatch(yourAdvertListApi(data)).then(async (responsejson) => {
         const response = responsejson.payload;
-        if(response.status){
+        if (response.status) {
           if (response.status === STATUS_CODES.INVALID_TOKEN) {
             Toast.fire({
               icon: "error",
               title: t("SESSION_EXPIRE"),
             });
             await dispatch(userLogout(userToken)).then(() => {
-                  dispatch(guestUserLogin());
-                  navigate("/login");
+              dispatch(guestUserLogin());
+              navigate("/login");
             })
           }
         }
@@ -58,7 +58,7 @@ function YourAdd() {
     <div className="main">
       {isLoading === true || bookmarkLoader ? <Loader /> : ""}
       <React.Fragment>
-        <Container>
+        <Container className="screenOverride">
           <Row>
             <Col xs={12} sm={12} md={12} lg={6}>
               <NoteBoxModule

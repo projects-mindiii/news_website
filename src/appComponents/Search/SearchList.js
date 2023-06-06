@@ -60,43 +60,43 @@ function SearchList() {
     <>
       {isLoading ? <Loader /> : ""}
       <section className="main">
-        <Container>
+        <Container className="screenOverride">
           <div className="searchModuleBox">
             <Row>
               <Col xs={12} sm={12} md={12} lg={6}>
                 {searchList
                   ? searchList.map((item, index) => {
-                      if (item.refrence_type == SERACH_REFRENCE_TYPE.DEAL) {
-                        return (
-                          <div className="searchedComponent">
-                            <DealList fromDeal={true} dealList={item.detail} />
-                          </div>
-                        );
-                      } else if (
-                        item.refrence_type == SERACH_REFRENCE_TYPE.COMPANY
-                      ) {
-                        return (
-                          <div className="searchedComponent">
-                            <CompanyDataModule
-                              companyListValue={item.detail[0]}
-                            />
-                          </div>
-                        );
-                      } else if (
-                        item.refrence_type == SERACH_REFRENCE_TYPE.CLASSIFIED
-                      ) {
-                        return (
-                          <div className="searchedComponent">
-                            <ClassifiedCategoryList
-                              // displayRoute="your_advert"
-                              forSaleListData={item.detail}
-                              classifiedDataType={4}
-                              bookType={BOOK_TYPE.CLASSIFIED}
-                            />
-                          </div>
-                        );
-                      }
-                    })
+                    if (item.refrence_type == SERACH_REFRENCE_TYPE.DEAL) {
+                      return (
+                        <div className="searchedComponent">
+                          <DealList fromDeal={true} dealList={item.detail} />
+                        </div>
+                      );
+                    } else if (
+                      item.refrence_type == SERACH_REFRENCE_TYPE.COMPANY
+                    ) {
+                      return (
+                        <div className="searchedComponent">
+                          <CompanyDataModule
+                            companyListValue={item.detail[0]}
+                          />
+                        </div>
+                      );
+                    } else if (
+                      item.refrence_type == SERACH_REFRENCE_TYPE.CLASSIFIED
+                    ) {
+                      return (
+                        <div className="searchedComponent">
+                          <ClassifiedCategoryList
+                            // displayRoute="your_advert"
+                            forSaleListData={item.detail}
+                            classifiedDataType={4}
+                            bookType={BOOK_TYPE.CLASSIFIED}
+                          />
+                        </div>
+                      );
+                    }
+                  })
                   : ""}
                 {searchList.length >= searchTotalCount ? (
                   ""

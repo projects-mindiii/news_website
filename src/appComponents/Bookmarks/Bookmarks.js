@@ -114,7 +114,7 @@ function Bookmarks() {
     <>
       {isLoading ? <Loader /> : ""}
       <section className="main">
-        <Container>
+        <Container className="screenOverride">
           <div>
             <Row>
               <Col xs={12} sm={12} md={12} lg={6}>

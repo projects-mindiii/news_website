@@ -51,7 +51,7 @@ function ViewCompanyProfile() {
             <Loader />
           </div>
         ) : null}
-        <Container>
+        <Container className="screenOverride">
           <Row>
             <Col lg={6} sm={12}>
               <CompanyProfile companyDetailData={companyDetails} />
@@ -68,7 +68,7 @@ function ViewCompanyProfile() {
                   </>
                   : ""}
 
-                <DealList fromDeal={false} dealList={companyDetails.deal_list}/>
+                <DealList fromDeal={false} dealList={companyDetails.deal_list} />
               </> : <h4 className="displayNoText">{t("NO_DEAL")}</h4>}
             </Col>
           </Row>

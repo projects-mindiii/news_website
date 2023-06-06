@@ -22,7 +22,7 @@ function CompanyList({ companyList, refrenceType }) {
             {companyList ?
                 <div className={styles.productModule}>
                     {companyList.length > 0 ?
-                        <Container>
+                        <Container className="screenOverride">
                             <Tab.Container id="left-tabs-example" defaultActiveKey={eventKeyValue}>
                                 <Row>
                                     <Col lg={6} sm={12}>
