@@ -349,7 +349,7 @@ function Profile() {
     <>
       {isLoading === true ? <Loader /> : ""}
       <div className="main">
-        <Container>
+        <Container className="screenOverride">
           <div className="profile">
             <Row>
               <Col xs={12} sm={12} md={12} lg={6}>

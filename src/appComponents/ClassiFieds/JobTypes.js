@@ -100,9 +100,9 @@ function JobTypes() {
             title: t("SESSION_EXPIRE"),
           });
           await dispatch(userLogout(userToken)).then(() => {
-          dispatch(guestUserLogin());
-          navigate("/login");
-        })
+            dispatch(guestUserLogin());
+            navigate("/login");
+          })
         } else {
           Toast.fire({
             icon: "error",
@@ -137,9 +137,9 @@ function JobTypes() {
             title: t("SESSION_EXPIRE"),
           });
           await dispatch(userLogout(userToken)).then(() => {
-          dispatch(guestUserLogin());
-          navigate("/login");
-        })
+            dispatch(guestUserLogin());
+            navigate("/login");
+          })
         } else {
           Toast.fire({
             icon: "error",
@@ -175,7 +175,7 @@ function JobTypes() {
     <div className="main">
       {isLoading === true || bookmarkLoader ? <Loader /> : ""}
       <React.Fragment>
-        <Container>
+        <Container className="screenOverride">
           <Row>
             <Col xs={12} sm={12} md={12} lg={6}>
               <div className="categoryButton">
@@ -267,7 +267,7 @@ function JobTypes() {
                 ) : (
                   <p className="nodataDisplay">
                     {/* -- {t("NOCLASSIFIED_DISPLAY")} --{" "} */}
-                    ---  {t("NOCLASSIFIEDJOB_DISPLAY")} --- 
+                    ---  {t("NOCLASSIFIEDJOB_DISPLAY")} ---
                   </p>
                 )
               ) : jobSeekerWebList.length ? (
@@ -291,9 +291,9 @@ function JobTypes() {
               ) : (
                 <p className="nodataDisplay">
                   {/* -- {t("NOCLASSIFIED_DISPLAY")} --{" "} */}
-                  --- {t("NOCLASSIFIEDJOB_DISPLAY")}  --- 
+                  --- {t("NOCLASSIFIEDJOB_DISPLAY")}  ---
                 </p>
-                
+
               )}
             </Col>
             <Col xs={12} sm={12} md={12} lg={5}>

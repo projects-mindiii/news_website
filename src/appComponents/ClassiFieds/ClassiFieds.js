@@ -214,7 +214,7 @@ function ClassiFieds() {
       <div className="classifiedData">
         {isLoading === true || bookmarkLoader ? <Loader /> : ""}
         <React.Fragment>
-          <Container>
+          <Container className="screenOverride">
             <Row>
               <Col xs={12} sm={12} md={12} lg={6}>
                 <div className="categoryButton">
@@ -303,18 +303,18 @@ function ClassiFieds() {
                         </div>
                       )}
                     </>
-                  ) : 
-                  forSaleTotalCount === 0 && wantedTotalCount === 0 ? (
-                    <p className="nodataDisplay">
-                      -- {t("NOCLASSIFIED_DISPLAY")} --
-                    </p>
-                  ) : forSaleTotalCount === 0 ? (
-                    <p className="nodataDisplay">
-                      -- {t("NOCLASSIFIEDSALES_DISPLAY")} --
-                    </p>
-                  ) : (
-                    ""
-                  )
+                  ) :
+                    forSaleTotalCount === 0 && wantedTotalCount === 0 ? (
+                      <p className="nodataDisplay">
+                        -- {t("NOCLASSIFIED_DISPLAY")} --
+                      </p>
+                    ) : forSaleTotalCount === 0 ? (
+                      <p className="nodataDisplay">
+                        -- {t("NOCLASSIFIEDSALES_DISPLAY")} --
+                      </p>
+                    ) : (
+                      ""
+                    )
                 ) : wantedWebList.length ? (
                   <>
                     <ClassifiedCategoryList
