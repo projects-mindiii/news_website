@@ -24,6 +24,8 @@ function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const check = location.pathname.match("deal")
+
   function handleResponse(responsejson) {
     if (responsejson.status_code) {
       if (responsejson.status_code === STATUS_CODES.INVALID_TOKEN) {
@@ -81,7 +83,7 @@ function Header() {
             <img src={Logo} alt="news-logo" />
           </div>
           {location.pathname == "/classifieds" ||
-          location.pathname == "/job-types" ? (
+            location.pathname == "/job-types" ? (
             <div className="bannerImg">
               <iframe
                 src={process.env.REACT_APP_CLASSIFIED_HEADER_IFRAME_URL}
@@ -105,7 +107,7 @@ function Header() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ulValue" as="ul">
                   {HeaderData.map((item, index) => (
-                    <Nav.Item as="li" key={index}>
+                    <Nav.Item as="li" key={index} className={`${item.link.match(check) ? "active" : ""}`}>
                       <NavLink className={`nav-link`} to={item.link}>
                         {item.text}
                       </NavLink>
@@ -121,17 +123,17 @@ function Header() {
           <Row>
             <Col xl={8} lg={8} md={12} sm={12}>
               {location.pathname == "/deals/latest-deals" ||
-              location.pathname.match("/deals/companies/company-profile/") ||
-              location.pathname == "/deals/products" ||
-              location.pathname == "/deals/services" ||
-              location.pathname == "/deals/brands" ||
-              location.pathname == "/deals/companies" ? (
+                location.pathname.match("/deals/companies/company-profile/") ||
+                location.pathname == "/deals/products" ||
+                location.pathname == "/deals/services" ||
+                location.pathname == "/deals/brands" ||
+                location.pathname == "/deals/companies" ? (
                 <DealsHeader />
               ) : (
                 ""
               )}
               {location.pathname == "/classifieds" ||
-              location.pathname == "/job-types" ? (
+                location.pathname == "/job-types" ? (
                 <ClassifiedCountry />
               ) : (
                 ""

@@ -3,7 +3,6 @@ import { Row, Container, Col } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Select from "react-select";
 import Cropper from "react-easy-crop";
-
 import { getCroppedImg, getRotatedImage } from '../Cropper/canvasUtils'
 import { CropperStyles } from '../Cropper/styles'
 import Slider from '@material-ui/core/Slider'
@@ -11,7 +10,6 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { getOrientation } from 'get-orientation/browser'
-
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SublyApi from "../../helpers/Api";
@@ -372,12 +370,9 @@ function PostAdvert({ classes }) {
                                 setValue("email", response.data[0].email ? response.data[0].email : "");
                                 setValue("city", response.data[0].city ? response.data[0].city : "");
                                 setValue("companyName", response.data[0].company_name ? response.data[0].company_name : "");
-
-
                                 setDialCodeWatsapp(response.data[0].whatsapp_dail_code ? response.data[0].whatsapp_dail_code : "27");
                                 setWatsappNo(response.data[0].whatapp_contact_number ? response.data[0].whatapp_contact_number : "");
                                 setCountryCodeWatsapp(response.data[0].whatsapp_country_code ? response.data[0].whatsapp_country_code : "za");
-
                                 setDialCode(response.data[0].dial_code
                                     ? response.data[0].dial_code
                                     : "27");
@@ -387,7 +382,6 @@ function PostAdvert({ classes }) {
                                 setCountryCode(response.data[0].country_code
                                     ? response.data[0].country_code
                                     : "za");
-
 
                                 if (response.data[0].is_default_country == 1) {
                                     setValue("isDefaultCountry", {

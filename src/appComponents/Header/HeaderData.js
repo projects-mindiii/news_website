@@ -8,35 +8,33 @@ export const headerData = [
         text: `${t("DEALS")}`,
         link: `/deals/latest-deals`,
         activeClass: `active`,
-
-
     },
     {
         id: "2",
         text: `${t("CLASSIFIEDS")}`,
-         link: `/classifieds`,
-        activeClass:""
+        link: `/classifieds`,
+        activeClass: ""
     },
     {
         id: "3",
         text: `${t("JOBS")}`,
         link: `/job-types`,
-        activeClass:""
-       
+        activeClass: ""
+
     },
     {
         id: "4",
         text: `${t("POST_ADVERT")} `,
         link: `/post-advert`,
-        activeClass:""
-        
+        activeClass: ""
+
     },
     {
         id: "5",
         text: `${t("YOUR_ADS")} `,
         link: `/your-add`,
-        activeClass:""
-       
+        activeClass: ""
+
     },
 ];
 
