@@ -708,11 +708,13 @@ function PostAdvert({ classes }) {
     function keyHandle(e) {
         const key = e.keyCode;
         const keyValue = e.target.value.match(/\./g)
-        if (key >= 96 && key <= 105 || key == 8 || key == 13 || key == 46 || key >= 37 && key <= 40) {
+
+        if (key == 8 || key == 46 || !isNaN(e.key)) {
             return true;
-        } else if (key == 110 && !keyValue) {
+        } else if ((key == 190 || key == 110) && !keyValue) {
             return true;
-        } else {
+        }
+        else {
             e.preventDefault();
             return false;
         }

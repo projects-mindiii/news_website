@@ -722,3 +722,9 @@
         min-width: 205px;
     }
 }
+
+@media only screen and (max-width: 991px) {
+    .post_Add_CategoryButton:first-child {
+        margin-top: 15px;
+    }
+}

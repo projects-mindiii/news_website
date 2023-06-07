@@ -63,7 +63,7 @@ function ContactPerson(props) {
               <p>{t("CONTACT_NUMBER")}</p>
               <span>
                 <a
-                  href={`tel:${props.forSaleListData[props.index].dial_code} ${
+                  href={`tel:+${props.forSaleListData[props.index].dial_code} ${
                     props.forSaleListData[props.index].contact
                   }`}
                   target="blank"

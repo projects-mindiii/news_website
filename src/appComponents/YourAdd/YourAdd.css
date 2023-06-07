@@ -93,3 +93,9 @@
 .postAdvertBox {
     margin-top: 9px;
 }
+
+@media only screen and (max-width: 991px) {
+    .postAdvertBox {
+        margin-top: 0px;
+    }
+}

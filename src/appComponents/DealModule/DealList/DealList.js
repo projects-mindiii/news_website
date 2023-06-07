@@ -121,7 +121,7 @@ function DealList({ dealList, fromDeal }) {
                                     <img src={contact} alt="img" />
                                     <div className="dealText">
                                         <span>{t("CONTACT_NUMBER")}</span>
-                                        <a href={`tel:${item.contact_dial_code} ${item.contact_number}`} target="blank">
+                                        <a href={`tel:+${item.contact_dial_code} ${item.contact_number}`} target="blank">
                                             <p>
                                                 +{item.contact_dial_code} {item.contact_number}
                                             </p></a>

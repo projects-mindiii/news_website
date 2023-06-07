@@ -108,7 +108,7 @@ export const TRANSLATIONS_EN = {
   SAVE: "SAVE",
   NOTE: "PLEASE NOTE",
   ALERT: "Alert",
-  WANT_DELETE: "Are you sure ? You want to delete your account.",
+  WANT_DELETE: "Are you sure? You want to delete your account.",
   CANCEL: "CANCEL",
   DELETE: "DELETE",
   SOUTH_AFRICA_SET: "South Africa",

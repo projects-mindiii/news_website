@@ -112,7 +112,7 @@ export const TRANSLATIONS_ES = {
   SAVE: "AHORRAR",
   NOTE: "TENGA EN CUENTA",
   ALERT: "Alerta",
-  WANT_DELETE: "Está seguro ? Quiere eliminar su cuenta.",
+  WANT_DELETE: "Está seguro? Quiere eliminar su cuenta.",
   CANCEL: "CANCELAR",
   DELETE: "BORRAR",
   SOUTH_AFRICA_SET: "Sudáfrica",
