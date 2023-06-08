@@ -113,3 +113,7 @@
     border: 1px solid rgba(0, 0, 0, 0.3);
   }
 }
+
+.emailText {
+  padding: 0px 52px !important;
+}

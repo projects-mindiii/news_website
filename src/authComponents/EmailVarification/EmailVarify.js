@@ -86,7 +86,7 @@ function EmailVarify() {
             <img src={EMAILVARIFICATION} alt="reset-password" />
             <h1>{t("EMAIL_VERIFICATION")}</h1>
             <div className="passwordSent">
-              <p>{t("VARIFICATION_TEXT")}</p>
+              <p className="emailText">{t("VARIFICATION_TEXT")}</p>
               <span>{detail.email}</span>
             </div>
             <div className="otpbox">

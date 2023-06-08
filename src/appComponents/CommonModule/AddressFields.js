@@ -99,7 +99,8 @@ function AddressFields(props) {
                                                 <img src={contact} alt="img" />
                                                 <div className="dealText">
                                                     <h5>{t("CONTACT_PERSON")}</h5>
-                                                    <p>+{item.dial_code} {item.contact}</p>
+                                                    <a href={`tel:+${item.dial_code} ${item.contact}`} target="blank">
+                                                        <p>+{item.dial_code} {item.contact}</p></a>
                                                 </div>
                                             </div>
                                         )}

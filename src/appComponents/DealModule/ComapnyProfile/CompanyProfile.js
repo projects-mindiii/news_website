@@ -137,7 +137,7 @@ function CompanyProfile({ companyDetailData }) {
                   <img src={contact} alt="img" />
                   <div className="dealText">
                     <span>{t("CONTACT_NUMBER")}</span>
-                    <a href={`tel:${companyDetailData.company_detail.dial_code} ${companyDetailData.company_detail.contact}`} target="blank">
+                    <a href={`tel:+${companyDetailData.company_detail.dial_code} ${companyDetailData.company_detail.contact}`} target="blank">
                       <p>{companyDetailData.company_detail.dial_code} {companyDetailData.company_detail.contact}</p></a>
                   </div>
                 </div>
