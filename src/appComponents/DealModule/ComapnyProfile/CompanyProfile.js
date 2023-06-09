@@ -102,6 +102,7 @@ function CompanyProfile({ companyDetailData }) {
                       url={item.image}
                       playing={false}
                       controls={true}
+                      key={index}
                     />
                   ))}
                 </div>

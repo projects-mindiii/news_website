@@ -169,7 +169,7 @@
 }
 
 
- .companyDetails .dealText p{
+.companyDetails .dealText p {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -179,7 +179,7 @@
     color: #000000;
 }
 
-.companyDetails .websiteUrl p{
+.companyDetails .websiteUrl p {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -187,4 +187,11 @@
     line-height: 21px;
     letter-spacing: -0.61875px;
     color: #000000;
-} 
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .playBox {
+        width: 100% !important;
+        height: 360px !important;
+    }
+}

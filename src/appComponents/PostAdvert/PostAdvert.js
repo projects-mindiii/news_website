@@ -914,7 +914,7 @@ function PostAdvert({ classes }) {
                                                 <div className="headings ">{t("ON_HYBRID_REMOTE")}</div>
                                                 <div className="post_Add_Locationtype selectNew">
                                                     {locationType ? locationType.map((type, index) => (
-                                                        <div >
+                                                        <div key={index}>
                                                             <Form.Check
                                                                 {...register("selectlocationtype", {
                                                                     required: {
@@ -941,7 +941,7 @@ function PostAdvert({ classes }) {
                                                 <div className="headings "> {t("EMPLOYMENT_EQUITY")}</div>
                                                 <div className="post_Add_EmploymentEnquiry  selectNew">
                                                     {employmentEquity ? employmentEquity.map((type, index) => (
-                                                        <div  >
+                                                        <div key={index}>
                                                             <Form.Check
                                                                 {...register("employmentenquiry", {
                                                                     required: {
@@ -979,7 +979,7 @@ function PostAdvert({ classes }) {
                                                         <Dropdown.Menu as={DropdownSearch}>{currenciesOptions && currenciesOptions.map((item, index) => (
                                                             <Dropdown.Item active={currencyValue ? currencyValue.name == item.name : index == 0} onClick={() => {
                                                                 setCurrencyValue(item);
-                                                            }}>{item.name}</Dropdown.Item>))}
+                                                            }} key={index}>{item.name}</Dropdown.Item>))}
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                     <Form.Group className="amount">

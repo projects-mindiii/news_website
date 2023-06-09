@@ -68,7 +68,7 @@ function SearchList() {
                   ? searchList.map((item, index) => {
                     if (item.refrence_type == SERACH_REFRENCE_TYPE.DEAL) {
                       return (
-                        <div className="searchedComponent">
+                        <div className="searchedComponent" key={index}>
                           <DealList fromDeal={true} dealList={item.detail} />
                         </div>
                       );
@@ -76,7 +76,7 @@ function SearchList() {
                       item.refrence_type == SERACH_REFRENCE_TYPE.COMPANY
                     ) {
                       return (
-                        <div className="searchedComponent">
+                        <div className="searchedComponent" key={index}>
                           <CompanyDataModule
                             companyListValue={item.detail[0]}
                           />
@@ -86,7 +86,7 @@ function SearchList() {
                       item.refrence_type == SERACH_REFRENCE_TYPE.CLASSIFIED
                     ) {
                       return (
-                        <div className="searchedComponent">
+                        <div className="searchedComponent" key={index}>
                           <ClassifiedCategoryList
                             // displayRoute="your_advert"
                             forSaleListData={item.detail}

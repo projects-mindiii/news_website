@@ -48,7 +48,7 @@ function GoogleLogin(props) {
             title: response.message,
           });
           navigate("/deals/latest-deals");
-          localStorage.setItem("token", response.data.token);
+          // localStorage.setItem("token", response.data.token);
         } else if (response.data.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
             const response = signresponsejson.payload;
@@ -58,7 +58,7 @@ function GoogleLogin(props) {
                 title: response.message,
               });
               navigate("/deals/latest-deals");
-              localStorage.setItem("token", signresponsejson.data.token);
+              // localStorage.setItem("token", signresponsejson.data.token);
             } else {
               Toast.fire({
                 icon: "error",
