@@ -45,6 +45,11 @@
 
 .createProfileBtn button {
     background: #000000 !important;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.545455px;
+    color: #FFFFFF;
 }
 
 .createProfileBtn button:hover {
@@ -57,6 +62,10 @@
 
 .loginToProfile button {
     background: #ec4624 !important;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.545455px;
 }
 
 .loginToProfile button:hover {

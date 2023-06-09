@@ -77,8 +77,8 @@ function CompanyData(props) {
           </div>
           {companyListValue.length > 0
             ? companyListValue.map((item, index) => (
-                <CompanyDataModule companyListValue={item} />
-              ))
+              <CompanyDataModule companyListValue={item} key={index} />
+            ))
             : ""}
           {companyListValue.length >= companyList.total_count ? (
             " "
