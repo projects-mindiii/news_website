@@ -35,7 +35,7 @@ function Footer() {
                 <Container>
                     <div className="footerContent">
                         <Row>
-                            <Col lg={4} md={4}>
+                            <Col lg={5} md={5} sm={6}>
                                 <div className="signAfricaImg">
                                     <img src={Image1} alt="sign-Africa" />
                                 </div>
@@ -68,19 +68,19 @@ function Footer() {
 
                                 </div>
                             </Col>
-                            <Col lg={4} md={4}>
+                            <Col lg={3} md={3} sm={2}>
                                 <div className="linkHeading">
                                     <h6>{t("QUICK_LINKS")}</h6>
                                     <div className="linkNames">
                                         {(footerData.links).map((item2, index2) => (
-                                            <a href={item2.link} key={index2}>
-                                                <h6>{item2.text}</h6>
+                                            <a href={item2.link}>
+                                                <h6 key={index2}> {item2.text}</h6>
                                             </a>
                                         ))}
                                     </div>
                                 </div>
                             </Col>
-                            <Col lg={4} md={4} >
+                            <Col lg={4} md={4} sm={4}>
                                 <div className="linkHeadingWrapper">
                                     <div className="linkHeading">
                                         <h6>{t("OUR MEDIA")}</h6>
