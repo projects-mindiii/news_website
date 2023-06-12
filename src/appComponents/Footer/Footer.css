@@ -8,12 +8,12 @@
 }
 
 .footerContent {
-  padding: 20px 100px;
+  padding: 20px 120px;
 }
 
 .signAfricaImg {
-  margin-top: 20px;
-  margin-bottom: 25px;
+  margin-top: 18px;
+  margin-bottom: 48px;
 }
 
 .signAfricaImg img {
@@ -29,15 +29,15 @@
 }
 
 .signContent {
-  margin: 10px 0px 20px 0px;
+  margin: 12px 0px 38px 0px;
 }
 
 .signContent h6 {
   font-size: 10px;
-  line-height: 22px;
+  line-height: 16px;
   letter-spacing: -0.19px;
   color: #ffffff;
-  font-weight: 500px;
+  font-weight: 500;
 }
 
 .appStoresImg {
@@ -130,12 +130,26 @@
 
 @media only screen and (min-width: 320px) and (max-width: 400px) {
   .footerContent {
-    padding: 20px 76px 50px 76px;
+    padding: 20px 42px 50px 42px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .footerContent {
+    padding: 20px 60px;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .footerContent {
+    padding: 20px 20px;
+  }
+}
+@media screen and (min-width: 401px) and (max-width: 575px) {
+  .footerContent {
+    padding: 20px 80px;
   }
 }
 
 @media (min-width: 1200px) {
-
   .footer .container,
   .container-lg,
   .container-md,
@@ -146,7 +160,6 @@
 }
 
 @media (min-width: 992px) {
-
   .footer .container,
   .container-lg,
   .container-md,
@@ -164,4 +177,11 @@
 
 .linkNames a {
   text-decoration: none;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: -0.19px;
+}
+.linkNames a h6:hover {
+  color: #ef5132;
 }
