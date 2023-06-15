@@ -194,7 +194,7 @@ function JobTypes() {
                         }
                         eventKey={1}
                       >
-                        {t("JOB_OFFERS")}({jobOfferTotalCount})
+                        {t("JOB_OFFERS")} ({jobOfferTotalCount})
                       </Nav.Link>
                       {showDefaultList == 1 ? (
                         <MdKeyboardArrowUp

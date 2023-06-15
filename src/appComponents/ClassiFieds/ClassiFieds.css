@@ -159,7 +159,7 @@
   height: 18.57px;
   margin-right: 6px;
   width: 18.57px;
-  vertical-align: sub;
+  vertical-align: middle;
 }
 
 .classiFieds_RupeesText p {
@@ -245,6 +245,7 @@
 
 .classiFields_shareIcon {
   margin-left: 20px;
+  margin-top: 6px;
 }
 
 .classiFields_shareicons span>span {
