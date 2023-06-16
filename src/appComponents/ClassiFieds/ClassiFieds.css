@@ -589,3 +589,10 @@
   border-color: #ced4da !important;
   box-shadow: unset !important;
 }
+
+
+/* feedback issue */
+.classiFields_shareicons {
+  margin-bottom: 2px;
+  
+}
