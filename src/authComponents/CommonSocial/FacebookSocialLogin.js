@@ -16,7 +16,7 @@ function FacebookSocialLogin(props) {
   // Social Login with facebook.
   const responseFacebook = async (response) => {
     let userData = response;
-    if (userData) {
+    if (userData.id) {
       let requestData = new FormData();
       requestData.append("name", userData.name);
       requestData.append("social_type", SOCIAL_TYPE.FACEBOOK);
@@ -34,12 +34,12 @@ function FacebookSocialLogin(props) {
           responsejson.data?.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND
         ) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
-            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+            if (signresponsejson.status_code === STATUS_CODES.SUCCESS) {
               Toast.fire({
                 icon: "success",
                 title: responsejson.data.message,
               });
-              navigate("/deals/latest-deals");
+              // navigate("/deals/latest-deals");
             }
           });
         } else {
