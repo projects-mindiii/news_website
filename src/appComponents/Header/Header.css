@@ -78,7 +78,7 @@
 @media only screen and (max-width: 991px) {
   .navItem .navbar-nav .nav-link {
     width: 100%;
-    max-width: 365px;
+    /* max-width: 365px; */
   }
 }
 

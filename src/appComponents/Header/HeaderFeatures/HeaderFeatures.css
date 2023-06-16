@@ -1,84 +1,131 @@
 .headerFeature {
-    display: flex;
-    background: #FFFFFF;
-    opacity: 0.7;
-    margin-top: 15px;
-    padding-right: 25px !important;
-    padding-left: 25px !important;
-    justify-content: right;
-    width: 100%;
-    max-width: fit-content;
-    /* max-width: 357px; */
-    height: 39px !important;
+  display: flex;
+  background: #ffffff;
+  opacity: 0.7;
+  margin-top: 15px;
+  padding-right: 25px !important;
+  padding-left: 25px !important;
+  justify-content: right;
+  width: 100%;
+  /* max-width: fit-content; */
+  max-width: 357px;
+  height: 39px !important;
 }
 
 .headerFeature h5 {
-    font-weight: 500;
-    font-size: 15px;
-    padding-top: 10px;
-    color: #474747;
-    letter-spacing: 0.2px;
-    cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  padding-top: 10px;
+  color: #474747;
+  letter-spacing: 0.2px;
+  cursor: pointer;
 }
 
 .headerFeature span {
-    color: #EC4624;
-    font-weight: 600;
-    padding-top: 8px;
-    padding-right: 10px;
-    padding-left: 10px;
+  color: #ec4624;
+  font-weight: 600;
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
-.infoIcon svg{
-    margin-top: 7px;
-    margin-left: 5px;
-    cursor: pointer;
+.infoIcon svg {
+  margin-top: 7px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
-.infoIcon svg:focus{
-    outline: none;
+.infoIcon svg:focus {
+  outline: none;
 }
-
 
 @media only screen and (min-width: 338px) and (max-width: 379px) {
-    .headerAfterProfile {
-        padding-right: 15px !important;
-        padding-left: 15px !important;
-    }
+  .headerAfterProfile {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }
 
-    .headerAfterProfile h5 {
-        font-size: 14px !important;
-        letter-spacing: unset !important;
-    }
+  .headerAfterProfile h5 {
+    font-size: 14px !important;
+    letter-spacing: unset !important;
+  }
 }
 
-
 @media only screen and (min-width: 328px) and (max-width: 337px) {
-    .headerAfterProfile {
-        padding-right: 10px !important;
-        padding-left: 10px !important;
-    }
+  .headerAfterProfile {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
 
-    .headerAfterProfile h5 {
-        font-size: 14px !important;
-        letter-spacing: unset !important;
-    }
+  .headerAfterProfile h5 {
+    font-size: 14px !important;
+    letter-spacing: unset !important;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 327px) {
-    .headerAfterProfile {
-        padding-right: 6px !important;
-        padding-left: 6px !important;
-    }
+  .headerAfterProfile {
+    padding-right: 6px !important;
+    padding-left: 6px !important;
+  }
 
-    .headerAfterProfile h5 {
-        font-size: 14px !important;
-        letter-spacing: unset !important;
-    }
+  .headerAfterProfile h5 {
+    font-size: 14px !important;
+    letter-spacing: unset !important;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    .tooltipClass {
-        width: 300px !important;
+  .tooltipClass {
+    width: 300px !important;
+  }
+}
+
+/* feedback solve css */
+
+/* @media screen and (min-width:320px) and (max-width:379px) {
+    .headerFeature {
+        display: flex;
+        background: #FFFFFF;
+        opacity: 0.7;
+        margin-top: 15px;
+        padding-right: 154px !important;
+        padding-left: 25px !important;
+        justify-content: right;
+        width: 100%;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+        max-width: 357px;
+        height: 39px !important;
+    }
+
+
+.headerFeature h5 {
+    font-weight: 500;
+    font-size: 10px !important;
+    padding-top: 14px;
+    color: #474747;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    
+
+}
+   
+} */
+
+@media screen and (max-width: 991px) {
+  .headerFeature {
+    max-width: inherit;
+    justify-content: left;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 328px) {
+    @-moz-document url-prefix() {
+        .headerAfterProfile h5 {
+            font-size: 13px !important;
+            letter-spacing: unset !important;
+            line-height: 20px;
+        }
     }
 }

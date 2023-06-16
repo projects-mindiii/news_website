@@ -52,7 +52,6 @@ function GoogleLogin(props) {
         } else if (response.data.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
             const response = signresponsejson.payload;
-            console.log("signresponsejson", signresponsejson)
             if (response.status_code === STATUS_CODES.SUCCESS) {
               Toast.fire({
                 icon: "success",

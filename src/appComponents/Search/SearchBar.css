@@ -64,3 +64,26 @@
         justify-content: flex-end;
     }
 }
+
+.cusinput{
+    width: 100%;
+    max-width: 400px;
+}
+
+
+
+@media only screen and (max-width: 991px) {
+    .searchBar {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .searchBar .form-control {
+        border: none !important;
+        box-shadow: none !important;
+        font-weight: 400;
+        background: #FAFAFA;
+        border-radius: 4px;
+        height: 40px;
+    }
+}
