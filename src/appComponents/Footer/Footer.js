@@ -73,8 +73,8 @@ function Footer() {
                                     <h6>{t("QUICK_LINKS")}</h6>
                                     <div className="linkNames">
                                         {(footerData.links).map((item2, index2) => (
-                                            <a href={item2.link}>
-                                                <h6 key={index2}> {item2.text}</h6>
+                                            <a href={item2.link} key={index2}>
+                                                <h6>{item2.text}</h6>
                                             </a>
                                         ))}
                                     </div>

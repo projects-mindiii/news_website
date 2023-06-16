@@ -133,16 +133,19 @@
     padding: 20px 42px 50px 42px;
   }
 }
+
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .footerContent {
     padding: 20px 60px;
   }
 }
+
 @media screen and (min-width: 576px) and (max-width: 767px) {
   .footerContent {
     padding: 20px 20px;
   }
 }
+
 @media screen and (min-width: 401px) and (max-width: 575px) {
   .footerContent {
     padding: 20px 80px;
@@ -150,6 +153,7 @@
 }
 
 @media (min-width: 1200px) {
+
   .footer .container,
   .container-lg,
   .container-md,
@@ -160,6 +164,7 @@
 }
 
 @media (min-width: 992px) {
+
   .footer .container,
   .container-lg,
   .container-md,
@@ -182,6 +187,14 @@
   line-height: 17px;
   letter-spacing: -0.19px;
 }
+
 .linkNames a h6:hover {
   color: #ef5132;
+}
+
+@media screen and (min-width: 320px) and (max-width: 325px) {
+  .socialIcon img {
+    width: 29px;
+  }
+
 }
