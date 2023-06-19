@@ -15,7 +15,7 @@ function Footer() {
 
     return (
         <>
-            <Container>
+            <Container className="screenOverride">
                 {location.pathname == "/classifieds" || location.pathname == "/job-types" ?
                     <div className="bannerImg">
                         <iframe src={process.env.REACT_APP_CLASSIFIED_FOOTER_IFRAME_URL}

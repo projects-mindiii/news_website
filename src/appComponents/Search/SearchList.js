@@ -114,12 +114,13 @@ function SearchList() {
                   </div>
                 )}
               </Col>
-              {searchList.length == 0 && (
-                <h4 className="displayNoText">{t("NO_SEARCH_DATA")}</h4>
-              )}
+
             </Row>
           </div>
         </Container>
+        {searchList.length == 0 && (
+          <h4 className="displayNoText">{t("NO_SEARCH_DATA")}</h4>
+        )}
       </section>
     </>
   );
