@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import mapicon from "../../assets/images/map_ico.svg";
 import "../ClassiFieds/ClassiFieds.css";
 import { useTranslation } from "react-i18next";
@@ -10,15 +10,20 @@ import { useLocation } from "react-router-dom";
 function ClassifiedCountry() {
   const {
     classifiedFilterValues,
-    jobSeekerTotalCount,jobOfferTotalCount,forSaleTotalCount,wantedTotalCount
+    jobSeekerTotalCount, jobOfferTotalCount, forSaleTotalCount, wantedTotalCount
   } = useSelector((state) => state.classified);
   function closeModal() {
     return setIsOpen(false);
   }
+
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [resultData, setResultData] = useState("");
   const location = useLocation();
+
+  useEffect(() => {
+    closeModal();
+  }, [location])
 
   return (
     <div className={styles.classiFieds_map_serchbar}>
@@ -31,7 +36,7 @@ function ClassifiedCountry() {
             <div className={styles.countryText}>
               <p className={styles.selectText}>{classifiedFilterValues.name} - </p>
               <span className={styles.resultText}>
-                {(location.pathname == "/job-types")?(jobOfferTotalCount+jobSeekerTotalCount):(forSaleTotalCount+wantedTotalCount)} {t("CLASSIFIED_LIST_RESULT")}
+                {(location.pathname == "/job-types") ? (jobOfferTotalCount + jobSeekerTotalCount) : (forSaleTotalCount + wantedTotalCount)} {t("CLASSIFIED_LIST_RESULT")}
               </span>{" "}
             </div>
           ) : (

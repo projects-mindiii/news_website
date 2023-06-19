@@ -250,7 +250,7 @@
 
 .classiFields_shareIcon {
   margin-left: 20px;
-  margin-top: 6px;
+  /* margin-top: 6px; */
 }
 
 .classiFields_shareicons span>span {
@@ -419,6 +419,10 @@
 
   .classiFields_emailHeadingText span {
     font-size: 13.5px;
+  }
+
+  .classiFields_shareIcon {
+    margin-top: 4px;
   }
 }
 
