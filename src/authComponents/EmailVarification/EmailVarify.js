@@ -122,7 +122,7 @@ function EmailVarify() {
                 }
               }}
             >
-              {t("VARIFY")}
+              {t("VERIFY")}
             </CustomBtn>
             <h4
               onClick={() => {

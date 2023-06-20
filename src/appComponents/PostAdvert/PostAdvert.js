@@ -186,7 +186,7 @@ function PostAdvert({ classes }) {
     const [countryCode, setCountryCode] = useState("za");
     const [categoryType, setCategoryType] = useState("")
     const [locationType, setLocationType] = useState("");
-    const [employmentEquity, setEmploymentEquity] = useState([{ id: 1, name: "none" }, { id: 2, name: "EE/ AA Required" }])
+    const [employmentEquity, setEmploymentEquity] = useState([{ id: 1, name: "none" ,value: 0}, { id: 2, name: "EE/ AA Required" ,value: 1}])
     const [earingOptions, setEaringOptions] = useState();
     const [currenciesOptions, setCurrenciesOptions] = useState();
     const [currencyValue, setCurrencyValue] = useState();
@@ -448,7 +448,7 @@ function PostAdvert({ classes }) {
                         setPhoneNo(advertValue[0].contact)
                         setDialCode(advertValue[0].dial_code)
                         setCountryCode(advertValue[0].country_code)
-                        setValue("employmentenquiry", advertValue[0].emp_equity && advertValue[0].emp_equity.toString())
+                        setValue("employmentenquiry", advertValue[0] && advertValue[0].emp_equity.toString())
                         setValue("selectlocationtype", advertValue[0].job_location_type_id)
                         setProfileImage(advertValue[0].gallery)
                         setProfilePreview(advertValue[0].gallery)
@@ -951,9 +951,10 @@ function PostAdvert({ classes }) {
                                                                 className="post_Add_category"
                                                                 type="radio"
                                                                 label={type.name}
-                                                                value={type.id}
+                                                                value={type.value}
 
                                                             />
+                                                            
                                                         </div>
 
                                                     )) : ""}

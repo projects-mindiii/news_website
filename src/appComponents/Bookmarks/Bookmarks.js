@@ -141,11 +141,13 @@ function Bookmarks() {
                     {bookmarkList.length >= bookmarkTotalCount ? (
                       ""
                     ) : (
-                      <CustomBtn
-                        children={t("LOAD_MORE")}
-                        type={"button"}
-                        onClick={() => loadmore()}
-                      />
+                      <div className="loadmoreBtn">
+                        <CustomBtn
+                          children={t("LOAD_MORE")}
+                          type={"button"}
+                          onClick={() => loadmore()}
+                        />
+                      </div>
                     )}
                   </>
                 ) : (
