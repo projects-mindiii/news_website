@@ -1,6 +1,7 @@
 .countryIcon .imgIcon img {
   margin-right: 10px !important;
   margin-bottom: 4px !important;
+  cursor: pointer;
 }
 
 .countryText {
@@ -43,5 +44,4 @@ span.countryText {
   display: flex !important;
   margin-top: 15px !important;
   padding: 5px !important;
-  cursor: pointer;
 }

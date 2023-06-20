@@ -27,9 +27,9 @@ function ClassifiedCountry() {
 
   return (
     <div className={styles.classiFieds_map_serchbar}>
-      <div className={styles.countryIcon} onClick={() => setIsOpen(true)}>
-        <div className={styles.imgIcon}>
-          <img src={mapicon} alt={mapicon} width="25px" height="25px" />{" "}
+      <div className={styles.countryIcon}>
+        <div className={styles.imgIcon} >
+          <img src={mapicon} onClick={() => setIsOpen(true)} alt={mapicon} width="25px" height="25px" />{" "}
         </div>
         <div className={styles.countryText}>
           {classifiedFilterValues ? (

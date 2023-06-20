@@ -99,7 +99,6 @@
 .bannerImg {
   text-align: center;
   margin-bottom: 10px;
-  width: 1100px;
 }
 
 .bannerImg iframe {
@@ -228,7 +227,24 @@
     padding: 10px 14px;
     margin-right: 7px;
   }
+
+  .screenOverride .searchedComponent {
+    width: 530px;
+  }
+
+  .screenOverride .searchModuleBox .marginTop {
+    width: 530px;
+  }
+
+  .screenOverride .loadmoreBtn {
+    width: 530px;
+  }
+
+  .screenOverride .bannerImg {
+    width: 1100px;
+  }
 }
+
 
 @media screen and (min-width: 1080px) and (max-width: 1199px) {
   .header .container {
