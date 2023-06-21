@@ -18,7 +18,7 @@ import { STATUS_CODES } from "../../../utils/StatusCode";
 import { guestUserLogin, userLogout } from "../../../store/slices/UserSlice";
 
 // -------function for showing deal list-----------
-function DealList({ dealList, fromDeal }) {
+function DealList({ dealList, fromDeal ,deal }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     //set language
@@ -82,7 +82,9 @@ function DealList({ dealList, fromDeal }) {
             {dealList && dealList.length > 0 ?
                 dealList.map((item, index) => (
                     <div className="latestDeals" key={index}>
-                        <img src={item.gallery ? item.gallery[0].img_url : dealIcon} alt="deals" />
+                        <img src={item.gallery ? item.gallery[0].img_url : dealIcon}
+                         alt="deals" />
+                           {deal === true ? ( <h1>{t("DEAL")}</h1>) :  ""}
                         <h3>{item.name}</h3>
                         <p className="dealSubText">{item.description}</p>
                         <div className="dealDetails">

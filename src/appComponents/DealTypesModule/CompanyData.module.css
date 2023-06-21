@@ -1,64 +1,108 @@
 .productModule {
-    margin-bottom: 30px;
-    margin-top: 23px;
+  margin-bottom: 30px;
+  margin-top: 23px;
 }
 
 .products {
-    background: #FFFFFF;
-    box-shadow: 0px 25px 40px rgb(0 0 0 / 3%);
-    border-radius: 6px;
-    margin-top: 10px;
+  background: #ffffff;
+  box-shadow: 0px 25px 40px rgb(0 0 0 / 3%);
+  border-radius: 6px;
+  margin-top: 10px;
 }
 
 .products h2 {
-    font-weight: 500;
-    font-size: 20px;
-    text-align: center;
-    letter-spacing: -0.2px;
-    color: #0A0000;
-    padding: 15px 10px;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: -0.2px;
+  color: #0a0000;
+  padding: 15px 10px;
 }
 
 .products span {
-    color: #EC4624;
+  color: #ec4624;
 }
 
 .productslist {
-    background: #FFFFFF;
-    box-shadow: 0px 25px 40px rgb(0 0 0 / 3%);
-    border-radius: 6px;
-    margin-top: 10px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  background: #ffffff;
+  box-shadow: 0px 25px 40px rgb(0 0 0 / 3%);
+  border-radius: 6px;
+  margin-top: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .productImg img {
-    width: 180px;
-    border-radius: 5.75997px;
-    background: #FFFFFF;
-    box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
+  width: 180px;
+  border-radius: 5.75997px;
+  background: #ffffff;
+  box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
 }
 
 .productDiscription {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .productDiscription h3 {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.productDiscription p {
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000000;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.productDiscription h5 {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 0px;
+}
+
+.productModule h4 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 36px;
+  text-align: center;
+  letter-spacing: -0.315px;
+  color: #000000;
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+@media only screen and (max-width: 400px) {
+  .productDiscription h3 {
     font-weight: 600;
-    font-size: 22px;
-    line-height: 27px;
+    font-size: 15px !important;
+    line-height: 19px;
     color: #000000;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-}
+    margin-bottom: 2px;
+  }
 
-.productDiscription p {
+  .productDiscription p {
     font-weight: 300;
-    font-size: 13px;
+    font-size: 12px !important;
     line-height: 18px;
     color: #000000;
     margin-bottom: 4px;
@@ -66,53 +110,74 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .productImg img {
+    width: 135px;
+   
+  }
 }
 
-.productDiscription h5 {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
-    color: #000000;
-    margin-bottom: 0px;
+/* company text css */
+.companyText{
+    align-items: center;
+    display: flex;
+}
+.date{
+    display: flex; 
+    align-items: self-end;
+    margin-left: 14px;
+    margin-top: 10px;
+
+}  
+
+.date p{
+    margin-top: 5px;
+}
+.date span img {
+    height: 18.57px;
+    margin-right: 6px;
+    width: 18.57px;
+    vertical-align: middle;
+  }
+  
+
+
+.companyText h2 {
+  font-weight: 600;
+  color: #fff;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f24237 0%, #ea2064 100%);
+  width: 100%;
+  max-width: 105px;
+  height: 30px;
+  text-align: center;
+  padding-top: 5px;
+  margin-top: 15px;
+  font-size: 13px;
+  line-height: 20px;
+  
 }
 
-.productModule h4 {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 36px;
-    text-align: center;
-    letter-spacing: -0.315px;
-    color: #000000;
-    margin-top: 30px;
-    margin-bottom: 100px;
-}
 
 @media only screen and (max-width: 400px) {
-    .productDiscription h3 {
+    .companyText{
+        padding-top: 20px;
+    }
+    .companyText h2 {
         font-weight: 600;
-        font-size: 15px !important;
-        line-height: 19px;
-        color: #000000;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        margin-bottom: 2px;
-    }
+        color: #fff;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #f24237 0%, #ea2064 100%);
+        width: 100%;
+        max-width: 105px;
+        height: 30px;
+        text-align: center;
+        padding-top: 5px;
+        /* margin-top: 15px; */
+        font-size: 13px;
+        line-height: 20px;
+        
+      }
 
-    .productDiscription p {
-        font-weight: 300;
-        font-size: 12px !important;
-        line-height: 18px;
-        color: #000000;
-        margin-bottom: 4px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .productImg img {
-        width: 135px;
-    }
 }

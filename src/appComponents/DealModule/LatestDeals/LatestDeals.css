@@ -194,3 +194,20 @@ button.whatsApp svg {
         font-size: 28px !important;
     }
 }
+
+/* search deal text css */
+
+.latestDeals h1 {
+    font-weight: 600;
+    color: #fff;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f24237 0%, #ea2064 100%);
+    width: 100%;
+    max-width: 95px;
+    height: 30px;
+    text-align: center;
+    padding-top: 6px;
+    margin-top: 15px;
+    font-size: 13px;
+    line-height: 20px;
+}

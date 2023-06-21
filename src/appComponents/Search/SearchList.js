@@ -69,7 +69,7 @@ function SearchList() {
                     if (item.refrence_type == SERACH_REFRENCE_TYPE.DEAL) {
                       return (
                         <div className="searchedComponent" key={index}>
-                          <DealList fromDeal={true} dealList={item.detail} />
+                          <DealList fromDeal={true} dealList={item.detail} deal={true} />
                         </div>
                       );
                     } else if (
@@ -77,8 +77,9 @@ function SearchList() {
                     ) {
                       return (
                         <div className="searchedComponent" key={index}>
-                          <CompanyDataModule
+                          <CompanyDataModule company={true}
                             companyListValue={item.detail[0]}
+                            companyShowDate={item}
                           />
                         </div>
                       );

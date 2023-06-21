@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { COUNT, COUNT_REFFRENCE, SHARE_COUNT } from "../../utils/Constants";
 import { STATUS_CODES } from "../../utils/StatusCode";
 import { useTranslation } from "react-i18next";
+import watchicon from "../../assets/images/watch_ico.png";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
-function CompanyDataModule({ companyListValue }) {
+function CompanyDataModule({ companyListValue, company, companyShowDate }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +25,6 @@ function CompanyDataModule({ companyListValue }) {
     requestData.append("share_in", SHARE_COUNT.SHARE);
     await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
       if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-
       } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
         Toast.fire({
           icon: "error",
@@ -33,9 +33,9 @@ function CompanyDataModule({ companyListValue }) {
         dispatch(userLogout(userToken)).then(() => {
           dispatch(guestUserLogin());
           navigate("/login");
-        })
+        });
       }
-    })
+    });
   }
 
   return (
@@ -52,20 +52,34 @@ function CompanyDataModule({ companyListValue }) {
           //   navigate(`/deals/companies/company-profile/${companyListValue.id}`)
           // }
 
-          navigate(`/deals/companies/company-profile/${companyListValue.id}`); handleCount()
-        }}>
-
+          navigate(`/deals/companies/company-profile/${companyListValue.id}`);
+          handleCount();
+        }}
+      >
         <div className={styles.productImg}>
           <img src={companyListValue.company_logo} alt="logo" />
         </div>
         <div className={styles.productDiscription}>
+          <div className={styles.companyText}>
+            {company === true ? <h2>{t("COMPANY")}</h2> : ""}
+            <div className={styles.date}>
+            <span>
+              <img src={watchicon} alt={watchicon} />
+            </span>
+            <p className={styles.showDate}> {companyShowDate.show_date}</p>
+            </div>
+            </div>
+           
+         
           {companyListValue.name && <h3>{companyListValue.name}</h3>}
           {companyListValue.address && <p>{companyListValue.address}</p>}
 
           {companyListValue.deal_count > 0 ? (
             <h5>
               {companyListValue.deal_count}
-              {companyListValue.deal_count > 1 ? `${t("DEALS_TEXT")}` : `${t("DEAL")}`}
+              {companyListValue.deal_count > 1
+                ? `${t("DEALS_TEXT")}`
+                : `${t("DEAL")}`}
             </h5>
           ) : (
             ""
