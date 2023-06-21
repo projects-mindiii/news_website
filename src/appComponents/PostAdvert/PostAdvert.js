@@ -980,7 +980,7 @@ function PostAdvert({ classes }) {
                                                         <Dropdown.Menu as={DropdownSearch}>{currenciesOptions && currenciesOptions.map((item, index) => (
                                                             <Dropdown.Item active={currencyValue ? currencyValue.name == item.name : index == 0} onClick={() => {
                                                                 setCurrencyValue(item);
-                                                            }} key={index}>{item.name}</Dropdown.Item>))}
+                                                            }} key={index}>{item.name} ({item.symbol})</Dropdown.Item>))}
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                     <Form.Group className="amount">
