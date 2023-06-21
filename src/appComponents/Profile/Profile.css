@@ -332,11 +332,13 @@
 }
 
 .react-tel-input .selected-flag .flag {
-  opacity: 0;
+  opacity: 0 ;
   width: 100% !important;
   position: absolute;
   height: 100% !important;
   margin-top: -5px;
+  top: 5px !important;
+  margin-left: -7px !important;
 }
 
 .phoneInputSet .react-tel-input .selected-flag:hover,
