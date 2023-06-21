@@ -247,4 +247,8 @@ export const TRANSLATIONS_EN = {
   NO_SEARCH_DATA: "--- NO SEARCH FOUND ---",
   TOOLTIP_TEXT: "You can access website except post advert and bookmark.",
   TMG_UPLOAD_ERROR: "Only 5 files are allowed to upload.",
+
+  //--------Search text for company and deal------
+  COMPANY:"COMPANY",
+  DEAL:"DEAL"
 };

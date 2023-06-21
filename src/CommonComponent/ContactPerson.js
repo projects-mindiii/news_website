@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 //-------Create a Deals Header component--------
 function ContactPerson(props) {
   const { t } = useTranslation();
+ 
 
   return (
     <React.Fragment>
@@ -62,14 +63,15 @@ function ContactPerson(props) {
             <div className="classiFields_emailHeadingText">
               <p>{t("CONTACT_NUMBER")}</p>
               <span>
+            
                 <a
                   href={`tel:+${props.forSaleListData[props.index].dial_code} ${
-                    props.forSaleListData[props.index].contact
+                    props.forSaleListData[props.index].contact.replace(/^0/, "")
                   }`}
                   target="blank"
                 >
                   +{props.forSaleListData[props.index].dial_code}{" "}
-                  {props.forSaleListData[props.index].contact}
+                  {props.forSaleListData[props.index].contact.replace(/^0/, "")}
                 </a>
               </span>
             </div>
