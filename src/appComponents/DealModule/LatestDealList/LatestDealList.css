@@ -98,6 +98,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #f1f1f1 !important;
 }
 
 .mapAccordion .card-body {
@@ -110,6 +111,7 @@
 
 .accordion>.card>.card-header {
     background-color: #F1F1F1 !important;
+    border-bottom: none !important;
 }
 
 .advertBox {
