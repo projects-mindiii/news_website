@@ -186,12 +186,12 @@ function PostAdvert({ classes }) {
     const [countryCode, setCountryCode] = useState("za");
     const [categoryType, setCategoryType] = useState("")
     const [locationType, setLocationType] = useState("");
-    const [employmentEquity, setEmploymentEquity] = useState([{ id: 1, name: "none" ,value: 0}, { id: 2, name: "EE/ AA Required" ,value: 1}])
+    const [employmentEquity, setEmploymentEquity] = useState([{ id: 1, name: "none", value: 0 }, { id: 2, name: "EE/ AA Required", value: 1 }])
     const [earingOptions, setEaringOptions] = useState();
     const [currenciesOptions, setCurrenciesOptions] = useState();
     const [currencyValue, setCurrencyValue] = useState();
     const [jobTypeOptions, setJobTypeOptions] = useState();
-    const [CategoryValue, setCategoryValue] = useState();
+    const [CategoryValue, setCategoryValue] = useState("0");
     const [countryOptions, setCountryOptions] = useState();
     const [isDefaultCountry, setIsDefaultCountry] = useState([{
         label: `${t("OUTOF_SOUTH")}`,
@@ -349,7 +349,7 @@ function PostAdvert({ classes }) {
                         });
                     });
                     setCategoryType(allMetaList.category_type);
-                    setCategoryValue(allMetaList.category_type[0].id)
+                    setCategoryValue(allMetaList.category_type[0].id);
                     setLocationType(allMetaList.job_location_type);
                     await setEaringOptions(earningOption);
                     await setJobTypeOptions(jobType);
@@ -432,6 +432,7 @@ function PostAdvert({ classes }) {
                         const advertValue = yourAdvertWebList.filter((item, index) => (
                             item.id === location.state.id
                         ))
+
                         setValue("categorytype", advertValue[0].category_type_id && advertValue[0].category_type_id.toString())
                         setCategoryValue(advertValue[0].category_type_id && advertValue[0].category_type_id.toString())
                         setValue("fullName", advertValue[0].contact_name)
@@ -448,7 +449,7 @@ function PostAdvert({ classes }) {
                         setPhoneNo(advertValue[0].contact)
                         setDialCode(advertValue[0].dial_code)
                         setCountryCode(advertValue[0].country_code)
-                        setValue("employmentenquiry", advertValue[0] && advertValue[0].emp_equity.toString())
+                        setValue("employmentenquiry", advertValue[0] && (advertValue[0].emp_equity === null || advertValue[0].emp_equity === '' || advertValue[0].emp_equity === undefined) ? "" : advertValue[0].emp_equity.toString())
                         setValue("selectlocationtype", advertValue[0].job_location_type_id)
                         setProfileImage(advertValue[0].gallery)
                         setProfilePreview(advertValue[0].gallery)
@@ -514,6 +515,7 @@ function PostAdvert({ classes }) {
         }
         getClassifiedLists();
     }, []);
+
     async function onSubmit(data, e) {
         setIsLoading(true)
         let requestData = new FormData();
@@ -785,7 +787,7 @@ function PostAdvert({ classes }) {
                                                     type="radio"
                                                     label={type.name}
                                                     value={type.id}
-                                                    defaultChecked={index === 0}
+                                                    defaultChecked={type.id === CategoryValue}
                                                 />
                                             </div>
                                         )) : ""}
@@ -954,7 +956,7 @@ function PostAdvert({ classes }) {
                                                                 value={type.value}
 
                                                             />
-                                                            
+
                                                         </div>
 
                                                     )) : ""}
