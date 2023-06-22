@@ -60,16 +60,6 @@ function CompanyDataModule({ companyListValue, company, companyShowDate }) {
           <img src={companyListValue.company_logo} alt="logo" />
         </div>
         <div className={styles.productDiscription}>
-          {/* <div className={styles.companyText}>
-              {company === true ? <h2>{t("COMPANY")}</h2> : ""}
-            <div className={styles.date}>
-                <img src={watchicon} alt={watchicon} />
-              {companyShowDate.show_date && (
-                <p className={styles.showDate}> {companyShowDate.show_date}</p>
-              )}
-            </div>
-          </div> */}
-
            <div className={styles.companyText}>
               {company === true ? <><h2>{t("COMPANY")}</h2> <div className={styles.date}>
                 <img src={watchicon} alt={watchicon} />

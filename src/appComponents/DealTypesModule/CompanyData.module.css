@@ -190,30 +190,104 @@
 
 }
 
-@media only screen and (min-width: 320px) and (max-width: 400px){
+@media only screen and (min-width: 320px) and (max-width: 339px){
 .companyText h2  {
-  width: 60.63px !important;
-  font-size: 9.4378px !important;
-  height: 21.89px !important;
-  padding-top: 2px !important;
-  color: #fff !important;
-  font-weight: 600;
+  width: 50.63px !important;
+    font-size: 6.4378px !important;
+    height: 22.89px !important;
+    padding-top: 2px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
 }
-}
+
 .date  img {
-  height: 14.57px;
-  width: 14.57px;
-  margin-right: 3px;
+  height: 12.57px !important;
+  width: 12.57px !important;
+  margin-right: 3px !important;
 }
   
 
 
 .date p{
-  font-size: 9.78876px;
-  line-height: 12px;
+  font-size: 6.78876px !important;
+  line-height: 12px !important;
+}
 }
 
+@media only screen and (min-width: 340px) and (max-width: 361px){
+  .companyText h2  {
+    width: 72.63px !important;
+    font-size: 9.4378px !important;
+    height: 23.89px !important;
+    padding-top: 2px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+  }
+  .date  img {
+    height: 14.57px;
+    width: 14.57px;
+    margin-right: 3px;
+  }
+    
+  
+  
+  .date p{
+    font-size: 6.78876px !important;
+    line-height: 12px;
+}
+  }
+  
 
+  @media only screen and (min-width: 360px) and (max-width: 400px){
+    .companyText h2  {
+      width: 73.63px !important;
+      font-size: 10.4378px !important;
+      height: 23.89px !important;
+      padding-top: 3px !important;
+      color: #fff !important;
+      font-weight: 600 !important;
+    }
+    .date  img {
+      height: 14.57px;
+      width: 14.57px;
+      margin-right: 3px;
+    }
+      
+    
+    
+    .date p{
+      font-size: 10.78876px !important;
+      line-height: 12px;
+  }
+    }
+
+    @media only screen and (min-width: 400px) and (max-width: 479px){
+      .productImg img {
+        width: 135px;
+        height: 132px;
+    }
+     
+      .companyText h2  {
+        width: 73.63px !important;
+        font-size: 10.4378px !important;
+        height: 23.89px !important;
+        padding-top: 3px !important;
+        color: #fff !important;
+        font-weight: 600 !important;
+      }
+      .date  img {
+        height: 14.57px;
+        width: 14.57px;
+        margin-right: 3px;
+      }
+        
+      
+      
+      .date p{
+        font-size: 10.78876px !important;
+        line-height: 12px;
+    }
+      }
 
 
 

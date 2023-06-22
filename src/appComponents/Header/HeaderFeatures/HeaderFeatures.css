@@ -97,3 +97,23 @@
         }
     }
 }
+
+@media screen and (min-width: 339px) and (max-width: 380px) {
+  @-moz-document url-prefix() {
+    .headerAfterProfile h5 {
+      font-size: 14px !important;
+      letter-spacing: unset !important;
+      padding-top: 11px !important;
+    }
+  }
+}
+
+@media screen and (min-width: 338px) and (max-width: 338px) {
+  @-moz-document url-prefix() {
+    .headerAfterProfile h5 {
+      font-size: 13px !important;
+      letter-spacing: unset !important;
+      padding-top: 12px !important;
+    }
+  }
+}
