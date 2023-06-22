@@ -66,12 +66,12 @@ function ContactPerson(props) {
             
                 <a
                   href={`tel:+${props.forSaleListData[props.index].dial_code} ${
-                    props.forSaleListData[props.index].contact.replace(/^0/, "")
+                    props.forSaleListData[props.index].contact.replace(/^0/, "").replace(/-/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
                   }`}
                   target="blank"
                 >
                   +{props.forSaleListData[props.index].dial_code}{" "}
-                  {props.forSaleListData[props.index].contact.replace(/^0/, "")}
+                  {props.forSaleListData[props.index].contact.replace(/^0/, "").replace(/-/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}
                 </a>
               </span>
             </div>
