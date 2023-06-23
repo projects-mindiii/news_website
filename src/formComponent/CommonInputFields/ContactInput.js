@@ -1,11 +1,9 @@
 import { MdPhonelinkRing } from "react-icons/md";
 import PhoneInput from "react-phone-input-2";
 
-//--------Create a email input field for profile component----------
+//--------Create a contact input field for profile component----------
 function ContactInput(props) {
-
     return (
-
         <div className="phoneInputSet">
             <MdPhonelinkRing />
             <div className="phoneCountry">
