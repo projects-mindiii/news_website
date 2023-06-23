@@ -115,38 +115,31 @@
   .productImg img {
     width: 120px;
     height: 113px;
-}
-   
   }
-
+}
 
 /* company text css */
-.companyText{
-    align-items: center;
-    display: flex;
+.companyText {
+  align-items: center;
+  display: flex;
 }
 
-
-
-.date{
+.date {
   display: flex;
   align-items: center;
   margin-left: 10px;
   margin-top: -7px;
-
-}  
-
-.date p{
-    margin-top: 5px;
 }
-.date  img {
-    height: 18.57px;
-    margin-right: 6px;
-    width: 18.57px;
-    /* vertical-align: middle; */
-  }
-  
 
+.date p {
+  margin-top: 5px;
+}
+.date img {
+  height: 18.57px;
+  margin-right: 6px;
+  width: 18.57px;
+  /* vertical-align: middle; */
+}
 
 .companyText h2 {
   font-weight: 600;
@@ -161,19 +154,17 @@
   /* margin-top: 15px; */
   font-size: 13px;
   line-height: 20px;
-  
 }
 
-
 @media only screen and (max-width: 482px) {
-    /* .companyText{
+  /* .companyText{
         padding-top: 20px;
           align-items: center;
           display: block;
       }
        */
-    
-    /* .companyText h2 {
+
+  /* .companyText h2 {
         font-weight: 600;
         color: #fff;
         border-radius: 14px;
@@ -187,35 +178,37 @@
         line-height: 20px;
         
       } */
-
 }
 
-@media only screen and (min-width: 320px) and (max-width: 339px){
-.companyText h2  {
-  width: 50.63px !important;
-    font-size: 6.4378px !important;
+@media only screen and (min-width: 320px) and (max-width: 339px) {
+  .productImg img {
+    width: 110px;
+    height: 113px;
+  }
+  
+  .companyText h2 {
+    width: 56.63px !important;
+    font-size: 9.4378px !important;
     height: 22.89px !important;
     padding-top: 2px !important;
     color: #fff !important;
     font-weight: 600 !important;
+  }
+
+  .date img {
+    height: 12.57px !important;
+    width: 12.57px !important;
+    margin-right: 3px !important;
+  }
+
+  .date p {
+    font-size: 7.78876px !important;
+    line-height: 12px !important;
+  }
 }
 
-.date  img {
-  height: 12.57px !important;
-  width: 12.57px !important;
-  margin-right: 3px !important;
-}
-  
-
-
-.date p{
-  font-size: 6.78876px !important;
-  line-height: 12px !important;
-}
-}
-
-@media only screen and (min-width: 340px) and (max-width: 361px){
-  .companyText h2  {
+@media only screen and (min-width: 340px) and (max-width: 360px) {
+  .companyText h2 {
     width: 72.63px !important;
     font-size: 9.4378px !important;
     height: 23.89px !important;
@@ -223,71 +216,61 @@
     color: #fff !important;
     font-weight: 600 !important;
   }
-  .date  img {
+  .date img {
     height: 14.57px;
     width: 14.57px;
     margin-right: 3px;
   }
-    
-  
-  
-  .date p{
-    font-size: 6.78876px !important;
+
+  .date p {
+    font-size: 5.78876px !important;
     line-height: 12px;
+  }
 }
+
+@media only screen and (min-width: 360px) and (max-width: 400px) {
+  .companyText h2 {
+    width: 73.63px !important;
+    font-size: 10.4378px !important;
+    height: 23.89px !important;
+    padding-top: 3px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
   }
-  
-
-  @media only screen and (min-width: 360px) and (max-width: 400px){
-    .companyText h2  {
-      width: 73.63px !important;
-      font-size: 10.4378px !important;
-      height: 23.89px !important;
-      padding-top: 3px !important;
-      color: #fff !important;
-      font-weight: 600 !important;
-    }
-    .date  img {
-      height: 14.57px;
-      width: 14.57px;
-      margin-right: 3px;
-    }
-      
-    
-    
-    .date p{
-      font-size: 10.78876px !important;
-      line-height: 12px;
+  .date img {
+    height: 14.57px;
+    width: 14.57px;
+    margin-right: 3px;
   }
-    }
 
-    @media only screen and (min-width: 400px) and (max-width: 479px){
-      .productImg img {
-        width: 135px;
-        height: 132px;
-    }
-     
-      .companyText h2  {
-        width: 73.63px !important;
-        font-size: 10.4378px !important;
-        height: 23.89px !important;
-        padding-top: 3px !important;
-        color: #fff !important;
-        font-weight: 600 !important;
-      }
-      .date  img {
-        height: 14.57px;
-        width: 14.57px;
-        margin-right: 3px;
-      }
-        
-      
-      
-      .date p{
-        font-size: 10.78876px !important;
-        line-height: 12px;
-    }
-      }
+  .date p {
+    font-size: 10.78876px !important;
+    line-height: 12px;
+  }
+}
 
+@media only screen and (min-width: 400px) and (max-width: 479px) {
+  .productImg img {
+    width: 135px;
+    height: 132px;
+  }
 
+  .companyText h2 {
+    width: 73.63px !important;
+    font-size: 10.4378px !important;
+    height: 23.89px !important;
+    padding-top: 3px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+  }
+  .date img {
+    height: 14.57px;
+    width: 14.57px;
+    margin-right: 3px;
+  }
 
+  .date p {
+    font-size: 10.78876px !important;
+    line-height: 12px;
+  }
+}

@@ -514,6 +514,7 @@
     border: none;
     width: 100%;
     align-items: center;
+    background: none !important;
 
 }
 
