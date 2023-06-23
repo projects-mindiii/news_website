@@ -517,6 +517,10 @@ function PostAdvert({ classes }) {
     }, []);
 
     async function onSubmit(data, e) {
+        console.log("data",data)
+        console.log("categoryTypecategoryType", CategoryValue)
+        console.log(" CategoryValue", CategoryValue )
+
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
@@ -527,10 +531,10 @@ function PostAdvert({ classes }) {
             'country_id', data.isDefaultCountry.id == 0 ? data.country.id : data.isDefaultCountry.id == 1 ? 204 : ""
         );
         requestData.append(
-            'classified_type', data.categorytype ? data.categorytype : ""
+            'classified_type', CategoryValue ? CategoryValue : ""
         );
         {
-            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
+            (CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'emp_equity', data.employmentenquiry ? data.employmentenquiry : ""
                 );
@@ -542,37 +546,37 @@ function PostAdvert({ classes }) {
             'city', data.city ? data.city : ""
         );
         {
-            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
+            (CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'currency_id', currencyValue && currencyValue.id ? currencyValue.id : 154
                 );
         }
         {
-            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
+            (CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'is_negotiable', data.negotiable == true ? 1 : 0
                 );
         }
         {
-            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
+            (CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     "job_location_type", data.selectlocationtype ? data.selectlocationtype : ""
                 );
         }
         {
-            (data.categorytype == CLASSIFIED_CATEGORY_TYPE.FORSALE || data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
+            (CategoryValue == CLASSIFIED_CATEGORY_TYPE.FORSALE || CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER) &&
                 requestData.append(
                     'price', data.amountvalue ? data.amountvalue : ""
                 );
         }
         {
-            data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
+            CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
                 requestData.append(
                     "earning_options", data.earningoption && data.earningoption.id ? data.earningoption.id : ""
                 )
         }
         {
-            data.categorytype == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
+            CategoryValue == CLASSIFIED_CATEGORY_TYPE.JOBOFFER &&
                 requestData.append(
                     'job_type', data.jobType ? data.jobType.id : ""
                 );
@@ -787,7 +791,7 @@ function PostAdvert({ classes }) {
                                                     type="radio"
                                                     label={type.name}
                                                     value={type.id}
-                                                    defaultChecked={type.id === CategoryValue}
+                                                    defaultChecked={type.id == CategoryValue}
                                                 />
                                             </div>
                                         )) : ""}
