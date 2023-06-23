@@ -162,7 +162,7 @@
 
 .post_AddForm .heading::placeholder {
     color: #999999 !important;
-    height: 42px !important;
+    /* height: 42px !important; */
     font-size: 16px;
     font-weight: 400;
 }
