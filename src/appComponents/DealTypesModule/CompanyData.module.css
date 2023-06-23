@@ -188,7 +188,7 @@
   
   .companyText h2 {
     width: 56.63px !important;
-    font-size: 9.4378px !important;
+    font-size: 8.4378px !important;
     height: 22.89px !important;
     padding-top: 2px !important;
     color: #fff !important;
@@ -202,7 +202,7 @@
   }
 
   .date p {
-    font-size: 7.78876px !important;
+    font-size: 6.78876px !important;
     line-height: 12px !important;
   }
 }
@@ -228,10 +228,10 @@
   }
 }
 
-@media only screen and (min-width: 360px) and (max-width: 400px) {
+@media only screen and (min-width: 361px) and (max-width: 400px) {
   .companyText h2 {
     width: 73.63px !important;
-    font-size: 10.4378px !important;
+    font-size: 9.4378px !important;
     height: 23.89px !important;
     padding-top: 3px !important;
     color: #fff !important;
