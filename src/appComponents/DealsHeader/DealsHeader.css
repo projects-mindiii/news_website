@@ -1,31 +1,80 @@
 .navHeader .navbar-nav a.nav {
-    background: #828282 !important;
-    border-radius: 23.52px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 21px;
-    color: #FFFFFF;
-    padding: 10px 16px;
-    margin-right: 9px;
-    margin-top: 15px;
-    text-decoration: none;
-    max-width: 200px;
+  background: #828282 !important;
+  border-radius: 23.52px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #ffffff;
+  padding: 10px 16px;
+  margin-right: 9px;
+  margin-top: 15px;
+  text-decoration: none;
+  max-width: 200px;
 }
 
 .navHeader .navbar-nav a.nav.active {
-    background: #EC4624 !important;
+  background: #ec4624 !important;
 }
 
 .navHeader img.icon {
-    margin-right: 7px;
+  margin-right: 7px;
 }
 
 @media only screen and (max-width: 400px) {
-    .navHeader .navbar-expand .navbar-nav {
-        flex-direction: column !important;
-    }
+  .navHeader .navbar-expand .navbar-nav {
+    flex-direction: column !important;
+  }
 }
 
 .ulValue1 {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.rowRemove {
+  display: unset !important;
+}
+
+@media only screen and (max-width: 340px) {
+  .navHeader .navbar-nav a.nav {
+    padding: 10px 11px;
+    max-width: 149px;
+  }
+}
+
+.backarrowButton {
+  flex: 0 0 auto;
+  width: 5%;
+}
+
+.navWithBack {
+  width: 95%;
+}
+
+.navWithoutBack {
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .backarrowButton {
+    width: 8%;
+  }
+  .navWithBack {
+    width: 92%;
+  }
+}
+@media screen and (max-width: 470px) {
+  .backarrowButton {
+    width: 10%;
+  }
+  .navWithBack {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 360px) {
+  .backarrowButton {
+    width: 12%;
+  }
+  .navWithBack {
+    width: 88%;
+  }
 }
