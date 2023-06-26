@@ -121,7 +121,7 @@ function Header() {
 
           {/* -------DealsHeaderSection-------- */}
           <Row>
-            <Col xl={9} lg={9} md={12} sm={12}>
+            <Col xl={8} lg={9} md={12} sm={12}>
               {location.pathname == "/deals/latest-deals" ||
                 location.pathname.match("/deals/companies/company-profile/") ||
                 location.pathname == "/deals/products" ||
@@ -140,7 +140,7 @@ function Header() {
               )}
               {location.pathname == "/search-list" ? <SearchTotalCount /> : ""}
             </Col>
-            <Col xl={3} lg={3} md={12} sm={12}>
+            <Col xl={4} lg={3} md={12} sm={12}>
               <SearchBar />
             </Col>
           </Row>

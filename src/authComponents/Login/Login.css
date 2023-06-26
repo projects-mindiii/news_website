@@ -161,3 +161,20 @@
         min-width: 30px;
     }
 }
+
+
+@media screen and (min-width: 310px) and (max-width: 319px) {
+    .loginComponents {
+        padding: 5px 7px;
+    }
+
+    .loginComponents img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .loginComponents h3 {
+        font-size: 12px;
+    }
+}

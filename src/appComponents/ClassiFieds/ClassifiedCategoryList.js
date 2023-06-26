@@ -39,10 +39,16 @@ function ClassifiedList({
               >
                 {item.category_name}
               </button>
-
-              <span>
+              {/* <span>
                 <img src={watchicon} alt={watchicon} /> {item.created_date}
-              </span>
+              </span>  */}
+
+              <div className="classiFieds_watch">
+                <img src={watchicon} alt={watchicon} />
+                <p>{item.created_date}</p>
+              </div>
+
+
             </div>
             {displayRoute && displayRoute == "your_advert" ? (
               ""
@@ -70,7 +76,7 @@ function ClassifiedList({
       </div>
 
       {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ||
-      item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS ? (
+        item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBSEEKERS ? (
         <div className="jobType">
           <p>
             {item.job_type_name ? item.job_type_name + `-` : ""}
@@ -81,20 +87,20 @@ function ClassifiedList({
         ""
       )}
       {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.FORSALE ||
-      item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
+        item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER ? (
         <div className="classiFieds_RupeesText">
           {item.amount === 0 ? "" : item.amount && <p>
             {item.currency_code} {item.amount.toFixed(2)}
           </p>}
 
-          
-         <span>
-         {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER
-           ? item.earning_name.toUpperCase()
-           : item.currency_name.toUpperCase()}
-         {item.is_negotiable ? "(NEGOTIABLE)" : ""}
-       </span>
-          
+
+          <span>
+            {item.category_type_id == CLASSIFIED_CATEGORY_TYPE.JOBOFFER
+              ? item.earning_name.toUpperCase()
+              : item.currency_name.toUpperCase()}
+            {item.is_negotiable ? "(NEGOTIABLE)" : ""}
+          </span>
+
         </div>
       ) : (
         ""
@@ -118,7 +124,7 @@ function ClassifiedList({
         {item.whatapp_contact_number.length > 0 && <WhatsApp watsApp={true} />}
       </div>
 
-      <SocialMedaiShare id={item.id}/>
+      <SocialMedaiShare id={item.id} />
 
       {displayRoute && displayRoute == "your_advert" ? (
         <button
@@ -131,8 +137,8 @@ function ClassifiedList({
         ""
       )}
       {displayRoute &&
-      displayRoute == "your_advert" &&
-      item.approval_status == 0 ? (
+        displayRoute == "your_advert" &&
+        item.approval_status == 0 ? (
         <button className="not_live">{t("PENDING_APPROVAL")}</button>
       ) : (
         ""

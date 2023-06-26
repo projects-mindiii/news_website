@@ -197,7 +197,7 @@ button.whatsApp svg {
 
 /* search deal text css */
 
-.latestDeals h1 {
+.latestDeals .searchDealText{
     font-weight: 600;
     color: #fff;
     border-radius: 14px;

@@ -127,18 +127,18 @@
 .date {
   display: flex;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 7px;
   margin-top: -7px;
 }
 
 .date p {
   margin-top: 5px;
 }
+
 .date img {
   height: 18.57px;
   margin-right: 6px;
   width: 18.57px;
-  /* vertical-align: middle; */
 }
 
 .companyText h2 {
@@ -151,33 +151,8 @@
   height: 30px;
   text-align: center;
   padding-top: 5px;
-  /* margin-top: 15px; */
   font-size: 13px;
   line-height: 20px;
-}
-
-@media only screen and (max-width: 482px) {
-  /* .companyText{
-        padding-top: 20px;
-          align-items: center;
-          display: block;
-      }
-       */
-
-  /* .companyText h2 {
-        font-weight: 600;
-        color: #fff;
-        border-radius: 14px;
-        background: linear-gradient(180deg, #f24237 0%, #ea2064 100%);
-        width: 100%;
-        max-width: 105px;
-        height: 30px;
-        text-align: center;
-        padding-top: 5px;
-        font-size: 13px;
-        line-height: 20px;
-        
-      } */
 }
 
 @media only screen and (min-width: 320px) and (max-width: 339px) {
@@ -185,9 +160,9 @@
     width: 110px;
     height: 113px;
   }
-  
+
   .companyText h2 {
-    width: 56.63px !important;
+    width: 51.63px !important;
     font-size: 8.4378px !important;
     height: 22.89px !important;
     padding-top: 2px !important;
@@ -196,35 +171,42 @@
   }
 
   .date img {
-    height: 12.57px !important;
-    width: 12.57px !important;
+    height: 11.57px !important;
+    width: 10.57px !important;
     margin-right: 3px !important;
   }
 
   .date p {
-    font-size: 6.78876px !important;
+    font-size: 8.78876px !important;
     line-height: 12px !important;
   }
 }
 
+
 @media only screen and (min-width: 340px) and (max-width: 360px) {
+  .productImg img {
+    width: 110px;
+    height: 113px;
+  }
+
   .companyText h2 {
-    width: 72.63px !important;
-    font-size: 9.4378px !important;
-    height: 23.89px !important;
+    width: 53.63px !important;
+    font-size: 8.4378px !important;
+    height: 22.89px !important;
     padding-top: 2px !important;
     color: #fff !important;
     font-weight: 600 !important;
   }
+
   .date img {
-    height: 14.57px;
-    width: 14.57px;
-    margin-right: 3px;
+    height: 11.57px !important;
+    width: 10.57px !important;
+    margin-right: 3px !important;
   }
 
   .date p {
-    font-size: 5.78876px !important;
-    line-height: 12px;
+    font-size: 8.78876px !important;
+    line-height: 12px !important;
   }
 }
 
@@ -237,6 +219,7 @@
     color: #fff !important;
     font-weight: 600 !important;
   }
+
   .date img {
     height: 14.57px;
     width: 14.57px;
@@ -263,6 +246,7 @@
     color: #fff !important;
     font-weight: 600 !important;
   }
+
   .date img {
     height: 14.57px;
     width: 14.57px;
