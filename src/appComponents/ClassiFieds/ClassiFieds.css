@@ -482,6 +482,7 @@
   .classiFieds_watch p {
     font-size: 10.78876px;
     line-height: 12px;
+    margin-top: 1px;
   }
 }
 
@@ -519,6 +520,7 @@
   .classiFieds_watch p {
     font-size: 10.78876px;
     line-height: 12px;
+    margin-top: 1px;
   }
 }
 
@@ -557,6 +559,7 @@
   .classiFieds_watch p {
     font-size: 9.78876px;
     line-height: 12px;
+    margin-top: 1px;
   }
 }
 
@@ -618,5 +621,22 @@
     .classiFieds_countryName img {
       margin-right: 7px;
     }
+  }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 78.63px;
+    font-size: 8.4378px !important;
+    height: 25.89px;
+  }
+}
+
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 78.63px;
+    font-size: 8.4378px !important;
+    height: 28.89px;
   }
 }
