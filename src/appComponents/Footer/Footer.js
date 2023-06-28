@@ -7,12 +7,18 @@ import { useTranslation } from "react-i18next";
 import { footerData } from "./FooterData";
 import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 //--------Create a Footer component----------
 function Footer() {
     //set language
     const { t } = useTranslation();
     const location = useLocation();
+
+    // --------function for open component top of the page ----------
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    })
 
     return (
         <>
