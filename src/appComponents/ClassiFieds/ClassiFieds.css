@@ -61,7 +61,7 @@
   font-weight: 600;
   height: 27.89px;
   width: 97.63px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .classiFieds_forSaleBox .classiFields_contactPerson {
@@ -146,25 +146,46 @@
   color: white;
 }
 
-.classiFieds_time span {
+/* .classiFieds_time span {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: -0.3px;
   color: #000000;
   margin-left: 7px;
-}
+} */
 
 .classiFieds_time {
   display: flex;
   align-items: center;
 }
 
-.classiFieds_time span img {
+/* .classiFieds_time span img {
   height: 18.57px;
   margin-right: 6px;
   width: 18.57px;
   vertical-align: sub;
+} */
+
+.classiFieds_watch {
+  display: flex;
+  align-items: center;
+  margin-left: 7px;
+}
+
+.classiFieds_watch img {
+  height: 18.57px;
+  margin-right: 6px;
+  width: 18.57px;
+}
+
+.classiFieds_watch p {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: -0.3px;
+  color: #000000;
+  margin-bottom: 0px;
 }
 
 .classiFieds_RupeesText p {
@@ -250,7 +271,6 @@
 
 .classiFields_shareIcon {
   margin-left: 20px;
-  /* margin-top: 6px; */
 }
 
 .classiFields_shareicons span>span {
@@ -289,19 +309,6 @@
 .classiFieds_forSaledropdown {
   margin-bottom: 15px;
 }
-
-/* @media only screen and (max-width: 991px) {
-  .advertisment {
-    margin-top: 10px;
-  }
-} */
-
-/* @media only screen and (max-width: 377px) {
-  .classiFields_advertise {
-    width: 300px;
-    height: 277px;
-  }
-} */
 
 .advertisment {
   display: flex;
@@ -401,7 +408,6 @@
 .classiFieds_bookmarkicon svg {
   color: #000000;
   position: absolute;
-  /* right: 0px; */
   right: -5px;
   top: 0;
 }
@@ -446,6 +452,8 @@
 
   .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 89.63px;
+    font-size: 10.4378px !important;
+    height: 25.89px;
   }
 }
 
@@ -457,7 +465,7 @@
 
   .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 74.63px;
-    font-size: 10.4378px;
+    font-size: 10.4378px !important;
     height: 25.89px;
   }
 
@@ -466,14 +474,15 @@
     line-height: 17px;
   }
 
-  .classiFieds_time span img {
+  .classiFieds_watch img {
     height: 14.57px;
     width: 14.57px;
   }
 
-  .classiFieds_time span {
+  .classiFieds_watch p {
     font-size: 10.78876px;
     line-height: 12px;
+    margin-top: 1px;
   }
 }
 
@@ -481,9 +490,8 @@
   .classiFieds_bookmarkicon svg {
     color: #000000;
     position: absolute;
-    /* right: -9px; */
     right: 0;
-    top: 0;
+    top: -1;
     width: 22px;
   }
 
@@ -495,7 +503,7 @@
 
   .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 74.63px;
-    font-size: 10.4378px;
+    font-size: 10.4378px !important;
     height: 25.89px;
   }
 
@@ -504,14 +512,15 @@
     line-height: 17px;
   }
 
-  .classiFieds_time span img {
+  .classiFieds_watch img {
     height: 14.57px;
     width: 14.57px;
   }
 
-  .classiFieds_time span {
+  .classiFieds_watch p {
     font-size: 10.78876px;
     line-height: 12px;
+    margin-top: 1px;
   }
 }
 
@@ -519,9 +528,8 @@
   .classiFieds_bookmarkicon svg {
     color: #000000;
     position: absolute;
-    /* right: -9px; */
     right: 0;
-    top: -1px;
+    top: -3px;
     width: 22px;
   }
 
@@ -538,19 +546,20 @@
 
   .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
     width: 62.63px;
-    font-size: 8.4378px;
+    font-size: 8.4378px !important;
     height: 21.89px;
   }
 
-  .classiFieds_time span img {
+  .classiFieds_watch img {
     height: 14.57px;
     width: 14.57px;
     margin-right: 3px
   }
 
-  .classiFieds_time span {
+  .classiFieds_watch p {
     font-size: 9.78876px;
     line-height: 12px;
+    margin-top: 1px;
   }
 }
 
@@ -612,5 +621,22 @@
     .classiFieds_countryName img {
       margin-right: 7px;
     }
+  }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 78.63px;
+    font-size: 8.4378px !important;
+    height: 25.89px;
+  }
+}
+
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+  .classiFieds_forSale_about .classiFieds_time_action .classiFieds_forSale_button {
+    width: 78.63px;
+    font-size: 8.4378px !important;
+    height: 28.89px;
   }
 }

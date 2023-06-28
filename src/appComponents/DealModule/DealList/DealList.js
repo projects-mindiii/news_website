@@ -84,7 +84,7 @@ function DealList({ dealList, fromDeal ,deal }) {
                     <div className="latestDeals" key={index}>
                         <img src={item.gallery ? item.gallery[0].img_url : dealIcon}
                          alt="deals" />
-                           {deal === true ? ( <h1>{t("DEAL")}</h1>) :  ""}
+                           {deal === true ? ( <h1 className="searchDealText">{t("DEAL")}</h1>) :  ""}
                         <h3>{item.name}</h3>
                         <p className="dealSubText">{item.description}</p>
                         <div className="dealDetails">

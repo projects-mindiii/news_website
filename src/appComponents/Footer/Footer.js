@@ -6,12 +6,19 @@ import Image3 from "../../assets/images/image3.png";
 import { useTranslation } from "react-i18next";
 import { footerData } from "./FooterData";
 import { useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 //--------Create a Footer component----------
 function Footer() {
     //set language
     const { t } = useTranslation();
     const location = useLocation();
+
+    // --------function for open component top of the page ----------
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    })
 
     return (
         <>
@@ -74,9 +81,12 @@ function Footer() {
                                     <h6>{t("QUICK_LINKS")}</h6>
                                     <div className="linkNames">
                                         {(footerData.links).map((item2, index2) => (
-                                            <a href={item2.link} key={index2}>
+                                            // <a href={item2.link} key={index2}>
+                                            //     <h6>{item2.text}</h6>
+                                            // </a>
+                                            <NavLink to={item2.link} key={index2}>
                                                 <h6>{item2.text}</h6>
-                                            </a>
+                                            </NavLink>
                                         ))}
                                     </div>
                                 </div>

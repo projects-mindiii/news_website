@@ -519,8 +519,7 @@ function PostAdvert({ classes }) {
     async function onSubmit(data, e) {
         console.log("data",data)
         console.log("categoryTypecategoryType", CategoryValue)
-        console.log(" CategoryValue", CategoryValue )
-
+      
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
