@@ -24,7 +24,6 @@ import WatsappInput from "../../formComponent/CommonInputFields/WatsappInput";
 import ContactInput from "../../formComponent/CommonInputFields/ContactInput";
 import CustomBtn from "../../formComponent/Button/Button";
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useTranslation } from "react-i18next";
 import { CLASSIFIED_CATEGORY_TYPE } from "../../utils/Constants";
@@ -517,6 +516,8 @@ function PostAdvert({ classes }) {
     }, []);
 
     async function onSubmit(data, e) {
+        console.log("data", data)
+        console.log("CategoryValue", CategoryValue)
         setIsLoading(true)
         let requestData = new FormData();
         requestData.append('heading', data.heading ? data.heading : "");
@@ -741,11 +742,16 @@ function PostAdvert({ classes }) {
                         onChange={(e) => setValue(e.target.value)}
                         value={value}
                     />
+
                     <ul className="list-unstyled">
-                        {React.Children.toArray(children).filter(
-                            (child) =>
-                                !value || child.props.children.toLowerCase().startsWith(value),
-                        )}
+                        {React.Children.toArray(children).filter((child) => {
+                            const childText =
+                                typeof child.props.children === 'string'
+                                    ? child.props.children
+                                    : String(child.props.children);
+
+                            return !value || childText.toLowerCase().startsWith(value.toLowerCase());
+                        })}
                     </ul>
                 </div>
             );
