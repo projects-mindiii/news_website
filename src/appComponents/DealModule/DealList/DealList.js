@@ -18,7 +18,7 @@ import { STATUS_CODES } from "../../../utils/StatusCode";
 import { guestUserLogin, userLogout } from "../../../store/slices/UserSlice";
 
 // -------function for showing deal list-----------
-function DealList({ dealList, fromDeal ,deal }) {
+function DealList({ dealList, fromDeal, deal }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     //set language
@@ -35,9 +35,7 @@ function DealList({ dealList, fromDeal ,deal }) {
                     requestData.append("refrence_type", COUNT_REFFRENCE.DEAL);
                     requestData.append("share_in", 0);
                     SublyApi.updateCount(requestData, userToken).then((responsejson) => {
-                        if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-
-                        } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+                        if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
                             Toast.fire({
                                 icon: "error",
                                 title: t("SESSION_EXPIRE"),
@@ -83,8 +81,8 @@ function DealList({ dealList, fromDeal ,deal }) {
                 dealList.map((item, index) => (
                     <div className="latestDeals" key={index}>
                         <img src={item.gallery ? item.gallery[0].img_url : dealIcon}
-                         alt="deals" />
-                           {deal === true ? ( <h1 className="searchDealText">{t("DEAL")}</h1>) :  ""}
+                            alt="deals" />
+                        {deal === true ? (<h1 className="searchDealText">{t("DEAL")}</h1>) : ""}
                         <h3>{item.name}</h3>
                         <p className="dealSubText">{item.description}</p>
                         <div className="dealDetails">

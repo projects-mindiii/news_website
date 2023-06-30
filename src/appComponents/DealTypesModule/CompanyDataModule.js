@@ -24,8 +24,7 @@ function CompanyDataModule({ companyListValue, company, companyShowDate }) {
     requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
     requestData.append("share_in", SHARE_COUNT.SHARE);
     await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
-      if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-      } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+      if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
         Toast.fire({
           icon: "error",
           title: t("SESSION_EXPIRE"),
@@ -60,14 +59,14 @@ function CompanyDataModule({ companyListValue, company, companyShowDate }) {
           <img src={companyListValue.company_logo} alt="logo" />
         </div>
         <div className={styles.productDiscription}>
-           <div className={styles.companyText}>
-              {company === true ? <><h2>{t("COMPANY")}</h2> <div className={styles.date}>
-                <img src={watchicon} alt={watchicon} />
+          <div className={styles.companyText}>
+            {company === true ? <><h2>{t("COMPANY")}</h2> <div className={styles.date}>
+              <img src={watchicon} alt={watchicon} />
               {companyShowDate.show_date && (
                 <p className={styles.showDate}> {companyShowDate.show_date}</p>
               )}
-            </div></>: ""}
-            
+            </div></> : ""}
+
           </div>
 
           {companyListValue.name && <h3>{companyListValue.name}</h3>}

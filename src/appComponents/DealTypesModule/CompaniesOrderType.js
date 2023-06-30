@@ -50,9 +50,7 @@ function CompanyOrderType(props) {
         requestData.append("refrence_type", COUNT_REFFRENCE.COMPANY);
         requestData.append("share_in", SHARE_COUNT.SHARE);
         await SublyApi.updateCount(requestData, userToken).then((responsejson) => {
-            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
-
-            } else if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
+          if (responsejson.status === STATUS_CODES.INVALID_TOKEN) {
                 Toast.fire({
                     icon: "error",
                     title: t("SESSION_EXPIRE"),
