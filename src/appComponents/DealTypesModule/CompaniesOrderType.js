@@ -10,7 +10,7 @@ import { COUNT, COUNT_REFFRENCE, SHARE_COUNT } from "../../utils/Constants";
 import { useTranslation } from "react-i18next";
 import { guestUserLogin, userLogout } from "../../store/slices/UserSlice";
 
-//  -------function for display product list------
+//  -------function for display company list------
 function CompanyOrderType(props) {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -28,7 +28,6 @@ function CompanyOrderType(props) {
                 userToken,
                 companyValue.company_order
             );
-
             if (details.status_code == STATUS_CODES.SUCCESS) {
                 setcompanyList(details.data.company_deal_count_list);
                 setLoader(false);
