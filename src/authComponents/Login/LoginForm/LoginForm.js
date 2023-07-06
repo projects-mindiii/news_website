@@ -2,10 +2,6 @@ import { Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import "./LoginForm.css";
 import "../../../assets/styles/Common.css";
-import Google from "../../../assets/images/google_logo.png";
-import Facebook from "../../../assets/images/facebook_logo.png";
-import Apple from "../../../assets/images/apple_logo.png";
-import Linkedin from "../../../assets/images/linkdin_logo.png";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "../../../utils/Toaster";
@@ -28,10 +24,10 @@ function LoginForm() {
 
     const dispatch = useDispatch();
 
-    const { guestUser, currentUser, isLoading } = useSelector((state) => state.user);
+    const {isLoading } = useSelector((state) => state.user);
 
     //set language
-    const { t, i18n } = useTranslation();
+    const {t} = useTranslation();
     //-----state for show alert box for error response------
     const [showError, setShowError] = useState(null);
 

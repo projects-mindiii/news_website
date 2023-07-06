@@ -35,7 +35,7 @@ function LinkedInLogin(props) {
           responsejson.data?.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND
         ) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
-            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+            if (signresponsejson.status_code === STATUS_CODES.SUCCESS) {
               Toast.fire({
                 icon: "success",
                 title: responsejson.data.message,

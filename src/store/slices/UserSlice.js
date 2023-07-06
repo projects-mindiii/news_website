@@ -189,7 +189,7 @@ export const userSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(userLogout.fulfilled, (state, action) => {
-      const response = action.payload;
+      // const response = action.payload;
       state.isLoading = false
       state.currentUser = {};
       state.guestUser = {};
