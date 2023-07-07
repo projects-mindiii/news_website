@@ -117,7 +117,6 @@ export const TRANSLATIONS_EN = {
 
   //----Deals Text------
   CONTACT_PERSON: "CONTACT PERSON",
-  CONTACT_NUMBER: "CONTACT NUMBER",
   WEBSITE: "WEBSITE",
   EXPIRY: "EXPIRY",
   EMAIL_TEXT: "EMAIL",
@@ -248,7 +247,5 @@ export const TRANSLATIONS_EN = {
   TOOLTIP_TEXT: "You can access website except post advert and bookmark.",
   TMG_UPLOAD_ERROR: "Only 5 files are allowed to upload.",
 
-  //--------Search text for company and deal------
-  COMPANY:"COMPANY",
-  DEAL:"DEAL"
+ 
 };

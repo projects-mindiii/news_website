@@ -1,5 +1,4 @@
 import mapicon from "../assets/images/map_ico.png";
-import { Row, Col } from "react-bootstrap";
 import bookmarkicon from "../assets/images/bookmark_ico.png";
 import forsale from "../assets/images/for_sale_img.png";
 import watchicon from "../assets/images/watch_ico.png";

@@ -35,7 +35,7 @@ function LinkedInLogin(props) {
           responsejson.data?.status_code == STATUS_CODES.SOCIAL_USER_NOT_FOUND
         ) {
           await dispatch(socialSignup(requestData)).then((signresponsejson) => {
-            if (responsejson.status_code === STATUS_CODES.SUCCESS) {
+            if (signresponsejson.status_code === STATUS_CODES.SUCCESS) {
               Toast.fire({
                 icon: "success",
                 title: responsejson.data.message,
@@ -55,8 +55,8 @@ function LinkedInLogin(props) {
 
   return (
     <LinkedIn
-      clientId="86vhj2q7ukf83q"
-      redirectUri={`${window.location.origin}/linkedin`}
+      clientId={process.env.REACT_APP_LINKEDIN_CLIENT_ID}
+      redirectUri={process.env.REACT_APP_LINKEDIN_REDIRECT_URL}
       onSuccess={onSuccess}
       onError={(error) => {
         console.log(error);
