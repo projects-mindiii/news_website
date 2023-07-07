@@ -55,8 +55,8 @@ function LinkedInLogin(props) {
 
   return (
     <LinkedIn
-      clientId="86vhj2q7ukf83q"
-      redirectUri={`${window.location.origin}/linkedin`}
+      clientId={process.env.REACT_APP_LINKEDIN_CLIENT_ID}
+      redirectUri={process.env.REACT_APP_LINKEDIN_REDIRECT_URL}
       onSuccess={onSuccess}
       onError={(error) => {
         console.log(error);

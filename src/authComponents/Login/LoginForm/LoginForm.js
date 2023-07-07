@@ -105,10 +105,8 @@ function LoginForm() {
                         <div className="socialLogo loginformcomponent">
                             <GoogleLogin />
                             <FacebookSocialLogin facebookText=""/>
-                            <AppleSocialLogin/>
+                            {/* <AppleSocialLogin/> */}
                             <LinkedInLogin/>
-                            {/* <img src={Apple} alt="apple-logo" />
-                            <img src={Linkedin} alt="linkedin-logo" /> */}
                         </div>
                     </Form>
                 </div>

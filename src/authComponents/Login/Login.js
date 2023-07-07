@@ -39,9 +39,9 @@ function Login() {
             <FacebookSocialLogin facebookText={t("LOGIN_FACEBOOK")} />
           </div>
 
-          <div className="loginComponents">
+          {/* <div className="loginComponents">
             <AppleLogin appleText={t("LOGIN_APPLE")} />
-          </div>
+          </div> */}
           <div className="loginComponents">
             <LinkedInLogin linkedinText={t("LOGIN_LINKEDIN")}/>
           </div>
